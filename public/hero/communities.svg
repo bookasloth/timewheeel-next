@@ -1,0 +1,24 @@
+<svg viewBox="0 0 720 540" xmlns="http://www.w3.org/2000/svg" font-family="Plus Jakarta Sans, Poppins, sans-serif">
+  <rect width="720" height="540" fill="#f2f2f2"/>
+  <rect x="48" y="48" width="624" height="444" rx="2" fill="#ffffff" stroke="#e7e6ef"/>
+  <circle cx="76" cy="78" r="5" fill="#e2e0ec"/><circle cx="94" cy="78" r="5" fill="#e2e0ec"/><circle cx="112" cy="78" r="5" fill="#e2e0ec"/>
+  <rect x="80" y="120" width="44" height="44" rx="2" fill="#ff4d9322"/>
+  <rect x="94" y="134" width="16" height="16" rx="2" fill="#ff4d93"/>
+  <text x="140" y="140" font-size="20" font-weight="700" fill="#0f1111">Active members</text>
+  <rect x="560" y="126" width="80" height="30" rx="2" fill="#f2f1f8"/>
+  <circle cx="580" cy="141" r="4" fill="#4ab765"/>
+  <text x="592" y="146" font-size="14" fill="#667085">Live</text>
+  <text x="80" y="220" font-size="52" font-weight="800" fill="#0f1111">8,940</text>
+  <text x="230" y="214" font-size="18" font-weight="700" fill="#ff4d93">▲ 9%</text>
+  <g>
+    <!-- avatar grid -->
+    <g fill="#ff4d9326">
+      <circle cx="110" cy="300" r="26"/><circle cx="190" cy="300" r="26"/><circle cx="270" cy="300" r="26"/><circle cx="350" cy="300" r="26"/><circle cx="430" cy="300" r="26"/><circle cx="510" cy="300" r="26"/><circle cx="590" cy="300" r="26"/>
+      <circle cx="110" cy="380" r="26"/><circle cx="190" cy="380" r="26"/><circle cx="270" cy="380" r="26"/><circle cx="350" cy="380" r="26"/><circle cx="430" cy="380" r="26"/><circle cx="510" cy="380" r="26"/><circle cx="590" cy="380" r="26"/>
+    </g>
+    <g fill="#ff4d93">
+      <circle cx="110" cy="300" r="26"/><circle cx="350" cy="300" r="26"/><circle cx="590" cy="300" r="26"/>
+      <circle cx="190" cy="380" r="26"/><circle cx="430" cy="380" r="26"/>
+    </g>
+  </g>
+</svg>

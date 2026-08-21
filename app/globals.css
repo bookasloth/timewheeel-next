@@ -1,26 +1,168 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-rating: var(--rating);
+  --color-navy: var(--navy);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-blue: var(--accent-blue);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: 1px;
+  --radius-md: 1px;
+  --radius-lg: 1px;
+  --radius-xl: 1px;
+  --radius-2xl: 1px;
+  --radius-3xl: 1px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Light brand theme. Navy ink, orange primary, green rating accent, lavender surfaces. */
+:root {
+  /* Brand palette:
+     ink #0F1111 · dark #1A1D24 · light #F2F2F2
+     orange #FE5100 · pink #FF4D93 · green #4AB765 · yellow #FFCC1C · blue #269CEF */
+  --background: #ffffff;
+  --foreground: #0f1111;
+  --navy: #1a1d24;
+  --card: #ffffff;
+  --card-foreground: #0f1111;
+  --popover: #ffffff;
+  --popover-foreground: #0f1111;
+
+  --primary: #fe5100;
+  --primary-foreground: #ffffff;
+  --brand: #fe5100;
+  --brand-foreground: #ffffff;
+  --rating: #4ab765;
+  --accent-pink: #ff4d93;
+  --accent-yellow: #ffcc1c;
+  --accent-blue: #269cef;
+
+  --secondary: #f2f2f2;
+  --secondary-foreground: #0f1111;
+  --muted: #f2f2f2;
+  --muted-foreground: #5b5f62;
+  --accent: #f2f2f2;
+  --accent-foreground: #0f1111;
+  --destructive: #e5484d;
+  --border: #e4e4e6;
+  --input: #dedee1;
+  --ring: #fe5100;
+  --radius: 1px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading), var(--font-sans), sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
+/* ── Site-wide button hover: color layer sweeps in from the left ──
+   Contained inside the button (overflow-hidden), text stays put, no shadow. */
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn:hover::before {
+  transform: translateX(0);
+}
+
+/* primary (orange) → navy sweeps in */
+.btn-primary {
+  background: var(--brand);
+  color: var(--brand-foreground);
+}
+.btn-primary::before {
+  background: var(--navy);
+}
+
+/* green (Trustpilot etc.) → navy sweeps in */
+.btn-green {
+  background: var(--rating);
+  color: #fff;
+}
+.btn-green::before {
+  background: var(--navy);
+}
+
+/* outline → brand orange sweeps in, text flips white */
+.btn-outline {
+  background: transparent;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid var(--border);
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+.btn-outline::before {
+  background: var(--brand);
+}
+.btn-outline:hover {
+  color: #fff;
+  border-color: var(--brand);
+}
+
+/* hero active-word progress bar — scaleX 0→1 over the 2s cycle */
+@keyframes tw-word-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
