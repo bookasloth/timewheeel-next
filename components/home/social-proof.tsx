@@ -161,9 +161,8 @@ export function SocialProof() {
                   top: `${p.top}px`,
                   transform: "translate(-50%, -50%)",
                   transition: animate
-                    ? "left 0.8s cubic-bezier(0.65,0,0.35,1), top 0.8s cubic-bezier(0.65,0,0.35,1)"
+                    ? `left 0.8s cubic-bezier(0.65,0,0.35,1) ${p.order * 25}ms, top 0.8s cubic-bezier(0.65,0,0.35,1) ${p.order * 25}ms`
                     : "none",
-                  transitionDelay: animate ? `${p.order * 25}ms` : "0ms",
                 }}
               >
                 <svg role="img" viewBox="0 0 24 24" className="size-5 shrink-0" fill="currentColor" aria-hidden>
