@@ -61,8 +61,30 @@ const navLinks = [
 export function Navbar() {
   const [openMenu, setOpenMenu] = useState<"products" | "services" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSection, setMobileSection] = useState<"products" | "services" | null>(
+    "products",
+  );
+
+  const mobileRow = (item: { name: string; icon: Icon; accent: string; href: string }) => (
+    <Link
+      key={item.name}
+      href={item.href}
+      onClick={() => setMobileOpen(false)}
+      className="group flex items-center gap-3 rounded-xl p-2 active:bg-secondary"
+    >
+      <span
+        className="relative grid size-8 shrink-0 place-items-center rounded-lg bg-[var(--a)]/15 text-[var(--a)]"
+        style={{ "--a": item.accent } as CSSProperties}
+      >
+        <item.icon className="size-5" weight="regular" />
+        <item.icon className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-active:opacity-100" weight="fill" />
+      </span>
+      <span className="truncate text-sm font-semibold">{item.name}</span>
+    </Link>
+  );
 
   return (
+    <>
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="text-xl font-black tracking-tight">
@@ -197,64 +219,78 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* mobile menu */}
-      {mobileOpen && (
-        <div className="border-t border-border/60 bg-background px-6 py-4 md:hidden">
-          <p className="px-1 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Products
-          </p>
-          <div className="grid grid-cols-2 gap-1 pb-3">
-            {navProducts.map((p) => (
-              <Link
-                key={p.name}
-                href={p.href}
-                className="flex items-center gap-2 rounded-lg p-2 hover:bg-secondary"
-                onClick={() => setMobileOpen(false)}
-              >
-                <p.icon className="size-4" style={{ color: p.accent }} />
-                <span className="truncate text-sm">{p.name}</span>
-              </Link>
-            ))}
-          </div>
+      </header>
 
-          {serviceGroups.map((g) => (
-            <div key={g.title} className="pb-3">
-              <p className="px-1 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                {g.title}
-              </p>
-              {g.items.map((s) => (
-                <Link
-                  key={s.name}
-                  href={s.href}
-                  className="flex items-center gap-2 rounded-lg p-2 text-sm font-medium hover:bg-secondary"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <s.icon className="size-4 shrink-0" style={{ color: s.accent }} />
-                  <span className="truncate">{s.name}</span>
-                </Link>
+      {/* mobile menu — full-screen overlay with collapsible sections */}
+      {mobileOpen && (
+        <div className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-background px-6 pb-8 pt-2 md:hidden">
+          {/* Products */}
+          <button
+            className="flex w-full items-center justify-between border-b border-border/60 py-4 text-base font-semibold"
+            onClick={() =>
+              setMobileSection((s) => (s === "products" ? null : "products"))
+            }
+          >
+            What We Built
+            <ChevronDown
+              className={cn(
+                "size-5 transition-transform",
+                mobileSection === "products" && "rotate-180",
+              )}
+            />
+          </button>
+          {mobileSection === "products" && (
+            <div className="py-2">{navProducts.map(mobileRow)}</div>
+          )}
+
+          {/* Services */}
+          <button
+            className="flex w-full items-center justify-between border-b border-border/60 py-4 text-base font-semibold"
+            onClick={() =>
+              setMobileSection((s) => (s === "services" ? null : "services"))
+            }
+          >
+            What We Offer
+            <ChevronDown
+              className={cn(
+                "size-5 transition-transform",
+                mobileSection === "services" && "rotate-180",
+              )}
+            />
+          </button>
+          {mobileSection === "services" && (
+            <div className="py-2">
+              {serviceGroups.map((g) => (
+                <div key={g.title} className="pb-2">
+                  <p className="px-2 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {g.title}
+                  </p>
+                  {g.items.map(mobileRow)}
+                </div>
               ))}
             </div>
-          ))}
+          )}
 
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="block rounded-lg px-1 py-2 text-sm font-medium hover:text-foreground"
+              className="block border-b border-border/60 py-4 text-base font-semibold active:text-brand"
               onClick={() => setMobileOpen(false)}
             >
               {l.label}
             </Link>
           ))}
+
           <Link
             href={site.demoUrl}
-            className="btn btn-primary mt-3 block rounded-lg px-4 py-2 text-center text-sm font-semibold text-brand-foreground"
+            className="btn btn-primary mt-6 block rounded-lg px-4 py-3 text-center text-sm font-semibold text-brand-foreground"
             onClick={() => setMobileOpen(false)}
           >
             Book A Meeting
           </Link>
         </div>
       )}
-    </header>
+    </>
   );
 }
