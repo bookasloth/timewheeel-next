@@ -5,30 +5,22 @@ import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import {
   AppWindow,
-  CalendarCheck,
   Code,
-  Coffee,
   FileText,
-  GraduationCap,
   MagnifyingGlass,
   PenNib,
   Robot,
   ShareNetwork,
   Storefront,
-  Ticket,
   type Icon,
-} from "@phosphor-icons/react";
+} from "@phosphor-icons/react/dist/ssr";
+import { featuredProducts } from "@/lib/products";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-type NavProduct = { name: string; icon: Icon; accent: string; href: string };
-
-const navProducts: NavProduct[] = [
-  { name: "Alluminaty", icon: GraduationCap, accent: "#269cef", href: "#" },
-  { name: "Book A Sloth", icon: CalendarCheck, accent: "#fe5100", href: "#" },
-  { name: "Coffee and Toffee", icon: Coffee, accent: "#ffcc1c", href: "#" },
-  { name: "Ticket Dino", icon: Ticket, accent: "#269cef", href: "#" },
-];
+// Products come from the shared featured list so the navbar and homepage
+// ecosystem never drift. Order + names live in lib/products.ts.
+const navProducts = featuredProducts;
 
 type NavService = { name: string; icon: Icon; accent: string; href: string };
 
