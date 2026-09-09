@@ -9,8 +9,10 @@ import {
   Student,
   Ticket,
   UsersThree,
-  type Icon,
 } from "@phosphor-icons/react/dist/ssr";
+// Type-only: erased at runtime, so it won't pull IconContext into server
+// components (the /dist/ssr GOTCHA applies to icon *values*, not this type).
+import type { Icon } from "@phosphor-icons/react";
 
 export type Product = {
   slug: string;

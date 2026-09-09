@@ -5,6 +5,8 @@ import { products } from "@/lib/products";
 import { standardPlan, customPlan, productPricing } from "@/lib/pricing";
 import { site } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -17,6 +19,12 @@ const bySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
 export default function PricingPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-24 md:py-28">
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Pricing", path: "/pricing" },
+        ])}
+      />
       {/* hero */}
       <Reveal className="text-center">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand">

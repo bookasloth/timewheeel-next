@@ -12,8 +12,8 @@ import {
   Robot,
   ShareNetwork,
   Storefront,
-  type Icon,
 } from "@phosphor-icons/react/dist/ssr";
+import type { Icon } from "@phosphor-icons/react";
 import { featuredProducts } from "@/lib/products";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
