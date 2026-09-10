@@ -82,18 +82,26 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 text-sm text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} Timewheel. All rights reserved.</p>
-          <div className="flex gap-5">
-            <Link href={site.social.twitter} className="hover:text-foreground">
-              X
-            </Link>
-            <Link href={site.social.linkedin} className="hover:text-foreground">
-              LinkedIn
-            </Link>
-            <Link href={site.social.youtube} className="hover:text-foreground">
-              YouTube
-            </Link>
+        <div className="relative mt-12 overflow-hidden border-t border-border/60 pt-6">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 select-none whitespace-nowrap text-center text-[clamp(3.5rem,11vw,8rem)] font-black uppercase leading-none tracking-widest text-foreground/[0.04]"
+          >
+            Timewheel
+          </span>
+          <div className="relative flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
+            <p>© {new Date().getFullYear()} Timewheel. All rights reserved.</p>
+            <div className="flex gap-5">
+              <Link href={site.social.twitter} className="hover:text-foreground">
+                X
+              </Link>
+              <Link href={site.social.linkedin} className="hover:text-foreground">
+                LinkedIn
+              </Link>
+              <Link href={site.social.youtube} className="hover:text-foreground">
+                YouTube
+              </Link>
+            </div>
           </div>
         </div>
       </div>

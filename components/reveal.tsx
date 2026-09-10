@@ -35,8 +35,21 @@ export function Reveal({
         delay,
         ease: "power3.out",
         stagger: stagger ? 0.1 : 0,
-        scrollTrigger: { trigger: ref.current, start: "top 85%" },
+        scrollTrigger: { trigger: ref.current, start: "top 85%", once: true },
       });
+    },
+    // Revert on every update so StrictMode's double-effect in dev can never
+    // leave blocks stuck at opacity 0 (which showed as "empty" sections).
+    { scope: ref, revertOnUpdate: true },
+  );
+
+  // Re-measure after full load so late layout changes never leave a trigger
+  // un-fired (which also produced blank sections).
+  useGSAP(
+    () => {
+      const refresh = () => ScrollTrigger.refresh();
+      window.addEventListener("load", refresh);
+      return () => window.removeEventListener("load", refresh);
     },
     { scope: ref },
   );

@@ -54,7 +54,7 @@ export const products: Product[] = [
     tagline: "Manage Bookings & Clients",
     icon: CalendarCheck,
     accent: "#fe5100",
-    href: "#",
+    href: "https://bookasloth.com",
     featured: true,
     blurb:
       "A modern booking platform built to simplify how businesses manage appointments, reservations, and customer scheduling — built around speed, usability, and conversion-focused experiences customers actually enjoy.",

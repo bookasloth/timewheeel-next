@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@/components/google-analytics";
-import { Navbar } from "@/components/nav/navbar";
-import { Footer } from "@/components/footer";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -54,16 +53,14 @@ export const metadata: Metadata = {
   alternates: { canonical: siteUrl },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
       className={`${poppins.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
         <Analytics />
         <GoogleAnalytics />
       </body>

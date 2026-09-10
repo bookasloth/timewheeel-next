@@ -40,7 +40,7 @@ const serviceGroups: { title: string; items: NavService[] }[] = [
       { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "#" },
       { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "#" },
       { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "#" },
-      { name: "Content Creation", icon: FileText, accent: "#ffcc1c", href: "#" },
+      { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/digital-marketing2" },
     ],
   },
 ];

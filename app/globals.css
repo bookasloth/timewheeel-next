@@ -157,6 +157,155 @@
   }
 }
 
+/* digital marketing: floating hero badges gently drift upward */
+@keyframes dm-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.hero-float {
+  animation: dm-float 5s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+/* digital marketing: sparkline finishing sweep on the mock dashboard */
+@keyframes dm-meter {
+  to {
+    stroke-dashoffset: -126;
+  }
+}
+.hero-meter {
+  animation: dm-meter 3s linear infinite;
+}
+
+/* digital marketing: CTA marquee scrolls continuously */
+@keyframes dm-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.dm-marquee {
+  animation: dm-marquee 22s linear infinite;
+  will-change: transform;
+}
+
+/* --- prestige flourishes (digital marketing) --- */
+
+/* animated multi-stop gradient text */
+@keyframes dm-gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.dm-gradient-text {
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: dm-gradient-x 6s ease-in-out infinite;
+}
+
+/* slow rotating conic sheen behind the hero dashboard */
+@keyframes dm-sheen {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.dm-sheen {
+  animation: dm-sheen 18s linear infinite;
+}
+
+/* expanding pulse ring around the ecosystem hub */
+@keyframes dm-pulse-ring {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.dm-pulse-ring {
+  animation: dm-pulse-ring 2.8s ease-out infinite;
+}
+
+/* flowing dashes along ecosystem connector lines */
+@keyframes dm-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.dm-flow {
+  stroke-dasharray: 3 5;
+  animation: dm-flow 1.6s linear infinite;
+}
+.dm-flow-reverse {
+  animation-direction: reverse;
+}
+
+/* slow drift for background orbs */
+@keyframes dm-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(26px, -20px) scale(1.06);
+  }
+  66% {
+    transform: translate(-20px, 16px) scale(0.96);
+  }
+}
+.dm-drift {
+  animation: dm-drift 16s ease-in-out infinite;
+}
+
+/* slow spin for decorative asterisks */
+@keyframes dm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.dm-spin {
+  animation: dm-spin 14s linear infinite;
+}
+
+/* very slow orbit for drawn orbit rings */
+.dm-orbit {
+  animation: dm-spin 40s linear infinite;
+  transform-origin: center;
+}
+
+::selection {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* Smooth in-page scrolling with an offset for the sticky nav */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Anchored sections land below the sticky header */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

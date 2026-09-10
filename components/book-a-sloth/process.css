@@ -1,0 +1,364 @@
+/* Book A Sloth — How it works.
+   "Book A Sloth Express" — the booking journey as a transit line:
+   animated station stops, step cards, and a PAID ticket. */
+
+.pw {
+  --accent: #fe5100;
+  --accent-soft: #fff4ed;
+
+  --text-dark: #1b1b1b;
+  --text-muted: #667085;
+
+  --border-light: #ece8e3;
+
+  --green: #16a34a;
+
+  --radius: 16px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 24px 48px -20px rgba(254, 81, 0, 0.16);
+
+  font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif,
+    system-ui, sans-serif;
+  background: #ffffff;
+  padding-block: 96px;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .pw {
+    padding-block: 56px;
+  }
+}
+
+.pw__container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 28px;
+}
+
+@media (max-width: 640px) {
+  .pw__container {
+    padding-inline: 20px;
+  }
+}
+
+.pw__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pw__line {
+  width: 28px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+.pw__title {
+  margin: 20px auto 0;
+  max-width: 820px;
+  font-size: clamp(30px, 4.6vw, 48px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.pw__desc {
+  margin: 18px auto 0;
+  max-width: 640px;
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ─── Station track ─── */
+
+.pw__metro {
+  margin-top: 60px;
+}
+
+.pw__track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(64px, 1fr));
+  gap: 0;
+}
+
+.pw__trackline {
+  position: absolute;
+  top: 27px;
+  left: 8.4%;
+  right: 8.4%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-light);
+}
+
+.pw__trackline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0 10px,
+    transparent 10px 22px
+  );
+  animation: pw-dash 0.9s linear infinite;
+}
+
+@keyframes pw-dash {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 22px 0;
+  }
+}
+
+.pw__stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pw__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--accent) 45%, var(--border-light));
+  background: #ffffff;
+  color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.pw__node--go {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 10px 24px -10px rgba(254, 81, 0, 0.45);
+}
+
+.pw__node--go::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: pw-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes pw-pulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.pw__node--paid {
+  background: var(--green);
+  border-color: var(--green);
+  color: #ffffff;
+  box-shadow: 0 10px 24px -10px rgba(22, 163, 74, 0.45);
+}
+
+.pw__nodeNum {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 800;
+  border: 2px solid #ffffff;
+}
+
+.pw__node--paid .pw__nodeNum {
+  background: var(--green);
+}
+
+.pw__stopLabel {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ─── Step cards ─── */
+
+.pw__grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 960px) {
+  .pw__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .pw__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pw__card {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 24px 24px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pw__card:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border-light));
+  box-shadow: var(--shadow-lg);
+}
+
+.pw__cardNum {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #f0ede8;
+  user-select: none;
+}
+
+.pw__cardIc {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pw__cardName {
+  margin: 16px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+}
+
+.pw__cardDesc {
+  margin: 7px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ─── Ticket ─── */
+
+.pw__ticket {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 52px;
+  padding: 20px 28px;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  background: #faf9f7;
+}
+
+.pw__ticketDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  background-image: radial-gradient(#fff 30%, transparent 31%);
+}
+
+.pw__ticketLabel {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.pw__ticketRoute {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-dark);
+}
+
+.pw__ticketStamp {
+  margin-left: auto;
+  padding: 6px 14px;
+  border: 2px solid var(--green);
+  border-radius: 8px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  transform: rotate(-5deg);
+}
+
+/* ─── Foot ─── */
+
+.pw__foot {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+/* ─── Mobile ─── */
+
+@media (max-width: 700px) {
+  .pw__metro {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .pw__metro::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pw__track {
+    min-width: 540px;
+  }
+}
