@@ -287,7 +287,7 @@ export function DmServices() {
           What we do
         </p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-          What are Our Few of The Best Digital Marketing Services
+          A Few of Our Best Digital Marketing Services
         </h2>
         <p className="mt-4 text-muted-foreground md:text-lg">
           From visibility and engagement to acquisition and conversion, our

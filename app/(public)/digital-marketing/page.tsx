@@ -2,20 +2,14 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { DmHero } from "@/components/digital-marketing/hero";
 import { DmTrust } from "@/components/digital-marketing/trust";
-import { DmChallenges } from "@/components/digital-marketing/challenges";
 import { DmIntro } from "@/components/digital-marketing/intro";
 import { DmWhy } from "@/components/digital-marketing/why";
 import { DmServices } from "@/components/digital-marketing/services";
 import { DmAudience } from "@/components/digital-marketing/audience";
 import { DmEcosystem } from "@/components/digital-marketing/ecosystem";
-import { DmProcess } from "@/components/digital-marketing/process";
-import { DmResults } from "@/components/digital-marketing/results";
-import { DmCaseStudies } from "@/components/digital-marketing/case-studies";
 import { DmTestimonials } from "@/components/digital-marketing/testimonials";
-import { DmLocal } from "@/components/digital-marketing/local";
 import { DmFaq } from "@/components/digital-marketing/faq";
 import { DmFinalCta } from "@/components/digital-marketing/final-cta";
-import { DmContact } from "@/components/digital-marketing/contact";
 
 export const metadata: Metadata = {
 title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
@@ -118,20 +112,16 @@ export default function DigitalMarketingPage() {
       />
       <DmHero />
       <DmTrust />
-      {/* <DmChallenges /> */}
       <DmIntro />
       <DmWhy />
       <DmServices />
       <DmAudience />
       <DmEcosystem />
-      {/* <DmProcess /> */}
-      {/* <DmResults /> */}
-      <DmCaseStudies />
+      {/* Case studies hidden until real client results replace the placeholders
+          in lib/digital-marketing.ts — re-add <DmCaseStudies /> then. */}
       <DmTestimonials />
-      {/* <DmLocal /> */}
       <DmFaq />
       <DmFinalCta />
-      {/* <DmContact /> */}
     </div>
   );
 }

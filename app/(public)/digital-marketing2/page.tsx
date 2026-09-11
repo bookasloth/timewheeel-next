@@ -7,11 +7,9 @@ import { Dm2Why } from "@/components/digital-marketing2/why";
 import { Dm2Services } from "@/components/digital-marketing2/services";
 import { Dm2Audience } from "@/components/digital-marketing2/audience";
 import { Dm2Ecosystem } from "@/components/digital-marketing2/ecosystem";
-import { Dm2CaseStudies } from "@/components/digital-marketing2/case-studies";
 import { Dm2Testimonials } from "@/components/digital-marketing2/testimonials";
 import { Dm2Faq } from "@/components/digital-marketing2/faq";
 import { Dm2FinalCta } from "@/components/digital-marketing2/final-cta";
-import { Dm2Contact } from "@/components/digital-marketing2/contact";
 
 export const metadata: Metadata = {
   title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
@@ -131,7 +129,8 @@ export default function DigitalMarketing2Page() {
       <Dm2Services />
       <Dm2Audience />
       <Dm2Ecosystem />
-      <Dm2CaseStudies />
+      {/* Case studies hidden until real client results replace the placeholders
+          in lib/digital-marketing2.ts — re-add <Dm2CaseStudies /> then. */}
       <Dm2Testimonials />
       <Dm2Faq />
       <Dm2FinalCta />
