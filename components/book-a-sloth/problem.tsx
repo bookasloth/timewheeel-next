@@ -38,7 +38,10 @@ export function BasProblem() {
         </div>
 
         <div className="lg:col-span-7">
-          <Reveal stagger className="grid gap-4 sm:grid-cols-2">
+          <Reveal
+            stagger
+            className="grid gap-4 sm:grid-cols-2 [&>*:last-child:nth-child(odd)]:sm:col-span-2 [&>*:last-child:nth-child(odd)]:sm:mx-auto [&>*:last-child:nth-child(odd)]:sm:w-[calc(50%-0.5rem)]"
+          >
             {bas.problem.items.map((item, i) => {
               const Icon = icons[i % icons.length];
               const { pain, soft } = colors[i % colors.length];
