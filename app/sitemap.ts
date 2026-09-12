@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/digital-marketing2",
     "/restaurant-marketing",
     "/web-development-company-in-india",
+    "/seo-company-in-nagpur",
     "/products/book-a-sloth",
     "/legal/privacy",
     "/legal/terms",
