@@ -109,9 +109,10 @@ export function Hero() {
 
       {/* center headline */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
-        <h1 className="font-black uppercase leading-[0.9] tracking-tight" style={{ fontSize: "clamp(3rem, 13vw, 10rem)" }}>
-          <span className="block overflow-hidden"><span className="hero-line-inner block">Own Your</span></span>
-          <span className="block overflow-hidden"><span className="hero-line-inner block">Systems</span></span>
+        <h1 className="font-black uppercase leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.6rem, 11vw, 9rem)" }}>
+          <span className="block overflow-hidden"><span className="hero-line-inner block">Be Evil.</span></span>
+          <span className="block overflow-hidden"><span className="hero-line-inner block">Don&apos;t Pay</span></span>
+          <span className="block overflow-hidden"><span className="hero-line-inner block">Subscription.</span></span>
         </h1>
         <p className="hero-fade mt-7 max-w-xl text-base font-medium text-black/70 md:text-lg">
           Bookings, payments, events and communities — running on one connected
