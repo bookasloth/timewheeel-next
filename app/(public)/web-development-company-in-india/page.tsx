@@ -16,7 +16,7 @@ import { WdOwnership } from "@/components/web-development/ownership";
 import { WdIndustries } from "@/components/web-development/industries";
 import { WdFaq } from "@/components/web-development/faq";
 import { WdFinalCta } from "@/components/web-development/final-cta";
-import { WdContact } from "@/components/web-development/contact";
+import { LeadForm } from "@/components/shared/lead-form";
 
 const PATH = "/web-development-company-in-india";
 const url = `${site.url}${PATH}`;
@@ -108,7 +108,24 @@ export default function WebDevelopmentIndiaPage() {
       <WdIndustries />
       <WdFaq />
       <WdFinalCta />
-      <WdContact />
+      <LeadForm
+        idPrefix="wd"
+        source="Web Development Company in India"
+        eyebrow="Start your project"
+        heading="Get a Fixed Quote in 24 Hours"
+        blurb="Tell us what you need built. You'll get a clear scope, a fixed price and a written timeline — no obligation, no jargon."
+        infoRows={[
+          { k: "Based in", v: "India" },
+          { k: "Serving", v: "Clients across India & abroad" },
+          { k: "Quote turnaround", v: "Within one business day" },
+          { k: "You own", v: "Code, domain, hosting, data" },
+        ]}
+        serviceOptions={wd.serviceOptions}
+        serviceLabel="What do you need?"
+        submitLabel="Get My Fixed Quote"
+        successHeading="Thanks — your quote is on the way."
+        successBody="We've received your project details and will send a fixed quote and timeline within one business day."
+      />
     </div>
   );
 }

@@ -19,6 +19,8 @@ type Props = {
   successHeading: string;
   successBody: string;
   idPrefix: string;
+  /** Where the lead came from, included in the notification email. */
+  source: string;
 };
 
 type FormState = { values: Record<FieldName, string>; errors: Partial<Record<FieldName, string>> };
@@ -56,17 +58,36 @@ function fc(hasError: boolean) {
 
 export function LeadForm(p: Props) {
   const [form, setForm] = useState<FormState>(empty);
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [honeypot, setHoneypot] = useState("");
 
   function set(field: FieldName, value: string) {
     setForm((f) => ({ values: { ...f.values, [field]: value }, errors: { ...f.errors, [field]: undefined } }));
   }
-  function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
     const errors = validate(form.values);
     if (Object.keys(errors).length) { setForm((f) => ({ ...f, errors })); return; }
     setStatus("submitting");
-    setTimeout(() => setStatus("success"), 600);
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form.values, source: p.source, company_website: honeypot }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus("error");
+        setErrorMsg(data?.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error — please try again.");
+    }
   }
 
   const id = (f: string) => `${p.idPrefix}-${f}`;
@@ -121,6 +142,18 @@ export function LeadForm(p: Props) {
 
           <Reveal delay={0.1}>
             <form onSubmit={submit} noValidate className="rounded-3xl border border-border bg-card p-7 md:p-9">
+              {/* Honeypot: hidden from humans; bots fill it and get silently dropped. */}
+              <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label htmlFor={id("company_website")}>Company website</label>
+                <input
+                  id={id("company_website")}
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {text("name", "Name", "text", "Your full name", "name")}
                 {text("business", "Business Name", "text", "Your company", "organization")}
@@ -160,6 +193,9 @@ export function LeadForm(p: Props) {
                 {status === "submitting" ? "Sending…" : p.submitLabel}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </button>
+              {status === "error" && (
+                <p role="alert" className="mt-3 text-center text-sm text-destructive">{errorMsg}</p>
+              )}
             </form>
           </Reveal>
         </div>
