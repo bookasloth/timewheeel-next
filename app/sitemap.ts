@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/digital-marketing",
     "/digital-marketing2",
     "/restaurant-marketing",
+    "/web-development-company-in-india",
     "/products/book-a-sloth",
     "/legal/privacy",
     "/legal/terms",
