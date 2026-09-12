@@ -32,12 +32,12 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: 1px;
-  --radius-md: 1px;
-  --radius-lg: 1px;
-  --radius-xl: 1px;
-  --radius-2xl: 1px;
-  --radius-3xl: 1px;
+  --radius-sm: 3px;
+  --radius-md: 3px;
+  --radius-lg: 3px;
+  --radius-xl: 3px;
+  --radius-2xl: 3px;
+  --radius-3xl: 3px;
 }
 
 /* Light brand theme. Navy ink, orange primary, green rating accent, lavender surfaces. */
@@ -72,7 +72,7 @@
   --border: #e4e4e6;
   --input: #dedee1;
   --ring: #fe5100;
-  --radius: 1px;
+  --radius: 3px;
 }
 
 @layer base {
@@ -90,6 +90,17 @@
   h3 {
     font-family: var(--font-heading), var(--font-sans), sans-serif;
     letter-spacing: -0.02em;
+  }
+}
+
+/* House rule: no sharp corners. Everything gets a 3px baseline radius in the
+   `base` layer, so any explicit `rounded-*` utility (larger, or full) always
+   wins via the utilities layer — only true 0-radius corners become 3px. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 3px;
   }
 }
 
