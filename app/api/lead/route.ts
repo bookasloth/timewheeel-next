@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { renderLeadEmailHtml, renderLeadEmailText } from "@/lib/lead-email";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
 // lives in the repo. Required env:
@@ -103,21 +104,10 @@ export async function POST(request: Request) {
     service: clean(body.service),
     message: clean(body.message),
     source: clean(body.source) || "website",
+    when: new Date().toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short",
+    }) + " IST",
   };
-
-  const text = [
-    `New lead from ${l.source}`,
-    "",
-    `Name:     ${l.name}`,
-    `Business: ${l.business}`,
-    `Email:    ${l.email}`,
-    `Phone:    ${l.phone}`,
-    `Website:  ${l.website || "—"}`,
-    `Service:  ${l.service}`,
-    "",
-    "Message:",
-    l.message,
-  ].join("\n");
 
   try {
     await transporter.sendMail({
@@ -125,7 +115,8 @@ export async function POST(request: Request) {
       to: LEAD_TO,
       replyTo: `${l.name} <${l.email}>`,
       subject: `New lead: ${l.service} — ${l.business} (${l.source})`,
-      text,
+      text: renderLeadEmailText(l),
+      html: renderLeadEmailHtml(l),
     });
     return NextResponse.json({ ok: true });
   } catch (err) {
