@@ -14,12 +14,14 @@ export function Reveal({
   stagger,
   y = 24,
   delay = 0,
+  "data-ghost": dataGhost,
 }: {
   children: ReactNode;
   className?: string;
   stagger?: boolean;
   y?: number;
   delay?: number;
+  "data-ghost"?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -55,7 +57,7 @@ export function Reveal({
   );
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} data-ghost={dataGhost}>
       {children}
     </div>
   );

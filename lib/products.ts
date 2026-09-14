@@ -38,7 +38,7 @@ export const products: Product[] = [
     tagline: "Connect Schools & Alumni",
     icon: GraduationCap,
     accent: "#269cef",
-    href: "#",
+    href: "/products/alluminaty",
     featured: true,
     blurb:
       "An alumni engagement platform that keeps schools, colleges, and their graduates connected long after they leave — directories, events, mentorship, and giving in one place instead of scattered spreadsheets and group chats.",
@@ -54,7 +54,7 @@ export const products: Product[] = [
     tagline: "Manage Bookings & Clients",
     icon: CalendarCheck,
     accent: "#fe5100",
-    href: "https://bookasloth.com",
+    href: "/products/book-a-sloth",
     featured: true,
     blurb:
       "A modern booking platform built to simplify how businesses manage appointments, reservations, and customer scheduling — built around speed, usability, and conversion-focused experiences customers actually enjoy.",

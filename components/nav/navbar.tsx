@@ -12,6 +12,8 @@ import {
   Robot,
   ShareNetwork,
   Storefront,
+  PresentationChart,
+  BookOpenText,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import { featuredProducts } from "@/lib/products";
@@ -45,17 +47,21 @@ const serviceGroups: { title: string; items: NavService[] }[] = [
   },
 ];
 
-const navLinks = [
-  { label: "Resources", href: "/blog" },
-  { label: "Company", href: "/about" },
+const resourceItems = [
+  { name: "Case Studies", href: "/case-studies", icon: PresentationChart, accent: "#fe5100" },
+  { name: "Blog", href: "/blog", icon: BookOpenText, accent: "#269cef" },
 ];
 
+const navLinks = [{ label: "Company", href: "/about" }];
+
 export function Navbar() {
-  const [openMenu, setOpenMenu] = useState<"products" | "services" | null>(null);
+  const [openMenu, setOpenMenu] = useState<
+    "products" | "services" | "resources" | null
+  >(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSection, setMobileSection] = useState<"products" | "services" | null>(
-    "products",
-  );
+  const [mobileSection, setMobileSection] = useState<
+    "products" | "services" | "resources" | null
+  >("products");
 
   const mobileRow = (item: { name: string; icon: Icon; accent: string; href: string }) => (
     <Link
@@ -183,6 +189,53 @@ export function Navbar() {
             )}
           </div>
 
+          {/* Resources */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenMenu("resources")}
+            onMouseLeave={() => setOpenMenu(null)}
+          >
+            <button className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/90 hover:text-foreground">
+              Resources
+              <ChevronDown
+                className={cn(
+                  "size-4 transition-transform",
+                  openMenu === "resources" && "rotate-180",
+                )}
+              />
+            </button>
+            {openMenu === "resources" && (
+              <div className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-3">
+                <div className="rounded-2xl border border-border bg-popover p-3">
+                  <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Resources
+                  </p>
+                  {resourceItems.map((s) => (
+                    <Link
+                      key={s.name}
+                      href={s.href}
+                      className="group relative flex items-center gap-3 overflow-hidden rounded-xl p-2"
+                    >
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+                        style={{ backgroundColor: `${s.accent}1f` }}
+                      />
+                      <span
+                        className="relative z-10 grid size-9 shrink-0 place-items-center rounded-lg bg-[var(--a)]/15 text-[var(--a)]"
+                        style={{ "--a": s.accent } as CSSProperties}
+                      >
+                        <s.icon className="size-5" weight="regular" />
+                        <s.icon className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100" weight="fill" />
+                      </span>
+                      <span className="relative z-10 block text-sm font-semibold">{s.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           {navLinks.map((l) => (
             <Link
               key={l.href}
@@ -263,16 +316,37 @@ export function Navbar() {
             </div>
           )}
 
-          {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="block border-b border-border/60 py-4 text-base font-semibold active:text-brand"
-              onClick={() => setMobileOpen(false)}
-            >
-              {l.label}
-            </Link>
-          ))}
+          {/* Resources */}
+          <button
+            className="flex w-full items-center justify-between border-b border-border/60 py-4 text-base font-semibold"
+            onClick={() =>
+              setMobileSection((s) => (s === "resources" ? null : "resources"))
+            }
+          >
+            Resources
+            <ChevronDown
+              className={cn(
+                "size-5 transition-transform",
+                mobileSection === "resources" && "rotate-180",
+              )}
+            />
+          </button>
+          {mobileSection === "resources" && (
+            <div className="py-2">{resourceItems.map(mobileRow)}
+            </div>
+          )}
+
+          {navLinks.length > 0 &&
+            navLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="block border-b border-border/60 py-4 text-base font-semibold active:text-brand"
+                onClick={() => setMobileOpen(false)}
+              >
+                {l.label}
+              </Link>
+            ))}
 
           <Link
             href={site.demoUrl}

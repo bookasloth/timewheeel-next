@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     remotePatterns: [
       { protocol: "https", hostname: "company-assets.bookasloth.in", pathname: "/images/**" },
+      { protocol: "https", hostname: "picsum.photos" },
     ],
   },
 };

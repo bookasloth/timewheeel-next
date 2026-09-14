@@ -1,0 +1,368 @@
+export const az = {
+  meta: {
+    title: "Alluminaty — Alumni Network Platform Built by Timewheel",
+    description:
+      "Alluminaty is an alumni network platform built by Timewheel — verified directories, groups, events, business opportunities and giving back, all in one product.",
+  },
+  hero: {
+    titleLine1: "Every alumni network,",
+    titleLine2: "forever connected.",
+    titleAccent: "forever connected.",
+    body: "Alluminaty keeps schools, colleges and their graduates connected for life — verified directories, groups, events, opportunities and giving back in one calm, structured product instead of scattered chats.",
+    primaryLabel: "Start a Project",
+    primaryHref: "/digital-marketing",
+    secondaryLabel: "See it live",
+    secondaryHref: "https://nnawca.vercel.app",
+    builtBy: "Built by Timewheel",
+    members: [
+      { name: "Pranav Kadoo", meta: "Batch 2006–13 · Shiwalik House" },
+      { name: "Ritika Deshmukh", meta: "Batch 2012–19 · Nilgiri House" },
+      { name: "Anil Chakraborty", meta: "Batch 1998–05 · Aravali House" },
+    ],
+  },
+  stats: [
+    { value: "500+", label: "Verified alumni" },
+    { value: "18", label: "Countries connected" },
+    { value: "10", label: "Houses & batches" },
+    { value: "1", label: "Lifelong network" },
+  ],
+  ticker: [
+    "Verified Directory",
+    "Batch, House & City",
+    "Events & Reunions",
+    "Mentorship",
+    "Scholarships",
+    "Business Directory",
+    "Giving Back",
+    "Governance",
+  ],
+  problem: {
+    number: "01",
+    label: "THE CHALLENGE",
+    title: "Alumni networks shouldn't fade after graduation.",
+    body: "Every school has the same story — the bond survives, but the infrastructure around it doesn't.",
+    items: [
+      {
+        name: "Batchmates scatter",
+        desc: "After graduation, classmates spread across cities and countries — and slowly out of reach.",
+      },
+      {
+        name: "Contacts live in spreadsheets",
+        desc: "Directories rot in outdated documents nobody can find or trust.",
+      },
+      {
+        name: "Conversations fragment",
+        desc: "The batch lives across fading group chats — noisy, unsearchable, and split by year.",
+      },
+      {
+        name: "Reunions get missed",
+        desc: "Events are announced on whichever chat still survives, and half the batch never hears.",
+      },
+      {
+        name: "Giving back has no channel",
+        desc: "There is no structured way to mentor students, fund scholarships, or support drives.",
+      },
+    ],
+  },
+  solution: {
+    number: "02",
+    label: "THE SOLUTION",
+    title: "One connected network for every batch.",
+    body: "Everything that used to live in scattered chats and stale spreadsheets now lives in one verified, structured product.",
+    items: [
+      "Verified alumni directory",
+      "Groups, feed & messaging",
+      "Events, reunions & RSVPs",
+      "Businesses, jobs & referrals",
+      "Scholarships & mentorship",
+      "Membership, voting & governance",
+    ],
+  },
+  beforeAfter: {
+    number: "03",
+    label: "BEFORE / AFTER",
+    title: "From scattered batches\nto a living network.",
+    titleAccent: "living network.",
+    body: "The bond was always there. Now the platform keeps it in reach.",
+    beforeTitle: "Before Alluminaty",
+    afterTitle: "With Alluminaty",
+    before: [
+      "Batchmates lost across generations",
+      "Contacts in stale spreadsheets",
+      "Reunions announced on dying chats",
+      "No channel to give back",
+    ],
+    after: [
+      "One verified alumni directory",
+      "Search by batch, house, city, company",
+      "Events, groups & RSVPs in one place",
+      "Scholarships, mentorship & opportunities",
+    ],
+    stats: [
+      { value: "500+", label: "alumni reconnected" },
+      { value: "18", label: "countries in one network" },
+    ],
+  },
+  features: {
+    number: "04",
+    label: "WHAT'S INSIDE",
+    title: "Everything an alumni network needs.",
+    body: "Six connected experiences — for the members, for the institutions, and for the work of keeping thousands of alumni reachable.",
+    items: [
+      {
+        icon: "users",
+        name: "Verified Directory",
+        desc: "Every member is verified against the school's real records, so the network stays trusted.",
+        bullets: [
+          "Verified members only",
+          "Search by batch, house, city or company",
+          "Highlighted profiles for premium members",
+        ],
+      },
+      {
+        icon: "message",
+        name: "Community & Feed",
+        desc: "A feed that keeps the batch talking long after campus — posts, polls and messages.",
+        bullets: [
+          "Activity feed & posts",
+          "Polls, comments & reactions",
+          "Direct messaging & groups",
+        ],
+      },
+      {
+        icon: "calendar",
+        name: "Events & Reunions",
+        desc: "Discover, RSVP and create events — from founders' day to city meetups.",
+        bullets: [
+          "Event listings & RSVP",
+          "Create your own events",
+          "Reminders & personal calendar",
+        ],
+      },
+      {
+        icon: "store",
+        name: "Business & Opportunities",
+        desc: "Alumni-owned businesses, jobs, referrals and collaborations — alumni to alumni.",
+        bullets: [
+          "Business directory",
+          "Jobs, referrals & mentorship",
+          "Alumni discounts",
+        ],
+      },
+      {
+        icon: "heart",
+        name: "Giving Back",
+        desc: "Scholarships, welfare drives, mentorship and career support that reach the next batch.",
+        bullets: [
+          "Scholarship funds",
+          "Mentorship pairing",
+          "Welfare & charity drives",
+        ],
+      },
+      {
+        icon: "shield",
+        name: "Membership & Governance",
+        desc: "Contribution tiers, verified voting and committee leadership — transparent and durable.",
+        bullets: [
+          "Free to lifetime tiers",
+          "Secure Razorpay checkout",
+          "Verified voting rights",
+        ],
+      },
+    ],
+  },
+  process: {
+    number: "05",
+    label: "HOW IT WORKS",
+    title: "From sign-up\nto a living network.",
+    body: "Five simple moves take a scattered batch and turn it into a self-sustaining community.",
+    steps: [
+      {
+        name: "Create & verify",
+        stop: "VERIFY",
+        desc: "Members sign up with real batch details, approved by the committee.",
+      },
+      {
+        name: "Find your people",
+        stop: "FIND",
+        desc: "Search by batch, house, city or company — and reconnect.",
+      },
+      {
+        name: "Join the community",
+        stop: "ENGAGE",
+        desc: "Groups, feed, polls and messaging bring the batch alive.",
+      },
+      {
+        name: "Meet, grow, give back",
+        stop: "GROW",
+        desc: "Events, reunions, mentorship, opportunities and scholarships.",
+      },
+      {
+        name: "Govern & sustain",
+        stop: "SUSTAIN",
+        desc: "Committees, voting and contributions keep it running for decades.",
+      },
+    ],
+  },
+  pricing: {
+    number: "06",
+    label: "MEMBERSHIP",
+    title: "A contribution, not a subscription.",
+    body: "Every tier funds the network — scholarships, welfare drives, events and mentorship. Institutions choose what their alumni pay.",
+    footnote: "Secured by Razorpay · Non-refundable contributions · Each institution sets its own tiers",
+    plans: [
+      {
+        name: "Member",
+        tagline: "Stay connected forever",
+        price: "₹0",
+        unit: "free",
+        highlight: false,
+        features: [
+          "Directory & profiles",
+          "Join events & groups",
+          "Post, comment & poll",
+          "Voting rights (verified + 30 days)",
+        ],
+      },
+      {
+        name: "Associate",
+        tagline: "Give back & get more",
+        price: "₹499",
+        unit: "/ year",
+        highlight: true,
+        features: [
+          "Full, uncapped feed",
+          "Reduced ads",
+          "Post jobs & referrals",
+          "Video calling · 30 min/call",
+          "1 GB gallery storage",
+          "Verified Associate badge",
+        ],
+      },
+      {
+        name: "Premium",
+        tagline: "Lead the network",
+        price: "₹999",
+        unit: "/ year",
+        highlight: false,
+        features: [
+          "Everything in Associate",
+          "Ad-free feed",
+          "Highlighted profile",
+          "List your business",
+          "Video calling · 60 min/call",
+          "Earlier event invitations",
+        ],
+      },
+      {
+        name: "Life Member",
+        tagline: "A lifetime contribution",
+        price: "₹9,999",
+        unit: "one-time",
+        highlight: false,
+        features: [
+          "Everything in Premium, forever",
+          "Never renews or expires",
+          "Permanent Life Member badge",
+          "Video calling · 90 min/call",
+          "Eligible for Committee invitation",
+        ],
+      },
+    ],
+  },
+  matrix: {
+    heading: "Benefit Matrix",
+    note: "Voting in decisions is open to any verified member with 30+ days active, regardless of paid tier.",
+    columns: ["Benefit", "Member", "Associate", "Premium", "Life"],
+    rows: [
+      { name: "Alumni feed", values: ["Preview", "Full", "Full", "Full"] },
+      { name: "Feed ads", values: ["Standard", "Reduced", "Ad-free", "Ad-free"] },
+      { name: "Video calling", values: ["Pass", "30 min", "60 min", "90 min"] },
+      { name: "Gallery storage", values: ["200 MB", "1 GB", "5 GB", "10 GB"] },
+      { name: "Highlighted profile", values: ["—", "—", "Yes", "Yes"] },
+      { name: "Business listing", values: ["—", "—", "Yes", "Yes"] },
+      { name: "Committee eligibility", values: ["—", "—", "—", "Yes"] },
+    ],
+  },
+  capabilities: {
+    number: "07",
+    label: "WHAT TIMEWHEEL BUILT",
+    title: "A complete product,\nend to end.",
+    body: "Timewheel designed, built and shipped Alluminaty as a complete digital product — from strategy to production.",
+    items: [
+      { icon: "compass", label: "Product Strategy" },
+      { icon: "pen", label: "UX / UI Design" },
+      { icon: "layout", label: "Design System" },
+      { icon: "code", label: "Frontend Development" },
+      { icon: "server", label: "Backend & APIs" },
+      { icon: "database", label: "Database & Storage" },
+      { icon: "shield", label: "Auth & Verification" },
+      { icon: "wallet", label: "Payments (Razorpay)" },
+      { icon: "message", label: "Feeds, Groups & Events" },
+    ],
+  },
+  testimonials: {
+    number: "08",
+    label: "FROM THE NETWORK",
+    title: "Alumni who came home.",
+    body: "It started as a directory. It became a community.",
+    items: [
+      {
+        quote:
+          "Alluminaty turned a scattered batch into a living network — the platform where every Navodian finds their way home.",
+        name: "Pranav Kadoo",
+        role: "Alumnus · Batch 2006–13, Shiwalik House",
+        initials: "PK",
+      },
+      {
+        quote:
+          "For the first time in ten years, my batch has one place to find everyone — by house, by city, by company.",
+        name: "Ritika Deshmukh",
+        role: "Batch Representative",
+        initials: "RD",
+      },
+      {
+        quote:
+          "We ran our first verified fundraiser on it. The trust came from real names and real members.",
+        name: "Anil Chakraborty",
+        role: "Reunion Organizer",
+        initials: "AC",
+      },
+    ],
+  },
+  faq: {
+    number: "09",
+    label: "FAQ",
+    title: "Questions, answered.",
+    items: [
+      {
+        q: "Who is Alluminaty for?",
+        a: "Alluminaty is built for schools, colleges, universities and coaching networks that want a verified, lifelong alumni network — directories, events, groups, giving back, and membership in one product.",
+      },
+      {
+        q: "How are members verified?",
+        a: "Membership is approved against the institution's real records, so profiles in the directory belong to real alumni. Verified members get a badge and can vote in decisions after 30+ days active.",
+      },
+      {
+        q: "Can alumni pay for membership?",
+        a: "Institutions choose their tiers. Alluminaty supports free, annual and lifetime contributions with secure Razorpay checkout — and a full benefit matrix for every tier.",
+      },
+      {
+        q: "Where do contributions go?",
+        a: "Contributions fund scholarships, welfare drives, events and reunions, mentorship, the alumni map, and the platform itself — with governance, annual reports and audits for transparency.",
+      },
+      {
+        q: "Can we run events and committees on it?",
+        a: "Yes. Alumni can discover, RSVP and create events and reunions, and committees are configured with elected and advisory roles — with invite-only leadership for committed contributors.",
+      },
+    ],
+  },
+  final: {
+    title: "Your alumni network is waiting to be built.",
+    body: "Alluminaty is one example of what Timewheel can build. Yours could be next.",
+    primaryLabel: "Start a Project",
+    primaryHref: "/digital-marketing",
+    secondaryLabel: "Explore Timewheel",
+    secondaryHref: "/",
+  },
+};

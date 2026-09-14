@@ -5,6 +5,7 @@ import { NewsletterForm } from "@/components/newsletter-form";
 
 const company = [
   { label: "About", href: "/about" },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Solutions", href: "/solutions" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
