@@ -28,8 +28,8 @@ export function AzCapabilities() {
   return (
     <section className="az-sec az-caps">
       <div className="az-container">
-        <Reveal className="az-head" data-ghost={az.capabilities.number}>
-          <p className="az-kicker">
+        <Reveal className="az-head az-head--light" data-ghost={az.capabilities.number}>
+          <p className="az-kicker az-kicker--light">
             <span className="az-kicker-num">{az.capabilities.number}</span>
             {az.capabilities.label}
           </p>

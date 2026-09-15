@@ -9,7 +9,7 @@ export const az = {
     titleLine2: "forever connected.",
     titleAccent: "forever connected.",
     body: "Alluminaty keeps schools, colleges and their graduates connected for life — verified directories, groups, events, opportunities and giving back in one calm, structured product instead of scattered chats.",
-    primaryLabel: "Start a Project",
+    primaryLabel: "Get A Demo",
     primaryHref: "/digital-marketing",
     secondaryLabel: "See it live",
     secondaryHref: "https://nnawca.vercel.app",
@@ -58,14 +58,9 @@ export const az = {
         name: "Reunions get missed",
         desc: "Events are announced on whichever chat still survives, and half the batch never hears.",
       },
-      {
-        name: "Giving back has no channel",
-        desc: "There is no structured way to mentor students, fund scholarships, or support drives.",
-      },
     ],
   },
   solution: {
-    number: "02",
     label: "THE SOLUTION",
     title: "One connected network for every batch.",
     body: "Everything that used to live in scattered chats and stale spreadsheets now lives in one verified, structured product.",
@@ -360,7 +355,7 @@ export const az = {
   final: {
     title: "Your alumni network is waiting to be built.",
     body: "Alluminaty is one example of what Timewheel can build. Yours could be next.",
-    primaryLabel: "Start a Project",
+    primaryLabel: "Get A Demo",
     primaryHref: "/digital-marketing",
     secondaryLabel: "Explore Timewheel",
     secondaryHref: "/",

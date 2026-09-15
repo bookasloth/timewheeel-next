@@ -1,6 +1,22 @@
-import { Check } from "lucide-react";
+import {
+  Briefcase,
+  Building2,
+  CalendarDays,
+  GraduationCap,
+  MessagesSquare,
+  Vote,
+} from "lucide-react";
 import { az } from "@/lib/alluminaty";
 import { Reveal } from "@/components/reveal";
+
+const itemIcons = [
+  Building2,
+  MessagesSquare,
+  CalendarDays,
+  Briefcase,
+  GraduationCap,
+  Vote,
+];
 
 export function AzSolution() {
   return (
@@ -19,17 +35,17 @@ export function AzSolution() {
         </Reveal>
 
         <Reveal className="az-strips" stagger>
-          {az.solution.items.map((item, i) => (
-            <div className="az-strip" key={item}>
-              <span className="az-strip-num">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="az-strip-ic">
-                <Check size={15} strokeWidth={2.4} aria-hidden="true" />
-              </span>
-              <span className="az-strip-name">{item}</span>
-            </div>
-          ))}
+          {az.solution.items.map((item, i) => {
+            const Icon = itemIcons[i % itemIcons.length];
+            return (
+              <div className="az-strip" key={item}>
+                <span className="az-strip-ic">
+                  <Icon size={17} strokeWidth={1.9} aria-hidden="true" />
+                </span>
+                <span className="az-strip-name">{item}</span>
+              </div>
+            );
+          })}
         </Reveal>
       </div>
     </section>

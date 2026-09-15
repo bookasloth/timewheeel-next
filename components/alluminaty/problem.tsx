@@ -17,16 +17,16 @@ export function AzProblem() {
           <p className="az-lede">{az.problem.body}</p>
         </Reveal>
 
-        <div className="az-grid">
+        <div className="az-problem-grid">
           {az.problem.items.map((item, i) => {
             const Icon = icons[i % icons.length];
             return (
-              <Reveal key={item.name} className="az-card">
-                <span className="az-card-ic az-card-ic--muted">
+              <Reveal key={item.name} className="az-problem-card">
+                <span className="az-problem-ic">
                   <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
-                <h3 className="az-card-title">{item.name}</h3>
-                <p className="az-card-body">{item.desc}</p>
+                <h3 className="az-problem-title">{item.name}</h3>
+                <p className="az-problem-desc">{item.desc}</p>
               </Reveal>
             );
           })}
