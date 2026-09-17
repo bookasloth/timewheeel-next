@@ -226,10 +226,6 @@ export function SolutionsTabs() {
                 <ActiveIcon size={27} strokeWidth={1.7} />
               </div>
 
-              <span className="solutionsTabs__moduleLabel">
-                Enterprise module
-              </span>
-
               <h3>{content.title}</h3>
               <p>{content.description}</p>
             </div>

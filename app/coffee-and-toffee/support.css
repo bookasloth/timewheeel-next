@@ -1,0 +1,91 @@
+/* Coffee & Toffee — standalone support page.
+   Fonts, warm editorial styling and small scene animations.
+   Layout + spacing live in Tailwind utilities on the components. */
+
+.ct-page {
+  background: #faf7f1;
+  color: #302017;
+  font-family: var(--ct-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.ct-serif {
+  font-family: var(--ct-serif), Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+.ct-hand {
+  font-family: var(--ct-hand), "Comic Sans MS", cursive;
+}
+
+/* soft page glow, barely there */
+.ct-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(620px 340px at 85% -5%, rgba(232, 121, 34, 0.055), transparent 65%),
+    radial-gradient(520px 300px at -10% 45%, rgba(90, 53, 31, 0.04), transparent 65%),
+    radial-gradient(460px 320px at 55% 110%, rgba(220, 231, 208, 0.35), transparent 70%);
+}
+
+/* coffee cup steam — gentle rise, never distracting */
+@keyframes ct-steam {
+  0% {
+    transform: translateY(5px) scaleY(0.85);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-15px) scaleY(1.05);
+    opacity: 0;
+  }
+}
+
+.ct-steam {
+  animation: ct-steam 3.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: bottom;
+}
+
+.ct-steam--d1 {
+  animation-delay: 0.35s;
+}
+
+.ct-steam--d2 {
+  animation-delay: 0.8s;
+}
+
+/* latte-art heart pop */
+@keyframes ct-latte {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.ct-latte {
+  animation: ct-latte 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* underline that draws when the help center scrolls into view */
+@keyframes ct-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

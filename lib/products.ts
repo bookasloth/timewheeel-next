@@ -70,7 +70,7 @@ export const products: Product[] = [
     tagline: "Collect Tips & Donations",
     icon: Coffee,
     accent: "#ffcc1c",
-    href: "#",
+    href: "/products/coffee-for-me",
     featured: true,
     blurb:
       "A creator monetization platform that lets audiences support creators through simple, meaningful contributions — helping creators build sustainable income while keeping a direct connection with their communities.",

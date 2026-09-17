@@ -6,6 +6,15 @@ export const site = {
   calendlyUrl:
     process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://timewheel.co.in/book-a-demo",
   tagline: "Build on systems you control forever",
+  contact: {
+    email: "hello@timewheel.co.in",
+    phone: "+91 98765 43210",
+    whatsappDigits: "919876543210",
+    city: "Nagpur",
+    region: "Maharashtra, India",
+    responseTime: "Within 1 business day",
+    hours: "Mon–Sat · 10:00–19:00 IST",
+  },
   social: {
     twitter: "#",
     linkedin: "#",

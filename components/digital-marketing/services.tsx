@@ -262,8 +262,8 @@ function SocialCard({ accent }: { accent: string }) {
 }
 
 const servicesVisual: Record<string, ComponentType<{ accent: string }>> = {
-  // "Paid Advertising": AdDashboard,
-  "Search Engine Optimization (SEO)": SeoCard,
+  "Paid Advertising": AdDashboard,
+  "Search Engine Optimization": SeoCard,
   "Content Marketing": ContentCard,
   "Email Marketing": EmailCard,
   "WhatsApp Marketing": WhatsAppCard,
@@ -287,7 +287,7 @@ export function DmServices() {
           What we do
         </p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-          A Few of Our Best Digital Marketing Services
+          Everything Your Brand Needs to Grow Online
         </h2>
         <p className="mt-4 text-muted-foreground md:text-lg">
           From visibility and engagement to acquisition and conversion, our
@@ -306,6 +306,12 @@ export function DmServices() {
                   <div className="flex items-center gap-3">
                     <span className="text-5xl font-black leading-none tracking-tight text-muted-foreground/20 transition-colors duration-300 group-hover:text-brand/30 md:text-7xl">
                       {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span
+                      className="grid size-11 place-items-center rounded-xl"
+                      style={{ backgroundColor: `${service.accent}1f`, color: service.accent }}
+                    >
+                      <service.icon className="size-5" weight="bold" />
                     </span>
                   </div>
                   <p

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Rocket, Search, Target, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { CollageCover } from "@/components/digital-marketing/dm-illustrations";
 import { dmCaseStudies } from "@/lib/digital-marketing2";
@@ -72,19 +72,13 @@ export function Dm2CaseStudies() {
                 <span className="font-semibold text-foreground/70">Outcome:</span>{" "}
                 {cs.outcome}
               </p>
-              {cs.href && cs.href !== "#" ? (
-                <Link
-                  href={cs.href}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline-offset-4 hover:text-brand"
-                >
-                  Explore Case Study
-                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
-              ) : (
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground/60">
-                  Case study coming soon
-                </span>
-              )}
+              <Link
+                href={cs.href}
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline-offset-4 hover:text-brand"
+              >
+                Explore Case Study
+                <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </div>
           </article>
         ))}

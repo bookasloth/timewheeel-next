@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 import { NewsletterForm } from "@/components/newsletter-form";
 
 const company = [
+  { label: "Contact", href: "/contact" },
   { label: "About", href: "/about" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Solutions", href: "/solutions" },

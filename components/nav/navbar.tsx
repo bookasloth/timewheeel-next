@@ -30,7 +30,7 @@ const serviceGroups: { title: string; items: NavService[] }[] = [
   {
     title: "Tech",
     items: [
-      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "#" },
+      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design" },
       { name: "Website Development", icon: Code, accent: "#269cef", href: "#" },
       { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "#" },
       { name: "Shopify Development", icon: Storefront, accent: "#fe5100", href: "#" },
@@ -52,7 +52,10 @@ const resourceItems = [
   { name: "Blog", href: "/blog", icon: BookOpenText, accent: "#269cef" },
 ];
 
-const navLinks = [{ label: "Company", href: "/about" }];
+const navLinks = [
+  { label: "Company", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export function Navbar() {
   const [openMenu, setOpenMenu] = useState<

@@ -141,6 +141,102 @@
   background: var(--navy);
 }
 
+/* ── Website Design service page (app/(public)/website-design) ──
+   Page-scoped palette: blue / purple / orange / green / dark / soft.
+   Tokens emit wblue/wpurple/... utilities only where used. */
+@theme {
+  --color-wblue: #3155ff;
+  --color-wpurple: #7c4dff;
+  --color-worange: #ff7a3d;
+  --color-wgreen: #35c98a;
+  --color-wdark: #111827;
+  --color-wsoft: #f8f9fc;
+}
+
+/* website-design page buttons (reuse the .btn colour-sweep pattern) */
+.btn-blue {
+  background: var(--color-wblue);
+  color: #fff;
+}
+.btn-blue::before {
+  background: var(--color-wdark);
+}
+.btn-dark {
+  background: var(--color-wdark);
+  color: #fff;
+}
+.btn-dark::before {
+  background: var(--color-wblue);
+}
+
+/* ── Web App Development service page (app/(public)/web-app-development) ──
+   Soft lavender surfaces for the product-showcase hero + a muted iris accent.
+   Tokens emit wamist/walilac/wairis utilities only where used. */
+@theme {
+  --color-wamist: #f6f5fb;
+  --color-walilac: #eceafe;
+  --color-wairis: #7b6cff;
+}
+
+/* website-design hero: floating service chips drift gently upward */
+@keyframes wd-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+.wd-float {
+  animation: wd-float 6s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+/* website-design hero: ambient background layers */
+@keyframes wd-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(28px, -22px) scale(1.06);
+  }
+  66% {
+    transform: translate(-24px, 18px) scale(0.95);
+  }
+}
+.wd-blob {
+  animation: wd-drift 20s ease-in-out infinite;
+  animation-delay: var(--blob-delay, 0s);
+}
+.wd-grid-bg {
+  background-image: radial-gradient(
+    circle,
+    rgba(17, 24, 39, 0.09) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+.wd-fade-edges {
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 42%,
+    #000 35%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 42%,
+    #000 35%,
+    transparent 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd-blob,
+  .wd-float {
+    animation: none;
+  }
+}
+
 /* outline → brand orange sweeps in, text flips white */
 .btn-outline {
   background: transparent;

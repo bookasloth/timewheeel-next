@@ -1,14 +1,33 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Asterisk } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+
 
 export function Dm2FinalCta() {
   return (
-    <section className="w-full">
-      <Reveal className="relative overflow-hidden border-t border-white/10 bg-navy text-center text-white">
+    <section className="mx-auto max-w-full px-6 py-20 md:py-28">
+      <Reveal className="relative overflow-hidden rounded-3xl border border-border bg-navy text-center text-white">
+        {/* abstract illustration */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-2 select-none text-center text-[clamp(4rem,12vw,10rem)] font-black uppercase leading-none tracking-tighter text-white/[0.03]"
+        >
+          Timewheel
+        </div>
+
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
           <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
-            Ready to Turn Attention Into Growth?
+            Ready to Turn{" "}
+            <span
+              className="dm-gradient-text"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #fe5100, #ff4d93, #ffcc1c, #fe5100)",
+              }}
+            >
+              Attention
+            </span>{" "}
+            Into Growth?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/70">
             Let&apos;s build a digital marketing system around your business
@@ -32,6 +51,8 @@ export function Dm2FinalCta() {
           </div>
         </div>
 
+        <div className="relative">
+        </div>
       </Reveal>
     </section>
   );

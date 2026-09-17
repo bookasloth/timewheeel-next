@@ -61,6 +61,7 @@ export const az = {
     ],
   },
   solution: {
+    number: "02",
     label: "THE SOLUTION",
     title: "One connected network for every batch.",
     body: "Everything that used to live in scattered chats and stale spreadsheets now lives in one verified, structured product.",

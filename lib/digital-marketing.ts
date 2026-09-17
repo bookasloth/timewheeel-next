@@ -9,7 +9,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 
 export const dmStats = [
-  { value: 5, suffix: "+", label: "Years of Experience" },
+  { value: 7, suffix: "+", label: "Years of Experience" },
   { value: 50, suffix: "+", label: "Happy Customers" },
   { value: 20, suffix: "+", label: "Projects Completed" },
 ];

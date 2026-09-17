@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Globe, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-// Reusable lead-capture section. Frontend-only for now (fakes success) — wire
-// to a real endpoint when one exists. Copy is passed per page.
+// Reusable lead-capture section. Submits to /api/lead. Copy is passed per page.
 type FieldName = "name" | "business" | "email" | "phone" | "website" | "service" | "message";
 
 type Props = {
@@ -127,16 +126,33 @@ export function LeadForm(p: Props) {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="grid gap-12 lg:grid-cols-2">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand">{p.eyebrow}</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{p.heading}</h2>
+            <p className="inline-flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand/5 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.22em] text-brand">{p.eyebrow}</p>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">{p.heading}</h2>
             <p className="mt-4 max-w-md text-muted-foreground md:text-lg">{p.blurb}</p>
-            <div className="mt-8 space-y-4">
-              {p.infoRows.map((row) => (
-                <div key={row.k} className="flex items-center justify-between rounded-xl border border-border bg-card px-5 py-3.5 text-sm">
-                  <span className="font-semibold text-foreground">{row.k}</span>
-                  <span className="text-muted-foreground">{row.v}</span>
-                </div>
-              ))}
+            <div className="mt-8 space-y-3">
+              {p.infoRows.map((row) => {
+                const Icon =
+                  row.k === "Email" ? Mail :
+                  row.k === "Phone" ? Phone :
+                  row.k === "Location" || row.k === "Based in" ? MapPin :
+                  row.k.includes("turnaround") || row.k.includes("Response") ? Timer :
+                  row.k.includes("hours") || row.k.includes("Hours") ? Clock :
+                  row.k === "You own" ? ShieldCheck :
+                  row.k === "Serving" ? Globe : undefined;
+                return (
+                  <div key={row.k} className="flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-3.5 text-sm">
+                    {Icon && (
+                      <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-brand/10 text-brand">
+                        <Icon className="size-4" strokeWidth={1.9} />
+                      </span>
+                    )}
+                    <div className="flex min-w-0 flex-1 items-center justify-between gap-4">
+                      <span className="font-semibold text-foreground">{row.k}</span>
+                      <span className="truncate text-right text-muted-foreground">{row.v}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </Reveal>
 
