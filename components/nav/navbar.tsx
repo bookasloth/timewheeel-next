@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import {
   AppWindow,
@@ -66,6 +67,20 @@ export function Navbar() {
     "products" | "services" | "resources" | null
   >("products");
 
+  // Overlay mode: transparent, light-text header over the homepage dark hero;
+  // solidifies to the cream bar after a little scroll, and on every other page.
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  const light = pathname === "/" && !scrolled && !mobileOpen;
+  const linkBase = "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors";
+  const linkTone = light ? "text-white/85 hover:text-white" : "text-foreground/90 hover:text-foreground";
+
   const mobileRow = (item: { name: string; icon: Icon; accent: string; href: string }) => (
     <Link
       key={item.name}
@@ -86,9 +101,19 @@ export function Navbar() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-colors duration-300",
+        light
+          ? "bg-transparent"
+          : "border-b border-border/60 bg-background/80 backdrop-blur-xl",
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="text-xl font-black tracking-tight">
+        <Link
+          href="/"
+          className={cn("text-xl font-black tracking-tight", light ? "text-white" : "text-foreground")}
+        >
           TIME<span className="text-brand">WHEEL</span>
         </Link>
 
@@ -100,7 +125,7 @@ export function Navbar() {
             onMouseEnter={() => setOpenMenu("products")}
             onMouseLeave={() => setOpenMenu(null)}
           >
-            <button className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/90 hover:text-foreground">
+            <button className={cn(linkBase, linkTone)}>
               What We Built
               <ChevronDown
                 className={cn(
@@ -147,7 +172,7 @@ export function Navbar() {
             onMouseEnter={() => setOpenMenu("services")}
             onMouseLeave={() => setOpenMenu(null)}
           >
-            <button className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/90 hover:text-foreground">
+            <button className={cn(linkBase, linkTone)}>
               What We Offer
               <ChevronDown
                 className={cn(
@@ -198,7 +223,7 @@ export function Navbar() {
             onMouseEnter={() => setOpenMenu("resources")}
             onMouseLeave={() => setOpenMenu(null)}
           >
-            <button className="flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/90 hover:text-foreground">
+            <button className={cn(linkBase, linkTone)}>
               Resources
               <ChevronDown
                 className={cn(
@@ -243,7 +268,7 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-foreground/90 hover:text-foreground"
+              className={cn("rounded-md px-3 py-2 text-sm font-medium transition-colors", linkTone)}
             >
               {l.label}
             </Link>
@@ -258,7 +283,7 @@ export function Navbar() {
             Book A Meeting
           </Link>
           <button
-            className="grid size-10 place-items-center rounded-lg hover:bg-secondary md:hidden"
+            className={cn("grid size-10 place-items-center rounded-lg hover:bg-secondary md:hidden", light && "text-white")}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >

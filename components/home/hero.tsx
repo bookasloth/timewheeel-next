@@ -84,7 +84,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#062421] text-white"
+      className="relative -mt-16 overflow-hidden bg-[#062421] text-white"
       style={{ backgroundImage: "radial-gradient(120% 90% at 50% 0%, #0c3b34 0%, #062421 55%, #041a18 100%)" }}
     >
       {/* dashed orbit rings + product icons */}
