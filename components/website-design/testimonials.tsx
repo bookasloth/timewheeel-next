@@ -55,7 +55,7 @@ export function WdTestimonials() {
 
         {rest.map((t, i) => (
           <Reveal key={t.name} delay={0.1 + i * 0.08}>
-            <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-shadow duration-300 hover:shadow-[0_24px_50px_-30px_rgba(17,24,39,0.3)]">
+            <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-shadow duration-300">
               <Quote className="size-7" strokeWidth={1.6} style={{ color: t.accent, opacity: 0.4 }} aria-hidden />
               <blockquote className="mt-3 flex-1 text-[15px] font-medium leading-relaxed text-foreground/85">
                 {t.quote}

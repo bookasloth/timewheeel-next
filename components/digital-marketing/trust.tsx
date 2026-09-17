@@ -111,7 +111,7 @@ export function DmTrust() {
                   : "group flex flex-col items-center pr-6 text-center md:pr-8"
               }
             >
-              <p className="flex -translate-y-0 items-baseline gap-1 text-5xl font-black leading-none tracking-tight transition-transform duration-300 group-hover:-translate-y-1 md:text-7xl">
+              <p className="flex -translate-y-0 items-baseline gap-1 text-5xl font-black leading-none tracking-tight transition-transform duration-300 md:text-7xl">
                 <span className={statGradients[i % statGradients.length] + " bg-clip-text text-transparent"}>
                   <Counter value={s.value} suffix={s.suffix} />
                 </span>

@@ -23,7 +23,7 @@ export function DmChallenges() {
             return (
               <article
                 key={c.question}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:border-brand/40"
               >
 <span
                 aria-hidden

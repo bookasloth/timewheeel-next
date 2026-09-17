@@ -9,7 +9,7 @@ export function CaseStudyCard({ cs }: { cs: CaseStudy }) {
   return (
     <Link
       href={cs.href}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-[0_24px_60px_-24px_rgba(15,17,17,0.25)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:border-black/20"
     >
       <div
         className="absolute inset-0 bg-black/25 transition-colors duration-500 group-hover:bg-black/0"

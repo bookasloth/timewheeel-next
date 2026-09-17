@@ -36,7 +36,7 @@ export function WdVp() {
               <div className="group flex h-full flex-col bg-white p-7 transition-colors duration-300 hover:bg-wsoft md:p-9">
                 <div className="flex items-start justify-between">
                   <span
-                    className="grid size-11 place-items-center rounded-xl transition-transform duration-300 group-hover:-translate-y-0.5"
+                    className="grid size-11 place-items-center rounded-xl transition-transform duration-300"
                     style={{ backgroundColor: `${block.accent}1a`, color: block.accent }}
                   >
                     <Icon className="size-5" strokeWidth={2} />

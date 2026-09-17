@@ -40,7 +40,7 @@ export function DmResults() {
           {dmMetrics.map((m) => (
             <article
               key={m.label}
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
+              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06]"
             >
               <span
                 aria-hidden

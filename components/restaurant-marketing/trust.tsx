@@ -47,7 +47,7 @@ export function RmTrust() {
                   : "group flex flex-col items-center pr-6 text-center md:pr-8"
               }
             >
-              <p className="flex -translate-y-0 items-baseline gap-1 text-4xl font-black leading-none tracking-tight transition-transform duration-300 group-hover:-translate-y-1 md:text-6xl">
+              <p className="flex -translate-y-0 items-baseline gap-1 text-4xl font-black leading-none tracking-tight transition-transform duration-300 md:text-6xl">
                 <span
                   className="text-transparent"
                   style={{ WebkitTextStroke: `2.5px ${statColors[i % statColors.length]}` }}

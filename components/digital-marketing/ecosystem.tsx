@@ -66,10 +66,10 @@ function NodeCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       className={cn(
-        "flex min-h-[84px] w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-[#E8E8E8] px-3 py-3 text-center transition-all duration-300 hover:-translate-y-0.5",
+        "flex min-h-[84px] w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-[#E8E8E8] px-3 py-3 text-center transition-all duration-300",
         isConversion
-          ? "border-brand/40 bg-brand/[0.06] hover:shadow-[0_14px_30px_-22px_rgba(254,81,0,0.26)]"
-          : "bg-white hover:shadow-[0_14px_30px_-22px_rgba(15,17,17,0.22)]",
+          ? "border-brand/40 bg-brand/[0.06]"
+          : "bg-white",
       )}
       style={
         !isConversion && lit

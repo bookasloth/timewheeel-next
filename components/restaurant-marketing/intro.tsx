@@ -46,7 +46,7 @@ function JourneyVisual() {
               <span className="relative z-10 grid size-[42px] shrink-0 place-items-center rounded-full border border-border bg-card transition-all duration-300 group-hover:border-brand/40">
                 <span className="size-2.5 rounded-full" style={{ backgroundColor: colors[i] }} />
               </span>
-              <div className="flex-1 rounded-xl border border-border bg-secondary/40 px-4 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/30 hover:bg-secondary/70">
+              <div className="flex-1 rounded-xl border border-border bg-secondary/40 px-4 py-3.5 transition-all duration-300 hover:border-brand/30 hover:bg-secondary/70">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-base font-bold">{s.step}</p>
                   <span className="text-[10px] font-black tracking-widest text-muted-foreground/40">

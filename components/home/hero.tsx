@@ -122,7 +122,7 @@ export function Hero() {
         <div className="hero-fade mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="#ecosystem"
-            className="group inline-flex items-center gap-2 rounded-lg bg-[#141110] px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 rounded-lg bg-[#141110] px-7 py-3.5 text-sm font-semibold text-white transition-transform"
           >
             Explore the Ecosystem
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

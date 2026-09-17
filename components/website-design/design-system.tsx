@@ -107,7 +107,7 @@ export function WdDesignSystem() {
                   { t: "Design", c: palette.purple },
                   { t: "Growth", c: palette.green },
                 ].map((c) => (
-                  <div key={c.t} className="flex-1 rounded-xl border border-border p-3 transition-transform duration-200 hover:-translate-y-0.5">
+                  <div key={c.t} className="flex-1 rounded-xl border border-border p-3 transition-transform duration-200">
                     <span className="grid size-7 place-items-center rounded-lg text-white" style={{ backgroundColor: c.c }}>
                       <Check className="size-3.5" />
                     </span>

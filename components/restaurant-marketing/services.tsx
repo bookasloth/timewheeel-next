@@ -31,7 +31,7 @@ function Panel({
   children: ReactNode;
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1">
+    <div className="group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all duration-300">
       <div className="relative">
         <div className="flex items-center justify-between gap-2">
           <span className="text-xs font-semibold text-muted-foreground">{label}</span>

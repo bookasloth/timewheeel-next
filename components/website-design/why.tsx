@@ -33,7 +33,7 @@ export function WdWhy() {
                     <div className="group flex h-full flex-col bg-white p-6 transition-colors duration-300 hover:bg-white">
                       <div className="flex items-center justify-between">
                         <span
-                          className="grid size-10 place-items-center rounded-xl text-white transition-transform duration-300 group-hover:-translate-y-0.5"
+                          className="grid size-10 place-items-center rounded-xl text-white transition-transform duration-300"
                           style={{ backgroundColor: r.accent }}
                         >
                           <Icon className="size-5" />
