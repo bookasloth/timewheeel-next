@@ -4,7 +4,7 @@ import { ContactHero } from "@/components/contact/contact-hero";
 import { ContactChannels } from "@/components/contact/contact-channels";
 import { ContactSteps } from "@/components/contact/contact-steps";
 import { ContactForm } from "@/components/contact/contact-form";
-import { ContactFaq } from "@/components/contact/contact-faq";
+import { ContactFaq, faqs } from "@/components/contact/contact-faq";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact — Timewheel" },
@@ -41,12 +41,27 @@ const jsonLd = {
   },
 };
 
+// FAQPage — mirrors the visible contact FAQ (source: contact-faq faqs).
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function ContactPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
       <ContactHero />
       {/* <ContactChannels /> */}

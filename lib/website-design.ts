@@ -128,7 +128,7 @@ export const wd = {
         services: ["Web Design", "Brand UI", "Landing Page"],
         accent: palette.green,
         visual: "mockup-coffee",
-        href: "/products/coffee-for-me",
+        href: "/coffee-and-toffee",
         external: false,
         meta: [
           { key: "Role", value: "Design + Brand UI" },

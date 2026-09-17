@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
 import { CaseStudyDetail } from "@/components/case-studies/case-study-detail";
 import { JsonLd } from "@/components/json-ld";
-import { breadcrumbLd } from "@/lib/jsonld";
+import { breadcrumbLd, organizationLd } from "@/lib/jsonld";
+import { site } from "@/lib/site";
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -47,8 +48,28 @@ export default async function CaseStudyPage({
     notFound();
   }
 
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationLd(),
+      {
+        "@type": "Article",
+        headline: `${cs.name} — Case Study`,
+        description: cs.summary,
+        articleSection: cs.category,
+        keywords: cs.tags.join(", "),
+        ...(cs.meta?.date ? { datePublished: cs.meta.date } : {}),
+        ...(cs.image ? { image: `${site.url}${cs.image.src}` } : {}),
+        mainEntityOfPage: `${site.url}${cs.href}`,
+        author: { "@id": `${site.url}/#organization` },
+        publisher: { "@id": `${site.url}/#organization` },
+      },
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={articleLd} />
       <JsonLd
         data={breadcrumbLd([
           { name: "Home", path: "/" },

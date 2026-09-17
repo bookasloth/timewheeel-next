@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-const faqs = [
+export const faqs = [
   {
     q: "How fast will you reply?",
     a: "Within one business day — usually much sooner during IST business hours. Urgent queries get a WhatsApp heads-up even faster.",

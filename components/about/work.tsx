@@ -187,7 +187,7 @@ const projects: {
     name: "Coffee & Toffee",
     category: "Brand & Web",
     desc: "Connecting visual identity with a high-quality digital experience.",
-    href: "/products/coffee-for-me",
+    href: "/coffee-and-toffee",
     Visual: CoffeeVisual,
   },
 ];
