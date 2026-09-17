@@ -11,26 +11,26 @@ import { products } from "@/lib/products";
 // word, big pill CTA, honest trust line, orbital product icons on dashed rings,
 // and a 4-card feature row. Orbit uses our REAL products; no fake reviews/logos.
 
-const TYPED = ["website.", "web app.", "online store.", "brand.", "rankings.", "audience."];
+const TYPED = ["website.", "web app.", "online store.", "brand.", "traffic.", "revenue.", "audience.", "community.", "leads."];
 
 // Real product icons placed on two concentric rings (angle in deg, radius in px).
 // Angles kept on the left (120–240) and right (300–60) arcs only, nothing near
 // the vertical centre (top ~270 / bottom ~90), so no icon sits between the
 // headline and the button.
 const orbit = [
-  { slug: "book-a-sloth", ring: 0, angle: 200 },
-  { slug: "alluminaty", ring: 0, angle: 340 },
-  { slug: "ticket-dino", ring: 1, angle: 160 },
-  { slug: "coffee-for-me", ring: 1, angle: 20 },
-  { slug: "the-parliament", ring: 2, angle: 210 },
-  { slug: "link-lantern", ring: 2, angle: 350 },
-  { slug: "whatsloom", ring: 1, angle: 195 },
-  { slug: "serp-sutra", ring: 0, angle: 15 },
-  { slug: "2b-navodian", ring: 2, angle: 150 },
+  { slug: "book-a-sloth", ring: 0, angle: 205 },
+  { slug: "alluminaty", ring: 0, angle: 335 },
+  { slug: "ticket-dino", ring: 0, angle: 160 },
+  { slug: "coffee-for-me", ring: 0, angle: 25 },
+  { slug: "the-parliament", ring: 1, angle: 200 },
+  { slug: "link-lantern", ring: 1, angle: 350 },
+  { slug: "whatsloom", ring: 1, angle: 150 },
+  { slug: "serp-sutra", ring: 1, angle: 20 },
+  { slug: "2b-navodian", ring: 1, angle: 215 },
 ].map((o) => ({ ...o, product: products.find((p) => p.slug === o.slug)! }))
   .filter((o) => o.product);
 
-const RINGS = [300, 460, 620]; // radii
+const RINGS = [460, 620]; // radii — two outer rings only
 
 const features = [
   { icon: Database, label: "Own your code & data" },
@@ -126,9 +126,9 @@ export function Hero() {
           <br />
           <Typewriter />
         </h1>
-        <p className="hero-up mt-5 max-w-xl text-base text-white/60 md:text-lg">
-          Design, development and web apps, then the SEO, ads and social to grow
-          them. One team for building your product and marketing it, on systems you own.
+        <p className="hero-up mt-5 max-w-3xl text-base text-white/60 md:text-lg">
+          One team to design, build and grow your business online — websites and apps,
+          then the SEO, ads and social to fill them. Built on systems you own, not rent.
         </p>
         <Link
           href="#ecosystem"
