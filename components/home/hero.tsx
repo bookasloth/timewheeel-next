@@ -53,44 +53,29 @@ function Typewriter() {
   );
 }
 
-// Flies the hole in from off-screen and sets it down in the middle, then holds.
-// The entry comes from one of 16 directions — the 4 sides, the 4 corners, and
-// the halves between, each way. The start point sits off-screen, so resetting
-// to the next direction is invisible; the eased-out glide is all you see. Its
+// Flies the hole straight across the frame — in one edge, out the other — over
+// 240s, easing in and out. Direction alternates each pass: right-to-left, then
+// left-to-right. It never fully leaves — at each edge it rests half-in. Its
 // own component so only the canvas re-renders each frame, not the copy.
 function DriftingBlackHole() {
-  const [focus, setFocus] = useState<[number, number]>([0.5, 0.55]);
+  const [focus, setFocus] = useState<[number, number]>([1.0, 0.55]);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setFocus([0.5, 0.55]);
       return;
     }
-    const DIRS = 16;
-    const CX = 0.5, CY = 0.55, D = 1.2; // rest point, and how far off-screen the entry starts
-    const TRAVEL = 6000, PAUSE = 2600;
-    let i = Math.floor(Math.random() * DIRS);
+    const CY = 0.55, D = 0.5; // vertical centre; reach so the hole rests half-in at each edge
+    const DUR = 240000;
+    let dir = 1; // 1 = right→left, -1 = left→right
     let t0 = performance.now();
     let raf = 0;
-    const start = (idx: number): [number, number] => {
-      const a = (idx * 2 * Math.PI) / DIRS;
-      return [CX + Math.cos(a) * D, CY + Math.sin(a) * D];
-    };
     const loop = (now: number) => {
-      const t = now - t0;
-      if (t < TRAVEL) {
-        const k = t / TRAVEL;
-        const e = 1 - Math.pow(1 - k, 3); // easeOutCubic — glides in and settles
-        const [sx, sy] = start(i);
-        setFocus([sx + (CX - sx) * e, sy + (CY - sy) * e]);
-      } else if (t < TRAVEL + PAUSE) {
-        setFocus([CX, CY]);
-      } else {
-        let j = Math.floor(Math.random() * DIRS);
-        if (j === i) j = (j + 1) % DIRS;
-        i = j;
-        t0 = now;
-        setFocus(start(i)); // off-screen, so the jump is unseen
-      }
+      let k = (now - t0) / DUR;
+      if (k >= 1) { dir = -dir; t0 = now; k = 0; }
+      const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; // easeInOutQuad
+      const startX = 0.5 + dir * D;
+      const endX = 0.5 - dir * D;
+      setFocus([startX + (endX - startX) * e, CY]);
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
