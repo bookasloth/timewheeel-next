@@ -14,7 +14,7 @@ import { RmContact } from "@/components/restaurant-marketing/contact";
 export const metadata: Metadata = {
   title: "Digital Marketing Agency for Restaurants | Social Media Strategies",
   description:
-    "Boost your restaurant's brand engagement and bring more customers with our top-rated digital marketing agency for restaurants — social media, local SEO, content, video, and paid ads.",
+    "Boost your restaurant's brand engagement and bring more customers with our top-rated digital marketing agency for restaurants, social media, local SEO, content, video, and paid ads.",
   alternates: { canonical: `${site.url}/restaurant-marketing` },
   openGraph: {
     type: "website",
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "Digital Marketing Agency for Restaurants | Social Media Strategies",
     description:
-      "Restaurant marketing agency with top social media and digital marketing services — more walk-ins, more table bookings, more repeat guests across India.",
+      "Restaurant marketing agency with top social media and digital marketing services, more walk-ins, more table bookings, more repeat guests across India.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Digital Marketing Agency for Restaurants | Social Media Strategies",
     description:
-      "Restaurant marketing agency with top social media and digital marketing services — more walk-ins, more table bookings, more repeat guests across India.",
+      "Restaurant marketing agency with top social media and digital marketing services, more walk-ins, more table bookings, more repeat guests across India.",
   },
 };
 
@@ -62,7 +62,7 @@ const faqJsonLd = {
       name: "Why do restaurants need a dedicated digital marketing agency?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Restaurants compete on visibility, footfall, and repeat visits. A dedicated agency understands dining trends, local search behavior, and social media appetite — helping you turn searches and scrolls into tables and loyal guests.",
+        text: "Restaurants compete on visibility, footfall, and repeat visits. A dedicated agency understands dining trends, local search behavior, and social media appetite, helping you turn searches and scrolls into tables and loyal guests.",
       },
     },
     {
@@ -70,7 +70,7 @@ const faqJsonLd = {
       name: "Which locations do you serve for restaurant marketing?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We are an advertising agency based in Mumbai and we help restaurants build their brand presence across India — from local eateries to established F&B brands in every major city.",
+        text: "We are an advertising agency based in Mumbai and we help restaurants build their brand presence across India, from local eateries to established F&B brands in every major city.",
       },
     },
     {
@@ -78,7 +78,7 @@ const faqJsonLd = {
       name: "Can you market a small or single-location restaurant?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Absolutely. Our strategies scale to your goals — whether you run a local eatery or an established F&B brand, we tailor the plan to your budget, location, and growth ambitions.",
+        text: "Absolutely. Our strategies scale to your goals, whether you run a local eatery or an established F&B brand, we tailor the plan to your budget, location, and growth ambitions.",
       },
     },
   ],

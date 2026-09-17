@@ -5,7 +5,7 @@ const steps = [
   {
     icon: MessageSquare,
     title: "Tell us what you're building",
-    desc: "A message, a call, or a booking — however it's easiest for you.",
+    desc: "A message, a call, or a booking, however it's easiest for you.",
   },
   {
     icon: BadgeCheck,

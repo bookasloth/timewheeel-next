@@ -20,19 +20,19 @@ const description =
   "TIMEWHEEL is a digital design and development partner helping ambitious businesses build websites and digital experiences that are clear, modern, and built to grow.";
 
 export const metadata: Metadata = {
-  title: "About — Digital Design & Development",
+  title: "About, Digital Design & Development",
   description,
   alternates: { canonical: `${site.url}/about` },
   openGraph: {
     type: "website",
     url: `${site.url}/about`,
     siteName: site.name,
-    title: "About Timewheel — Digital Design & Development",
+    title: "About Timewheel, Digital Design & Development",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Timewheel — Digital Design & Development",
+    title: "About Timewheel, Digital Design & Development",
     description,
   },
 };

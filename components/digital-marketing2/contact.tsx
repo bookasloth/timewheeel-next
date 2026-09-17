@@ -86,7 +86,7 @@ export function Dm2Contact() {
       setForm((f) => ({ ...f, errors }));
       return;
     }
-    // Frontend-only for now — wire to a real endpoint when available.
+    // Frontend-only for now, wire to a real endpoint when available.
     setStatus("submitting");
     setTimeout(() => setStatus("success"), 600);
   }
@@ -100,7 +100,7 @@ export function Dm2Contact() {
               <CheckCircle2 className="size-8" />
             </span>
             <h2 className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">
-              Thanks — we&apos;ll be in touch.
+              Thanks, we&apos;ll be in touch.
             </h2>
             <p className="mx-auto mt-4 max-w-md text-muted-foreground">
               Your enquiry has been received. Our team will reach out shortly to
@@ -125,7 +125,7 @@ export function Dm2Contact() {
             </h2>
             <p className="mt-4 max-w-md text-muted-foreground md:text-lg">
               Tell us about your business and goals. We&apos;ll respond with a
-              clear next step — no obligation, no jargon.
+              clear next step, no obligation, no jargon.
             </p>
             <div className="mt-8 space-y-4">
               {[

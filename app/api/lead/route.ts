@@ -18,7 +18,7 @@ type Lead = {
   service?: string;
   message?: string;
   source?: string;
-  company_website?: string; // honeypot — humans never see or fill this
+  company_website?: string; // honeypot, humans never see or fill this
 };
 
 // Best-effort in-memory rate limit. ponytail: per-instance only; move to a
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !LEAD_TO) {
     console.error("Lead email not configured: missing SMTP_* / LEAD_TO env vars.");
     return NextResponse.json(
-      { error: "Sorry — we couldn't send your enquiry. Please email us directly." },
+      { error: "Sorry, we couldn't send your enquiry. Please email us directly." },
       { status: 500 },
     );
   }
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
       from: LEAD_FROM || SMTP_USER,
       to: LEAD_TO,
       replyTo: `${l.name} <${l.email}>`,
-      subject: `New lead: ${l.service} — ${l.business} (${l.source})`,
+      subject: `New lead: ${l.service}, ${l.business} (${l.source})`,
       text: renderLeadEmailText(l),
       html: renderLeadEmailHtml(l),
     });
@@ -122,7 +122,7 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("Lead email send failed:", err);
     return NextResponse.json(
-      { error: "Sorry — we couldn't send your enquiry. Please try again." },
+      { error: "Sorry, we couldn't send your enquiry. Please try again." },
       { status: 502 },
     );
   }

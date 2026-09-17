@@ -3,7 +3,7 @@ import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { slugify } from "@/lib/blog";
 
-// Token-styled markdown renderer for blog posts. Server component — the mapped
+// Token-styled markdown renderer for blog posts. Server component, the mapped
 // elements use no hooks, so no client JS is shipped.
 function textOf(children: ReactNode): string {
   if (typeof children === "string") return children;

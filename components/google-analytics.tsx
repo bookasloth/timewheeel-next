@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-// ponytail: renders nothing unless NEXT_PUBLIC_GA_ID is set — safe to ship before GA4 exists.
+// ponytail: renders nothing unless NEXT_PUBLIC_GA_ID is set, safe to ship before GA4 exists.
 export function GoogleAnalytics() {
   const id = process.env.NEXT_PUBLIC_GA_ID;
   if (!id) return null;

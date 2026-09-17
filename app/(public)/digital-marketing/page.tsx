@@ -22,13 +22,13 @@ title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing
       siteName: site.name,
       title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
       description:
-        "Premium digital marketing services in Nagpur — SEO, paid advertising, social media, content, email and WhatsApp marketing.",
+        "Premium digital marketing services in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp marketing.",
     },
     twitter: {
       card: "summary_large_image",
       title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
       description:
-        "Premium digital marketing services in Nagpur — SEO, paid advertising, social media, content, email and WhatsApp marketing.",
+        "Premium digital marketing services in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp marketing.",
     },
 };
 
@@ -118,7 +118,7 @@ export default function DigitalMarketingPage() {
       <DmAudience />
       <DmEcosystem />
       {/* Case studies hidden until real client results replace the placeholders
-          in lib/digital-marketing.ts — re-add <DmCaseStudies /> then. */}
+          in lib/digital-marketing.ts, re-add <DmCaseStudies /> then. */}
       <DmTestimonials />
       <DmFaq />
       <DmFinalCta />

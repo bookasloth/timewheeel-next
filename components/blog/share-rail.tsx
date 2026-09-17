@@ -44,7 +44,7 @@ export function ShareRail({ url, title }: { url: string; title: string }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      /* clipboard blocked — no-op */
+      /* clipboard blocked, no-op */
     }
   }
 

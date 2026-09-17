@@ -28,7 +28,7 @@ export const shots = {
 
 export const bas = {
   meta: {
-    title: "Book A Sloth — Built by Timewheel",
+    title: "Book A Sloth, Built by Timewheel",
     description:
       "Explore Book A Sloth, a booking and scheduling platform built by Timewheel. See how we design, develop and automate digital products for businesses.",
   },
@@ -44,7 +44,7 @@ export const bas = {
     titleLine1: "Everything You Need",
     titleLine2: "to Manage Bookings.",
     titleAccent: "Manage Bookings.",
-    body: "Book A Sloth helps businesses manage appointments, customers, availability, payments and automated communication — all from one simple platform.",
+    body: "Book A Sloth helps businesses manage appointments, customers, availability, payments and automated communication, all from one simple platform.",
     primary: "Visit Site",
     secondary: "Get Started",
     shotUrl: "bookasloth.com",
@@ -70,7 +70,7 @@ export const bas = {
     items: [
       {
         name: "Manual bookings",
-        desc: "Appointments arrive over calls, messages and walk-ins — never in one place.",
+        desc: "Appointments arrive over calls, messages and walk-ins, never in one place.",
       },
       {
         name: "Back-and-forth communication",
@@ -106,7 +106,7 @@ export const bas = {
     number: "04",
     label: "THE PRODUCT",
     title: "Built as one product.",
-    body: "Three connected experiences — for customers, for the business, and for the hours of work that used to go into managing it.",
+    body: "Three connected experiences, for customers, for the business, and for the hours of work that used to go into managing it.",
     shots: [
       {
         id: "dashboard",
@@ -132,7 +132,7 @@ export const bas = {
     number: "05",
     label: "AUTOMATION",
     title: "Automate the work\nbehind every booking.",
-    body: "Each step of a booking triggers the next — automatically.",
+    body: "Each step of a booking triggers the next, automatically.",
     steps: [
       "Booking",
       "Confirmation",
@@ -202,7 +202,7 @@ export const bas = {
     number: "09",
     label: "HOW TIMEWHEEL BUILDS",
     title: "From idea\nto launch.",
-    body: "A simple, proven process — the same one that took Book A Sloth from an idea to a shipping product.",
+    body: "A simple, proven process, the same one that took Book A Sloth from an idea to a shipping product.",
     steps: [
       { name: "Discover", desc: "The business, the users, the workflow." },
       { name: "Design", desc: "The product and every screen in it." },
@@ -409,7 +409,7 @@ export const bas = {
     items: [
       {
         q: "Is there a free plan?",
-        a: "Yes — Book A Sloth starts free and grows with you. You only pay for what you actually use.",
+        a: "Yes, Book A Sloth starts free and grows with you. You only pay for what you actually use.",
       },
       {
         q: "Can I migrate my existing bookings?",
@@ -473,7 +473,7 @@ export const bas = {
     number: "16",
     label: "WALKTHROUGH",
     title: "How a booking flows\nthrough Book A Sloth.",
-    body: "From first click to follow-up — every step is handled.",
+    body: "From first click to follow-up, every step is handled.",
     steps: [
       {
         name: "Check availability",

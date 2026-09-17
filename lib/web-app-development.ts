@@ -5,9 +5,9 @@
 
 export const wa = {
   meta: {
-    title: "Web App Development | Custom Web Applications — Timewheel",
+    title: "Web App Development | Custom Web Applications, Timewheel",
     description:
-      "Custom web applications designed around your business — dashboards, customer portals, internal platforms and SaaS products. Planned, designed, built and launched to scale.",
+      "Custom web applications designed around your business, dashboards, customer portals, internal platforms and SaaS products. Planned, designed, built and launched to scale.",
   },
 
   hero: {
@@ -30,7 +30,7 @@ export const wa = {
     label: "What we build",
     heading: "Digital products designed",
     headingAccent: "around your business.",
-    body: "From internal tools to customer-facing platforms — every product is designed and built as a cohesive, production-grade system.",
+    body: "From internal tools to customer-facing platforms, every product is designed and built as a cohesive, production-grade system.",
     cards: [
       {
         title: "Business Dashboards",
@@ -55,14 +55,14 @@ export const wa = {
     label: "Our expertise",
     heading: "From frontend experiences",
     headingAccent: "to powerful backends.",
-    body: "Full-stack capability under one roof — so your product is coherent end to end, not stitched together from specialists.",
+    body: "Full-stack capability under one roof, so your product is coherent end to end, not stitched together from specialists.",
     cards: [
       { title: "Frontend Development", desc: "Fast, accessible interfaces built with modern component systems." },
       { title: "Backend Development", desc: "Secure, well-typed services that keep your data moving reliably." },
       { title: "API Integration", desc: "Clean, documented APIs that connect your systems together." },
       { title: "Database Architecture", desc: "Schemas and data models designed to grow without pain." },
       { title: "Cloud & Deployment", desc: "Fast, global hosting with automated builds and releases." },
-      { title: "Third-Party Integrations", desc: "Payments, auth, email and tools — wired in and maintained." },
+      { title: "Third-Party Integrations", desc: "Payments, auth, email and tools, wired in and maintained." },
     ],
   },
 
@@ -99,7 +99,7 @@ export const wa = {
     label: "Business benefits",
     heading: "Software that pays",
     headingAccent: "for itself.",
-    body: "A well-built web application is an asset — it removes friction today and compounds in value as your business grows.",
+    body: "A well-built web application is an asset, it removes friction today and compounds in value as your business grows.",
     cards: [
       { title: "Streamlined Workflows", desc: "Reduce complexity and make everyday work easier." },
       { title: "Better User Experiences", desc: "Create products that are intuitive and enjoyable to use." },

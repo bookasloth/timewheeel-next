@@ -147,12 +147,12 @@ function SeoCard({ accent }: { accent: string }) {
       </div>
       <div className="mt-2 space-y-2 text-xs">
         <div className="rounded-md border p-2.5" style={{ borderColor: `${accent}55` }}>
-          <p className="font-bold text-foreground">Top Marketing Agency in Nagpur — Timewheel</p>
+          <p className="font-bold text-foreground">Top Marketing Agency in Nagpur, Timewheel</p>
           <p className="mt-0.5 font-medium" style={{ color: accent }}>
             timewheel.co.in
           </p>
           <p className="mt-1 line-clamp-1 text-muted-foreground">
-            Premium SEO, paid ads, content &amp; social — one connected growth system.
+            Premium SEO, paid ads, content &amp; social, one connected growth system.
           </p>
         </div>
         <div className="rounded-md border border-border p-2.5 opacity-60">
@@ -221,7 +221,7 @@ function WhatsAppCard({ accent }: { accent: string }) {
           Ready to hear our latest offers? 🎉
         </div>
         <div className="ml-auto max-w-[70%] rounded-lg rounded-br-sm bg-brand px-2.5 py-1.5 text-white">
-          Yes — tell me more!
+          Yes, tell me more!
         </div>
       </div>
       <Meter

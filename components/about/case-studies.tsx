@@ -20,7 +20,7 @@ export function AboutCaseStudies() {
             <br className="hidden sm:block" /> real numbers.
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            From local SEO rescues to full marketing systems — the challenges,
+            From local SEO rescues to full marketing systems, the challenges,
             the work, and the results of each build.
           </p>
         </Reveal>

@@ -14,7 +14,7 @@ export function SeoServices() {
             SEO that covers classic search and AI search
           </h2>
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">
-            Six disciplines, one connected strategy — so you show up wherever your Nagpur
+            Six disciplines, one connected strategy, so you show up wherever your Nagpur
             customers are looking.
           </p>
         </Reveal>

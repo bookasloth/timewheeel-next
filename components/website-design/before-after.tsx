@@ -108,7 +108,7 @@ function AfterSite() {
           and grow business.
         </p>
         <p className="mt-2 max-w-sm text-[9px] leading-relaxed text-muted-foreground">
-          Clear strategy, thoughtful design and clean development — one studio, one team, one goal.
+          Clear strategy, thoughtful design and clean development, one studio, one team, one goal.
         </p>
         <div className="mt-3.5 flex gap-2">
           <span className="rounded-md px-3 py-1.5 text-[8px] font-bold text-white" style={{ backgroundColor: palette.blue }}>
@@ -188,7 +188,7 @@ export function WdBeforeAfter() {
           />
         </div>
         <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs font-semibold text-muted-foreground">
-          <ArrowLeftRight className="size-3.5" /> Drag the handle — same business, two websites
+          <ArrowLeftRight className="size-3.5" /> Drag the handle, same business, two websites
         </p>
       </Reveal>
 

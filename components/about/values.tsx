@@ -2,7 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { Compass, Cpu, PanelsTopLeft, Sprout } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-// Proof/value band — horizontal, navy, qualitative. No invented numbers:
+// Proof/value band, horizontal, navy, qualitative. No invented numbers:
 // four numbered approach items instead of fake statistics.
 
 const values: { n: string; icon: LucideIcon; label: string }[] = [

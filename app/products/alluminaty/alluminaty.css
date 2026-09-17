@@ -1,5 +1,5 @@
 /* =========================================================
-   Alluminaty — alumni network platform
+   Alluminaty, alumni network platform
    Independent visual identity, scoped entirely under `.az`.
    Design language: deep space navy, electric blue aurora,
    gold serif accents, film grain, ghost numerals, harsh
@@ -731,7 +731,7 @@
     right: 4px;
   }
 }
-/* ---------- Hero — animated marquee reveal ---------- */
+/* ---------- Hero, animated marquee reveal ---------- */
 
 .az-hero-center {
   position: relative;
@@ -1044,7 +1044,7 @@
 
 /* ---------- Solution (deep navy aurora band) ---------- */
 
-/* ---------- Problem — minimal light band ---------- */
+/* ---------- Problem, minimal light band ---------- */
 
 .az-problem {
   position: relative;
@@ -2152,7 +2152,7 @@
 }
 
 /* =========================================================
-   CINEMATIC POLISH — elevate every section beyond hero/stats
+   CINEMATIC POLISH, elevate every section beyond hero/stats
    ========================================================= */
 
 /* ---- Solution: richer aurora, glass manifesto rows ---- */

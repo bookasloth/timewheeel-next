@@ -11,7 +11,7 @@ import { breadcrumbLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Per-product pricing built for ownership. No fragmented subscriptions — pay only for the systems you actually run.",
+    "Per-product pricing built for ownership. No fragmented subscriptions, pay only for the systems you actually run.",
 };
 
 const bySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
@@ -35,7 +35,7 @@ export default function PricingPage() {
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
           No fragmented subscriptions and no platform commissions skimmed off the
-          top. Pay only for the systems you actually run — transparent, per
+          top. Pay only for the systems you actually run, transparent, per
           product.
         </p>
       </Reveal>
@@ -109,7 +109,7 @@ export default function PricingPage() {
             Transparent pricing, by product
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-            Every product priced on its own. Mix and match — you only pay for
+            Every product priced on its own. Mix and match, you only pay for
             what you run.
           </p>
         </Reveal>
@@ -184,7 +184,7 @@ export default function PricingPage() {
           Not sure which systems you need?
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          Book a demo and we&apos;ll map your workflows to the products that fit —
+          Book a demo and we&apos;ll map your workflows to the products that fit,
           no pressure, no lock-in.
         </p>
         <Link

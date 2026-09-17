@@ -13,7 +13,7 @@ const visualStyles = [
 const accents = ["#fe5100", "#269cef", "#ffcc1c"];
 
 // Editorial strip describing the standard, repeatable way we work. No invented
-// client claims here — this is the framework real case studies will slot into.
+// client claims here, this is the framework real case studies will slot into.
 const framework = [
   {
     step: "01",
@@ -54,7 +54,7 @@ export function DmCaseStudies() {
           </h2>
         </div>
         <p className="max-w-md text-muted-foreground">
-          Real client stories and verified results will live here — the
+          Real client stories and verified results will live here, the
           framework below shows exactly how we turn activity into outcomes.
         </p>
       </Reveal>

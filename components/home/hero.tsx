@@ -11,20 +11,26 @@ import { products } from "@/lib/products";
 // word, big pill CTA, honest trust line, orbital product icons on dashed rings,
 // and a 4-card feature row. Orbit uses our REAL products; no fake reviews/logos.
 
-const TYPED = ["bookings.", "payments.", "events.", "communities."];
+const TYPED = ["website.", "web app.", "online store.", "brand.", "rankings.", "audience."];
 
 // Real product icons placed on two concentric rings (angle in deg, radius in px).
+// Angles kept on the left (120–240) and right (300–60) arcs only, nothing near
+// the vertical centre (top ~270 / bottom ~90), so no icon sits between the
+// headline and the button.
 const orbit = [
-  { slug: "book-a-sloth", ring: 0, angle: 18 },
-  { slug: "alluminaty", ring: 1, angle: 150 },
-  { slug: "ticket-dino", ring: 0, angle: 205 },
-  { slug: "coffee-for-me", ring: 1, angle: 320 },
-  { slug: "the-parliament", ring: 0, angle: 285 },
-  { slug: "link-lantern", ring: 1, angle: 40 },
+  { slug: "book-a-sloth", ring: 0, angle: 200 },
+  { slug: "alluminaty", ring: 0, angle: 340 },
+  { slug: "ticket-dino", ring: 1, angle: 160 },
+  { slug: "coffee-for-me", ring: 1, angle: 20 },
+  { slug: "the-parliament", ring: 2, angle: 210 },
+  { slug: "link-lantern", ring: 2, angle: 350 },
+  { slug: "whatsloom", ring: 1, angle: 195 },
+  { slug: "serp-sutra", ring: 0, angle: 15 },
+  { slug: "2b-navodian", ring: 2, angle: 150 },
 ].map((o) => ({ ...o, product: products.find((p) => p.slug === o.slug)! }))
   .filter((o) => o.product);
 
-const RINGS = [300, 460]; // radii
+const RINGS = [300, 460, 620]; // radii
 
 const features = [
   { icon: Database, label: "Own your code & data" },
@@ -60,9 +66,9 @@ function Typewriter() {
   }, [text, deleting, wordIdx]);
 
   return (
-    <span className="text-rating">
+    <span className="text-brand">
       {text}
-      <span className="ml-0.5 inline-block w-[3px] -translate-y-1 animate-pulse bg-rating align-middle" style={{ height: "0.85em" }} aria-hidden />
+      <span className="ml-0.5 inline-block w-[3px] -translate-y-1 animate-pulse bg-brand align-middle" style={{ height: "0.85em" }} aria-hidden />
     </span>
   );
 }
@@ -84,8 +90,8 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative -mt-16 overflow-hidden bg-[#062421] text-white"
-      style={{ backgroundImage: "radial-gradient(120% 90% at 50% 0%, #0c3b34 0%, #062421 55%, #041a18 100%)" }}
+      className="relative -mt-16 overflow-hidden bg-[#100702] text-white"
+      style={{ backgroundImage: "radial-gradient(120% 90% at 50% 0%, #3a1707 0%, #1c0d05 55%, #100702 100%)" }}
     >
       {/* dashed orbit rings + product icons */}
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-[46%] -z-0 -translate-x-1/2 -translate-y-1/2">
@@ -115,34 +121,28 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24 text-center md:pt-28">
-        <span className="hero-up inline-flex items-center rounded-full bg-rating/15 px-4 py-1.5 text-sm font-semibold text-rating">
-          Build on systems you own
-        </span>
-        <h1 className="hero-up mt-6 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
-          One platform for your
+        <h1 className="hero-up text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+          We build and grow your
           <br />
           <Typewriter />
         </h1>
         <p className="hero-up mt-5 max-w-xl text-base text-white/60 md:text-lg">
-          Bookings, payments, events and communities — one connected system you own
-          outright, with no platform commissions and no SaaS rent.
+          Design, development and web apps, then the SEO, ads and social to grow
+          them. One team for building your product and marketing it, on systems you own.
         </p>
         <Link
           href="#ecosystem"
-          className="hero-up group mt-9 inline-flex items-center gap-2 rounded-full bg-rating px-8 py-4 text-base font-bold text-[#052018] transition-transform hover:-translate-y-0.5"
+          className="hero-up group btn btn-primary mt-9 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-base font-semibold text-brand-foreground"
         >
           Explore the Ecosystem
           <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" />
         </Link>
-        <p className="hero-up mt-6 text-sm font-medium text-white/50">
-          10+ products shipped · you own every one · no lock-in
-        </p>
 
         {/* feature cards */}
         <div className="hero-up mt-16 grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
           {features.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-col gap-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-left">
-              <span className="grid size-11 place-items-center rounded-xl bg-rating/15 text-rating">
+              <span className="grid size-11 place-items-center rounded-xl bg-brand/15 text-brand">
                 <Icon className="size-5" />
               </span>
               <span className="text-sm font-semibold text-white/90">{label}</span>

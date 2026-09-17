@@ -5,7 +5,7 @@ const facts = [
   {
     number: "01",
     title: "Dedicated restaurant specialists",
-    body: "We are a team of professionals who specialize in — and will elevate — your restaurant's online presence.",
+    body: "We are a team of professionals who specialize in, and will elevate, your restaurant's online presence.",
   },
   {
     number: "02",
@@ -33,7 +33,7 @@ export function RmAbout() {
         </div>
         <p className="max-w-md text-muted-foreground">
           A dedicated marketing team built specifically for the restaurant
-          industry — from local eateries to established F&amp;B brands across
+          industry, from local eateries to established F&amp;B brands across
           India.
         </p>
       </Reveal>

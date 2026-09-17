@@ -73,7 +73,7 @@ export function SocialProof() {
   const [animate, setAnimate] = useState(false);
   const spinRef = useRef<SVGSVGElement>(null);
 
-  // responsive column count (no pixel math — positions are percentages)
+  // responsive column count (no pixel math, positions are percentages)
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 640px)");
     const apply = () => setCols(mq.matches ? 2 : 3);
@@ -143,7 +143,7 @@ export function SocialProof() {
           <RefreshCw ref={spinRef} className="size-4" />
         </button>
 
-        {/* one animated field — logos never reparent, only their left/top changes */}
+        {/* one animated field, logos never reparent, only their left/top changes */}
         <div
           className="relative transition-[height] duration-700 ease-out"
           style={{ height: areaHeight }}

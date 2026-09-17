@@ -14,7 +14,7 @@ import { Dm2FinalCta } from "@/components/digital-marketing2/final-cta";
 export const metadata: Metadata = {
   title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
   description:
-    "Hire a full-service digital marketing agency in Nagpur for SEO, paid ads, social media, content, email and WhatsApp marketing — one connected growth system with clear reports.",
+    "Hire a full-service digital marketing agency in Nagpur for SEO, paid ads, social media, content, email and WhatsApp marketing, one connected growth system with clear reports.",
   alternates: { canonical: `${site.url}/digital-marketing2` },
   openGraph: {
     type: "website",
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
     description:
-      "Full-service digital marketing in Nagpur — SEO, paid advertising, social media, content, email and WhatsApp, all working toward one goal.",
+      "Full-service digital marketing in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp, all working toward one goal.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
     description:
-      "Full-service digital marketing in Nagpur — SEO, paid advertising, social media, content, email and WhatsApp, all working toward one goal.",
+      "Full-service digital marketing in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp, all working toward one goal.",
   },
 };
 
@@ -130,7 +130,7 @@ export default function DigitalMarketing2Page() {
       <Dm2Audience />
       <Dm2Ecosystem />
       {/* Case studies hidden until real client results replace the placeholders
-          in lib/digital-marketing2.ts — re-add <Dm2CaseStudies /> then. */}
+          in lib/digital-marketing2.ts, re-add <Dm2CaseStudies /> then. */}
       <Dm2Testimonials />
       <Dm2Faq />
       <Dm2FinalCta />

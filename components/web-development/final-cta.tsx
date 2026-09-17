@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-// ponytail: no WhatsApp deep link yet — needs a real number. Add a wa.me
+// ponytail: no WhatsApp deep link yet, needs a real number. Add a wa.me
 // secondary CTA here once one exists (blueprint MUST-HAVE); until then both
 // paths route to the on-page form rather than shipping a dead link.
 export function WdFinalCta() {
@@ -14,7 +14,7 @@ export function WdFinalCta() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-white/70 md:text-lg">
           Send us your project. Get a fixed scope, a fixed price and a written timeline within
-          one business day — and keep full ownership of everything we build.
+          one business day, and keep full ownership of everything we build.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Link

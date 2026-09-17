@@ -1,4 +1,4 @@
-/* Coffee & Toffee — standalone support page.
+/* Coffee & Toffee, standalone support page.
    Fonts, warm editorial styling and small scene animations.
    Layout + spacing live in Tailwind utilities on the components. */
 
@@ -32,7 +32,7 @@
     radial-gradient(460px 320px at 55% 110%, rgba(220, 231, 208, 0.35), transparent 70%);
 }
 
-/* coffee cup steam — gentle rise, never distracting */
+/* coffee cup steam, gentle rise, never distracting */
 @keyframes ct-steam {
   0% {
     transform: translateY(5px) scaleY(0.85);

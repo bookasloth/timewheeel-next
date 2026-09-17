@@ -18,7 +18,7 @@ const pillars: {
   {
     icon: ShieldCheck,
     title: "You own your data",
-    body: "Your customers, revenue, and audience live in systems you control — never rented, never locked in.",
+    body: "Your customers, revenue, and audience live in systems you control, never rented, never locked in.",
     color: "#269cef",
   },
   {
@@ -30,7 +30,7 @@ const pillars: {
   {
     icon: Boxes,
     title: "Portable infrastructure",
-    body: "One connected foundation for bookings, payments, events, and communities — that moves with you.",
+    body: "One connected foundation for bookings, payments, events, and communities, that moves with you.",
     color: "#fe5100",
   },
 ];

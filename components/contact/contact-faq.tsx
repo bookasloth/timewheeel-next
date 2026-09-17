@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 export const faqs = [
   {
     q: "How fast will you reply?",
-    a: "Within one business day — usually much sooner during IST business hours. Urgent queries get a WhatsApp heads-up even faster.",
+    a: "Within one business day, usually much sooner during IST business hours. Urgent queries get a WhatsApp heads-up even faster.",
   },
   {
     q: "Do you work with clients outside Nagpur?",
@@ -12,7 +12,7 @@ export const faqs = [
   },
   {
     q: "Is the first conversation free?",
-    a: "Always. A scope call is free and you keep the plan and recommendations either way — no obligation to move forward.",
+    a: "Always. A scope call is free and you keep the plan and recommendations either way, no obligation to move forward.",
   },
   {
     q: "Do you charge by the project or by the hour?",
@@ -20,7 +20,7 @@ export const faqs = [
   },
   {
     q: "What happens after I send a message?",
-    a: "We reply with a clear next step — usually a scope call — then a fixed quote within 24 hours of that call, so you know exactly what you're getting.",
+    a: "We reply with a clear next step, usually a scope call, then a fixed quote within 24 hours of that call, so you know exactly what you're getting.",
   },
 ];
 

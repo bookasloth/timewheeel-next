@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
 
-// Honest-expectations section — candour against a market full of guarantees.
+// Honest-expectations section, candour against a market full of guarantees.
 export function SeoExpectations() {
   return (
     <section className="border-t border-border/60 bg-secondary/40">

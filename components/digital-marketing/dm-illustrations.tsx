@@ -70,7 +70,7 @@ export function OrbitRings(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-// Signal strength bars — measurement motif for the dark metrics section.
+// Signal strength bars, measurement motif for the dark metrics section.
 export function SignalBars(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
@@ -134,7 +134,7 @@ export function GaugeIllo(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-// Editorial collage cover for the case-study cards — distinct composition per
+// Editorial collage cover for the case-study cards, distinct composition per
 // index, tinted by accent. Purely decorative.
 export function CollageCover({ index, accent }: { index: number; accent: string }) {
   const v = index % 3;

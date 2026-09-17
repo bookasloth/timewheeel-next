@@ -7,14 +7,14 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { ContactFaq, faqs } from "@/components/contact/contact-faq";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact — Timewheel" },
+  title: { absolute: "Contact, Timewheel" },
   description:
-    "Contact Timewheel — a product idea, a project brief, or a question. We reply within one business day with a clear, scoped next step.",
+    "Contact Timewheel, a product idea, a project brief, or a question. We reply within one business day with a clear, scoped next step.",
   openGraph: {
     type: "website",
-    title: "Contact — Timewheel",
+    title: "Contact, Timewheel",
     description:
-      "Say hello. We read every message — replies within one business day.",
+      "Say hello. We read every message, replies within one business day.",
     siteName: "Timewheel",
   },
   alternates: { canonical: "/contact" },
@@ -41,7 +41,7 @@ const jsonLd = {
   },
 };
 
-// FAQPage — mirrors the visible contact FAQ (source: contact-faq faqs).
+// FAQPage, mirrors the visible contact FAQ (source: contact-faq faqs).
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",

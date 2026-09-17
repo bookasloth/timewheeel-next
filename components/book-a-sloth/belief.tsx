@@ -7,7 +7,7 @@ const beliefs = [
   },
   {
     name: "Your craft is the valuable part.",
-    body: "The machinery around it isn't your job — that part is ours.",
+    body: "The machinery around it isn't your job, that part is ours.",
   },
   {
     name: "Creators should own their audience.",

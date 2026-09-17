@@ -127,7 +127,7 @@ export const rmApproach = [
 export const rmTestimonials = [
   {
     quote:
-      "As a restaurant owner in Mumbai, I struggled to get the right visibility for my brand. This team truly understands what restaurants need—their expertise in digital marketing helped my business thrive. Thanks to their strategies, we've seen a significant boost in brand awareness and more repeat guests.",
+      "As a restaurant owner in Mumbai, I struggled to get the right visibility for my brand. This team truly understands what restaurants need, their expertise in digital marketing helped my business thrive. Thanks to their strategies, we've seen a significant boost in brand awareness and more repeat guests.",
     name: "Rahul Mehta",
     role: "Owner",
     brand: "Spice Haven",
@@ -160,7 +160,7 @@ export const rmProcess = [
     course: "Starter",
     emoji: "🎙️",
     title: "Taste & Tour",
-    body: "We sit with you, learn your menu, brand, audience, and local market — the recipe for what comes next.",
+    body: "We sit with you, learn your menu, brand, audience, and local market, the recipe for what comes next.",
     keys: ["Brand & menu audit", "Review & reputation check", "Local SEO baseline"],
   },
   {
@@ -168,7 +168,7 @@ export const rmProcess = [
     course: "Main course",
     emoji: "📋",
     title: "Build the Menu",
-    body: "A custom marketing plan that picks the right channels — social, search, content, and paid — for your goals.",
+    body: "A custom marketing plan that picks the right channels, social, search, content, and paid, for your goals.",
     keys: ["Channel strategy", "Content & campaign calendar", "Booking & funnel setup"],
   },
   {
@@ -184,7 +184,7 @@ export const rmProcess = [
     course: "Dessert",
     emoji: "📈",
     title: "Refine & Repeat",
-    body: "We measure footfall, bookings, and repeat visits — then refine what works for compounding growth.",
+    body: "We measure footfall, bookings, and repeat visits, then refine what works for compounding growth.",
     keys: ["Performance reports", "Funnel optimization", "Loyalty & retention"],
   },
 ];
@@ -219,11 +219,11 @@ export const rmResults = [
 export const rmFaq = [
   {
     q: "Why do restaurants need a dedicated digital marketing agency?",
-    a: "Restaurants compete on visibility, footfall, and repeat visits. A dedicated agency understands dining trends, local search behavior, and social media appetite — helping you turn searches and scrolls into tables and loyal guests.",
+    a: "Restaurants compete on visibility, footfall, and repeat visits. A dedicated agency understands dining trends, local search behavior, and social media appetite, helping you turn searches and scrolls into tables and loyal guests.",
   },
   {
     q: "Which locations do you serve for restaurant marketing?",
-    a: "We are an advertising agency based in Mumbai and we help restaurants build their brand presence across India — from local eateries to established F&B brands in every major city.",
+    a: "We are an advertising agency based in Mumbai and we help restaurants build their brand presence across India, from local eateries to established F&B brands in every major city.",
   },
   {
     q: "What digital marketing services do you offer for restaurants?",
@@ -235,7 +235,7 @@ export const rmFaq = [
   },
   {
     q: "Can you market a small or single-location restaurant?",
-    a: "Absolutely. Our strategies scale to your goals — whether you run a local eatery or an established F&B brand, we tailor the plan to your budget, location, and growth ambitions.",
+    a: "Absolutely. Our strategies scale to your goals, whether you run a local eatery or an established F&B brand, we tailor the plan to your budget, location, and growth ambitions.",
   },
 ];
 

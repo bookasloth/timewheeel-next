@@ -294,7 +294,7 @@ export function Navbar() {
 
       </header>
 
-      {/* mobile menu — full-screen overlay with collapsible sections */}
+      {/* mobile menu, full-screen overlay with collapsible sections */}
       {mobileOpen && (
         <div className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-background px-6 pb-8 pt-2 md:hidden">
           {/* Products */}

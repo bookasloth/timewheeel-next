@@ -26,7 +26,7 @@ export function Dm2CaseStudies() {
           </h2>
         </div>
         <p className="max-w-md text-muted-foreground">
-          Real client stories and verified results will live here — the
+          Real client stories and verified results will live here, the
           framework below shows exactly how we turn activity into outcomes.
         </p>
       </Reveal>

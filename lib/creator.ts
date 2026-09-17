@@ -1,14 +1,14 @@
 export const creatorUi = {
   meta: {
-    title: "Coffee & Toffee — A digital home for creators",
+    title: "Coffee & Toffee, A digital home for creators",
     description:
-      "A warm, self-hostable, creator-first support platform. Profiles, updates, supporter walls, and instant payouts — designed to feel human, not transactional.",
+      "A warm, self-hostable, creator-first support platform. Profiles, updates, supporter walls, and instant payouts, designed to feel human, not transactional.",
   },
   hero: {
     eyebrow: "A digital home for creators & supporters",
     titleTop: "Supporting someone you admire,",
     titleEm: "not completing a transaction.",
-    body: "Coffee & Toffee is a warm, self-hostable home for the people who back your work. Coffees, toffees, memberships, updates, and a supporter wall — one page, one community, 100% yours.",
+    body: "Coffee & Toffee is a warm, self-hostable home for the people who back your work. Coffees, toffees, memberships, updates, and a supporter wall, one page, one community, 100% yours.",
     primary: "Create your page",
     primaryHref: "#start",
     secondary: "See the concept",
@@ -36,7 +36,7 @@ export const creatorUi = {
     messagePlaceholder: "a note for Aarohi (optional)",
     noteMax: 250,
     send: "Send ₹{total} with love",
-    sent: "Thank you — Aarohi is smiling right now.",
+    sent: "Thank you, Aarohi is smiling right now.",
   },
   ticker: [
     "Writers",
@@ -88,7 +88,7 @@ export const creatorUi = {
   feed: {
     eyebrow: "Updates feed",
     title: "Part of the journey",
-    body: "New work, polls, milestones, and thank-yous — supporters watch your story unfold, not just your tills.",
+    body: "New work, polls, milestones, and thank-yous, supporters watch your story unfold, not just your tills.",
     points: [
       "Image, text & audio updates",
       "Polls your community actually votes in",
@@ -99,7 +99,7 @@ export const creatorUi = {
         kind: "image",
         label: "In progress",
         time: "2d ago",
-        title: "New painting — evening chai",
+        title: "New painting, evening chai",
         body: "First pass done. The light through the window took the whole afternoon.",
         art: ["#f2d8a9", "#df7248"],
       },
@@ -140,7 +140,7 @@ export const creatorUi = {
       { name: "Anju", tier: "Coffee", note: "Sent this on a bad day. Made mine better.", initials: "An" },
       { name: "Farah", tier: "Toffee", note: "Your chai series is my phone wallpaper.", initials: "Fa" },
       { name: "Leo", tier: "Coffee", note: "Keep going. The world needs your quiet work.", initials: "Le" },
-      { name: "Mira", tier: "Patron", note: "Gifting a print to my mum — she cried.", initials: "Mi" },
+      { name: "Mira", tier: "Patron", note: "Gifting a print to my mum, she cried.", initials: "Mi" },
       { name: "Sam", tier: "Toffee", note: "First ever coffee I've bought someone. 10/10.", initials: "Sa" },
       { name: "Noor", tier: "Coffee", note: "Seen your process from day one. So proud.", initials: "No" },
     ],
@@ -151,7 +151,7 @@ export const creatorUi = {
     title: "Self-hostable. Lightweight. Yours.",
     body: "Operate everything yourself. Runs on your own server, exports your list, pays out instantly, and never rents your audience back to you.",
     bullets: [
-      "Own your supporter list — CSV export any time",
+      "Own your supporter list, CSV export any time",
       "Instant payouts, straight to your bank",
       "3% per contribution, zero monthly fees",
       "White-label domain & your own theme",
@@ -171,7 +171,7 @@ export const creatorUi = {
   values: {
     quote:
       "This is not a payment tool. It is a digital home for creators and the people who believe in them.",
-    byline: "— the Coffee & Toffee idea",
+    byline: "the Coffee & Toffee idea",
   },
   process: {
     eyebrow: "How it works",
@@ -186,12 +186,12 @@ export const creatorUi = {
       {
         name: "Share one link",
         stop: "02",
-        desc: "Bio, videos, newsletter — one warm page fans actually want to open.",
+        desc: "Bio, videos, newsletter, one warm page fans actually want to open.",
       },
       {
         name: "Support flows in",
         stop: "03",
-        desc: "Coffees, toffees, memberships, notes — every contribution lands live.",
+        desc: "Coffees, toffees, memberships, notes, every contribution lands live.",
       },
       {
         name: "Own everything",
@@ -203,7 +203,7 @@ export const creatorUi = {
   quotes: {
     eyebrow: "Voices",
     title: "Made for real creators",
-    body: "Writers, painters, coders, and educators — earning a little steadier, staying a lot closer.",
+    body: "Writers, painters, coders, and educators, earning a little steadier, staying a lot closer.",
     items: [
       {
         quote:
@@ -214,7 +214,7 @@ export const creatorUi = {
       },
       {
         quote:
-          "Self-hosted on a ₹400 server. My list, my emails, my community — nobody holds them hostage.",
+          "Self-hosted on a ₹400 server. My list, my emails, my community, nobody holds them hostage.",
         name: "Kabir S.",
         role: "Indie developer",
         initials: "KS",
@@ -234,7 +234,7 @@ export const creatorUi = {
     items: [
       {
         q: "Is it really self-hostable?",
-        a: "Yes. Coffee & Toffee can run on your own server from day one — your domain, your data, your rules. If you'd rather not manage infrastructure, a hosted option is there too, but the controls always stay yours.",
+        a: "Yes. Coffee & Toffee can run on your own server from day one, your domain, your data, your rules. If you'd rather not manage infrastructure, a hosted option is there too, but the controls always stay yours.",
       },
       {
         q: "What does it cost?",
@@ -242,7 +242,7 @@ export const creatorUi = {
       },
       {
         q: "Do I own my supporter list?",
-        a: "Completely. Names, notes, and emails export to CSV any time. The platform never emails your supporters and never sells your data — the relationship is yours, even if you leave.",
+        a: "Completely. Names, notes, and emails export to CSV any time. The platform never emails your supporters and never sells your data, the relationship is yours, even if you leave.",
       },
       {
         q: "How fast do payouts land?",
@@ -250,11 +250,11 @@ export const creatorUi = {
       },
       {
         q: "Can I run memberships and a shop too?",
-        a: "The same page powers one-off coffees and toffees, monthly memberships, and a shop for ebooks, calls, commissions, or physical goods — beneath one supporter list you own.",
+        a: "The same page powers one-off coffees and toffees, monthly memberships, and a shop for ebooks, calls, commissions, or physical goods, beneath one supporter list you own.",
       },
       {
         q: "What does the supporter experience feel like?",
-        a: "One tap, a warm page, and a note you can leave. It is designed to feel like buying someone you admire a coffee — not completing a transaction.",
+        a: "One tap, a warm page, and a note you can leave. It is designed to feel like buying someone you admire a coffee, not completing a transaction.",
       },
     ],
   },

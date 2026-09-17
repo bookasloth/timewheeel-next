@@ -1,4 +1,4 @@
-// ponytail: all numbers are PLACEHOLDERS — edit here when real pricing lands.
+// ponytail: all numbers are PLACEHOLDERS, edit here when real pricing lands.
 // Currency ₹ assumed from timewheel.co.in; swap freely.
 
 export const standardPlan = {

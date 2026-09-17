@@ -28,7 +28,7 @@ function ScreenMock({ label }: { label: string }) {
   if (label === "Updates feed") {
     return (
       <div className="ct-screen-body ct-screen-feed">
-        {["New painting — evening chai", "What should the next print be?", "214 coffees this month"].map(
+        {["New painting, evening chai", "What should the next print be?", "214 coffees this month"].map(
           (t, i) => (
             <div key={t} className="ct-feed-row">
               <span className="ct-feed-dot" />

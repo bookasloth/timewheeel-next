@@ -23,7 +23,7 @@ const statGradients = [
   "bg-gradient-to-br from-[#4ab765] to-[#269cef]",
 ];
 
-// Placeholder trusted-brand marks — swap in real client logos when available.
+// Placeholder trusted-brand marks, swap in real client logos when available.
 const brandMarks: Array<{ icon: LucideIcon; name: string; accent: string }> = [
   { icon: Hexagon, name: "Northwind", accent: "#ff4d93" },
   { icon: Layers, name: "Vertex Labs", accent: "#fe5100" },
@@ -57,7 +57,7 @@ function BrandItem({ brand }: { brand: { icon: LucideIcon; name: string; accent:
   );
 }
 
-// Dark "in numbers" band — gradient counts with a subtle ring decoration.
+// Dark "in numbers" band, gradient counts with a subtle ring decoration.
 export function DmTrust() {
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-navy text-white">
@@ -94,7 +94,7 @@ export function DmTrust() {
           <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
-                Timewheel digital marketing — in numbers
+                Timewheel digital marketing, in numbers
               </p>
               <Squiggle className="mt-1.5 h-3 w-28 text-brand" />
             </div>

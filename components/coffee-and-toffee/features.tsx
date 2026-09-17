@@ -82,7 +82,7 @@ export function CfFeatures({ data }: { data: CfData }) {
         </Reveal>
 
         <div className="cf-feature-grid">
-          {/* livable demo tile — spans 2 columns */}
+          {/* livable demo tile, spans 2 columns */}
           <Reveal className="cf-card cf-feature cf-feature--wide">
             <span className="cf-feature-label">
               <span className="cf-feature-ic">

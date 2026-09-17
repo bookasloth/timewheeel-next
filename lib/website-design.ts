@@ -1,4 +1,4 @@
-// Content for /website-design — Timewheel's premium web design services page.
+// Content for /website-design, Timewheel's premium web design services page.
 // Palette is page-scoped (blue/purple/orange/green/dark/soft). Numbers stay
 // true to shipped Timewheel products (lib/products.ts); no invented client stats.
 
@@ -28,9 +28,9 @@ export type WdPortfolioProject = {
 
 export const wd = {
   meta: {
-    title: "Web Design Services | Timewheel — Premium Websites That Grow Businesses",
+    title: "Web Design Services | Timewheel, Premium Websites That Grow Businesses",
     description:
-      "Timewheel designs and builds premium websites for startups and growing businesses — strategy, UI design and clean development under one roof. Start your project today.",
+      "Timewheel designs and builds premium websites for startups and growing businesses, strategy, UI design and clean development under one roof. Start your project today.",
   },
 
   breadcrumb: ["Home", "Website Design"],
@@ -39,7 +39,7 @@ export const wd = {
     eyebrow: "Web Design & Development Studio",
     headlineA: "We design websites",
     headlineB: "people remember.",
-    sub: "Premium websites for startups and growing businesses. Clear strategy, thoughtful design and clean development — so your site looks the part and turns visitors into customers.",
+    sub: "Premium websites for startups and growing businesses. Clear strategy, thoughtful design and clean development, so your site looks the part and turns visitors into customers.",
     primaryCta: { label: "Start a Project", href: "/contact" },
     secondaryCta: { label: "Explore Our Work", href: "#work" },
     labels: ["UI / UX", "Web Design", "Development", "Responsive", "Strategy"],
@@ -49,7 +49,7 @@ export const wd = {
   valueProps: {
     label: "Why it works",
     title: "A website should do more than look good. It should make people trust you.",
-    body: "Every project starts with the business — the audience, the message, the goal — and the design follows. That's the difference between a page and a website that works.",
+    body: "Every project starts with the business, the audience, the message, the goal, and the design follows. That's the difference between a page and a website that works.",
     blocks: [
       {
         number: "01",
@@ -85,14 +85,14 @@ export const wd = {
   portfolio: {
     label: "Selected Work",
     title: "Selected digital experiences.",
-    body: "A sample of websites and platforms we've designed, built and shipped. Live products, real builds — names are as important as visuals.",
+    body: "A sample of websites and platforms we've designed, built and shipped. Live products, real builds, names are as important as visuals.",
     projects: [
       {
         number: "01",
         name: "Book A Sloth",
         category: "SaaS · Booking Platform",
         summary:
-          "A modern booking platform for service businesses — designed to feel fast and trustworthy, then built end to end.",
+          "A modern booking platform for service businesses, designed to feel fast and trustworthy, then built end to end.",
         services: ["Product Design", "UI / UX", "Design System", "Development"],
         accent: palette.orange,
         visual: "screenshot-book-a-sloth",
@@ -108,7 +108,7 @@ export const wd = {
         name: "Alluminaty",
         category: "Platform · Education",
         summary:
-          "An alumni engagement platform for schools and colleges — directories, events and giving, organised into one clear experience.",
+          "An alumni engagement platform for schools and colleges, directories, events and giving, organised into one clear experience.",
         services: ["UI Design", "Dashboard Design", "Web App"],
         accent: palette.purple,
         visual: "mockup-alluminaty",
@@ -124,7 +124,7 @@ export const wd = {
         name: "Coffee & Toffee",
         category: "D2C · Creator Support",
         summary:
-          "A creator tip-and-support experience that feels personal — warm, clear and effortless for the person giving.",
+          "A creator tip-and-support experience that feels personal, warm, clear and effortless for the person giving.",
         services: ["Web Design", "Brand UI", "Landing Page"],
         accent: palette.green,
         visual: "mockup-coffee",
@@ -154,7 +154,7 @@ export const wd = {
   designSystem: {
     label: "Design System",
     title: "Every detail has a reason.",
-    body: "Professional websites are built from intentional decisions — type, color, spacing, interaction. Here's a look at the toolkit behind every project.",
+    body: "Professional websites are built from intentional decisions, type, color, spacing, interaction. Here's a look at the toolkit behind every project.",
     colors: [
       { name: "Blue", hex: palette.blue },
       { name: "Purple", hex: palette.purple },
@@ -187,14 +187,14 @@ export const wd = {
   services: {
     label: "What you get",
     title: "Everything a great website needs. Nothing you don't.",
-    body: "An honest, complete list — so you know exactly what's included before we start.",
+    body: "An honest, complete list, so you know exactly what's included before we start.",
     included: [
       { name: "UX Research", desc: "We learn what your customers need before we design anything." },
       { name: "Wireframes", desc: "Clear page structures you approve before any visuals." },
       { name: "UI Design", desc: "A distinctive look built around your brand, not a template." },
       { name: "Design System", desc: "Type, color and components that keep every page consistent." },
       { name: "Responsive Design", desc: "Looks right and works well on every device." },
-      { name: "Website Development", desc: "Your design, built properly — fast and reliable." },
+      { name: "Website Development", desc: "Your design, built properly, fast and reliable." },
       { name: "CMS Integration", desc: "Edit your own content without touching code." },
       { name: "SEO-ready Structure", desc: "Built to be found by Google from day one." },
     ],
@@ -209,12 +209,12 @@ export const wd = {
   why: {
     label: "Why Timewheel",
     title: "Not another template. Not another website.",
-    body: "Plenty of studios can make a page. We make websites that carry your business — here's how we work.",
+    body: "Plenty of studios can make a page. We make websites that carry your business, here's how we work.",
     reasons: [
       {
         number: "01",
         title: "Clarity",
-        body: "No jargon. Just clear communication — from the first call to the final handover.",
+        body: "No jargon. Just clear communication, from the first call to the final handover.",
         accent: palette.blue,
         icon: "message",
       },
@@ -235,7 +235,7 @@ export const wd = {
       {
         number: "04",
         title: "Craft",
-        body: "Every interaction and detail is considered — the small things are the brand.",
+        body: "Every interaction and detail is considered, the small things are the brand.",
         accent: palette.green,
         icon: "sparkle",
       },
@@ -248,7 +248,7 @@ export const wd = {
     quotes: [
       {
         quote:
-          "For the first time, our website actually sounds like us. No template feel, no filler — customers keep mentioning how easy it is to find what they need.",
+          "For the first time, our website actually sounds like us. No template feel, no filler, customers keep mentioning how easy it is to find what they need.",
         name: "Rahul Deshpande",
         role: "Founder, Aesthetic Homes",
         accent: palette.blue,
@@ -277,23 +277,23 @@ export const wd = {
     items: [
       {
         q: "How long does a website project take?",
-        a: "Most websites launch in about 4 to 6 weeks. A focused landing page can go live in 2 to 3 weeks, while larger platforms take longer. You get a clear timeline in writing before we start — and we stick to it.",
+        a: "Most websites launch in about 4 to 6 weeks. A focused landing page can go live in 2 to 3 weeks, while larger platforms take longer. You get a clear timeline in writing before we start, and we stick to it.",
       },
       {
         q: "Do you design and develop the website?",
-        a: "Yes. Design and development live under one roof at Timewheel — strategy, UI design, copy placement and build. That means fewer handoffs, fewer misunderstandings, and a site that looks exactly like the design you approved.",
+        a: "Yes. Design and development live under one roof at Timewheel, strategy, UI design, copy placement and build. That means fewer handoffs, fewer misunderstandings, and a site that looks exactly like the design you approved.",
       },
       {
         q: "Can you redesign an existing website?",
-        a: "Absolutely. We rebuild dated or slow sites without losing the SEO you already have — we keep your URLs, redirect anything that moves, and hand back a faster, clearer website.",
+        a: "Absolutely. We rebuild dated or slow sites without losing the SEO you already have, we keep your URLs, redirect anything that moves, and hand back a faster, clearer website.",
       },
       {
         q: "Do you work with startups?",
-        a: "Yes — startups, growing businesses, and established brands. If you're pre-launch and moving fast, we'll recommend the smallest site that does the job well now, built so it can grow later.",
+        a: "Yes, startups, growing businesses, and established brands. If you're pre-launch and moving fast, we'll recommend the smallest site that does the job well now, built so it can grow later.",
       },
       {
         q: "Can you integrate CMS / third-party tools?",
-        a: "Yes. We connect the tools you actually need — a CMS you can edit yourself, analytics, payment, booking or email integrations — and keep the setup simple enough that your team doesn't need a developer to run it.",
+        a: "Yes. We connect the tools you actually need, a CMS you can edit yourself, analytics, payment, booking or email integrations, and keep the setup simple enough that your team doesn't need a developer to run it.",
       },
       {
         q: "Do you provide mobile-responsive design?",
@@ -301,7 +301,7 @@ export const wd = {
       },
       {
         q: "What happens after launch?",
-        a: "You get full ownership and a quick handover — how to edit, where everything lives, and how to ask for support. Most clients also join a simple maintenance plan for updates and small changes, but it's optional and cancellable anytime.",
+        a: "You get full ownership and a quick handover, how to edit, where everything lives, and how to ask for support. Most clients also join a simple maintenance plan for updates and small changes, but it's optional and cancellable anytime.",
       },
     ],
   },

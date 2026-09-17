@@ -15,7 +15,7 @@ export function Dm2Audience() {
           </h2>
         </div>
         <p className="max-w-md text-muted-foreground">
-          No two businesses are the same — so neither are our strategies. Here
+          No two businesses are the same, so neither are our strategies. Here
           are the teams we help most.
         </p>
       </Reveal>

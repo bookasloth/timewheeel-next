@@ -8,7 +8,7 @@ import { getAllPosts, formatDate } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Guides on digital marketing, SEO, AI search and building without platform lock-in — from the Timewheel team.",
+    "Guides on digital marketing, SEO, AI search and building without platform lock-in, from the Timewheel team.",
 };
 
 export default function BlogPage() {

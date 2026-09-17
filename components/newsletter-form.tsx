@@ -25,7 +25,7 @@ export function NewsletterForm() {
 
   if (state === "ok")
     return (
-      <p className="mt-6 text-sm text-brand">Thanks — you&apos;re on the list.</p>
+      <p className="mt-6 text-sm text-brand">Thanks, you&apos;re on the list.</p>
     );
 
   return (

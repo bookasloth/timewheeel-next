@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 // Blog comment -> email for moderation (no public DB). Same SMTP env as leads.
 // Comments are emailed to LEAD_TO; approve and add them to the post's
 // frontmatter `comments:` array to publish. Persisting live user comments would
-// need a datastore — this keeps it spam-safe and human-moderated for now.
+// need a datastore, this keeps it spam-safe and human-moderated for now.
 
 export const runtime = "nodejs";
 

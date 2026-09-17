@@ -155,12 +155,12 @@ export const dmChallenges = [
   {
     question: "Are you getting traffic that never turns into customers?",
     answer:
-      "We connect content, paid advertising, and conversion-focused journeys so attention becomes leads — not just visits.",
+      "We connect content, paid advertising, and conversion-focused journeys so attention becomes leads, not just visits.",
   },
   {
     question: "Do you actually know which marketing works?",
     answer:
-      "Every channel is tracked against clear metrics, so your budget goes toward what delivers — with transparent, regular reporting.",
+      "Every channel is tracked against clear metrics, so your budget goes toward what delivers, with transparent, regular reporting.",
   },
 ];
 
@@ -206,7 +206,7 @@ export const dmMetrics = [
   { label: "Campaign Performance", value: "ROAS & CTR tracking", accent: "#4ab765" },
 ];
 
-// Placeholder case study data — replace with real stories.
+// Placeholder case study data, replace with real stories.
 export const dmCaseStudies = [
   {
     brand: "Growth story 01",

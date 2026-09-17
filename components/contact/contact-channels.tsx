@@ -14,7 +14,7 @@ const channels = [
     title: "WhatsApp",
     value: site.contact.phone,
     note: "Fast replies for quick questions.",
-    href: `https://wa.me/${site.contact.whatsappDigits}?text=${encodeURIComponent("Hi Timewheel — I'd like to discuss a project.")}`,
+    href: `https://wa.me/${site.contact.whatsappDigits}?text=${encodeURIComponent("Hi Timewheel, I'd like to discuss a project.")}`,
     icon: MessageCircle,
   },
   {

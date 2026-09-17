@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   other: { "geo.region": "IN", "geo.placename": "India" },
 };
 
-// Service schema — provider is the shared Organization node; areaServed India-wide.
+// Service schema, provider is the shared Organization node; areaServed India-wide.
 const serviceLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -62,7 +62,7 @@ const serviceLd = {
   ],
 };
 
-// FAQPage — must mirror the visible FAQ exactly (source: wd.faq).
+// FAQPage, must mirror the visible FAQ exactly (source: wd.faq).
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -113,7 +113,7 @@ export default function WebDevelopmentIndiaPage() {
         source="Web Development Company in India"
         eyebrow="Start your project"
         heading="Get a Fixed Quote in 24 Hours"
-        blurb="Tell us what you need built. You'll get a clear scope, a fixed price and a written timeline — no obligation, no jargon."
+        blurb="Tell us what you need built. You'll get a clear scope, a fixed price and a written timeline, no obligation, no jargon."
         infoRows={[
           { k: "Based in", v: "India" },
           { k: "Serving", v: "Clients across India & abroad" },
@@ -123,7 +123,7 @@ export default function WebDevelopmentIndiaPage() {
         serviceOptions={wd.serviceOptions}
         serviceLabel="What do you need?"
         submitLabel="Get My Fixed Quote"
-        successHeading="Thanks — your quote is on the way."
+        successHeading="Thanks, your quote is on the way."
         successBody="We've received your project details and will send a fixed quote and timeline within one business day."
       />
     </div>

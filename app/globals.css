@@ -48,7 +48,7 @@
 }
 
 /* Tactile Editorial theme. Cream paper ground, ink structure, orange/blue/green accents.
-   The website is the gallery; illustrations are the artwork — keep the UI restrained. */
+   The website is the gallery; illustrations are the artwork, keep the UI restrained. */
 :root {
   /* Palette:
      paper #F5F0E7 · surface #FFFDF7 · ink #171717 · grey #77736C
@@ -89,7 +89,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Subtle paper grain over the cream ground — fixed to the viewport, layered
+    /* Subtle paper grain over the cream ground, fixed to the viewport, layered
        under all content so it never sits on top of UI text. ~4.5% fractal noise. */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
     background-attachment: fixed;
@@ -107,7 +107,7 @@
 
 /* House rule: no sharp corners. Everything gets a 3px baseline radius in the
    `base` layer, so any explicit `rounded-*` utility (larger, or full) always
-   wins via the utilities layer — only true 0-radius corners become 3px. */
+   wins via the utilities layer, only true 0-radius corners become 3px. */
 @layer base {
   *,
   *::before,
@@ -129,13 +129,13 @@
   filter: brightness(0.93);
 }
 
-/* primary — orange */
+/* primary, orange */
 .btn-primary {
   background: var(--brand);
   color: var(--brand-foreground);
 }
 
-/* green — positive / WhatsApp actions */
+/* green, positive / WhatsApp actions */
 .btn-green {
   background: var(--rating);
   color: #fff;
@@ -249,7 +249,7 @@
   border-color: var(--brand);
 }
 
-/* hero active-word progress bar — scaleX 0→1 over the 2s cycle */
+/* hero active-word progress bar, scaleX 0→1 over the 2s cycle */
 @keyframes tw-word-progress {
   from {
     transform: scaleX(0);

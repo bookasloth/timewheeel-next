@@ -57,7 +57,7 @@ const serviceLd = {
   ],
 };
 
-// FAQPage — mirrors the visible FAQ exactly (source: wd.faq.items).
+// FAQPage, mirrors the visible FAQ exactly (source: wd.faq.items).
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",

@@ -21,7 +21,7 @@ function esc(s: string): string {
     .replace(/"/g, "&quot;");
 }
 
-// Branded HTML email — table layout + inline CSS so it renders in every client.
+// Branded HTML email, table layout + inline CSS so it renders in every client.
 export function renderLeadEmailHtml(l: LeadEmail): string {
   const brand = "#fe5100";
   const ink = "#17130e";
@@ -34,11 +34,11 @@ export function renderLeadEmailHtml(l: LeadEmail): string {
     </tr>`;
   const websiteCell = l.website
     ? `<a href="${esc(l.website)}" style="color:${brand};text-decoration:none">${esc(l.website)}</a>`
-    : `<span style="color:${muted}">—</span>`;
+    : `<span style="color:${muted}">–</span>`;
 
   return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f4f3f0">
-  <span style="display:none;max-height:0;overflow:hidden;opacity:0">New ${esc(l.service)} lead from ${esc(l.business)} — ${esc(l.source)}</span>
+  <span style="display:none;max-height:0;overflow:hidden;opacity:0">New ${esc(l.service)} lead from ${esc(l.business)}, ${esc(l.source)}</span>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3f0;padding:24px 12px">
     <tr><td align="center">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid ${line};border-radius:14px;overflow:hidden">
@@ -47,7 +47,7 @@ export function renderLeadEmailHtml(l: LeadEmail): string {
         </td></tr>
         <tr><td style="padding:28px 28px 8px">
           <div style="display:inline-block;background:${brand};color:#fff;font:700 11px/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;padding:6px 10px;border-radius:999px">New lead</div>
-          <h1 style="margin:16px 0 4px;font:800 22px/1.25 Arial,sans-serif;color:${ink}">${esc(l.service)} — ${esc(l.business)}</h1>
+          <h1 style="margin:16px 0 4px;font:800 22px/1.25 Arial,sans-serif;color:${ink}">${esc(l.service)}, ${esc(l.business)}</h1>
           <p style="margin:0;font:400 13px/1.5 Arial,sans-serif;color:${muted}">via ${esc(l.source)} · ${esc(l.when)}</p>
         </td></tr>
         <tr><td style="padding:12px 28px 4px">
@@ -84,7 +84,7 @@ export function renderLeadEmailText(l: LeadEmail): string {
     `Business: ${l.business}`,
     `Email:    ${l.email}`,
     `Phone:    ${l.phone}`,
-    `Website:  ${l.website || "—"}`,
+    `Website:  ${l.website || "–"}`,
     `Service:  ${l.service}`,
     `When:     ${l.when}`,
     "",

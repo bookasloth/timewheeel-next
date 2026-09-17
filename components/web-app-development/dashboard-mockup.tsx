@@ -62,7 +62,7 @@ function Kpi({ k, v, meta, tone }: { k: string; v: string; meta?: string; tone: 
   );
 }
 
-// Smooth area chart — same drawing style as the rest of the site's mockups.
+// Smooth area chart, same drawing style as the rest of the site's mockups.
 function RevenueChart() {
   const line = "M0 78 C36 70 58 72 92 54 C126 36 158 48 196 32 C234 16 266 24 300 10";
   return (

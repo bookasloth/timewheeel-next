@@ -45,7 +45,7 @@ export function Testimonials() {
                 &ldquo;{q}&rdquo;
               </blockquote>
               <figcaption className="mt-6 text-xs text-muted-foreground">
-                Rated 4.5/5 — from over 100 reviews
+                Rated 4.5/5, from over 100 reviews
               </figcaption>
             </figure>
           ))}

@@ -4,7 +4,7 @@ import { dmStats } from "@/lib/digital-marketing2";
 
 const statColors = ["#fe5100", "#269cef", "#4ab765"];
 
-// Dark "in numbers" band — gradient counts with a subtle ring decoration.
+// Dark "in numbers" band, gradient counts with a subtle ring decoration.
 export function Dm2Trust() {
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-navy text-white">

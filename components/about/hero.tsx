@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
-// About hero — full-bleed section on a clean white background. Copy on the
+// About hero, full-bleed section on a clean white background. Copy on the
 // left, the team/about photo on the right in a softly framed card.
 
 const DOT_GRID = "radial-gradient(circle, rgba(15,17,17,0.06) 1px, transparent 1px)";
@@ -74,7 +74,7 @@ export function AboutHero() {
           <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-[0_50px_100px_-40px_rgba(15,17,17,0.3)] h-[380px] lg:h-[440px]">
             <Image
               src="/about.jpeg"
-              alt="About Timewheel — our team and workspace"
+              alt="About Timewheel, our team and workspace"
               width={735}
               height={1102}
               className="h-full w-full object-cover"

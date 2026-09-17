@@ -9,7 +9,7 @@ type Thing = Record<string, unknown>;
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
 
-// Only real social profiles — placeholder "#" links are dropped.
+// Only real social profiles, placeholder "#" links are dropped.
 const sameAs = Object.values(site.social).filter((u) => u !== "#");
 
 export function organizationLd(): Thing {
@@ -19,7 +19,7 @@ export function organizationLd(): Thing {
     name: site.name,
     url: site.url,
     description:
-      "Timewheel builds self-hosted business tools for bookings, payments, events, and communities — own your systems, no SaaS rent or platform commissions.",
+      "Timewheel builds self-hosted business tools for bookings, payments, events, and communities, own your systems, no SaaS rent or platform commissions.",
     ...(sameAs.length ? { sameAs } : {}),
     // ponytail: add `logo` once a real /logo.png ships (memory: asset TODO).
   };
@@ -105,7 +105,7 @@ export function faqLd(items: { q: string; a: string }[]): Thing {
   };
 }
 
-/** LocalBusiness for the Nagpur entity — feeds map-pack + AI "top agencies" answers. */
+/** LocalBusiness for the Nagpur entity, feeds map-pack + AI "top agencies" answers. */
 export function localBusinessLd(): Thing {
   return {
     "@context": "https://schema.org",
@@ -123,7 +123,7 @@ export function localBusinessLd(): Thing {
       // ponytail: add streetAddress + postalCode when the real office address is confirmed.
     },
     areaServed: { "@type": "City", name: site.contact.city },
-    // ponytail: keep in sync with site.contact.hours (human string) — schema needs machine format.
+    // ponytail: keep in sync with site.contact.hours (human string), schema needs machine format.
     openingHours: "Mo-Sa 10:00-19:00",
     ...(sameAs.length ? { sameAs } : {}),
   };

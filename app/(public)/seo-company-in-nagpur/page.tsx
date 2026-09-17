@@ -109,7 +109,7 @@ export default function SeoCompanyNagpurPage() {
         source="SEO Company in Nagpur"
         eyebrow="Start the conversation"
         heading="Get Your Free SEO Plan"
-        blurb="Run the audit above, then tell us your goals. We'll come back with a clear, honest plan — no obligation, no jargon."
+        blurb="Run the audit above, then tell us your goals. We'll come back with a clear, honest plan, no obligation, no jargon."
         infoRows={[
           { k: "Based in", v: "Nagpur, Maharashtra" },
           { k: "Serving", v: "Businesses across India" },
@@ -119,7 +119,7 @@ export default function SeoCompanyNagpurPage() {
         serviceOptions={seo.serviceOptions}
         serviceLabel="Service you need"
         submitLabel="Get My Free SEO Plan"
-        successHeading="Thanks — we'll be in touch."
+        successHeading="Thanks, we'll be in touch."
         successBody="Your enquiry is in. We'll review your site and reach out within one business day with a clear next step."
       />
     </div>

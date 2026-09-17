@@ -20,7 +20,7 @@ export function SeoDeliverables() {
         </Reveal>
         <Reveal>
           <p className="mt-6 text-sm text-muted-foreground">
-            Want to see it now? Run the free audit at the top of this page — that scorecard is
+            Want to see it now? Run the free audit at the top of this page, that scorecard is
             exactly what every engagement starts with.
           </p>
         </Reveal>

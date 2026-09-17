@@ -31,7 +31,7 @@ export function Dm2FinalCta() {
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/70">
             Let&apos;s build a digital marketing system around your business
-            goals — strategy, channels, and reports all working in one direction.
+            goals, strategy, channels, and reports all working in one direction.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link

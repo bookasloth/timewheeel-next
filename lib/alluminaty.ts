@@ -1,14 +1,14 @@
 export const az = {
   meta: {
-    title: "Alluminaty — Alumni Network Platform Built by Timewheel",
+    title: "Alluminaty, Alumni Network Platform Built by Timewheel",
     description:
-      "Alluminaty is an alumni network platform built by Timewheel — verified directories, groups, events, business opportunities and giving back, all in one product.",
+      "Alluminaty is an alumni network platform built by Timewheel, verified directories, groups, events, business opportunities and giving back, all in one product.",
   },
   hero: {
     titleLine1: "Every alumni network,",
     titleLine2: "forever connected.",
     titleAccent: "forever connected.",
-    body: "Alluminaty keeps schools, colleges and their graduates connected for life — verified directories, groups, events, opportunities and giving back in one calm, structured product instead of scattered chats.",
+    body: "Alluminaty keeps schools, colleges and their graduates connected for life, verified directories, groups, events, opportunities and giving back in one calm, structured product instead of scattered chats.",
     primaryLabel: "Get A Demo",
     primaryHref: "/digital-marketing",
     secondaryLabel: "See it live",
@@ -40,11 +40,11 @@ export const az = {
     number: "01",
     label: "THE CHALLENGE",
     title: "Alumni networks shouldn't fade after graduation.",
-    body: "Every school has the same story — the bond survives, but the infrastructure around it doesn't.",
+    body: "Every school has the same story, the bond survives, but the infrastructure around it doesn't.",
     items: [
       {
         name: "Batchmates scatter",
-        desc: "After graduation, classmates spread across cities and countries — and slowly out of reach.",
+        desc: "After graduation, classmates spread across cities and countries, and slowly out of reach.",
       },
       {
         name: "Contacts live in spreadsheets",
@@ -52,7 +52,7 @@ export const az = {
       },
       {
         name: "Conversations fragment",
-        desc: "The batch lives across fading group chats — noisy, unsearchable, and split by year.",
+        desc: "The batch lives across fading group chats, noisy, unsearchable, and split by year.",
       },
       {
         name: "Reunions get missed",
@@ -103,7 +103,7 @@ export const az = {
     number: "04",
     label: "WHAT'S INSIDE",
     title: "Everything an alumni network needs.",
-    body: "Six connected experiences — for the members, for the institutions, and for the work of keeping thousands of alumni reachable.",
+    body: "Six connected experiences, for the members, for the institutions, and for the work of keeping thousands of alumni reachable.",
     items: [
       {
         icon: "users",
@@ -118,7 +118,7 @@ export const az = {
       {
         icon: "message",
         name: "Community & Feed",
-        desc: "A feed that keeps the batch talking long after campus — posts, polls and messages.",
+        desc: "A feed that keeps the batch talking long after campus, posts, polls and messages.",
         bullets: [
           "Activity feed & posts",
           "Polls, comments & reactions",
@@ -128,7 +128,7 @@ export const az = {
       {
         icon: "calendar",
         name: "Events & Reunions",
-        desc: "Discover, RSVP and create events — from founders' day to city meetups.",
+        desc: "Discover, RSVP and create events, from founders' day to city meetups.",
         bullets: [
           "Event listings & RSVP",
           "Create your own events",
@@ -138,7 +138,7 @@ export const az = {
       {
         icon: "store",
         name: "Business & Opportunities",
-        desc: "Alumni-owned businesses, jobs, referrals and collaborations — alumni to alumni.",
+        desc: "Alumni-owned businesses, jobs, referrals and collaborations, alumni to alumni.",
         bullets: [
           "Business directory",
           "Jobs, referrals & mentorship",
@@ -158,7 +158,7 @@ export const az = {
       {
         icon: "shield",
         name: "Membership & Governance",
-        desc: "Contribution tiers, verified voting and committee leadership — transparent and durable.",
+        desc: "Contribution tiers, verified voting and committee leadership, transparent and durable.",
         bullets: [
           "Free to lifetime tiers",
           "Secure Razorpay checkout",
@@ -181,7 +181,7 @@ export const az = {
       {
         name: "Find your people",
         stop: "FIND",
-        desc: "Search by batch, house, city or company — and reconnect.",
+        desc: "Search by batch, house, city or company, and reconnect.",
       },
       {
         name: "Join the community",
@@ -204,7 +204,7 @@ export const az = {
     number: "06",
     label: "MEMBERSHIP",
     title: "A contribution, not a subscription.",
-    body: "Every tier funds the network — scholarships, welfare drives, events and mentorship. Institutions choose what their alumni pay.",
+    body: "Every tier funds the network, scholarships, welfare drives, events and mentorship. Institutions choose what their alumni pay.",
     footnote: "Secured by Razorpay · Non-refundable contributions · Each institution sets its own tiers",
     plans: [
       {
@@ -275,16 +275,16 @@ export const az = {
       { name: "Feed ads", values: ["Standard", "Reduced", "Ad-free", "Ad-free"] },
       { name: "Video calling", values: ["Pass", "30 min", "60 min", "90 min"] },
       { name: "Gallery storage", values: ["200 MB", "1 GB", "5 GB", "10 GB"] },
-      { name: "Highlighted profile", values: ["—", "—", "Yes", "Yes"] },
-      { name: "Business listing", values: ["—", "—", "Yes", "Yes"] },
-      { name: "Committee eligibility", values: ["—", "—", "—", "Yes"] },
+      { name: "Highlighted profile", values: ["–", "–", "Yes", "Yes"] },
+      { name: "Business listing", values: ["–", "–", "Yes", "Yes"] },
+      { name: "Committee eligibility", values: ["–", "–", "–", "Yes"] },
     ],
   },
   capabilities: {
     number: "07",
     label: "WHAT TIMEWHEEL BUILT",
     title: "A complete product,\nend to end.",
-    body: "Timewheel designed, built and shipped Alluminaty as a complete digital product — from strategy to production.",
+    body: "Timewheel designed, built and shipped Alluminaty as a complete digital product, from strategy to production.",
     items: [
       { icon: "compass", label: "Product Strategy" },
       { icon: "pen", label: "UX / UI Design" },
@@ -305,14 +305,14 @@ export const az = {
     items: [
       {
         quote:
-          "Alluminaty turned a scattered batch into a living network — the platform where every Navodian finds their way home.",
+          "Alluminaty turned a scattered batch into a living network, the platform where every Navodian finds their way home.",
         name: "Pranav Kadoo",
         role: "Alumnus · Batch 2006–13, Shiwalik House",
         initials: "PK",
       },
       {
         quote:
-          "For the first time in ten years, my batch has one place to find everyone — by house, by city, by company.",
+          "For the first time in ten years, my batch has one place to find everyone, by house, by city, by company.",
         name: "Ritika Deshmukh",
         role: "Batch Representative",
         initials: "RD",
@@ -333,7 +333,7 @@ export const az = {
     items: [
       {
         q: "Who is Alluminaty for?",
-        a: "Alluminaty is built for schools, colleges, universities and coaching networks that want a verified, lifelong alumni network — directories, events, groups, giving back, and membership in one product.",
+        a: "Alluminaty is built for schools, colleges, universities and coaching networks that want a verified, lifelong alumni network, directories, events, groups, giving back, and membership in one product.",
       },
       {
         q: "How are members verified?",
@@ -341,15 +341,15 @@ export const az = {
       },
       {
         q: "Can alumni pay for membership?",
-        a: "Institutions choose their tiers. Alluminaty supports free, annual and lifetime contributions with secure Razorpay checkout — and a full benefit matrix for every tier.",
+        a: "Institutions choose their tiers. Alluminaty supports free, annual and lifetime contributions with secure Razorpay checkout, and a full benefit matrix for every tier.",
       },
       {
         q: "Where do contributions go?",
-        a: "Contributions fund scholarships, welfare drives, events and reunions, mentorship, the alumni map, and the platform itself — with governance, annual reports and audits for transparency.",
+        a: "Contributions fund scholarships, welfare drives, events and reunions, mentorship, the alumni map, and the platform itself, with governance, annual reports and audits for transparency.",
       },
       {
         q: "Can we run events and committees on it?",
-        a: "Yes. Alumni can discover, RSVP and create events and reunions, and committees are configured with elected and advisory roles — with invite-only leadership for committed contributors.",
+        a: "Yes. Alumni can discover, RSVP and create events and reunions, and committees are configured with elected and advisory roles, with invite-only leadership for committed contributors.",
       },
     ],
   },

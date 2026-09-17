@@ -105,7 +105,7 @@ export function Dm2Ecosystem() {
           Every Channel, Working Toward One Goal
         </h2>
         <p className="mt-4 text-muted-foreground md:text-lg">
-          SEO, paid, content, social, email, and WhatsApp — connected into a
+          SEO, paid, content, social, email, and WhatsApp, connected into a
           single growth system around your brand.
         </p>
       </Reveal>

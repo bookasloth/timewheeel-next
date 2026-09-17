@@ -161,7 +161,7 @@ export default function PrivacyPage() {
           <li>Request correction of inaccurate data.</li>
           <li>Request deletion of your personal information.</li>
           <li>Object to or restrict processing of your data.</li>
-          <li>Data portability — receive your data in a structured format.</li>
+          <li>Data portability, receive your data in a structured format.</li>
           <li>Withdraw consent at any time where processing is based on consent.</li>
         </ul>
         <p>

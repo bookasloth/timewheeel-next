@@ -19,9 +19,9 @@ export type Product = {
   name: string;
   tagline: string;
   icon: Icon;
-  /** brand accent (hex) — placeholder until real product palettes land */
+  /** brand accent (hex), placeholder until real product palettes land */
   accent: string;
-  /** external app URL — placeholder "#" until live URLs provided */
+  /** external app URL, placeholder "#" until live URLs provided */
   href: string;
   /** featured on homepage + navbar with blurb + bullets */
   featured?: boolean;
@@ -29,7 +29,7 @@ export type Product = {
   bullets?: string[];
 };
 
-// The first four are `featured` — they drive both the navbar "What We Built"
+// The first four are `featured`, they drive both the navbar "What We Built"
 // dropdown and the homepage ecosystem section, in this order.
 export const products: Product[] = [
   {
@@ -41,7 +41,7 @@ export const products: Product[] = [
     href: "/products/alluminaty",
     featured: true,
     blurb:
-      "An alumni engagement platform that keeps schools, colleges, and their graduates connected long after they leave — directories, events, mentorship, and giving in one place instead of scattered spreadsheets and group chats.",
+      "An alumni engagement platform that keeps schools, colleges, and their graduates connected long after they leave, directories, events, mentorship, and giving in one place instead of scattered spreadsheets and group chats.",
     bullets: [
       "Searchable alumni directories and profiles",
       "Events, reunions, and mentorship programs",
@@ -57,7 +57,7 @@ export const products: Product[] = [
     href: "/products/book-a-sloth",
     featured: true,
     blurb:
-      "A modern booking platform built to simplify how businesses manage appointments, reservations, and customer scheduling — built around speed, usability, and conversion-focused experiences customers actually enjoy.",
+      "A modern booking platform built to simplify how businesses manage appointments, reservations, and customer scheduling, built around speed, usability, and conversion-focused experiences customers actually enjoy.",
     bullets: [
       "Fast and frictionless booking workflows",
       "Automated scheduling and confirmations",
@@ -73,7 +73,7 @@ export const products: Product[] = [
     href: "/coffee-and-toffee",
     featured: true,
     blurb:
-      "A creator monetization platform that lets audiences support creators through simple, meaningful contributions — helping creators build sustainable income while keeping a direct connection with their communities.",
+      "A creator monetization platform that lets audiences support creators through simple, meaningful contributions, helping creators build sustainable income while keeping a direct connection with their communities.",
     bullets: [
       "Simple tipping and creator support tools",
       "Direct audience-to-creator monetization",
@@ -89,7 +89,7 @@ export const products: Product[] = [
     href: "#",
     featured: true,
     blurb:
-      "An event ticketing and management platform engineered for modern organizers who need reliability at scale — from ticket sales and attendee management to analytics and operational workflows.",
+      "An event ticketing and management platform engineered for modern organizers who need reliability at scale, from ticket sales and attendee management to analytics and operational workflows.",
     bullets: [
       "Smart event and ticket management",
       "Real-time analytics and attendee tracking",

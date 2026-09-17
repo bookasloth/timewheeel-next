@@ -3,7 +3,7 @@ import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { products, type Product } from "@/lib/products";
 import { Reveal } from "@/components/reveal";
 
-// Homepage "ecosystem" bento — real Timewheel products as mixed-size tiles.
+// Homepage "ecosystem" bento, real Timewheel products as mixed-size tiles.
 // Cream/ink (Tactile Editorial) tokens; per-product accent only as an icon dab.
 
 const flagship = products.find((p) => p.slug === "book-a-sloth")!;
@@ -51,7 +51,7 @@ export function EcosystemBento() {
       </Reveal>
 
       <Reveal stagger className="mt-12 grid auto-rows-[minmax(150px,auto)] grid-cols-2 gap-4 md:grid-cols-4">
-        {/* flagship — 2x2 */}
+        {/* flagship, 2x2 */}
         <Link
           href={href}
           {...(flagshipExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
@@ -83,7 +83,7 @@ export function EcosystemBento() {
           </div>
         </Link>
 
-        {/* stat — bold orange tile */}
+        {/* stat, bold orange tile */}
         <div className="flex flex-col justify-between rounded-2xl bg-brand p-5 text-brand-foreground">
           <p className="text-4xl font-black tracking-tight">10+</p>
           <p className="text-sm font-semibold">Products designed, built &amp; shipped</p>
@@ -93,18 +93,18 @@ export function EcosystemBento() {
         {smalls[1] && <ProductTile product={smalls[1]} />}
         {smalls[2] && <ProductTile product={smalls[2]} />}
 
-        {/* ownership — ink tile, wide */}
+        {/* ownership, ink tile, wide */}
         <div className="col-span-2 flex flex-col justify-between rounded-2xl bg-navy p-7 text-white">
           <ShieldCheck className="size-6 text-white/80" />
           <div className="mt-6">
             <p className="text-xl font-extrabold">You own the whole stack.</p>
             <p className="mt-1.5 max-w-md text-sm text-white/70">
-              Your code, your data, your infrastructure — no platform commissions, no SaaS rent, no lock-in.
+              Your code, your data, your infrastructure, no platform commissions, no SaaS rent, no lock-in.
             </p>
           </div>
         </div>
 
-        {/* CTA — see the work */}
+        {/* CTA, see the work */}
         <Link
           href="/case-studies"
           className="group col-span-2 flex flex-col justify-between rounded-2xl border border-border bg-card p-7 transition-colors hover:border-ink/40"

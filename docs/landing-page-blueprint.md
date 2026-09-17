@@ -1,11 +1,11 @@
-# Landing Page Blueprint — Nagpur Service Pages
+# Landing Page Blueprint, Nagpur Service Pages
 
 Reference for every new service landing page (digital marketing, SEO, web dev, vertical
 niches like restaurant). Derived from a SERP teardown of the pages that currently rank for
 `digital marketing / SEO / web development company in Nagpur` (research date 2026-09-12).
 
 **Rule of thumb:** build the chassis once, swap four slots per keyword. Price and the
-sample deliverable are the two slots almost no competitor fills — that's where the market
+sample deliverable are the two slots almost no competitor fills, that's where the market
 is won.
 
 ---
@@ -15,7 +15,7 @@ is won.
 - **One URL per keyword.** A homepage cannot align H1 ↔ proof ↔ FAQ ↔ CTA to one query.
   Three purpose-built LPs beat one good homepage on all three queries at once.
 - **No duplicate pages targeting the same keyword.** Two near-identical pages on the same
-  term cannibalise each other — Google splits ranking and picks one. If you have a variant,
+  term cannibalise each other, Google splits ranking and picks one. If you have a variant,
   repoint it at a *different* keyword or `noindex`/301 it.
 - **Priority order to build:** SEO first (weakest competition, highest local intent, fits
   our AEO/GEO edge) → Web Dev second (long-tail cluster; directories own the head term) →
@@ -66,8 +66,8 @@ testimonials · industries · Nagpur locality cluster · contact + map · footer
 
 **H1 pattern:** keyword **+ a benefit**, never a bare superlative.
 - DM: *Digital Marketing Agency in Nagpur That's Measured on Leads, Not Likes*
-- SEO: *SEO Company in Nagpur — We Show You the Rankings Before We Ask for the Retainer*
-- Web: *Web Development Company in Nagpur — Fixed Scope, Fixed Price, Launched in 6 Weeks*
+- SEO: *SEO Company in Nagpur, We Show You the Rankings Before We Ask for the Retainer*
+- Web: *Web Development Company in Nagpur, Fixed Scope, Fixed Price, Launched in 6 Weeks*
 
 **Depth:** DM 1,800–2,300 · SEO 2,000–2,500 · Web 1,600–2,000 words. Length comes from
 structured evidence (tables, metrics, case cards), not more prose.
@@ -76,22 +76,22 @@ structured evidence (tables, metrics, case cards), not more prose.
 
 ## 4. Checklist for a new page
 
-**MUST HAVE** — omit and you lose to pages that have them:
+**MUST HAVE**, omit and you lose to pages that have them:
 - [ ] Own URL for the keyword (not the homepage, not a duplicate)
 - [ ] H1 = keyword + benefit; page `<title>` matches the H1's promise
 - [ ] Named Nagpur clients above or just below the fold (real, not placeholder names)
-- [ ] Keyword-specific proof block (case studies / ranking table / portfolio) — **real data**
+- [ ] Keyword-specific proof block (case studies / ranking table / portfolio), **real data**
 - [ ] Service breakdown, 5–6 sub-services, each internally linked
 - [ ] 4-step process section
 - [ ] 8–10 FAQ with `FAQPage` schema whose text **matches the visible FAQ**
 - [ ] Nagpur locality internal-link cluster (8–10)
 - [ ] Map embed + consistent NAP + GBP link
-- [ ] A working lead **form** on the page (render it — don't leave it imported-but-unused)
+- [ ] A working lead **form** on the page (render it, don't leave it imported-but-unused)
 - [ ] WhatsApp deep link w/ pre-filled message as persistent secondary CTA
 - [ ] `ProfessionalService`/`LocalBusiness` + `BreadcrumbList` schema, correct company name
 - [ ] Sticky header CTA
 
-**SHOULD HAVE** — real lift in trust/conversion:
+**SHOULD HAVE**, real lift in trust/conversion:
 - [ ] Comparison table vs "typical agency" (replaces generic "why choose us")
 - [ ] Team photos + real names
 - [ ] Keyword-specific stat counters (not generic company stats)
@@ -101,11 +101,11 @@ structured evidence (tables, metrics, case cards), not more prose.
 - [ ] 3-post blog feed
 - [ ] `geo.region` / `geo.placename` meta
 
-**DIFFERENTIATORS** — competitors absent/weak; this is where you win:
+**DIFFERENTIATORS**, competitors absent/weak; this is where you win:
 - [ ] **Pricing bands stated openly** (8/10 competitors hide price)
-- [ ] **Show the actual deliverable** — sample audit PDF / report / wireframe / sprint plan
+- [ ] **Show the actual deliverable**, sample audit PDF / report / wireframe / sprint plan
 - [ ] **Honest-expectations section** ("what SEO can and cannot do in 90 days")
-- [ ] **AEO/GEO section** on the SEO page (AI-search visibility — our existing edge)
+- [ ] **AEO/GEO section** on the SEO page (AI-search visibility, our existing edge)
 - [ ] **Ownership & handover block** on the web-dev page ("you own code, domain, hosting")
 - [ ] **Local search-behaviour insight** (Hindi vs English queries, neighbourhood intent)
 - [ ] **Service diagnostic** on the DM page (route the unsure buyer)
@@ -113,7 +113,7 @@ structured evidence (tables, metrics, case cards), not more prose.
 - [ ] Qualification section ("we're probably not a fit if…")
 - [ ] Third-party rating aggregation (Google + Clutch + GoodFirms in one strip)
 
-**AVOID** — common in this market and actively harmful:
+**AVOID**, common in this market and actively harmful:
 - [ ] ✗ Keyword marquees / scrolling keyword tickers (reads as stuffing)
 - [ ] ✗ "Best / Top / #1" with no evidence
 - [ ] ✗ City/tehsil names stuffed into the `<title>`
@@ -135,5 +135,5 @@ structured evidence (tables, metrics, case cards), not more prose.
 > Build one chassis; swap proof block, service breakdown, FAQ set, and CTA offer per
 > keyword. Price and the sample deliverable are the two slots almost nobody fills.
 
-*Source: `nagpur-landing-page-research.md` SERP teardown — TELZON (DM + SEO LPs), Advexity,
+*Source: `nagpur-landing-page-research.md` SERP teardown, TELZON (DM + SEO LPs), Advexity,
 VowelWeb read in full; ~20 more ranking pages at snippet level.*

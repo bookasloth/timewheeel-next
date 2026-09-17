@@ -39,7 +39,7 @@ function BasVisual() {
     <Frame url="bookasloth.com">
       <Image
         src="/products/bas-booking-16x9.png"
-        alt="Book A Sloth — a modern booking platform design shown in a browser"
+        alt="Book A Sloth, a modern booking platform design shown in a browser"
         width={1440}
         height={810}
         sizes="(max-width: 1024px) 100vw, 55vw"
@@ -134,7 +134,7 @@ function CoffeeVisual() {
 
         <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-white p-3">
           <div>
-            <span className="block text-[10px] font-black text-foreground">Buy a coffee — ₹99</span>
+            <span className="block text-[10px] font-black text-foreground">Buy a coffee, ₹99</span>
             <span className="mt-0.5 block text-[8px] font-medium text-muted-foreground">
               A tiny thank-you that funds the next video.
             </span>

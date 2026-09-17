@@ -34,7 +34,7 @@ function Poll({
         </button>
       ))}
       <p className="ct-poll-foot">
-        {picked !== null ? `${total} votes · tap another to change your mind next week` : "Your vote counts — pick one"}
+        {picked !== null ? `${total} votes · tap another to change your mind next week` : "Your vote counts, pick one"}
       </p>
     </div>
   );

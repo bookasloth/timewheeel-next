@@ -15,7 +15,7 @@ export function WdServices() {
           Websites and web apps for every stage
         </h2>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">
-          From a first business website to a custom platform — one team, one standard,
+          From a first business website to a custom platform, one team, one standard,
           one point of contact.
         </p>
       </Reveal>

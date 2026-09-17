@@ -158,7 +158,7 @@ function MiniProfile() {
         </button>
       </div>
       {!sent ? (
-        <p className="ct-demo-note">A live idea — checkout connects to Razorpay in the real product.</p>
+        <p className="ct-demo-note">A live idea, checkout connects to Razorpay in the real product.</p>
       ) : null}
     </div>
   );

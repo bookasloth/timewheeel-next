@@ -38,7 +38,7 @@ export function WdProcess() {
         <p className="mt-4 text-muted-foreground md:text-lg">{wd.process.body}</p>
       </Reveal>
 
-      {/* desktop — horizontal timeline */}
+      {/* desktop, horizontal timeline */}
       <div className="relative mt-16 hidden md:block">
         <div className="absolute inset-x-[8%] top-5 h-px bg-border" aria-hidden />
         <div
@@ -66,7 +66,7 @@ export function WdProcess() {
         </div>
       </div>
 
-      {/* mobile — vertical sequence */}
+      {/* mobile, vertical sequence */}
       <div className="mt-12 md:hidden">
         <div className="relative space-y-8 before:absolute before:bottom-2 before:left-5 before:top-2 before:w-px before:bg-border">
           {wd.process.steps.map((step, i) => (

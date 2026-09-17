@@ -44,12 +44,12 @@ export function WdDesignSystem() {
                 <div className="mt-6 space-y-4">
                   <div>
                     <p className="text-lg font-extrabold tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
-                      Plus Jakarta Sans — headings
+                      Plus Jakarta Sans, headings
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">Bold, confident, easy to scan.</p>
                   </div>
                   <div>
-                    <p className="text-base font-medium">Poppins — body text</p>
+                    <p className="text-base font-medium">Poppins, body text</p>
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                       Clean and readable across every device and length of copy.
                     </p>

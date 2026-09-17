@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/reveal";
 import { wa } from "@/lib/web-app-development";
 
-// Small bespoke UI illustrations for each "what we build" card — no stock media.
+// Small bespoke UI illustrations for each "what we build" card, no stock media.
 function ArtDashboard() {
   return (
     <div className="p-5">

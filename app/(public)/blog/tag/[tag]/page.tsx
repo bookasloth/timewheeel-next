@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ tag: stri
   const { tag } = await params;
   const label = getAllTags().find((t) => slugify(t) === tag) ?? tag;
   return {
-    title: `${label} — Blog`,
+    title: `${label}, Blog`,
     description: `Timewheel blog posts tagged ${label}.`,
   };
 }

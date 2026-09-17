@@ -11,7 +11,7 @@ export function WdTechStack() {
             What we build with, and why it matters
           </h2>
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">
-            Modern, well-supported tools — chosen for speed, security and the fact that any
+            Modern, well-supported tools, chosen for speed, security and the fact that any
             developer can pick them up after us. No obscure lock-in.
           </p>
         </Reveal>

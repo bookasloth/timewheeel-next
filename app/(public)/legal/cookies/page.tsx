@@ -99,7 +99,7 @@ export default function CookiesPage() {
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-3 pr-6 font-mono text-xs">_ga / _gid</td>
-                <td className="py-3 pr-6">Google Analytics — anonymous usage stats</td>
+                <td className="py-3 pr-6">Google Analytics, anonymous usage stats</td>
                 <td className="py-3 pr-6">2 years / 24 hours</td>
                 <td className="py-3">Analytics</td>
               </tr>

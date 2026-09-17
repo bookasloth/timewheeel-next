@@ -39,7 +39,7 @@ function ScoreRing({ score, label }: { score: number | null; label: string }) {
           />
         </svg>
         <span className="absolute inset-0 grid place-items-center text-sm font-extrabold" style={{ color }}>
-          {score ?? "—"}
+          {score ?? "–"}
         </span>
       </div>
       <span className="text-[11px] font-semibold text-muted-foreground">{label}</span>
@@ -76,7 +76,7 @@ export function SiteAudit() {
       setStatus("success");
     } catch {
       setStatus("error");
-      setError("Network error — please try again.");
+      setError("Network error, please try again.");
     }
   }
 
@@ -171,7 +171,7 @@ export function SiteAudit() {
               ].map((m) => (
                 <div key={m.k} className="rounded-lg border border-border bg-secondary/30 px-2 py-2">
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{m.k}</p>
-                  <p className="mt-0.5 text-sm font-bold text-foreground">{m.v ?? "—"}</p>
+                  <p className="mt-0.5 text-sm font-bold text-foreground">{m.v ?? "–"}</p>
                 </div>
               ))}
             </div>
@@ -186,7 +186,7 @@ export function SiteAudit() {
         ) : (
           <p className="mt-4 text-center text-[11px] text-muted-foreground">
             {status === "idle" || status === "error"
-              ? "Sample scores — run your own site to see where it stands."
+              ? "Sample scores, run your own site to see where it stands."
               : " "}
           </p>
         )}

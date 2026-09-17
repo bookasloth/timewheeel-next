@@ -13,7 +13,7 @@ export function SeoFaq() {
       <Reveal>
         <p className="text-center text-sm font-semibold uppercase tracking-wide text-brand">FAQ</p>
         <h2 className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
-          SEO in Nagpur — answered
+          SEO in Nagpur, answered
         </h2>
       </Reveal>
       <div className="mt-12 space-y-3">

@@ -7,7 +7,7 @@ export function SeoFinalCta() {
     <section className="mx-auto max-w-6xl px-6 py-16">
       <Reveal className="relative overflow-hidden rounded-3xl border border-border bg-navy px-8 py-16 text-center md:py-20">
         <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">
-          See exactly where your site stands — free
+          See exactly where your site stands, free
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-white/70 md:text-lg">
           Run the instant AI + SEO audit, then get a clear, honest plan to fix what&apos;s

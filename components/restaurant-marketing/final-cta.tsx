@@ -16,7 +16,7 @@ export function RmFinalCta() {
             maximize your brand&apos;s potential.
           </p>
           <p className="mx-auto mt-3 max-w-xl text-white/70">
-            Let&apos;s help you get the best results — reach out today!
+            Let&apos;s help you get the best results, reach out today!
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link

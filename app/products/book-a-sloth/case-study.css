@@ -1,5 +1,5 @@
 /* =========================================================
-   Book A Sloth — case study
+   Book A Sloth, case study
    Independent visual identity, scoped entirely under `.sx`.
    Reference: the Book A Sloth product (warm paper, saffron
    accent, editorial photography-free layouts).
@@ -1480,7 +1480,7 @@
     0 2px 8px rgba(23, 19, 14, 0.04);
 }
 
-/* Header row of tabs — table header, not floating pills */
+/* Header row of tabs, table header, not floating pills */
 
 .sx-feat-tabs {
   display: grid;

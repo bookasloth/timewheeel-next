@@ -2,7 +2,7 @@ import { Check, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
 
-// The differentiator section — AI-search visibility, tied to what the audit measures.
+// The differentiator section, AI-search visibility, tied to what the audit measures.
 export function SeoAeo() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">

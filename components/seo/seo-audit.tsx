@@ -34,7 +34,7 @@ function ScoreRing({ score, label, big }: { score: number | null; label: string;
           />
         </svg>
         <span className={`absolute inset-0 grid place-items-center font-extrabold ${big ? "text-xl" : "text-sm"}`} style={{ color }}>
-          {score ?? "—"}
+          {score ?? "–"}
         </span>
       </div>
       <span className="text-[11px] font-semibold text-muted-foreground">{label}</span>
@@ -77,7 +77,7 @@ export function SeoAudit() {
       setStatus("success");
     } catch {
       setStatus("error");
-      setError("Network error — please try again.");
+      setError("Network error, please try again.");
     }
   }
 
@@ -165,13 +165,13 @@ export function SeoAudit() {
               href="#contact"
               className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg btn btn-primary px-5 py-3 text-sm font-semibold text-brand-foreground"
             >
-              Fix these — get a plan
+              Fix these, get a plan
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </>
         ) : (
           <p className="mt-4 text-center text-[11px] text-muted-foreground">
-            {status === "loading" ? " " : "Sample scores — run your own site to see where it stands."}
+            {status === "loading" ? " " : "Sample scores, run your own site to see where it stands."}
           </p>
         )}
       </div>

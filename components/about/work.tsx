@@ -47,7 +47,7 @@ function BookASlothVisual() {
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary/40">
         <Image
           src="/products/bas-booking-16x9.png"
-          alt="Book A Sloth — a booking platform interface shown in a browser"
+          alt="Book A Sloth, a booking platform interface shown in a browser"
           width={720}
           height={405}
           className="absolute inset-0 h-full w-full object-cover object-top"
@@ -145,7 +145,7 @@ function CoffeeVisual() {
         </div>
         <div className="flex items-center justify-between rounded-lg border border-border bg-white p-2">
           <div>
-            <span className="block text-[8px] font-black">Buy a coffee — ₹99</span>
+            <span className="block text-[8px] font-black">Buy a coffee, ₹99</span>
             <span className="text-[7px] font-medium text-muted-foreground">
               Funds the next video.
             </span>

@@ -50,7 +50,7 @@ export function AboutCompany() {
             businesses across India and worldwide.
           </p>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            We also design, build and run our own software products — booking
+            We also design, build and run our own software products, booking
             platforms, community apps and creator tools. It means every client
             project is shaped by the same team that ships and runs live
             products every day.

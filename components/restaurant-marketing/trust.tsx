@@ -4,7 +4,7 @@ import { rmStats } from "@/lib/restaurant-marketing";
 
 const statColors = ["#fe5100", "#269cef", "#4ab765"];
 
-// Dark "in numbers" band — stroke counts with a subtle ring decoration.
+// Dark "in numbers" band, stroke counts with a subtle ring decoration.
 export function RmTrust() {
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-navy text-white">

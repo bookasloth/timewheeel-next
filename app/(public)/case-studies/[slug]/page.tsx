@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const cs = getCaseStudy(slug);
   if (!cs) return {};
-  const title = `${cs.name} — Case Study by Timewheel`;
+  const title = `${cs.name}, Case Study by Timewheel`;
   return {
     title: { absolute: title },
     description: cs.summary,
@@ -54,7 +54,7 @@ export default async function CaseStudyPage({
       organizationLd(),
       {
         "@type": "Article",
-        headline: `${cs.name} — Case Study`,
+        headline: `${cs.name}, Case Study`,
         description: cs.summary,
         articleSection: cs.category,
         keywords: cs.tags.join(", "),

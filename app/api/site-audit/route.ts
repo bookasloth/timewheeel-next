@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Live site audit — proxies Google PageSpeed Insights server-side so the API
+// Live site audit, proxies Google PageSpeed Insights server-side so the API
 // key stays hidden and there's no CORS. Returns the four Lighthouse category
 // scores + a couple of headline metrics for the given URL (mobile strategy).
 //
@@ -18,7 +18,7 @@ function normalizeUrl(raw: string): string | null {
   try {
     const u = new URL(withProto);
     if (u.protocol !== "http:" && u.protocol !== "https:") return null;
-    // Reject obvious non-public hosts — PSI can't reach them anyway, and a
+    // Reject obvious non-public hosts, PSI can't reach them anyway, and a
     // bare word ("test") with no dot isn't a real domain.
     const h = u.hostname.toLowerCase();
     if (h === "localhost" || h === "127.0.0.1" || h.endsWith(".local")) return null;
@@ -60,7 +60,7 @@ export async function GET(request: Request) {
       const status = res.status === 429 ? 429 : 502;
       const msg =
         res.status === 429
-          ? "We're running a lot of audits right now — try again in a minute."
+          ? "We're running a lot of audits right now, try again in a minute."
           : "We couldn't reach that site. Check the URL is public and try again.";
       return NextResponse.json({ error: msg }, { status });
     }
@@ -88,7 +88,7 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         error: aborted
-          ? "That site took too long to test. It may be slow — which is exactly what we fix."
+          ? "That site took too long to test. It may be slow, which is exactly what we fix."
           : "Something went wrong running the audit. Please try again.",
       },
       { status: aborted ? 504 : 500 },

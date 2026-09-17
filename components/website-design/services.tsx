@@ -51,7 +51,7 @@ export function WdServices() {
             </ul>
             <div className={cn("mt-auto border-t border-border/70 pt-5")}>
               <p className="text-[13px] leading-relaxed text-muted-foreground">
-                Tell us what your business needs — we&apos;ll scope the right add-ons, and only the ones worth paying for.
+                Tell us what your business needs, we&apos;ll scope the right add-ons, and only the ones worth paying for.
               </p>
             </div>
           </div>

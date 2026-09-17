@@ -30,7 +30,7 @@ const NODE_META: Record<string, { icon: LucideIcon; role: string; accent: string
 };
 
 // Channels placed around the TIMEWHEEL hub. The bottom-center spot is
-// reserved for Conversions — the single outcome of the system.
+// reserved for Conversions, the single outcome of the system.
 const ORBIT: Array<{ name: string; dx: number; dy: number }> = [
   { name: "Content", dx: -141.4, dy: -141.4 },
   { name: "SEO", dx: 0, dy: -200 },
@@ -109,7 +109,7 @@ export function DmEcosystem() {
           Every Channel, Working Toward One Goal
         </h2>
         <p className="mt-4 text-muted-foreground md:text-lg">
-          SEO, paid, content, social, email, and WhatsApp — connected into a
+          SEO, paid, content, social, email, and WhatsApp, connected into a
           single growth system around your brand.
         </p>
       </Reveal>

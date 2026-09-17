@@ -188,7 +188,7 @@ function ContentPanel({ accent }: { accent: string }) {
           </span>
         </div>
         <p className="mt-1.5 text-[10px] text-muted-foreground">
-          Showcasing craft, origin, and craving — content that builds trust.
+          Showcasing craft, origin, and craving, content that builds trust.
         </p>
       </div>
       <Meter

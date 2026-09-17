@@ -18,7 +18,7 @@ export function FinalCta() {
         </h2>
         <p className="relative mx-auto mt-4 max-w-xl text-muted-foreground">
           Replace fragmented subscriptions with focused systems for bookings,
-          payments, events, communities, and customer workflows — all working
+          payments, events, communities, and customer workflows, all working
           together so your business runs with more control, clarity, and
           ownership.
         </p>

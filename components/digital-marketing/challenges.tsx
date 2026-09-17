@@ -55,7 +55,7 @@ export function DmChallenges() {
                   {c.answer}
                 </p>
                 <span className="mt-6 text-xs font-bold uppercase tracking-widest text-muted-foreground/60 transition-colors duration-300 group-hover:text-brand">
-                  Solved — {String(i + 1).padStart(2, "0")}
+                  Solved, {String(i + 1).padStart(2, "0")}
                 </span>
               </article>
             );

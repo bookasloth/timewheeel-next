@@ -61,13 +61,13 @@ export type CaseStudy = {
   content: CaseStudyContent;
 };
 
-// Real, documented client builds — deliberately separate from the product
+// Real, documented client builds, deliberately separate from the product
 // ecosystem (lib/products.ts). To add a case study, drop a new entry in here
 // with `content` and it appears on the index plus its own
 // /case-studies/[slug] detail page driven by the generic template.
 //
 // NOTE: the entries below are placeholder case studies added to demonstrate
-// the structure — swap them out for real client builds as they're documented.
+// the structure, swap them out for real client builds as they're documented.
 export const caseStudies: CaseStudy[] = [
   {
     slug: "occasion-cakes",
@@ -118,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Challenge",
           title: "Invisible in local search.",
-          body: "Occasion Cakes baked beautifully but was invisible in local search. Orders came from walk-ins and aggregators that ate the margin — search for 'birthday cake near me' surfaced everyone but them.",
+          body: "Occasion Cakes baked beautifully but was invisible in local search. Orders came from walk-ins and aggregators that ate the margin, search for 'birthday cake near me' surfaced everyone but them.",
           bullets: [
             "A crowded, fast-moving Dubai market",
             "A bilingual audience (English + Arabic) to serve",
@@ -128,7 +128,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Strategy",
           title: "Own local intent end to end.",
-          body: "Treat Google Business Profile as the storefront, build occasion-and-location landing pages, and engineer review velocity — instead of chasing one generic 'cake shop Dubai' term.",
+          body: "Treat Google Business Profile as the storefront, build occasion-and-location landing pages, and engineer review velocity, instead of chasing one generic 'cake shop Dubai' term.",
           bullets: [
             "Rebuilt and optimised the Google Business Profile with categories, photos, and posts",
             "Shipped 30 occasion + location landing pages (birthdays, weddings, corporate)",
@@ -139,7 +139,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Results",
           title: "From invisible to first result.",
-          body: "Figures come from the client's own analytics — Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards — tracked over 5 months. Before and after windows are like-for-like.",
+          body: "Figures come from the client's own analytics, Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards, tracked over 5 months. Before and after windows are like-for-like.",
           table: {
             heading: "How the numbers moved",
             rows: [
@@ -174,7 +174,7 @@ export const caseStudies: CaseStudy[] = [
       ],
       closing: {
         title: "Want results like this?",
-        body: "Whether it's organic growth, performance, AI workflows, or a product you need built — start with a conversation.",
+        body: "Whether it's organic growth, performance, AI workflows, or a product you need built, start with a conversation.",
         ctaLabel: "Book a call",
         ctaHref: "https://bookasloth.com/sndatarkar",
       },
@@ -250,7 +250,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Results",
           title: "Fatigue beaten, installs up.",
-          body: "Figures come from the client's own analytics — Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards — tracked over 6 months. Before and after windows are like-for-like.",
+          body: "Figures come from the client's own analytics, Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards, tracked over 6 months. Before and after windows are like-for-like.",
           table: {
             heading: "How the numbers moved",
             rows: [
@@ -285,7 +285,7 @@ export const caseStudies: CaseStudy[] = [
       ],
       closing: {
         title: "Want results like this?",
-        body: "Whether it's growing installs, cutting CAC, or a product you need built — start with a conversation.",
+        body: "Whether it's growing installs, cutting CAC, or a product you need built, start with a conversation.",
         ctaLabel: "Book a call",
         ctaHref: "https://bookasloth.com/sndatarkar",
       },
@@ -297,7 +297,7 @@ export const caseStudies: CaseStudy[] = [
     tagline: "Selling land by turning plots into life stories",
     category: "Real Estate · Plotted Land",
     summary:
-      "Plotted land is a commodity, so every competitor sold on price and drowned in low-quality leads. We sold the life the land makes possible — and tripled qualified site visits.",
+      "Plotted land is a commodity, so every competitor sold on price and drowned in low-quality leads. We sold the life the land makes possible, and tripled qualified site visits.",
     accent: "#16A34A",
     image: null,
     tags: ["Campaign", "Copywriting", "Performance"],
@@ -361,7 +361,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Results",
           title: "Story that qualifies, spend that converts.",
-          body: "Figures come from the client's own analytics — Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards — tracked over 4 months. Before and after windows are like-for-like.",
+          body: "Figures come from the client's own analytics, Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards, tracked over 4 months. Before and after windows are like-for-like.",
           table: {
             heading: "How the numbers moved",
             rows: [
@@ -391,12 +391,12 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "Key Learnings",
           title: "Story does the qualifying.",
-          body: "Story did the qualifying that discounts never could — it attracted buyers who could already picture themselves there.",
+          body: "Story did the qualifying that discounts never could, it attracted buyers who could already picture themselves there.",
         },
       ],
       closing: {
         title: "Want results like this?",
-        body: "Whether it's growing leads, cutting CAC, or a product you need built — start with a conversation.",
+        body: "Whether it's growing leads, cutting CAC, or a product you need built, start with a conversation.",
         ctaLabel: "Book a call",
         ctaHref: "https://bookasloth.com/sndatarkar",
       },
@@ -408,7 +408,7 @@ export const caseStudies: CaseStudy[] = [
     tagline: "Meta lead-gen that turned clicks into customers",
     category: "D2C · Custom Art",
     summary:
-      "Corart got clicks but not customers. A high-consideration custom product leaked at every post-click step — so we fixed the funnel and qualified intent before letting spend scale.",
+      "Corart got clicks but not customers. A high-consideration custom product leaked at every post-click step, so we fixed the funnel and qualified intent before letting spend scale.",
     accent: "#EC4899",
     image: null,
     tags: ["Performance", "Landing Pages", "Creative"],
@@ -472,7 +472,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Results",
           title: "Same budget, different business.",
-          body: "Figures come from the client's own analytics — Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards — tracked over 4 months. Before and after windows are like-for-like.",
+          body: "Figures come from the client's own analytics, Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards, tracked over 4 months. Before and after windows are like-for-like.",
           table: {
             heading: "How the numbers moved",
             rows: [
@@ -507,7 +507,7 @@ export const caseStudies: CaseStudy[] = [
       ],
       closing: {
         title: "Want results like this?",
-        body: "Whether it's growing leads, cutting CAC, or a product you need built — start with a conversation.",
+        body: "Whether it's growing leads, cutting CAC, or a product you need built, start with a conversation.",
         ctaLabel: "Book a call",
         ctaHref: "https://bookasloth.com/sndatarkar",
       },
@@ -519,7 +519,7 @@ export const caseStudies: CaseStudy[] = [
     tagline: "Tripling organic traffic for a powerlifting-gear brand",
     category: "D2C · Strength Gear",
     summary:
-      "Everything Powerlifting made gear serious lifters wanted — but organic search barely knew it existed. ~290 visits a month, ~100 ranking keywords, and zero paid traffic meant growth depended entirely on organic they weren't capturing. The questions their athletes Googled mid-workout went to everyone else.",
+      "Everything Powerlifting made gear serious lifters wanted, but organic search barely knew it existed. ~290 visits a month, ~100 ranking keywords, and zero paid traffic meant growth depended entirely on organic they weren't capturing. The questions their athletes Googled mid-workout went to everyone else.",
     accent: "#DC2626",
     image: null,
     tags: ["SEO", "Content", "Funnel"],
@@ -535,31 +535,31 @@ export const caseStudies: CaseStudy[] = [
         title: "Tripling organic traffic",
         titleAccent: "for a powerlifting brand.",
         summary:
-          "Everything Powerlifting made gear serious lifters wanted — but organic search barely knew it existed. ~290 visits a month, ~100 ranking keywords, and zero paid traffic meant growth depended entirely on organic they weren't capturing. The questions their athletes Googled mid-workout went to everyone else.",
+          "Everything Powerlifting made gear serious lifters wanted, but organic search barely knew it existed. ~290 visits a month, ~100 ranking keywords, and zero paid traffic meant growth depended entirely on organic they weren't capturing. The questions their athletes Googled mid-workout went to everyone else.",
       },
       sections: [
         {
           eyebrow: "The Challenge",
           title: "Organic growth with no paid backstop.",
-          body: "Growth depended on organic search the brand wasn't capturing — and the niche was crowded.",
+          body: "Growth depended on organic search the brand wasn't capturing, and the niche was crowded.",
           bullets: [
             "Low-authority domain (Authority Score 9) in a competitive gear niche",
-            "No paid traffic — organic had to carry growth alone",
+            "No paid traffic, organic had to carry growth alone",
             "Commercial product terms crowded by established retailers",
           ],
         },
         {
           eyebrow: "The Strategy",
           title: "Win the questions before the purchase.",
-          body: "Build a content engine around what lifters actually search — squat pain, deadlift variations, workout math — then rank product pages for high-intent commercial terms and interlink readers into the shop.",
+          body: "Build a content engine around what lifters actually search, squat pain, deadlift variations, workout math, then rank product pages for high-intent commercial terms and interlink readers into the shop.",
         },
         {
           eyebrow: "The Execution",
           title: "Content first, then product-page SEO.",
           body: "Four moves, in sequence.",
           bullets: [
-            "Built a blog/news engine targeting lifter informational intent — squat pain, deadlift types, calories burned",
-            "Optimised product pages for commercial head terms — 'deadlift shoes', 'squat shoes'",
+            "Built a blog/news engine targeting lifter informational intent, squat pain, deadlift types, calories burned",
+            "Optimised product pages for commercial head terms, 'deadlift shoes', 'squat shoes'",
             "Interlinked informational articles into matching product pages to convert readers",
             "Added schema and technical fixes to win image and rich-result SERP features",
           ],
@@ -567,11 +567,11 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "The Results",
           title: "From less than 300 visits to a top-2 head term.",
-          body: "Nine months of compounding organic — measured on the client's own analytics.",
+          body: "Nine months of compounding organic, measured on the client's own analytics.",
           table: {
             heading: "The numbers over 9 months",
             labels: { key: "KPI", value: "Before → After", why: "Change" },
-            note: "How this was measured: figures come from the client's own analytics — Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards — tracked over 9 months. Before/after windows are like-for-like.",
+            note: "How this was measured: figures come from the client's own analytics, Google Analytics 4, Google Search Console, and the relevant ad-platform dashboards, tracked over 9 months. Before/after windows are like-for-like.",
             rows: [
               { key: "Organic traffic / mo", value: "292 → 889", why: "+205%" },
               { key: "Organic keywords", value: "100 → 887", why: "9x" },
@@ -583,7 +583,7 @@ export const caseStudies: CaseStudy[] = [
         {
           eyebrow: "Key Learnings",
           title: "Content built the funnel; interlinking closed it.",
-          body: "Informational content — the questions lifters ask mid-set — built the top-of-funnel that product-page SEO alone never could. Interlinking turned those readers into shoppers. AI engines followed too: cited pages nearly tripled (42 → 123) as the library grew.",
+          body: "Informational content, the questions lifters ask mid-set, built the top-of-funnel that product-page SEO alone never could. Interlinking turned those readers into shoppers. AI engines followed too: cited pages nearly tripled (42 → 123) as the library grew.",
         },
       ],
       closing: {

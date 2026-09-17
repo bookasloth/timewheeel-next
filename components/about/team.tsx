@@ -40,7 +40,7 @@ export function AboutTeam() {
           <br className="hidden sm:block" /> deeply invested in your work.
         </h2>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          We&apos;re a compact team of designers, engineers and strategists —
+          We&apos;re a compact team of designers, engineers and strategists,
           based in Nagpur, working remote-first with clients across India and
           worldwide.
         </p>

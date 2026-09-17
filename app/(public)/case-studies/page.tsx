@@ -10,7 +10,7 @@ import { Reveal } from "@/components/reveal";
 const baseMetadata: Metadata = {
   title: "Case Studies",
   description:
-    "How Timewheel designs, builds and ships digital products — booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
+    "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
 };
 
 const PER_PAGE = 6;

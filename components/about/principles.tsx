@@ -49,7 +49,7 @@ const pillars: Pillar[] = [
     n: "03",
     icon: TrendingUp,
     title: "Business Focused",
-    body: "We design with real business goals in mind — from stronger positioning to better engagement and conversion.",
+    body: "We design with real business goals in mind, from stronger positioning to better engagement and conversion.",
     accent: "wgreen",
     growth: [0.6, 0.85, 1, 0.7],
   },

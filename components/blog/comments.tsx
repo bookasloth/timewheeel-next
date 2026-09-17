@@ -53,7 +53,7 @@ export function Comments({
       setStatus("success");
     } catch {
       setStatus("error");
-      setError("Network error — please try again.");
+      setError("Network error, please try again.");
     }
   }
 
@@ -96,7 +96,7 @@ export function Comments({
         <div className="mt-5 flex items-center gap-3 rounded-2xl border border-border bg-secondary/40 p-6">
           <CheckCircle2 className="size-6 shrink-0 text-rating" />
           <p className="text-sm text-muted-foreground">
-            Thanks — your comment was submitted and will appear after moderation.
+            Thanks, your comment was submitted and will appear after moderation.
           </p>
         </div>
       ) : (

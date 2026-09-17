@@ -16,7 +16,7 @@ export function ContactHero() {
 
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             A product idea, a project brief, or just a question about how we
-            work — tell us what you&apos;re building and we&apos;ll get back to
+            work, tell us what you&apos;re building and we&apos;ll get back to
             you within one business day.
           </p>
 

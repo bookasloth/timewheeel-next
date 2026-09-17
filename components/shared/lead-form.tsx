@@ -85,7 +85,7 @@ export function LeadForm(p: Props) {
       setStatus("success");
     } catch {
       setStatus("error");
-      setErrorMsg("Network error — please try again.");
+      setErrorMsg("Network error, please try again.");
     }
   }
 

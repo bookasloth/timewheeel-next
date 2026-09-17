@@ -22,9 +22,9 @@ const hand = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Coffee & Toffee — Support",
+  title: "Coffee & Toffee, Support",
   description:
-    "Friendly help for Coffee & Toffee. Search articles, email us, or chat — real support for creators and supporters.",
+    "Friendly help for Coffee & Toffee. Search articles, email us, or chat, real support for creators and supporters.",
 };
 
 export default function CoffeeToffeeLayout({
