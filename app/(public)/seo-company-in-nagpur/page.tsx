@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { seo } from "@/lib/seo";
-import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
+import { organizationLd, breadcrumbLd, localBusinessLd } from "@/lib/jsonld";
 import { LeadForm } from "@/components/shared/lead-form";
 import { SeoHero } from "@/components/seo/hero";
 import { SeoStats } from "@/components/seo/stats";
@@ -45,6 +45,7 @@ const serviceLd = {
   "@context": "https://schema.org",
   "@graph": [
     organizationLd(),
+    localBusinessLd(),
     {
       "@type": "Service",
       name: "SEO Services in Nagpur",

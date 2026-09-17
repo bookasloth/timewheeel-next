@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { wd } from "@/lib/web-development";
-import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
+import { organizationLd, breadcrumbLd, localBusinessLd } from "@/lib/jsonld";
 import { WdHero } from "@/components/web-development/hero";
 import { WdStats } from "@/components/web-development/stats";
 import { WdPortfolio } from "@/components/web-development/portfolio";
@@ -46,6 +46,7 @@ const serviceLd = {
   "@context": "https://schema.org",
   "@graph": [
     organizationLd(),
+    localBusinessLd(),
     {
       "@type": "Service",
       name: "Web Development",
