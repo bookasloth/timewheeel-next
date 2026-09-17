@@ -8,6 +8,7 @@ import { AzFeatures } from "@/components/alluminaty/features";
 import { AzProcess } from "@/components/alluminaty/process";
 import { AzCapabilities } from "@/components/alluminaty/capabilities";
 import { AzTestimonials } from "@/components/alluminaty/testimonials";
+import { AzCommunity } from "@/components/alluminaty/community";
 import { AzFaq } from "@/components/alluminaty/faq";
 import { AzFinalCta } from "@/components/alluminaty/final-cta";
 
@@ -54,6 +55,7 @@ export default function AlluminatyPage() {
       <AzProcess />
       <AzCapabilities />
       <AzTestimonials />
+      <AzCommunity />
       <AzFaq />
       <AzFinalCta />
     </>
