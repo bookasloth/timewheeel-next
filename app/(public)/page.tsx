@@ -1,6 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { ValueProps } from "@/components/home/value-props";
-import { FeaturedProducts } from "@/components/home/featured-products";
+import { EcosystemBento } from "@/components/home/ecosystem-bento";
 import { PoweredBy } from "@/components/home/powered-by";
 import { SocialProof } from "@/components/home/social-proof";
 import { Testimonials } from "@/components/home/testimonials";
@@ -14,7 +14,7 @@ export default function Home() {
       <JsonLd data={homeLd()} />
       <Hero />
       <ValueProps />
-      <FeaturedProducts />
+      <EcosystemBento />
       <PoweredBy />
       <SocialProof />
       <Testimonials />
