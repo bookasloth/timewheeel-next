@@ -5,32 +5,12 @@ import Link from "next/link";
 import { ArrowRight, Database, BadgePercent, LayoutDashboard, TrendingUp } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
-import { products } from "@/lib/products";
+import { BlackHoleHeroSection } from "@/components/ui/blackhole-hero-section";
 
-// Dark, centered hero (Lexend-style): pill badge, headline with a typewriter
-// word, big pill CTA, honest trust line, orbital product icons on dashed rings,
-// and a 4-card feature row. Orbit uses our REAL products; no fake reviews/logos.
+// Dark, centered hero (Lexend-style): headline with a typewriter word, big CTA,
+// and a 4-card feature row.
 
 const TYPED = ["website.", "web app.", "online store.", "brand.", "traffic.", "revenue.", "audience.", "community.", "leads."];
-
-// Real product icons placed on two concentric rings (angle in deg, radius in px).
-// Angles kept on the left (120–240) and right (300–60) arcs only, nothing near
-// the vertical centre (top ~270 / bottom ~90), so no icon sits between the
-// headline and the button.
-const orbit = [
-  { slug: "book-a-sloth", ring: 0, angle: 205 },
-  { slug: "alluminaty", ring: 0, angle: 335 },
-  { slug: "ticket-dino", ring: 0, angle: 160 },
-  { slug: "coffee-for-me", ring: 0, angle: 25 },
-  { slug: "the-parliament", ring: 1, angle: 200 },
-  { slug: "link-lantern", ring: 1, angle: 350 },
-  { slug: "whatsloom", ring: 1, angle: 150 },
-  { slug: "serp-sutra", ring: 1, angle: 20 },
-  { slug: "2b-navodian", ring: 1, angle: 215 },
-].map((o) => ({ ...o, product: products.find((p) => p.slug === o.slug)! }))
-  .filter((o) => o.product);
-
-const RINGS = [460, 620]; // radii — two outer rings only
 
 const features = [
   { icon: Database, label: "Own your code & data" },
@@ -73,6 +53,52 @@ function Typewriter() {
   );
 }
 
+// Flies the hole in from off-screen and sets it down in the middle, then holds.
+// The entry comes from one of 16 directions — the 4 sides, the 4 corners, and
+// the halves between, each way. The start point sits off-screen, so resetting
+// to the next direction is invisible; the eased-out glide is all you see. Its
+// own component so only the canvas re-renders each frame, not the copy.
+function DriftingBlackHole() {
+  const [focus, setFocus] = useState<[number, number]>([0.5, 0.55]);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setFocus([0.5, 0.55]);
+      return;
+    }
+    const DIRS = 16;
+    const CX = 0.5, CY = 0.55, D = 1.2; // rest point, and how far off-screen the entry starts
+    const TRAVEL = 6000, PAUSE = 2600;
+    let i = Math.floor(Math.random() * DIRS);
+    let t0 = performance.now();
+    let raf = 0;
+    const start = (idx: number): [number, number] => {
+      const a = (idx * 2 * Math.PI) / DIRS;
+      return [CX + Math.cos(a) * D, CY + Math.sin(a) * D];
+    };
+    const loop = (now: number) => {
+      const t = now - t0;
+      if (t < TRAVEL) {
+        const k = t / TRAVEL;
+        const e = 1 - Math.pow(1 - k, 3); // easeOutCubic — glides in and settles
+        const [sx, sy] = start(i);
+        setFocus([sx + (CX - sx) * e, sy + (CY - sy) * e]);
+      } else if (t < TRAVEL + PAUSE) {
+        setFocus([CX, CY]);
+      } else {
+        let j = Math.floor(Math.random() * DIRS);
+        if (j === i) j = (j + 1) % DIRS;
+        i = j;
+        t0 = now;
+        setFocus(start(i)); // off-screen, so the jump is unseen
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  return <BlackHoleHeroSection focus={focus} distance={29} roll={0} elevation={-5.5} vignette={0.4} />;
+}
+
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
 
@@ -81,8 +107,7 @@ export function Hero() {
       const q = gsap.utils.selector(ref);
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       gsap.timeline()
-        .from(q(".hero-up"), { opacity: 0, y: 22, duration: 0.7, ease: "power3.out", stagger: 0.1 })
-        .from(q(".hero-orbit-icon"), { opacity: 0, scale: 0.4, duration: 0.7, ease: "back.out(1.7)", stagger: 0.08 }, "-=0.5");
+        .from(q(".hero-up"), { opacity: 0, y: 22, duration: 0.7, ease: "power3.out", stagger: 0.1 });
     },
     { scope: ref },
   );
@@ -90,41 +115,17 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative -mt-16 overflow-hidden bg-[#100702] text-white"
-      style={{ backgroundImage: "radial-gradient(120% 90% at 50% 0%, #3a1707 0%, #1c0d05 55%, #100702 100%)" }}
+      className="relative -mt-16 flex min-h-[calc(100svh+4rem)] items-center overflow-hidden bg-black text-white"
     >
-      {/* dashed orbit rings + product icons */}
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[46%] -z-0 -translate-x-1/2 -translate-y-1/2">
-        {RINGS.map((r) => (
-          <div
-            key={r}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-white/10"
-            style={{ width: r * 2, height: r * 2 }}
-          />
-        ))}
-        {orbit.map(({ product, ring, angle }) => {
-          const rad = (angle * Math.PI) / 180;
-          const R = RINGS[ring];
-          const x = Math.cos(rad) * R;
-          const y = Math.sin(rad) * R;
-          const Icon = product.icon;
-          return (
-            <div
-              key={product.slug}
-              className="hero-orbit-icon absolute left-1/2 top-1/2 hidden md:grid size-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm"
-              style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`, color: product.accent }}
-            >
-              <Icon size={24} weight="duotone" />
-            </div>
-          );
-        })}
+      {/* WebGL ray-traced black hole, horizontal disc, centered behind copy */}
+      <div aria-hidden className="absolute inset-0">
+        <DriftingBlackHole />
       </div>
-
-      <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24 text-center md:pt-28">
-        <h1 className="hero-up text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
-          We build and grow your
-          <br />
-          <Typewriter />
+      {/* legibility vignette over the disc, under the content */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_55%_at_50%_50%,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.32)_45%,transparent_78%)]" />
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pb-16 pt-24 text-center md:pt-28">
+        <h1 className="hero-up text-[2.07rem] font-black leading-[1.08] tracking-tight md:text-[3.37rem]">
+          We turn ambitious ideas into things that grow your <Typewriter />
         </h1>
         <p className="hero-up mt-5 max-w-3xl text-base text-white/60 md:text-lg">
           One team to design, build and grow your business online — websites and apps,
@@ -139,7 +140,7 @@ export function Hero() {
         </Link>
 
         {/* feature cards */}
-        <div className="hero-up mt-16 grid w-full grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="hero-up mt-16 grid w-full grid-cols-2 gap-[21px] lg:grid-cols-4">
           {features.map(({ icon: Icon, label }) => (
             <div key={label} className="flex flex-col gap-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-left">
               <span className="grid size-11 place-items-center rounded-xl bg-brand/15 text-brand">
