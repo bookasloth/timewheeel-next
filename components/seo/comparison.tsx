@@ -7,7 +7,7 @@ export function SeoComparison() {
     <section className="border-t border-border/60 bg-secondary/40">
       <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">Why us</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Why us</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.comparison.title}</h2>
         </Reveal>
         <Reveal className="mt-10 overflow-hidden rounded-2xl border border-border">

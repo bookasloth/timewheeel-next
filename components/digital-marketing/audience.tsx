@@ -7,7 +7,7 @@ export function DmAudience() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Who it&apos;s for
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">

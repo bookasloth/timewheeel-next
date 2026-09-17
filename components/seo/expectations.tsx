@@ -8,7 +8,7 @@ export function SeoExpectations() {
     <section className="border-t border-border/60 bg-secondary/40">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">Straight talk</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Straight talk</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.expectations.title}</h2>
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2">

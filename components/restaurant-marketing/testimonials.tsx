@@ -49,7 +49,7 @@ export function RmTestimonials() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Testimonials
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">

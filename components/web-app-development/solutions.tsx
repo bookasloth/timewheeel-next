@@ -122,7 +122,7 @@ export function WaSolutions() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">{wa.solutions.label}</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">{wa.solutions.label}</p>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
           <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
             {wa.solutions.heading} <span className="text-brand">{wa.solutions.headingAccent}</span>

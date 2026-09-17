@@ -11,6 +11,7 @@
   --font-heading: var(--font-heading);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-text: var(--brand-text);
   --color-rating: var(--rating);
   --color-navy: var(--navy);
   --color-accent-pink: var(--accent-pink);
@@ -63,8 +64,9 @@
 
   --primary: #f45b0a;
   --primary-foreground: #fffdf7;
-  --brand: #f45b0a;
+  --brand: #f45b0a; /* bright orange — fills, large text, icons */
   --brand-foreground: #fffdf7;
+  --brand-text: #b83f00; /* darker orange for small text on light — AA (4.9:1 on cream) */
   --rating: #29a66f; /* green */
   --accent-pink: #ff4d93;
   --accent-yellow: #ffcc1c;
@@ -73,7 +75,7 @@
   --secondary: #ebe4d8; /* muted cream surface */
   --secondary-foreground: #171717;
   --muted: #ebe4d8;
-  --muted-foreground: #77736c; /* warm grey secondary text */
+  --muted-foreground: #6c685f; /* warm grey secondary text — AA (4.9:1 on cream) */
   --accent: #ebe4d8;
   --accent-foreground: #171717;
   --destructive: #e5484d;

@@ -11,7 +11,7 @@ export function SeoFaq() {
   return (
     <section className="mx-auto max-w-3xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-center text-sm font-semibold uppercase tracking-wide text-brand">FAQ</p>
+        <p className="text-center text-sm font-semibold uppercase tracking-wide text-brand-text">FAQ</p>
         <h2 className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
           SEO in Nagpur, answered
         </h2>

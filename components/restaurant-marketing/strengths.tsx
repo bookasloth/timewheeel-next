@@ -9,7 +9,7 @@ export function RmStrengths() {
     <section className="border-y border-border/60 bg-secondary/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             We do restaurant marketing
           </p>
           <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">

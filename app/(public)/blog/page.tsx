@@ -23,7 +23,7 @@ export default function BlogPage() {
         ])}
       />
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Resources</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Resources</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">The Timewheel blog</h1>
         <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
           Guides on digital marketing, SEO, AI search and building on systems you own.
@@ -39,7 +39,7 @@ export default function BlogPage() {
                 href={`/blog/${p.slug}`}
                 className="group flex flex-col rounded-2xl border border-border bg-card p-7 transition-colors hover:border-brand/50"
               >
-                <span className="inline-flex w-fit items-center rounded-full bg-brand/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand">
+                <span className="inline-flex w-fit items-center rounded-full bg-brand/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-text">
                   {p.category}
                 </span>
                 <h2 className="mt-4 text-xl font-bold leading-snug text-foreground">{p.title}</h2>

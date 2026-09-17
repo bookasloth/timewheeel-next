@@ -14,7 +14,7 @@ export function PageShell({
   return (
     <div className="mx-auto max-w-3xl px-6 py-24 md:py-32">
       {eyebrow && (
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
           {eyebrow}
         </p>
       )}

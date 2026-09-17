@@ -16,7 +16,7 @@ export function WaTechStack() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">{wa.tech.label}</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">{wa.tech.label}</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           {wa.tech.heading} <span className="text-brand">{wa.tech.headingAccent}</span>
         </h2>

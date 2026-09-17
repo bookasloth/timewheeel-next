@@ -9,7 +9,7 @@ export function DmChallenges() {
     <section className="border-y border-border/60 bg-secondary/40">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Challenges
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">

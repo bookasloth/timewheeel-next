@@ -42,7 +42,7 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
             <li><Link href="/blog" className="hover:text-foreground">Blog</Link></li>
           </ol>
         </nav>
-        <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-brand">Tag</p>
+        <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-brand-text">Tag</p>
         <h1 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">{label}</h1>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -52,7 +52,7 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
               href={`/blog/${p.slug}`}
               className="group flex flex-col rounded-2xl border border-border bg-card p-7 transition-colors hover:border-brand/50"
             >
-              <span className="inline-flex w-fit items-center rounded-full bg-brand/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand">
+              <span className="inline-flex w-fit items-center rounded-full bg-brand/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-text">
                 {p.category}
               </span>
               <h2 className="mt-4 text-xl font-bold leading-snug text-foreground">{p.title}</h2>

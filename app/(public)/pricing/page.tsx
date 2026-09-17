@@ -27,7 +27,7 @@ export default function PricingPage() {
       />
       {/* hero */}
       <Reveal className="text-center">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
           Pricing
         </p>
         <h1 className="mx-auto mt-3 max-w-3xl text-4xl font-extrabold md:text-6xl">

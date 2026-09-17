@@ -10,7 +10,7 @@ export function WdServices() {
   return (
     <section id="services" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">What we build</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">What we build</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           Websites and web apps for every stage
         </h2>

@@ -14,7 +14,7 @@ export function RelatedPosts({ posts }: { posts: PostMeta[] }) {
             href={`/blog/${p.slug}`}
             className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand/50"
           >
-            <span className="inline-flex w-fit items-center rounded-full bg-brand/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand">
+            <span className="inline-flex w-fit items-center rounded-full bg-brand/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-text">
               {p.category}
             </span>
             <h3 className="mt-3 font-bold leading-snug text-foreground group-hover:text-brand">{p.title}</h3>

@@ -8,7 +8,7 @@ export function WdOwnership() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             No lock-in
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">

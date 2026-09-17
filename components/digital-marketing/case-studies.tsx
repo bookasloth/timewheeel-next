@@ -46,7 +46,7 @@ export function DmCaseStudies() {
     <section id="case-studies" className="mx-auto max-w-6xl px-6 pb-20 pt-6 md:pb-28 md:pt-8">
       <Reveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Proof
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -109,7 +109,7 @@ export function DmCaseStudies() {
             </div>
 
             <div className="flex flex-1 flex-col p-7 pt-5">
-              <span className="text-xs font-bold uppercase tracking-wide text-brand">
+              <span className="text-xs font-bold uppercase tracking-wide text-brand-text">
                 {cs.industry}
               </span>
               <h3 className="mt-1.5 text-lg font-bold">{cs.brand}</h3>

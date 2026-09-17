@@ -11,7 +11,7 @@ export default function TermsPage() {
 
   return (
     <div>
-      <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-brand">
+      <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-brand-text">
         Legal
       </p>
       <h1 className="mb-2 text-4xl font-black tracking-tight md:text-5xl">

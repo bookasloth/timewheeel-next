@@ -287,7 +287,7 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
           <div className="mx-auto max-w-6xl px-6 py-16">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+                <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
                   More case studies
                 </p>
                 <h2 className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">

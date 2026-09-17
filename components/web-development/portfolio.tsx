@@ -11,7 +11,7 @@ export function WdPortfolio() {
   return (
     <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Proof</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Proof</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           {wd.portfolio.title}
         </h2>

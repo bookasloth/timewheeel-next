@@ -8,7 +8,7 @@ export function SeoPricing() {
   return (
     <section id="pricing" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">Pricing</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Pricing</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.pricing.title}</h2>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{seo.pricing.body}</p>
       </Reveal>

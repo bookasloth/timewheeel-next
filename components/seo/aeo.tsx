@@ -8,7 +8,7 @@ export function SeoAeo() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <Reveal>
-          <p className="inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-brand-text">
             <Sparkles className="size-4" /> AEO · AI search
           </p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.aeo.title}</h2>

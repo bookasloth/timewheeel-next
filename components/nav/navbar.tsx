@@ -106,7 +106,7 @@ export function Navbar() {
         "sticky top-0 z-50 transition-colors duration-300",
         light
           ? "bg-transparent"
-          : "border-b border-border/60 bg-background/80 backdrop-blur-xl",
+          : "border-b border-border/60 bg-background",
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -136,7 +136,7 @@ export function Navbar() {
             </button>
             {openMenu === "products" && (
               <div className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-3">
-                <div className="rounded-2xl border border-border bg-popover p-3">
+                <div className="rounded-2xl border border-border bg-background p-3">
                   <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     Products
                   </p>
@@ -183,7 +183,7 @@ export function Navbar() {
             </button>
             {openMenu === "services" && (
               <div className="absolute left-1/2 top-full w-[600px] -translate-x-1/2 pt-3">
-                <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-popover p-3">
+                <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-background p-3">
                   {serviceGroups.map((g) => (
                     <div key={g.title}>
                       <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -234,7 +234,7 @@ export function Navbar() {
             </button>
             {openMenu === "resources" && (
               <div className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-3">
-                <div className="rounded-2xl border border-border bg-popover p-3">
+                <div className="rounded-2xl border border-border bg-background p-3">
                   <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     Resources
                   </p>

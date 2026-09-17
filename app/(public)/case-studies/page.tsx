@@ -53,7 +53,7 @@ export default async function CaseStudiesPage({ searchParams }: Props) {
       />
       <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Case Studies
           </p>
           <h1 className="mt-3 max-w-2xl text-4xl font-black tracking-tight md:text-5xl">

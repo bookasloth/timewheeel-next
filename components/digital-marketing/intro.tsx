@@ -76,7 +76,7 @@ export function DmIntro() {
       <div className="grid items-center gap-12 md:grid-cols-2">
         <div>
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand">
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
               Why digital marketing with us
             </p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">

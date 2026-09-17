@@ -44,7 +44,7 @@ export function EcosystemBento() {
   return (
     <section id="ecosystem" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">The ecosystem</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">The ecosystem</p>
         <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
           One connected system. Products you actually own.
         </h2>
@@ -109,7 +109,7 @@ export function EcosystemBento() {
           href="/case-studies"
           className="group col-span-2 flex flex-col justify-between rounded-2xl border border-border bg-card p-7 transition-colors hover:border-ink/40"
         >
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">Proof</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Proof</p>
           <p className="mt-6 flex items-center gap-1.5 text-xl font-extrabold text-foreground">
             See what we&apos;ve built
             <ArrowUpRight className="size-5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

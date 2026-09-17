@@ -21,7 +21,7 @@ export function SeoHero() {
       <div className="relative mx-auto max-w-6xl px-6 pb-12 pt-8 md:pt-12">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand">{seo.hero.eyebrow}</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">{seo.hero.eyebrow}</p>
             <h1 className="mt-4 text-4xl font-black leading-[1.06] tracking-tight md:text-5xl lg:text-[3.4rem]">
               <span className="text-navy">{seo.hero.h1a}</span>{" "}
               <span

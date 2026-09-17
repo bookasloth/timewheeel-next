@@ -5,7 +5,7 @@ export function SeoProcess() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand">How we work</p>
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">How we work</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.process.title}</h2>
       </Reveal>
       <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
