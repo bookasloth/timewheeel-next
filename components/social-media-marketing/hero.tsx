@@ -1,33 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Heart, MessageCircle, Sparkle } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Sparkle } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
-
-// Decorative sample data inside the social command-centre mock. These are
-// illustrative UI mockups only, not claims about actual client performance.
-const floating = [
-  { label: "4.2% engagement", pos: "-top-3 -left-3", bg: "#2563eb", fg: "#ffffff", delay: "0.2s" },
-  { label: "Reels · 2× reach", pos: "top-[38%] -right-4", bg: "linear-gradient(135deg, #ff4d93, #f45b0a)", fg: "#ffffff", delay: "0.5s" },
-  { label: "14 posts scheduled", pos: "bottom-10 -left-4", bg: "#29a66f", fg: "#ffffff", delay: "0.8s" },
-  { label: "+38% profile visits", pos: "-top-3 -right-3", bg: "#ffcc1c", fg: "#5b4300", delay: "0.4s" },
-];
-
-const queue = [
-  { platform: "Reels", hook: "The 3 mistakes most Indian brands make", status: "Scheduled", tone: "#fe5100" },
-  { platform: "Carousel", hook: "Choosing a name people remember", status: "In review", tone: "#8b5cf6" },
-  { platform: "Story", hook: "Behind the studio, this week", status: "Draft", tone: "#14b8a6" },
-];
-
-const replies = [
-  { from: "@founder.hq", text: "This is exactly what we needed. Thanks!", time: "2m", tone: "#29a66f" },
-  { from: "@saha.industries", text: "Can you share the pricing sheet?", time: "1h", tone: "#2563eb" },
-];
-
-const reach = [
-  { label: "Instagram", value: "58K", pct: "82%", color: "#ff4d93", soft: "#ffe3ef" },
-  { label: "LinkedIn", value: "31K", pct: "64%", color: "#2563eb", soft: "#dbe7fe" },
-  { label: "YouTube", value: "22K", pct: "46%", color: "#fe5100", soft: "#ffe6d9" },
-];
 
 export function SmmHero() {
   return (
@@ -96,130 +71,15 @@ export function SmmHero() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)]">
-                {/* gradient trim */}
-                <div className="h-1.5 bg-gradient-to-r from-brand via-accent-pink to-accent-yellow" />
-                {/* window chrome */}
-                <div className="flex items-center gap-2 border-b border-border bg-secondary/60 px-4 py-3">
-                  <span className="size-2.5 rounded-full bg-accent-pink" />
-                  <span className="size-2.5 rounded-full bg-accent-yellow" />
-                  <span className="size-2.5 rounded-full bg-accent-blue" />
-                  <span className="ml-2 flex-1 rounded-md bg-background px-2.5 py-1 text-[10px] font-medium text-muted-foreground">
-                    timewheel.co.in/social
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-blue/10 px-2 py-0.5 text-[10px] font-bold text-accent-blue">
-                    <span className="size-1.5 animate-pulse rounded-full bg-accent-blue" />
-                    Live
-                  </span>
-                </div>
-
-                <div className="p-5">
-                  {/* header */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-bold">Social command centre</p>
-                      <p className="text-[11px] text-muted-foreground">This week · all platforms</p>
-                    </div>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 text-[10px] font-bold text-brand-text">
-                      <Sparkle className="size-3" /> 98% on schedule
-                    </span>
-                  </div>
-
-                  {/* content queue + engagement */}
-                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-lg border border-border bg-card p-3.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-muted-foreground">
-                          Content queue
-                        </span>
-                        <span className="rounded-full bg-accent-pink/10 px-2 py-0.5 text-[10px] font-bold text-accent-pink">
-                          3 ready
-                        </span>
-                      </div>
-                      <div className="mt-2.5 space-y-2">
-                        {queue.map((q) => (
-                          <div key={q.platform} className="rounded-lg bg-secondary/40 px-2.5 py-2">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide" style={{ color: q.tone }}>
-                                <span className="size-1.5 rounded-full" style={{ background: q.tone }} />
-                                {q.platform}
-                              </span>
-                              <span className="rounded-full bg-background px-1.5 py-0.5 text-[9px] font-bold text-muted-foreground">
-                                {q.status}
-                              </span>
-                            </div>
-                            <p className="mt-1 truncate text-[11px] font-semibold text-foreground">{q.hook}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="rounded-lg border border-border bg-card p-3.5">
-                      <div className="flex items-center gap-1.5">
-                        <MessageCircle className="size-3.5 text-brand" />
-                        <span className="text-xs font-semibold text-muted-foreground">Inbox</span>
-                      </div>
-                      <div className="mt-2.5 space-y-2">
-                        {replies.map((r) => (
-                          <div key={r.from} className="rounded-lg bg-secondary/40 px-2.5 py-2">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="flex items-center gap-1.5 truncate text-[11px] font-bold text-foreground">
-                                <span className="size-1.5 shrink-0 rounded-full" style={{ background: r.tone }} />
-                                <span className="truncate">{r.from}</span>
-                              </span>
-                              <span className="shrink-0 text-[9px] font-semibold text-muted-foreground">{r.time}</span>
-                            </div>
-                            <p className="mt-0.5 truncate text-[11px] text-muted-foreground">{r.text}</p>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="mt-2.5 flex items-center gap-1.5 rounded-lg bg-rating/10 px-2.5 py-2 text-[10px] text-muted-foreground">
-                        <Heart className="size-3 fill-current text-rating" />
-                        <span className="font-bold text-foreground">2.3K</span> likes on this week&apos;s top post
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* reach */}
-                  <div className="mt-3 rounded-lg border border-border bg-card p-3.5">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-muted-foreground">Total reach · 30 days</span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-rating/10 px-2 py-0.5 text-[10px] font-bold text-rating">
-                        <ArrowUpRight className="size-3" /> +18% vs prev
-                      </span>
-                    </div>
-                    <div className="mt-2.5 space-y-2">
-                      {reach.map((r) => (
-                        <div key={r.label}>
-                          <div className="flex items-center justify-between text-[11px]">
-                            <span className="flex items-center gap-1.5 text-muted-foreground">
-                              <span className="size-1.5 rounded-full" style={{ background: r.color }} />
-                              {r.label}
-                            </span>
-                            <span className="font-bold text-foreground">{r.value}</span>
-                          </div>
-                          <div className="mt-1 h-1 w-full overflow-hidden rounded-full bg-secondary">
-                            <div className="h-full rounded-full" style={{ width: r.pct, background: r.color }} />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* floating decorative chips */}
-              {floating.map((f) => (
-                <div
-                  key={f.label}
-                  className={`hero-float absolute z-10 hidden rounded-lg px-2.5 py-1.5 text-xs font-bold shadow-sm lg:block ${f.pos}`}
-                  style={{ background: f.bg, color: f.fg, animationDelay: f.delay }}
-                >
-                  {f.label}
-                </div>
-              ))}
-            </div>
+            <Image
+              src="/hero/social.png"
+              alt="Social media marketing by Timewheel"
+              width={1536}
+              height={1024}
+              priority
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="h-auto w-full rounded-2xl border border-border shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)]"
+            />
           </Reveal>
         </div>
       </div>

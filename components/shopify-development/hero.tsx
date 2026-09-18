@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ShoppingBag, BadgeCheck } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { sd } from "@/lib/shopify-development";
@@ -46,10 +47,14 @@ export function SdHero() {
 
         <Reveal delay={0.1} className="relative">
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-brand/15 via-transparent to-accent-blue/10" />
-            <div className="grid h-full place-items-center">
-              <ShoppingBag className="size-24 text-brand/70" strokeWidth={1.25} />
-            </div>
+            <Image
+              src="/hero/shopify.png"
+              alt="Shopify development by Timewheel"
+              fill
+              priority
+              sizes="(min-width: 768px) 45vw, 90vw"
+              className="object-cover"
+            />
           </div>
           <div className="absolute -bottom-4 right-4 flex items-center gap-2.5 rounded-2xl border border-border bg-card px-4 py-3 shadow-md">
             <span className="grid size-9 place-items-center rounded-xl bg-brand text-white">

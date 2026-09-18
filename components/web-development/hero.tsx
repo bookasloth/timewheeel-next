@@ -1,8 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
-import { SiteAudit } from "@/components/web-development/site-audit";
 
 export function WdHero() {
   return (
@@ -59,7 +59,15 @@ export function WdHero() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <SiteAudit />
+            <Image
+              src="/hero/web-dev.png"
+              alt="Web development by Timewheel"
+              width={1536}
+              height={1024}
+              priority
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="h-auto w-full rounded-2xl border border-border shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)]"
+            />
           </Reveal>
         </div>
       </div>
