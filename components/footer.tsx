@@ -10,9 +10,9 @@ import { EstimateForm } from "@/components/estimate-form";
 const services = [
   { label: "SEO", href: "/seo-company-in-nagpur" },
   { label: "Digital Marketing", href: "/digital-marketing" },
-  { label: "Web Development", href: "/web-development-company-in-india" },
-  { label: "Web App Development", href: "/web-app-development" },
-  { label: "Website Design", href: "/website-design" },
+  { label: "Web Development", href: "/web-development-company-in-nagpur" },
+  { label: "Web App Development", href: "/web-app-development-company-in-nagpur" },
+  { label: "Website Design", href: "/website-design-company-in-nagpur" },
   { label: "Restaurant Marketing", href: "/restaurant-marketing" },
 ];
 

@@ -86,7 +86,7 @@ export const products: Product[] = [
     tagline: "Sell Events & Tickets",
     icon: Ticket,
     accent: "#269cef",
-    href: "#",
+    href: "/products/ticket-dino",
     featured: true,
     blurb:
       "An event ticketing and management platform engineered for modern organizers who need reliability at scale, from ticket sales and attendee management to analytics and operational workflows.",

@@ -17,7 +17,7 @@ import { WdFinalCta } from "@/components/web-development/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
-const PATH = "/web-development-company-in-india";
+const PATH = "/web-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {
