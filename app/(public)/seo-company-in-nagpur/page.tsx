@@ -78,7 +78,7 @@ const crumbs = [
 
 export default function SeoCompanyNagpurPage() {
   return (
-    <div id="top" className="overflow-x-clip">
+    <div id="top" className="overflow-x-clip seo-nagpur-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd(crumbs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />

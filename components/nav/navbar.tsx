@@ -31,19 +31,19 @@ const serviceGroups: { title: string; items: NavService[] }[] = [
   {
     title: "Tech",
     items: [
-      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design" },
-      { name: "Website Development", icon: Code, accent: "#269cef", href: "#" },
-      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development" },
+      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design-company-in-india" },
+      { name: "Website Development", icon: Code, accent: "#269cef", href: "/web-development-company-in-india" },
+      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development-company-in-india" },
       { name: "Shopify Development", icon: Storefront, accent: "#fe5100", href: "#" },
     ],
   },
   {
     title: "Marketing",
     items: [
-      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "#" },
-      { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "#" },
+      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-company-in-india" },
+      { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur" },
       { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "#" },
-      { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/digital-marketing2" },
+      { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/digital-marketing-company-in-india" },
     ],
   },
 ];

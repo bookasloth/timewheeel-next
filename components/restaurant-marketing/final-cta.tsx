@@ -5,7 +5,7 @@ import { Reveal } from "@/components/reveal";
 export function RmFinalCta() {
   return (
     <section className="w-full">
-      <Reveal className="relative overflow-hidden border-t border-white/10 bg-navy text-center text-white">
+      <Reveal className="relative overflow-hidden bg-black text-center text-white">
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
           <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Work With a Full-Service Agency for Your Restaurant Marketing

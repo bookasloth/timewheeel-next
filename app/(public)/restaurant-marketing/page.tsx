@@ -105,6 +105,7 @@ export default function RestaurantMarketingPage() {
       <RmTestimonials />
       <RmFaq />
       <RmFinalCta />
+      <RmContact />
       <GrowthBlueprintModal service="Restaurant Marketing" />
     </div>
   );

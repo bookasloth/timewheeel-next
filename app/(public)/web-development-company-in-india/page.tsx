@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { wd } from "@/lib/web-development";
 import { organizationLd, breadcrumbLd, localBusinessLd } from "@/lib/jsonld";
@@ -82,21 +80,10 @@ const crumbs = [
 
 export default function WebDevelopmentIndiaPage() {
   return (
-    <div className="overflow-x-clip">
+    <div className="overflow-x-clip wd-india">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd(crumbs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-
-      {/* Visible breadcrumb */}
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-6xl px-6 pt-6">
-        <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
-          <li><Link href="/" className="hover:text-foreground">Home</Link></li>
-          <ChevronRight className="size-3" aria-hidden />
-          <li aria-current="page" className="font-medium text-foreground">
-            Web Development Company in India
-          </li>
-        </ol>
-      </nav>
 
       <WdHero />
       <WdStats />

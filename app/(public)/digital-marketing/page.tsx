@@ -10,7 +10,9 @@ import { DmEcosystem } from "@/components/digital-marketing/ecosystem";
 import { DmTestimonials } from "@/components/digital-marketing/testimonials";
 import { DmFaq } from "@/components/digital-marketing/faq";
 import { DmFinalCta } from "@/components/digital-marketing/final-cta";
+import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
+import { dmServiceOptions } from "@/lib/digital-marketing";
 
 export const metadata: Metadata = {
 title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
@@ -123,6 +125,26 @@ export default function DigitalMarketingPage() {
       <DmTestimonials />
       <DmFaq />
       <DmFinalCta />
+      <div id="lead">
+        <LeadForm
+          idPrefix="dm"
+          source="Digital Marketing Company"
+          eyebrow="Start the conversation"
+          heading="Get Your Free Digital Marketing Plan"
+          blurb="Tell us your business and goals. We'll come back with a clear, honest plan across SEO, ads, social and site, with no obligation and no jargon."
+          infoRows={[
+            { k: "Based in", v: "Nagpur, Maharashtra" },
+            { k: "Serving", v: "Businesses across India" },
+            { k: "Response", v: "Within one business day" },
+            { k: "Guarantees", v: "Honest timelines, never fake leads or rankings" },
+          ]}
+          serviceOptions={dmServiceOptions}
+          serviceLabel="Service you need"
+          submitLabel="Get My Free Plan"
+          successHeading="Thanks, we'll be in touch."
+          successBody="Your enquiry is in. We'll review your presence and reach out within one business day with a clear next step."
+        />
+      </div>
       <GrowthBlueprintModal service="Digital Marketing" />
     </div>
   );

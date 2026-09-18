@@ -67,14 +67,6 @@ export default function DigitalMarketingNagpurPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd(crumbs)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd(dm.faq)) }} />
 
-      <nav aria-label="Breadcrumb" className="mx-auto max-w-6xl px-6 pt-6">
-        <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
-          <li><Link href="/" className="hover:text-foreground">Home</Link></li>
-          <ChevronRight className="size-3" aria-hidden />
-          <li aria-current="page" className="font-medium text-foreground">Digital Marketing Company in Nagpur</li>
-        </ol>
-      </nav>
-
       {/* Hero: H1 == query, answer-first paragraph (the AI-citable block) */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0">

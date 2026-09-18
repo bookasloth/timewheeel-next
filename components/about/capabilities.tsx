@@ -20,7 +20,7 @@ const services: {
     icon: PenTool,
     title: "Website Design",
     body: "Modern, conversion-focused websites designed around your brand, audience, and goals.",
-    href: "/website-design",
+    href: "/website-design-company-in-india",
     accent: {
       tile: "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-white",
       border: "hover:border-brand/50",
@@ -81,7 +81,7 @@ export function AboutCapabilities() {
 
         <Reveal delay={0.05}>
           <Link
-            href="/website-design"
+             href="/website-design-company-in-india"
             className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-bold text-brand transition-colors hover:text-navy"
           >
             View Our Services

@@ -171,6 +171,14 @@
   background: var(--color-wblue);
 }
 
+/* ── Web Development Company in India (app/(public)/web-development-company-in-india) ──
+    Blue-focused: blue as the primary accent. */
+.wd-india {
+  --brand: #269cef;
+  --brand-text: #1a6bb5;
+  --ring: #269cef;
+}
+
 /* ── Web App Development service page (app/(public)/web-app-development) ──
     Green-focused: soft lavender surfaces + green as the primary accent.
     Tokens emit wamist/walilac/wairis utilities only where used. */
@@ -183,6 +191,66 @@
   --color-wamist: #f6f5fb;
   --color-walilac: #eceafe;
   --color-wairis: #4ab765;
+}
+
+/* ── SEO Company in Nagpur (app/(public)/seo-company-in-nagpur) ──
+    Yellow-focused: yellow as the primary accent. */
+.seo-nagpur-page {
+  --brand: #4ab765;
+  --brand-text: #2d7a3e;
+  --ring: #4ab765;
+}
+
+/* ── Performance Marketing (app/(public)/digital-marketing2) ──
+    Yellow-focused: yellow as the primary accent. */
+.dm2-page {
+  --brand: #ffcc1c;
+  --brand-text: #c9a000;
+  --ring: #ffcc1c;
+}
+
+/* ── Social Media Marketing (app/(public)/social-media-marketing-company-in-india) ──
+    Blue-first: a punchier primary blue (#2563eb) with a rotating multi-hue
+    accent palette (pink/yellow/green/violet/orange) layered across sections.
+    Matches the Social Media Marketing accent in the navbar. */
+.smm-page {
+  --brand: #2563eb;
+  --brand-text: #1d4ed8;
+  --ring: #2563eb;
+}
+
+/* SMM ambient glow blobs (hero + final CTA) */
+@keyframes smm-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(26px, -20px) scale(1.14);
+  }
+}
+.smm-blob {
+  animation: smm-drift 18s ease-in-out infinite;
+}
+
+/* SMM display-word gradient (used for the hero highlight word) */
+.smm-rainbow-text {
+  background-image: linear-gradient(92deg, #2563eb 0%, #7c3aed 48%, #ff4d93 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* SMM workflow spine: blue → violet → pink → honey → green */
+.smm-spine {
+  background-image: linear-gradient(
+    180deg,
+    rgba(37, 99, 235, 0.55),
+    rgba(139, 92, 246, 0.5),
+    rgba(255, 77, 147, 0.5),
+    rgba(255, 204, 28, 0.55),
+    rgba(41, 166, 111, 0.5)
+  );
 }
 
 /* website-design hero: floating service chips drift gently upward */

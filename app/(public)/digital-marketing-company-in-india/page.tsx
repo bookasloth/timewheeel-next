@@ -10,13 +10,15 @@ import { Dm2Ecosystem } from "@/components/digital-marketing2/ecosystem";
 import { Dm2Testimonials } from "@/components/digital-marketing2/testimonials";
 import { Dm2Faq } from "@/components/digital-marketing2/faq";
 import { Dm2FinalCta } from "@/components/digital-marketing2/final-cta";
+import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
+import { dmServiceOptions } from "@/lib/digital-marketing2";
 
 export const metadata: Metadata = {
   title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
   description:
     "Hire a full-service digital marketing agency in Nagpur for SEO, paid ads, social media, content, email and WhatsApp marketing, one connected growth system with clear reports.",
-  alternates: { canonical: `${site.url}/digital-marketing2` },
+  alternates: { canonical: `${site.url}/digital-marketing-company-in-india` },
   openGraph: {
     type: "website",
     url: `${site.url}/digital-marketing2`,
@@ -114,7 +116,7 @@ const faqJsonLd = {
 
 export default function DigitalMarketing2Page() {
   return (
-    <div className="overflow-x-clip">
+    <div className="overflow-x-clip dm2-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -135,6 +137,26 @@ export default function DigitalMarketing2Page() {
       <Dm2Testimonials />
       <Dm2Faq />
       <Dm2FinalCta />
+      <div id="lead">
+        <LeadForm
+          idPrefix="dm2"
+          source="Digital Marketing Agency in Nagpur"
+          eyebrow="Start the conversation"
+          heading="Get Your Free Digital Marketing Plan"
+          blurb="Tell us your business and goals. We'll come back with a clear, honest plan across SEO, ads, social and site, with no obligation and no jargon."
+          infoRows={[
+            { k: "Based in", v: "Nagpur, Maharashtra" },
+            { k: "Serving", v: "Businesses across India" },
+            { k: "Response", v: "Within one business day" },
+            { k: "Guarantees", v: "Honest timelines, never fake leads or rankings" },
+          ]}
+          serviceOptions={dmServiceOptions}
+          serviceLabel="Service you need"
+          submitLabel="Get My Free Plan"
+          successHeading="Thanks, we'll be in touch."
+          successBody="Your enquiry is in. We'll review your presence and reach out within one business day with a clear next step."
+        />
+      </div>
       <GrowthBlueprintModal service="Digital Marketing" />
     </div>
   );

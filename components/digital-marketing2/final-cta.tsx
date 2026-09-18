@@ -1,20 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Asterisk } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 
 export function Dm2FinalCta() {
   return (
     <section className="mx-auto max-w-full px-6 py-20 md:py-28">
-      <Reveal className="relative overflow-hidden rounded-3xl border border-border bg-navy text-center text-white">
-        {/* abstract illustration */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-2 select-none text-center text-[clamp(4rem,12vw,10rem)] font-black uppercase leading-none tracking-tighter text-white/[0.03]"
-        >
-          Timewheel
-        </div>
-
+      <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
           <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Turn{" "}

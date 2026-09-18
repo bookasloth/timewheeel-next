@@ -108,11 +108,21 @@ export const wa = {
     ],
   },
 
-  finalCta: {
-    headingA: "Have a web app idea?",
-    headingB: "Let's build it.",
-    body: "From internal business platforms to customer-facing products, TIMEWHEEL turns ideas into thoughtful, scalable web applications.",
-    primaryCta: { label: "Start a Project", href: "/contact" },
-    secondaryCta: { label: "Talk to Our Team", href: "/contact" },
-  },
-};
+   finalCta: {
+     headingA: "Have a web app idea?",
+     headingB: "Let's build it.",
+     body: "From internal business platforms to customer-facing products, TIMEWHEEL turns ideas into thoughtful, scalable web applications.",
+     primaryCta: { label: "Start a Project", href: "/contact" },
+     secondaryCta: { label: "Talk to Our Team", href: "/contact" },
+   },
+
+   serviceOptions: [
+     "Web Application",
+     "Dashboard",
+     "Customer Portal",
+     "SaaS Platform",
+     "Internal Tool",
+     "Maintenance & Support",
+     "Not sure yet",
+   ],
+ };

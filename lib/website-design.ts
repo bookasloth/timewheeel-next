@@ -28,9 +28,9 @@ export type WdPortfolioProject = {
 
 export const wd = {
   meta: {
-    title: "Web Design Services | Timewheel, Premium Websites That Grow Businesses",
+    title: "Top Web Design Company in Nagpur | Timewheel",
     description:
-      "Timewheel designs and builds premium websites for startups and growing businesses, strategy, UI design and clean development under one roof. Start your project today.",
+      "Timewheel is the top web design company in Nagpur, designing and building premium websites for startups and growing businesses. Strategy, UI design and clean development under one roof.",
   },
 
   breadcrumb: ["Home", "Website Design"],
@@ -306,10 +306,26 @@ export const wd = {
     ],
   },
 
-  finalCta: {
-    title: "Your next website should feel like your best one yet.",
-    sub: "Let's create something worth remembering.",
-    cta: { label: "Start a Project", href: "/contact" },
-    secondary: { label: "See our work first", href: "#work" },
-  },
-};
+   finalCta: {
+     title: "Your next website should feel like your best one yet.",
+     sub: "Let's create something worth remembering.",
+     cta: { label: "Start a Project", href: "/contact" },
+     secondary: { label: "See our work first", href: "#work" },
+   },
+
+    serviceOptions: [
+      "Landing Page",
+      "Business Website",
+      "E-commerce",
+      "Web Application",
+      "Redesign / Rebuild",
+      "Maintenance & Support",
+      "Not sure yet",
+    ],
+
+    stats: [
+      { v: "50+", label: "Professions" },
+      { v: "4.9", label: "Avg. rating" },
+      { v: "7+", label: "Years" },
+    ],
+  };

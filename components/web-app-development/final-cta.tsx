@@ -5,7 +5,7 @@ import { wa } from "@/lib/web-app-development";
 
 export function WaFinalCta() {
   return (
-    <section className="bg-navy">
+    <section className="bg-black">
       <Reveal>
         <div className="mx-auto max-w-3xl px-6 pb-20 pt-20 text-center md:pb-28 md:pt-28">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-white/70">

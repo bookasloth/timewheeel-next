@@ -1,18 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { cn } from "@/lib/utils";
 
 const rotateTexts = [
-  "people remember",
-  "that convert",
-  "you'll love",
-  "built to grow",
-  "made to last",
-  "startups trust",
+  "for salons",
+  "for tutors",
+  "for clinics",
+  "for restaurants",
+  "for lawyers",
+  "for doctors",
+  "for coaches",
+  "for gyms",
+  "for real estate",
+  "for startups",
+  "for businesses",
 ];
 
 const rotateColors = [
@@ -20,18 +25,33 @@ const rotateColors = [
   "text-wpurple",
   "text-worange",
   "text-wgreen",
-  "text-wdark",
+  "text-wblue",
+  "text-wpurple",
+  "text-worange",
+  "text-wgreen",
+  "text-wblue",
+  "text-wpurple",
+  "text-worange",
 ];
 
 const stats = [
-  { value: "50+", label: "Projects" },
+  { value: "50+", label: "Professions" },
   { value: "4.9", label: "Avg. rating" },
   { value: "7+", label: "Years" },
 ];
 
 function LandingHero() {
   const [rotateIndex, setRotateIndex] = useState(0);
-  const activeColor = rotateColors[rotateIndex % rotateColors.length];
+  const [colorIndex, setColorIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setColorIndex(rotateIndex);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [rotateIndex]);
+
+  const activeColor = rotateColors[colorIndex % rotateColors.length];
 
   return (
     <section className="relative flex h-[calc(100svh_-_6.75rem)] min-h-[32rem] w-full flex-col items-center justify-center overflow-hidden">
@@ -45,26 +65,13 @@ function LandingHero() {
       </div>
 
       <div className="relative z-10 flex flex-col justify-center items-center w-[300px] sm:w-[380px] md:w-[500px] lg:w-[680px] pointer-events-auto">
-        <motion.span
-          className="mb-5 inline-flex items-center gap-2 rounded-full border border-wdark/10 bg-white/70 px-3 py-1 text-[11px] font-medium tracking-wide text-wdark/70 shadow-sm backdrop-blur sm:text-xs"
-          animate={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 12 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-wgreen opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-wgreen" />
-          </span>
-          Now booking new projects
-        </motion.span>
-
         <motion.h1
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center w-full justify-center items-center flex-col flex leading-tight font-heading tracking-tight space-y-1 md:space-y-2"
           animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.2, ease: "easeOut", delay: 0.15 }}
         >
-          <span className="whitespace-nowrap">We design websites</span>
+          <span className="whitespace-nowrap">Top Web Design Company</span>
           <span className="relative inline-flex">
             <span
               aria-hidden
