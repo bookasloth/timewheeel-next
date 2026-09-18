@@ -172,8 +172,13 @@
 }
 
 /* ── Web App Development service page (app/(public)/web-app-development) ──
-   Soft lavender surfaces for the product-showcase hero + a muted iris accent.
-   Tokens emit wamist/walilac/wairis utilities only where used. */
+    Green-focused: soft lavender surfaces + green as the primary accent.
+    Tokens emit wamist/walilac/wairis utilities only where used. */
+.wa-page {
+  --brand: #4ab765;
+  --brand-text: #2d7a3e;
+  --ring: #4ab765;
+}
 @theme {
   --color-wamist: #f6f5fb;
   --color-walilac: #eceafe;

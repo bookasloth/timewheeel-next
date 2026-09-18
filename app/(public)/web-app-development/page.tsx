@@ -61,7 +61,7 @@ const crumbs = [
 
 export default function WebAppDevelopmentPage() {
   return (
-    <div className="overflow-x-clip">
+    <div className="overflow-x-clip wa-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd(crumbs)) }} />
 
