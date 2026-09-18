@@ -179,6 +179,13 @@
   --brand-text: #2d7a3e;
   --ring: #4ab765;
 }
+
+/* shopify-development: Shopify green as the primary accent. */
+.shopify-page {
+  --brand: #5e8e3e;
+  --brand-text: #3f6b28;
+  --ring: #5e8e3e;
+}
 @theme {
   --color-wamist: #f6f5fb;
   --color-walilac: #eceafe;

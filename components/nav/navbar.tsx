@@ -32,17 +32,17 @@ const serviceGroups: { title: string; items: NavService[] }[] = [
     title: "Tech",
     items: [
       { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design" },
-      { name: "Website Development", icon: Code, accent: "#269cef", href: "#" },
+      { name: "Website Development", icon: Code, accent: "#269cef", href: "/web-development-company-in-india" },
       { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development" },
-      { name: "Shopify Development", icon: Storefront, accent: "#fe5100", href: "#" },
+      { name: "Shopify Development", icon: Storefront, accent: "#5e8e3e", href: "/shopify-development" },
     ],
   },
   {
     title: "Marketing",
     items: [
-      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "#" },
-      { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "#" },
-      { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "#" },
+      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-in-nagpur" },
+      { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur" },
+      { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "/ai-marketing-automation-in-nagpur" },
       { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/digital-marketing2" },
     ],
   },
