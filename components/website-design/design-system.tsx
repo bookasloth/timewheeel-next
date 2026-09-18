@@ -1,6 +1,15 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Bell, Check, Mail, Search } from "lucide-react";
+import {
+  ArrowRight,
+  Bell,
+  Check,
+  Copy,
+  Mail,
+  Search,
+} from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { palette, wd } from "@/lib/website-design";
 
@@ -10,7 +19,7 @@ function Tile({
   className = "",
 }: {
   label: string;
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
 }) {
   return (
@@ -22,6 +31,24 @@ function Tile({
 }
 
 export function WdDesignSystem() {
+  const [copied, setCopied] = useState<string | null>(null);
+  const [subscribe, setSubscribe] = useState(true);
+  const [activeNav, setActiveNav] = useState("Services");
+  const [selectedCard, setSelectedCard] = useState("Design");
+  const [typeScale, setTypeScale] = useState(5.5);
+
+  const copyHex = async (hex: string) => {
+    try {
+      await navigator.clipboard.writeText(hex);
+    } catch {
+      /* clipboard unavailable (e.g. http preview) */
+    }
+    setCopied(hex);
+    window.setTimeout(() => setCopied(null), 1500);
+  };
+
+  const navItems = ["Home", "Services", "Work", "About"];
+
   return (
     <section className="border-y border-border/60 bg-soft/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
@@ -34,11 +61,14 @@ export function WdDesignSystem() {
         </Reveal>
 
         <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {/* Typography */}
+          {/* Typography — live scale slider */}
           <Reveal className="h-full lg:row-span-2">
             <Tile label="Typography" className="h-full justify-between">
               <div>
-                <span className="block text-[5.5rem] font-black leading-none tracking-tighter" style={{ fontFamily: "var(--font-heading)" }}>
+                <span
+                  className="block font-black leading-none tracking-tighter transition-[font-size] duration-200"
+                  style={{ fontFamily: "var(--font-heading)", fontSize: `${typeScale}rem` }}
+                >
                   Aa
                 </span>
                 <div className="mt-6 space-y-4">
@@ -56,22 +86,52 @@ export function WdDesignSystem() {
                   </div>
                 </div>
               </div>
+              <div className="mt-6 rounded-xl border border-border bg-soft p-4">
+                <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                  <span>Display size</span>
+                  <span className="text-foreground">{typeScale.toFixed(1)}rem</span>
+                </div>
+                <input
+                  type="range"
+                  min={3.5}
+                  max={7}
+                  step={0.1}
+                  value={typeScale}
+                  onChange={(e) => setTypeScale(Number(e.target.value))}
+                  aria-label="Adjust the display type size"
+                  className="mt-3 w-full accent-[#ff4d93]"
+                />
+              </div>
             </Tile>
           </Reveal>
 
-          {/* Colors */}
+          {/* Colors — click to copy */}
           <Reveal delay={0.06} className="h-full">
             <Tile label="Colors">
               <div className="flex flex-wrap items-center gap-4">
                 {wd.designSystem.colors.map((c) => (
-                  <div key={c.name} className="flex flex-col items-center gap-2">
+                  <button
+                    key={c.name}
+                    type="button"
+                    onClick={() => copyHex(c.hex)}
+                    title={`Click to copy ${c.hex}`}
+                    aria-label={`Copy ${c.hex}`}
+                    className="group flex flex-col items-center gap-2"
+                  >
                     <span
-                      className="size-11 rounded-full border border-black/5 shadow-inner"
+                      className="grid size-11 place-items-center rounded-full border border-black/5 shadow-inner transition-transform duration-200 group-hover:scale-110"
                       style={{ backgroundColor: c.hex }}
-                    />
+                    >
+                      {copied === c.hex && (
+                        <Check className="size-4 text-white drop-shadow" />
+                      )}
+                    </span>
                     <span className="text-[10px] font-bold text-foreground">{c.name}</span>
-                    <span className="text-[9px] uppercase text-muted-foreground">{c.hex}</span>
-                  </div>
+                    <span className="inline-flex items-center gap-1 text-[9px] uppercase text-muted-foreground transition-colors group-hover:text-foreground">
+                      {copied === c.hex ? "Copied!" : c.hex}
+                      <Copy className="size-2.5 opacity-0 transition-opacity group-hover:opacity-100" />
+                    </span>
+                  </button>
                 ))}
               </div>
             </Tile>
@@ -83,12 +143,12 @@ export function WdDesignSystem() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href={wd.finalCta.cta.href}
-                  className="group btn btn-blue inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold"
+                  className="group btn btn-blue inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold active:scale-95"
                 >
                   Start a Project
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
-                <span className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold">
+                <span className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold active:scale-95">
                   Secondary
                 </span>
               </div>
@@ -98,7 +158,7 @@ export function WdDesignSystem() {
             </Tile>
           </Reveal>
 
-          {/* Cards */}
+          {/* Cards — click to select */}
           <Reveal delay={0.18} className="h-full">
             <Tile label="Cards">
               <div className="flex gap-3">
@@ -106,20 +166,37 @@ export function WdDesignSystem() {
                   { t: "Strategy", c: palette.blue },
                   { t: "Design", c: palette.purple },
                   { t: "Growth", c: palette.green },
-                ].map((c) => (
-                  <div key={c.t} className="flex-1 rounded-xl border border-border p-3 transition-transform duration-200">
-                    <span className="grid size-7 place-items-center rounded-lg text-white" style={{ backgroundColor: c.c }}>
-                      <Check className="size-3.5" />
-                    </span>
-                    <p className="mt-2.5 text-xs font-bold">{c.t}</p>
-                    <span className="mt-1.5 block h-1.5 w-full rounded-full bg-foreground/10" />
-                  </div>
-                ))}
+                ].map((card) => {
+                  const selected = selectedCard === card.t;
+                  return (
+                    <button
+                      key={card.t}
+                      type="button"
+                      onClick={() => setSelectedCard(card.t)}
+                      aria-pressed={selected}
+                      className={`flex-1 rounded-xl border p-3 text-left transition-all duration-200 active:scale-95 ${
+                        selected
+                          ? "border-foreground/40 bg-soft shadow-sm"
+                          : "border-border hover:border-foreground/25"
+                      }`}
+                    >
+                      <span className="grid size-7 place-items-center rounded-lg text-white" style={{ backgroundColor: card.c }}>
+                        <Check className="size-3.5" />
+                      </span>
+                      <p className="mt-2.5 text-xs font-bold">{card.t}</p>
+                      <span className="mt-1.5 block h-1.5 w-full rounded-full bg-foreground/10" />
+                      <span
+                        className="mt-1.5 block h-1 w-2/3 rounded-full bg-foreground/10 transition-colors"
+                        style={selected ? { backgroundColor: `${card.c}66` } : undefined}
+                      />
+                    </button>
+                  );
+                })}
               </div>
             </Tile>
           </Reveal>
 
-          {/* Forms */}
+          {/* Forms — working toggle */}
           <Reveal delay={0.24} className="h-full">
             <Tile label="Forms">
               <div className="space-y-2.5">
@@ -132,15 +209,32 @@ export function WdDesignSystem() {
                     className="w-full rounded-lg border border-input bg-background py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-wblue focus:ring-2 focus:ring-wblue/25"
                   />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="relative inline-flex h-5 w-9 items-center rounded-full" style={{ backgroundColor: palette.blue }}>
-                    <span className="absolute left-0.5 size-4 rounded-full bg-white shadow" />
+                <button
+                  type="button"
+                  onClick={() => setSubscribe((v) => !v)}
+                  role="switch"
+                  aria-checked={subscribe}
+                  className="flex items-center gap-2"
+                >
+                  <span
+                    className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200"
+                    style={{ backgroundColor: subscribe ? palette.blue : "rgba(17,24,39,0.15)" }}
+                  >
+                    <span
+                      className="absolute size-4 rounded-full bg-white shadow transition-transform duration-200"
+                      style={{
+                        left: "0.125rem",
+                        transform: subscribe ? "translateX(1rem)" : "translateX(0)",
+                      }}
+                    />
                   </span>
-                  <span className="text-xs font-medium text-muted-foreground">Subscribe to updates</span>
-                </div>
+                  <span className="text-xs font-medium text-muted-foreground">
+                    {subscribe ? "Subscribed to updates" : "Subscribe to updates"}
+                  </span>
+                </button>
                 <Link
                   href={wd.finalCta.cta.href}
-                  className="btn btn-blue block rounded-lg px-4 py-2 text-center text-sm font-semibold"
+                  className="btn btn-blue block rounded-lg px-4 py-2 text-center text-sm font-semibold active:scale-[0.98]"
                 >
                   Send
                 </Link>
@@ -148,7 +242,7 @@ export function WdDesignSystem() {
             </Tile>
           </Reveal>
 
-          {/* Navigation */}
+          {/* Navigation — clickable tabs */}
           <Reveal delay={0.3} className="h-full lg:col-span-3">
             <Tile label="Navigation">
               <div className="flex items-center justify-between rounded-xl border border-border bg-white px-4 py-2.5 shadow-sm">
@@ -156,13 +250,27 @@ export function WdDesignSystem() {
                   <span className="size-5 rounded-md text-white" style={{ backgroundColor: palette.blue }} />
                   <span className="text-xs font-black tracking-tight text-foreground">Brand</span>
                 </span>
-                <span className="hidden items-center gap-4 sm:flex">
-                  <span className="text-[11px] font-semibold text-muted-foreground">Home</span>
-                  <span className="text-[11px] font-semibold text-foreground">Services</span>
-                  <span className="text-[11px] font-semibold text-muted-foreground">Work</span>
-                  <span className="text-[11px] font-semibold text-muted-foreground">About</span>
+                <span className="hidden items-center gap-1 sm:flex">
+                  {navItems.map((item) => {
+                    const active = activeNav === item;
+                    return (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() => setActiveNav(item)}
+                        aria-current={active ? "page" : undefined}
+                        className={`rounded-md px-2.5 py-1.5 text-[11px] font-semibold transition-colors duration-200 ${
+                          active
+                            ? "bg-foreground/5 text-foreground"
+                            : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    );
+                  })}
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[10px] font-bold text-white" style={{ backgroundColor: palette.blue }}>
+                <span className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[10px] font-bold text-white transition-transform active:scale-95" style={{ backgroundColor: palette.blue }}>
                   <Bell className="size-3" /> Get Started
                 </span>
               </div>

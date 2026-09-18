@@ -20,7 +20,7 @@ export type WdPortfolioProject = {
   summary: string;
   services: string[];
   accent: string;
-  visual: "screenshot-book-a-sloth" | "mockup-alluminaty" | "mockup-coffee";
+  visual: "screenshot-book-a-sloth" | "mockup-alluminaty";
   href: string;
   external: boolean;
   meta: WdPortfolioMeta[];
@@ -119,23 +119,81 @@ export const wd = {
           { key: "Screens", value: "40+" },
         ],
       },
+    ] as WdPortfolioProject[],
+  },
+
+  ourWork: {
+    label: "More from our studio",
+    title: "Our work.",
+    body: "A look at the platforms and products we design, build and ship. Live builds, real products, honest numbers.",
+    cases: [
       {
-        number: "03",
+        name: "Book A Sloth",
+        category: "SaaS · Booking Platform",
+        summary:
+          "A modern booking platform for service businesses, booking flows, dashboards and customer scheduling, designed to feel fast and trustworthy.",
+        tags: ["Product Design", "Dashboard", "Build"],
+        accent: palette.orange,
+        href: "/products/book-a-sloth",
+        external: false,
+        metric: "Live",
+      },
+      {
+        name: "Alluminaty",
+        category: "Platform · Education",
+        summary:
+          "Alumni engagement for schools and colleges, directories, events, mentorship and giving, organised into one clear experience.",
+        tags: ["UI Design", "Web App"],
+        accent: palette.purple,
+        href: "/products/alluminaty",
+        external: false,
+        metric: "40+ screens",
+      },
+      {
+        name: "Ticket Dino",
+        category: "Events · Ticketing",
+        summary:
+          "Event ticketing and attendee management built for organizers, sales, check-ins and analytics without the friction.",
+        tags: ["Dashboard Design", "Build", "Analytics"],
+        accent: palette.blue,
+        href: "/products/ticket-dino",
+        external: false,
+        metric: "Live",
+      },
+      {
         name: "Coffee & Toffee",
         category: "D2C · Creator Support",
         summary:
-          "A creator tip-and-support experience that feels personal, warm, clear and effortless for the person giving.",
-        services: ["Web Design", "Brand UI", "Landing Page"],
+          "A creator tip-and-support experience that feels personal, warm and effortless for the person giving, not just the creator.",
+        tags: ["Web Design", "Brand UI"],
         accent: palette.green,
-        visual: "mockup-coffee",
         href: "/coffee-and-toffee",
         external: false,
-        meta: [
-          { key: "Role", value: "Design + Brand UI" },
-          { key: "Status", value: "Shipping" },
-        ],
+        metric: "Shipping",
       },
-    ] as WdPortfolioProject[],
+      {
+        name: "2B Navodian",
+        category: "Education · Enrolment",
+        summary:
+          "A guided enrolment experience that turns a confusing admissions process into a clear, step-by-step path for students and parents.",
+        tags: ["Product Design", "UX", "Build"],
+        accent: palette.blue,
+        href: "#",
+        external: false,
+        metric: "In progress",
+      },
+      {
+        name: "The Parliament",
+        category: "Community · Membership",
+        summary:
+          "Membership and community tooling designed to help founders run paid communities and memberships without the busy work.",
+        tags: ["UI Design", "Membership"],
+        accent: palette.purple,
+        href: "#",
+        external: false,
+        metric: "In progress",
+      },
+    ],
   },
 
   process: {
@@ -324,8 +382,8 @@ export const wd = {
     ],
 
     stats: [
-      { v: "50+", label: "Professions" },
-      { v: "4.9", label: "Avg. rating" },
-      { v: "7+", label: "Years" },
+      { value: 50, suffix: "+", label: "Professions" },
+      { value: 4.9, suffix: "", label: "Avg. rating" },
+      { value: 7, suffix: "+", label: "Years" },
     ],
   };

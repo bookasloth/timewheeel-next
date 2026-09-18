@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, GraduationCap, Heart, Users } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Users } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { palette, wd, type WdPortfolioProject } from "@/lib/website-design";
 import { cn } from "@/lib/utils";
@@ -106,67 +106,9 @@ function AlluminatyVisual() {
   );
 }
 
-function CoffeeVisual() {
-  return (
-    <Frame url="coffeeandtoffee.in">
-      <div className="relative flex aspect-[16/10] flex-col bg-white p-5">
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5">
-            <GraduationCap className="size-4" style={{ color: palette.green }} />
-            <span className="text-[10px] font-black tracking-tight text-foreground">Coffee &amp; Toffee</span>
-          </span>
-          <span className="rounded-md border border-border px-2 py-1 text-[8px] font-bold text-muted-foreground">
-            Menu
-          </span>
-        </div>
-
-        <div className="mt-5 flex items-center gap-3 rounded-xl p-3" style={{ backgroundColor: `${palette.green}12` }}>
-          <span className="grid size-14 shrink-0 place-items-center rounded-full text-lg font-black text-white" style={{ backgroundColor: palette.green }}>
-            PA
-          </span>
-          <div>
-            <span className="block text-[11px] font-black tracking-tight text-foreground">Pixel &amp; Pin Studio</span>
-            <span className="mt-0.5 block text-[8px] font-medium text-muted-foreground">
-              128 monthly supporters · YouTube + Instagram
-            </span>
-          </div>
-        </div>
-
-        <div className="mt-3 flex items-center justify-between rounded-xl border border-border bg-white p-3">
-          <div>
-            <span className="block text-[10px] font-black text-foreground">Buy a coffee, ₹99</span>
-            <span className="mt-0.5 block text-[8px] font-medium text-muted-foreground">
-              A tiny thank-you that funds the next video.
-            </span>
-          </div>
-          <span className="inline-flex items-center gap-1 rounded-md px-2.5 py-1.5 text-[8px] font-bold text-white" style={{ backgroundColor: palette.green }}>
-            <Heart className="size-2.5 fill-current" /> Support
-          </span>
-        </div>
-
-        <div className="mt-3 flex items-center justify-between text-[8px] font-semibold text-muted-foreground">
-          <span className="uppercase tracking-wider">Recent supporters</span>
-          <span className="uppercase tracking-wider">1,240 cups funded</span>
-        </div>
-        <div className="mt-2 flex -space-x-1.5">
-          {[palette.blue, palette.purple, palette.orange, palette.green].map((c, i) => (
-            <span key={c + i} className="grid size-6 place-items-center rounded-full border-2 border-white text-[7px] font-black text-white" style={{ backgroundColor: c }}>
-              {["R", "S", "K", "M"][i]}
-            </span>
-          ))}
-          <span className="grid size-6 place-items-center rounded-full border-2 border-white bg-foreground/10 text-[7px] font-black text-foreground/60">
-            +27
-          </span>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
 const visuals: Record<WdPortfolioProject["visual"], () => ReactNode> = {
   "screenshot-book-a-sloth": BasVisual,
   "mockup-alluminaty": AlluminatyVisual,
-  "mockup-coffee": CoffeeVisual,
 };
 
 function Project({ project, index }: { project: WdPortfolioProject; index: number }) {
