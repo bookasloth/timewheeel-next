@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- PLACEHOLDER: swap with a real wrapped-toffee illustration -->
+  <ellipse cx="100" cy="150" rx="52" ry="10" fill="#7c3aed" opacity="0.12"/>
+  <!-- left wrapper -->
+  <path d="M56 100 l-30 -20 v40 z" fill="#fcd34d" stroke="#2b2440" stroke-width="4" stroke-linejoin="round"/>
+  <!-- right wrapper -->
+  <path d="M144 100 l30 -20 v40 z" fill="#fcd34d" stroke="#2b2440" stroke-width="4" stroke-linejoin="round"/>
+  <!-- twists -->
+  <path d="M56 92 l-24 -8 M56 108 l-24 8 M144 92 l24 -8 M144 108 l24 8" stroke="#2b2440" stroke-width="3" stroke-linecap="round"/>
+  <!-- body -->
+  <rect x="56" y="74" width="88" height="52" rx="18" fill="#7c3aed" stroke="#2b2440" stroke-width="4"/>
+  <!-- shine -->
+  <rect x="66" y="82" width="20" height="12" rx="6" fill="#fff" opacity="0.35"/>
+  <!-- sparkle -->
+  <path d="M118 96 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" fill="#fbbf24"/>
+</svg>

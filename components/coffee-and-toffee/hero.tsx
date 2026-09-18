@@ -112,6 +112,13 @@ export function CfHero({ data }: { data: CfData }) {
         </motion.div>
       ))}
 
+      {/* Placeholder illustrations + doodles — swap the files in
+          /public/coffee/*.svg with better art (same names = no code change). */}
+      <img src="/coffee/illus-cup.svg" alt="" aria-hidden className="cf-deco cf-deco-cup hidden md:block" />
+      <img src="/coffee/illus-toffee.svg" alt="" aria-hidden className="cf-deco cf-deco-toffee hidden md:block" />
+      <img src="/coffee/doodle-sparkle.svg" alt="" aria-hidden className="cf-deco cf-deco-sparkle" />
+      <img src="/coffee/doodle-arrow.svg" alt="" aria-hidden className="cf-deco cf-deco-arrow hidden md:block" />
+
       <div className="cf-container cf-hero-centered">
         <div className="cf-hero-copy">
   

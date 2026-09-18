@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 70" fill="none">
+  <!-- PLACEHOLDER hand-drawn curved arrow -->
+  <path d="M10 12 C 40 8, 70 20, 72 52" stroke="#7c3aed" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M60 44 l12 10 4 -16" stroke="#7c3aed" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

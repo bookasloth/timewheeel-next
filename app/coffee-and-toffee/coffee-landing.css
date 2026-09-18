@@ -1547,3 +1547,42 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+
+/* ── placeholder illustrations + doodles (swap /public/coffee/*.svg) ── */
+.cf-deco {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+}
+.cf-deco-cup {
+  width: 120px;
+  top: 40%;
+  right: 3%;
+  animation: cf-float 8s ease-in-out infinite;
+}
+.cf-deco-toffee {
+  width: 104px;
+  top: 46%;
+  left: 3%;
+  animation: cf-float 9s ease-in-out infinite 0.5s;
+}
+.cf-deco-sparkle {
+  width: 34px;
+  top: 24%;
+  left: 30%;
+  animation: cf-twinkle 2.8s ease-in-out infinite;
+}
+.cf-deco-arrow {
+  width: 74px;
+  bottom: 30%;
+  right: 30%;
+  opacity: 0.85;
+}
+@keyframes cf-twinkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+  50%      { transform: scale(1.25) rotate(15deg); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-deco { animation: none !important; }
+}
