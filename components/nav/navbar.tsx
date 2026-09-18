@@ -33,7 +33,7 @@ const serviceGroups: { title: string; items: NavService[] }[] = [
     items: [
       { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design" },
       { name: "Website Development", icon: Code, accent: "#269cef", href: "#" },
-      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "#" },
+      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development" },
       { name: "Shopify Development", icon: Storefront, accent: "#fe5100", href: "#" },
     ],
   },
