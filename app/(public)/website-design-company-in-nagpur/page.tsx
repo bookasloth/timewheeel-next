@@ -8,7 +8,6 @@ import { LeadForm } from "@/components/shared/lead-form";
 import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
 import { WdHero } from "@/components/website-design/hero";
 import { WdStats } from "@/components/website-design/stats";
-import { WdAudit } from "@/components/website-design/audit";
 import { WdVp } from "@/components/website-design/value-props";
 import { WdPortfolio } from "@/components/website-design/portfolio";
 import { WdProcess } from "@/components/website-design/process";
@@ -106,7 +105,6 @@ export default function WebsiteDesignPage() {
       <WdWhy />
       <WdTestimonials />
       <WdFaq />
-      {/* <WdAudit /> */}
       <WdFinalCta />
       <div id="lead">
         <LeadForm
