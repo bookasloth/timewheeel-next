@@ -435,6 +435,8 @@ export const bas = {
     plans: [
       {
         name: "Starter",
+        price: "Free",
+        period: "5% per booking",
         tagline: "For getting your first bookings",
         highlight: false,
         features: [
@@ -446,6 +448,8 @@ export const bas = {
       },
       {
         name: "Growth",
+        price: "₹1,499",
+        period: "per year, 0% commission",
         tagline: "For growing service businesses",
         highlight: true,
         features: [
@@ -458,6 +462,8 @@ export const bas = {
       },
       {
         name: "Business",
+        price: "₹3,650",
+        period: "per year, 0% commission",
         tagline: "For teams, agencies & enterprises",
         highlight: false,
         features: [

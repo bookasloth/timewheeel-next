@@ -9,6 +9,8 @@ import { BasFaq } from "@/components/book-a-sloth/faq";
 import { BasProcess } from "@/components/book-a-sloth/process";
 import { BasFinalCta } from "@/components/book-a-sloth/final-cta";
 import { BasFeatures } from "@/components/book-a-sloth/features";
+import { BasIntegrations } from "@/components/book-a-sloth/integrations";
+import { BasPricing } from "@/components/book-a-sloth/pricing";
 import { BasTestimonials } from "@/components/book-a-sloth/testimonials";
 
 export const metadata: Metadata = {
@@ -82,9 +84,11 @@ export default function BookASlothPage() {
       <BasHero />
       <BasProblem />
       <BasFeatures />
+      <BasIntegrations />
       <BasProcess />
       <BasAutomation />
       <BasBeforeAfter />
+      <BasPricing />
       <BasFaq />
       <BasCapabilities />
       <BasTestimonials />

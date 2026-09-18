@@ -26,6 +26,10 @@ export function BasPricing() {
                 </span>
               ) : null}
               <h3 className="pr__name">{plan.name}</h3>
+              <p className="pr__price">
+                {plan.price}
+                <span className="pr__period">{plan.period}</span>
+              </p>
               <p className="pr__tagline">{plan.tagline}</p>
               <ul className="pr__features">
                 {plan.features.map((feature) => (
