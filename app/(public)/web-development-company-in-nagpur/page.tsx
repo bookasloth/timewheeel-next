@@ -78,7 +78,7 @@ const crumbs = [
   { name: "Web Development Company in Nagpur", path: PATH },
 ];
 
-export default function WebDevelopmentIndiaPage() {
+export default function WebDevelopmentPage() {
   return (
     <div className="overflow-x-clip wd-india">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />

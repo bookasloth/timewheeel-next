@@ -25,9 +25,9 @@ const T = "#14b8a6"; // teal
 
 export const smm = {
   meta: {
-    title: "Social Media Marketing Company in India | Timewheel",
+    title: "Social Media Marketing Company in Nagpur | Timewheel",
     description:
-      "Social media marketing company in India, strategy, content, creative, community and paid social under one roof. One consistent brand voice, clear reporting and honest timelines.",
+      "Social media marketing company in Nagpur, strategy, content, creative, community and paid social under one roof. One consistent brand voice, clear reporting and honest timelines.",
   },
 
   hero: {

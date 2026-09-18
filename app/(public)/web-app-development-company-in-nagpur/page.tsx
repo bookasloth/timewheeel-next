@@ -83,7 +83,7 @@ export default function WebAppDevelopmentPage() {
           heading="Get Your Free Web App Plan"
           blurb="Tell us what you're building. We'll come back with a clear scope, timeline and price, no obligation, no jargon."
           infoRows={[
-            { k: "Based in", v: "India" },
+            { k: "Based in", v: "Nagpur, Maharashtra" },
             { k: "Serving", v: "Clients across India & abroad" },
             { k: "Response", v: "Within one business day" },
             { k: "Guarantees", v: "Honest timelines, never fake rankings" },
