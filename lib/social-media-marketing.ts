@@ -1,4 +1,4 @@
-// Content for /social-media-marketing-company-in-india.
+// Content for /social-media-marketing-company-in-nagpur.
 // Blueprint-style service page following the existing lib/<service>.ts pattern.
 // Everything here is Timewheel capability copy; no fabricated stats, clients,
 // testimonials, case studies or awards are claimed anywhere on the page.

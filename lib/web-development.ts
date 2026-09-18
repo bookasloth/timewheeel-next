@@ -1,4 +1,4 @@
-// Content for /web-development-company-in-india.
+// Content for /web-development-company-in-nagpur.
 // Structure follows docs/landing-page-blueprint.md §6.3 (web-dev), adapted
 // India-wide: web-dev buyers accept remote vendors, so national not hyperlocal.
 // Numbers here are deliberately modest and true, no invented client metrics.
