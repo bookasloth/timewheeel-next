@@ -36,11 +36,11 @@ export const metadata: Metadata = {
     title: wd.meta.title,
     description: wd.meta.description,
   },
-  // Local-intent hints for the "in India" query.
-  other: { "geo.region": "IN", "geo.placename": "India" },
+  // Local-intent hints for the "in Nagpur" query.
+  other: { "geo.region": "IN-MH", "geo.placename": "Nagpur" },
 };
 
-// Service schema, provider is the shared Organization node; areaServed India-wide.
+// Service schema, provider is the shared Organization node; areaServed Nagpur.
 const serviceLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -50,7 +50,7 @@ const serviceLd = {
       "@type": "Service",
       name: "Web Development",
       serviceType: "Web development and web application development",
-      areaServed: { "@type": "Country", name: "India" },
+      areaServed: { "@type": "City", name: "Nagpur" },
       provider: { "@id": `${site.url}/#organization` },
       url,
       description: wd.meta.description,
@@ -75,7 +75,7 @@ const faqLd = {
 
 const crumbs = [
   { name: "Home", path: "/" },
-  { name: "Web Development Company in India", path: PATH },
+  { name: "Web Development Company in Nagpur", path: PATH },
 ];
 
 export default function WebDevelopmentIndiaPage() {
@@ -99,12 +99,12 @@ export default function WebDevelopmentIndiaPage() {
       <WdFinalCta />
       <LeadForm
         idPrefix="wd"
-        source="Web Development Company in India"
+        source="Web Development Company in Nagpur"
         eyebrow="Start your project"
         heading="Get a Fixed Quote in 24 Hours"
         blurb="Tell us what you need built. You'll get a clear scope, a fixed price and a written timeline, no obligation, no jargon."
         infoRows={[
-          { k: "Based in", v: "India" },
+          { k: "Based in", v: "Nagpur, Maharashtra" },
           { k: "Serving", v: "Clients across India & abroad" },
           { k: "Quote turnaround", v: "Within one business day" },
           { k: "You own", v: "Code, domain, hosting, data" },

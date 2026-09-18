@@ -1,18 +1,18 @@
 // Content for /web-development-company-in-nagpur.
 // Structure follows docs/landing-page-blueprint.md §6.3 (web-dev), adapted
-// India-wide: web-dev buyers accept remote vendors, so national not hyperlocal.
+// Nagpur-focused; web-dev buyers accept remote vendors, so serves clients India-wide too.
 // Numbers here are deliberately modest and true, no invented client metrics.
 
 export const wd = {
   meta: {
-    title: "Web Development Company in India | Fixed Price, 6 Weeks",
+    title: "Web Development Company in Nagpur | Fixed Price, 6 Weeks",
     description:
-      "Web development company in India building fast, SEO-ready websites and web apps on Next.js, WordPress and Shopify. Fixed scope, fixed price, launched in about six weeks, and you own the code.",
+      "Web development company in Nagpur building fast, SEO-ready websites and web apps on Next.js, WordPress and Shopify. Fixed scope, fixed price, launched in about six weeks, and you own the code.",
   },
 
   hero: {
-    eyebrow: "Web Development Company in India",
-    h1a: "Web Development Company in India",
+    eyebrow: "Web Development Company in Nagpur",
+    h1a: "Web Development Company in Nagpur",
     h1b: "Fixed Scope, Fixed Price, Launched in 6 Weeks",
     sub: "Fast, SEO-ready websites and web apps built on Next.js, WordPress and Shopify. You get the code, the timeline in writing, and a site that loads in under two seconds.",
     primaryCta: { label: "Get a Fixed Quote in 24 Hours", href: "#contact" },
@@ -73,7 +73,7 @@ export const wd = {
 
   // Three open pricing bands, the biggest gap in this SERP.
   pricing: {
-    title: "What a website costs in India",
+    title: "What a website costs in Nagpur",
     body: "Honest bands, not a mystery quote. Final price depends on scope, but you'll never be surprised. Exact figures confirmed in your 24-hour quote.",
     note: "Prices exclude GST and third-party costs (domain, hosting, paid plugins). One-off build; maintenance is optional and separate.",
     tiers: [
@@ -139,7 +139,7 @@ export const wd = {
 
   ownership: {
     title: "You own everything. Always.",
-    body: "The single biggest fear for Indian businesses hiring a web developer is being locked in or left stranded. We remove it in writing.",
+    body: "The single biggest fear for Nagpur businesses hiring a web developer is being locked in or left stranded. We remove it in writing.",
     points: [
       "Full source code, handed over on launch",
       "Your domain and hosting, in your own accounts",
@@ -160,7 +160,7 @@ export const wd = {
 
   faq: [
     {
-      q: "How much does a website cost in India?",
+      q: "How much does a website cost in Nagpur?",
       a: "A professional small-business website typically ranges from ₹25,000 to ₹60,000, a larger business site or Shopify store from ₹75,000 to ₹2,00,000, and a custom web application from ₹2,50,000 upward. Your exact price is fixed in a 24-hour quote before any work starts.",
     },
     {
@@ -193,7 +193,7 @@ export const wd = {
     },
     {
       q: "Do you work with businesses outside your city?",
-      a: "Yes. We're based in India and work with clients across the country and abroad. Web projects run smoothly remotely over calls, a shared staging link and clear written milestones.",
+      a: "Yes. We're based in Nagpur and work with clients across India and abroad. Web projects run smoothly remotely over calls, a shared staging link and clear written milestones.",
     },
     {
       q: "Can you redesign or speed up my existing website?",

@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 
-// Addresses the #1 unspoken fear of Indian SMB web buyers: lock-in / being stranded.
+// Addresses the #1 unspoken fear of Nagpur SMB web buyers: lock-in / being stranded.
 export function WdOwnership() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
