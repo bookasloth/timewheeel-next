@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Timewheel",
   description:
     "Learn how Timewheel collects, uses, and protects your personal information.",
+  alternates: { canonical: "/legal/privacy" },
 };
 
 export default function PrivacyPage() {

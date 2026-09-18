@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Refund & SLA | Timewheel",
   description:
     "Review Timewheel's refund policy, service-level commitments, and support response targets.",
+  alternates: { canonical: "/legal/refund" },
 };
 
 export default function RefundPage() {

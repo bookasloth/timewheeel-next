@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ tag: stri
   return {
     title: `${label}, Blog`,
     description: `Timewheel blog posts tagged ${label}.`,
+    alternates: { canonical: `/blog/tag/${tag}` },
   };
 }
 

@@ -8,8 +8,8 @@ export const site = {
   tagline: "Build on systems you control forever",
   contact: {
     email: "hello@timewheel.co.in",
-    phone: "+91 98765 43210",
-    whatsappDigits: "919876543210",
+    phone: "+91 79041 09359",
+    whatsappDigits: "917904109359",
     city: "Nagpur",
     region: "Maharashtra, India",
     responseTime: "Within 1 business day",

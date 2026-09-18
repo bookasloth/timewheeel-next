@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Terms of Service | Timewheel",
   description:
     "Read the terms and conditions governing your use of Timewheel products and services.",
+  alternates: { canonical: "/legal/terms" },
 };
 
 export default function TermsPage() {

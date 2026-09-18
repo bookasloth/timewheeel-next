@@ -3,7 +3,11 @@ import { PageShell } from "@/components/page-shell";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
 
-export const metadata: Metadata = { title: "Solutions" };
+export const metadata: Metadata = {
+  title: "Solutions",
+  alternates: { canonical: "/solutions" },
+  openGraph: { title: "Solutions, Timewheel", url: "/solutions" },
+};
 
 export default function SolutionsPage() {
   return (

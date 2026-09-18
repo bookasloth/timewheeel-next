@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "Per-product pricing built for ownership. No fragmented subscriptions, pay only for the systems you actually run.",
+  alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Pricing, Timewheel",
+    description:
+      "Per-product pricing built for ownership. No fragmented subscriptions, pay only for the systems you actually run.",
+    url: "/pricing",
+  },
 };
 
 const bySlug = Object.fromEntries(products.map((p) => [p.slug, p]));

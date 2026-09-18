@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Guides on digital marketing, SEO, AI search and building without platform lock-in, from the Timewheel team.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog, Timewheel",
+    description:
+      "Guides on digital marketing, SEO, AI search and building without platform lock-in, from the Timewheel team.",
+    url: "/blog",
+  },
 };
 
 export default function BlogPage() {

@@ -17,9 +17,18 @@ export function organizationLd(): Thing {
     "@type": "Organization",
     "@id": ORG_ID,
     name: site.name,
+    legalName: "Timewheel Internet Pvt. Ltd.",
     url: site.url,
     description:
       "Timewheel builds self-hosted business tools for bookings, payments, events, and communities, own your systems, no SaaS rent or platform commissions.",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: site.contact.email,
+      telephone: site.contact.phone,
+      areaServed: "IN",
+      availableLanguage: ["en", "hi"],
+    },
     ...(sameAs.length ? { sameAs } : {}),
     // ponytail: add `logo` once a real /logo.png ships (memory: asset TODO).
   };
