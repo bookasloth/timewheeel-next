@@ -3,7 +3,7 @@
 // true to shipped Timewheel products (lib/products.ts); no invented client stats.
 
 export const palette = {
-  blue: "#3155ff",
+  blue: "#ff4d93",
   purple: "#7c4dff",
   orange: "#ff7a3d",
   green: "#35c98a",
@@ -156,7 +156,7 @@ export const wd = {
     title: "Every detail has a reason.",
     body: "Professional websites are built from intentional decisions, type, color, spacing, interaction. Here's a look at the toolkit behind every project.",
     colors: [
-      { name: "Blue", hex: palette.blue },
+       { name: "Pink", hex: palette.blue },
       { name: "Purple", hex: palette.purple },
       { name: "Orange", hex: palette.orange },
       { name: "Green", hex: palette.green },

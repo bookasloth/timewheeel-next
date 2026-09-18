@@ -147,7 +147,7 @@
    Page-scoped palette: blue / purple / orange / green / dark / soft.
    Tokens emit wblue/wpurple/... utilities only where used. */
 @theme {
-  --color-wblue: #3155ff;
+  --color-wblue: #ff4d93;
   --color-wpurple: #7c4dff;
   --color-worange: #ff7a3d;
   --color-wgreen: #35c98a;
