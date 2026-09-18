@@ -9,6 +9,7 @@ import { RmServices } from "@/components/restaurant-marketing/services";
 import { RmTestimonials } from "@/components/restaurant-marketing/testimonials";
 import { RmFaq } from "@/components/restaurant-marketing/faq";
 import { RmFinalCta } from "@/components/restaurant-marketing/final-cta";
+import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { RmContact } from "@/components/restaurant-marketing/contact";
 
 export const metadata: Metadata = {
@@ -104,6 +105,7 @@ export default function RestaurantMarketingPage() {
       <RmTestimonials />
       <RmFaq />
       <RmFinalCta />
+      <GrowthBlueprintModal service="Restaurant Marketing" />
     </div>
   );
 }

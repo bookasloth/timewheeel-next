@@ -6,6 +6,7 @@ import { dmNagpur as dm } from "@/lib/digital-marketing-nagpur";
 import { organizationLd, breadcrumbLd, localBusinessLd, faqLd } from "@/lib/jsonld";
 import { Reveal } from "@/components/reveal";
 import { LeadForm } from "@/components/shared/lead-form";
+import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
 const PATH = "/digital-marketing-nagpur";
 const url = `${site.url}${PATH}`;
@@ -214,6 +215,7 @@ export default function DigitalMarketingNagpurPage() {
           successBody="Your enquiry is in. We'll review your presence and reach out within one business day with a clear next step."
         />
       </div>
+      <GrowthBlueprintModal service="Digital Marketing" />
     </div>
   );
 }

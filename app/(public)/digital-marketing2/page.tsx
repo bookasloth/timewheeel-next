@@ -10,6 +10,7 @@ import { Dm2Ecosystem } from "@/components/digital-marketing2/ecosystem";
 import { Dm2Testimonials } from "@/components/digital-marketing2/testimonials";
 import { Dm2Faq } from "@/components/digital-marketing2/faq";
 import { Dm2FinalCta } from "@/components/digital-marketing2/final-cta";
+import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
 export const metadata: Metadata = {
   title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
@@ -134,6 +135,7 @@ export default function DigitalMarketing2Page() {
       <Dm2Testimonials />
       <Dm2Faq />
       <Dm2FinalCta />
+      <GrowthBlueprintModal service="Digital Marketing" />
     </div>
   );
 }

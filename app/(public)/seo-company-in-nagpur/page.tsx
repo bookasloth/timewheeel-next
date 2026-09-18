@@ -5,6 +5,7 @@ import { site } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { organizationLd, breadcrumbLd, localBusinessLd } from "@/lib/jsonld";
 import { LeadForm } from "@/components/shared/lead-form";
+import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { SeoHero } from "@/components/seo/hero";
 import { SeoStats } from "@/components/seo/stats";
 import { SeoLocal } from "@/components/seo/local";
@@ -123,6 +124,7 @@ export default function SeoCompanyNagpurPage() {
         successHeading="Thanks, we'll be in touch."
         successBody="Your enquiry is in. We'll review your site and reach out within one business day with a clear next step."
       />
+      <GrowthBlueprintModal service="SEO" />
     </div>
   );
 }

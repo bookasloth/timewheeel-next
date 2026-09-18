@@ -17,6 +17,7 @@ import { WdIndustries } from "@/components/web-development/industries";
 import { WdFaq } from "@/components/web-development/faq";
 import { WdFinalCta } from "@/components/web-development/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
+import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
 const PATH = "/web-development-company-in-india";
 const url = `${site.url}${PATH}`;
@@ -127,6 +128,7 @@ export default function WebDevelopmentIndiaPage() {
         successHeading="Thanks, your quote is on the way."
         successBody="We've received your project details and will send a fixed quote and timeline within one business day."
       />
+      <GrowthBlueprintModal service="Web Development" />
     </div>
   );
 }
