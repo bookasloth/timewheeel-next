@@ -28,15 +28,48 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products/book-a-sloth" },
 };
 
+const PAGE_URL = "https://timewheel.co.in/products/book-a-sloth";
+
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Book A Sloth",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  description: bas.meta.description,
-  author: { "@type": "Organization", name: "Timewheel" },
-  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${PAGE_URL}#software`,
+      name: "Book A Sloth",
+      url: bas.liveUrl,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      description: bas.meta.description,
+      author: {
+        "@type": "Organization",
+        name: "Timewheel",
+        url: "https://timewheel.co.in",
+      },
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "INR",
+        lowPrice: "0",
+        highPrice: "3650",
+        offerCount: bas.pricing.plans.length,
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: bas.testimonials.rating,
+        reviewCount: bas.testimonials.reviews.replace(/\D/g, ""),
+        bestRating: "5",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${PAGE_URL}#faq`,
+      mainEntity: bas.faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ],
 };
 
 export default function BookASlothPage() {

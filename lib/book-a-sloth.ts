@@ -28,9 +28,10 @@ export const shots = {
 
 export const bas = {
   meta: {
-    title: "Book A Sloth, Built by Timewheel",
+    title:
+      "Book A Sloth — Appointment Booking & Scheduling Software | Built by Timewheel",
     description:
-      "Explore Book A Sloth, a booking and scheduling platform built by Timewheel. See how we design, develop and automate digital products for businesses.",
+      "Book A Sloth is an India-first appointment booking and scheduling platform: 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, WhatsApp and email reminders, and GST invoicing. Designed and built by Timewheel.",
   },
   nav: {
     links: [
@@ -41,10 +42,10 @@ export const bas = {
   },
   liveUrl: "https://bookasloth.com",
   hero: {
-    titleLine1: "Everything You Need",
-    titleLine2: "to Manage Bookings.",
-    titleAccent: "Manage Bookings.",
-    body: "Book A Sloth helps businesses manage appointments, customers, availability, payments and automated communication, all from one simple platform.",
+    titleLine1: "Book A Sloth.",
+    titleLine2: "Bookings on autopilot.",
+    titleAccent: "Bookings on autopilot.",
+    body: "Book A Sloth is an India-first appointment booking and scheduling platform. Take bookings 24/7, get paid up front over UPI and Razorpay, sync Google Calendar both ways, and cut no-shows with automatic WhatsApp and email reminders, with GST invoicing built in.",
     primary: "Visit Site",
     secondary: "Get Started",
     shotUrl: "bookasloth.com",

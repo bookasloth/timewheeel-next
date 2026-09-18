@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Fraunces, Inter, Caveat } from "next/font/google";
+import "./coffee-landing.css";
 import "./support.css";
 
 const serif = Fraunces({

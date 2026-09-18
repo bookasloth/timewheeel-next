@@ -11,7 +11,7 @@ export function BasHero() {
       <div className="sx-container sx-hero-body">
         <Reveal>
           <h1 className="sx-hero-title">
-            {bas.hero.titleLine1} to{" "}
+            {bas.hero.titleLine1}{" "}
             <span className="sx-accent">{bas.hero.titleAccent}</span>
           </h1>
           <p className="sx-hero-para">{bas.hero.body}</p>

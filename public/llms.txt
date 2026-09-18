@@ -14,6 +14,9 @@ Contact: hello@timewheel.co.in
 - [Restaurant Marketing](https://timewheel.co.in/restaurant-marketing): Marketing for restaurants and cafes.
 - [Digital Marketing](https://timewheel.co.in/digital-marketing): Full-service digital marketing.
 
+## Products
+- [Book A Sloth](https://timewheel.co.in/products/book-a-sloth): An India-first appointment booking and scheduling platform Timewheel designed and built. 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, WhatsApp and email reminders, GST invoicing, and a business dashboard. Live at https://bookasloth.com.
+
 ## Company
 - [About](https://timewheel.co.in/about): Who Timewheel is and how we work.
 - [Solutions](https://timewheel.co.in/solutions): Product and service overview.
