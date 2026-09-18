@@ -1,20 +1,77 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
-import { breadcrumbLd } from "@/lib/jsonld";
-import { ComingSoon } from "@/components/shared/coming-soon";
+import { smm } from "@/lib/social-media-marketing";
+import { organizationLd, localBusinessLd, breadcrumbLd } from "@/lib/jsonld";
+import { SmmHero } from "@/components/social-media-marketing/hero";
+import { SmmIntro } from "@/components/social-media-marketing/intro";
+import { SmmServices } from "@/components/social-media-marketing/services";
+import { SmmPlatforms } from "@/components/social-media-marketing/platforms";
+import { SmmApproach } from "@/components/social-media-marketing/approach";
+import { SmmWhy } from "@/components/social-media-marketing/why";
+import { SmmContentPurpose } from "@/components/social-media-marketing/content-purpose";
+import { SmmWorkflow } from "@/components/social-media-marketing/workflow";
+import { SmmFaq } from "@/components/social-media-marketing/faq";
+import { SmmFinalCta } from "@/components/social-media-marketing/final-cta";
+import { LeadForm } from "@/components/shared/lead-form";
+import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
 const PATH = "/social-media-marketing-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 const title = "Social Media Marketing Company in Nagpur | Timewheel";
 const description =
-  "Social media marketing services in Nagpur, content, community and paid social that grow your brand. Page launching soon, talk to our team to get started.";
+  "Social media marketing company in Nagpur, strategy, content, creative, community and paid social under one roof. One consistent brand voice, clear reporting and honest timelines.";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: url },
-  openGraph: { type: "website", url, siteName: site.name, title, description },
-  twitter: { card: "summary_large_image", title, description },
+  openGraph: {
+    type: "website",
+    url,
+    siteName: site.name,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  // Local-intent hints for the "in Nagpur" query.
+  other: { "geo.region": "IN-MH", "geo.placename": "Nagpur" },
+};
+
+// Service schema, provider is the shared Organization node; areaServed Nagpur.
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    organizationLd(),
+    localBusinessLd(),
+    {
+      "@type": "Service",
+      name: "Social Media Marketing",
+      serviceType: "Social media strategy, content, management and advertising",
+      areaServed: { "@type": "City", name: "Nagpur" },
+      provider: { "@id": `${site.url}/#organization` },
+      url,
+      description,
+      offers: smm.services.items.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title },
+      })),
+    },
+  ],
+};
+
+// FAQPage, must mirror the visible FAQ exactly (source: smm.faq).
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: smm.faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 };
 
 const crumbs = [
@@ -24,14 +81,40 @@ const crumbs = [
 
 export default function SocialMediaMarketingPage() {
   return (
-    <>
+    <div className="overflow-x-clip smm-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd(crumbs)) }} />
-      <ComingSoon
-        eyebrow="Social Media Marketing"
-        title="Social Media Marketing in Nagpur"
-        blurb="Content, community and paid social built to grow your brand and bring in customers. This page is on the way, in the meantime, tell us what you need."
-        accent="#269cef"
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+
+      <SmmHero />
+      <SmmIntro />
+      <SmmServices />
+      <SmmPlatforms />
+      <SmmApproach />
+      <SmmWhy />
+      <SmmContentPurpose />
+      <SmmWorkflow />
+      <SmmFaq />
+      <SmmFinalCta />
+      <LeadForm
+        idPrefix="smm"
+        source="Social Media Marketing Company in Nagpur"
+        eyebrow="Start the conversation"
+        heading="Get a Social Media Plan Built for Your Brand"
+        blurb="Tell us about your business and what you want social media to do for it. We'll come back with an honest, personalised plan, strategy, channels and next steps, no obligation, no jargon."
+        infoRows={[
+          { k: "Based in", v: "Nagpur, Maharashtra" },
+          { k: "Serving", v: "Businesses across India" },
+          { k: "Response", v: "Within one business day" },
+          { k: "Guarantees", v: "Honest timelines, never fake followers or stats" },
+        ]}
+        serviceOptions={smm.serviceOptions}
+        serviceLabel="What do you need?"
+        submitLabel="Get My Social Media Plan"
+        successHeading="Thanks, we'll be in touch."
+        successBody="Your enquiry is in. We'll review your presence and reach out within one business day with a clear next step."
       />
-    </>
+      <GrowthBlueprintModal service="Social Media Marketing" />
+    </div>
   );
 }
