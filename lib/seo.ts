@@ -11,11 +11,11 @@ export const seo = {
   },
 
   hero: {
-    eyebrow: "SEO Company in Nagpur",
-    h1a: "SEO Company in Nagpur",
-    h1b: "See Where You Rank Before You Pay",
-    sub: "Local SEO, technical fixes, content and AI-search visibility for Nagpur businesses. Start with a free, instant audit of your own site, real scores, real fixes, no sign-up.",
-    trustLine: "Free instant audit · AI + SEO scored · Honest timelines, no fake guarantees",
+    h1a: "SEO Company in",
+    h1b: "Nagpur",
+    sub: "Enter your website for a free, instant AI + SEO audit, see exactly where you rank across Google, local search and AI before you pay for anything.",
+    cta: "Audit My Website",
+    checks: ["Free audit", "No signup", "Real data", "No fake guarantees"],
   },
 
   stats: [
