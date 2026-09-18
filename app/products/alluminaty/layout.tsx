@@ -37,7 +37,7 @@ export default function AlluminatyLayout({ children }: { children: ReactNode }) 
       >
         <main>{children}</main>
       </div>
-      <Footer />
+      <Footer accent="#1173cf" />
     </>
   );
 }

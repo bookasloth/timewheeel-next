@@ -24,7 +24,7 @@ export default function CreatorsLayout({ children }: { children: ReactNode }) {
       <div className={`ct flex-1 ${serif.variable} ${sans.variable}`}>
         <main>{children}</main>
       </div>
-      <Footer />
+      <Footer accent="#e0572e" />
     </>
   );
 }
