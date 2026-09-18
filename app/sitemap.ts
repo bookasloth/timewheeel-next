@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/web-development-company-in-india",
     "/seo-company-in-nagpur",
     "/digital-marketing-nagpur",
+    "/ai-automation-agency-in-nagpur",
     "/case-studies",
     ...caseStudies.map((cs) => cs.href),
     "/creators",
