@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { ContactHero } from "@/components/contact/contact-hero";
 import { ContactChannels } from "@/components/contact/contact-channels";
 import { ContactSteps } from "@/components/contact/contact-steps";
-import { ContactForm } from "@/components/contact/contact-form";
+import { ContactLocate } from "@/components/contact/contact-locate";
 import { ContactFaq, faqs } from "@/components/contact/contact-faq";
 
 export const metadata: Metadata = {
@@ -66,7 +66,9 @@ export default function ContactPage() {
       <ContactHero />
       {/* <ContactChannels /> */}
       {/* <ContactSteps /> */}
-      <ContactForm />
+      {/* ContactForm (wired to /api/lead) replaced by design-only ContactLocate.
+          Re-add <ContactForm /> if you want backend capture back. */}
+      <ContactLocate />
       <ContactFaq />
     </>
   );
