@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { products } from "@/lib/products";
 import { site } from "@/lib/site";
+import { EstimateForm } from "@/components/estimate-form";
 
-// Site-wide footer. Structure + design only; the estimate form is presentational.
-// The coloured band and accents read `--footer-accent` (falls back to --brand),
-// so each page type can retint the footer by setting that var on its layout.
+// Site-wide footer. The coloured band and accents read `--footer-accent`
+// (falls back to --brand), so each page type can retint the footer.
 
 const services = [
   { label: "SEO", href: "/seo-company-in-nagpur" },
@@ -39,37 +39,6 @@ const social = [
   { label: "YouTube", href: site.social.youtube },
 ];
 
-// Inline mad-lib fields for the estimate sentence (design only, uncontrolled).
-// Pill styling + ring so each blank clearly reads as a fillable field.
-function Blank({ ph, type = "text", min = "9ch" }: { ph: string; type?: string; min?: string }) {
-  return (
-    <input
-      type={type}
-      placeholder={ph}
-      aria-label={ph}
-      style={{ minWidth: min }}
-      className="mx-1.5 inline-block rounded-lg border border-white/40 bg-white/10 px-3 py-1 align-baseline font-semibold text-white outline-none transition placeholder:font-normal placeholder:text-white/70 hover:bg-white/20 focus:border-white focus:bg-white/25 [field-sizing:content]"
-    />
-  );
-}
-
-function Pick({ ph, options }: { ph: string; options: string[] }) {
-  return (
-    <span className="relative mx-1.5 inline-flex items-center rounded-lg border border-white/40 bg-white/10 align-baseline transition hover:bg-white/20 focus-within:border-white focus-within:bg-white/25">
-      <select
-        defaultValue=""
-        aria-label={ph}
-        className="w-full cursor-pointer appearance-none bg-transparent py-1 pl-3 pr-8 font-semibold text-white outline-none [field-sizing:content]"
-      >
-        <option value="" disabled className="text-neutral-900">{ph}</option>
-        {options.map((o) => (
-          <option key={o} value={o} className="text-neutral-900">{o}</option>
-        ))}
-      </select>
-      <ChevronDown className="pointer-events-none absolute right-2.5 size-4 text-white/80" aria-hidden />
-    </span>
-  );
-}
 
 // `accent` retints the footer per page type. When omitted it falls back to the
 // --footer-accent CSS var, then the global --brand (Timewheel orange).
@@ -80,30 +49,7 @@ export function Footer({ accent }: { accent?: string }) {
       {/* Coloured CTA band — tint follows the current page type */}
       <section className="text-white" style={{ background: fa }}>
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/70">Get your project estimate — free</p>
-          <p className="mt-2 text-sm text-white/60">Tap a highlighted field and fill in the blanks.</p>
-          {/* design-only mad-lib form: free-text for personal bits, dropdowns for choices */}
-          <form className="mt-8 text-2xl font-medium leading-[2.2] tracking-tight md:text-[2rem] md:leading-[2]" aria-label="Project estimate">
-            Hey, I&apos;m <Blank ph="Your Name" min="9ch" /> — you can reach me at{" "}
-            <Blank ph="Email Address" type="email" min="12ch" /> or <Blank ph="Phone Number" type="tel" min="11ch" />.
-            I&apos;m building <Blank ph="Project / Business Name" min="14ch" /> and I need help with{" "}
-            <Pick ph="Design / SEO / Development / Marketing…" options={["Design", "SEO", "Web Development", "Web App", "Digital Marketing", "Branding", "Something else"]} />.
-            The idea is simple: turn <Blank ph="what it is today" min="12ch" /> into{" "}
-            <Blank ph="what I want it to become" min="14ch" />.
-            I&apos;m ready to invest around{" "}
-            <Pick ph="₹ Budget" options={["Under ₹50k", "₹50k – ₹1L", "₹1L – ₹3L", "₹3L – ₹10L", "₹10L+"]} /> and would like to get moving{" "}
-            <Pick ph="Timeline" options={["ASAP", "This month", "This quarter", "Just exploring"]} />.
-            So… shall we make it happen?
-            <span className="mt-8 block">
-              <button
-                type="button"
-                style={{ color: fa }}
-                className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-semibold transition-opacity hover:opacity-90"
-              >
-                Let&apos;s Talk <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
-            </span>
-          </form>
+          <EstimateForm accent={fa} />
         </div>
       </section>
 

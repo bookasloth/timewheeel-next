@@ -424,3 +424,17 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Footer estimate form sits on a coloured band. Chrome autofill would paint an
+   opaque light background + dark text over the fields; defer the UA background
+   indefinitely and force white text so autofilled fields keep the design.
+   ponytail: transition trick; under prefers-reduced-motion the UA bg can flash
+   through — acceptable edge, revisit only if reported. */
+.est-field:-webkit-autofill,
+.est-field:-webkit-autofill:hover,
+.est-field:-webkit-autofill:focus,
+.est-field:-webkit-autofill:active {
+  -webkit-text-fill-color: #ffffff;
+  caret-color: #ffffff;
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
