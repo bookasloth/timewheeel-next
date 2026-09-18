@@ -14,7 +14,7 @@ import { WaBenefits } from "@/components/web-app-development/benefits";
 import { WaFinalCta } from "@/components/web-app-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
-const PATH = "/web-app-development";
+const PATH = "/web-app-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {

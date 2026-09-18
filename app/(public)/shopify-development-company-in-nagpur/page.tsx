@@ -16,7 +16,7 @@ import { SdFaq } from "@/components/shopify-development/faq";
 import { SdFinalCta } from "@/components/shopify-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
-const PATH = "/shopify-development";
+const PATH = "/shopify-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {

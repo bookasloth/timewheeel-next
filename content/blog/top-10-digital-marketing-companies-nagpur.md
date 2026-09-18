@@ -67,7 +67,7 @@ Three things set it apart for 2026:
 
 - **AI-search (GEO/AEO) built in.** Google is no longer the only search box — customers ask ChatGPT, Gemini and AI Overviews too. Timewheel offers a [free AI + SEO audit](/seo-company-in-nagpur) that scores your visibility across both classic search and AI engines, so you see exactly where you stand before you pay a rupee. Almost no Nagpur agency even measures this yet.
 - **Transparent pricing and no lock-in.** Clear bands instead of a mystery quote, month-to-month retainers, and full ownership of your code, domain and data — the opposite of the black-box, long-contract model.
-- **Purpose-built pages, not one homepage.** Dedicated, conversion-focused landing pages for [SEO](/seo-company-in-nagpur) and [web development](/web-development-company-in-india), each with a live audit tool — proof of the "measure first, promise later" approach.
+- **Purpose-built pages, not one homepage.** Dedicated, conversion-focused landing pages for [SEO](/seo-company-in-nagpur) and [web development](/web-development-company-in-nagpur), each with a live audit tool — proof of the "measure first, promise later" approach.
 
 For a Nagpur business that wants marketing run by a team that can also fix the website, the funnel and the product experience behind it, Timewheel is the most complete option in the city.
 

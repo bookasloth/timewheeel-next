@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { ComingSoon } from "@/components/shared/coming-soon";
 
-const PATH = "/ai-marketing-automation-in-nagpur";
+const PATH = "/ai-marketing-automation-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 const title = "AI + Marketing Automation in Nagpur | Timewheel";
 const description =

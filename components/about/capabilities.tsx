@@ -20,7 +20,7 @@ const services: {
     icon: PenTool,
     title: "Website Design",
     body: "Modern, conversion-focused websites designed around your brand, audience, and goals.",
-    href: "/website-design",
+    href: "/website-design-company-in-nagpur",
     accent: {
       tile: "bg-brand/10 text-brand group-hover:bg-brand group-hover:text-white",
       border: "hover:border-brand/50",
@@ -31,7 +31,7 @@ const services: {
     icon: Code2,
     title: "Web Development",
     body: "Fast, responsive and scalable websites built with modern technologies like Next.js.",
-    href: "/web-development-company-in-india",
+    href: "/web-development-company-in-nagpur",
     accent: {
       tile: "bg-[#2563eb]/10 text-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white",
       border: "hover:border-[#2563eb]/50",
@@ -81,7 +81,7 @@ export function AboutCapabilities() {
 
         <Reveal delay={0.05}>
           <Link
-            href="/website-design"
+            href="/website-design-company-in-nagpur"
             className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-bold text-brand transition-colors hover:text-navy"
           >
             View Our Services

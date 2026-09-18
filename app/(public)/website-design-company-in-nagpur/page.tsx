@@ -17,7 +17,7 @@ import { WdFaq } from "@/components/website-design/faq";
 import { WdFinalCta } from "@/components/website-design/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 
-const PATH = "/website-design";
+const PATH = "/website-design-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {

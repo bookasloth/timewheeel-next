@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { ComingSoon } from "@/components/shared/coming-soon";
 
-const PATH = "/social-media-marketing-in-nagpur";
+const PATH = "/social-media-marketing-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 const title = "Social Media Marketing Company in Nagpur | Timewheel";
 const description =
