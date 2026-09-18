@@ -22,7 +22,11 @@
   --az-gold: #f0b429;
   --az-gold-soft: #fdecc0;
   --az-teal: #31e0c5;
+  --az-red: #ea4335;
+  --az-green: #34a853;
   --az-on-accent: #ffffff;
+  /* Signature multicolour accent (red → blue → gold → green) */
+  --az-spectrum: linear-gradient(100deg, #ea4335 0%, #4285f4 34%, #f0b429 67%, #34a853 100%);
 
   flex: 1 1 auto;
   display: flex;
@@ -767,7 +771,7 @@
   font-family: var(--az-font-serif), Georgia, serif;
   font-weight: 600;
   font-style: italic;
-  background: linear-gradient(100deg, #b87f1e 0%, #f0b429 45%, #c8871b 100%);
+  background: var(--az-spectrum);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -831,10 +835,10 @@
   aspect-ratio: 2 / 3;
   height: 220px;
   overflow: hidden;
-  border-radius: 20px;
-  border: 1px solid rgba(5, 18, 36, 0.12);
+  border-radius: 24px;
+  border: 1px solid rgba(5, 18, 36, 0.08);
   background: var(--az-surface);
-  box-shadow: none;
+  box-shadow: 0 18px 40px -24px rgba(5, 18, 36, 0.45);
 }
 
 @media (min-width: 768px) {
@@ -1449,6 +1453,20 @@
 .az-feat--panel .az-feat-ic {
   background: linear-gradient(135deg, #f4c04c, var(--az-gold));
   box-shadow: none;
+}
+
+/* Multicolour feature icons — red / blue / gold / green in sequence */
+.az-feat-grid .az-feat:nth-of-type(4n + 1) .az-feat-ic {
+  background: linear-gradient(135deg, #f6584a, var(--az-red));
+}
+.az-feat-grid .az-feat:nth-of-type(4n + 2) .az-feat-ic {
+  background: linear-gradient(135deg, #5b9bff, var(--az-accent-dark));
+}
+.az-feat-grid .az-feat:nth-of-type(4n + 3) .az-feat-ic {
+  background: linear-gradient(135deg, #f4c04c, var(--az-gold));
+}
+.az-feat-grid .az-feat:nth-of-type(4n) .az-feat-ic {
+  background: linear-gradient(135deg, #49d38a, var(--az-green));
 }
 
 .az-feat-name {
