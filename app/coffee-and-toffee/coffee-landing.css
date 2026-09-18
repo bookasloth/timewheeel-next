@@ -1484,3 +1484,66 @@
   .cf-hero-accent,
   .cf-chip { animation: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   PLAYFUL POLISH — lift on hover, violet emphasis, yellow doodles
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Inline heading emphasis: violet with a yellow hand-drawn underline. */
+.cf-accent-em {
+  color: var(--cf-violet);
+  position: relative;
+  white-space: nowrap;
+}
+.cf-accent-em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 12px;
+  background: no-repeat center / 100% 100%
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 12' preserveAspectRatio='none'%3E%3Cpath d='M3 8 C 70 3, 150 3, 297 6' stroke='%23fbbf24' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* Cards lift and glow violet on hover. */
+.cf-card,
+.cf-feature,
+.cf-cap,
+.cf-benefit,
+.cf-faq-item {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+.cf-card:hover,
+.cf-feature:hover,
+.cf-cap:hover,
+.cf-benefit:hover {
+  transform: translateY(-6px);
+  border-color: var(--cf-violet-soft);
+  box-shadow: 0 24px 46px -14px rgba(124, 58, 237, 0.28);
+}
+
+/* Icon tiles wiggle when their card is hovered. */
+.cf-feature-ic,
+.cf-cap-ic,
+.cf-benefit-ic,
+.cf-card-ic {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cf-feature:hover .cf-feature-ic,
+.cf-cap:hover .cf-cap-ic,
+.cf-benefit:hover .cf-benefit-ic {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* Stat numbers: violet→yellow gradient pop. */
+.cf-stats .cf-stat-value {
+  background: linear-gradient(120deg, #c4b5fd, #fbbf24 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
