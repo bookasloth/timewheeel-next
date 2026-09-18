@@ -1,4 +1,4 @@
-// Content for /shopify-development.
+// Content for /shopify-development-company-in-nagpur.
 // A Shopify development service page, ordered for conversion: proof early
 // (stats + portfolio), the four near-identical Plus/Migration/Custom/Headless
 // blocks from the reference wireframe merged into one 2x2 "specialized" grid,
@@ -6,7 +6,7 @@
 
 export const sd = {
   meta: {
-    title: "Shopify Development Company in India | Timewheel",
+    title: "Shopify Development Company in Nagpur | Timewheel",
     description:
       "Build, customize, migrate and scale Shopify stores with a development team that understands ecommerce, performance and growth. Shopify Plus, headless, apps and integrations.",
   },
@@ -14,11 +14,11 @@ export const sd = {
   hero: {
     eyebrow: "Trusted Shopify Development Partner",
     headingA: "Shopify Development",
-    headingAccent: "Company in India",
+    headingAccent: "Company in Nagpur",
     sub: "Build, customize, migrate and scale Shopify stores with a development team that understands ecommerce, performance and growth.",
     primaryCta: { label: "Start Your Project", href: "/contact" },
     secondaryCta: { label: "View Our Work", href: "/case-studies" },
-    badge: "Shopify Experts from India",
+    badge: "Shopify Experts from Nagpur",
   },
 
   stats: [
