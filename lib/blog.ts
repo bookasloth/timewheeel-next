@@ -20,6 +20,10 @@ export type PostMeta = {
   tags: string[];
   ogTitle?: string;
   ogDescription?: string;
+  /** Optional hero image (frontmatter `cover`); hero shows a branded panel when absent. */
+  cover?: string;
+  /** Optional TL;DR bullets (frontmatter `takeaways`), shown above the article body. */
+  takeaways?: string[];
   readingTime: number;
 };
 
@@ -66,6 +70,8 @@ function readPost(slug: string): Post {
       tags: Array.isArray(data.tags) ? data.tags : [],
       ogTitle: data.ogTitle,
       ogDescription: data.ogDescription,
+      cover: data.cover,
+      takeaways: Array.isArray(data.takeaways) ? data.takeaways : undefined,
       readingTime: readingTime(content),
     },
     content,

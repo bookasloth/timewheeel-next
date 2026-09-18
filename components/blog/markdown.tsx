@@ -72,8 +72,25 @@ const components: Components = {
     <th className="border border-border bg-secondary/50 px-3 py-2 text-left font-semibold">{children}</th>
   ),
   td: ({ children }) => <td className="border border-border px-3 py-2 text-muted-foreground">{children}</td>,
-  code: ({ children }) => (
-    <code className="rounded bg-secondary px-1.5 py-0.5 text-sm text-foreground">{children}</code>
+  // Inline code only; fenced blocks arrive with a `language-*` className and are
+  // left unstyled here so the `pre` wrapper controls block styling.
+  code: ({ className, children }) => {
+    if (className?.includes("language-")) {
+      return <code className={`${className} text-sm`}>{children}</code>;
+    }
+    return <code className="rounded bg-secondary px-1.5 py-0.5 text-sm text-foreground">{children}</code>;
+  },
+  pre: ({ children }) => (
+    <pre className="mt-6 overflow-x-auto rounded-xl border border-border bg-[#0d0d0d] p-4 text-sm text-neutral-100">
+      {children}
+    </pre>
+  ),
+  img: ({ src, alt }) => (
+    <figure className="mt-8">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={typeof src === "string" ? src : ""} alt={alt ?? ""} loading="lazy" className="w-full rounded-2xl border border-border" />
+      {alt && <figcaption className="mt-2 text-center text-xs text-muted-foreground">{alt}</figcaption>}
+    </figure>
   ),
 };
 
