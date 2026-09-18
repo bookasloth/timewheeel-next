@@ -2,27 +2,39 @@
    Class prefix `.cf-` scoped under the `.cf` root (mirrors `.az` / `.sx`). */
 
 .cf {
-  /* palette */
-  --cf-bg: #faf7f1;
-  --cf-surface: #fffdf9;
-  --cf-surface-2: #f6efe3;
-  --cf-ink: #241a12;
-  --cf-muted: #6f665f;
-  --cf-faint: #a4998a;
-  --cf-line: #e8e0d6;
+  /* Playful creator-support palette: warm cream ground, violet primary,
+     sunny-yellow CTA, hand-drawn accents. Legacy token names are kept but
+     remapped, so every existing rule recolours to the new scheme. */
+  --cf-bg: #faf6ee;         /* warm cream ground */
+  --cf-surface: #ffffff;    /* card white */
+  --cf-surface-2: #f3eefe;  /* soft violet surface */
+  --cf-ink: #2b2440;        /* violet-black text */
+  --cf-muted: #6b6580;      /* muted violet-grey */
+  --cf-faint: #a49fb5;
+  --cf-line: #ece7f7;       /* soft violet hairline */
 
-  --cf-espresso: #1d1209;
-  --cf-coffee: #4a3421;
-  --cf-caramel: #a9712f;
-  --cf-toffee: #c77b2f;
-  --cf-gold: #e0a030;
-  --cf-amber: #f5b942;
-  --cf-orange: #e87922;
-  --cf-cream: #f5eee3;
+  /* brand */
+  --cf-violet: #7c3aed;
+  --cf-violet-2: #8b5cf6;
+  --cf-violet-soft: #ede9fe;
+  --cf-yellow: #fbbf24;
+  --cf-yellow-2: #f59e0b;
+  --cf-yellow-soft: #fef3c7;
 
+  /* legacy names remapped onto the new palette */
+  --cf-espresso: #2e1065;   /* deep violet band (was near-black) */
+  --cf-coffee: #6d28d9;
+  --cf-caramel: #7c3aed;
+  --cf-toffee: #8b5cf6;
+  --cf-gold: #fbbf24;
+  --cf-amber: #fcd34d;
+  --cf-orange: #f59e0b;
+  --cf-cream: #fdf9f0;
+
+  --cf-font-sans: var(--cf-font-body);
   --cf-radius: 22px;
-  --cf-shadow: 0 10px 30px rgba(70, 45, 25, 0.06);
-  --cf-shadow-lg: 0 22px 48px rgba(70, 45, 25, 0.1);
+  --cf-shadow: 0 10px 30px rgba(80, 55, 130, 0.08);
+  --cf-shadow-lg: 0 22px 48px rgba(80, 55, 130, 0.14);
 
   background: var(--cf-bg);
   color: var(--cf-ink);
@@ -193,12 +205,7 @@
 }
 
 .cf-hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+  display: none; /* playful bright hero — no dark coffee video */
 }
 
 .cf-hero-overlay {
@@ -206,7 +213,9 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(160deg, rgba(29, 18, 9, 0.82), rgba(29, 18, 9, 0.55) 50%, rgba(29, 18, 9, 0.78));
+    radial-gradient(50% 45% at 18% 20%, rgba(139, 92, 246, 0.18), transparent 60%),
+    radial-gradient(46% 42% at 84% 26%, rgba(251, 191, 36, 0.22), transparent 62%),
+    linear-gradient(180deg, var(--cf-bg), var(--cf-surface-2) 120%);
   pointer-events: none;
 }
 
@@ -231,7 +240,7 @@
   font-weight: 600;
   line-height: 1.02;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--cf-ink);
 }
 
 .cf-hero-word {
@@ -250,7 +259,7 @@
   max-width: 600px;
   font-size: 18px;
   line-height: 1.7;
-  color: rgba(245, 238, 227, 0.85);
+  color: var(--cf-muted);
 }
 
 .cf-hero-actions {
@@ -286,14 +295,14 @@
   gap: 9px;
   padding: 8px 14px 8px 8px;
   border-radius: 999px;
-  background: rgba(255, 253, 249, 0.12);
-  border: 1px solid rgba(245, 238, 227, 0.2);
-  box-shadow: 0 14px 30px rgba(29, 18, 9, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--cf-line);
+  box-shadow: 0 14px 30px rgba(80, 55, 130, 0.14);
   left: var(--chiplr);
   right: var(--chippr);
   white-space: nowrap;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .cf-chip-av {
@@ -312,7 +321,7 @@
 .cf-chip-txt {
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--cf-cream);
+  color: var(--cf-ink);
 }
 
 .cf-chip-txt svg {
@@ -1339,4 +1348,139 @@
   .cf-chip {
     animation: none !important;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PREMIUM HERO FX — aurora, grain, shimmer, glow, floating chips
+   Layered on top of the video hero for a top-tier landing feel.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Soft violet + yellow blobs drifting behind the copy on the cream ground. */
+.cf-hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(36% 42% at 20% 28%, rgba(139, 92, 246, 0.28), transparent 62%),
+    radial-gradient(32% 38% at 84% 22%, rgba(251, 191, 36, 0.30), transparent 64%),
+    radial-gradient(44% 48% at 70% 84%, rgba(124, 58, 237, 0.20), transparent 66%);
+  filter: blur(36px);
+  animation: cf-aurora 18s ease-in-out infinite alternate;
+}
+
+@keyframes cf-aurora {
+  0%   { transform: translate3d(-3%, -2%, 0) scale(1.05) rotate(0deg); }
+  50%  { transform: translate3d(4%, 3%, 0) scale(1.15) rotate(4deg); }
+  100% { transform: translate3d(-2%, 4%, 0) scale(1.08) rotate(-3deg); }
+}
+
+/* Fine film grain so the gradients never band. */
+.cf-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.cf-hero-centered { z-index: 4; }
+.cf-chip { z-index: 5; }
+
+/* Animated gold shine sweeping through the italic accent. The glyphs live in
+   per-word spans, so the gradient + clip has to sit on the words themselves. */
+.cf-hero-accent .cf-hero-word {
+  background-image: linear-gradient(
+    100deg,
+    var(--cf-violet) 0%,
+    var(--cf-violet-2) 40%,
+    #b794f6 52%,
+    var(--cf-violet-2) 64%,
+    var(--cf-violet) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: cf-shine 5.5s linear infinite;
+}
+
+@keyframes cf-shine {
+  to { background-position: -250% 0; }
+}
+
+/* Hand-drawn yellow underline swooping under the violet accent line. */
+.cf-hero-accent {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+.cf-hero-accent::after {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: -2px;
+  height: 14px;
+  background: no-repeat center / 100% 100%
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9 C 60 3, 130 3, 297 7' stroke='%23fbbf24' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  animation: cf-underline 1s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+  transform-origin: left center;
+}
+@keyframes cf-underline {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* Sunny CTA: yellow gradient, dark ink text, glow + hover shimmer. */
+.cf-btn--gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--cf-amber), var(--cf-yellow-2)) !important;
+  color: #3a2a00 !important;
+  box-shadow:
+    0 10px 26px -6px rgba(245, 158, 11, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.cf-btn--gold::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.6s ease;
+}
+
+.cf-btn--gold:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 34px -6px rgba(245, 158, 11, 0.62),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.cf-btn--gold:hover::after { left: 130%; }
+
+/* Floating supporter chips drift gently around the copy. */
+.cf-chip {
+  animation: cf-float var(--cf-float, 7s) ease-in-out infinite;
+}
+
+@keyframes cf-float {
+  0%, 100% { transform: translateY(0) rotate(var(--cf-tilt, 0deg)); }
+  50%      { transform: translateY(-14px) rotate(var(--cf-tilt, 0deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-hero::before,
+  .cf-hero-accent,
+  .cf-chip { animation: none; }
 }

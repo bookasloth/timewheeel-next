@@ -7,6 +7,52 @@ import { CfButton } from "./button";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+type Chip = {
+  initials: string;
+  text: React.ReactNode;
+  pos: React.CSSProperties;
+  float: string;
+  tilt: string;
+  delay: number;
+};
+
+// Floating supporter proof, the Ko-fi / BMAC signature. Positioned around the
+// copy with CSS vars for drift speed + tilt; hidden on small screens.
+const CHIPS: Chip[] = [
+  {
+    initials: "AK",
+    text: <>Aisha bought 3 coffees ☕</>,
+    pos: { top: "18%", ["--chiplr" as string]: "6%" },
+    float: "7.5s",
+    tilt: "-4deg",
+    delay: 0.5,
+  },
+  {
+    initials: "RM",
+    text: <>New member · ₹499/mo 🎉</>,
+    pos: { top: "30%", ["--chippr" as string]: "5%" },
+    float: "8.5s",
+    tilt: "5deg",
+    delay: 0.7,
+  },
+  {
+    initials: "SP",
+    text: <>“Love your work!” — ₹500 tip</>,
+    pos: { bottom: "20%", ["--chiplr" as string]: "9%" },
+    float: "9s",
+    tilt: "3deg",
+    delay: 0.9,
+  },
+  {
+    initials: "JD",
+    text: <>Paid out instantly ⚡</>,
+    pos: { bottom: "26%", ["--chippr" as string]: "8%" },
+    float: "7s",
+    tilt: "-5deg",
+    delay: 1.1,
+  },
+];
+
 function Words({
   text,
   className = "",
@@ -49,6 +95,22 @@ export function CfHero({ data }: { data: CfData }) {
         aria-hidden="true"
       />
       <div className="cf-hero-overlay" aria-hidden="true" />
+
+      {/* floating supporter proof */}
+      {CHIPS.map((c, i) => (
+        <motion.div
+          key={i}
+          className="cf-chip hidden md:inline-flex"
+          style={{ ...c.pos, ["--cf-float" as string]: c.float, ["--cf-tilt" as string]: c.tilt }}
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE, delay: c.delay }}
+          aria-hidden="true"
+        >
+          <span className="cf-chip-av">{c.initials}</span>
+          <span className="cf-chip-txt">{c.text}</span>
+        </motion.div>
+      ))}
 
       <div className="cf-container cf-hero-centered">
         <div className="cf-hero-copy">

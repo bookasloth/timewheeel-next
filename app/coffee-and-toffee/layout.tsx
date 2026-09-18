@@ -5,19 +5,19 @@ import "./coffee-landing.css";
 import "./support.css";
 
 const serif = Fraunces({
-  variable: "--ct-serif",
+  variable: "--cf-font-serif",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 const sans = Inter({
-  variable: "--ct-sans",
+  variable: "--cf-font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 const hand = Caveat({
-  variable: "--ct-hand",
+  variable: "--cf-font-hand",
   subsets: ["latin"],
   weight: ["500", "600"],
 });
@@ -35,7 +35,7 @@ export default function CoffeeToffeeLayout({
 }) {
   return (
     <div
-      className={`${serif.variable} ${sans.variable} ${hand.variable} ct-page`}
+      className={`${serif.variable} ${sans.variable} ${hand.variable} cf ct-page`}
     >
       {children}
     </div>
