@@ -2,19 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-// StackBlitz-style "before / after" card.
-//   Before (rest):  clean white card, accent-coloured CTA text, image tucked
-//                   into a diagonal corner bottom-right.
-//   After (hover):  an accent bar sweeps in to fill the footer, CTA text flips
-//                   to white, and the image corner grows.
+// StackBlitz-style project card. Image is a ~40% diagonal wedge, text ~60%.
+// `mirror` flips it (image left / text right) so a row of two cards mirrors.
 type Props = {
   title: string;
   subtitle?: string;
   href: string;
   image: string;
   cta?: string;
-  /** Accent colour of the sweeping footer bar. */
   accent?: string;
+  mirror?: boolean;
 };
 
 export function WebProjectCard({
@@ -22,51 +19,59 @@ export function WebProjectCard({
   subtitle,
   href,
   image,
-  cta = "Read the release",
+  cta = "See the build",
   accent = "#3987C9",
+  mirror = false,
 }: Props) {
+  const imageClip = mirror
+    ? "polygon(0 0, 44% 0, 36% 100%, 0 100%)" // left wedge
+    : "polygon(56% 0, 100% 0, 100% 100%, 64% 100%)"; // right wedge
+
   return (
     <Link
       href={href}
       className="group relative block min-h-[210px] overflow-hidden rounded-2xl border border-ink bg-white"
     >
-      {/* footer accent strip: full width, hidden off-left at rest, sweeps in on
-          hover. The image (on top) covers its right end, so the strip visually
-          ends exactly along the image's diagonal. */}
+      {/* footer accent strip: full width, sweeps in on hover from the text side.
+          The image (on top) covers its far end along the diagonal. */}
       <span
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-14 -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"
+        className={`absolute inset-x-0 bottom-0 h-14 transition-transform duration-500 ease-out group-hover:translate-x-0 ${
+          mirror ? "translate-x-full" : "-translate-x-full"
+        }`}
         style={{ backgroundColor: accent }}
       />
 
-      {/* image: full-bleed cover clipped to a diagonal right wedge, on top of
-          the strip. Zooms on hover. Seam runs 56% (top) → 38% (bottom). */}
-      <div
-        aria-hidden
-        className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: "polygon(56% 0, 100% 0, 100% 100%, 38% 100%)" }}
-      >
+      {/* image: ~40% diagonal wedge, zooms on hover */}
+      <div aria-hidden className="absolute inset-0 overflow-hidden" style={{ clipPath: imageClip }}>
         <Image
           src={image}
           alt=""
           fill
-          sizes="(min-width: 1024px) 440px, 60vw"
+          sizes="(min-width: 1024px) 300px, 50vw"
           className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-110"
         />
       </div>
 
-      {/* copy */}
-      <div className="relative px-6 pb-20 pt-7">
-        <h3 className="max-w-[56%] text-lg font-black leading-tight tracking-tight text-ink">{title}</h3>
+      {/* copy (~60%) */}
+      <div className={`relative px-6 pb-20 pt-7 ${mirror ? "text-right" : ""}`}>
+        <h3 className={`text-lg font-black leading-tight tracking-tight text-ink ${mirror ? "ml-auto" : ""} max-w-[58%]`}>
+          {title}
+        </h3>
         {subtitle && (
-          <p className="mt-1 max-w-[56%] text-lg font-medium leading-tight tracking-tight text-ink/80">
+          <p className={`mt-1 text-lg font-medium leading-tight tracking-tight text-ink/80 ${mirror ? "ml-auto" : ""} max-w-[58%]`}>
             {subtitle}
           </p>
         )}
       </div>
 
-      {/* CTA text over the footer, above both bar and image */}
-      <span className="absolute inset-x-0 bottom-0 flex h-14 items-center gap-2 px-6 text-[13px] font-bold" style={{ color: accent }}>
+      {/* CTA over the strip */}
+      <span
+        className={`absolute inset-x-0 bottom-0 flex h-14 items-center gap-2 px-6 text-[13px] font-bold ${
+          mirror ? "justify-end" : ""
+        }`}
+        style={{ color: accent }}
+      >
         <span className="transition-colors duration-300 group-hover:text-white">{cta}</span>
         <ArrowRight className="size-4 transition-[transform,color] duration-300 group-hover:translate-x-0.5 group-hover:text-white" />
       </span>
