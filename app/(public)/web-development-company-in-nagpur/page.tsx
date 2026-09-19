@@ -87,15 +87,12 @@ export default function WebDevelopmentPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <WdHero />
-      <section className="mx-auto max-w-3xl px-6 py-10">
-        <WebProjectCard
-          title="Ticket Dino:"
-          subtitle="Events that sell themselves"
-          href="#"
-          image="/hero/web-dev.png"
-          cta="See the build"
-          accent="#3987C9"
-        />
+      <section className="mx-auto max-w-6xl px-6 py-12">
+        <div className="grid gap-5 md:grid-cols-3">
+          <WebProjectCard title="Ticket Dino:" subtitle="Events that sell out" href="#" image="/hero/web-dev.png" cta="See the build" accent="#3987C9" />
+          <WebProjectCard title="Book A Sloth:" subtitle="Bookings on autopilot" href="#" image="/hero/web-design.png" cta="See the build" accent="#29a66f" />
+          <WebProjectCard title="CoffeeForMe:" subtitle="Orders, zero commission" href="#" image="/hero/social.png" cta="See the build" accent="#f45b0a" />
+        </div>
       </section>
       <WdStats />
       <WdPortfolio />
