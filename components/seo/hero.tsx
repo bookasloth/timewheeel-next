@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Link2, ArrowRight, ArrowUp, ArrowLeft, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
@@ -104,38 +105,85 @@ function AuditCard({ data }: { data: Result }) {
   );
 }
 
-// Greyed, shimmering placeholder shown before an audit runs (idle) and while
-// it runs (loading). Deliberately looks empty so it reads as "run the tool".
-function SkeletonCard({ loading }: { loading: boolean }) {
-  // Warm-grey tones layered so the card reads as a real UI waiting for data.
+// Default resting visual: a product-style preview image + a prompt that
+// points at the audit form. Swaps to the working card once an audit runs.
+// TODO: swap /products/bas-dashboard-16x10.png for a real SEO-audit visual.
+function ImagePanel() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
+      <Image
+        src="/products/bas-dashboard-16x10.png"
+        alt="Preview of the Timewheel SEO audit dashboard"
+        width={1600}
+        height={1000}
+        priority
+        sizes="(min-width: 1024px) 45vw, 90vw"
+        className="h-auto w-full"
+      />
+      <div className="flex items-center justify-center gap-2 border-t border-border bg-secondary/50 px-4 py-3 text-center text-[13px] font-semibold text-foreground">
+        <ArrowUp className="size-4 text-brand-text lg:hidden" />
+        <ArrowLeft className="hidden size-4 text-brand-text lg:inline-block" />
+        Enter your URL{" "}
+        <span className="lg:hidden">above</span>
+        <span className="hidden lg:inline">on the left</span>{" "}
+        to audit your real site
+      </div>
+    </div>
+  );
+}
+
+const RING_META = [
+  { label: "SEO Health", color: "#f59e0b" },
+  { label: "AI Search", color: "#3987c9" },
+  { label: "Technical", color: "#29a66f" },
+];
+const RING_C = 2 * Math.PI * 30; // circumference for r=30
+
+// "Working" card: the three rings scan-fill on a loop in their own colours so
+// the tool visibly feels alive while the audit runs.
+function LoadingCard() {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
       <div className="flex items-center gap-2 border-b border-border bg-secondary/60 px-4 py-3">
         <span className="size-2.5 rounded-full bg-border" />
         <span className="size-2.5 rounded-full bg-border" />
         <span className="size-2.5 rounded-full bg-border" />
-        <span className="shimmer ml-2 h-5 flex-1 rounded-md bg-secondary" />
+        <span className="ml-2 flex-1 rounded-md bg-background px-3 py-1 text-[11px] font-medium text-muted-foreground">
+          Auditing your site…
+        </span>
       </div>
 
       <div className="p-6">
-        {/* title row */}
         <div className="flex items-center justify-between">
-          <span className="shimmer h-4 w-40 rounded bg-secondary" />
-          <span className="shimmer h-3 w-16 rounded bg-secondary/70" />
+          <p className="text-base font-extrabold text-foreground">Scoring your site</p>
+          <span className="flex items-center gap-1.5 text-[11px] font-medium text-brand-text">
+            <Loader2 className="size-3 animate-spin" /> Live
+          </span>
         </div>
 
-        {/* three score rings, greyed */}
         <div className="mt-5 grid grid-cols-3 gap-2">
-          {["SEO Health", "AI Search", "Technical"].map((label) => (
-            <div key={label} className="flex flex-col items-center gap-2">
-              <div className="shimmer size-[76px] rounded-full border-[6px] border-secondary bg-card" />
-              <span className="shimmer h-3 w-14 rounded bg-secondary" />
-              <span className="shimmer h-2.5 w-9 rounded bg-secondary/70" />
+          {RING_META.map((r, i) => (
+            <div key={r.label} className="flex flex-col items-center gap-2 text-center">
+              <div className="relative size-[76px]">
+                <svg viewBox="0 0 72 72" className="size-full -rotate-90">
+                  <circle cx="36" cy="36" r="30" fill="none" stroke="#ececed" strokeWidth="6" />
+                  <circle
+                    cx="36" cy="36" r="30" fill="none" stroke={r.color} strokeWidth="6"
+                    strokeLinecap="round" strokeDasharray={RING_C}
+                    className="seo-ring-scan"
+                    style={{ animationDelay: `${i * 0.22}s` }}
+                  />
+                </svg>
+                <span className="absolute inset-0 grid place-items-center text-lg font-extrabold" style={{ color: r.color }}>
+                  <span className="size-1.5 animate-pulse rounded-full" style={{ backgroundColor: r.color }} />
+                </span>
+              </div>
+              <span className="text-xs font-bold text-foreground">{r.label}</span>
+              <span className="text-[11px] font-semibold text-muted-foreground">Scanning…</span>
             </div>
           ))}
         </div>
 
-        {/* findings placeholder rows, varied widths + tones */}
         <div className="mt-6 rounded-xl border border-border p-4">
           <span className="shimmer block h-4 w-44 rounded bg-secondary" />
           <ul className="mt-4 space-y-3.5">
@@ -148,23 +196,9 @@ function SkeletonCard({ loading }: { loading: boolean }) {
           </ul>
         </div>
 
-        {/* prompt overlay: tell people to run the tool */}
         <div className="mt-5 flex items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 px-4 py-3 text-center text-[13px] font-semibold text-foreground">
-          {loading ? (
-            <>
-              <Loader2 className="size-4 animate-spin text-brand-text" />
-              Crawling your site and scoring…
-            </>
-          ) : (
-            <>
-              <ArrowUp className="size-4 text-brand-text lg:hidden" />
-              <ArrowLeft className="hidden size-4 text-brand-text lg:inline-block" />
-              Enter your URL{" "}
-              <span className="lg:hidden">above</span>
-              <span className="hidden lg:inline">on the left</span>{" "}
-              to reveal your real scores
-            </>
-          )}
+          <Loader2 className="size-4 animate-spin text-brand-text" />
+          Crawling your site and scoring… about 15 seconds.
         </div>
       </div>
     </div>
@@ -290,10 +324,12 @@ export function SeoHero() {
 
         {/* Right: live audit card (sample until a real audit runs) */}
         <Reveal delay={0.12} className="w-full">
-          {status === "success" && result ? (
+          {status === "loading" ? (
+            <LoadingCard />
+          ) : status === "success" && result ? (
             <AuditCard data={result} />
           ) : (
-            <SkeletonCard loading={status === "loading"} />
+            <ImagePanel />
           )}
         </Reveal>
       </div>

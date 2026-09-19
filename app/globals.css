@@ -447,6 +447,27 @@
   }
 }
 
+/* SEO audit "working" ring scan — arc fills and empties on a loop so the
+   loading card reads as actively measuring. r=30 => circumference ~188.5. */
+@keyframes seo-ring-scan {
+  0%,
+  100% {
+    stroke-dashoffset: 188.5;
+  }
+  50% {
+    stroke-dashoffset: 40;
+  }
+}
+.seo-ring-scan {
+  animation: seo-ring-scan 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .seo-ring-scan {
+    animation: none;
+    stroke-dashoffset: 80;
+  }
+}
+
 /* expanding pulse ring around the ecosystem hub */
 @keyframes dm-pulse-ring {
   0% {
