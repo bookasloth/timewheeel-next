@@ -67,6 +67,7 @@ export function AuditLeadModal({ open, onClose, domain, scores, findings, findin
           sendReport: true,
           domain: site,
           scores,
+          findings, // admin-only: full titles + exact fixes for the team email
         }),
       });
       const data = await res.json().catch(() => ({}));

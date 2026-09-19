@@ -1,6 +1,13 @@
 // Pure renderer for the lead notification email. No framework imports, so it
 // can be unit-tested / previewed standalone.
 
+export type LeadFinding = {
+  title: string;
+  severity: string;
+  category: string;
+  recommendation: string;
+};
+
 export type LeadEmail = {
   name: string;
   business: string;
@@ -11,6 +18,9 @@ export type LeadEmail = {
   message: string;
   source: string;
   when: string;
+  // Admin-only: the full audit findings + exact fixes. Never shown in the
+  // public report; the team gets them here to action the lead.
+  findings?: LeadFinding[];
 };
 
 function esc(s: string): string {
@@ -64,6 +74,15 @@ export function renderLeadEmailHtml(l: LeadEmail): string {
           <div style="font:600 12px/1.4 Arial,sans-serif;color:${muted};text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Message</div>
           <div style="background:#faf9f7;border:1px solid ${line};border-left:3px solid ${brand};border-radius:8px;padding:16px 18px;font:400 15px/1.6 Arial,sans-serif;color:${ink};white-space:pre-wrap">${esc(l.message)}</div>
         </td></tr>
+        ${l.findings && l.findings.length ? `
+        <tr><td style="padding:20px 28px 4px">
+          <div style="font:600 12px/1.4 Arial,sans-serif;color:${muted};text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Full audit findings + fixes (admin only)</div>
+          ${l.findings.map((f, i) => `
+            <div style="background:#faf9f7;border:1px solid ${line};border-radius:8px;padding:14px 16px;margin-bottom:8px">
+              <div style="font:700 14px/1.4 Arial,sans-serif;color:${ink}">${i + 1}. ${esc(f.title)} <span style="font:600 11px/1 Arial,sans-serif;color:${muted}">(${esc(f.severity)} · ${esc(f.category)})</span></div>
+              <div style="margin-top:6px;font:400 13px/1.55 Arial,sans-serif;color:${ink}"><strong>Fix:</strong> ${esc(f.recommendation || "—")}</div>
+            </div>`).join("")}
+        </td></tr>` : ""}
         <tr><td style="padding:24px 28px 28px">
           <a href="mailto:${esc(l.email)}?subject=Re:%20your%20enquiry%20to%20Timewheel" style="display:inline-block;background:${brand};color:#fff;font:700 15px/1 Arial,sans-serif;text-decoration:none;padding:14px 26px;border-radius:10px">Reply to ${esc(l.name)}</a>
         </td></tr>
@@ -167,5 +186,9 @@ export function renderLeadEmailText(l: LeadEmail): string {
     "",
     "Message:",
     l.message,
+    ...(l.findings && l.findings.length
+      ? ["", "Full audit findings + fixes (admin only):",
+         ...l.findings.map((f, i) => `${i + 1}. ${f.title} (${f.severity} · ${f.category})\n   Fix: ${f.recommendation || "—"}`)]
+      : []),
   ].join("\n");
 }

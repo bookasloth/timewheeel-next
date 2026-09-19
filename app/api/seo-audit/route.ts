@@ -45,6 +45,10 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const target = normalizeUrl(searchParams.get("url") ?? "");
   const full = searchParams.get("full") === "1";
+  // Public report requests are redacted: we never send the exact fix to the
+  // browser, so a shared/pasted report can't be reverse-engineered. The full
+  // recommendations only ever go to the team via the lead email.
+  const redacted = searchParams.get("redacted") === "1";
   if (!target) {
     return NextResponse.json(
       { error: "Please enter a valid website URL (e.g. yourbusiness.com)." },
@@ -94,7 +98,8 @@ export async function GET(request: Request) {
             title: f.title,
             severity: f.severity,
             category: f.category,
-            recommendation: f.recommendation,
+            // Redacted (public report): the exact fix is withheld entirely.
+            ...(redacted ? {} : { recommendation: f.recommendation }),
           }))
         : [],
       findingsTotal: data.findingsTotal ?? (data.findings?.length ?? 0),

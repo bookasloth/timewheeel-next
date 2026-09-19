@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { SeoReportClient } from "@/components/seo/report-client";
 
 export const metadata: Metadata = {
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SeoReportPage() {
-  return (
-    <Suspense fallback={null}>
-      <SeoReportClient />
-    </Suspense>
-  );
+  return <SeoReportClient />;
 }

@@ -29,6 +29,8 @@ type Lead = {
   sendReport?: boolean;
   domain?: string;
   scores?: { overall?: number | null; ai?: number | null; seo?: number | null };
+  // Admin-only full findings + fixes, forwarded straight into the team email.
+  findings?: Array<{ title?: string; severity?: string; category?: string; recommendation?: string }>;
 };
 
 // Best-effort in-memory rate limit. ponytail: per-instance only; move to a
@@ -119,14 +121,25 @@ export async function POST(request: Request) {
     }) + " IST",
   };
 
+  // Admin-only: full findings + exact fixes, capped and cleaned.
+  const findings = Array.isArray(body.findings)
+    ? body.findings.slice(0, 30).map((f) => ({
+        title: clean(f.title),
+        severity: clean(f.severity),
+        category: clean(f.category),
+        recommendation: clean(f.recommendation),
+      }))
+    : undefined;
+  const teamEmail = { ...l, findings };
+
   try {
     await transporter.sendMail({
       from: LEAD_FROM || SMTP_USER,
       to: LEAD_TO,
       replyTo: `${l.name} <${l.email}>`,
       subject: `New lead: ${l.service}, ${l.business} (${l.source})`,
-      text: renderLeadEmailText(l),
-      html: renderLeadEmailHtml(l),
+      text: renderLeadEmailText(teamEmail),
+      html: renderLeadEmailHtml(teamEmail),
     });
 
     // Optional second email TO the lead: their SEO report link. The report URL
