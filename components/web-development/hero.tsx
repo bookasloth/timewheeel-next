@@ -13,7 +13,7 @@ const HERO_TILES = [
   { n: 3, pos: "left-[6px] top-[calc(34%+10px)]" }, // browser, mid-left
   { n: 4, pos: "left-[25px] -bottom-[124px]" }, // chart, bottom-left
   { n: 5, pos: "-right-[120px] top-[42%]" }, // rocket, mid-right (half off-screen)
-  { n: 6, pos: "right-[70px] bottom-[36px]" }, // plant, bottom-right (pulled in near buttons)
+  { n: 6, pos: "right-[110px] -bottom-[14px]" }, // plant, bottom-right (pulled in near buttons)
 ] as const;
 
 function Tile({ n, pos }: (typeof HERO_TILES)[number]) {
