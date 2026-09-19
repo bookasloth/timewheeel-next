@@ -30,15 +30,7 @@ export function WebProjectCard({
       href={href}
       className="group relative block min-h-[240px] overflow-hidden rounded-2xl border border-ink bg-white"
     >
-      {/* footer accent bar — hidden off to the left at rest, sweeps in on hover */}
-      <span
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-16 -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"
-        style={{ backgroundColor: accent }}
-      />
-
-      {/* image, revealed through a diagonal corner (bottom-right), grows on hover.
-          Sits above the bar so its dark corner stays on top of the accent. */}
+      {/* image, revealed through a diagonal corner (bottom-right), grows on hover */}
       <div
         aria-hidden
         className="absolute inset-y-0 right-0 w-[44%] transition-[width] duration-500 ease-out group-hover:w-[52%]"
@@ -46,6 +38,13 @@ export function WebProjectCard({
       >
         <Image src={image} alt="" fill sizes="(min-width: 1024px) 380px, 60vw" className="object-contain object-right" />
       </div>
+
+      {/* footer accent bar — over the image; hidden off to the left at rest, sweeps in on hover */}
+      <span
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-16 -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"
+        style={{ backgroundColor: accent }}
+      />
 
       {/* copy */}
       <div className="relative px-8 pb-24 pt-10">
