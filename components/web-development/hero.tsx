@@ -11,7 +11,7 @@ const HERO_TILES = [
   { n: 1, pos: "-left-[69px] -top-[44px]" }, // code, top-left
   { n: 2, pos: "-right-8 -top-10 md:-right-4" }, // laptop, top-right
   { n: 3, pos: "left-[6px] top-[calc(34%+10px)]" }, // browser, mid-left
-  { n: 4, pos: "left-[25px] -bottom-[74px]" }, // chart, bottom-left
+  { n: 4, pos: "left-[25px] -bottom-[124px]" }, // chart, bottom-left
   { n: 5, pos: "-right-6 top-[42%] md:-right-2" }, // rocket, mid-right
   { n: 6, pos: "-right-8 -bottom-8 md:-right-2" }, // plant, bottom-right
 ] as const;
@@ -71,13 +71,13 @@ export function WdHero() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
       </div>
 
-      {/* scattered illustration tiles */}
+      {/* doodle accents — sit behind the icon tiles */}
+      <Doodles />
+
+      {/* scattered illustration tiles (paint over the doodles) */}
       {HERO_TILES.map((t) => (
         <Tile key={t.n} {...t} />
       ))}
-
-      {/* doodle accents */}
-      <Doodles />
 
       <div className="relative mx-auto max-w-3xl px-6 pb-14 pt-16 text-center md:pb-20 md:pt-24">
         <Reveal>
