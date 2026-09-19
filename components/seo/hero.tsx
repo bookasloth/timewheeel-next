@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Link2, ArrowRight, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
+import { Link2, ArrowRight, ArrowUp, ArrowLeft, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
 
@@ -10,18 +10,6 @@ type Scores = { overall: number | null; ai: number | null; seo: number | null };
 type Finding = { title: string; severity: string; category: string; recommendation: string };
 type Result = { domain: string | null; scores: Scores; findings: Finding[]; findingsTotal: number };
 type Status = "idle" | "loading" | "success" | "error";
-
-// Illustrative preview shown before a real audit runs. Not real data.
-const SAMPLE_RESULT: Result = {
-  domain: "yoursite.com",
-  scores: { overall: 62, ai: 48, seo: 74 },
-  findings: [
-    { title: "Meta titles missing on 8 pages", severity: "high", category: "", recommendation: "" },
-    { title: "No local-business schema markup", severity: "medium", category: "", recommendation: "" },
-    { title: "Slow mobile load on key pages", severity: "medium", category: "", recommendation: "" },
-  ],
-  findingsTotal: 12,
-};
 
 function band(v: number | null): { color: string; word: string } {
   if (v === null) return { color: "#c9c9cf", word: "" };
@@ -62,7 +50,7 @@ function Ring({ score, label }: { score: number | null; label: string }) {
   );
 }
 
-function AuditCard({ data, sample }: { data: Result; sample: boolean }) {
+function AuditCard({ data }: { data: Result }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card">
       <div className="flex items-center gap-2 border-b border-border bg-secondary/60 px-4 py-3">
@@ -72,21 +60,12 @@ function AuditCard({ data, sample }: { data: Result; sample: boolean }) {
         <span className="ml-2 flex-1 truncate rounded-md bg-background px-3 py-1 text-[11px] font-medium text-muted-foreground">
           {data.domain ?? "your site"}
         </span>
-        {sample && (
-          <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
-            Sample
-          </span>
-        )}
       </div>
 
       <div className="p-6">
         <div className="flex items-center justify-between">
-          <p className="text-base font-extrabold text-foreground">
-            {sample ? "Example SEO Audit" : "Your SEO Audit Result"}
-          </p>
-          <span className="text-[11px] font-medium text-muted-foreground">
-            {sample ? "Illustrative" : "Scanned just now"}
-          </span>
+          <p className="text-base font-extrabold text-foreground">Your SEO Audit Result</p>
+          <span className="text-[11px] font-medium text-muted-foreground">Scanned just now</span>
         </div>
 
         <div className="mt-5 grid grid-cols-3 gap-2">
@@ -114,7 +93,7 @@ function AuditCard({ data, sample }: { data: Result; sample: boolean }) {
           href="#contact"
           className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl btn btn-primary px-5 py-3 text-sm font-bold text-brand-foreground"
         >
-          {sample ? "Get my real audit + plan" : "Fix these, get a plan"}
+          Fix these, get a plan
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
         </Link>
         <p className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
@@ -125,20 +104,67 @@ function AuditCard({ data, sample }: { data: Result; sample: boolean }) {
   );
 }
 
-function CardSkeleton() {
+// Greyed, shimmering placeholder shown before an audit runs (idle) and while
+// it runs (loading). Deliberately looks empty so it reads as "run the tool".
+function SkeletonCard({ loading }: { loading: boolean }) {
+  // Warm-grey tones layered so the card reads as a real UI waiting for data.
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
       <div className="flex items-center gap-2 border-b border-border bg-secondary/60 px-4 py-3">
-        <span className="size-2.5 rounded-full bg-destructive" />
-        <span className="size-2.5 rounded-full bg-accent-yellow" />
-        <span className="size-2.5 rounded-full bg-rating" />
-        <span className="ml-2 flex-1 rounded-md bg-background px-3 py-1 text-[11px] text-muted-foreground">
-          Auditing…
-        </span>
+        <span className="size-2.5 rounded-full bg-border" />
+        <span className="size-2.5 rounded-full bg-border" />
+        <span className="size-2.5 rounded-full bg-border" />
+        <span className="shimmer ml-2 h-5 flex-1 rounded-md bg-secondary" />
       </div>
+
       <div className="p-6">
-        <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-          <Loader2 className="size-4 animate-spin" /> Crawling your site and scoring…
+        {/* title row */}
+        <div className="flex items-center justify-between">
+          <span className="shimmer h-4 w-40 rounded bg-secondary" />
+          <span className="shimmer h-3 w-16 rounded bg-secondary/70" />
+        </div>
+
+        {/* three score rings, greyed */}
+        <div className="mt-5 grid grid-cols-3 gap-2">
+          {["SEO Health", "AI Search", "Technical"].map((label) => (
+            <div key={label} className="flex flex-col items-center gap-2">
+              <div className="shimmer size-[76px] rounded-full border-[6px] border-secondary bg-card" />
+              <span className="shimmer h-3 w-14 rounded bg-secondary" />
+              <span className="shimmer h-2.5 w-9 rounded bg-secondary/70" />
+            </div>
+          ))}
+        </div>
+
+        {/* findings placeholder rows, varied widths + tones */}
+        <div className="mt-6 rounded-xl border border-border p-4">
+          <span className="shimmer block h-4 w-44 rounded bg-secondary" />
+          <ul className="mt-4 space-y-3.5">
+            {["92%", "78%", "64%"].map((w) => (
+              <li key={w} className="flex items-center gap-3">
+                <span className="size-2.5 shrink-0 rounded-full bg-border" />
+                <span className="shimmer h-3 rounded bg-secondary" style={{ width: w }} />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* prompt overlay: tell people to run the tool */}
+        <div className="mt-5 flex items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 px-4 py-3 text-center text-[13px] font-semibold text-foreground">
+          {loading ? (
+            <>
+              <Loader2 className="size-4 animate-spin text-brand-text" />
+              Crawling your site and scoring…
+            </>
+          ) : (
+            <>
+              <ArrowUp className="size-4 text-brand-text lg:hidden" />
+              <ArrowLeft className="hidden size-4 text-brand-text lg:inline-block" />
+              Enter your URL{" "}
+              <span className="lg:hidden">above</span>
+              <span className="hidden lg:inline">on the left</span>{" "}
+              to reveal your real scores
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -264,12 +290,10 @@ export function SeoHero() {
 
         {/* Right: live audit card (sample until a real audit runs) */}
         <Reveal delay={0.12} className="w-full">
-          {status === "loading" ? (
-            <CardSkeleton />
-          ) : status === "success" && result ? (
-            <AuditCard data={result} sample={false} />
+          {status === "success" && result ? (
+            <AuditCard data={result} />
           ) : (
-            <AuditCard data={SAMPLE_RESULT} sample />
+            <SkeletonCard loading={status === "loading"} />
           )}
         </Reveal>
       </div>
