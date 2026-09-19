@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Link2, ArrowRight, ArrowUp, ArrowLeft, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { AuditLeadModal } from "@/components/seo/audit-lead-modal";
 import { seo } from "@/lib/seo";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
@@ -51,7 +52,7 @@ function Ring({ score, label }: { score: number | null; label: string }) {
   );
 }
 
-function AuditCard({ data }: { data: Result }) {
+function AuditCard({ data, onGetFixes }: { data: Result; onGetFixes: () => void }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card">
       <div className="flex items-center gap-2 border-b border-border bg-secondary/60 px-4 py-3">
@@ -90,13 +91,14 @@ function AuditCard({ data }: { data: Result }) {
           </ul>
         </div>
 
-        <Link
-          href="#contact"
+        <button
+          type="button"
+          onClick={onGetFixes}
           className="group mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl btn btn-primary px-5 py-3 text-sm font-bold text-brand-foreground"
         >
-          Fix these, get a plan
+          Get all Fixes on Your Email
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
+        </button>
         <p className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
           <TrendingUp className="size-3.5 text-rating" /> More traffic, calls and customers from Google.
         </p>
@@ -209,6 +211,7 @@ export function SeoHero() {
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   async function run(e: React.FormEvent) {
     e.preventDefault();
@@ -326,12 +329,23 @@ export function SeoHero() {
           {status === "loading" ? (
             <LoadingCard />
           ) : status === "success" && result ? (
-            <AuditCard data={result} />
+            <AuditCard data={result} onGetFixes={() => setModalOpen(true)} />
           ) : (
             <ImagePanel />
           )}
         </Reveal>
       </div>
+
+      {result && (
+        <AuditLeadModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          domain={result.domain}
+          scores={result.scores}
+          findings={result.findings}
+          findingsTotal={result.findingsTotal}
+        />
+      )}
     </section>
   );
 }

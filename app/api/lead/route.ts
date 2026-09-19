@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { renderLeadEmailHtml, renderLeadEmailText } from "@/lib/lead-email";
+import {
+  renderLeadEmailHtml,
+  renderLeadEmailText,
+  renderReportEmailHtml,
+  renderReportEmailText,
+} from "@/lib/lead-email";
+import { site } from "@/lib/site";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
 // lives in the repo. Required env:
@@ -19,6 +25,10 @@ type Lead = {
   message?: string;
   source?: string;
   company_website?: string; // honeypot, humans never see or fill this
+  // Optional: also email the lead their SEO report link (audit "get fixes" flow).
+  sendReport?: boolean;
+  domain?: string;
+  scores?: { overall?: number | null; ai?: number | null; seo?: number | null };
 };
 
 // Best-effort in-memory rate limit. ponytail: per-instance only; move to a
@@ -118,6 +128,48 @@ export async function POST(request: Request) {
       text: renderLeadEmailText(l),
       html: renderLeadEmailHtml(l),
     });
+
+    // Optional second email TO the lead: their SEO report link. The report URL
+    // is built server-side from our own domain so a client can't point it
+    // elsewhere. Failure here must not fail the request — the team email is
+    // already sent, so we log and carry on.
+    if (body.sendReport) {
+      const domain = clean(body.domain);
+      const site_ = domain ? domain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : "";
+      if (site_) {
+        const reportUrl = `${site.url}/seo-report?site=${encodeURIComponent(site_)}`;
+        try {
+          await transporter.sendMail({
+            from: LEAD_FROM || SMTP_USER,
+            to: l.email,
+            subject: `Your SEO audit for ${site_} is ready`,
+            text: renderReportEmailText({
+              name: l.name,
+              domain: site_,
+              scores: {
+                overall: body.scores?.overall ?? null,
+                ai: body.scores?.ai ?? null,
+                seo: body.scores?.seo ?? null,
+              },
+              reportUrl,
+            }),
+            html: renderReportEmailHtml({
+              name: l.name,
+              domain: site_,
+              scores: {
+                overall: body.scores?.overall ?? null,
+                ai: body.scores?.ai ?? null,
+                seo: body.scores?.seo ?? null,
+              },
+              reportUrl,
+            }),
+          });
+        } catch (err) {
+          console.error("Report email to lead failed:", err);
+        }
+      }
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Lead email send failed:", err);

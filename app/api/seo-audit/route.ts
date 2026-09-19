@@ -44,6 +44,7 @@ async function postJson(path: string, body: unknown, signal: AbortSignal) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const target = normalizeUrl(searchParams.get("url") ?? "");
+  const full = searchParams.get("full") === "1";
   if (!target) {
     return NextResponse.json(
       { error: "Please enter a valid website URL (e.g. yourbusiness.com)." },
@@ -89,7 +90,7 @@ export async function GET(request: Request) {
         color: data.scores?.color ?? null,
       },
       findings: Array.isArray(data.findings)
-        ? data.findings.slice(0, 4).map((f: Record<string, unknown>) => ({
+        ? (full ? data.findings : data.findings.slice(0, 4)).map((f: Record<string, unknown>) => ({
             title: f.title,
             severity: f.severity,
             category: f.category,
