@@ -105,17 +105,16 @@ function AuditCard({ data }: { data: Result }) {
   );
 }
 
-// Default resting visual: a product-style preview image + a prompt that
-// points at the audit form. Swaps to the working card once an audit runs.
-// TODO: swap /products/bas-dashboard-16x10.png for a real SEO-audit visual.
+// Default resting visual: the SEO hero image + a prompt that points at the
+// audit form. Swaps to the working card once an audit runs.
 function ImagePanel() {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border bg-card">
       <Image
-        src="/products/bas-dashboard-16x10.png"
-        alt="Preview of the Timewheel SEO audit dashboard"
-        width={1600}
-        height={1000}
+        src="/hero/seo.png"
+        alt="Preview of the Timewheel SEO audit"
+        width={1536}
+        height={1024}
         priority
         sizes="(min-width: 1024px) 45vw, 90vw"
         className="h-auto w-full"
