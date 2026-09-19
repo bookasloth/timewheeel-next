@@ -11,7 +11,7 @@ export const dmNagpur = {
 
   hero: {
     eyebrow: "Digital Marketing Company in Nagpur",
-    h1: "Digital Marketing Company in Nagpur",
+    h1: "Results-Driven Digital Marketing Company in Nagpur for Measurable Growth",
     // The quotable definition AI engines lift verbatim. ~50 words, answer-first.
     answer:
       "A digital marketing company in Nagpur helps local businesses grow online through SEO, social media, Google Ads, content and website development. Timewheel brings all of these under one team, measures what actually drives leads instead of vanity numbers, and builds on systems you own, with no platform lock-in or subscription rent.",

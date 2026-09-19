@@ -11,8 +11,8 @@ export const seo = {
   },
 
   hero: {
-    h1a: "SEO Company in",
-    h1b: "Nagpur",
+    h1a: "Trusted SEO Company in Nagpur for",
+    h1b: "Growing Brands",
     sub: "Enter your website for a free, instant AI + SEO audit, see exactly where you rank across Google, local search and AI before you pay for anything.",
     cta: "Audit My Website",
     checks: ["Free audit", "No signup", "Real data", "No fake guarantees"],

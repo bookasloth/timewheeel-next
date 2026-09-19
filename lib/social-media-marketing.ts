@@ -32,9 +32,9 @@ export const smm = {
 
   hero: {
     eyebrow: "Social Media Marketing",
-    h1a: "Social media that builds",
-    h1b: "brands",
-    h1c: "people remember.",
+    h1a: "Creative Social Media Company in Nagpur for",
+    h1b: "Stronger Brand",
+    h1c: "Presence",
     sub: "Timewheel plans, creates and runs social media that earns attention and turns it into trust. Strategy, content, creative, community and performance, one consistent brand voice across every platform that matters to you.",
     primaryCta: { label: "Let's Talk", href: "#contact" },
     secondaryCta: { label: "See What We Do", href: "#services" },

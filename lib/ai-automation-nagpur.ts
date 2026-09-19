@@ -13,8 +13,8 @@ export const aiAuto = {
 
   hero: {
     eyebrow: "AI & Marketing Automation for Real Business Growth",
-    headingA: "Work smarter.",
-    headingB: "Grow faster.",
+    headingA: "Smart AI & Automation Company in Nagpur",
+    headingB: "for Smarter Operations",
     // The quotable definition AI engines lift verbatim. ~50 words, answer-first.
     answer:
       "An AI automation agency helps businesses save time and win more customers by putting AI and marketing automation to work: qualifying leads, following up on WhatsApp and email, and connecting the tools you already use. Timewheel implements this practically for Nagpur businesses, on systems you own, with no platform lock-in.",

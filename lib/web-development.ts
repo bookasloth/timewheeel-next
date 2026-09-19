@@ -12,8 +12,8 @@ export const wd = {
 
   hero: {
     eyebrow: "Web Development Company in Nagpur",
-    h1a: "Web Development Company in Nagpur",
-    h1b: "Fixed Scope, Fixed Price, Launched in 6 Weeks",
+    h1a: "Reliable Web Development Company in Nagpur for",
+    h1b: "Ambitious Projects",
     sub: "Fast, SEO-ready websites and web apps built on Next.js, WordPress and Shopify. You get the code, the timeline in writing, and a site that loads in under two seconds.",
     primaryCta: { label: "Get a Fixed Quote in 24 Hours", href: "#contact" },
     secondaryCta: { label: "See our work", href: "#work" },

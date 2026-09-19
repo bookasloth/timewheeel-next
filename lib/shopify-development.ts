@@ -13,8 +13,8 @@ export const sd = {
 
   hero: {
     eyebrow: "Trusted Shopify Development Partner",
-    headingA: "Shopify Development",
-    headingAccent: "Company in Nagpur",
+    headingA: "Expert Shopify Development Company in Nagpur for",
+    headingAccent: "Online Stores",
     sub: "Build, customize, migrate and scale Shopify stores with a development team that understands ecommerce, performance and growth.",
     primaryCta: { label: "Start Your Project", href: "/contact" },
     secondaryCta: { label: "View Our Work", href: "/case-studies" },

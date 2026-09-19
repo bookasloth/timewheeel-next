@@ -8,17 +8,10 @@ import { TextRotate } from "@/components/ui/text-rotate";
 import { cn } from "@/lib/utils";
 
 const rotateTexts = [
-  "for salons",
-  "for tutors",
-  "for clinics",
-  "for restaurants",
-  "for lawyers",
-  "for doctors",
-  "for coaches",
-  "for gyms",
-  "for real estate",
-  "for startups",
-  "for businesses",
+  "for Modern Businesses",
+  "for Bold Startups",
+  "for Local Brands",
+  "for Growing Stores",
 ];
 
 const rotateColors = [
@@ -26,13 +19,6 @@ const rotateColors = [
   "text-wpurple",
   "text-worange",
   "text-wgreen",
-  "text-wblue",
-  "text-wpurple",
-  "text-worange",
-  "text-wgreen",
-  "text-wblue",
-  "text-wpurple",
-  "text-worange",
 ];
 
 const panels = [
@@ -72,7 +58,7 @@ function LandingHero() {
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.2, ease: "easeOut", delay: 0.15 }}
           >
-            <span className="text-wdark">Top Web Design Company</span>
+            <span className="text-wdark">Creative Web Design Company in Nagpur</span>
             <br />
             <span className="relative inline-flex">
               <span
