@@ -4,16 +4,16 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 
-// Six decorative illustration tiles scattered around the centered hero.
+// Six decorative illustration tiles that bleed off the hero edges.
 // Art (with its own torn-paper colour backing) lives at
 // /public/web-dev/hero-1.png … hero-6.png.
 const HERO_TILES = [
-  { n: 1, pos: "left-[2%] top-[10%] md:left-[5%]" },
-  { n: 2, pos: "right-[2%] top-[6%] md:right-[6%]" },
-  { n: 3, pos: "left-[1%] top-[42%] md:left-[3%]" },
-  { n: 4, pos: "left-[5%] bottom-[6%] md:left-[8%]" },
-  { n: 5, pos: "right-[2%] top-[48%] md:right-[5%]" },
-  { n: 6, pos: "right-[5%] bottom-[5%] md:right-[9%]" },
+  { n: 1, pos: "-left-8 -top-6 md:-left-6" }, // code, top-left
+  { n: 2, pos: "-right-8 -top-10 md:-right-4" }, // laptop, top-right
+  { n: 3, pos: "-left-10 top-[34%] md:-left-6" }, // browser, mid-left
+  { n: 4, pos: "-left-6 -bottom-6 md:left-0" }, // chart, bottom-left
+  { n: 5, pos: "-right-6 top-[42%] md:-right-2" }, // rocket, mid-right
+  { n: 6, pos: "-right-8 -bottom-8 md:-right-2" }, // plant, bottom-right
 ] as const;
 
 function Tile({ n, pos }: (typeof HERO_TILES)[number]) {
@@ -24,8 +24,33 @@ function Tile({ n, pos }: (typeof HERO_TILES)[number]) {
       src={`/web-dev/hero-${n}.png`}
       width={512}
       height={512}
-      className={`pointer-events-none absolute hidden size-[116px] object-contain lg:block xl:size-[136px] ${pos}`}
+      className={`pointer-events-none absolute hidden size-[200px] object-contain lg:block xl:size-[248px] ${pos}`}
     />
+  );
+}
+
+// Hand-drawn doodle accents, sprinkled between the tiles (reference match).
+function Doodles() {
+  const dots = "radial-gradient(currentColor 1.4px, transparent 1.5px)";
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 hidden text-ink lg:block">
+      {/* near code (top-left) */}
+      <svg className="absolute left-[15%] top-[9%] size-6 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>
+      <span className="absolute left-[17%] top-[22%] size-12 opacity-30" style={{ backgroundImage: dots, backgroundSize: "9px 9px" }} />
+      {/* near laptop (top-right) */}
+      <svg className="absolute right-[17%] top-[7%] size-6 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>
+      {/* near browser (mid-left) */}
+      <svg className="absolute left-[15%] top-[46%] h-6 w-16 opacity-80" viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+      {/* near rocket (mid-right) */}
+      <svg className="absolute right-[15%] top-[40%] size-7 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
+      <svg className="absolute right-[16%] top-[56%] h-6 w-16 opacity-80" viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+      {/* near chart (bottom-left) */}
+      <svg className="absolute left-[16%] bottom-[16%] h-6 w-16 opacity-80" viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+      <span className="absolute left-[19%] bottom-[8%] size-12 opacity-30" style={{ backgroundImage: dots, backgroundSize: "9px 9px" }} />
+      {/* near plant (bottom-right) */}
+      <svg className="absolute right-[15%] bottom-[22%] size-6 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
+      <span className="absolute right-[17%] bottom-[9%] h-14 w-16 opacity-30" style={{ backgroundImage: dots, backgroundSize: "9px 9px" }} />
+    </div>
   );
 }
 
@@ -51,13 +76,8 @@ export function WdHero() {
         <Tile key={t.n} {...t} />
       ))}
 
-      {/* doodle accents (sparingly) */}
-      <svg aria-hidden className="pointer-events-none absolute left-[14%] top-[30%] hidden size-6 text-ink/50 lg:block" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-      <svg aria-hidden className="pointer-events-none absolute right-[16%] top-[24%] hidden size-7 text-ink/40 lg:block" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      </svg>
+      {/* doodle accents */}
+      <Doodles />
 
       <div className="relative mx-auto max-w-3xl px-6 pb-14 pt-16 text-center md:pb-20 md:pt-24">
         <Reveal>
