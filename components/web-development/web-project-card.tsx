@@ -30,24 +30,22 @@ export function WebProjectCard({
       href={href}
       className="group relative block min-h-[240px] overflow-hidden rounded-2xl border border-ink bg-white"
     >
-      {/* image: full-bleed cover, masked into a diagonal right panel so it
-          fills without distortion or letterboxing, and grows on hover. */}
+      {/* image: full-bleed cover clipped to a diagonal right wedge. The seam
+          runs 63% (top) → 51% (bottom) of the card width. */}
       <div
         aria-hidden
-        className="absolute inset-y-0 right-0 w-[52%] transition-[width] duration-500 ease-out group-hover:w-[58%]"
-        style={{
-          WebkitMaskImage: "linear-gradient(108deg, transparent 0 26%, #000 26%)",
-          maskImage: "linear-gradient(108deg, transparent 0 26%, #000 26%)",
-        }}
+        className="absolute inset-0"
+        style={{ clipPath: "polygon(63% 0, 100% 0, 100% 100%, 51% 100%)" }}
       >
-        <Image src={image} alt="" fill sizes="(min-width: 1024px) 440px, 60vw" className="object-cover object-left" />
+        <Image src={image} alt="" fill sizes="(min-width: 1024px) 440px, 60vw" className="object-cover object-center" />
       </div>
 
-      {/* footer accent bar — over the image; hidden off to the left at rest, sweeps in on hover */}
+      {/* footer accent strip: ends at the image with the same diagonal slash,
+          hidden off-left at rest, sweeps in on hover. */}
       <span
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-16 -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"
-        style={{ backgroundColor: accent }}
+        style={{ backgroundColor: accent, clipPath: "polygon(0 0, 52% 0, 51% 100%, 0 100%)" }}
       />
 
       {/* copy */}
