@@ -4,52 +4,61 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 
-// Six decorative illustration tiles that bleed off the hero edges.
-// Art (with its own torn-paper colour backing) lives at
-// /public/web-dev/hero-1.png … hero-6.png.
-const HERO_TILES = [
-  { n: 1, pos: "-left-[69px] -top-[44px]" }, // code, top-left
-  { n: 2, pos: "-right-8 -top-10 md:-right-4" }, // laptop, top-right
-  { n: 3, pos: "left-[6px] top-[calc(34%+10px)]" }, // browser, mid-left
-  { n: 4, pos: "left-[25px] -bottom-[124px]" }, // chart, bottom-left
-  { n: 5, pos: "-right-[120px] top-[42%]" }, // rocket, mid-right (half off-screen)
-  { n: 6, pos: "right-[210px] -bottom-[114px]" }, // plant, bottom-right (pulled in near buttons)
-] as const;
+const DOT_BG = "radial-gradient(currentColor 1.4px, transparent 1.5px)";
 
-function Tile({ n, pos }: (typeof HERO_TILES)[number]) {
-  return (
-    <Image
-      aria-hidden
-      alt=""
-      src={`/web-dev/hero-${n}.png`}
-      width={512}
-      height={512}
-      className={`pointer-events-none absolute hidden size-[200px] object-contain lg:block xl:size-[248px] ${pos}`}
-    />
-  );
+// A single doodle, positioned relative to its parent tile (≤20px from it).
+function Doodle({ d, at }: { d: string; at: string }) {
+  const base = `pointer-events-none absolute text-ink opacity-80 ${at}`;
+  if (d === "plus")
+    return <svg className={`${base} size-5`} viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>;
+  if (d === "x")
+    return <svg className={`${base} size-5`} viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>;
+  if (d === "star")
+    return <svg className={`${base} size-6`} viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>;
+  if (d === "squiggle")
+    return <svg className={`${base} h-5 w-14`} viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>;
+  // dots
+  return <span className={`${base} size-10 opacity-30`} style={{ backgroundImage: DOT_BG, backgroundSize: "9px 9px" }} />;
 }
 
-// Hand-drawn doodle accents, sprinkled between the tiles (reference match).
-function Doodles() {
-  const dots = "radial-gradient(currentColor 1.4px, transparent 1.5px)";
+// Six illustration tiles that bleed off the hero edges. Each carries its own
+// doodles, positioned relative to the tile so they always hug the icon.
+// Art lives at /public/web-dev/hero-1.png … hero-6.png.
+type TileDef = { n: number; pos: string; doodles: { d: string; at: string }[] };
+const HERO_TILES: TileDef[] = [
+  { n: 1, pos: "-left-[69px] -top-[44px]", doodles: [ // code, top-left
+    { d: "plus", at: "-top-3 right-3" },
+    { d: "dots", at: "-bottom-1 -right-4" },
+  ] },
+  { n: 2, pos: "-right-8 -top-10 md:-right-4", doodles: [ // laptop, top-right
+    { d: "x", at: "top-8 -left-3" },
+  ] },
+  { n: 3, pos: "left-[6px] top-[calc(34%+10px)]", doodles: [ // browser, mid-left
+    { d: "squiggle", at: "top-1/2 -right-8" },
+  ] },
+  { n: 4, pos: "left-[25px] -bottom-[124px]", doodles: [ // chart, bottom-left
+    { d: "squiggle", at: "-top-3 right-4" },
+    { d: "dots", at: "bottom-6 -right-6" },
+  ] },
+  { n: 5, pos: "-right-[120px] top-[42%]", doodles: [ // rocket, mid-right (half off-screen)
+    { d: "star", at: "top-2 -left-5" },
+    { d: "squiggle", at: "-bottom-2 -left-6" },
+  ] },
+  { n: 6, pos: "right-[210px] -bottom-[114px]", doodles: [ // plant, bottom-right
+    { d: "star", at: "top-4 -right-4" },
+    { d: "dots", at: "-bottom-2 -left-4" },
+  ] },
+];
+
+function Tile({ n, pos, doodles }: TileDef) {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 hidden text-ink lg:block">
-      {/* near code (top-left) */}
-      <svg className="absolute left-[15%] top-[9%] size-6 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>
-      <span className="absolute left-[17%] top-[22%] size-12 opacity-30" style={{ backgroundImage: dots, backgroundSize: "9px 9px" }} />
-      {/* near laptop (top-right) */}
-      <svg className="absolute right-[17%] top-[7%] size-6 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>
-      {/* near browser (mid-left) */}
-      <svg className="absolute left-[15%] top-[46%] h-6 w-16 opacity-80" viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-      {/* near rocket (mid-right) */}
-      <svg className="absolute right-[15%] top-[40%] size-7 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
-      <svg className="absolute right-[16%] top-[56%] h-6 w-16 opacity-80" viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-      {/* near chart (bottom-left) */}
-      <svg className="absolute left-[16%] bottom-[16%] h-6 w-16 opacity-80" viewBox="0 0 90 24" fill="none"><path d="M2 12c8-14 16 14 24 0s16-14 24 0 16 14 24 0" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-      <span className="absolute left-[19%] bottom-[8%] size-12 opacity-30" style={{ backgroundImage: dots, backgroundSize: "9px 9px" }} />
-      {/* near plant (bottom-right) */}
-      <svg className="absolute right-[15%] bottom-[22%] size-6 opacity-80" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" /></svg>
-      <span className="absolute right-[17%] bottom-[9%] h-14 w-16 opacity-30" style={{ backgroundImage: dots, backgroundSize: "9px 9px" }} />
+    <div aria-hidden className={`pointer-events-none absolute hidden lg:block ${pos}`}>
+      <div className="relative size-[200px] xl:size-[248px]">
+        <Image alt="" src={`/web-dev/hero-${n}.png`} fill sizes="248px" className="object-contain" />
+        {doodles.map((dd, i) => (
+          <Doodle key={i} {...dd} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -71,10 +80,7 @@ export function WdHero() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
       </div>
 
-      {/* doodle accents — sit behind the icon tiles */}
-      <Doodles />
-
-      {/* scattered illustration tiles (paint over the doodles) */}
+      {/* illustration tiles, each carrying its own hugging doodles */}
       {HERO_TILES.map((t) => (
         <Tile key={t.n} {...t} />
       ))}
