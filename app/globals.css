@@ -216,6 +216,14 @@
   --ring: #ffcc1c;
 }
 
+/* ── AI Marketing Automation (app/(public)/ai-marketing-automation-company-in-nagpur) ──
+    Violet-first: AI/tech accent (#8b5cf6) over the shared editorial base. */
+.ai-marketing-page {
+  --brand: #8b5cf6;
+  --brand-text: #6d3fd4;
+  --ring: #8b5cf6;
+}
+
 /* ── Social Media Marketing (app/(public)/social-media-marketing-company-in-nagpur) ──
     Blue-first: a punchier primary blue (#2563eb) with a rotating multi-hue
     accent palette (pink/yellow/green/violet/orange) layered across sections.
