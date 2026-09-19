@@ -87,10 +87,10 @@ export function WdHero() {
 
       <div className="relative mx-auto max-w-3xl px-6 pb-14 pt-16 text-center md:pb-20 md:pt-24">
         <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-text">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-brand-text">
             {wd.hero.eyebrow}
           </p>
-          <h1 className="mx-auto mt-5 max-w-2xl font-black leading-[1.08] tracking-tight text-navy">
+          <h1 className="wd-hero-h1 mx-auto mt-5 max-w-2xl font-black tracking-tight text-navy">
             {wd.hero.h1a}{" "}
             <span
               className="dm-gradient-text"
@@ -99,20 +99,20 @@ export function WdHero() {
               {wd.hero.h1b}
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mx-auto mt-6 max-w-xl text-[19px] leading-relaxed text-muted-foreground">
             {wd.hero.sub}
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link
               href={wd.hero.primaryCta.href}
-              className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold text-brand-foreground"
+              className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold text-brand-foreground"
             >
               {wd.hero.primaryCta.label}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
               href={wd.hero.secondaryCta.href}
-              className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
+              className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold"
             >
               {wd.hero.secondaryCta.label}
             </Link>

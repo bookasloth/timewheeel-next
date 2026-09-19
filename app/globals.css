@@ -430,6 +430,12 @@ h2 {
   font-size: 25px !important;
   line-height: 1.2 !important;
 }
+/* Hero exception: a larger focal h1 on the web-dev hero (34px → 52px).
+   Class specificity beats the global h1 rule. */
+.wd-hero-h1 {
+  font-size: clamp(2.125rem, 1.3rem + 3.6vw, 3.25rem) !important;
+  line-height: 1.05 !important;
+}
 
 /* skeleton shimmer sweep (SEO hero idle card) */
 @keyframes shimmer {
