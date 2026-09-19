@@ -8,10 +8,10 @@ import { wd } from "@/lib/web-development";
 // Art (with its own torn-paper colour backing) lives at
 // /public/web-dev/hero-1.png … hero-6.png.
 const HERO_TILES = [
-  { n: 1, pos: "-left-8 -top-6 md:-left-6" }, // code, top-left
+  { n: 1, pos: "-left-[69px] -top-[44px]" }, // code, top-left
   { n: 2, pos: "-right-8 -top-10 md:-right-4" }, // laptop, top-right
-  { n: 3, pos: "-left-10 top-[34%] md:-left-6" }, // browser, mid-left
-  { n: 4, pos: "-left-6 -bottom-6 md:left-0" }, // chart, bottom-left
+  { n: 3, pos: "left-[6px] top-[calc(34%+10px)]" }, // browser, mid-left
+  { n: 4, pos: "left-[25px] bottom-[26px]" }, // chart, bottom-left
   { n: 5, pos: "-right-6 top-[42%] md:-right-2" }, // rocket, mid-right
   { n: 6, pos: "-right-8 -bottom-8 md:-right-2" }, // plant, bottom-right
 ] as const;
