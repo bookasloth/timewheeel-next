@@ -1,42 +1,31 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 
-// Six decorative illustration slots scattered around the centered hero.
-// PLACEHOLDERS for now — drop real art at /public/web-dev/hero-1.png … hero-6.png
-// and swap each tile's inner placeholder for:
-//   <Image src="/web-dev/hero-N.png" alt="" width={W} height={H} className="..." />
+// Six decorative illustration tiles scattered around the centered hero.
+// Art (with its own torn-paper colour backing) lives at
+// /public/web-dev/hero-1.png … hero-6.png.
 const HERO_TILES = [
-  { n: 1, pos: "left-[3%] top-[12%] md:left-[6%]", rotate: "-7deg", blob: "#F45B0A" },
-  { n: 2, pos: "right-[3%] top-[8%] md:right-[7%]", rotate: "5deg", blob: "#FF4D93" },
-  { n: 3, pos: "left-[2%] top-[44%] md:left-[4%]", rotate: "4deg", blob: "#29A66F" },
-  { n: 4, pos: "left-[6%] bottom-[8%] md:left-[9%]", rotate: "-4deg", blob: "#3987C9" },
-  { n: 5, pos: "right-[3%] top-[50%] md:right-[6%]", rotate: "-6deg", blob: "#FFCC1C" },
-  { n: 6, pos: "right-[6%] bottom-[7%] md:right-[10%]", rotate: "6deg", blob: "#FF4D93" },
+  { n: 1, pos: "left-[2%] top-[10%] md:left-[5%]" },
+  { n: 2, pos: "right-[2%] top-[6%] md:right-[6%]" },
+  { n: 3, pos: "left-[1%] top-[42%] md:left-[3%]" },
+  { n: 4, pos: "left-[5%] bottom-[6%] md:left-[8%]" },
+  { n: 5, pos: "right-[2%] top-[48%] md:right-[5%]" },
+  { n: 6, pos: "right-[5%] bottom-[5%] md:right-[9%]" },
 ] as const;
 
-function Tile({ n, pos, rotate, blob }: (typeof HERO_TILES)[number]) {
+function Tile({ n, pos }: (typeof HERO_TILES)[number]) {
   return (
-    <div
+    <Image
       aria-hidden
-      className={`pointer-events-none absolute hidden lg:block ${pos}`}
-      style={{ transform: `rotate(${rotate})` }}
-    >
-      <div className="relative">
-        {/* torn-paper colour blob behind the tile */}
-        <span
-          className="absolute -inset-3 -z-10 rounded-[40%_60%_55%_45%/55%_45%_60%_40%] opacity-25"
-          style={{ backgroundColor: blob }}
-        />
-        {/* placeholder — swap for the real PNG */}
-        <div className="grid size-[92px] place-items-center rounded-2xl border border-dashed border-ink/25 bg-surface text-center xl:size-[112px]">
-          <span className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
-            Image {n}
-          </span>
-        </div>
-      </div>
-    </div>
+      alt=""
+      src={`/web-dev/hero-${n}.png`}
+      width={512}
+      height={512}
+      className={`pointer-events-none absolute hidden size-[116px] object-contain lg:block xl:size-[136px] ${pos}`}
+    />
   );
 }
 
