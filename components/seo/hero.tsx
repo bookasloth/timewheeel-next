@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Link2, ArrowRight, ArrowUp, ArrowLeft, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
-import { AuditLeadModal } from "@/components/seo/audit-lead-modal";
+import { AuditLeadPanel } from "@/components/seo/audit-lead-modal";
 import { seo } from "@/lib/seo";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
@@ -211,7 +211,7 @@ export function SeoHero() {
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   async function run(e: React.FormEvent) {
     e.preventDefault();
@@ -222,6 +222,7 @@ export function SeoHero() {
     }
     setStatus("loading");
     setError("");
+    setShowForm(false);
     try {
       const res = await fetch(`/api/seo-audit?url=${encodeURIComponent(url.trim())}`);
       const data = await res.json();
@@ -329,23 +330,22 @@ export function SeoHero() {
           {status === "loading" ? (
             <LoadingCard />
           ) : status === "success" && result ? (
-            <AuditCard data={result} onGetFixes={() => setModalOpen(true)} />
+            showForm ? (
+              <AuditLeadPanel
+                onClose={() => setShowForm(false)}
+                domain={result.domain}
+                scores={result.scores}
+                findings={result.findings}
+                findingsTotal={result.findingsTotal}
+              />
+            ) : (
+              <AuditCard data={result} onGetFixes={() => setShowForm(true)} />
+            )
           ) : (
             <ImagePanel />
           )}
         </Reveal>
       </div>
-
-      {result && (
-        <AuditLeadModal
-          open={modalOpen}
-          onClose={() => setModalOpen(false)}
-          domain={result.domain}
-          scores={result.scores}
-          findings={result.findings}
-          findingsTotal={result.findingsTotal}
-        />
-      )}
     </section>
   );
 }
