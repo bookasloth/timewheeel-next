@@ -30,13 +30,17 @@ export function WebProjectCard({
       href={href}
       className="group relative block min-h-[240px] overflow-hidden rounded-2xl border border-ink bg-white"
     >
-      {/* image, revealed through a diagonal corner (bottom-right), grows on hover */}
+      {/* image: full-bleed cover, masked into a diagonal right panel so it
+          fills without distortion or letterboxing, and grows on hover. */}
       <div
         aria-hidden
-        className="absolute inset-y-0 right-0 w-[44%] transition-[width] duration-500 ease-out group-hover:w-[52%]"
-        style={{ clipPath: "polygon(38% 0, 100% 0, 100% 100%, 0 100%)" }}
+        className="absolute inset-y-0 right-0 w-[52%] transition-[width] duration-500 ease-out group-hover:w-[58%]"
+        style={{
+          WebkitMaskImage: "linear-gradient(108deg, transparent 0 26%, #000 26%)",
+          maskImage: "linear-gradient(108deg, transparent 0 26%, #000 26%)",
+        }}
       >
-        <Image src={image} alt="" fill sizes="(min-width: 1024px) 380px, 60vw" className="object-contain object-right" />
+        <Image src={image} alt="" fill sizes="(min-width: 1024px) 440px, 60vw" className="object-cover object-left" />
       </div>
 
       {/* footer accent bar — over the image; hidden off to the left at rest, sweeps in on hover */}
