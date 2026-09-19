@@ -153,7 +153,20 @@ export function SeoReportClient() {
           </div>
           <div className="px-6 py-8 md:px-8 md:py-10">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">AI + SEO Audit Report</p>
-            <h1 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">{domain}</h1>
+            <div className="mt-3 flex items-center gap-3">
+              {domain && domain !== "your site" && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`}
+                  alt=""
+                  width={36}
+                  height={36}
+                  className="size-9 shrink-0 rounded-lg bg-white p-1"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                />
+              )}
+              <h1 className="text-3xl font-black tracking-tight md:text-5xl">{domain}</h1>
+            </div>
             <p className="mt-3 text-sm text-white/60">
               Prepared by Timewheel · {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
               {result?.pageCount ? ` · ${result.pageCount} pages scanned` : ""}
