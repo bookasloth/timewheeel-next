@@ -44,7 +44,7 @@ export function WebProjectCard({
         className="absolute inset-y-0 right-0 w-[44%] transition-[width] duration-500 ease-out group-hover:w-[52%]"
         style={{ clipPath: "polygon(38% 0, 100% 0, 100% 100%, 0 100%)" }}
       >
-        <Image src={image} alt="" fill sizes="(min-width: 1024px) 380px, 60vw" className="object-cover" />
+        <Image src={image} alt="" fill sizes="(min-width: 1024px) 380px, 60vw" className="object-contain object-right" />
       </div>
 
       {/* copy */}
