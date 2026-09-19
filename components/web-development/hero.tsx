@@ -1,12 +1,49 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 
+// Six decorative illustration slots scattered around the centered hero.
+// PLACEHOLDERS for now — drop real art at /public/web-dev/hero-1.png … hero-6.png
+// and swap each tile's inner placeholder for:
+//   <Image src="/web-dev/hero-N.png" alt="" width={W} height={H} className="..." />
+const HERO_TILES = [
+  { n: 1, pos: "left-[3%] top-[12%] md:left-[6%]", rotate: "-7deg", blob: "#F45B0A" },
+  { n: 2, pos: "right-[3%] top-[8%] md:right-[7%]", rotate: "5deg", blob: "#FF4D93" },
+  { n: 3, pos: "left-[2%] top-[44%] md:left-[4%]", rotate: "4deg", blob: "#29A66F" },
+  { n: 4, pos: "left-[6%] bottom-[8%] md:left-[9%]", rotate: "-4deg", blob: "#3987C9" },
+  { n: 5, pos: "right-[3%] top-[50%] md:right-[6%]", rotate: "-6deg", blob: "#FFCC1C" },
+  { n: 6, pos: "right-[6%] bottom-[7%] md:right-[10%]", rotate: "6deg", blob: "#FF4D93" },
+] as const;
+
+function Tile({ n, pos, rotate, blob }: (typeof HERO_TILES)[number]) {
+  return (
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute hidden lg:block ${pos}`}
+      style={{ transform: `rotate(${rotate})` }}
+    >
+      <div className="relative">
+        {/* torn-paper colour blob behind the tile */}
+        <span
+          className="absolute -inset-3 -z-10 rounded-[40%_60%_55%_45%/55%_45%_60%_40%] opacity-25"
+          style={{ backgroundColor: blob }}
+        />
+        {/* placeholder — swap for the real PNG */}
+        <div className="grid size-[92px] place-items-center rounded-2xl border border-dashed border-ink/25 bg-surface text-center xl:size-[112px]">
+          <span className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+            Image {n}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function WdHero() {
   return (
     <section className="relative overflow-hidden">
+      {/* dot-grid + top hairline */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0 opacity-70"
@@ -20,56 +57,55 @@ export function WdHero() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6 pb-12 pt-8 md:pt-12">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
-              {wd.hero.eyebrow}
-            </p>
-            <h1 className="mt-4 text-4xl font-black leading-[1.06] tracking-tight md:text-5xl lg:text-[3.4rem]">
-              <span className="text-navy">{wd.hero.h1a}</span>{" "}
-              <span
-                className="dm-gradient-text"
-                style={{ backgroundImage: "linear-gradient(90deg, #fe5100, #ff4d93, #ffcc1c, #fe5100)" }}
-              >
-                {wd.hero.h1b}
-              </span>
-            </h1>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
-              {wd.hero.sub}
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link
-                href={wd.hero.primaryCta.href}
-                className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
-              >
-                {wd.hero.primaryCta.label}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href={wd.hero.secondaryCta.href}
-                className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
-              >
-                {wd.hero.secondaryCta.label}
-              </Link>
-            </div>
-            <p className="mt-6 text-[13px] font-semibold text-muted-foreground">
-              {wd.hero.trustLine}
-            </p>
-          </Reveal>
+      {/* scattered illustration tiles */}
+      {HERO_TILES.map((t) => (
+        <Tile key={t.n} {...t} />
+      ))}
 
-          <Reveal delay={0.15}>
-            <Image
-              src="/hero/web-dev.png"
-              alt="Web development by Timewheel"
-              width={1536}
-              height={1024}
-              priority
-              sizes="(min-width: 1024px) 40vw, 90vw"
-              className="h-auto w-full rounded-2xl border border-border shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)]"
-            />
-          </Reveal>
-        </div>
+      {/* doodle accents (sparingly) */}
+      <svg aria-hidden className="pointer-events-none absolute left-[14%] top-[30%] hidden size-6 text-ink/50 lg:block" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+      <svg aria-hidden className="pointer-events-none absolute right-[16%] top-[24%] hidden size-7 text-ink/40 lg:block" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2l2.4 6.8L21 10l-5 4.2L17.5 21 12 17.3 6.5 21 8 14.2 3 10l6.6-1.2L12 2z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+
+      <div className="relative mx-auto max-w-3xl px-6 pb-14 pt-16 text-center md:pb-20 md:pt-24">
+        <Reveal>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-text">
+            {wd.hero.eyebrow}
+          </p>
+          <h1 className="mx-auto mt-5 max-w-2xl font-black leading-[1.08] tracking-tight text-navy">
+            {wd.hero.h1a}{" "}
+            <span
+              className="dm-gradient-text"
+              style={{ backgroundImage: "linear-gradient(90deg, #fe5100, #ff4d93, #ffcc1c, #fe5100)" }}
+            >
+              {wd.hero.h1b}
+            </span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            {wd.hero.sub}
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href={wd.hero.primaryCta.href}
+              className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold text-brand-foreground"
+            >
+              {wd.hero.primaryCta.label}
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href={wd.hero.secondaryCta.href}
+              className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
+            >
+              {wd.hero.secondaryCta.label}
+            </Link>
+          </div>
+          <p className="mt-7 text-[13px] font-semibold text-muted-foreground">
+            {wd.hero.trustLine}
+          </p>
+        </Reveal>
       </div>
     </section>
   );

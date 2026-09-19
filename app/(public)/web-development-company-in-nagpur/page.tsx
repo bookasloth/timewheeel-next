@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { wd } from "@/lib/web-development";
 import { organizationLd, breadcrumbLd, localBusinessLd } from "@/lib/jsonld";
 import { WdHero } from "@/components/web-development/hero";
+import { WebProjectCard } from "@/components/web-development/web-project-card";
 import { WdStats } from "@/components/web-development/stats";
 import { WdPortfolio } from "@/components/web-development/portfolio";
 import { WdStandards } from "@/components/web-development/standards";
@@ -86,6 +87,16 @@ export default function WebDevelopmentPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <WdHero />
+      <section className="mx-auto max-w-3xl px-6 py-10">
+        <WebProjectCard
+          title="Ticket Dino:"
+          subtitle="Events that sell themselves"
+          href="#"
+          image="/hero/web-dev.png"
+          cta="See the build"
+          accent="#3987C9"
+        />
+      </section>
       <WdStats />
       <WdPortfolio />
       <WdStandards />
