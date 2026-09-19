@@ -12,8 +12,8 @@ const HERO_TILES = [
   { n: 2, pos: "-right-8 -top-10 md:-right-4" }, // laptop, top-right
   { n: 3, pos: "left-[6px] top-[calc(34%+10px)]" }, // browser, mid-left
   { n: 4, pos: "left-[25px] -bottom-[124px]" }, // chart, bottom-left
-  { n: 5, pos: "-right-6 top-[42%] md:-right-2" }, // rocket, mid-right
-  { n: 6, pos: "-right-8 -bottom-8 md:-right-2" }, // plant, bottom-right
+  { n: 5, pos: "-right-[120px] top-[42%]" }, // rocket, mid-right (half off-screen)
+  { n: 6, pos: "right-[70px] bottom-[36px]" }, // plant, bottom-right (pulled in near buttons)
 ] as const;
 
 function Tile({ n, pos }: (typeof HERO_TILES)[number]) {
