@@ -418,6 +418,14 @@
   animation: dm-sheen 18s linear infinite;
 }
 
+/* Uniform h1 size across the whole site: one size everywhere, ~30% smaller
+   than the old per-page hero sizes. !important so it overrides the Tailwind
+   text-*xl utilities each h1 still carries. */
+h1 {
+  font-size: clamp(1.9rem, 1.2rem + 3vw, 2.625rem) !important;
+  line-height: 1.1 !important;
+}
+
 /* skeleton shimmer sweep (SEO hero idle card) */
 @keyframes shimmer {
   100% {
