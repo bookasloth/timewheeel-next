@@ -7,7 +7,7 @@ import { useEffect } from "react";
 // in the public layout; renders no DOM itself.
 export function ButtonGlow() {
   useEffect(() => {
-    const onMove = (e: PointerEvent) => {
+    const onMove = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       const btn = target?.closest?.(".btn-primary") as HTMLElement | null;
       if (!btn) return;
@@ -15,8 +15,8 @@ export function ButtonGlow() {
       btn.style.setProperty("--gx", `${e.clientX - r.left}px`);
       btn.style.setProperty("--gy", `${e.clientY - r.top}px`);
     };
-    document.addEventListener("pointermove", onMove, { passive: true });
-    return () => document.removeEventListener("pointermove", onMove);
+    document.addEventListener("mousemove", onMove, { passive: true });
+    return () => document.removeEventListener("mousemove", onMove);
   }, []);
 
   return null;

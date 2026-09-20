@@ -151,9 +151,9 @@
   /* ring thickness; masked so the glow lands on the edge only, never inside */
   padding: 1.5px;
   background: radial-gradient(
-    90px circle at var(--gx, 50%) var(--gy, 50%),
+    72px circle at var(--gx, 50%) var(--gy, 50%),
     var(--brand),
-    transparent 60%
+    transparent 65%
   );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
