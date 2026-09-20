@@ -325,6 +325,77 @@
   }
 }
 
+/* ── Digital Marketing, AI-style layout (app/(public)/performance-marketing-company-in-nagpur) ──
+    Black panels + bright yellow accent. Mirrors the aim-* bento theme, recoloured. */
+.pm-page {
+  --brand: #ffcc1c;
+  --brand-text: #8a6d00; /* darker yellow for small text on cream — AA */
+  --ring: #ffcc1c;
+}
+
+/* hero bento — near-black panel with warm yellow bloom, the bold "ad engine" ground */
+.pm-panel {
+  background:
+    radial-gradient(110% 80% at 100% 0%, rgba(255, 204, 28, 0.24), transparent 48%),
+    radial-gradient(80% 70% at 0% 100%, rgba(255, 176, 32, 0.18), transparent 48%),
+    linear-gradient(135deg, #0a0a0a 0%, #171717 38%, #201a06 70%, #0d0d0d 100%);
+}
+/* faint dot-grid overlay for the dark surfaces */
+.pm-dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+/* glossy rotating bloom, yellow/gold */
+.pm-bloom {
+  background: conic-gradient(
+    from 0deg,
+    #ffe27a,
+    #ffcc1c,
+    #ffb020,
+    #ffd84d,
+    #ffe27a
+  );
+  filter: blur(18px) saturate(1.2);
+  opacity: 0.8;
+}
+/* dark corner action square */
+.pm-arrow {
+  background: #0b0b0b;
+  color: #ffcc1c;
+}
+/* scoped dark token context — flips token-based children to a black/gold glass surface */
+.pm-dark {
+  --background: #0a0a0a;
+  --card: #161616;
+  --card-foreground: #fffbe6;
+  --foreground: #fffbe6;
+  --muted-foreground: #c4b583;
+  --secondary: #241f0a;
+  --secondary-foreground: #fffbe6;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.14);
+}
+/* light card ground for stat/innovation tiles — warm cream/gold */
+.pm-tile-soft {
+  background:
+    radial-gradient(90% 90% at 100% 0%, rgba(255, 204, 28, 0.16), transparent 60%),
+    linear-gradient(160deg, #fffdf0 0%, #fff8e0 55%, #fafafa 100%);
+}
+/* animated gradient headline word (reuses dm-gradient-x) */
+.pm-word {
+  background-image: linear-gradient(92deg, #fde68a 0%, #ffcc1c 40%, #ffb020 75%, #ffde59 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: dm-gradient-x 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pm-word {
+    animation: none;
+  }
+}
+
 /* ── Social Media Marketing (app/(public)/social-media-marketing-company-in-nagpur) ──
     Blue-first: a punchier primary blue (#2563eb) with a rotating multi-hue
     accent palette (pink/yellow/green/violet/orange) layered across sections.
@@ -538,7 +609,8 @@ h2 {
   line-height: 1.05 !important;
 }
 /* AI marketing hero: large focal headline inside the dark bento panel. */
-.aim-hero-h1 {
+.aim-hero-h1,
+.pm-hero-h1 {
   font-size: clamp(2.25rem, 1.2rem + 3.2vw, 3.25rem) !important;
   line-height: 1.04 !important;
 }

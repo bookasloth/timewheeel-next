@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
-import { Dm2HeroCentered } from "@/components/digital-marketing2/hero-centered";
-import { Dm2Trust } from "@/components/digital-marketing2/trust";
-import { Dm2Intro } from "@/components/digital-marketing2/intro";
-import { Dm2Why } from "@/components/digital-marketing2/why";
-import { Dm2Services } from "@/components/digital-marketing2/services";
-import { Dm2Audience } from "@/components/digital-marketing2/audience";
-import { Dm2Ecosystem } from "@/components/digital-marketing2/ecosystem";
-import { Dm2Testimonials } from "@/components/digital-marketing2/testimonials";
-import { Dm2Faq } from "@/components/digital-marketing2/faq";
-import { Dm2FinalCta } from "@/components/digital-marketing2/final-cta";
+import { PmHeroCentered } from "@/components/perf-marketing/hero-centered";
+import { PmTrust } from "@/components/perf-marketing/trust";
+import { PmIntro } from "@/components/perf-marketing/intro";
+import { PmWhy } from "@/components/perf-marketing/why";
+import { PmServices } from "@/components/perf-marketing/services";
+import { PmAudience } from "@/components/perf-marketing/audience";
+import { PmEcosystem } from "@/components/perf-marketing/ecosystem";
+import { PmTestimonials } from "@/components/perf-marketing/testimonials";
+import { PmFaq } from "@/components/perf-marketing/faq";
+import { PmFinalCta } from "@/components/perf-marketing/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { dmServiceOptions } from "@/lib/digital-marketing2";
@@ -116,7 +116,7 @@ const faqJsonLd = {
 
 export default function DigitalMarketing2Page() {
   return (
-    <div className="overflow-x-clip dm2-page">
+    <div className="overflow-x-clip pm-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -125,18 +125,16 @@ export default function DigitalMarketing2Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <Dm2HeroCentered />
-      <Dm2Trust />
-      <Dm2Intro />
-      <Dm2Why />
-      <Dm2Services />
-      <Dm2Audience />
-      <Dm2Ecosystem />
-      {/* Case studies hidden until real client results replace the placeholders
-          in lib/digital-marketing2.ts, re-add <Dm2CaseStudies /> then. */}
-      <Dm2Testimonials />
-      <Dm2Faq />
-      <Dm2FinalCta />
+      <PmHeroCentered />
+      <PmTrust />
+      <PmIntro />
+      <PmWhy />
+      <PmServices />
+      <PmAudience />
+      <PmEcosystem />
+      <PmTestimonials />
+      <PmFaq />
+      <PmFinalCta />
       <div id="lead">
         <LeadForm
           idPrefix="dm2"
