@@ -12,22 +12,17 @@ import {
 } from "simple-icons";
 import type { SimpleIcon } from "simple-icons";
 
-// The tech pool, ordered foundation -> top level. Index 0 sits at the base of
-// the wall; later entries stack on top, like masonry. Each pill shows the brand
-// logo + name with a brand-coloured outline (no solid fill), from simple-icons.
+// Ordered apex -> base: HTML5 at the top, platforms/infra along the bottom.
+// 36 pills = a full 8-row pyramid (1+2+…+8).
 const ICONS: SimpleIcon[] = [
-  // foundation: core languages + version control
-  siHtml5, siCss, siJavascript, siSass, siGit, siPhp, siPython,
-  // runtime + data
-  siNodedotjs, siExpress, siMysql, siPostgresql, siMongodb, siRedis, siFirebase, siSupabase,
-  // typed layer + APIs + frameworks
-  siTypescript, siGraphql, siPrisma, siReact, siVuedotjs, siSvelte, siLaravel,
-  // meta-frameworks + tooling
-  siNextdotjs, siAstro, siVite, siTailwindcss,
-  // CMS + commerce
-  siWordpress, siWoocommerce, siShopify, siSanity, siStripe,
-  // platforms + infra (top level)
-  siDocker, siCloudflare, siNetlify, siVercel, siGithub,
+  siHtml5,
+  siCss, siJavascript,
+  siSass, siGit, siPhp,
+  siPython, siNodedotjs, siExpress, siMysql,
+  siPostgresql, siMongodb, siRedis, siFirebase, siSupabase,
+  siTypescript, siGraphql, siPrisma, siReact, siVuedotjs, siSvelte,
+  siLaravel, siNextdotjs, siAstro, siVite, siTailwindcss, siWordpress, siWoocommerce,
+  siShopify, siSanity, siStripe, siDocker, siCloudflare, siNetlify, siVercel, siGithub,
 ];
 
 const PILL_H = 40;
@@ -37,42 +32,41 @@ const PILLS: Pill[] = ICONS.map((ic) => ({
   name: ic.title,
   color: `#${ic.hex}`,
   path: ic.path,
-  w: Math.max(96, Math.round(ic.title.length * 8.6 + 58)),
+  w: Math.max(84, Math.round(ic.title.length * 7.6 + 50)),
 }));
 
-// Masonry wall: pack pills into rows (foundation first), stack the rows bottom
-// -> top, and right-align every row so the wall sits against the right edge.
-function wallTargets(W: number, H: number): { x: number; y: number }[] {
-  const gapX = 10;
-  const gapY = 8;
+function pyramidRows(n: number): number[] {
+  const rows: number[] = [];
+  let r = 1;
+  let left = n;
+  while (left > 0) {
+    const c = Math.min(r, left);
+    rows.push(c);
+    left -= c;
+    r += 1;
+  }
+  return rows;
+}
+
+// Centered pyramid: apex at top, each row wider than the last, variable pill
+// widths packed and centered per row.
+function pyramidTargets(W: number, H: number): { x: number; y: number }[] {
+  const rows = pyramidRows(PILLS.length);
+  const gapX = 8;
+  const gapY = 6;
   const rowStep = PILL_H + gapY;
-  const rightX = W - 18;
-  const maxRow = Math.min(W - 32, 660);
-
-  const rows: number[][] = [];
-  let cur: number[] = [];
-  let curW = 0;
-  PILLS.forEach((p, i) => {
-    const add = p.w + (cur.length ? gapX : 0);
-    if (curW + add > maxRow && cur.length) {
-      rows.push(cur);
-      cur = [];
-      curW = 0;
-    }
-    cur.push(i);
-    curW += p.w + (cur.length > 1 ? gapX : 0);
-  });
-  if (cur.length) rows.push(cur);
-
+  const topY = 34 + PILL_H / 2;
   const out: { x: number; y: number }[] = [];
-  const baseY = H - 22 - PILL_H / 2;
-  rows.forEach((row, rIdx) => {
-    const y = baseY - rIdx * rowStep;
-    const totalW = row.reduce((s, idx) => s + PILLS[idx].w, 0) + gapX * (row.length - 1);
-    let x = rightX - totalW; // left start so the row's right edge = rightX
-    row.forEach((idx) => {
-      out[idx] = { x: x + PILLS[idx].w / 2, y };
-      x += PILLS[idx].w + gapX;
+  let idx = 0;
+  rows.forEach((count, r) => {
+    const y = topY + r * rowStep;
+    const ids: number[] = [];
+    for (let j = 0; j < count && idx < PILLS.length; j += 1, idx += 1) ids.push(idx);
+    const totalW = ids.reduce((s, i) => s + PILLS[i].w, 0) + gapX * (ids.length - 1);
+    let x = W / 2 - totalW / 2;
+    ids.forEach((i) => {
+      out[i] = { x: x + PILLS[i].w / 2, y };
+      x += PILLS[i].w + gapX;
     });
   });
   return out;
@@ -86,16 +80,20 @@ export function TechStackPlayground() {
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+    const box = boxRef.current;
+    if (!box) return;
+    // Narrow screens or reduced-motion: skip physics, show a static list.
+    if (
+      box.clientWidth < 680 ||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    ) {
       setReduced(true);
       return;
     }
-    const box = boxRef.current;
-    if (!box) return;
 
     const W = box.clientWidth;
     const H = box.clientHeight;
-    const targets = wallTargets(W, H);
+    const targets = pyramidTargets(W, H);
     targetsRef.current = targets;
 
     const engine = Matter.Engine.create();
@@ -111,13 +109,13 @@ export function TechStackPlayground() {
       wall(W + 30, H / 2, 60, H + 120),
     ]);
 
-    // Start static: the pills hold the pyramid until the first click / Knock / drag.
+    // Start static so the pyramid holds; the first grab wakes everything.
     const bodies = PILLS.map((p, i) =>
       Matter.Bodies.rectangle(targets[i].x, targets[i].y, p.w, PILL_H, {
         isStatic: true,
         chamfer: { radius: PILL_H / 2 },
-        restitution: 0.26,
-        friction: 0.5,
+        restitution: 0.2,
+        friction: 0.6,
         frictionAir: 0.02,
       }),
     );
@@ -129,16 +127,12 @@ export function TechStackPlayground() {
     const mouse = Matter.Mouse.create(box);
     const mc = Matter.MouseConstraint.create(engine, {
       mouse,
-      constraint: { stiffness: 0.2, render: { visible: false } },
+      constraint: { stiffness: 0.9, render: { visible: false } },
     });
     Matter.Composite.add(world, mc);
+    // Grab a pill -> the whole stack goes live so you can pick and re-stack.
     Matter.Events.on(mc, "mousedown", () => {
-      if (!mc.body) return; // clicked empty space, leave the pyramid alone
-      wake();
-      Matter.Body.applyForce(mc.body, mc.body.position, {
-        x: (Math.random() - 0.5) * 0.1,
-        y: -0.06,
-      });
+      if (mc.body) wake();
     });
 
     const sync = () => {
@@ -169,7 +163,7 @@ export function TechStackPlayground() {
     bodiesRef.current.forEach((b) => {
       Matter.Body.setStatic(b, false);
       Matter.Body.applyForce(b, b.position, {
-        x: (Math.random() - 0.5) * 0.13,
+        x: (Math.random() - 0.5) * 0.14,
         y: -0.04 - Math.random() * 0.05,
       });
     });
@@ -183,13 +177,13 @@ export function TechStackPlayground() {
       Matter.Body.setAngularVelocity(b, 0);
       Matter.Body.setAngle(b, 0);
       Matter.Body.setPosition(b, targets[i] ?? { x: 0, y: 0 });
-      Matter.Body.setStatic(b, true); // hold the pyramid shape
+      Matter.Body.setStatic(b, true);
     });
   };
 
   const pillInner = (p: Pill) => (
     <>
-      <svg viewBox="0 0 24 24" width="16" height="16" fill={p.color} aria-hidden>
+      <svg viewBox="0 0 24 24" width="17" height="17" fill={p.color} aria-hidden>
         <path d={p.path} />
       </svg>
       <span className="text-ink">{p.name}</span>
@@ -198,11 +192,11 @@ export function TechStackPlayground() {
 
   if (reduced) {
     return (
-      <div className="mt-10 flex flex-wrap gap-2.5">
+      <div className="mt-10 flex flex-wrap justify-center gap-2.5">
         {PILLS.map((p) => (
           <span
             key={p.id}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-sm font-semibold"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-sm font-semibold"
             style={{ border: `2px solid ${p.color}` }}
           >
             {pillInner(p)}
@@ -216,7 +210,7 @@ export function TechStackPlayground() {
     <div className="mt-10">
       <div
         ref={boxRef}
-        className="relative h-[560px] w-full cursor-grab overflow-hidden rounded-2xl border border-border bg-secondary/30 active:cursor-grabbing"
+        className="relative h-[560px] w-full cursor-grab select-none overflow-hidden rounded-2xl border border-border bg-secondary/25 active:cursor-grabbing"
       >
         {PILLS.map((p, i) => (
           <div
@@ -248,7 +242,7 @@ export function TechStackPlayground() {
           Stack again
         </button>
         <span className="text-sm text-muted-foreground">
-          Drag the pills, or tap one to topple the stack.
+          Grab a pill, the stack comes alive. Pick them up and stack again.
         </span>
       </div>
     </div>
