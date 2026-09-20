@@ -9,15 +9,8 @@ const bySlug = new Map(products.map((p) => [p.slug, p]));
 // Nested inside the "Our Work" section, below the four project cards.
 export function WdPortfolio() {
   return (
-    <div id="work" className="mt-16">
-      <Reveal className="text-center">
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
-          {wd.portfolio.title}
-        </p>
-        <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{wd.portfolio.body}</p>
-      </Reveal>
-
-      <Reveal stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div id="work" className="mt-10">
+      <Reveal stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {wd.portfolio.items.map((item) => {
           const p = bySlug.get(item.slug);
           if (!p) return null;

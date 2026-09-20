@@ -94,12 +94,7 @@ export function WdHero() {
           </p>
           <h1 className="wd-hero-h1 mx-auto mt-5 max-w-2xl font-black tracking-tight text-navy">
             {wd.hero.h1a}{" "}
-            <span
-              className="dm-gradient-text"
-              style={{ backgroundImage: "linear-gradient(90deg, #fe5100, #ff4d93, #ffcc1c, #fe5100)" }}
-            >
-              {wd.hero.h1b}
-            </span>
+            <span className="text-brand">{wd.hero.h1b}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-[19px] leading-relaxed text-muted-foreground">
             {wd.hero.sub}
