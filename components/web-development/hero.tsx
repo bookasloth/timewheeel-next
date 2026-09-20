@@ -89,9 +89,16 @@ export function WdHero() {
 
       <div className="relative mx-auto max-w-3xl px-6 pb-14 pt-16 text-center md:pb-20 md:pt-24">
         <Reveal>
-          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-brand-text">
-            {wd.hero.eyebrow}
-          </p>
+          <nav
+            aria-label="Breadcrumb"
+            className="flex items-center justify-center gap-2 text-[13px] font-medium text-muted-foreground"
+          >
+            <Link href="/" className="transition-colors hover:text-foreground">
+              Home
+            </Link>
+            <span aria-hidden>/</span>
+            <span className="font-semibold text-brand-text">{wd.hero.eyebrow}</span>
+          </nav>
           <h1 className="wd-hero-h1 mx-auto mt-5 max-w-2xl font-black tracking-tight text-navy">
             {wd.hero.h1a}{" "}
             <span className="text-brand">{wd.hero.h1b}</span>
