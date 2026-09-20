@@ -131,10 +131,47 @@
   filter: brightness(0.93);
 }
 
-/* primary, orange */
+/* primary. Solid brand fill; on hover it flips to white with a 1px brand
+   border and a brand-coloured glow that tracks the cursor (--gx/--gy set by
+   the ButtonGlow client listener; falls back to centre). */
 .btn-primary {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  border: 1px solid transparent;
   background: var(--brand);
   color: var(--brand-foreground);
+}
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  /* ring thickness; masked so the glow lands on the edge only, never inside */
+  padding: 1.5px;
+  background: radial-gradient(
+    90px circle at var(--gx, 50%) var(--gy, 50%),
+    var(--brand),
+    transparent 60%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.btn-primary:hover {
+  background: #fff;
+  color: var(--brand-text);
+  border-color: var(--brand);
+  filter: none;
+}
+.btn-primary:hover::before {
+  opacity: 1;
 }
 
 /* green, positive / WhatsApp actions */
