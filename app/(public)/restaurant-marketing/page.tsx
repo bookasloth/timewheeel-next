@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { breadcrumbLd } from "@/lib/jsonld";
 import { RmHero } from "@/components/restaurant-marketing/hero";
 import { RmTrust } from "@/components/restaurant-marketing/trust";
 import { RmIntro } from "@/components/restaurant-marketing/intro";
@@ -95,6 +96,17 @@ export default function RestaurantMarketingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Restaurant Marketing", path: "/restaurant-marketing" },
+            ]),
+          ),
+        }}
       />
       <RmHero />
       <RmTrust />

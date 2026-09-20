@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Check, ChevronRight, Clock, User } from "lucide-react";
 import { site } from "@/lib/site";
-import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
+import { organizationLd, websiteLd, breadcrumbLd } from "@/lib/jsonld";
 import {
   getAllSlugs,
   getPost,
@@ -46,6 +46,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: meta.ogTitle ?? meta.title,
       description: meta.ogDescription ?? meta.description,
       publishedTime: meta.date,
+      modifiedTime: meta.date,
+      authors: [meta.author],
+      images: [`${url}/opengraph-image`],
     },
     twitter: {
       card: "summary_large_image",
@@ -92,12 +95,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     dateModified: meta.date,
     articleSection: meta.category,
     keywords: meta.tags.join(", "),
+    inLanguage: "en",
+    wordCount: content.trim().split(/\s+/).length,
     image: `${url}/opengraph-image`,
     mainEntityOfPage: url,
+    isPartOf: { "@id": `${site.url}/#website` },
     author: { "@id": `${site.url}/#organization` },
     publisher: { "@id": `${site.url}/#organization` },
   };
-  const graphLd = { "@context": "https://schema.org", "@graph": [organizationLd(), articleLd] };
+  const graphLd = {
+    "@context": "https://schema.org",
+    "@graph": [organizationLd(), websiteLd(), articleLd],
+  };
   const faqLd =
     faq.length > 0
       ? {

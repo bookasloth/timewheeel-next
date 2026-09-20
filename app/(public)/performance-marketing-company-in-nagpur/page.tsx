@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { breadcrumbLd } from "@/lib/jsonld";
 import { PmHeroCentered } from "@/components/perf-marketing/hero-centered";
 import { PmTrust } from "@/components/perf-marketing/trust";
 import { PmIntro } from "@/components/perf-marketing/intro";
@@ -124,6 +125,20 @@ export default function DigitalMarketing2Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              {
+                name: "Performance Marketing Company in Nagpur",
+                path: "/performance-marketing-company-in-nagpur",
+              },
+            ]),
+          ),
+        }}
       />
       <PmHeroCentered />
       <PmTrust />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { breadcrumbLd } from "@/lib/jsonld";
 import { DmHero } from "@/components/digital-marketing/hero";
 import { DmTrust } from "@/components/digital-marketing/trust";
 import { DmIntro } from "@/components/digital-marketing/intro";
@@ -112,6 +113,17 @@ export default function DigitalMarketingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbLd([
+              { name: "Home", path: "/" },
+              { name: "Digital Marketing", path: "/digital-marketing" },
+            ]),
+          ),
+        }}
       />
       <DmHero />
       <DmTrust />
