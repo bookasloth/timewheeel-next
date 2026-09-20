@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/reveal";
-import { wd } from "@/lib/web-development";
+import { TechStackPlayground } from "./tech-stack-playground";
 
 export function WdTechStack() {
   return (
@@ -16,23 +16,7 @@ export function WdTechStack() {
           </p>
         </Reveal>
 
-        <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {wd.techStack.map((g) => (
-            <div key={g.group} className="rounded-2xl border border-border bg-card p-6">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                {g.group}
-              </p>
-              <ul className="mt-4 space-y-2">
-                {g.items.map((it) => (
-                  <li key={it} className="flex items-center gap-2 text-sm font-medium">
-                    <span className="size-1.5 rounded-full bg-brand" />
-                    {it}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </Reveal>
+        <TechStackPlayground />
       </div>
     </section>
   );
