@@ -9,7 +9,6 @@ import {
   FileText,
   MagnifyingGlass,
   PenNib,
-  Robot,
   ShareNetwork,
   Storefront,
   PresentationChart,
@@ -42,7 +41,6 @@ const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
     items: [
       { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-company-in-nagpur", desc: "Content that stops the scroll." },
       { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur", desc: "Rank higher. Get found. Get leads." },
-      { name: "AI + Marketing Automation", icon: Robot, accent: "#8b5cf6", href: "/ai-marketing-automation-company-in-nagpur", desc: "Clicks and triggers on autopilot." },
       { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/performance-marketing-company-in-nagpur", desc: "Ad spend that pays back." },
     ],
   },
