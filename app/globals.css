@@ -397,13 +397,15 @@
 }
 
 /* ── Social Media Marketing (app/(public)/social-media-marketing-company-in-nagpur) ──
-    Blue-first: a punchier primary blue (#2563eb) with a rotating multi-hue
-    accent palette (pink/yellow/green/violet/orange) layered across sections.
-    Matches the Social Media Marketing accent in the navbar. */
+    Pink-crimson-fuchsia: crimson-rose primary (#e11d48) with pink + fuchsia
+    accents layered across sections. Scoped accent overrides keep the whole
+    page in the pink family (accent-yellow → fuchsia). */
 .smm-page {
-  --brand: #2563eb;
-  --brand-text: #1d4ed8;
-  --ring: #2563eb;
+  --brand: #e11d48;
+  --brand-text: #be123c;
+  --ring: #e11d48;
+  --accent-pink: #ff2d78;
+  --accent-yellow: #c026d3;
 }
 
 /* SMM ambient glow blobs (hero + final CTA) */
@@ -422,21 +424,20 @@
 
 /* SMM display-word gradient (used for the hero highlight word) */
 .smm-rainbow-text {
-  background-image: linear-gradient(92deg, #2563eb 0%, #7c3aed 48%, #ff4d93 100%);
+  background-image: linear-gradient(92deg, #ff2d78 0%, #e11d48 48%, #c026d3 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* SMM workflow spine: blue → violet → pink → honey → green */
+/* SMM workflow spine: pink → rose → crimson → fuchsia */
 .smm-spine {
   background-image: linear-gradient(
     180deg,
-    rgba(37, 99, 235, 0.55),
-    rgba(139, 92, 246, 0.5),
-    rgba(255, 77, 147, 0.5),
-    rgba(255, 204, 28, 0.55),
-    rgba(41, 166, 111, 0.5)
+    rgba(255, 45, 120, 0.55),
+    rgba(244, 63, 94, 0.5),
+    rgba(225, 29, 72, 0.55),
+    rgba(192, 38, 211, 0.5)
   );
 }
 

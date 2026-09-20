@@ -3,6 +3,13 @@ import { site } from "@/lib/site";
 import { smm } from "@/lib/social-media-marketing";
 import { organizationLd, localBusinessLd, breadcrumbLd } from "@/lib/jsonld";
 import { SmmHero } from "@/components/social-media-marketing/hero";
+import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
+import { SmmMetrics } from "@/components/social-media-marketing/metrics";
+import { SmmFeed } from "@/components/social-media-marketing/feed";
+import { SmmTestimonials } from "@/components/social-media-marketing/testimonials";
+import { SmmPackages } from "@/components/social-media-marketing/packages";
+import { SmmFounder } from "@/components/social-media-marketing/founder";
+import { SmmStickyCta } from "@/components/social-media-marketing/sticky-cta";
 import { SmmIntro } from "@/components/social-media-marketing/intro";
 import { SmmServices } from "@/components/social-media-marketing/services";
 import { SmmPlatforms } from "@/components/social-media-marketing/platforms";
@@ -88,14 +95,21 @@ export default function SocialMediaMarketingPage() {
 
       <SmmHero />
       <SmmIntro />
+      <SmmMetrics />
       <SmmServices />
       <SmmPlatforms />
+      <SmmFeed />
       <SmmApproach />
       <SmmWhy />
       <SmmContentPurpose />
       <SmmWorkflow />
+      <SmmPackages />
+      <SmmCollaborators />
+      <SmmTestimonials />
+      <SmmFounder />
       <SmmFaq />
       <SmmFinalCta />
+      <SmmStickyCta />
       <LeadForm
         idPrefix="smm"
         source="Social Media Marketing Company in Nagpur"

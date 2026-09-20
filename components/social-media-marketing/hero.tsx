@@ -71,15 +71,34 @@ export function SmmHero() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <Image
-              src="/hero/social.png"
-              alt="Social media marketing by Timewheel"
-              width={1536}
-              height={1024}
-              priority
-              sizes="(min-width: 1024px) 40vw, 90vw"
-              className="h-auto w-full rounded-2xl border border-border shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)]"
-            />
+            {/* ponytail: staggered grid, left = 3 landscape 16:9, right = 9:16 tall; swap srcs for real creatives */}
+            <div className="grid grid-cols-2 gap-4 lg:h-[32rem]">
+              {/* left column: 3 small 16:9 cards, offset down */}
+              <div className="mt-10 flex flex-col gap-4">
+                {smm.hero.gallery.slice(0, 3).map((img, i) => (
+                  <Image
+                    key={img.src}
+                    src={img.src}
+                    alt={img.alt}
+                    width={1280}
+                    height={720}
+                    priority={i === 0}
+                    sizes="(min-width: 1024px) 20vw, 45vw"
+                    className="aspect-[16/9] h-auto w-full min-h-0 flex-1 rounded-2xl border border-border object-cover shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)] lg:aspect-auto"
+                  />
+                ))}
+              </div>
+              {/* right column: single 9:16 vertical */}
+              <Image
+                src={smm.hero.gallery[3].src}
+                alt={smm.hero.gallery[3].alt}
+                width={720}
+                height={1280}
+                priority
+                sizes="(min-width: 1024px) 20vw, 45vw"
+                className="aspect-[9/16] h-full w-full rounded-2xl border border-border object-cover shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)] lg:aspect-auto"
+              />
+            </div>
           </Reveal>
         </div>
       </div>

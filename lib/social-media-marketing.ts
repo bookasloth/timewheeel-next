@@ -39,6 +39,12 @@ export const smm = {
     primaryCta: { label: "Let's Talk", href: "#contact" },
     secondaryCta: { label: "See What We Do", href: "#services" },
     trustLine: "Strategy-led · Platform-specific · Clear monthly reporting",
+    gallery: [
+      { src: "/hero/social.png", alt: "Social media content by Timewheel" },
+      { src: "/hero/seo.png", alt: "Content strategy and planning" },
+      { src: "/hero/web-dev.png", alt: "Campaign performance reporting" },
+      { src: "/hero/web-design.png", alt: "Brand creative across platforms" },
+    ],
   },
 
   intro: {
@@ -54,6 +60,128 @@ export const smm = {
       { title: "Platform-specific", note: "Shaped for how each platform actually works", tone: G },
       { title: "Measurable goals", note: "Every post pointed at a business outcome", tone: T },
     ],
+  },
+
+  // Honest reporting categories — no invented numbers. What every monthly
+  // scorecard covers, so clients know exactly what is measured.
+  metrics: {
+    eyebrow: "What we report",
+    heading: "Every month, the numbers that actually matter.",
+    body: "No vanity dashboards. A short, honest scorecard that shows what your social presence did and what it earned, in plain language.",
+    items: [
+      { label: "Reach & impressions", note: "How many real people saw your content", tone: B },
+      { label: "Engagement rate", note: "Saves, shares and comments, not just likes", tone: P },
+      { label: "Follower growth", note: "Net new, quality audience, never bought", tone: V },
+      { label: "Content output", note: "Posts, reels and stories shipped on plan", tone: G },
+    ],
+  },
+
+  // Illustrative creative gallery — sample content concepts, not client work.
+  feed: {
+    eyebrow: "Creative in action",
+    heading: "The kind of content we make.",
+    body: "Reels, carousels and stories built on templates your brand owns, so every post looks like you and works on its platform.",
+    posts: [
+      { kind: "Reel", caption: "Launch teaser, 15s hook-led edit", tone: P },
+      { kind: "Carousel", caption: "5-slide how-to your audience saves", tone: V },
+      { kind: "Story", caption: "Behind-the-scenes with a poll sticker", tone: O },
+      { kind: "Post", caption: "Bold quote card in brand type", tone: B },
+      { kind: "Reel", caption: "Trend-jack cut to your product", tone: G },
+      { kind: "Carousel", caption: "Before / after in three frames", tone: Y },
+    ],
+  },
+
+  // NOTE: placeholder testimonials — replace with real, permissioned client
+  // quotes before publishing. Do not ship fabricated social proof.
+  testimonials: {
+    eyebrow: "In their words",
+    heading: "What working with us feels like.",
+    items: [
+      {
+        quote: "Replace with a real client quote before this page goes live.",
+        name: "Client name",
+        role: "Role, Company",
+        tone: P,
+      },
+      {
+        quote: "Placeholder testimonial. Swap in a permissioned quote from a real client.",
+        name: "Client name",
+        role: "Role, Company",
+        tone: V,
+      },
+      {
+        quote: "Placeholder testimonial. Use a genuine result or experience in the client's own words.",
+        name: "Client name",
+        role: "Role, Company",
+        tone: B,
+      },
+    ],
+  },
+
+  // Package tiers — deliverables are real capability; prices are placeholders.
+  // Set real pricing (or keep "Custom") before publishing.
+  packages: {
+    eyebrow: "Ways to work together",
+    heading: "Pick the engagement that fits where you are.",
+    body: "Every plan is scoped to your goals. Start where it makes sense and scale up when the results justify it.",
+    tiers: [
+      {
+        name: "Starter",
+        price: "Custom",
+        cadence: "monthly",
+        blurb: "For brands finding their voice and building a consistent presence.",
+        features: [
+          "1-2 platforms managed",
+          "8-12 posts / month",
+          "Content calendar + captions",
+          "Basic monthly report",
+        ],
+        featured: false,
+        tone: B,
+      },
+      {
+        name: "Growth",
+        price: "Custom",
+        cadence: "monthly",
+        blurb: "For brands ready to grow reach with reels, campaigns and community.",
+        features: [
+          "3-4 platforms managed",
+          "16-20 posts + reels / month",
+          "Content + creative strategy",
+          "Community management",
+          "Full monthly scorecard",
+        ],
+        featured: true,
+        tone: P,
+      },
+      {
+        name: "Scale",
+        price: "Custom",
+        cadence: "monthly",
+        blurb: "For brands running always-on content plus paid social at volume.",
+        features: [
+          "All platforms managed",
+          "Full content + campaign calendar",
+          "Paid social management",
+          "Dedicated strategist",
+          "Priority reporting + reviews",
+        ],
+        featured: false,
+        tone: V,
+      },
+    ],
+    note: "Set real pricing before publishing, or keep Custom and quote per brand.",
+  },
+
+  // PLACEHOLDER founder note — replace name, role and quote with a real,
+  // permissioned person before publishing.
+  founder: {
+    eyebrow: "From the team",
+    quote:
+      "Replace this with a real note from your founder or social lead, in their own voice. One honest line about how you think about clients' brands goes a long way.",
+    name: "Founder name",
+    role: "Founder & Social Lead, Timewheel",
+    initial: "T",
   },
 
   services: {
