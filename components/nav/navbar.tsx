@@ -25,25 +25,27 @@ import { cn } from "@/lib/utils";
 // ecosystem never drift. Order + names live in lib/products.ts.
 const navProducts = featuredProducts;
 
-type NavService = { name: string; icon: Icon; accent: string; href: string };
+type NavService = { name: string; icon: Icon; accent: string; href: string; desc: string };
 
-const serviceGroups: { title: string; items: NavService[] }[] = [
+const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
   {
     title: "Tech",
+    icon: Code,
     items: [
-      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design-company-in-nagpur" },
-      { name: "Website Development", icon: Code, accent: "#269cef", href: "/web-development-company-in-nagpur" },
-      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development-company-in-nagpur" },
-      { name: "Shopify Development", icon: Storefront, accent: "#5e8e3e", href: "/shopify-development-company-in-nagpur" },
+      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design-company-in-nagpur", desc: "Interfaces built to convert, not just impress." },
+      { name: "Website Development", icon: Code, accent: "#269cef", href: "/web-development-company-in-nagpur", desc: "Fast, clean builds that ship on time." },
+      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development-company-in-nagpur", desc: "Custom apps that scale with you." },
+      { name: "Shopify Development", icon: Storefront, accent: "#5e8e3e", href: "/shopify-development-company-in-nagpur", desc: "Storefronts tuned to sell." },
     ],
   },
   {
     title: "Marketing",
+    icon: MagnifyingGlass,
     items: [
-      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-company-in-nagpur" },
-      { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur" },
-      { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "/ai-marketing-automation-company-in-nagpur" },
-      { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/performance-marketing-company-in-nagpur" },
+      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-company-in-nagpur", desc: "Content that stops the scroll." },
+      { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur", desc: "Rank higher. Get found. Get leads." },
+      { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "/ai-marketing-automation-company-in-nagpur", desc: "Clicks and triggers on autopilot." },
+      { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/performance-marketing-company-in-nagpur", desc: "Ad spend that pays back." },
     ],
   },
 ];
@@ -54,18 +56,17 @@ const resourceItems = [
 ];
 
 const navLinks = [
+  { label: "Pricing", href: "/pricing" },
   { label: "Company", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
-  const [openMenu, setOpenMenu] = useState<
-    "products" | "services" | "resources" | null
-  >(null);
+  const [openMenu, setOpenMenu] = useState<"services" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<
     "products" | "services" | "resources" | null
-  >("products");
+  >("services");
 
   // Overlay mode: transparent, light-text header over the homepage dark hero;
   // solidifies to the cream bar after a little scroll, and on every other page.
@@ -119,53 +120,6 @@ export function Navbar() {
 
         {/* desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
-          {/* Products */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenMenu("products")}
-            onMouseLeave={() => setOpenMenu(null)}
-          >
-            <button className={cn(linkBase, linkTone)}>
-              What We Built
-              <ChevronDown
-                className={cn(
-                  "size-4 transition-transform",
-                  openMenu === "products" && "rotate-180",
-                )}
-              />
-            </button>
-            {openMenu === "products" && (
-              <div className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-3">
-                <div className="rounded-2xl border border-border bg-background p-3">
-                  <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    Products
-                  </p>
-                  {navProducts.map((p) => (
-                    <Link
-                      key={p.name}
-                      href={p.href}
-                      className="group relative flex items-center gap-3 overflow-hidden rounded-xl p-2"
-                    >
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
-                        style={{ backgroundColor: `${p.accent}1f` }}
-                      />
-                      <span
-                        className="relative z-10 grid size-9 shrink-0 place-items-center rounded-lg bg-[var(--a)]/15 text-[var(--a)]"
-                        style={{ "--a": p.accent } as CSSProperties}
-                      >
-                        <p.icon className="size-5" weight="regular" />
-                        <p.icon className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100" weight="fill" />
-                      </span>
-                      <span className="relative z-10 block text-sm font-semibold">{p.name}</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
           {/* Services */}
           <div
             className="relative"
@@ -182,87 +136,110 @@ export function Navbar() {
               />
             </button>
             {openMenu === "services" && (
-              <div className="absolute left-1/2 top-full w-[600px] -translate-x-1/2 pt-3">
-                <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-background p-3">
-                  {serviceGroups.map((g) => (
-                    <div key={g.title}>
-                      <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        {g.title}
-                      </p>
-                      {g.items.map((s) => (
+              <div className="fixed left-1/2 top-16 w-[min(1060px,92vw)] -translate-x-1/2 pt-3">
+                <div className="grid grid-cols-[1.55fr_0.85fr] overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
+                  {/* left: headline + two service columns */}
+                  <div className="p-6">
+                    <h3 className="text-lg font-black tracking-tight text-foreground">
+                      Quality over quantity, always
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      End-to-end tech and marketing, built in Nagpur.
+                    </p>
+                    <div className="mt-5 grid grid-cols-2 gap-x-8 gap-y-1">
+                      {serviceGroups.map((g) => (
+                        <div key={g.title}>
+                          <p className="mb-2 flex items-center gap-2 text-sm font-bold text-foreground">
+                            <g.icon className="size-4" weight="fill" />
+                            {g.title}
+                          </p>
+                          {g.items.map((s) => (
+                            <Link
+                              key={s.name}
+                              href={s.href}
+                              className="group relative flex items-start gap-3 overflow-hidden rounded-xl p-2"
+                            >
+                              <span
+                                aria-hidden
+                                className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
+                                style={{ backgroundColor: `${s.accent}1f` }}
+                              />
+                              <span
+                                className="relative z-10 mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg bg-[var(--a)]/15 text-[var(--a)]"
+                                style={{ "--a": s.accent } as CSSProperties}
+                              >
+                                <s.icon className="size-5" weight="regular" />
+                                <s.icon className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100" weight="fill" />
+                              </span>
+                              <span className="relative z-10 min-w-0">
+                                <span className="block text-sm font-semibold text-foreground">{s.name}</span>
+                                <span className="block truncate text-xs text-muted-foreground">{s.desc}</span>
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* right: tinted rail — SaaS + Resources */}
+                  <div className="border-l border-border bg-secondary/60 p-6">
+                    <p className="text-sm font-bold text-foreground">Software as a Service</p>
+                    <div className="mt-3 space-y-1">
+                      {navProducts.map((p) => (
                         <Link
-                          key={s.name}
-                          href={s.href}
-                          className="group relative flex items-center gap-3 overflow-hidden rounded-xl p-2 text-sm font-semibold"
+                          key={p.name}
+                          href={p.href}
+                          className="block rounded-lg px-2 py-1.5 text-sm font-medium text-foreground/80 hover:bg-background hover:text-foreground"
                         >
-                          <span
-                            aria-hidden
-                            className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
-                            style={{ backgroundColor: `${s.accent}1f` }}
-                          />
-                          <span
-                            className="relative z-10 grid size-9 shrink-0 place-items-center rounded-lg bg-[var(--a)]/15 text-[var(--a)]"
-                            style={{ "--a": s.accent } as CSSProperties}
-                          >
-                            <s.icon className="size-5" weight="regular" />
-                            <s.icon className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100" weight="fill" />
-                          </span>
-                          <span className="relative z-10">{s.name}</span>
+                          {p.name}
                         </Link>
                       ))}
                     </div>
-                  ))}
+                    <p className="mt-5 text-sm font-bold text-foreground">Resources</p>
+                    <div className="mt-3 space-y-1">
+                      {/* Case Studies lives in the top-level Portfolio link, so it is filtered out here */}
+                      {resourceItems.filter((r) => r.href !== "/case-studies").map((r) => (
+                        <Link
+                          key={r.name}
+                          href={r.href}
+                          className="block rounded-lg px-2 py-1.5 text-sm font-medium text-foreground/80 hover:bg-background hover:text-foreground"
+                        >
+                          {r.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* footer strip */}
+                  <div className="col-span-2 flex flex-wrap items-center gap-x-8 gap-y-2 border-t border-border bg-background px-6 py-3">
+                    {navLinks.map((l) => (
+                      <Link
+                        key={l.href}
+                        href={l.href}
+                        className="text-xs font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                      >
+                        {l.label}
+                      </Link>
+                    ))}
+                    <Link
+                      href={site.demoUrl}
+                      className="text-xs font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    >
+                      Book A Meeting
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Resources */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenMenu("resources")}
-            onMouseLeave={() => setOpenMenu(null)}
+          <Link
+            href="/case-studies"
+            className={cn("rounded-md px-3 py-2 text-sm font-medium transition-colors", linkTone)}
           >
-            <button className={cn(linkBase, linkTone)}>
-              Resources
-              <ChevronDown
-                className={cn(
-                  "size-4 transition-transform",
-                  openMenu === "resources" && "rotate-180",
-                )}
-              />
-            </button>
-            {openMenu === "resources" && (
-              <div className="absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-3">
-                <div className="rounded-2xl border border-border bg-background p-3">
-                  <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    Resources
-                  </p>
-                  {resourceItems.map((s) => (
-                    <Link
-                      key={s.name}
-                      href={s.href}
-                      className="group relative flex items-center gap-3 overflow-hidden rounded-xl p-2"
-                    >
-                      <span
-                        aria-hidden
-                        className="absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
-                        style={{ backgroundColor: `${s.accent}1f` }}
-                      />
-                      <span
-                        className="relative z-10 grid size-9 shrink-0 place-items-center rounded-lg bg-[var(--a)]/15 text-[var(--a)]"
-                        style={{ "--a": s.accent } as CSSProperties}
-                      >
-                        <s.icon className="size-5" weight="regular" />
-                        <s.icon className="absolute left-1/2 top-1/2 size-5 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100" weight="fill" />
-                      </span>
-                      <span className="relative z-10 block text-sm font-semibold">{s.name}</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+            Portfolio
+          </Link>
 
           {navLinks.map((l) => (
             <Link
@@ -297,25 +274,6 @@ export function Navbar() {
       {/* mobile menu, full-screen overlay with collapsible sections */}
       {mobileOpen && (
         <div className="fixed inset-x-0 bottom-0 top-16 z-40 flex flex-col overflow-y-auto bg-background px-6 pb-8 pt-2 md:hidden">
-          {/* Products */}
-          <button
-            className="flex w-full items-center justify-between border-b border-border/60 py-4 text-base font-semibold"
-            onClick={() =>
-              setMobileSection((s) => (s === "products" ? null : "products"))
-            }
-          >
-            What We Built
-            <ChevronDown
-              className={cn(
-                "size-5 transition-transform",
-                mobileSection === "products" && "rotate-180",
-              )}
-            />
-          </button>
-          {mobileSection === "products" && (
-            <div className="py-2">{navProducts.map(mobileRow)}</div>
-          )}
-
           {/* Services */}
           <button
             className="flex w-full items-center justify-between border-b border-border/60 py-4 text-base font-semibold"
@@ -342,6 +300,25 @@ export function Navbar() {
                 </div>
               ))}
             </div>
+          )}
+
+          {/* Products */}
+          <button
+            className="flex w-full items-center justify-between border-b border-border/60 py-4 text-base font-semibold"
+            onClick={() =>
+              setMobileSection((s) => (s === "products" ? null : "products"))
+            }
+          >
+            What We Built
+            <ChevronDown
+              className={cn(
+                "size-5 transition-transform",
+                mobileSection === "products" && "rotate-180",
+              )}
+            />
+          </button>
+          {mobileSection === "products" && (
+            <div className="py-2">{navProducts.map(mobileRow)}</div>
           )}
 
           {/* Resources */}
