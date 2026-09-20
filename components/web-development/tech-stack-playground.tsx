@@ -130,10 +130,21 @@ export function TechStackPlayground() {
       constraint: { stiffness: 0.9, render: { visible: false } },
     });
     Matter.Composite.add(world, mc);
-    // Grab a pill -> the whole stack goes live so you can pick and re-stack.
-    Matter.Events.on(mc, "mousedown", () => {
-      if (mc.body) wake();
-    });
+    // First touch/press anywhere wakes the whole stack (static bodies can't be
+    // grabbed, and mc.body resolves a tick late, so wake on the raw DOM event),
+    // then nudge the pill under the cursor so a tap visibly knocks the stack.
+    const onDown = () => {
+      wake();
+      const hit = Matter.Query.point(bodies, mouse.position);
+      if (hit[0]) {
+        Matter.Body.applyForce(hit[0], hit[0].position, {
+          x: (Math.random() - 0.5) * 0.09,
+          y: -0.05,
+        });
+      }
+    };
+    box.addEventListener("mousedown", onDown);
+    box.addEventListener("touchstart", onDown, { passive: true });
 
     const sync = () => {
       for (let i = 0; i < bodies.length; i += 1) {
@@ -152,6 +163,8 @@ export function TechStackPlayground() {
     Matter.Runner.run(runner, engine);
 
     return () => {
+      box.removeEventListener("mousedown", onDown);
+      box.removeEventListener("touchstart", onDown);
       Matter.Events.off(engine, "afterUpdate", sync);
       Matter.Runner.stop(runner);
       Matter.Composite.clear(world, false);
