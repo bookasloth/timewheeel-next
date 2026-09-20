@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Matter from "matter-js";
 import {
   siNextdotjs, siReact, siTypescript, siJavascript, siTailwindcss, siHtml5, siCss, siSass, siVuedotjs,
@@ -72,17 +72,28 @@ function pyramidTargets(W: number, H: number): { x: number; y: number }[] {
   return out;
 }
 
+type Sim = {
+  engine: Matter.Engine;
+  bodies: Matter.Body[];
+  mouse: Matter.Mouse;
+  targets: { x: number; y: number }[];
+};
+
 export function TechStackPlayground() {
   const boxRef = useRef<HTMLDivElement>(null);
-  const pillRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const simRef = useRef<Sim | null>(null);
+  const startedRef = useRef(false);
   const bodiesRef = useRef<Matter.Body[]>([]);
   const targetsRef = useRef<{ x: number; y: number }[]>([]);
   const [reduced, setReduced] = useState(false);
 
-  useEffect(() => {
-    const box = boxRef.current;
-    if (!box) return;
-    // Narrow screens or reduced-motion: skip physics, show a static list.
+  // Callback ref: fires with the real box node once it is in the DOM, so we
+  // never read a null ref (a hydration mismatch was breaking useEffect timing).
+  // Runs its setup once; StrictMode/HMR re-invocations are guarded out. No
+  // teardown on purpose — this section lives for the whole page.
+  const initBox = useCallback((box: HTMLDivElement | null) => {
+    boxRef.current = box;
+    if (!box || startedRef.current) return;
     if (
       box.clientWidth < 680 ||
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
@@ -90,14 +101,17 @@ export function TechStackPlayground() {
       setReduced(true);
       return;
     }
+    startedRef.current = true;
 
     const W = box.clientWidth;
     const H = box.clientHeight;
     const targets = pyramidTargets(W, H);
-    targetsRef.current = targets;
 
+    // Gravity starts OFF so the dynamic pills float in the pyramid formation.
+    // The first tap / Knock turns it on. (Creating bodies static and calling
+    // setStatic(false) later corrupts their mass into NaN, so we avoid it.)
     const engine = Matter.Engine.create();
-    engine.gravity.y = 1;
+    engine.gravity.y = 0;
     const world = engine.world;
 
     const wall = (x: number, y: number, w: number, h: number) =>
@@ -111,18 +125,16 @@ export function TechStackPlayground() {
 
     // Start static so the pyramid holds; the first grab wakes everything.
     const bodies = PILLS.map((p, i) =>
+      // Plain dynamic rectangles (a chamfer near half the height makes a
+      // degenerate rounded rect that NaNs). They hold position while gravity
+      // is off; the DOM pill is visually rounded regardless.
       Matter.Bodies.rectangle(targets[i].x, targets[i].y, p.w, PILL_H, {
-        isStatic: true,
-        chamfer: { radius: PILL_H / 2 },
         restitution: 0.2,
         friction: 0.6,
         frictionAir: 0.02,
       }),
     );
-    bodiesRef.current = bodies;
     Matter.Composite.add(world, bodies);
-
-    const wake = () => bodies.forEach((b) => b.isStatic && Matter.Body.setStatic(b, false));
 
     const mouse = Matter.Mouse.create(box);
     const mc = Matter.MouseConstraint.create(engine, {
@@ -130,9 +142,16 @@ export function TechStackPlayground() {
       constraint: { stiffness: 0.9, render: { visible: false } },
     });
     Matter.Composite.add(world, mc);
-    // First touch/press anywhere wakes the whole stack (static bodies can't be
-    // grabbed, and mc.body resolves a tick late, so wake on the raw DOM event),
-    // then nudge the pill under the cursor so a tap visibly knocks the stack.
+
+    simRef.current = { engine, bodies, mouse, targets };
+    bodiesRef.current = bodies;
+    targetsRef.current = targets;
+
+    const wake = () => {
+      engine.gravity.y = 1;
+    };
+    // First touch/press turns gravity on so the stack drops, then nudges the
+    // pill under the cursor for a visible knock.
     const onDown = () => {
       wake();
       const hit = Matter.Query.point(bodies, mouse.position);
@@ -146,35 +165,40 @@ export function TechStackPlayground() {
     box.addEventListener("mousedown", onDown);
     box.addEventListener("touchstart", onDown, { passive: true });
 
-    const sync = () => {
+    // Drive the engine with Matter.Runner — it manages the delta/correction
+    // timing (a manual Engine.update divides by a zero lastDelta on the first
+    // frame and explodes every body to NaN). On each tick, sync the live DOM
+    // children (boxRef read fresh so it always targets the on-screen box).
+    Matter.Events.on(engine, "afterUpdate", () => {
+      const b = boxRef.current;
+      if (!b) return;
       for (let i = 0; i < bodies.length; i += 1) {
-        const el = pillRefs.current[i];
-        const b = bodies[i];
+        const el = b.children[i] as HTMLElement | undefined;
+        const body = bodies[i];
         if (!el) continue;
-        el.style.transform = `translate(${b.position.x - PILLS[i].w / 2}px, ${
-          b.position.y - PILL_H / 2
-        }px) rotate(${b.angle}rad)`;
+        el.style.transform = `translate(${body.position.x - PILLS[i].w / 2}px, ${
+          body.position.y - PILL_H / 2
+        }px) rotate(${body.angle}rad)`;
       }
-    };
-    Matter.Events.on(engine, "afterUpdate", sync);
-    sync();
+    });
+    // Paint the pyramid once up front so it doesn't flash at (0,0) pre-first-tick.
+    for (let i = 0; i < bodies.length; i += 1) {
+      const el = box.children[i] as HTMLElement | undefined;
+      if (el) {
+        el.style.transform = `translate(${bodies[i].position.x - PILLS[i].w / 2}px, ${
+          bodies[i].position.y - PILL_H / 2
+        }px)`;
+      }
+    }
 
     const runner = Matter.Runner.create();
     Matter.Runner.run(runner, engine);
-
-    return () => {
-      box.removeEventListener("mousedown", onDown);
-      box.removeEventListener("touchstart", onDown);
-      Matter.Events.off(engine, "afterUpdate", sync);
-      Matter.Runner.stop(runner);
-      Matter.Composite.clear(world, false);
-      Matter.Engine.clear(engine);
-    };
   }, []);
 
   const knock = () => {
+    const engine = simRef.current?.engine;
+    if (engine) engine.gravity.y = 1;
     bodiesRef.current.forEach((b) => {
-      Matter.Body.setStatic(b, false);
       Matter.Body.applyForce(b, b.position, {
         x: (Math.random() - 0.5) * 0.14,
         y: -0.04 - Math.random() * 0.05,
@@ -183,14 +207,14 @@ export function TechStackPlayground() {
   };
 
   const restack = () => {
+    const engine = simRef.current?.engine;
+    if (engine) engine.gravity.y = 0; // hold the reformed pyramid in place
     const targets = targetsRef.current;
     bodiesRef.current.forEach((b, i) => {
-      Matter.Body.setStatic(b, false);
       Matter.Body.setVelocity(b, { x: 0, y: 0 });
       Matter.Body.setAngularVelocity(b, 0);
       Matter.Body.setAngle(b, 0);
       Matter.Body.setPosition(b, targets[i] ?? { x: 0, y: 0 });
-      Matter.Body.setStatic(b, true);
     });
   };
 
@@ -222,15 +246,12 @@ export function TechStackPlayground() {
   return (
     <div className="mt-10">
       <div
-        ref={boxRef}
+        ref={initBox}
         className="relative h-[560px] w-full cursor-grab select-none overflow-hidden rounded-2xl border border-border bg-secondary/25 active:cursor-grabbing"
       >
-        {PILLS.map((p, i) => (
+        {PILLS.map((p) => (
           <div
             key={p.id}
-            ref={(el) => {
-              pillRefs.current[i] = el;
-            }}
             className="pointer-events-none absolute left-0 top-0 flex select-none items-center justify-center gap-2 rounded-full bg-white text-sm font-semibold shadow-sm will-change-transform"
             style={{ width: p.w, height: PILL_H, border: `2px solid ${p.color}` }}
           >

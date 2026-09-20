@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/reveal";
-import { TechStackPlayground } from "./tech-stack-playground";
+import { TechStackMount } from "./tech-stack-mount";
 
 export function WdTechStack() {
   return (
@@ -16,7 +16,7 @@ export function WdTechStack() {
           </p>
         </Reveal>
 
-        <TechStackPlayground />
+        <TechStackMount />
       </div>
     </section>
   );
