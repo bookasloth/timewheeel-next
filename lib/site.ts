@@ -12,6 +12,11 @@ export const site = {
     whatsappDigits: "917904109359",
     city: "Nagpur",
     region: "Maharashtra, India",
+    // Machine-readable address for LocalBusiness schema (office: Eureka CoWorking).
+    streetAddress: "2nd & 4th floor, 11, Friends Colony, Mate Square, Pratap Nagar Road, Kotwal Nagar",
+    addressRegion: "Maharashtra",
+    postalCode: "440022",
+    geo: { lat: 21.1215218, lng: 79.0567245 },
     responseTime: "Within 1 business day",
     hours: "Mon–Sat · 10:00–19:00 IST",
   },

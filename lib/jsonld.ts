@@ -126,11 +126,18 @@ export function localBusinessLd(): Thing {
     telephone: site.contact.phone,
     address: {
       "@type": "PostalAddress",
+      streetAddress: site.contact.streetAddress,
       addressLocality: site.contact.city,
-      addressRegion: site.contact.region,
+      addressRegion: site.contact.addressRegion,
+      postalCode: site.contact.postalCode,
       addressCountry: "IN",
-      // ponytail: add streetAddress + postalCode when the real office address is confirmed.
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: site.contact.geo.lat,
+      longitude: site.contact.geo.lng,
+    },
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${site.contact.geo.lat},${site.contact.geo.lng}`,
     areaServed: { "@type": "City", name: site.contact.city },
     // ponytail: keep in sync with site.contact.hours (human string), schema needs machine format.
     openingHours: "Mo-Sa 10:00-19:00",
