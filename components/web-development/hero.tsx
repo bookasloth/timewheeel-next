@@ -28,26 +28,16 @@ type TileDef = { n: number; pos: string; doodles: { d: string; at: string }[] };
 const HERO_TILES: TileDef[] = [
   { n: 1, pos: "-left-[69px] -top-[44px]", doodles: [ // code, top-left
     { d: "plus", at: "-top-3 right-3" },
-    { d: "dots", at: "-bottom-1 -right-4" },
   ] },
-  { n: 2, pos: "-right-8 -top-10 md:-right-4", doodles: [ // laptop, top-right
-    { d: "x", at: "top-8 -left-3" },
-  ] },
+  { n: 2, pos: "-right-8 -top-10 md:-right-4", doodles: [] }, // laptop, top-right
   { n: 3, pos: "left-[6px] top-[calc(34%+10px)]", doodles: [ // browser, mid-left
     { d: "squiggle", at: "top-1/2 -right-8" },
   ] },
-  { n: 4, pos: "left-[25px] -bottom-[124px]", doodles: [ // chart, bottom-left
-    { d: "squiggle", at: "-top-3 right-4" },
-    { d: "dots", at: "bottom-6 -right-6" },
-  ] },
+  { n: 4, pos: "left-[25px] -bottom-[124px]", doodles: [] }, // chart, bottom-left
   { n: 5, pos: "-right-[120px] top-[42%]", doodles: [ // rocket, mid-right (half off-screen)
     { d: "star", at: "top-2 -left-5" },
-    { d: "squiggle", at: "-bottom-2 -left-6" },
   ] },
-  { n: 6, pos: "right-[210px] -bottom-[114px]", doodles: [ // plant, bottom-right
-    { d: "star", at: "top-4 -right-4" },
-    { d: "dots", at: "-bottom-2 -left-4" },
-  ] },
+  { n: 6, pos: "right-[210px] -bottom-[114px]", doodles: [] }, // plant, bottom-right
 ];
 
 function Tile({ n, pos, doodles }: TileDef) {
