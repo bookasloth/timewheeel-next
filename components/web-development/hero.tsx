@@ -111,9 +111,6 @@ export function WdHero() {
               {wd.hero.secondaryCta.label}
             </Link>
           </div>
-          <p className="mt-7 text-[13px] font-semibold text-muted-foreground">
-            {wd.hero.trustLine}
-          </p>
         </Reveal>
       </div>
     </section>
