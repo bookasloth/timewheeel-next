@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -63,6 +63,16 @@ const navLinks = [
 
 export function Navbar() {
   const [openMenu, setOpenMenu] = useState<"services" | null>(null);
+  // Delay the close so the cursor can cross the gap between the trigger and the
+  // viewport-centered mega panel without the menu snapping shut.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenMenu("services");
+  };
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 150);
+  };
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<
     "products" | "services" | "resources" | null
@@ -123,8 +133,8 @@ export function Navbar() {
           {/* Services */}
           <div
             className="relative"
-            onMouseEnter={() => setOpenMenu("services")}
-            onMouseLeave={() => setOpenMenu(null)}
+            onMouseEnter={openServices}
+            onMouseLeave={scheduleClose}
           >
             <button className={cn(linkBase, linkTone)}>
               What We Offer
@@ -136,7 +146,11 @@ export function Navbar() {
               />
             </button>
             {openMenu === "services" && (
-              <div className="fixed left-1/2 top-16 w-[min(1060px,92vw)] -translate-x-1/2 pt-3">
+              <div
+                className="fixed left-1/2 top-16 w-[min(1060px,92vw)] -translate-x-1/2 pt-3"
+                onMouseEnter={openServices}
+                onMouseLeave={scheduleClose}
+              >
                 <div className="grid grid-cols-[1.55fr_0.85fr] overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
                   {/* left: headline + two service columns */}
                   <div className="p-6">
