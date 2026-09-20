@@ -12,15 +12,22 @@ import {
 } from "simple-icons";
 import type { SimpleIcon } from "simple-icons";
 
-// The tech pool. Each pill shows the brand logo + name with the brand-coloured
-// outline (no solid fill), driven straight off simple-icons (title/hex/path).
+// The tech pool, ordered foundation -> top level. Index 0 sits at the base of
+// the wall; later entries stack on top, like masonry. Each pill shows the brand
+// logo + name with a brand-coloured outline (no solid fill), from simple-icons.
 const ICONS: SimpleIcon[] = [
-  siNextdotjs, siReact, siTypescript, siJavascript, siTailwindcss, siHtml5, siCss, siSass, siVuedotjs,
-  siSvelte, siAstro, siVite,
-  siNodedotjs, siExpress, siPython, siPhp, siLaravel, siGraphql, siPrisma,
-  siPostgresql, siMysql, siMongodb, siRedis, siSupabase, siFirebase,
-  siWordpress, siShopify, siWoocommerce, siStripe, siSanity,
-  siVercel, siCloudflare, siNetlify, siDocker, siGit, siGithub,
+  // foundation: core languages + version control
+  siHtml5, siCss, siJavascript, siSass, siGit, siPhp, siPython,
+  // runtime + data
+  siNodedotjs, siExpress, siMysql, siPostgresql, siMongodb, siRedis, siFirebase, siSupabase,
+  // typed layer + APIs + frameworks
+  siTypescript, siGraphql, siPrisma, siReact, siVuedotjs, siSvelte, siLaravel,
+  // meta-frameworks + tooling
+  siNextdotjs, siAstro, siVite, siTailwindcss,
+  // CMS + commerce
+  siWordpress, siWoocommerce, siShopify, siSanity, siStripe,
+  // platforms + infra (top level)
+  siDocker, siCloudflare, siNetlify, siVercel, siGithub,
 ];
 
 const PILL_H = 40;
@@ -33,31 +40,40 @@ const PILLS: Pill[] = ICONS.map((ic) => ({
   w: Math.max(96, Math.round(ic.title.length * 8.6 + 58)),
 }));
 
-function pyramidRows(n: number): number[] {
-  const rows: number[] = [];
-  let r = 1;
-  let left = n;
-  while (left > 0) {
-    const c = Math.min(r, left);
-    rows.push(c);
-    left -= c;
-    r += 1;
-  }
-  return rows;
-}
+// Masonry wall: pack pills into rows (foundation first), stack the rows bottom
+// -> top, and right-align every row so the wall sits against the right edge.
+function wallTargets(W: number, H: number): { x: number; y: number }[] {
+  const gapX = 10;
+  const gapY = 8;
+  const rowStep = PILL_H + gapY;
+  const rightX = W - 18;
+  const maxRow = Math.min(W - 32, 660);
 
-function pyramidTargets(W: number, H: number): { x: number; y: number }[] {
-  const rows = pyramidRows(PILLS.length);
-  const spacingX = Math.min(150, (W - 30) / Math.max(...rows));
-  const topY = 44;
-  const gapY = rows.length > 1 ? (H - 70 - topY) / (rows.length - 1) : 0;
-  const out: { x: number; y: number }[] = [];
-  let idx = 0;
-  rows.forEach((count, row) => {
-    const y = topY + row * gapY;
-    for (let j = 0; j < count && idx < PILLS.length; j += 1, idx += 1) {
-      out.push({ x: W / 2 + (j - (count - 1) / 2) * spacingX, y });
+  const rows: number[][] = [];
+  let cur: number[] = [];
+  let curW = 0;
+  PILLS.forEach((p, i) => {
+    const add = p.w + (cur.length ? gapX : 0);
+    if (curW + add > maxRow && cur.length) {
+      rows.push(cur);
+      cur = [];
+      curW = 0;
     }
+    cur.push(i);
+    curW += p.w + (cur.length > 1 ? gapX : 0);
+  });
+  if (cur.length) rows.push(cur);
+
+  const out: { x: number; y: number }[] = [];
+  const baseY = H - 22 - PILL_H / 2;
+  rows.forEach((row, rIdx) => {
+    const y = baseY - rIdx * rowStep;
+    const totalW = row.reduce((s, idx) => s + PILLS[idx].w, 0) + gapX * (row.length - 1);
+    let x = rightX - totalW; // left start so the row's right edge = rightX
+    row.forEach((idx) => {
+      out[idx] = { x: x + PILLS[idx].w / 2, y };
+      x += PILLS[idx].w + gapX;
+    });
   });
   return out;
 }
@@ -79,7 +95,7 @@ export function TechStackPlayground() {
 
     const W = box.clientWidth;
     const H = box.clientHeight;
-    const targets = pyramidTargets(W, H);
+    const targets = wallTargets(W, H);
     targetsRef.current = targets;
 
     const engine = Matter.Engine.create();
