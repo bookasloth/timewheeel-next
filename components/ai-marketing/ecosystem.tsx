@@ -62,8 +62,8 @@ function NodeCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       className={cn(
-        "flex min-h-[84px] w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-[#E8E8E8] px-3 py-3 text-center transition-all duration-300",
-        isConversion ? "border-brand/40 bg-brand/[0.06]" : "bg-white",
+        "flex min-h-[84px] w-full flex-col items-center justify-center gap-1 rounded-[12px] border border-white/10 px-3 py-3 text-center transition-all duration-300",
+        isConversion ? "border-brand/50 bg-brand/[0.12]" : "bg-white/[0.05]",
       )}
       style={
         !isConversion && lit
@@ -84,7 +84,7 @@ function NodeCard({
         {name}
       </span>
       <span
-        className={cn("text-[11px] leading-tight", isConversion ? "text-brand/70" : "text-muted-foreground/90")}
+        className={cn("text-[11px] leading-tight", isConversion ? "text-brand" : "text-white/55")}
         style={!isConversion && lit ? { color: accent } : undefined}
       >
         {meta.role}
@@ -97,7 +97,16 @@ export function AimEcosystem() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-2 pt-20 md:pb-8 md:pt-28">
+    <section className="relative overflow-hidden bg-[#0b0616] text-white aim-dark">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(55% 55% at 50% 0%, rgba(139,92,246,0.2), transparent 60%), radial-gradient(50% 50% at 50% 100%, rgba(59,130,246,0.16), transparent 60%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 md:pb-24 md:pt-28">
       <Reveal className="mx-auto max-w-2xl text-center">
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           Every AI Tool, Working Toward One Goal
@@ -127,7 +136,7 @@ export function AimEcosystem() {
           <div
             onMouseEnter={() => setActive(null)}
             onMouseLeave={() => setActive(null)}
-            className="flex min-h-[88px] w-full flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/10 bg-navy px-6 py-4 text-center"
+            className="flex min-h-[88px] w-full flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/15 px-6 py-4 text-center aim-panel"
           >
             <span className="inline-flex items-center gap-1.5">
               <Plus className="size-3.5 text-brand" strokeWidth={2.5} />
@@ -160,12 +169,12 @@ export function AimEcosystem() {
             fill="none"
             className="absolute inset-0 h-full w-full"
           >
-            <circle cx={CENTER} cy={CENTER} r={104} stroke="#f0f0f2" strokeWidth="1" />
+            <circle cx={CENTER} cy={CENTER} r={104} stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
             <circle
               cx={CENTER}
               cy={CENTER}
               r={168}
-              stroke="#e9e9ed"
+              stroke="rgba(255,255,255,0.08)"
               strokeWidth="1"
               strokeDasharray="2 7"
             />
@@ -181,7 +190,7 @@ export function AimEcosystem() {
                   x2={CENTER + dx}
                   y2={CENTER + dy}
                   style={{
-                    stroke: lit ? accent : isConversion ? "#8B5CF6" : "#e4e4e8",
+                    stroke: lit ? accent : isConversion ? "#8B5CF6" : "rgba(255,255,255,0.14)",
                     strokeWidth: lit ? 1.6 : 1,
                     opacity: lit ? 1 : isConversion ? 0.6 : 0.9,
                     transition:
@@ -198,7 +207,7 @@ export function AimEcosystem() {
             <div
               onMouseEnter={() => setActive(null)}
               onMouseLeave={() => setActive(null)}
-              className="flex min-h-[88px] w-[128px] flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/10 bg-navy px-6 py-4 text-center"
+              className="flex min-h-[88px] w-[128px] flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/15 px-6 py-4 text-center aim-panel"
             >
               <span className="inline-flex items-center gap-1.5">
                 <Plus className="size-3.5 text-brand" strokeWidth={2.5} />
@@ -233,6 +242,7 @@ export function AimEcosystem() {
           })}
         </div>
       </Reveal>
+      </div>
     </section>
   );
 }

@@ -288,7 +288,16 @@ function ServiceVisual({ service }: { service: AimService }) {
   const Visual = servicesVisual[service.title] ?? AdCard;
   return (
     <TiltCard max={5}>
-      <Visual accent={service.accent} />
+      <div className="aim-dark relative overflow-hidden rounded-2xl bg-[#0b0616] p-2.5">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-10 -top-10 size-40 rounded-full opacity-40 blur-2xl"
+          style={{ background: service.accent }}
+        />
+        <div className="relative">
+          <Visual accent={service.accent} />
+        </div>
+      </div>
     </TiltCard>
   );
 }

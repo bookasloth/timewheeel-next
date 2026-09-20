@@ -5,7 +5,16 @@ import { Reveal } from "@/components/reveal";
 export function AimFinalCta() {
   return (
     <section className="mx-auto max-w-full px-6 py-20 md:py-28">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
+      <Reveal className="relative overflow-hidden rounded-3xl text-center text-white aim-panel">
+        <div aria-hidden className="pointer-events-none absolute inset-0 aim-dot-grid opacity-50" />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-16 -top-20 size-72 rounded-full aim-bloom dm-drift opacity-50"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 -left-16 size-72 rounded-full aim-bloom dm-drift opacity-40"
+        />
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
           <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Put{" "}

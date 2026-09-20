@@ -261,6 +261,70 @@
   --ring: #8b5cf6;
 }
 
+/* AI hero bento — deep-violet → indigo → blue panel, the "AI product" ground. */
+.aim-panel {
+  background:
+    radial-gradient(110% 80% at 100% 0%, rgba(59, 130, 246, 0.32), transparent 48%),
+    radial-gradient(80% 70% at 0% 100%, rgba(139, 92, 246, 0.3), transparent 48%),
+    linear-gradient(135deg, #17153a 0%, #3b0a5c 34%, #4c1d95 62%, #1e3a8a 100%);
+}
+/* faint tech dot-grid overlay for dark AI surfaces */
+.aim-dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+/* glossy "3D render" stand-in: soft rotating conic bloom + blur */
+.aim-bloom {
+  background: conic-gradient(
+    from 0deg,
+    #a78bfa,
+    #60a5fa,
+    #22d3ee,
+    #c084fc,
+    #a78bfa
+  );
+  filter: blur(18px) saturate(1.2);
+  opacity: 0.85;
+}
+/* dark corner action square, like the reference arrow badges */
+.aim-arrow {
+  background: #0b1220;
+  color: #fff;
+}
+/* scoped dark token context — flips token-based children (service mocks,
+   panels) to a dark glass surface without touching the rest of the page. */
+.aim-dark {
+  --background: #0b0616;
+  --card: #140a24;
+  --card-foreground: #f5f3ff;
+  --foreground: #f5f3ff;
+  --muted-foreground: #a89fc0;
+  --secondary: #241640;
+  --secondary-foreground: #f5f3ff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.14);
+}
+/* light lavender card ground for stat/innovation tiles */
+.aim-tile-soft {
+  background:
+    radial-gradient(90% 90% at 100% 0%, rgba(139, 92, 246, 0.14), transparent 60%),
+    linear-gradient(160deg, #f4f1ff 0%, #eef2ff 55%, #f8fafc 100%);
+}
+/* animated gradient headline word (reuses dm-gradient-text mechanics) */
+.aim-word {
+  background-image: linear-gradient(92deg, #c4b5fd 0%, #a78bfa 40%, #60a5fa 75%, #22d3ee 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: dm-gradient-x 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aim-word {
+    animation: none;
+  }
+}
+
 /* ── Social Media Marketing (app/(public)/social-media-marketing-company-in-nagpur) ──
     Blue-first: a punchier primary blue (#2563eb) with a rotating multi-hue
     accent palette (pink/yellow/green/violet/orange) layered across sections.
@@ -472,6 +536,11 @@ h2 {
 .wd-hero-h1 {
   font-size: clamp(2.125rem, 1.3rem + 3.6vw, 3.25rem) !important;
   line-height: 1.05 !important;
+}
+/* AI marketing hero: large focal headline inside the dark bento panel. */
+.aim-hero-h1 {
+  font-size: clamp(2.25rem, 1.2rem + 3.2vw, 3.25rem) !important;
+  line-height: 1.04 !important;
 }
 
 /* skeleton shimmer sweep (SEO hero idle card) */
