@@ -65,7 +65,9 @@ function Tile({ n, pos, doodles }: TileDef) {
 
 export function WdHero() {
   return (
-    <section className="relative overflow-hidden">
+    // overflow-x-clip (not overflow-hidden) so the two bottom illustration
+    // tiles can bleed downward into the section below instead of being cut off.
+    <section className="relative overflow-x-clip">
       {/* dot-grid + top hairline */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div

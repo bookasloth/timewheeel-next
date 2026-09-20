@@ -87,7 +87,18 @@ export default function WebDevelopmentPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <WdHero />
-      <section className="mx-auto max-w-5xl px-6 py-12">
+
+      {/* Our Work — separate titled section under the hero. Extra top padding on
+          lg leaves room for the hero's two bottom tiles that now bleed down. */}
+      <section className="relative z-10 mx-auto max-w-5xl px-6 pb-14 pt-16 lg:pt-28">
+        <div className="mb-8 text-center">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-brand-text">
+            Our Work
+          </p>
+          <h2 className="mt-3 font-black tracking-tight text-navy text-3xl md:text-4xl">
+            Builds we&apos;re proud of
+          </h2>
+        </div>
         <div className="grid gap-5 md:grid-cols-2">
           <WebProjectCard title="Ticket Dino:" subtitle="Events that sell out" href="#" image="/hero/web-dev.png" accent="#3987C9" />
           <WebProjectCard title="Book A Sloth:" subtitle="Bookings on autopilot" href="#" image="/hero/web-design.png" accent="#29a66f" mirror />
