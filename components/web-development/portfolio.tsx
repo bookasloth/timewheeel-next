@@ -6,19 +6,18 @@ import { products } from "@/lib/products";
 
 const bySlug = new Map(products.map((p) => [p.slug, p]));
 
-// Portfolio-first: web-dev buyers scroll for proof of real work before anything else.
+// Nested inside the "Our Work" section, below the four project cards.
 export function WdPortfolio() {
   return (
-    <section id="work" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <Reveal>
-        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Proof</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+    <div id="work" className="mt-16">
+      <Reveal className="text-center">
+        <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
           {wd.portfolio.title}
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{wd.portfolio.body}</p>
+        </p>
+        <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{wd.portfolio.body}</p>
       </Reveal>
 
-      <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {wd.portfolio.items.map((item) => {
           const p = bySlug.get(item.slug);
           if (!p) return null;
@@ -59,6 +58,6 @@ export function WdPortfolio() {
           );
         })}
       </Reveal>
-    </section>
+    </div>
   );
 }

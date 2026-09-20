@@ -88,9 +88,14 @@ export default function WebDevelopmentPage() {
 
       <WdHero />
 
-      {/* Our Work — separate titled section under the hero. Extra top padding on
-          lg leaves room for the hero's two bottom tiles that now bleed down. */}
-      <section className="relative z-10 mx-auto max-w-5xl px-6 pb-14 pt-16 lg:pt-28">
+      {/* Stats band. Top margin on lg leaves a transparent gap for the hero's
+          two bottom tiles to bleed into, before this opaque band starts. */}
+      <div className="lg:mt-28">
+        <WdStats />
+      </div>
+
+      {/* Our Work — titled projects section, now below the stats numbers. */}
+      <section className="relative z-10 mx-auto max-w-5xl px-6 pb-14 pt-16">
         <div className="mb-8 text-center">
           <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-brand-text">
             Our Work
@@ -105,9 +110,10 @@ export default function WebDevelopmentPage() {
           <WebProjectCard title="CoffeeForMe:" subtitle="Orders, zero commission" href="#" image="/hero/social.png" accent="#f45b0a" />
           <WebProjectCard title="The Parliament:" subtitle="Community on autopilot" href="#" image="/hero/shopify.png" accent="#ff4d93" mirror />
         </div>
+
+        {/* Recent-work proof cards, stacked below the four project cards */}
+        <WdPortfolio />
       </section>
-      <WdStats />
-      <WdPortfolio />
       <WdStandards />
       <WdServices />
       <WdTechStack />
