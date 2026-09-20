@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 import { products } from "@/lib/products";
+import { LoadMoreProjects } from "./load-more-projects";
 
 const bySlug = new Map(products.map((p) => [p.slug, p]));
 
@@ -51,6 +52,9 @@ export function WdPortfolio() {
           );
         })}
       </Reveal>
+
+      {/* Load-more appends further cards, fetched on click (not preloaded). */}
+      <LoadMoreProjects />
     </div>
   );
 }
