@@ -5,12 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import {
-  AppWindow,
   Code,
   FileText,
   MagnifyingGlass,
   PenNib,
-  Robot,
   ShareNetwork,
   Storefront,
   PresentationChart,
@@ -34,7 +32,6 @@ const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
     items: [
       { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design-company-in-nagpur", desc: "Interfaces built to convert, not just impress." },
       { name: "Website Development", icon: Code, accent: "#269cef", href: "/web-development-company-in-nagpur", desc: "Fast, clean builds that ship on time." },
-      { name: "Web App Development", icon: AppWindow, accent: "#4ab765", href: "/web-app-development-company-in-nagpur", desc: "Custom apps that scale with you." },
       { name: "Shopify Development", icon: Storefront, accent: "#5e8e3e", href: "/shopify-development-company-in-nagpur", desc: "Storefronts tuned to sell." },
     ],
   },
@@ -44,7 +41,6 @@ const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
     items: [
       { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-company-in-nagpur", desc: "Content that stops the scroll." },
       { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur", desc: "Rank higher. Get found. Get leads." },
-      { name: "AI + Marketing Automation", icon: Robot, accent: "#ff4d93", href: "/ai-marketing-automation-company-in-nagpur", desc: "Clicks and triggers on autopilot." },
       { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/performance-marketing-company-in-nagpur", desc: "Ad spend that pays back." },
     ],
   },
