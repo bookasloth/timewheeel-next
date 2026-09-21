@@ -2,7 +2,8 @@ import { Reveal } from "@/components/reveal";
 import { Counter } from "@/components/digital-marketing/counter";
 import { palette, wd } from "@/lib/website-design";
 
-const statColors = [palette.blue, palette.purple, palette.orange];
+// First stat keeps the maroon identity but lighter, so it reads on the navy band.
+const statColors = ["#a63d5f", palette.purple, palette.orange];
 
 // "In numbers" band: outlined gradient counts with a subtle ring decoration.
 export function WdStats() {
@@ -55,7 +56,7 @@ export function WdStats() {
                   <Counter value={s.value} suffix={s.suffix} />
                 </span>
               </p>
-              <p className="mt-2 h-px w-12 bg-white/15 transition-colors duration-300 group-hover:bg-brand/60" />
+              <p className="mt-2 h-px w-12 bg-white/15 transition-colors duration-300 group-hover:bg-[#a63d5f]" />
               <p className="mt-3 pb-1 text-sm font-medium text-white/55 transition-colors duration-300 group-hover:text-white">
                 {s.label}
               </p>

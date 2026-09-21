@@ -99,7 +99,7 @@ export function WdDesignSystem() {
                   value={typeScale}
                   onChange={(e) => setTypeScale(Number(e.target.value))}
                   aria-label="Adjust the display type size"
-                  className="mt-3 w-full accent-[#ff4d93]"
+                  className="mt-3 w-full accent-[#47143D]"
                 />
               </div>
             </Tile>
@@ -143,7 +143,7 @@ export function WdDesignSystem() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href={wd.finalCta.cta.href}
-                  className="group btn btn-blue inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold active:scale-95"
+                  className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold active:scale-95"
                 >
                   Start a Project
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -164,7 +164,7 @@ export function WdDesignSystem() {
               <div className="flex gap-3">
                 {[
                   { t: "Strategy", c: palette.blue },
-                  { t: "Design", c: palette.purple },
+                  { t: "Design", c: "#a63d5f" },
                   { t: "Growth", c: palette.green },
                 ].map((card) => {
                   const selected = selectedCard === card.t;
@@ -234,7 +234,7 @@ export function WdDesignSystem() {
                 </button>
                 <Link
                   href={wd.finalCta.cta.href}
-                  className="btn btn-blue block rounded-lg px-4 py-2 text-center text-sm font-semibold active:scale-[0.98]"
+                  className="btn btn-primary block rounded-lg px-4 py-2 text-center text-sm font-semibold active:scale-[0.98]"
                 >
                   Send
                 </Link>

@@ -86,23 +86,13 @@ export default function WebsiteDesignPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <WdHero />
-      <div className="mx-auto -mt-4 max-w-5xl px-6 pb-4 md:pb-8">
-        <Image
-          src="/hero/web-design.png"
-          alt="Website design work by Timewheel"
-          width={1536}
-          height={1024}
-          sizes="(min-width: 1024px) 64rem, 90vw"
-          className="h-auto w-full rounded-2xl border border-border shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)]"
-        />
-      </div>
       <WdStats />
       <WdVp />
       <WdPortfolio />
       <WdOurWork />
       <WdProcess />
       <WdDesignSystem />
-      {/* <WdBeforeAfter /> */}
+      <WdBeforeAfter />
       <WdServices />
       <WdWhy />
       <WdTestimonials />

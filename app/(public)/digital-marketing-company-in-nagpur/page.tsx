@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
   description:
     "Hire a full-service digital marketing agency in Nagpur for SEO, paid ads, social media, content, email and WhatsApp marketing, one connected growth system with clear reports.",
-  alternates: { canonical: `${site.url}/performance-marketing-company-in-nagpur` },
+  alternates: { canonical: `${site.url}/digital-marketing-company-in-nagpur` },
   openGraph: {
     type: "website",
-    url: `${site.url}/performance-marketing-company-in-nagpur`,
+    url: `${site.url}/digital-marketing-company-in-nagpur`,
     siteName: site.name,
     title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
     description:
@@ -133,8 +133,8 @@ export default function DigitalMarketing2Page() {
             breadcrumbLd([
               { name: "Home", path: "/" },
               {
-                name: "Performance Marketing Company in Nagpur",
-                path: "/performance-marketing-company-in-nagpur",
+                name: "Digital Marketing Company in Nagpur",
+                path: "/digital-marketing-company-in-nagpur",
               },
             ]),
           ),

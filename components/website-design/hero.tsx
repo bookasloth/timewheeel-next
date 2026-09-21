@@ -95,7 +95,7 @@ function LandingHero() {
 
           <div className="mt-6 flex flex-wrap items-center gap-3 lg:mt-8">
             <motion.button
-              className="rounded-lg bg-foreground px-5 py-2.5 text-base font-semibold text-background shadow-lg transition-transform hover:scale-105 md:px-6 md:py-3 md:text-lg"
+              className="btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
               animate={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.2, ease: "easeOut", delay: 0.7 }}
@@ -104,14 +104,15 @@ function LandingHero() {
                 Start a Project <span className="ml-1 font-serif">→</span>
               </Link>
             </motion.button>
-            <motion.button
-              className="rounded-lg bg-wblue px-5 py-2.5 text-base font-semibold text-white shadow-lg transition-transform hover:scale-105 md:px-6 md:py-3 md:text-lg"
+            <motion.div
               animate={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.2, ease: "easeOut", delay: 0.7 }}
             >
-              <Link href="#work">Explore Our Work</Link>
-            </motion.button>
+              <Link href="#work" className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold">
+                Explore Our Work
+              </Link>
+            </motion.div>
           </div>
         </div>
 

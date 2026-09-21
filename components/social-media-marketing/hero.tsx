@@ -3,8 +3,11 @@ import Image from "next/image";
 import { ArrowRight, Sparkle } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
+import { SmmReelCard } from "@/components/social-media-marketing/reel-card";
 
 export function SmmHero() {
+  // Staggered posts: each card keeps its own ratio (1:1, 4:5, 3:4).
+  const postRatios = ["aspect-square", "aspect-[4/5]", "aspect-[3/4]"];
   return (
     <section className="relative overflow-hidden">
       {/* ambient color field */}
@@ -71,32 +74,29 @@ export function SmmHero() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            {/* ponytail: staggered grid, left = 3 landscape 16:9, right = 9:16 tall; swap srcs for real creatives */}
+            {/* staggered grid: left = 3 Instagram 4:5 posts, right = 9:16 reel */}
             <div className="grid grid-cols-2 gap-4 lg:h-[32rem]">
-              {/* left column: 3 small 16:9 cards, offset down */}
+              {/* left column: 3 posts with mixed IG ratios (1:1, 4:5, 3:4), offset down */}
               <div className="mt-10 flex flex-col gap-4">
                 {smm.hero.gallery.slice(0, 3).map((img, i) => (
                   <Image
                     key={img.src}
                     src={img.src}
                     alt={img.alt}
-                    width={1280}
-                    height={720}
+                    width={1080}
+                    height={1350}
                     priority={i === 0}
                     sizes="(min-width: 1024px) 20vw, 45vw"
-                    className="aspect-[16/9] h-auto w-full min-h-0 flex-1 rounded-2xl border border-border object-cover shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)] lg:aspect-auto"
+                    className={`h-auto w-full min-h-0 flex-1 rounded-2xl border border-border object-cover shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)] lg:aspect-auto ${postRatios[i % postRatios.length]}`}
                   />
                 ))}
               </div>
-              {/* right column: single 9:16 vertical */}
-              <Image
+              {/* right column: single 9:16 reel, click to play */}
+              {/* Swap `video` for a real 9:16 reel file (e.g. /public/reel.mp4) */}
+              <SmmReelCard
                 src={smm.hero.gallery[3].src}
                 alt={smm.hero.gallery[3].alt}
-                width={720}
-                height={1280}
-                priority
-                sizes="(min-width: 1024px) 20vw, 45vw"
-                className="aspect-[9/16] h-full w-full rounded-2xl border border-border object-cover shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)] lg:aspect-auto"
+                video="/coffee.mp4"
               />
             </div>
           </Reveal>

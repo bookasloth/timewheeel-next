@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getAllSlugs().map((slug) => `/blog/${slug}`),
     ...getAllTags().map((tag) => `/blog/tag/${slugify(tag)}`),
     "/digital-marketing",
-    "/performance-marketing-company-in-nagpur",
+    "/digital-marketing-company-in-nagpur",
     "/restaurant-marketing",
     "/website-design-company-in-nagpur",
     "/web-app-development-company-in-nagpur",

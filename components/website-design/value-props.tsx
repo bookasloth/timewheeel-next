@@ -1,5 +1,4 @@
 import { Code2, Compass, MousePointerClick, Palette } from "lucide-react";
-import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/website-design";
 
 const blockIcons = {
@@ -13,26 +12,26 @@ export function WdVp() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <Reveal>
+        <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-wblue">
             {wd.valueProps.label}
           </p>
           <h2 className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">
             {wd.valueProps.title}
           </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
+        </div>
+        <div>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {wd.valueProps.body}
           </p>
-        </Reveal>
+        </div>
       </div>
 
       <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-        {wd.valueProps.blocks.map((block, i) => {
+        {wd.valueProps.blocks.map((block) => {
           const Icon = blockIcons[block.icon as keyof typeof blockIcons];
           return (
-            <Reveal key={block.number} delay={i * 0.08} className="h-full">
+            <div key={block.number} className="h-full">
               <div className="group flex h-full flex-col bg-white p-7 transition-colors duration-300 hover:bg-wsoft md:p-9">
                 <div className="flex items-start justify-between">
                   <span
@@ -48,7 +47,7 @@ export function WdVp() {
                 <h3 className="mt-6 text-lg font-bold tracking-tight">{block.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.body}</p>
               </div>
-            </Reveal>
+            </div>
           );
         })}
       </div>

@@ -68,14 +68,6 @@ export function WdHero() {
           </div>
         </div>
 
-        <div className="items-end gap-6 px-6 pt-12 md:flex md:px-20">
-          <div className="mb-8 h-48 w-84 overflow-hidden rounded-md border shadow-lg md:mb-0">
-            <img
-              src="/products/bas-booking-16x9.png"
-              alt="Website design work by Timewheel"
-              className="h-full w-full object-cover"
-            />
-          </div>
           <div className="pt-8">
             <p className="text-xs leading-5 text-muted-foreground md:text-sm">
               {wd.hero.trustLine}
@@ -88,7 +80,6 @@ export function WdHero() {
               <ArrowDownRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </Link>
           </div>
-        </div>
 
         <div className="absolute right-8 bottom-8 flex gap-6 md:right-12">
           {socials.map(({ href, label, Icon }) => (

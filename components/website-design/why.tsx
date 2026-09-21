@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
 import { MessageCircle, Sparkle, Target, Users } from "lucide-react";
-import { Reveal } from "@/components/reveal";
 import { palette, wd } from "@/lib/website-design";
 
 const reasonIcons = {
@@ -17,19 +16,19 @@ export function WdWhy() {
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           {/* copy + reasons */}
           <div>
-            <Reveal>
+            <div>
               <p className="text-sm font-semibold uppercase tracking-widest text-wgreen">{wd.why.label}</p>
               <h2 className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">
                 {wd.why.title}
               </h2>
               <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">{wd.why.body}</p>
-            </Reveal>
+            </div>
 
             <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-              {wd.why.reasons.map((r, i) => {
+              {wd.why.reasons.map((r) => {
                 const Icon = reasonIcons[r.icon as keyof typeof reasonIcons];
                 return (
-                  <Reveal key={r.number} delay={i * 0.08} className="h-full">
+                  <div key={r.number} className="h-full">
                     <div className="group flex h-full flex-col bg-white p-6 transition-colors duration-300 hover:bg-white">
                       <div className="flex items-center justify-between">
                         <span
@@ -43,14 +42,14 @@ export function WdWhy() {
                       <h3 className="mt-4 text-base font-bold tracking-tight">{r.title}</h3>
                       <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{r.body}</p>
                     </div>
-                  </Reveal>
+                  </div>
                 );
               })}
             </div>
           </div>
 
           {/* device mockup */}
-          <Reveal delay={0.15}>
+          <div>
             <div className="relative mx-auto max-w-sm lg:max-w-none">
               <div aria-hidden className="absolute inset-0 rounded-full bg-gradient-to-tr from-wblue/25 via-wpurple/20 to-worange/15 blur-3xl" />
               <div className="wd-float relative mx-auto -rotate-2 rounded-2xl border border-border bg-background p-3 pl-5 shadow-[0_40px_80px_-40px_rgba(17,24,39,0.5)] transition-transform duration-300 hover:rotate-0">
@@ -100,7 +99,7 @@ export function WdWhy() {
                 <Target className="size-5" />
               </span>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

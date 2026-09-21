@@ -30,7 +30,7 @@ const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
     title: "Tech",
     icon: Code,
     items: [
-      { name: "Website Design", icon: PenNib, accent: "#ff4d93", href: "/website-design-company-in-nagpur", desc: "Interfaces built to convert, not just impress." },
+      { name: "Website Design", icon: PenNib, accent: "#47143D", href: "/website-design-company-in-nagpur", desc: "Interfaces built to convert, not just impress." },
       { name: "Website Development", icon: Code, accent: "#269cef", href: "/web-development-company-in-nagpur", desc: "Fast, clean builds that ship on time." },
       { name: "Shopify Development", icon: Storefront, accent: "#5e8e3e", href: "/shopify-development-company-in-nagpur", desc: "Storefronts tuned to sell." },
     ],
@@ -39,9 +39,9 @@ const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
     title: "Marketing",
     icon: MagnifyingGlass,
     items: [
-      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#269cef", href: "/social-media-marketing-company-in-nagpur", desc: "Content that stops the scroll." },
+      { name: "Social Media Marketing", icon: ShareNetwork, accent: "#be123c", href: "/social-media-marketing-company-in-nagpur", desc: "Content that stops the scroll." },
       { name: "Search Engine Optimization", icon: MagnifyingGlass, accent: "#4ab765", href: "/seo-company-in-nagpur", desc: "Rank higher. Get found. Get leads." },
-      { name: "Performance Marketing", icon: FileText, accent: "#ffcc1c", href: "/performance-marketing-company-in-nagpur", desc: "Ad spend that pays back." },
+      { name: "Digital Marketing", icon: FileText, accent: "#ffcc1c", href: "/digital-marketing-company-in-nagpur", desc: "Ad spend that pays back." },
     ],
   },
 ];

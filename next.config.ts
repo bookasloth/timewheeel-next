@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
       { source: "/website-design", destination: "/website-design-company-in-nagpur", permanent: true },
       { source: "/web-app-development", destination: "/web-app-development-company-in-nagpur", permanent: true },
       { source: "/web-development-company-in-india", destination: "/web-development-company-in-nagpur", permanent: true },
-      { source: "/digital-marketing2", destination: "/performance-marketing-company-in-nagpur", permanent: true },
+      { source: "/digital-marketing2", destination: "/digital-marketing-company-in-nagpur", permanent: true },
+      { source: "/performance-marketing-company-in-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
     ];
   },
   images: {

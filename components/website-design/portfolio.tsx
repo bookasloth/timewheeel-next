@@ -220,7 +220,7 @@ export function WdPortfolio() {
             </div>
             <Link
               href={wd.hero.primaryCta.href}
-              className="group btn btn-blue inline-flex shrink-0 items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
+              className="group btn btn-primary inline-flex shrink-0 items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
             >
               Start a Project
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

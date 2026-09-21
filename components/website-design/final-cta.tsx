@@ -17,7 +17,7 @@ export function WdFinalCta() {
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link
               href={wd.finalCta.cta.href}
-              className="group btn btn-blue inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold"
+              className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold"
             >
               {wd.finalCta.cta.label}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

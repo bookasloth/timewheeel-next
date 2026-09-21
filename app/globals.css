@@ -184,7 +184,7 @@
    Page-scoped palette: blue / purple / orange / green / dark / soft.
    Tokens emit wblue/wpurple/... utilities only where used. */
 @theme {
-  --color-wblue: #ff4d93;
+  --color-wblue: #47143D;
   --color-wpurple: #7c4dff;
   --color-worange: #ff7a3d;
   --color-wgreen: #35c98a;
@@ -192,20 +192,13 @@
   --color-wsoft: #f8f9fc;
 }
 
-/* website-design page buttons (reuse the .btn colour-sweep pattern) */
-.btn-blue {
-  background: var(--color-wblue);
-  color: #fff;
-}
-.btn-blue::before {
-  background: var(--color-wdark);
-}
-.btn-dark {
-  background: var(--color-wdark);
-  color: #fff;
-}
-.btn-dark::before {
-  background: var(--color-wblue);
+/* website-design page — scoped brand so shared token-based components
+   (LeadForm, focus rings, small brand text) use the page primary (wblue)
+   instead of the global site-wide orange. */
+.wd-page {
+  --brand: #47143D;
+  --brand-text: #3b1132; /* darker maroon for small text on cream — AA */
+  --ring: #47143D;
 }
 
 /* ── Web Development Company in India (app/(public)/web-development-company-in-nagpur) ──
@@ -325,7 +318,7 @@
   }
 }
 
-/* ── Digital Marketing, AI-style layout (app/(public)/performance-marketing-company-in-nagpur) ──
+/* ── Digital Marketing, AI-style layout (app/(public)/digital-marketing-company-in-nagpur) ──
     Black panels + bright yellow accent. Mirrors the aim-* bento theme, recoloured. */
 .pm-page {
   --brand: #ffcc1c;

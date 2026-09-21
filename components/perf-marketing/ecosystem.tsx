@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   BarChart3,
@@ -8,7 +9,6 @@ import {
   Bot,
   MessageCircle,
   PenLine,
-  Plus,
   Sparkles,
   Target,
   Workflow,
@@ -136,15 +136,16 @@ export function PmEcosystem() {
           <div
             onMouseEnter={() => setActive(null)}
             onMouseLeave={() => setActive(null)}
-            className="flex min-h-[88px] w-full flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/15 px-6 py-4 text-center pm-panel"
+            className="flex min-h-[104px] w-full flex-col items-center justify-center gap-2 rounded-[16px] border border-white/15 px-5 py-5 text-center pm-panel"
           >
-            <span className="inline-flex items-center gap-1.5">
-              <Plus className="size-3.5 text-brand" strokeWidth={2.5} />
-              <span className="text-sm font-black uppercase tracking-wide text-white">
-                Timewheel
-              </span>
-            </span>
-            <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-white/45">
+            <Image
+              src="/timewheel-logo.png"
+              alt="Timewheel"
+              width={80}
+              height={80}
+              className="size-20 object-contain"
+            />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/45">
               The system
             </span>
           </div>
@@ -207,15 +208,16 @@ export function PmEcosystem() {
             <div
               onMouseEnter={() => setActive(null)}
               onMouseLeave={() => setActive(null)}
-              className="flex min-h-[88px] w-[128px] flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/15 px-6 py-4 text-center pm-panel"
+              className="flex min-h-[104px] w-[144px] flex-col items-center justify-center gap-2 rounded-[16px] border border-white/15 px-5 py-5 text-center pm-panel"
             >
-              <span className="inline-flex items-center gap-1.5">
-                <Plus className="size-3.5 text-brand" strokeWidth={2.5} />
-                <span className="text-sm font-black uppercase tracking-wide text-white">
-                  Timewheel
-                </span>
-              </span>
-              <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-white/45">
+              <Image
+                src="/timewheel-logo.png"
+                alt="Timewheel"
+                width={80}
+                height={80}
+                className="size-20 object-contain"
+              />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/45">
                 The system
               </span>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   BarChart3,
@@ -8,7 +9,6 @@ import {
   Mail,
   MessageCircle,
   PenLine,
-  Plus,
   Search,
   Share2,
   Target,
@@ -135,15 +135,16 @@ export function DmEcosystem() {
           <div
             onMouseEnter={() => setActive(null)}
             onMouseLeave={() => setActive(null)}
-            className="flex min-h-[88px] w-full flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/10 bg-navy px-6 py-4 text-center shadow-[0_28px_56px_-30px_rgba(15,17,17,0.4)]"
+            className="flex min-h-[104px] w-full flex-col items-center justify-center gap-2 rounded-[16px] border border-white/10 bg-navy px-5 py-5 text-center shadow-[0_28px_56px_-30px_rgba(15,17,17,0.4)]"
           >
-            <span className="inline-flex items-center gap-1.5">
-              <Plus className="size-3.5 text-brand" strokeWidth={2.5} />
-              <span className="text-sm font-black uppercase tracking-wide text-white">
-                Timewheel
-              </span>
-            </span>
-            <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-white/45">
+            <Image
+              src="/timewheel-logo.png"
+              alt="Timewheel"
+              width={80}
+              height={80}
+              className="size-20 object-contain"
+            />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/45">
               The system
             </span>
           </div>
@@ -208,15 +209,16 @@ export function DmEcosystem() {
             <div
               onMouseEnter={() => setActive(null)}
               onMouseLeave={() => setActive(null)}
-              className="flex min-h-[88px] w-[128px] flex-col items-center justify-center gap-1.5 rounded-[12px] border border-white/10 bg-navy px-6 py-4 text-center shadow-[0_28px_56px_-30px_rgba(15,17,17,0.4)]"
+              className="flex min-h-[104px] w-[144px] flex-col items-center justify-center gap-2 rounded-[16px] border border-white/10 bg-navy px-5 py-5 text-center shadow-[0_28px_56px_-30px_rgba(15,17,17,0.4)]"
             >
-              <span className="inline-flex items-center gap-1.5">
-                <Plus className="size-3.5 text-brand" strokeWidth={2.5} />
-                <span className="text-sm font-black uppercase tracking-wide text-white">
-                  Timewheel
-                </span>
-              </span>
-              <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-white/45">
+              <Image
+                src="/timewheel-logo.png"
+                alt="Timewheel"
+                width={80}
+                height={80}
+                className="size-20 object-contain"
+              />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/45">
                 The system
               </span>
             </div>
