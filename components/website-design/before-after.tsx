@@ -13,7 +13,7 @@ export function WdBeforeAfter() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-wblue">{wd.beforeAfter.label}</p>
+        <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.beforeAfter.label}</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
           {wd.beforeAfter.title}
         </h2>

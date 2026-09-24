@@ -31,8 +31,7 @@ export function SmmWhy() {
               <Reveal key={p.title} delay={i * 0.05}>
                 <div className="group flex gap-6 border-t border-border/70 py-7 first:border-t-0 lg:py-8">
                   <span
-                    className="grid size-9 shrink-0 place-items-center rounded-lg font-black tracking-tight transition-transform duration-300 group-hover:scale-110"
-                    style={{ backgroundColor: `${p.tone}1a`, color: p.tone }}
+                    className="grid size-9 shrink-0 place-items-center rounded-lg bg-brand/10 font-black tracking-tight text-brand transition-transform duration-300 group-hover:scale-110"
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>

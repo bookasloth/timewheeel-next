@@ -10,7 +10,6 @@ import { WdHero } from "@/components/website-design/hero";
 import { WdStats } from "@/components/website-design/stats";
 import { WdVp } from "@/components/website-design/value-props";
 import { WdPortfolio } from "@/components/website-design/portfolio";
-import { WdOurWork } from "@/components/website-design/our-work";
 import { WdProcess } from "@/components/website-design/process";
 import { WdDesignSystem } from "@/components/website-design/design-system";
 import { WdBeforeAfter } from "@/components/website-design/before-after";
@@ -89,7 +88,6 @@ export default function WebsiteDesignPage() {
       <WdStats />
       <WdVp />
       <WdPortfolio />
-      <WdOurWork />
       <WdProcess />
       <WdDesignSystem />
       <WdBeforeAfter />

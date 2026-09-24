@@ -13,7 +13,7 @@ export function WdVp() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-wblue">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
             {wd.valueProps.label}
           </p>
           <h2 className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">

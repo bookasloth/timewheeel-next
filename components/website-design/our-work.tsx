@@ -1,73 +1,78 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/website-design";
+import { products } from "@/lib/products";
+import { LoadMoreProjects } from "@/components/web-development/load-more-projects";
+
+const bySlug = new Map(products.map((p) => [p.slug, p]));
 
 export function WdOurWork() {
   return (
-    <section className="border-y border-border/60 bg-background">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-wblue">{wd.ourWork.label}</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
-            {wd.ourWork.title}
-          </h2>
-          <p className="mt-4 text-muted-foreground md:text-lg">{wd.ourWork.body}</p>
-        </Reveal>
+    <div className="mt-16">
+      <Reveal stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {wd.ourWork.items.map((item) => {
+          const p = bySlug.get(item.slug);
+          if (!p) return null;
+          const Icon = p.icon;
+          const isLive = Boolean(item.live);
+          const href = item.live ?? `/products/${p.slug}`;
+          return (
+            <Link
+              key={item.slug}
+              href={href}
+              {...(isLive ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand/50"
+            >
+              <div className="flex items-center justify-between">
+                <span
+                  className="grid size-11 place-items-center rounded-xl"
+                  style={{ backgroundColor: `${p.accent}1a`, color: p.accent }}
+                >
+                  <Icon size={22} weight="duotone" />
+                </span>
+                <span
+                  className={
+                    isLive
+                      ? "inline-flex items-center gap-1 rounded-full bg-rating/10 px-2 py-0.5 text-[10px] font-bold text-rating"
+                      : "rounded-full bg-secondary px-2 py-0.5 text-[10px] font-bold text-muted-foreground"
+                  }
+                >
+                  {isLive ? "Live" : "In rollout"}
+                </span>
+              </div>
+              <h3 className="mt-4 flex items-center gap-1.5 text-lg font-bold">
+                {p.name}
+                <ArrowUpRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </h3>
+              <p className="mt-1 text-sm font-medium text-muted-foreground">{p.tagline}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.result}</p>
+            </Link>
+          );
+        })}
+      </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {wd.ourWork.cases.map((c, i) => (
-            <Reveal key={c.name} className="h-full" delay={i * 0.06}>
-              <Link
-                href={c.href}
-                className="group flex h-full flex-col rounded-xl border border-border bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(17,24,39,0.3)]"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span
-                    className="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest"
-                    style={{ backgroundColor: `${c.accent}1a`, color: c.accent }}
-                  >
-                    {c.category}
-                  </span>
-                  <ArrowUpRight
-                    className="size-3.5 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    style={{ color: c.accent }}
-                  />
-                </div>
+      <LoadMoreProjects />
 
-                <h3 className="mt-3 text-lg font-extrabold tracking-tight">{c.name}</h3>
-                <p className="mt-1.5 flex-1 text-[13px] leading-relaxed text-muted-foreground">
-                  {c.summary}
-                </p>
-
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {c.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-border bg-wsoft px-2 py-0.5 text-[10px] font-bold text-foreground/80"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-3 flex items-center justify-between border-t border-border/70 pt-3">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-                    {c.metric}
-                  </span>
-                  <span
-                    className="inline-flex items-center gap-1 text-[11px] font-bold"
-                    style={{ color: c.accent }}
-                  >
-                    View case
-                    <ArrowUpRight className="size-3" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+      <Reveal className="mt-12">
+        <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-white px-6 py-6 text-center sm:flex-row sm:text-left">
+          <div>
+            <p className="text-base font-bold tracking-tight">Want to see your business here?</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Every project above started with a conversation about a goal.
+            </p>
+          </div>
+          <Link
+            href={wd.hero.primaryCta.href}
+            className="group btn btn-primary inline-flex shrink-0 items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
+          >
+            Start a Project
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
-      </div>
-    </section>
+      </Reveal>
+    </div>
   );
 }

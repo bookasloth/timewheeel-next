@@ -1,6 +1,8 @@
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
 
+const pinkShades = ["#be123c", "var(--brand)", "var(--accent-pink)", "#fb7185"];
+
 // Honest reporting strip — categories we report, no invented numbers.
 export function SmmMetrics() {
   return (
@@ -22,7 +24,9 @@ export function SmmMetrics() {
             <Reveal key={m.label} delay={i * 0.06}>
               <div
                 className="h-full rounded-2xl border border-border bg-card p-6 shadow-[0_18px_40px_-30px_rgba(26,29,36,0.35)]"
-                style={{ borderTop: `3px solid ${m.tone}` }}
+                style={{
+                  borderTop: `3px solid ${pinkShades[i % pinkShades.length]}`,
+                }}
               >
                 <span
                   className="grid size-10 place-items-center rounded-xl font-black"

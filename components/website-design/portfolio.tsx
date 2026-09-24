@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Users } from "lucide-react";
+import { ArrowUpRight, Users } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { WdOurWork } from "@/components/website-design/our-work";
 import { palette, wd, type WdPortfolioProject } from "@/lib/website-design";
 import { cn } from "@/lib/utils";
 
@@ -197,7 +198,7 @@ export function WdPortfolio() {
     <section id="work" className="border-y border-border/60 bg-soft/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-wpurple">{wd.portfolio.label}</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.portfolio.label}</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
             {wd.portfolio.title}
           </h2>
@@ -209,24 +210,7 @@ export function WdPortfolio() {
             <Project key={project.number} project={project} index={i} />
           ))}
         </div>
-
-        <Reveal className="mt-16">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-white px-6 py-6 text-center sm:flex-row sm:text-left">
-            <div>
-              <p className="text-base font-bold tracking-tight">Want to see your business here?</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Every project above started with a conversation about a goal.
-              </p>
-            </div>
-            <Link
-              href={wd.hero.primaryCta.href}
-              className="group btn btn-primary inline-flex shrink-0 items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
-            >
-              Start a Project
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-        </Reveal>
+        <WdOurWork />
       </div>
     </section>
   );

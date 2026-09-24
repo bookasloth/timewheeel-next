@@ -24,7 +24,7 @@ export function WdTestimonials() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-widest text-worange">{wd.testimonials.label}</p>
+        <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.testimonials.label}</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
           {wd.testimonials.title}
         </h2>
@@ -71,20 +71,6 @@ export function WdTestimonials() {
           </Reveal>
         ))}
       </div>
-
-      <Reveal delay={0.2}>
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-2 gap-y-3 border-t border-border/70 pt-8">
-          <span className="mr-2 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Built for</span>
-          {wd.testimonials.audiences.map((a) => (
-            <span
-              key={a}
-              className="rounded-full border border-border bg-wsoft px-3.5 py-1.5 text-xs font-semibold text-foreground/75 transition-colors duration-200 hover:border-wblue/50 hover:text-foreground"
-            >
-              {a}
-            </span>
-          ))}
-        </div>
-      </Reveal>
     </section>
   );
 }

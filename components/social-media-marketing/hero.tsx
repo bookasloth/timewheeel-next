@@ -75,7 +75,7 @@ export function SmmHero() {
 
           <Reveal delay={0.15}>
             {/* staggered grid: left = 3 Instagram 4:5 posts, right = 9:16 reel */}
-            <div className="grid grid-cols-2 gap-4 lg:h-[32rem]">
+            <div className="grid grid-cols-2 gap-4 lg:h-[28rem] lg:grid-cols-[1fr_1.1fr]">
               {/* left column: 3 posts with mixed IG ratios (1:1, 4:5, 3:4), offset down */}
               <div className="mt-10 flex flex-col gap-4">
                 {smm.hero.gallery.slice(0, 3).map((img, i) => (
@@ -93,11 +93,13 @@ export function SmmHero() {
               </div>
               {/* right column: single 9:16 reel, click to play */}
               {/* Swap `video` for a real 9:16 reel file (e.g. /public/reel.mp4) */}
-              <SmmReelCard
-                src={smm.hero.gallery[3].src}
-                alt={smm.hero.gallery[3].alt}
-                video="/coffee.mp4"
-              />
+              <div className="h-full pt-10">
+                <SmmReelCard
+                  src={smm.hero.gallery[3].src}
+                  alt={smm.hero.gallery[3].alt}
+                  video="/coffee.mp4"
+                />
+              </div>
             </div>
           </Reveal>
         </div>
