@@ -55,12 +55,9 @@ const jsonLd = {
         highPrice: "3650",
         offerCount: bas.pricing.plans.length,
       },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: bas.testimonials.rating,
-        reviewCount: bas.testimonials.reviews.replace(/\D/g, ""),
-        bestRating: "5",
-      },
+      // AggregateRating removed: no verifiable individual reviews back it
+      // (Google review-snippet policy). Restore with real Review markup when
+      // genuine reviews exist. ponytail: rating stays as visual copy only.
     },
     {
       "@type": "FAQPage",

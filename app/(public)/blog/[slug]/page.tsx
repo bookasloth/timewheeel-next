@@ -100,7 +100,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     image: `${url}/opengraph-image`,
     mainEntityOfPage: url,
     isPartOf: { "@id": `${site.url}/#website` },
-    author: { "@id": `${site.url}/#organization` },
+    author: {
+      "@type": "Person",
+      name: author.name,
+      jobTitle: author.role,
+      description: author.bio,
+      worksFor: { "@id": `${site.url}/#organization` },
+    },
     publisher: { "@id": `${site.url}/#organization` },
   };
   const graphLd = {
@@ -178,7 +184,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {meta.excerpt && <p className="mt-4 text-black/70 md:text-lg">{meta.excerpt}</p>}
 
               <p className="mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-sm font-semibold text-[#141110]">
-                <span className="inline-flex items-center gap-1.5"><User className="size-4" strokeWidth={2} /> Team {author.name}</span>
+                <span className="inline-flex items-center gap-1.5"><User className="size-4" strokeWidth={2} /> {author.name}</span>
                 <span className="text-black/30" aria-hidden>|</span>
                 <span className="inline-flex items-center gap-1.5"><Clock className="size-4" strokeWidth={2} /> {readLabel}</span>
                 <span className="text-black/30" aria-hidden>|</span>

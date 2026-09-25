@@ -1,98 +1,125 @@
-# GEO + SEO Audit — Timewheel
+# GEO Audit Report: Timewheel
 
-**Site:** https://timewheel.co.in
-**Scope:** All routes (31 static pages + dynamic blog & case-study routes)
-**Date:** 2026-09-18
-**Stack:** Next.js 16.3.1 (App Router, Turbopack, SSR)
+**Audit Date:** 2026-09-25
+**URL:** http://localhost:50077 (local dev build of timewheel.co.in)
+**Business Type:** Local Agency / Services (Nagpur digital agency) + own SaaS products
+**Pages Analyzed:** 8 sampled from 39-URL sitemap
+
+> **Scope note:** Audited against the local dev server, so off-site signals (Reddit / YouTube / Wikipedia / LinkedIn mentions, live AI-platform citations, real crawler hits) cannot be measured. Brand Authority and Platform Optimization are scored from on-page proxies only and flagged **[verify on live domain]**. Everything else (HTML, schema, content, SSR, technical) is measured directly and is real.
 
 ---
 
-## Composite GEO Score: 79 / 100  (was ~68 before fixes)
+## Executive Summary
 
-| Category | Weight | Score | Notes |
+**Overall GEO Score: 72/100 (Fair — top of range, near Good)**
+
+Timewheel is technically excellent and already GEO-aware: server-side rendered, all major AI crawlers explicitly allowed, a rich `llms.txt`, a complete sitemap, and deep schema (FAQPage, ProfessionalService with real address + geo, Service, Article, SoftwareApplication, BreadcrumbList). Money pages carry 5,000+ words with FAQ/answer blocks that AI engines quote well. The score is held back by **entity-recognition gaps** — the Organization schema ships with an empty `sameAs` and no logo, so AI systems have nothing to resolve "Timewheel" against — and a **self-declared AggregateRating (4.9/180) with no visible individual reviews**, which is a trust and Google-policy risk.
+
+### Score Breakdown
+
+| Category | Score | Weight | Weighted |
 |---|---|---|---|
-| AI Citability & Visibility | 25% | 90 | SSR content, llms.txt, all AI crawlers allowed, FAQ schema |
-| Brand Authority Signals | 20% | 55 | No live social profiles, no logo asset, no external mentions wired |
-| Content Quality & E-E-A-T | 20% | 75 | Candid, specific copy + local expertise; thin on author credentials |
-| Technical Foundations | 15% | 90 | SSR, sitemap, robots, metadataBase, canonicals (now fixed) |
-| Structured Data | 10% | 88 | Full JSON-LD graph; logo still missing |
-| Platform Optimization | 10% | 85 | Clean answer-structured content, good for AIO/ChatGPT/Perplexity |
-
-Business type detected: **Agency** (services + products + case studies).
-
----
-
-## Fixes Applied This Pass
-
-### 1. Canonical bug — CRITICAL (fixed)
-Root layout sets `alternates.canonical: siteUrl`. In Next 16 metadata, `alternates`
-is inherited by child routes unless overridden. 8 pages set their own `metadata`
-but no canonical, so every one emitted `<link rel="canonical" href="https://timewheel.co.in">`
-— telling Google and AI crawlers they are duplicates of the homepage. Those pages
-would be dropped from indexes and never cited.
-
-Added a correct per-page canonical to:
-`/blog`, `/blog/tag/[tag]`, `/pricing`, `/solutions`, `/legal/cookies`,
-`/legal/privacy`, `/legal/refund`, `/legal/terms`.
-
-Verified rendered: `/pricing` now emits `href="https://timewheel.co.in/pricing"`.
-
-### 2. Missing OG / Twitter images — HIGH (fixed)
-Twitter card was `summary_large_image` but only 2 of 31 pages shipped an image, so
-~28 pages produced imageless share/AI cards. Added one root `app/opengraph-image.tsx`
-(branded, generated via `next/og`). By file-convention inheritance it now covers
-every page that doesn't ship its own. Verified rendered on `/pricing`.
-
-### 3. Homepage OG title leaking onto other pages — MEDIUM (fixed on key pages)
-9 pages inherited the homepage's `og:title`/`og:url`. Set correct `openGraph` on the
-3 shared-heavily pages: `/blog`, `/pricing`, `/solutions`. Verified `/pricing` now
-shows `og:title = "Pricing, Timewheel"`. (Legal pages left on canonical-only — they
-are not shared.)
-
-### 4. Organization JSON-LD enriched — MEDIUM (fixed)
-Added `legalName` ("Timewheel Internet Pvt. Ltd.") and a `contactPoint`
-(email, phone, `areaServed: IN`, languages en/hi) to `organizationLd()`. Strengthens
-AI entity recognition for "who is Timewheel" answers.
-
-### 5. llms.txt corrected + expanded — LOW/MEDIUM (fixed)
-- Fixed stale "Web Development Company in **India**" → "Nagpur".
-- Added 5 missing service pages (performance, social, Shopify, AI-marketing-automation,
-  AI-automation-agency) and 2 products (Alluminaty, Ticket Dino) so AI crawlers see
-  the full service set.
-
-All changes typecheck clean (`tsc --noEmit`, exit 0).
+| AI Citability | 82/100 | 25% | 20.5 |
+| Brand Authority | 45/100 | 20% | 9.0 |
+| Content E-E-A-T | 68/100 | 20% | 13.6 |
+| Technical GEO | 90/100 | 15% | 13.5 |
+| Schema & Structured Data | 85/100 | 10% | 8.5 |
+| Platform Optimization | 70/100 | 10% | 7.0 |
+| **Overall GEO Score** | | | **72/100** |
 
 ---
 
-## Remaining Recommendations (not done — need assets or decisions)
+## Critical Issues (Fix Immediately)
 
-| # | Item | Severity | Why it needs you |
-|---|---|---|---|
-| 1 | Ship a real `/logo.png` and add `logo` to Organization + LocalBusiness JSON-LD | HIGH | AI "top agencies" answers and rich results favor entities with a logo. Needs a brand asset. |
-| 2 | Fill real social URLs in `lib/site.ts` (twitter/linkedin/youtube are `#`) | HIGH | `sameAs` is empty, so AI can't cross-verify the entity. Brand-authority is the lowest score and this is the biggest lever. Brand mentions correlate ~3x stronger than backlinks for AI citation. |
-| 3 | Replace placeholder phone `+91 98765 43210` in `lib/site.ts` | HIGH | It's echoed into LocalBusiness + contactPoint schema. A fake number damages trust and local-pack eligibility. |
-| 4 | Add real `streetAddress` + `postalCode` to `localBusinessLd()` | MEDIUM | Full PostalAddress improves map-pack and "near me" AI answers. |
-| 5 | Author bios + `Person`/`author` schema on blog posts | MEDIUM | E-E-A-T "Experience/Expertise" signal; currently no visible credentials. |
-| 6 | Set `openGraph` on `/case-studies` and legal pages | LOW | Same og:title-leak as #3 above; low traffic. |
-| 7 | Real per-URL `lastModified` in `sitemap.ts` (currently `new Date()` on every build) | LOW | Freshness signal; use blog post dates. |
+_None._ No crawler blocks, no noindex, content is server-rendered, structured data present.
+
+## High Priority Issues (Fix This Week)
+
+1. **Empty `sameAs` — no entity anchor.** `lib/site.ts` sets `twitter/linkedin/youtube` to `"#"`, so `organizationLd()` drops `sameAs` entirely ([lib/jsonld.ts:13,32](lib/jsonld.ts:13)). `sameAs` is the strongest signal AI systems use to recognize a brand as a real entity. Create LinkedIn / X / YouTube (and a Google Business Profile) and wire their real URLs in. Add Crunchbase/Instagram if they exist. Affects every page (Org + LocalBusiness both gated on this).
+
+2. **Unbacked AggregateRating (4.9 / 180 reviews).** Sourced from marketing copy in [lib/book-a-sloth.ts:380](lib/book-a-sloth.ts:380) and emitted as `AggregateRating` on `/products/book-a-sloth`, but no individual `Review` markup (author, reviewBody, date) or visible review list backs it. Google's review-snippet policy requires the ratings to come from reviews visible on the same page; self-serving aggregate ratings can trigger a manual action and read as untrustworthy to AI. Either (a) add real, visible reviews with `Review` schema, or (b) remove `AggregateRating` until real reviews exist.
+
+3. **No Organization `logo`.** Confirmed TODO in [lib/jsonld.ts:33](lib/jsonld.ts:33). A logo image in Organization schema feeds knowledge-panel and AI entity cards. Ship `/logo.png` (square, ≥112px) and add `logo`.
+
+## Medium Priority Issues (Fix This Month)
+
+4. **About page H1 spacing bug.** Renders as "We build digital​experiences that​move businesses forward." — missing spaces between spans ([components/about/hero.tsx:35](components/about/hero.tsx:35) and preceding spans). Hurts both the human read and the parsed H1. Add spaces at span boundaries.
+
+5. **No author attribution on blog.** The flagship article `/blog/top-10-digital-marketing-companies-nagpur` has `Article` schema but no visible author byline/bio or `author` `Person` with credentials. E-E-A-T "Experience/Expertise" is thin without a named, credentialed author. Add author bio + `author` to Article schema.
+
+6. **Homepage Organization has no postal address.** `ProfessionalService` (localBusiness) carries the real address + geo, but the homepage `Organization` node does not. Low effort to add `address` to `organizationLd()` for consistency across the entity graph.
+
+## Low Priority Issues
+
+7. `og:image` present but verify a real branded 1200×630 image ships (not a placeholder) once the logo/brand assets land.
+8. Confirm `openingHours` in schema ([lib/jsonld.ts:143](lib/jsonld.ts:143)) stays in sync with the human hours string in `site.contact.hours` (ponytail comment already flags this).
+9. Blog is thin (1 article + tag pages). Publisher/topical-authority signals grow with volume — add depth over time.
 
 ---
 
-## What's Already Strong (keep it)
+## Category Deep Dives
 
-- Server-side rendered content — AI crawlers read it without JS execution.
-- Full JSON-LD graph: Organization, WebSite, Service, FAQPage, BreadcrumbList,
-  ProfessionalService (LocalBusiness), SoftwareApplication per product.
-- `robots.ts` allows all crawlers (including AI bots) + points to sitemap.
-- `llms.txt` present and curated.
-- Candid, answer-structured copy (the "what SEO can/cannot do" and FAQ blocks are
-  exactly the passage shape AI engines quote).
-- `metadataBase` set, per-page titles/descriptions on 30/31 pages.
+### AI Citability (82/100)
+Strong. FAQPage + Question/Answer blocks on service, product, and blog pages give AI engines clean extractable answers. Money pages are deep (SEO page 5.4k words, blog 5.4k, About 4.5k). H1s are clear and declarative. SSR delivers the full text to crawlers with no JS dependency. Deduct for: some marketing-voice hero copy that is not directly quotable, and the About H1 spacing bug degrading one key heading.
+
+### Brand Authority (45/100) [verify on live domain]
+On-page proxy only. The concrete, fixable gap: `sameAs` is empty and there is no logo — the site currently gives AI systems zero external identity anchors. Off-site mention volume (Reddit/YouTube/Wikipedia/press) cannot be measured from localhost; for a young brand assume low and build deliberately. This category is the single biggest lever on the composite score.
+
+### Content E-E-A-T (68/100)
+Good foundation: real NAP (phone, street address, geo coords), case studies with specific metrics (+212% orders, etc.), full legal suite (privacy/terms/cookies/refund), and honest, non-hyped copy ("no ranking guarantees we can't keep") which reads as trustworthy. Weak on: no visible author credentials on the blog, and the unbacked AggregateRating actively dents Trust.
+
+### Technical GEO (90/100)
+Excellent. Next.js 16 SSR, `robots.txt` explicitly allows GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Meta-ExternalAgent and more; `llms.txt` is present and genuinely rich (services, products, company, resources with descriptions); sitemap complete with lastmod; canonical + full Open Graph + Twitter card meta on pages. Little to fix here.
+
+### Schema & Structured Data (85/100)
+Broad and well-typed: Organization, WebSite, ProfessionalService (with PostalAddress + GeoCoordinates + hasMap + openingHours), Service, FAQPage, BreadcrumbList, Article, SoftwareApplication, AggregateOffer. Typed builders in `lib/jsonld.ts` keep it maintainable. Deduct for empty `sameAs`, missing `logo`, and the policy-risk AggregateRating.
+
+### Platform Optimization (70/100) [verify on live domain]
+Structurally ready: FAQ/answer blocks suit Google AI Overviews and Perplexity; `llms.txt` + clean SSR suit ChatGPT search; local schema suits "near me" / map-pack answers. Actual citation presence across platforms needs live-domain testing once deployed and indexed.
 
 ---
 
-## Priority Order
+## Quick Wins (This Week)
 
-1. Real phone number (#3) — remove the fake before anything else ships.
-2. Social URLs + logo (#1, #2) — unlocks the weakest category (Brand Authority).
-3. Author schema on blog (#5) — compounding E-E-A-T as content grows.
+1. Create real social profiles + GBP, wire URLs into `lib/site.ts` → instantly populates `sameAs` on Organization **and** LocalBusiness. (Biggest score lever.)
+2. Ship `/logo.png` and add `logo` to `organizationLd()`.
+3. Fix the About H1 span spacing.
+4. Decide on reviews: add visible `Review` markup, or pull `AggregateRating` from the Book A Sloth product schema.
+5. Add an author byline + `author` `Person` to the blog article and its `Article` schema.
+
+## 30-Day Action Plan
+
+### Week 1: Entity identity
+- [ ] Stand up LinkedIn, X, YouTube, Google Business Profile
+- [ ] Replace `"#"` social placeholders with real URLs in `lib/site.ts`
+- [ ] Ship logo, add `logo` to Organization schema
+
+### Week 2: Trust & reviews
+- [ ] Collect/publish real customer reviews for Book A Sloth with visible author + text
+- [ ] Add `Review` schema, or remove `AggregateRating` until reviews exist
+- [ ] Add postal address to homepage Organization node
+
+### Week 3: Content authority
+- [ ] Add named author + credential bio across the blog; wire `author` into Article schema
+- [ ] Fix About H1 spacing; audit other multi-span headings
+- [ ] Publish 2–3 more blog articles on core service topics
+
+### Week 4: Live verification (post-deploy)
+- [ ] Re-run this audit against https://timewheel.co.in
+- [ ] Test brand queries in ChatGPT / Perplexity / Google AIO for citation presence
+- [ ] Submit sitemap in Search Console; confirm crawler hits from GPTBot/ClaudeBot/PerplexityBot in logs
+
+---
+
+## Appendix: Pages Analyzed
+
+| URL | Title | Notable |
+|---|---|---|
+| / | Timewheel, Build on systems you control forever | Org+WebSite+SoftwareApp graph; empty sameAs; no logo |
+| /seo-company-in-nagpur | SEO Company in Nagpur \| Local + AI Search Visibility | Full local schema (ProfessionalService, Geo, FAQ, Service); 5.4k words |
+| /blog/top-10-digital-marketing-companies-nagpur | Top 10 Digital Marketing Companies in Nagpur (2026) | Article+FAQ; no visible author |
+| /about | About, Digital Design & Development | H1 span spacing bug |
+| /products/book-a-sloth | Book A Sloth — Appointment Booking & Scheduling | SoftwareApp + AggregateOffer + unbacked AggregateRating |
+| /robots.txt | — | All AI crawlers allowed |
+| /llms.txt | — | Present, rich, well-structured |
+| /sitemap.xml | — | 39 URLs, lastmod present |

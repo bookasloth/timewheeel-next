@@ -110,7 +110,7 @@ export function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_55%_at_50%_50%,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.32)_45%,transparent_78%)]" />
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pb-16 pt-24 text-center md:pt-28">
         <h1 className="hero-up text-[2.07rem] font-black leading-[1.08] tracking-tight md:text-[3.37rem]">
-          We turn ambitious ideas into things that grow your <Typewriter />
+          We turn ambitious ideas into <br />things that grow your <Typewriter />
         </h1>
         <p className="hero-up mt-5 max-w-3xl text-base text-white/60 md:text-lg">
           One team to design, build and grow your business online — websites and apps,

@@ -22,7 +22,9 @@ export const site = {
   },
   social: {
     twitter: "#",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/company/timewheel-internet/",
+    instagram: "https://www.instagram.com/timewheelinternet/",
     youtube: "#",
+    google: "https://share.google/kQgyhTXcE8bGbd8Jt",
   },
 };

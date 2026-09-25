@@ -33,6 +33,13 @@ export type Author = { name: string; role: string; bio: string; initials: string
 
 // Author registry. Add people here; posts reference by their `author` string.
 const AUTHORS: Record<string, Author> = {
+  "Shubham N Datarkar": {
+    name: "Shubham N Datarkar",
+    role: "Founder, Timewheel",
+    bio: "Shubham founds and leads Timewheel, a Nagpur product studio that builds its own software and runs SEO, AI-search and growth for businesses across India. He writes from hands-on work shipping products and measuring what actually moves rankings and revenue.",
+    initials: "SD",
+    accent: "#fe5100",
+  },
   Timewheel: {
     name: "Timewheel",
     role: "Product studio + growth team",

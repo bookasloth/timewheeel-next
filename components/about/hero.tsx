@@ -30,8 +30,8 @@ export function AboutHero() {
           </p>
 
           <h1 className="mt-6 text-[2.35rem] font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
-            <span className="block">We build digital</span>
-            <span className="block">experiences that</span>
+            <span className="block">We build digital </span>
+            <span className="block">experiences that </span>
             <span className="block text-brand">move businesses forward.</span>
           </h1>
 

@@ -3,7 +3,7 @@ title: "Top 10 Digital Marketing Companies in Nagpur (2026)"
 description: "The 10 best digital marketing companies in Nagpur for 2026, ranked — with real specialties, pricing context and how to pick the right agency for your business."
 excerpt: "Ten agencies that actually serve Nagpur businesses, what each is genuinely good at, and a clear #1 at the end — counted down from 10 to 1."
 date: "2026-09-12"
-author: "Timewheel"
+author: "Shubham N Datarkar"
 category: "Digital Marketing"
 tags: ["Digital Marketing", "Nagpur", "SEO", "Agencies"]
 ogTitle: "Top 10 Digital Marketing Companies in Nagpur (2026)"

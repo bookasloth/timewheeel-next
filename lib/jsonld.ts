@@ -21,6 +21,7 @@ export function organizationLd(): Thing {
     url: site.url,
     description:
       "Timewheel builds self-hosted business tools for bookings, payments, events, and communities, own your systems, no SaaS rent or platform commissions.",
+    logo: `${site.url}/logo.webp`,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
@@ -29,8 +30,15 @@ export function organizationLd(): Thing {
       areaServed: "IN",
       availableLanguage: ["en", "hi"],
     },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.contact.streetAddress,
+      addressLocality: site.contact.city,
+      addressRegion: site.contact.addressRegion,
+      postalCode: site.contact.postalCode,
+      addressCountry: "IN",
+    },
     ...(sameAs.length ? { sameAs } : {}),
-    // ponytail: add `logo` once a real /logo.png ships (memory: asset TODO).
   };
 }
 
