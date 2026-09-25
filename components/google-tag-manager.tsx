@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 // ponytail: id passed from the server layout (reads GTM_ID), falls back to the known container so it fires even without the env var.
-const FALLBACK = "GTM-W8T4XS6B";
+const FALLBACK = "GTM-N8SZ8VT3";
 
 export function GoogleTagManager({ id }: { id?: string }) {
   const gtmId = id ?? FALLBACK;
