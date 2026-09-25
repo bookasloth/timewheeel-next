@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { MetaPixel } from "@/components/meta-pixel";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {children}
         <Analytics />
         <GoogleAnalytics />
+        <MetaPixel />
       </body>
     </html>
   );
