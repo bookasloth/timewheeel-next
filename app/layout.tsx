@@ -64,7 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {children}
         <Analytics />
         <GoogleAnalytics />
-        <MetaPixel />
+        <MetaPixel id={process.env.META_PIXEL_ID} />
       </body>
     </html>
   );
