@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowDownRight, Heart, SquareMousePointer } from "lucide-react";
-import { LinkedinLogo, XLogo, YoutubeLogo } from "@phosphor-icons/react";
+import { InstagramLogo, LinkedinLogo, XLogo, YoutubeLogo } from "@phosphor-icons/react";
 import { site } from "@/lib/site";
 import { wd } from "@/lib/website-design";
 
@@ -10,11 +10,13 @@ const TYPE =
   "text-5xl font-light leading-none tracking-wider md:text-6xl lg:text-7xl xl:text-[7rem]";
 const ICON = "size-10 shrink-0 md:size-12 lg:size-16 xl:size-[7rem]";
 
+// Only real profiles render; placeholder "#" links are dropped.
 const socials = [
-  { href: site.social.twitter, label: "X", Icon: XLogo },
   { href: site.social.linkedin, label: "LinkedIn", Icon: LinkedinLogo },
+  { href: site.social.instagram, label: "Instagram", Icon: InstagramLogo },
+  { href: site.social.twitter, label: "X", Icon: XLogo },
   { href: site.social.youtube, label: "YouTube", Icon: YoutubeLogo },
-];
+].filter((s) => s.href !== "#");
 
 export function WdHero() {
   const location = `${site.contact.city}, ${site.contact.region}`.toUpperCase();

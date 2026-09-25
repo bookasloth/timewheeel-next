@@ -33,11 +33,13 @@ const resources = [
   { label: "Refund & SLA", href: "/legal/refund" },
 ];
 
+// Only real profiles render; placeholder "#" links are dropped.
 const social = [
-  { label: "X", href: site.social.twitter },
   { label: "LinkedIn", href: site.social.linkedin },
+  { label: "Instagram", href: site.social.instagram },
+  { label: "X", href: site.social.twitter },
   { label: "YouTube", href: site.social.youtube },
-];
+].filter((s) => s.href !== "#");
 
 
 // `accent` retints the footer per page type. When omitted it falls back to the
