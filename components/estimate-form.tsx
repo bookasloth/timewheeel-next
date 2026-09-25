@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import { trackLead } from "@/lib/track";
 
 // Fill-in-the-blank project estimate. Underlined transparent fields read as one
 // sentence; selects are searchable (service is multi). Submits to /api/lead.
@@ -140,6 +141,7 @@ export function EstimateForm({ accent }: { accent: string }) {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) { setStatus("error"); setErr(data?.error ?? "Something went wrong. Please try again."); return; }
       setStatus("ok");
+      trackLead("estimate", { service: v.services.join(", "), value: v.budget });
     } catch { setStatus("error"); setErr("Network error, please try again."); }
   }
 

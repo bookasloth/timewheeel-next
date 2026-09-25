@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackLead } from "@/lib/track";
 
 // Full-screen "Startup Growth Blueprint" lead quiz. Reusable across service
 // pages: pass `service` (goes to /api/lead) and optional `intro` heading.
@@ -223,6 +224,7 @@ void main(){
       const data = await res.json().catch(() => ({}));
       if (!res.ok) { setStatus("error"); setErrorMsg(data?.error ?? "Something went wrong. Please try again."); return; }
       setStatus("success");
+      trackLead("growth-blueprint", { service, value: a.budget });
     } catch { setStatus("error"); setErrorMsg("Network error, please try again."); }
   }
 

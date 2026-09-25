@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Clock, Globe, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
+import { trackLead } from "@/lib/track";
 import { Reveal } from "@/components/reveal";
 
 // Reusable lead-capture section. Submits to /api/lead. Copy is passed per page.
@@ -83,6 +84,7 @@ export function LeadForm(p: Props) {
         return;
       }
       setStatus("success");
+      trackLead(p.source, { service: form.values.service });
     } catch {
       setStatus("error");
       setErrorMsg("Network error, please try again.");

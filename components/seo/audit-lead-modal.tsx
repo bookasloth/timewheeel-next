@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowLeft, Loader2, MailCheck, ArrowRight } from "lucide-react";
+import { trackLead } from "@/lib/track";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
 type Finding = { title: string; severity: string; category: string; recommendation: string };
@@ -66,6 +67,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         return;
       }
       setStatus("success");
+      trackLead("seo-audit", { service: "SEO" });
     } catch {
       setStatus("error");
       setError("Network error, please try again.");
