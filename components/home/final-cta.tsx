@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function FinalCta() {
   return (
@@ -13,9 +14,12 @@ export function FinalCta() {
             background: "radial-gradient(circle, var(--brand) 0%, transparent 60%)",
           }}
         />
-        <h2 className="relative mx-auto max-w-2xl text-3xl font-bold tracking-tight md:text-4xl">
+        <RevealHeading
+          as="h2"
+          className="relative mx-auto max-w-2xl text-3xl font-bold tracking-tight md:text-4xl"
+        >
           One connected ecosystem for modern business operations
-        </h2>
+        </RevealHeading>
         <p className="relative mx-auto mt-4 max-w-xl text-muted-foreground">
           Replace fragmented subscriptions with focused systems for bookings,
           payments, events, communities, and customer workflows, all working

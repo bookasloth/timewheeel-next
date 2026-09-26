@@ -1,5 +1,6 @@
 import { Boxes, ServerCog, UserCheck } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const props = [
   {
@@ -22,11 +23,12 @@ const props = [
 export function ValueProps() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <Reveal>
-        <h2 className="mx-auto max-w-2xl text-center text-3xl font-extrabold md:text-4xl">
-          Built with ownership-first systems for modern businesses
-        </h2>
-      </Reveal>
+      <RevealHeading
+        as="h2"
+        className="mx-auto max-w-2xl text-center text-3xl font-extrabold md:text-4xl"
+      >
+        Built with ownership-first systems for modern businesses
+      </RevealHeading>
       <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-3">
         {props.map((p) => (
           <div
