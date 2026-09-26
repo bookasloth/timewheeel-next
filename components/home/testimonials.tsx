@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const quotes = [
   "We stopped depending on disconnected tools for bookings and payments. Everything now runs through one stable workflow built for ownership.",
@@ -30,9 +31,9 @@ export function Testimonials() {
     <section className="border-y border-border/60 bg-secondary/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
-          <h2 className="mx-auto max-w-2xl text-center text-3xl font-extrabold md:text-4xl">
+          <RevealHeading as="h2" className="mx-auto max-w-2xl text-center text-3xl font-extrabold md:text-4xl">
             Built for modern businesses replacing platform dependency
-          </h2>
+          </RevealHeading>
         </Reveal>
         <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-3">
           {quotes.map((q) => (

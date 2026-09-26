@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { RefreshCw } from "lucide-react";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 import { gsap } from "gsap";
 import {
   siStripe,
@@ -121,7 +122,7 @@ export function SocialProof() {
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <h2 className="text-3xl font-extrabold md:text-4xl">Social proof</h2>
+      <RevealHeading as="h2" className="text-3xl font-extrabold md:text-4xl">Social proof</RevealHeading>
       <p className="mt-3 max-w-2xl text-muted-foreground">
         Yes they actually use us, no it&apos;s not just some random engineer who
         tried us out 2+ years ago.

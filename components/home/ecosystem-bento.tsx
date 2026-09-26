@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { products, type Product } from "@/lib/products";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Homepage "ecosystem" bento, real Timewheel products as mixed-size tiles.
 // Cream/ink (Tactile Editorial) tokens; per-product accent only as an icon dab.
@@ -45,9 +46,9 @@ export function EcosystemBento() {
     <section id="ecosystem" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">The ecosystem</p>
-        <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
           One connected system. Products you actually own.
-        </h2>
+        </RevealHeading>
       </Reveal>
 
       <Reveal stagger className="mt-12 grid auto-rows-[minmax(150px,auto)] grid-cols-2 gap-4 md:grid-cols-4">

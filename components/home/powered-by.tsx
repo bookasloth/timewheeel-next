@@ -5,6 +5,7 @@ import { Boxes, Coins, ShieldCheck, type LucideIcon } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -76,10 +77,10 @@ export function PoweredBy() {
 
   return (
     <section ref={ref} className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight md:text-4xl">
+      <RevealHeading as="h2" className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight md:text-4xl">
         Built on a foundation you actually{" "}
         <span className="text-brand">control</span>
-      </h2>
+      </RevealHeading>
 
       {/* circuit */}
       <div className="relative mt-14">
