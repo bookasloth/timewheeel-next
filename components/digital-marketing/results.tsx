@@ -5,6 +5,7 @@ import {
   SignalBars,
 } from "@/components/digital-marketing/dm-illustrations";
 import { dmMetrics } from "@/lib/digital-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function DmResults() {
   return (
@@ -27,9 +28,9 @@ export function DmResults() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Measurement
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             The Metrics That Make Marketing Meaningful
-          </h2>
+          </RevealHeading>
           <p className="mt-4 text-white/70 md:text-lg">
             Every campaign is measured against the numbers that actually move
             your business forward.

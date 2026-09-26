@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { Compass, Cpu, PanelsTopLeft, Sprout } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Proof/value band, horizontal, navy, qualitative. No invented numbers:
 // four numbered approach items instead of fake statistics.
@@ -20,9 +21,9 @@ export function AboutValues() {
           <p className="text-center text-sm font-semibold uppercase tracking-[0.18em] text-brand">
             How we think
           </p>
-          <h2 className="mx-auto mt-3 max-w-xl text-center text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+          <RevealHeading as="h2" className="mx-auto mt-3 max-w-xl text-center text-3xl font-extrabold tracking-tight text-white md:text-4xl">
             A focused way of building digital.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal

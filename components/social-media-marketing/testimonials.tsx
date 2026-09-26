@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/reveal";
 import { Quotes } from "@phosphor-icons/react/dist/ssr";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // PLACEHOLDER testimonials. Replace smm.testimonials with real, permissioned
 // client quotes before publishing — never ship fabricated social proof.
@@ -13,9 +14,9 @@ export function SmmTestimonials() {
             <span className="size-1.5 rounded-full bg-brand" />
             {smm.testimonials.eyebrow}
           </p>
-          <h2 className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
             {smm.testimonials.heading}
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">

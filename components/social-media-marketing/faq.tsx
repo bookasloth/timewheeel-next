@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SmmFaq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -15,9 +16,9 @@ export function SmmFaq() {
         <p className="text-center text-sm font-semibold uppercase tracking-wide text-brand-text">
           FAQ
         </p>
-        <h2 className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
           Social media marketing, answered
-        </h2>
+        </RevealHeading>
       </Reveal>
       <div className="mt-12 space-y-3">
         {smm.faq.map((item, i) => {

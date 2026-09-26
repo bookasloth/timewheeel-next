@@ -1,6 +1,7 @@
 import { MapPin } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { dmFaq } from "@/lib/digital-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const cities = ["Nagpur", "Pune", "Mumbai", "Maharashtra", "India"];
 
@@ -15,9 +16,9 @@ export function DmLocal() {
               <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
                 Local-first marketing
               </p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
                 Strong Presence Where Your Customers Actually Search
-              </h2>
+              </RevealHeading>
               <p className="mt-4 text-muted-foreground md:text-lg">
                 {locations
                   ? locations.a

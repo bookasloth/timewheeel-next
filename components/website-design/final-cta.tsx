@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/website-design";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function WdFinalCta() {
   return (
@@ -9,9 +10,9 @@ export function WdFinalCta() {
       <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
         <div className="relative px-6 py-20 md:px-12 md:py-24">
           <p className="text-sm font-semibold uppercase tracking-widest text-white/50">Let&apos;s talk</p>
-          <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-black leading-[1.08] tracking-tight md:text-6xl">
+          <RevealHeading as="h2" className="mx-auto mt-4 max-w-3xl text-4xl font-black leading-[1.08] tracking-tight md:text-6xl">
             {wd.finalCta.title}
-          </h2>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-lg text-white/70">{wd.finalCta.sub}</p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">

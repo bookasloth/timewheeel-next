@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { aimIntroSteps } from "@/lib/ai-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const colors = ["#8b5cf6", "#269cef", "#4ab765", "#ff4d93", "#ffcc1c", "#fe5100"];
 const widths = ["100%", "78%", "58%", "40%"];
@@ -77,9 +78,9 @@ export function AimIntro() {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
               Why AI marketing with us
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
               Best AI Marketing Company in Nagpur
-            </h2>
+            </RevealHeading>
             <p className="mt-5 text-muted-foreground md:text-lg">
               Based in Nagpur, we help businesses put AI to work across their
               marketing, automating the repetitive, sharpening the targeting,

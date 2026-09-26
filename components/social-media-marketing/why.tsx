@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Editorial working-philosophy list: sticky intro on the left, numbered
 // principles on the right. Not a card grid, so it reads as point of view.
@@ -14,9 +15,9 @@ export function SmmWhy() {
                 <span className="size-1.5 rounded-full bg-brand" />
                 {smm.why.label}
               </p>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+              <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
                 {smm.why.heading}
-              </h2>
+              </RevealHeading>
               <div className="mt-6 flex gap-3">
                 <span className="h-1 w-12 rounded-full bg-gradient-to-r from-brand to-accent-pink" />
                 <span className="h-1 w-8 rounded-full bg-gradient-to-r from-accent-pink to-accent-yellow" />

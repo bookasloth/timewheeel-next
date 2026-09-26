@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const pinkShades = ["#be123c", "var(--brand)", "var(--accent-pink)", "#fb7185"];
 
@@ -13,9 +14,9 @@ export function SmmMetrics() {
             <span className="size-1.5 rounded-full bg-brand" />
             {smm.metrics.eyebrow}
           </p>
-          <h2 className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
             {smm.metrics.heading}
-          </h2>
+          </RevealHeading>
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{smm.metrics.body}</p>
         </Reveal>
 

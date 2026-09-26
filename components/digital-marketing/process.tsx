@@ -1,6 +1,7 @@
 import { Check } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/reveal";
 import { dmProcess } from "@/lib/digital-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function DmProcess() {
   return (
@@ -11,9 +12,9 @@ export function DmProcess() {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
               Inside our process
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
               From Strategy to Sustainable Growth
-            </h2>
+            </RevealHeading>
           </div>
           <p className="max-w-md text-muted-foreground">
             A structured approach that gets your marketing built right the first

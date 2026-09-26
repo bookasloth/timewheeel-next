@@ -1,6 +1,7 @@
 import { MapPin, Languages, Locate } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const icons = [Locate, Languages, MapPin] as const;
 
@@ -9,7 +10,7 @@ export function SeoLocal() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Local expertise</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.local.title}</h2>
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.local.title}</RevealHeading>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{seo.local.body}</p>
       </Reveal>
       <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-3">

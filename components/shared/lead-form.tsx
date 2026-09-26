@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowRight, CheckCircle2, Clock, Globe, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
 import { trackLead } from "@/lib/track";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Reusable lead-capture section. Submits to /api/lead. Copy is passed per page.
 type FieldName = "name" | "business" | "email" | "phone" | "website" | "service" | "message";
@@ -101,7 +102,7 @@ export function LeadForm(p: Props) {
             <span className="mx-auto grid size-14 place-items-center rounded-full bg-rating/10 text-rating">
               <CheckCircle2 className="size-8" />
             </span>
-            <h2 className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">{p.successHeading}</h2>
+            <RevealHeading as="h2" className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">{p.successHeading}</RevealHeading>
             <p className="mx-auto mt-4 max-w-md text-muted-foreground">{p.successBody}</p>
           </Reveal>
         </div>
@@ -129,7 +130,7 @@ export function LeadForm(p: Props) {
         <div className="grid gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="inline-flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand/5 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.22em] text-brand">{p.eyebrow}</p>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">{p.heading}</h2>
+            <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">{p.heading}</RevealHeading>
             <p className="mt-4 max-w-md text-muted-foreground md:text-lg">{p.blurb}</p>
             <div className="mt-8 space-y-3">
               {p.infoRows.map((row) => {

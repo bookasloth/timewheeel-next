@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Sparkles, Code2, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -117,14 +118,14 @@ export function AboutPrinciples() {
             </span>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-[3rem] font-black leading-[1.08] tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-5 text-[3rem] font-black leading-[1.08] tracking-tight md:text-4xl">
             <span className="relative inline-block">
               <span className="absolute -top-10 -left-4 text-[8rem] font-black text-brand/[0.05] leading-none select-none">
                 03
               </span>
               Principles that move every project forward.
             </span>
-          </h2>
+          </RevealHeading>
           <div className="mt-5 h-1 w-20 overflow-hidden rounded-full bg-border">
             <span className="accent-bar block h-full origin-left bg-brand/60" />
           </div>

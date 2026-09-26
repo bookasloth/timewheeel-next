@@ -9,6 +9,7 @@ import {
   siVercel,
   type SimpleIcon,
 } from "simple-icons";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // ponytail: static logo wall, placeholder collaborators — swap for real partners.
 // OpenAI has no simple-icons glyph (trademark), so its official blossom path is inlined.
@@ -44,11 +45,11 @@ export function SmmCollaborators() {
     <section className="bg-navy py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <h2 className="text-center text-2xl font-bold tracking-tight md:text-3xl">
+          <RevealHeading as="h2" className="text-center text-2xl font-bold tracking-tight md:text-3xl">
             <span className="bg-gradient-to-r from-white/50 via-white to-white/50 bg-clip-text text-transparent">
               Companies we collaborate with.
             </span>
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal delay={0.1}>

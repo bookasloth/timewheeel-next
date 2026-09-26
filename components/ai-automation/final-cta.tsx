@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AiFinalCta() {
   const { finalCta } = aiAuto;
@@ -9,7 +10,7 @@ export function AiFinalCta() {
     <section className="border-t border-border bg-surface/40">
       <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
         <Reveal>
-          <h2 className="text-3xl font-black tracking-tight text-navy md:text-5xl">{finalCta.heading}</h2>
+          <RevealHeading as="h2" className="text-3xl font-black tracking-tight text-navy md:text-5xl">{finalCta.heading}</RevealHeading>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {finalCta.sub}
           </p>

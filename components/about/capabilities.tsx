@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Code2, Compass, PenLine, PenTool } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 type Accent = {
   tile: string;
@@ -73,10 +74,10 @@ export function AboutCapabilities() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
             Everything you need to
             <br className="hidden sm:block" /> build a stronger digital presence.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal delay={0.05}>

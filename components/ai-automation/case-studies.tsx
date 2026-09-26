@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AiCaseStudies() {
   const { caseStudies } = aiAuto;
@@ -8,7 +9,7 @@ export function AiCaseStudies() {
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <Reveal className="max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-text">{caseStudies.label}</span>
-          <h2 className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">{caseStudies.heading}</h2>
+          <RevealHeading as="h2" className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">{caseStudies.heading}</RevealHeading>
           <p className="mt-3 text-sm text-muted-foreground">{caseStudies.note}</p>
         </Reveal>
 

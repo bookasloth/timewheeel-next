@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { sd } from "@/lib/shopify-development";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SdFinalCta() {
   return (
@@ -12,9 +13,9 @@ export function SdFinalCta() {
             <span className="size-1.5 animate-pulse rounded-full bg-rating" />
             Available for new projects
           </span>
-          <h2 className="mx-auto mt-6 max-w-2xl text-3xl font-black leading-[1.05] tracking-tight text-white md:text-5xl">
+          <RevealHeading as="h2" className="mx-auto mt-6 max-w-2xl text-3xl font-black leading-[1.05] tracking-tight text-white md:text-5xl">
             {sd.finalCta.headingA} <span className="text-brand">{sd.finalCta.headingB}</span>
-          </h2>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-white/70 md:text-lg">{sd.finalCta.body}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link

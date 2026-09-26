@@ -8,6 +8,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const categories: { icon: LucideIcon; label: string; a: string }[] = [
   { icon: Rocket, label: "Startups", a: "#fe5100" },
@@ -30,9 +31,9 @@ export function AboutClients() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-4xl">
             Built for ambitious businesses.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal

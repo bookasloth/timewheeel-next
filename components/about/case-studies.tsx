@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AboutCaseStudies() {
   return (
@@ -15,10 +16,10 @@ export function AboutCaseStudies() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
             Work that moved
             <br className="hidden sm:block" /> real numbers.
-          </h2>
+          </RevealHeading>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             From local SEO rescues to full marketing systems, the challenges,
             the work, and the results of each build.

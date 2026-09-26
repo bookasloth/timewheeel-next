@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { dmAudience } from "@/lib/digital-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function DmAudience() {
   return (
@@ -10,9 +11,9 @@ export function DmAudience() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Who it&apos;s for
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             Tailored Digital Marketing for Every Business
-          </h2>
+          </RevealHeading>
         </div>
         <p className="max-w-md text-muted-foreground">
           No two businesses are the same, so neither are our strategies. Here

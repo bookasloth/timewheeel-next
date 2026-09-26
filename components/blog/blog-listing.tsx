@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { PostMeta } from "@/lib/blog";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Client-side blog index: featured post, category tabs, load-more, hover cards.
 // Takes plain PostMeta[] from the server (no lib/blog import here — that pulls fs).
@@ -64,7 +65,7 @@ function Featured({ post }: { post: PostMeta }) {
       <Thumb post={post} className="h-full min-h-[220px]" />
       <div className="flex flex-col justify-center p-7 md:p-10">
         <span className="text-xs font-bold uppercase tracking-wide text-brand-text">Featured · {post.category}</span>
-        <h2 className="mt-3 text-2xl font-black leading-tight tracking-tight md:text-3xl">{post.title}</h2>
+        <RevealHeading as="h2" className="mt-3 text-2xl font-black leading-tight tracking-tight md:text-3xl">{post.title}</RevealHeading>
         <p className="mt-3 text-sm text-muted-foreground md:text-base">{post.excerpt}</p>
         <span className="mt-5 flex items-center gap-3 text-xs text-muted-foreground">
           {fmt(post.date)} · {post.readingTime} min read

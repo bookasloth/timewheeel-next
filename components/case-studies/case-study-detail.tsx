@@ -10,6 +10,7 @@ import { caseStudies, type CaseStudy } from "@/lib/case-studies";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { FaqAccordion } from "@/components/case-studies/faq-accordion";
 import { CountUpStat } from "@/components/case-studies/count-up";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 function slugify(s: string) {
   return s
@@ -185,9 +186,9 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
                 className="mb-14 scroll-mt-24"
               >
                 <Eyebrow accent={accent}>{sec.eyebrow}</Eyebrow>
-                <h2 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
+                <RevealHeading as="h2" className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
                   {sec.title}
-                </h2>
+                </RevealHeading>
                 <p className="mt-4 leading-relaxed text-muted-foreground">
                   {sec.body}
                 </p>
@@ -255,9 +256,9 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
             {closing ? (
               <div className="mt-14 rounded-2xl border border-border bg-card p-8 text-center md:p-10">
                 <Eyebrow accent={accent}>Next up</Eyebrow>
-                <h2 className="mx-auto mt-3 max-w-xl text-2xl font-extrabold tracking-tight md:text-3xl">
+                <RevealHeading as="h2" className="mx-auto mt-3 max-w-xl text-2xl font-extrabold tracking-tight md:text-3xl">
                   {closing.title}
-                </h2>
+                </RevealHeading>
                 <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">
                   {closing.body}
                 </p>
@@ -290,9 +291,9 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
                 <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
                   More case studies
                 </p>
-                <h2 className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">
+                <RevealHeading as="h2" className="mt-2 text-2xl font-extrabold tracking-tight md:text-3xl">
                   Read another build
-                </h2>
+                </RevealHeading>
               </div>
               <Link
                 href="/case-studies"

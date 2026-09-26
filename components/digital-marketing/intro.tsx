@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { dmIntroSteps } from "@/lib/digital-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const colors = ["#fe5100", "#269cef", "#4ab765", "#ff4d93", "#ffcc1c", "#fe5100"];
 const widths = ["100%", "86%", "72%", "58%", "44%", "30%"];
@@ -79,9 +80,9 @@ export function DmIntro() {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
               Why digital marketing with us
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
               Best Digital Marketing Company in Nagpur
-            </h2>
+            </RevealHeading>
             <p className="mt-5 text-muted-foreground md:text-lg">
               We are based in Nagpur to offer a wide range of premium digital
               marketing services to help your business grow exponentially. With

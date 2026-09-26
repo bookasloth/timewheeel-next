@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AboutIntro() {
   return (
@@ -11,11 +12,11 @@ export function AboutIntro() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
             We turn ideas into
             <br className="hidden sm:block" /> digital experiences people
             remember.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal delay={0.1}>

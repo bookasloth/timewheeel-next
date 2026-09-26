@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { dmServiceOptions } from "@/lib/digital-marketing2";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 type FieldName =
   | "name"
@@ -99,9 +100,9 @@ export function Dm2Contact() {
             <span className="mx-auto grid size-14 place-items-center rounded-full bg-brand/10 text-brand">
               <CheckCircle2 className="size-8" />
             </span>
-            <h2 className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">
               Thanks, we&apos;ll be in touch.
-            </h2>
+            </RevealHeading>
             <p className="mx-auto mt-4 max-w-md text-muted-foreground">
               Your enquiry has been received. Our team will reach out shortly to
               discuss your growth goals.
@@ -120,9 +121,9 @@ export function Dm2Contact() {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
               Start the conversation
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
               Let&apos;s Talk About Your Growth
-            </h2>
+            </RevealHeading>
             <p className="mt-4 max-w-md text-muted-foreground md:text-lg">
               Tell us about your business and goals. We&apos;ll respond with a
               clear next step, no obligation, no jargon.

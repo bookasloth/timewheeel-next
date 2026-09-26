@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const DOT_GRID = "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)";
 
@@ -17,11 +18,11 @@ export function AboutCta() {
       </div>
 
       <div className="relative mx-auto max-w-2xl py-16 text-center md:py-20">
-        <h2 className="mx-auto text-3xl font-extrabold leading-[1.1] tracking-tight text-white md:text-4xl">
+        <RevealHeading as="h2" className="mx-auto text-3xl font-extrabold leading-[1.1] tracking-tight text-white md:text-4xl">
           Have an idea? Let&apos;s build
           <br />
           <span className="text-brand">something great.</span>
-        </h2>
+        </RevealHeading>
         <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
           Whether you need a new website, a better digital experience, or a
           clear direction for your next project, we&apos;d love to hear what

@@ -6,6 +6,7 @@ import { ArrowLeftRight, Check, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { palette, wd } from "@/lib/website-design";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function WdBeforeAfter() {
   const [pos, setPos] = useState(58);
@@ -14,9 +15,9 @@ export function WdBeforeAfter() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="max-w-2xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.beforeAfter.label}</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
           {wd.beforeAfter.title}
-        </h2>
+        </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">{wd.beforeAfter.body}</p>
       </Reveal>
 

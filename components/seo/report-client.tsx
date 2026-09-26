@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Loader2, AlertCircle, ArrowRight, Lock, ShieldCheck } from "lucide-react";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
 type Finding = { title: string; severity: string; category: string };
@@ -274,7 +275,7 @@ export function SeoReportClient() {
 
             {/* CTA */}
             <div className="mt-10 rounded-3xl border border-border bg-navy p-8 text-center text-white md:p-10">
-              <h2 className="text-2xl font-black tracking-tight md:text-3xl">Get every fix, done for you</h2>
+              <RevealHeading as="h2" className="text-2xl font-black tracking-tight md:text-3xl">Get every fix, done for you</RevealHeading>
               <p className="mx-auto mt-3 max-w-xl text-white/70">
                 We&apos;ll unlock the full report, hand you a prioritised plan, and do the work, honest
                 timelines and no fake ranking promises.

@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { rmIntroSteps } from "@/lib/restaurant-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const colors = ["#fe5100", "#269cef", "#4ab765", "#ff4d93"];
 const widths = ["100%", "86%", "72%", "58%"];
@@ -78,10 +79,10 @@ export function RmIntro() {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
               Why restaurant marketing with us
             </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
               Restaurant Marketing Agency with Top Social Media and Digital
               Marketing Services
-            </h2>
+            </RevealHeading>
             <p className="mt-5 text-muted-foreground md:text-lg">
               Suppose you want to attract more customers, increase walk-ins
               through optimized local SEO, or get more table bookings via

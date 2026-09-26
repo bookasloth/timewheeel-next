@@ -1,5 +1,6 @@
 import { wd } from "@/lib/website-design";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 function initials(name: string) {
   return name
@@ -20,9 +21,9 @@ export function AboutTestimonials() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
             {wd.testimonials.title}
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">

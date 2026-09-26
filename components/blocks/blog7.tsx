@@ -8,6 +8,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 interface Post {
   id: string;
@@ -81,9 +82,9 @@ const Blog7 = ({
           <Badge variant="secondary" className="mb-6">
             {tagline}
           </Badge>
-          <h2 className="mb-3 text-pretty text-3xl font-semibold md:mb-4 md:text-4xl lg:mb-6 lg:max-w-3xl lg:text-5xl">
+          <RevealHeading as="h2" className="mb-3 text-pretty text-3xl font-semibold md:mb-4 md:text-4xl lg:mb-6 lg:max-w-3xl lg:text-5xl">
             {heading}
-          </h2>
+          </RevealHeading>
           <p className="mb-8 text-muted-foreground md:text-base lg:max-w-2xl lg:text-lg">
             {description}
           </p>

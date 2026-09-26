@@ -1,5 +1,6 @@
 import { BadgeCheck, Lightbulb, Scroll } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const pmWhy = [
   {
@@ -29,9 +30,9 @@ export function PmWhy() {
     <section className="border-y border-border/60 bg-secondary/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
-          <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
             Why Our Digital Marketing Services in Nagpur
-          </h2>
+          </RevealHeading>
         </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {pmWhy.map((w, i) => {

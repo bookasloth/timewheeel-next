@@ -1,14 +1,15 @@
 import { MapPin } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SeoLocalities() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <Reveal>
-        <h2 className="text-center text-2xl font-extrabold tracking-tight md:text-3xl">
+        <RevealHeading as="h2" className="text-center text-2xl font-extrabold tracking-tight md:text-3xl">
           Serving businesses across Nagpur
-        </h2>
+        </RevealHeading>
         <p className="mx-auto mt-3 max-w-xl text-center text-sm text-muted-foreground">
           Local SEO tuned to the neighbourhoods you actually serve.
         </p>

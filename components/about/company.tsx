@@ -1,6 +1,7 @@
 import { Layers, MapPin, Rocket, TrendingUp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const facts: { icon: LucideIcon; label: string; value: string; accent: string }[] = [
   {
@@ -40,10 +41,10 @@ export function AboutCompany() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
             A product studio and
             <br className="hidden sm:block" /> growth team in one.
-          </h2>
+          </RevealHeading>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             TIMEWHEEL is a digital design and development studio based in
             Nagpur. We build websites, web apps and marketing systems for

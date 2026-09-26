@@ -1,14 +1,15 @@
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function WdIndustries() {
   return (
     <section className="border-t border-border/60 bg-secondary/40">
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <Reveal>
-          <h2 className="text-center text-2xl font-extrabold tracking-tight md:text-3xl">
+          <RevealHeading as="h2" className="text-center text-2xl font-extrabold tracking-tight md:text-3xl">
             Industries we build for
-          </h2>
+          </RevealHeading>
         </Reveal>
         <Reveal stagger className="mt-8 flex flex-wrap justify-center gap-3">
           {wd.industries.map((it) => (

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { Check, ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Package tiers. Prices are placeholders (see lib) — set real pricing or keep Custom.
 export function SmmPackages() {
@@ -12,9 +13,9 @@ export function SmmPackages() {
           <span className="size-1.5 rounded-full bg-brand" />
           {smm.packages.eyebrow}
         </p>
-        <h2 className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
           {smm.packages.heading}
-        </h2>
+        </RevealHeading>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{smm.packages.body}</p>
       </Reveal>
 

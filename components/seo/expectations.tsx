@@ -1,6 +1,7 @@
 import { Check, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Honest-expectations section, candour against a market full of guarantees.
 export function SeoExpectations() {
@@ -9,7 +10,7 @@ export function SeoExpectations() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Straight talk</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.expectations.title}</h2>
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.expectations.title}</RevealHeading>
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           <Reveal className="rounded-2xl border border-rating/30 bg-card p-7">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { projects } from "@/components/about/work";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Laptop-framed showcase of real websites already shipped. Reuses the shared
 // portfolio data (single source of truth) so the "actual work" stays in sync.
@@ -29,9 +30,9 @@ export function WebsitesShowcase() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-brand">
             Websites for everyone
           </p>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
             Real websites, really shipped.
-          </h2>
+          </RevealHeading>
           <p className="mt-3 text-muted-foreground md:text-lg">
             Not templates. Here&apos;s actual work I&apos;ve built and launched for people.
           </p>

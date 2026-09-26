@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Reveal } from "@/components/reveal";
 import { palette, wd } from "@/lib/website-design";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -34,7 +35,7 @@ export function WdProcess() {
     <section ref={ref} className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="max-w-2xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.process.label}</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">{wd.process.title}</h2>
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">{wd.process.title}</RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">{wd.process.body}</p>
       </Reveal>
 

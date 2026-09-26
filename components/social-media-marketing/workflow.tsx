@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // The operating rhythm behind every engagement: a connected vertical flow,
 // alternating left/right on desktop, single column with a spine on mobile.
@@ -13,9 +14,9 @@ export function SmmWorkflow() {
             <span className="size-1.5 rounded-full bg-brand" />
             {smm.workflow.label}
           </p>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
             {smm.workflow.heading}
-          </h2>
+          </RevealHeading>
           <p className="mt-4 text-muted-foreground md:text-lg">{smm.workflow.body}</p>
         </Reveal>
 

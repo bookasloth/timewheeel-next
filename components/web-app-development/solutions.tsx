@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { wa } from "@/lib/web-app-development";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Small bespoke UI illustrations for each "what we build" card, no stock media.
 function ArtDashboard() {
@@ -124,9 +125,9 @@ export function WaSolutions() {
       <Reveal>
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">{wa.solutions.label}</p>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-          <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="text-3xl font-extrabold tracking-tight md:text-4xl">
             {wa.solutions.heading} <span className="text-brand">{wa.solutions.headingAccent}</span>
-          </h2>
+          </RevealHeading>
           <p className="max-w-sm text-muted-foreground md:text-lg">{wa.solutions.body}</p>
         </div>
       </Reveal>

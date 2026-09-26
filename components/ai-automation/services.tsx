@@ -2,6 +2,7 @@ import { siWhatsapp, siMeta, siGoogle, siHubspot, siZoho, siZapier, type SimpleI
 import { Reveal } from "@/components/reveal";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
 import { icons } from "./icons";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const brands: Record<string, SimpleIcon> = {
   siWhatsapp,
@@ -19,9 +20,9 @@ export function AiServices() {
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <Reveal className="max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-text">{services.label}</span>
-          <h2 className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">
             {services.heading} <span className="text-brand">{services.headingAccent}</span>
-          </h2>
+          </RevealHeading>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">{services.body}</p>
         </Reveal>
 

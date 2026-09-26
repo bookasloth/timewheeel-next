@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function RmFinalCta() {
   return (
     <section className="w-full">
       <Reveal className="relative overflow-hidden bg-black text-center text-white">
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
-          <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
+          <RevealHeading as="h2" className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Work With a Full-Service Agency for Your Restaurant Marketing
-          </h2>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-white/70">
             Whether you&apos;re a local eatery or an established F&amp;B brand,
             we&apos;re the marketing partner that will help you drive traffic and

@@ -1,6 +1,7 @@
 import { Quotes } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/reveal";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AiTestimonials() {
   const { testimonials } = aiAuto;
@@ -9,7 +10,7 @@ export function AiTestimonials() {
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <Reveal className="max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-text">{testimonials.label}</span>
-          <h2 className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">{testimonials.heading}</h2>
+          <RevealHeading as="h2" className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">{testimonials.heading}</RevealHeading>
         </Reveal>
 
         <Reveal stagger className="mt-10 grid gap-5 sm:grid-cols-3">

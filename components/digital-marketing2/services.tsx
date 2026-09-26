@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/digital-marketing/tilt-card";
 import { dmServices, type DmService } from "@/lib/digital-marketing2";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // ---- Shared "product system" shells used by every service mock ----
 
@@ -303,9 +304,9 @@ export function Dm2Services() {
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
           What we do
         </p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           A Few of Our Best Digital Marketing Services
-        </h2>
+        </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">
           From visibility and engagement to acquisition and conversion, our
           digital marketing services work together to create a complete growth

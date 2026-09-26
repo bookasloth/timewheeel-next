@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Addresses the #1 unspoken fear of Nagpur SMB web buyers: lock-in / being stranded.
 export function WdOwnership() {
@@ -11,9 +12,9 @@ export function WdOwnership() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             No lock-in
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             {wd.ownership.title}
-          </h2>
+          </RevealHeading>
           <p className="mt-4 max-w-lg text-muted-foreground md:text-lg">{wd.ownership.body}</p>
           <div className="mt-8 rounded-2xl border border-border bg-secondary/40 p-6">
             <h3 className="font-bold">{wd.ownership.amc.title}</h3>

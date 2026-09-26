@@ -3,6 +3,7 @@ import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/digital-marketing/tilt-card";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 type PmService = {
   tag: string;
@@ -354,9 +355,9 @@ export function PmServices() {
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
           What we do
         </p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           A Few of Our Best Digital Marketing Services
-        </h2>
+        </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">
           From SEO and paid ads to social, content, and email, our digital
           marketing services work together to bring you more enquiries and

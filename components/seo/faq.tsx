@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SeoFaq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -12,9 +13,9 @@ export function SeoFaq() {
     <section className="mx-auto max-w-3xl px-6 py-20 md:py-28">
       <Reveal>
         <p className="text-center text-sm font-semibold uppercase tracking-wide text-brand-text">FAQ</p>
-        <h2 className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
           SEO in Nagpur, answered
-        </h2>
+        </RevealHeading>
       </Reveal>
       <div className="mt-12 space-y-3">
         {seo.faq.map((item, i) => {

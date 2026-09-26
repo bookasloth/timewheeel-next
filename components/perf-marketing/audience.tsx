@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const pmAudience = [
   {
@@ -42,9 +43,9 @@ export function PmAudience() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Who it&apos;s for
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             Digital Marketing Tailored to Your Business
-          </h2>
+          </RevealHeading>
         </div>
         <p className="max-w-md text-muted-foreground">
           Marketing works best when it fits how you sell. Here are the businesses

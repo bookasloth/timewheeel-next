@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/reveal";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
 import { icons } from "./icons";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AiUseCases() {
   const { useCases } = aiAuto;
@@ -9,9 +10,9 @@ export function AiUseCases() {
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <Reveal className="max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-text">{useCases.label}</span>
-          <h2 className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">
             {useCases.heading} <span className="text-brand">{useCases.headingAccent}</span>
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">

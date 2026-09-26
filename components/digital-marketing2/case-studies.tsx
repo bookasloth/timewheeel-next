@@ -3,6 +3,7 @@ import { ArrowUpRight, Rocket, Search, Target, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { CollageCover } from "@/components/digital-marketing/dm-illustrations";
 import { dmCaseStudies } from "@/lib/digital-marketing2";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const visualStyles = [
   "from-brand/30 to-transparent",
@@ -21,9 +22,9 @@ export function Dm2CaseStudies() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Proof
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             From Marketing Activity to Business Results
-          </h2>
+          </RevealHeading>
         </div>
         <p className="max-w-md text-muted-foreground">
           Real client stories and verified results will live here, the

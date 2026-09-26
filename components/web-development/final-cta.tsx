@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // ponytail: no WhatsApp deep link yet, needs a real number. Add a wa.me
 // secondary CTA here once one exists (blueprint MUST-HAVE); until then both
@@ -9,9 +10,9 @@ export function WdFinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-16">
       <Reveal className="relative overflow-hidden rounded-3xl bg-black px-8 py-16 text-center md:py-20">
-        <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">
+        <RevealHeading as="h2" className="text-3xl font-black tracking-tight text-white md:text-5xl">
           Ready to Build Something That Loads Fast and Ranks?
-        </h2>
+        </RevealHeading>
         <p className="mx-auto mt-5 max-w-xl text-white/70 md:text-lg">
           Send us your project. Get a fixed scope, a fixed price and a written timeline within
           one business day, and keep full ownership of everything we build.

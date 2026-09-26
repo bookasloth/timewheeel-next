@@ -3,6 +3,7 @@ import { ArrowRight, CalendarCheck, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
 import { site } from "@/lib/site";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SmmFinalCta() {
   return (
@@ -13,9 +14,9 @@ export function SmmFinalCta() {
             <span className="size-1.5 rounded-full bg-accent-yellow" />
             Start the conversation
           </p>
-          <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
+          <RevealHeading as="h2" className="mx-auto mt-5 max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
             {smm.finalCta.heading}
-          </h2>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-white/75 md:text-lg">{smm.finalCta.body}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link

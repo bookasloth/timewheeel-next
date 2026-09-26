@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // const marqueeItems = [
 //   "Attention → Growth",
@@ -44,7 +45,7 @@ export function DmFinalCta() {
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
-          <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
+          <RevealHeading as="h2" className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Turn{" "}
             <span
               className="dm-gradient-text"
@@ -56,7 +57,7 @@ export function DmFinalCta() {
               Attention
             </span>{" "}
             Into Growth?
-          </h2>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-white/70">
             Let&apos;s build a digital marketing system around your business
             goals, strategy, channels, and reports all working in one direction.

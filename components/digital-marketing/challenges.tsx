@@ -1,6 +1,7 @@
 import { EyeOff, Gauge, MousePointerClick } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { dmChallenges } from "@/lib/digital-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const icons = [EyeOff, MousePointerClick, Gauge];
 
@@ -12,9 +13,9 @@ export function DmChallenges() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Challenges
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             We Design Campaigns That Solve Problems, Not Create Them
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-3">

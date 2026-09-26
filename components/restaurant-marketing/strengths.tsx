@@ -1,6 +1,7 @@
 import { BadgeCheck, Sparkles, TrendingUp } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { rmStrengths } from "@/lib/restaurant-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const icons = [BadgeCheck, Sparkles, TrendingUp];
 
@@ -12,9 +13,9 @@ export function RmStrengths() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             We do restaurant marketing
           </p>
-          <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
             A Restaurant Marketing Company for Unique Brands
-          </h2>
+          </RevealHeading>
         </Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {rmStrengths.map((w, i) => {

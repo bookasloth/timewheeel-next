@@ -1,6 +1,7 @@
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Contact block: intro + three info cards + map / message-form split.
 // Design only — the form is presentational and is NOT wired to a backend.
@@ -38,11 +39,11 @@ export function ContactLocate() {
         {/* Intro */}
         <Reveal className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-brand">Contact us</p>
-          <h2 className="mx-auto mt-4 max-w-2xl text-4xl font-extrabold tracking-tight md:text-5xl">
+          <RevealHeading as="h2" className="mx-auto mt-4 max-w-2xl text-4xl font-extrabold tracking-tight md:text-5xl">
             Our{" "}
             <span className="underline decoration-brand decoration-4 underline-offset-8">team</span>{" "}
             are here to help you.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         {/* Info cards */}

@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // The difference between posting and presence, as a scannable pillar list.
 export function SmmIntro() {
@@ -13,9 +14,9 @@ export function SmmIntro() {
               <span className="size-1.5 rounded-full bg-brand" />
               {smm.intro.eyebrow}
             </p>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
               {smm.intro.heading}
-            </h2>
+            </RevealHeading>
             <p className="mt-5 text-muted-foreground md:text-lg">{smm.intro.body}</p>
             <p className="mt-5 text-sm text-muted-foreground">
               That&apos;s the gap Timewheel closes, with a working system, not a

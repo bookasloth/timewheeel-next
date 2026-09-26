@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Editorial content-purpose index. Big display labels replace generic cards,
 // each row is an outcome the content must earn, with a full-width hairline.
@@ -12,9 +13,9 @@ export function SmmContentPurpose() {
           <span className="size-1.5 rounded-full bg-brand" />
           {smm.contentPurpose.label}
         </p>
-        <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
           {smm.contentPurpose.heading}
-        </h2>
+        </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">{smm.contentPurpose.body}</p>
       </Reveal>
 

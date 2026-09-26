@@ -3,15 +3,16 @@ import { Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function WdPricing() {
   return (
     <section id="pricing" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal>
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Pricing</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           {wd.pricing.title}
-        </h2>
+        </RevealHeading>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{wd.pricing.body}</p>
       </Reveal>
 

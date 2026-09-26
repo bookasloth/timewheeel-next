@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { TiltCard } from "@/components/digital-marketing/tilt-card";
 import { aimServices, type AimService } from "@/lib/ai-marketing";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // ---- Shared "product system" shells used by every service mock ----
 
@@ -309,9 +310,9 @@ export function AimServices() {
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
           What we do
         </p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           A Few of Our Best AI Marketing Services
-        </h2>
+        </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">
           From smarter ads and always-on chat to lead scoring, content, and
           journeys, our AI marketing services work together to capture more

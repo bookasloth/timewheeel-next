@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { aimAudience } from "@/lib/ai-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AimAudience() {
   return (
@@ -10,9 +11,9 @@ export function AimAudience() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Who it&apos;s for
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             AI Marketing Tailored to Your Business
-          </h2>
+          </RevealHeading>
         </div>
         <p className="max-w-md text-muted-foreground">
           Automation only helps when it fits how you work. Here are the teams we

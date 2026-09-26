@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Coffee, Heart } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const BAS_BLUE = "#269cef";
 const BTC_YELLOW = "#ffcc1c";
@@ -203,10 +204,10 @@ export function AboutWork() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
             Digital experiences built
             <br className="hidden sm:block" /> for real businesses.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal delay={0.05}>

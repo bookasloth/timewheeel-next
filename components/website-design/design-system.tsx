@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { palette, wd } from "@/lib/website-design";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 function Tile({
   label,
@@ -64,9 +65,9 @@ export function WdDesignSystem() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.designSystem.label}</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
             {wd.designSystem.title}
-          </h2>
+          </RevealHeading>
           <p className="mt-4 text-muted-foreground md:text-lg">{wd.designSystem.body}</p>
         </Reveal>
 

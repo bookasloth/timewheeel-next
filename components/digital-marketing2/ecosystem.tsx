@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const NODE_META: Record<string, { icon: LucideIcon; role: string; accent: string }> = {
   SEO: { icon: Search, role: "Get found", accent: "#4AB765" },
@@ -101,9 +102,9 @@ export function Dm2Ecosystem() {
   return (
     <section className="mx-auto max-w-6xl px-6 pb-2 pt-20 md:pb-8 md:pt-28">
       <Reveal className="mx-auto max-w-2xl text-center">
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
           Every Channel, Working Toward One Goal
-        </h2>
+        </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">
           SEO, paid, content, social, email, and WhatsApp, connected into a
           single growth system around your brand.

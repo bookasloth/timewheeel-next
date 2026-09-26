@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { dmFaq } from "@/lib/digital-marketing2";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function Dm2Faq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -15,9 +16,9 @@ export function Dm2Faq() {
         <p className="text-center text-sm font-semibold uppercase tracking-wide text-brand-text">
           FAQ
         </p>
-        <h2 className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl">
           Frequently Asked Questions
-        </h2>
+        </RevealHeading>
       </Reveal>
       <div className="mt-12 space-y-3">
         {dmFaq.map((item, i) => {

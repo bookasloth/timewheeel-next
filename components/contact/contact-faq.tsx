@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export const faqs = [
   {
@@ -32,9 +33,9 @@ export function ContactFaq() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Quick answers
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             Before you get in touch
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <div className="mt-10 space-y-3">

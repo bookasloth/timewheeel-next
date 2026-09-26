@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const facts = [
   {
@@ -27,9 +28,9 @@ export function RmAbout() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Who we are
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             Who Is This Restaurant Marketing Agency?
-          </h2>
+          </RevealHeading>
         </div>
         <p className="max-w-md text-muted-foreground">
           A dedicated marketing team built specifically for the restaurant

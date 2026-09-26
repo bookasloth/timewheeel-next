@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/reveal";
 import { Heart, ChatCircle, BookmarkSimple } from "@phosphor-icons/react/dist/ssr";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Illustrative creative gallery — sample post concepts styled as social cards.
 // Not real client work; shows the format range (reel / carousel / story / post).
@@ -12,9 +13,9 @@ export function SmmFeed() {
           <span className="size-1.5 rounded-full bg-brand" />
           {smm.feed.eyebrow}
         </p>
-        <h2 className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
           {smm.feed.heading}
-        </h2>
+        </RevealHeading>
         <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{smm.feed.body}</p>
       </Reveal>
 

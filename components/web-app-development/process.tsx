@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { wa } from "@/lib/web-app-development";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const stepColors = [
   { bg: "bg-brand", fg: "text-white" },
@@ -15,9 +16,9 @@ export function WaProcess() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">{wa.process.label}</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             {wa.process.heading} <span className="text-brand">{wa.process.headingAccent}</span>
-          </h2>
+          </RevealHeading>
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{wa.process.body}</p>
         </Reveal>
 

@@ -1,6 +1,7 @@
 import { Check, X } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SeoComparison() {
   return (
@@ -8,7 +9,7 @@ export function SeoComparison() {
       <div className="mx-auto max-w-4xl px-6 py-20 md:py-28">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Why us</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.comparison.title}</h2>
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.comparison.title}</RevealHeading>
         </Reveal>
         <Reveal className="mt-10 overflow-hidden rounded-2xl border border-border">
           <div className="grid grid-cols-[1.2fr_1fr_1fr] bg-card text-sm">

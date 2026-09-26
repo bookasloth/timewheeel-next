@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { MessageCircle, Sparkle, Target, Users } from "lucide-react";
 import { palette, wd } from "@/lib/website-design";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const reasonIcons = {
   message: MessageCircle,
@@ -18,9 +19,9 @@ export function WdWhy() {
           <div>
             <div>
               <p className="text-sm font-semibold uppercase tracking-widest text-brand">{wd.why.label}</p>
-              <h2 className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">
+              <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">
                 {wd.why.title}
-              </h2>
+              </RevealHeading>
               <p className="mt-4 max-w-xl text-muted-foreground md:text-lg">{wd.why.body}</p>
             </div>
 

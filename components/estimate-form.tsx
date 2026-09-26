@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Check, ChevronDown } from "lucide-react";
 import { trackLead } from "@/lib/track";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Fill-in-the-blank project estimate. Underlined transparent fields read as one
 // sentence; selects are searchable (service is multi). Submits to /api/lead.
@@ -148,7 +149,7 @@ export function EstimateForm({ accent }: { accent: string }) {
   if (status === "ok") {
     return (
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-2xl font-black tracking-tight md:text-3xl">Thanks — that&apos;s in. 🎉</h2>
+        <RevealHeading as="h2" className="text-2xl font-black tracking-tight md:text-3xl">Thanks — that&apos;s in. 🎉</RevealHeading>
         <p className="mt-3 text-white/80">We usually respond within a couple of business days.</p>
       </div>
     );

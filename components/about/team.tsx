@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const members = [
   {
@@ -35,10 +36,10 @@ export function AboutTeam() {
           </p>
           <span className="h-px w-12 bg-brand/40" />
         </div>
-        <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
+        <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.4rem]">
           A small studio,
           <br className="hidden sm:block" /> deeply invested in your work.
-        </h2>
+        </RevealHeading>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
           We&apos;re a compact team of designers, engineers and strategists,
           based in Nagpur, working remote-first with clients across India and

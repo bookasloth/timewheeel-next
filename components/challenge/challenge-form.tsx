@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { trackLead } from "@/lib/track";
 import { ArrowRight, CheckCircle2, PartyPopper, User, Mail, Phone, Globe, PencilLine } from "lucide-react";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Signup form for the "30 days, 30 websites" challenge. Posts to /api/lead
 // (source + service fixed here) so it reuses the existing SMTP notification,
@@ -115,7 +116,7 @@ export function ChallengeForm() {
         >
           <PartyPopper className="size-8" />
         </motion.span>
-        <h2 className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">You&apos;re on the list!</h2>
+        <RevealHeading as="h2" className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">You&apos;re on the list!</RevealHeading>
         <p className="mx-auto mt-4 max-w-md text-muted-foreground">
           Spot claimed. I&apos;ll reach out on your email or phone with the next step. Your website is coming.
         </p>

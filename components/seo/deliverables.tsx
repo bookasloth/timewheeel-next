@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SeoDeliverables() {
   return (
@@ -7,7 +8,7 @@ export function SeoDeliverables() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Deliverables</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.deliverables.title}</h2>
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{seo.deliverables.title}</RevealHeading>
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{seo.deliverables.body}</p>
         </Reveal>
         <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2">

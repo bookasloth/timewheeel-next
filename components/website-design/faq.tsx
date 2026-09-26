@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/website-design";
 import { cn } from "@/lib/utils";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function WdFaq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -13,9 +14,9 @@ export function WdFaq() {
     <section className="mx-auto max-w-3xl px-6 py-20 md:py-28">
       <Reveal>
         <p className="text-center text-sm font-semibold uppercase tracking-widest text-brand">{wd.faq.label}</p>
-        <h2 className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
+        <RevealHeading as="h2" className="mt-3 text-center text-3xl font-extrabold tracking-tight md:text-[2.75rem]">
           {wd.faq.title}
-        </h2>
+        </RevealHeading>
       </Reveal>
       <div className="mt-12 space-y-3">
         {wd.faq.items.map((item, i) => {

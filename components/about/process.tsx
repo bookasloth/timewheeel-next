@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { Compass, Target, Wrench, Rocket } from "lucide-react";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const steps = [
   {
@@ -39,9 +40,9 @@ export function AboutProcess() {
             </p>
             <span className="h-px w-12 bg-brand/40" />
           </div>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
+          <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
             From first idea to launch day.
-          </h2>
+          </RevealHeading>
         </Reveal>
 
         <Reveal

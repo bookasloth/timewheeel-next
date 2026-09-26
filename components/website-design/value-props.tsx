@@ -1,5 +1,6 @@
 import { Code2, Compass, MousePointerClick, Palette } from "lucide-react";
 import { wd } from "@/lib/website-design";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const blockIcons = {
   compass: Compass,
@@ -16,9 +17,9 @@ export function WdVp() {
           <p className="text-sm font-semibold uppercase tracking-widest text-brand">
             {wd.valueProps.label}
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.75rem]">
             {wd.valueProps.title}
-          </h2>
+          </RevealHeading>
         </div>
         <div>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">

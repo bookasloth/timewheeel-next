@@ -1,6 +1,7 @@
 import { siFacebook, siInstagram, siX, siYoutube } from "simple-icons";
 import { Reveal } from "@/components/reveal";
 import { smm } from "@/lib/social-media-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Simple Icons dropped LinkedIn, so its official glyph is inlined (448x512).
 type BrandLogo = { path: string; hex: string; viewBox?: string };
@@ -28,9 +29,9 @@ export function SmmPlatforms() {
               <span className="size-1.5 rounded-full bg-brand" />
               {smm.platforms.label}
             </p>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
               {smm.platforms.heading}
-            </h2>
+            </RevealHeading>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-muted-foreground md:text-lg">{smm.platforms.body}</p>

@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SeoFinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-16">
       <Reveal className="relative overflow-hidden rounded-3xl bg-black px-8 py-16 text-center md:py-20">
-        <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">
+        <RevealHeading as="h2" className="text-3xl font-black tracking-tight text-white md:text-5xl">
           See exactly where your site stands, free
-        </h2>
+        </RevealHeading>
         <p className="mx-auto mt-5 max-w-xl text-white/70 md:text-lg">
           Run the instant AI + SEO audit, then get a clear, honest plan to fix what&apos;s
           holding your Nagpur rankings back. No sign-up, no obligation.

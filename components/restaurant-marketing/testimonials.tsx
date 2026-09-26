@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, MapPin, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { rmTestimonials } from "@/lib/restaurant-marketing";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const accents = ["#fe5100", "#269cef", "#4ab765"];
 
@@ -52,9 +53,9 @@ export function RmTestimonials() {
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">
             Testimonials
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
             What did Mumbai say about our digital marketing services?
-          </h2>
+          </RevealHeading>
           <p className="mt-4 text-muted-foreground">
             We&apos;ve partnered with global and national brands, helping them
             scale their business goals through proven strategies.

@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/reveal";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AiProcess() {
   const { process } = aiAuto;
@@ -8,7 +9,7 @@ export function AiProcess() {
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <Reveal className="max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-text">{process.label}</span>
-          <h2 className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">{process.heading}</h2>
+          <RevealHeading as="h2" className="mt-3 text-3xl font-black tracking-tight text-navy md:text-4xl">{process.heading}</RevealHeading>
         </Reveal>
 
         <Reveal stagger className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AimFinalCta() {
   return (
@@ -16,7 +17,7 @@ export function AimFinalCta() {
           className="pointer-events-none absolute -bottom-24 -left-16 size-72 rounded-full aim-bloom dm-drift opacity-40"
         />
         <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
-          <h2 className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
+          <RevealHeading as="h2" className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Put{" "}
             <span
               className="dm-gradient-text"
@@ -28,7 +29,7 @@ export function AimFinalCta() {
               AI
             </span>{" "}
             to Work?
-          </h2>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-white/70">
             Let&apos;s build an AI marketing system around your business,
             automating the busywork, sharpening your targeting, and capturing

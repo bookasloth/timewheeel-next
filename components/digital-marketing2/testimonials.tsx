@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { dmTestimonials } from "@/lib/digital-marketing2";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 function Stars() {
   return (
@@ -45,9 +46,9 @@ export function Dm2Testimonials() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="flex flex-wrap items-end justify-between gap-4">
-        <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
           One of the best digital marketing agencies in Nagpur
-        </h2>
+        </RevealHeading>
         <div className="flex gap-2">
           <button
             type="button"
