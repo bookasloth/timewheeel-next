@@ -39,10 +39,18 @@ export function RevealHeading({
       const el = ref.current;
       if (!el || prefersReducedMotion()) return;
 
+      // Hide until the split runs so above-the-fold headings don't flash the
+      // un-split text first (fonts.ready is async). Fallback reveals it anyway if
+      // the split never fires, so text can never get stuck hidden.
+      gsap.set(el, { autoAlpha: 0 });
+      const fallback = setTimeout(() => gsap.set(el, { autoAlpha: 1 }), 1500);
+
       let split: SplitText | undefined;
       // Split only after fonts load so line breaks are measured correctly.
       document.fonts.ready.then(() => {
         if (!ref.current) return;
+        clearTimeout(fallback);
+        gsap.set(el, { autoAlpha: 1 });
         split = SplitText.create(el, {
           type: "lines",
           mask: "lines",
@@ -59,7 +67,10 @@ export function RevealHeading({
         });
       });
 
-      return () => split?.revert();
+      return () => {
+        clearTimeout(fallback);
+        split?.revert();
+      };
     },
     { scope: ref },
   );

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 import { wa } from "@/lib/web-app-development";
 
 export function WaHero() {
@@ -20,12 +21,12 @@ export function WaHero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-brand backdrop-blur">
             {wa.hero.eyebrow}
           </span>
-          <h1 className="mt-5 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+          <RevealHeading as="h1" className="mt-5 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
             <span className="text-navy">{wa.hero.headingA}</span>{" "}
             <span className="text-brand">for the way</span>
             <br />
             <span className="text-navy">your business works.</span>
-          </h1>
+          </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {wa.hero.sub}
           </p>

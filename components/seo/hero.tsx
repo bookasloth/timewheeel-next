@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Link2, ArrowRight, ArrowUp, ArrowLeft, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 import { AuditLeadPanel } from "@/components/seo/audit-lead-modal";
 import { seo } from "@/lib/seo";
 
@@ -259,10 +260,10 @@ export function SeoHero() {
             </ol>
           </nav>
 
-          <h1 className="mt-5 max-w-xl text-4xl font-black leading-[1.03] tracking-tight text-navy sm:text-5xl md:text-6xl">
+          <RevealHeading as="h1" className="mt-5 max-w-xl text-4xl font-black leading-[1.03] tracking-tight text-navy sm:text-5xl md:text-6xl">
             {seo.hero.h1a}{" "}
             <span className="text-brand-text">{seo.hero.h1b}</span>
-          </h1>
+          </RevealHeading>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {seo.hero.sub}

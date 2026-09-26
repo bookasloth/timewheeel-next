@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // About hero, full-bleed section on a clean white background. Copy on the
 // left, the team/about photo on the right in a softly framed card.
@@ -29,11 +30,11 @@ export function AboutHero() {
             About Timewheel
           </p>
 
-          <h1 className="mt-6 text-[2.35rem] font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
+          <RevealHeading as="h1" className="mt-6 text-[2.35rem] font-black leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
             <span className="block">We build digital </span>
             <span className="block">experiences that </span>
             <span className="block text-brand">move businesses forward.</span>
-          </h1>
+          </RevealHeading>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             TIMEWHEEL is a digital design and development partner helping

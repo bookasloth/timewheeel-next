@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CalendarClock, MapPin, Timer } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 import { site } from "@/lib/site";
 
 export function ContactHero() {
@@ -9,10 +10,10 @@ export function ContactHero() {
       <div className="mx-auto max-w-4xl px-6 py-24 text-center md:py-32">
         <Reveal>
 
-          <h1 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">
+          <RevealHeading as="h1" className="mt-6 text-4xl font-black tracking-tight md:text-6xl">
             Say hello.{" "}
             <span className="text-brand">We read every message.</span>
-          </h1>
+          </RevealHeading>
 
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
             A product idea, a project brief, or just a question about how we

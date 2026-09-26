@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ShoppingBag, BadgeCheck } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 import { sd } from "@/lib/shopify-development";
 
 export function SdHero() {
@@ -21,10 +22,10 @@ export function SdHero() {
             <BadgeCheck className="size-3.5" />
             {sd.hero.eyebrow}
           </span>
-          <h1 className="mt-5 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+          <RevealHeading as="h1" className="mt-5 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
             <span className="text-navy">{sd.hero.headingA}</span>{" "}
             <span className="text-brand">{sd.hero.headingAccent}</span>
-          </h1>
+          </RevealHeading>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {sd.hero.sub}
           </p>

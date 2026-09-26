@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/reveal";
+import { RevealHeading } from "@/components/anim/reveal-heading";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
 import { AiHeroFlow } from "./hero-flow";
 
@@ -21,11 +22,11 @@ export function AiHero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-brand-text backdrop-blur">
             {hero.eyebrow}
           </span>
-          <h1 className="mt-5 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+          <RevealHeading as="h1" className="mt-5 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
             <span className="text-navy">{hero.headingA}</span>
             <br />
             <span className="text-brand">{hero.headingB}</span>
-          </h1>
+          </RevealHeading>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
               href={hero.primaryCta.href}
