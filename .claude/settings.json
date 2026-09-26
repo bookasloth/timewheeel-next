@@ -1,0 +1,11 @@
+{
+  "enableAllProjectMcpServers": false,
+  "enabledPlugins": {
+    "andrej-karpathy-skills@karpathy-skills": false,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": false,
+    "harness@harness-marketplace": false,
+    "superpowers@claude-plugins-official": false,
+    "caveman@caveman": false,
+    "ponytail@ponytail": false
+  }
+}
