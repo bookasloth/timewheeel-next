@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Timewheel",
+  title: { absolute: "Privacy Policy | Timewheel" },
   description:
     "Learn how Timewheel collects, uses, and protects your personal information.",
   alternates: { canonical: "/legal/privacy" },

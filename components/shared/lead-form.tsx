@@ -84,7 +84,7 @@ export function LeadForm(p: Props) {
         return;
       }
       setStatus("success");
-      trackLead(p.source, { service: form.values.service });
+      trackLead(p.source, { service: form.values.service, eventId: data?.eventId });
     } catch {
       setStatus("error");
       setErrorMsg("Network error, please try again.");

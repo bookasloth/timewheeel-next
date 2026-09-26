@@ -18,6 +18,8 @@ export type LeadEmail = {
   message: string;
   source: string;
   when: string;
+  // Challenge signups name their own price (₹0+). Only set for that flow.
+  budget?: string;
   // Admin-only: the full audit findings + exact fixes. Never shown in the
   // public report; the team gets them here to action the lead.
   findings?: LeadFinding[];
@@ -68,6 +70,7 @@ export function renderLeadEmailHtml(l: LeadEmail): string {
             ${row("Phone", `<a href="tel:${esc(l.phone)}" style="color:${brand};text-decoration:none">${esc(l.phone)}</a>`)}
             ${row("Website", websiteCell)}
             ${row("Service", esc(l.service))}
+            ${l.budget ? row("Their price", `<strong style="color:${brand}">${esc(l.budget)}</strong>`) : ""}
           </table>
         </td></tr>
         <tr><td style="padding:20px 28px 4px">
@@ -182,6 +185,7 @@ export function renderLeadEmailText(l: LeadEmail): string {
     `Phone:    ${l.phone}`,
     `Website:  ${l.website || "–"}`,
     `Service:  ${l.service}`,
+    ...(l.budget ? [`Price:    ${l.budget}`] : []),
     `When:     ${l.when}`,
     "",
     "Message:",

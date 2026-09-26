@@ -224,7 +224,7 @@ void main(){
       const data = await res.json().catch(() => ({}));
       if (!res.ok) { setStatus("error"); setErrorMsg(data?.error ?? "Something went wrong. Please try again."); return; }
       setStatus("success");
-      trackLead("growth-blueprint", { service, value: a.budget });
+      trackLead("growth-blueprint", { service, value: a.budget, eventId: data?.eventId });
     } catch { setStatus("error"); setErrorMsg("Network error, please try again."); }
   }
 

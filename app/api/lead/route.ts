@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import crypto from "node:crypto";
 import nodemailer from "nodemailer";
 import {
   renderLeadEmailHtml,
@@ -24,6 +25,8 @@ type Lead = {
   service?: string;
   message?: string;
   source?: string;
+  budget?: string; // "name your price" from the 30-day challenge; free text
+
   company_website?: string; // honeypot, humans never see or fill this
   // Optional: also email the lead their SEO report link (audit "get fixes" flow).
   sendReport?: boolean;
@@ -49,6 +52,79 @@ function limited(ip: string): boolean {
 
 function clean(s: unknown): string {
   return typeof s === "string" ? s.trim().slice(0, 2000) : "";
+}
+
+// ── Meta Conversions API (server-side 'Lead') ────────────────────────────────
+// The authoritative conversion signal: survives ad-blockers/ITP. Meta de-dupes
+// this against the browser pixel 'Lead' on the shared event_id. Best-effort only:
+// a failure here must never fail the lead submission.
+const sha256 = (v?: string) =>
+  v ? crypto.createHash("sha256").update(v.trim().toLowerCase()).digest("hex") : undefined;
+
+// Meta wants E.164 without the +; assume India (91) for bare 10-digit numbers.
+function normPhone(raw?: string): string | undefined {
+  if (!raw) return undefined;
+  let d = raw.replace(/\D/g, "");
+  if (d.length === 10) d = "91" + d;
+  else if (d.length === 11 && d.startsWith("0")) d = "91" + d.slice(1);
+  return d || undefined;
+}
+
+async function sendMetaCapiLead(opts: {
+  eventId: string;
+  email?: string;
+  phone?: string;
+  ip?: string;
+  userAgent?: string;
+  cookie?: string;
+  sourceUrl?: string;
+}) {
+  const PIXEL = process.env.META_PIXEL_ID;
+  const TOKEN = process.env.META_CAPI_ACCESS_TOKEN;
+  if (!PIXEL || !TOKEN) return; // not configured — silently skip
+  const ver = process.env.META_GRAPH_VERSION || "v21.0";
+
+  const cookie = opts.cookie || "";
+  const fbp = /_fbp=([^;]+)/.exec(cookie)?.[1];
+  let fbc = /_fbc=([^;]+)/.exec(cookie)?.[1];
+  // Reconstruct fbc from an fbclid on the source URL if the cookie is absent.
+  if (!fbc && opts.sourceUrl) {
+    const fbclid = /[?&]fbclid=([^&]+)/.exec(opts.sourceUrl)?.[1];
+    if (fbclid) fbc = `fb.1.${Date.now()}.${fbclid}`;
+  }
+
+  const user_data: Record<string, unknown> = {};
+  const em = sha256(opts.email);
+  const ph = sha256(normPhone(opts.phone));
+  if (em) user_data.em = [em];
+  if (ph) user_data.ph = [ph];
+  if (opts.ip) user_data.client_ip_address = opts.ip;
+  if (opts.userAgent) user_data.client_user_agent = opts.userAgent;
+  if (fbp) user_data.fbp = fbp;
+  if (fbc) user_data.fbc = fbc;
+
+  const payload = {
+    data: [
+      {
+        event_name: "Lead",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: opts.eventId,
+        action_source: "website",
+        event_source_url: opts.sourceUrl,
+        user_data,
+      },
+    ],
+  };
+
+  try {
+    await fetch(`https://graph.facebook.com/${ver}/${PIXEL}/events?access_token=${TOKEN}`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.error("Meta CAPI Lead failed:", err);
+  }
 }
 
 function validate(l: Lead): string | null {
@@ -115,6 +191,7 @@ export async function POST(request: Request) {
     website: clean(body.website),
     service: clean(body.service),
     message: clean(body.message),
+    budget: clean(body.budget) || undefined,
     source: clean(body.source) || "website",
     when: new Date().toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short",
@@ -183,7 +260,20 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ ok: true });
+    // Fire the server-side Meta CAPI 'Lead' (deduped with the browser pixel on
+    // eventId). Best-effort: never fail the request over ad tracking.
+    const eventId = crypto.randomUUID();
+    await sendMetaCapiLead({
+      eventId,
+      email: l.email,
+      phone: l.phone,
+      ip: ip !== "unknown" ? ip : undefined,
+      userAgent: request.headers.get("user-agent") || undefined,
+      cookie: request.headers.get("cookie") || undefined,
+      sourceUrl: request.headers.get("referer") || site.url,
+    });
+
+    return NextResponse.json({ ok: true, eventId });
   } catch (err) {
     console.error("Lead email send failed:", err);
     return NextResponse.json(

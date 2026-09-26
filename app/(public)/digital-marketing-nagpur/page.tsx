@@ -12,7 +12,7 @@ const PATH = "/digital-marketing-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {
-  title: dm.meta.title,
+  title: { absolute: dm.meta.title },
   description: dm.meta.description,
   alternates: { canonical: url },
   openGraph: {

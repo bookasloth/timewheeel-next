@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Timewheel",
+  title: { absolute: "Terms of Service | Timewheel" },
   description:
     "Read the terms and conditions governing your use of Timewheel products and services.",
   alternates: { canonical: "/legal/terms" },

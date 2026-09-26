@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { MetaPixel } from "@/components/meta-pixel";
-import {
-  GoogleTagManager,
-  GoogleTagManagerNoScript,
-} from "@/components/google-tag-manager";
+import { AnalyticsBridge } from "@/components/analytics-bridge";
+import { ConsentBanner } from "@/components/consent-banner";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -64,11 +61,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={`${poppins.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <GoogleTagManagerNoScript id={process.env.GTM_ID} />
         {children}
         <Analytics />
-        <MetaPixel id={process.env.META_PIXEL_ID} />
-        <GoogleTagManager id={process.env.GTM_ID} />
+        <AnalyticsBridge />
+        <ConsentBanner />
       </body>
     </html>
   );

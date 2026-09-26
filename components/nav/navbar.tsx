@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -117,11 +118,23 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <Link
-          href="/"
-          className={cn("text-xl font-black tracking-tight", light ? "text-white" : "text-foreground")}
-        >
-          TIME<span className="text-brand">WHEEL</span>
+        <Link href="/" aria-label="Timewheel home" className="flex items-center gap-2">
+          <Image
+            src="/brand/svg/timewheel-icon.svg"
+            alt=""
+            width={32}
+            height={32}
+            priority
+            className="size-8"
+          />
+          <span
+            className={cn(
+              "text-xl font-black tracking-tight",
+              light ? "text-white" : "text-foreground",
+            )}
+          >
+            TIME<span className="text-brand">WHEEL</span>
+          </span>
         </Link>
 
         {/* desktop nav */}

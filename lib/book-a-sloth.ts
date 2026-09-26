@@ -20,9 +20,9 @@ export const shots = {
     height: 451,
   },
   heroBanner: {
-    src: "https://company-assets.bookasloth.in/images/banner/hero-book-a-sloth.png",
-    width: 480,
-    height: 550,
+    src: "/products/bas-hero-banner.png",
+    width: 722,
+    height: 866,
   },
 };
 

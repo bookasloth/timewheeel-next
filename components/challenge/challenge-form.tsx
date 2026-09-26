@@ -90,7 +90,7 @@ export function ChallengeForm() {
         return;
       }
       setStatus("success");
-      trackLead("30-day-challenge", { value: form.values.budget });
+      trackLead("30-day-challenge", { value: form.values.budget, eventId: data?.eventId });
     } catch {
       setStatus("error");
       setErrorMsg("Network error, please try again.");

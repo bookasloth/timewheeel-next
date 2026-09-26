@@ -24,7 +24,7 @@ const PATH = "/website-design-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {
-  title: wd.meta.title,
+  title: { absolute: wd.meta.title },
   description: wd.meta.description,
   alternates: { canonical: url },
   openGraph: {

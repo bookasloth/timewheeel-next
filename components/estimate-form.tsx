@@ -141,7 +141,7 @@ export function EstimateForm({ accent }: { accent: string }) {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) { setStatus("error"); setErr(data?.error ?? "Something went wrong. Please try again."); return; }
       setStatus("ok");
-      trackLead("estimate", { service: v.services.join(", "), value: v.budget });
+      trackLead("estimate", { service: v.services.join(", "), value: v.budget, eventId: data?.eventId });
     } catch { setStatus("error"); setErr("Network error, please try again."); }
   }
 

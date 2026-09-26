@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     remotePatterns: [
-      { protocol: "https", hostname: "company-assets.bookasloth.in", pathname: "/images/**" },
       { protocol: "https", hostname: "picsum.photos" },
     ],
   },

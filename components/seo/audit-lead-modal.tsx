@@ -67,7 +67,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         return;
       }
       setStatus("success");
-      trackLead("seo-audit", { service: "SEO" });
+      trackLead("seo-audit", { service: "SEO", eventId: data?.eventId });
     } catch {
       setStatus("error");
       setError("Network error, please try again.");

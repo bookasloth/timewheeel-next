@@ -162,7 +162,7 @@ function CoffeeVisual() {
   );
 }
 
-const projects: {
+export const projects: {
   name: string;
   category: string;
   desc: string;

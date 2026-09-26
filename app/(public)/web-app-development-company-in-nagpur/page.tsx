@@ -19,7 +19,7 @@ const PATH = "/web-app-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {
-  title: wa.meta.title,
+  title: { absolute: wa.meta.title },
   description: wa.meta.description,
   alternates: { canonical: url },
   openGraph: {

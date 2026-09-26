@@ -20,7 +20,7 @@ const PATH = "/shopify-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
 export const metadata: Metadata = {
-  title: sd.meta.title,
+  title: { absolute: sd.meta.title },
   description: sd.meta.description,
   alternates: { canonical: url },
   openGraph: {
