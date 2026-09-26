@@ -8,6 +8,7 @@ import {
   Megaphone,
   TrendingUp,
   Bot,
+  ArrowUpRight,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
@@ -42,6 +43,11 @@ const demos = [
 
 const serviceOptions = [...demos.map((d) => d.name), "Something else"];
 
+// Book A Sloth booking page (we run demos on our own product). Swap to a
+// dedicated Timewheel booking page later via env, no code change needed.
+const BOOKING_URL =
+  process.env.NEXT_PUBLIC_BAS_BOOKING_URL || "https://bookasloth.com/sndatarkar";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -70,9 +76,27 @@ export default function BookADemoPage() {
               See it live. Pick your demo.
             </RevealHeading>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-              We run several demos, one per product and service. Choose what you want to see,
-              tell us a little about your business, and we reply with a time within one business day.
+              We run our demos on our own booking platform, Book A Sloth. Pick a time that
+              suits you, book instantly, and get reminders before the session. Prefer we reach
+              out instead? Request a callback below.
             </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-brand-foreground"
+              >
+                Book a demo on Book A Sloth
+                <ArrowUpRight className="size-4" />
+              </a>
+              <a
+                href="#contact"
+                className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
+              >
+                Prefer a callback?
+              </a>
+            </div>
           </Reveal>
 
           {/* Demo options */}
@@ -80,7 +104,9 @@ export default function BookADemoPage() {
             {demos.map((d, i) => (
               <Reveal key={d.name} delay={i * 0.05}>
                 <a
-                  href="#contact"
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group block h-full rounded-2xl border border-border bg-card p-5 transition-colors hover:border-brand/50"
                 >
                   <span className="grid size-10 place-items-center rounded-xl bg-brand/10 text-brand">
@@ -97,9 +123,9 @@ export default function BookADemoPage() {
 
       {/* Request form (reuses the lead pipeline) */}
       <LeadForm
-        eyebrow="Request a demo"
-        heading="Tell us what to show you"
-        blurb="Pick the demo, share your goals, and we'll line up a 30-minute live walkthrough at a time that suits you."
+        eyebrow="Prefer a callback?"
+        heading="Or ask us to reach out"
+        blurb="Rather we contact you than self-book? Pick the demo, share your goals, and we'll email you a time within one business day."
         infoRows={[
           { k: "Email", v: site.contact.email },
           { k: "Phone", v: site.contact.phone },
