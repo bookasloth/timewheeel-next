@@ -203,24 +203,6 @@ export async function POST(request: Request) {
   const problem = validate(body);
   if (problem) return NextResponse.json({ error: problem }, { status: 400 });
 
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LEAD_TO, LEAD_FROM, SMTP_SECURE } =
-    process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !LEAD_TO) {
-    console.error("Lead email not configured: missing SMTP_* / LEAD_TO env vars.");
-    return NextResponse.json(
-      { error: "Sorry, we couldn't send your enquiry. Please email us directly." },
-      { status: 500 },
-    );
-  }
-
-  const port = Number(SMTP_PORT) || 587;
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port,
-    secure: SMTP_SECURE === "true" || port === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
-
   const l = {
     name: clean(body.name),
     business: clean(body.business),
@@ -260,9 +242,10 @@ export async function POST(request: Request) {
     : undefined;
   const teamEmail = { ...l, campaign: campaign || undefined, findings };
 
-  // Persist the lead (authoritative store). Best-effort: a DB failure must not
-  // cost us the lead, the notification email below is the backup path.
-  await saveLead(
+  // 1) Persist to the authoritative store FIRST, so a lead is never lost to a
+  //    missing/broken email config. Best-effort, but tracked: `saved` tells us
+  //    whether we captured the lead even if every other channel is down.
+  const saved = await saveLead(
     {
       name: l.name,
       business: l.business,
@@ -283,75 +266,95 @@ export async function POST(request: Request) {
     attribution,
   );
 
-  try {
-    await transporter.sendMail({
-      from: LEAD_FROM || SMTP_USER,
-      to: LEAD_TO,
-      replyTo: `${l.name} <${l.email}>`,
-      subject: `New lead: ${l.service}, ${l.business} (${l.source})`,
-      text: renderLeadEmailText(teamEmail),
-      html: renderLeadEmailHtml(teamEmail),
+  // 2) Notify the team by email (backup channel). Best-effort: if SMTP is not
+  //    configured or the send fails, we have already stored the lead above.
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LEAD_TO, LEAD_FROM, SMTP_SECURE } =
+    process.env;
+  let emailed = false;
+  if (SMTP_HOST && SMTP_USER && SMTP_PASS && LEAD_TO) {
+    const port = Number(SMTP_PORT) || 587;
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port,
+      secure: SMTP_SECURE === "true" || port === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
+    try {
+      await transporter.sendMail({
+        from: LEAD_FROM || SMTP_USER,
+        to: LEAD_TO,
+        replyTo: `${l.name} <${l.email}>`,
+        subject: `New lead: ${l.service}, ${l.business} (${l.source})`,
+        text: renderLeadEmailText(teamEmail),
+        html: renderLeadEmailHtml(teamEmail),
+      });
+      emailed = true;
 
-    // Optional second email TO the lead: their SEO report link. The report URL
-    // is built server-side from our own domain so a client can't point it
-    // elsewhere. Failure here must not fail the request — the team email is
-    // already sent, so we log and carry on.
-    if (body.sendReport) {
-      const domain = clean(body.domain);
-      const site_ = domain ? domain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : "";
-      if (site_) {
-        const reportUrl = `${site.url}/seo-report?site=${encodeURIComponent(site_)}`;
-        try {
-          await transporter.sendMail({
-            from: LEAD_FROM || SMTP_USER,
-            to: l.email,
-            subject: `Your SEO audit for ${site_} is ready`,
-            text: renderReportEmailText({
-              name: l.name,
-              domain: site_,
-              scores: {
-                overall: body.scores?.overall ?? null,
-                ai: body.scores?.ai ?? null,
-                seo: body.scores?.seo ?? null,
-              },
-              reportUrl,
-            }),
-            html: renderReportEmailHtml({
-              name: l.name,
-              domain: site_,
-              scores: {
-                overall: body.scores?.overall ?? null,
-                ai: body.scores?.ai ?? null,
-                seo: body.scores?.seo ?? null,
-              },
-              reportUrl,
-            }),
-          });
-        } catch (err) {
-          console.error("Report email to lead failed:", err);
+      // Optional second email TO the lead: their SEO report link. The report URL
+      // is built server-side from our own domain so a client can't point it
+      // elsewhere. Failure here must not fail the request.
+      if (body.sendReport) {
+        const domain = clean(body.domain);
+        const site_ = domain ? domain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : "";
+        if (site_) {
+          const reportUrl = `${site.url}/seo-report?site=${encodeURIComponent(site_)}`;
+          try {
+            await transporter.sendMail({
+              from: LEAD_FROM || SMTP_USER,
+              to: l.email,
+              subject: `Your SEO audit for ${site_} is ready`,
+              text: renderReportEmailText({
+                name: l.name,
+                domain: site_,
+                scores: {
+                  overall: body.scores?.overall ?? null,
+                  ai: body.scores?.ai ?? null,
+                  seo: body.scores?.seo ?? null,
+                },
+                reportUrl,
+              }),
+              html: renderReportEmailHtml({
+                name: l.name,
+                domain: site_,
+                scores: {
+                  overall: body.scores?.overall ?? null,
+                  ai: body.scores?.ai ?? null,
+                  seo: body.scores?.seo ?? null,
+                },
+                reportUrl,
+              }),
+            });
+          } catch (err) {
+            console.error("Report email to lead failed:", err);
+          }
         }
       }
+    } catch (err) {
+      console.error("Lead email send failed:", err);
     }
+  } else {
+    console.error("Lead email not configured: missing SMTP_* / LEAD_TO env vars.");
+  }
 
-    // Fire the server-side Meta CAPI 'Lead' (deduped with the browser pixel on
-    // eventId). Best-effort: never fail the request over ad tracking.
-    await sendMetaCapiLead({
-      eventId,
-      email: l.email,
-      phone: l.phone,
-      ip: ip !== "unknown" ? ip : undefined,
-      userAgent: request.headers.get("user-agent") || undefined,
-      cookie: request.headers.get("cookie") || undefined,
-      sourceUrl: request.headers.get("referer") || site.url,
-    });
+  // 3) Server-side Meta CAPI 'Lead' (deduped with the browser pixel on eventId).
+  //    Best-effort: never fail the request over ad tracking.
+  await sendMetaCapiLead({
+    eventId,
+    email: l.email,
+    phone: l.phone,
+    ip: ip !== "unknown" ? ip : undefined,
+    userAgent: request.headers.get("user-agent") || undefined,
+    cookie: request.headers.get("cookie") || undefined,
+    sourceUrl: request.headers.get("referer") || site.url,
+  });
 
-    return NextResponse.json({ ok: true, eventId });
-  } catch (err) {
-    console.error("Lead email send failed:", err);
+  // Success as long as the lead landed somewhere (DB or email). Only hard-fail
+  // when every channel missed, so we never tell a visitor "sent" having lost it.
+  if (!saved && !emailed) {
     return NextResponse.json(
-      { error: "Sorry, we couldn't send your enquiry. Please try again." },
+      { error: "Sorry, we couldn't save your enquiry. Please try again or email us directly." },
       { status: 502 },
     );
   }
+  return NextResponse.json({ ok: true, eventId });
 }
