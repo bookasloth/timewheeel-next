@@ -6,8 +6,8 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function WdFinalCta() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-8 pt-2 md:pb-12">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
+    <section className="w-full">
+      <Reveal className="relative overflow-hidden bg-black text-center text-white">
         <div className="relative px-6 py-20 md:px-12 md:py-24">
           <p className="text-sm font-semibold uppercase tracking-widest text-white/50">Let&apos;s talk</p>
           <RevealHeading as="h2" className="mx-auto mt-4 max-w-3xl text-4xl font-black leading-[1.08] tracking-tight md:text-6xl">

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Fraunces, Inter, Caveat } from "next/font/google";
+import { Navbar } from "@/components/nav/navbar";
+import { Footer } from "@/components/footer";
 import "./coffee-landing.css";
-import "./support.css";
 
 const serif = Fraunces({
   variable: "--cf-font-serif",
@@ -34,10 +35,16 @@ export default function CoffeeToffeeLayout({
   children: ReactNode;
 }) {
   return (
-    <div
-      className={`${serif.variable} ${sans.variable} ${hand.variable} cf ct-page`}
-    >
-      {children}
-    </div>
+    <>
+      <Navbar />
+      {/* `.cf` owns the page ground (warm cream) and grows to fill the body
+          column, so no white seam shows between the nav, the page and the footer. */}
+      <div
+        className={`cf ${serif.variable} ${sans.variable} ${hand.variable}`}
+      >
+        <main className="cf-main">{children}</main>
+      </div>
+      <Footer />
+    </>
   );
 }

@@ -96,8 +96,8 @@ export const wd = {
         services: ["Product Design", "UI / UX", "Design System", "Development"],
         accent: palette.orange,
         visual: "screenshot-book-a-sloth",
-        href: "https://bookasloth.com",
-        external: true,
+        href: "/case-studies/book-a-sloth",
+        external: false,
         meta: [
           { key: "Role", value: "Design + Build" },
           { key: "Status", value: "Live" },
@@ -112,7 +112,7 @@ export const wd = {
         services: ["UI Design", "Dashboard Design", "Web App"],
         accent: palette.purple,
         visual: "mockup-alluminaty",
-        href: "/products/alluminaty",
+        href: "/case-studies/alluminaty",
         external: false,
         meta: [
           { key: "Role", value: "Product + UI" },
@@ -123,14 +123,7 @@ export const wd = {
   },
 
   ourWork: {
-    items: [
-      { slug: "book-a-sloth", live: "https://bookasloth.com", result: "Booking platform, full product build, live in production." },
-      { slug: "alluminaty", result: "Alumni engagement platform, directories, events, giving." },
-      { slug: "ticket-dino", result: "Event ticketing at scale, sales, check-in, analytics." },
-      { slug: "coffee-for-me", result: "Creator monetization, tipping and audience support." },
-      { slug: "the-parliament", result: "Community & membership platform." },
-      { slug: "link-lantern", result: "Link-in-bio and profile pages." },
-    ],
+    items: [] as { slug: string; live?: string; result: string }[],
   },
 
   process: {

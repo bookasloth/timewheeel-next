@@ -6,9 +6,8 @@ import { SmmHero } from "@/components/social-media-marketing/hero";
 import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
 import { SmmMetrics } from "@/components/social-media-marketing/metrics";
 import { SmmFeed } from "@/components/social-media-marketing/feed";
-import { SmmTestimonials } from "@/components/social-media-marketing/testimonials";
 import { SmmPackages } from "@/components/social-media-marketing/packages";
-import { SmmFounder } from "@/components/social-media-marketing/founder";
+import { SmmSocialProof } from "@/components/social-media-marketing/social-proof";
 import { SmmStickyCta } from "@/components/social-media-marketing/sticky-cta";
 import { SmmIntro } from "@/components/social-media-marketing/intro";
 import { SmmServices } from "@/components/social-media-marketing/services";
@@ -105,8 +104,7 @@ export default function SocialMediaMarketingPage() {
       <SmmWorkflow />
       <SmmPackages />
       <SmmCollaborators />
-      <SmmTestimonials />
-      <SmmFounder />
+      <SmmSocialProof />
       <SmmFaq />
       <SmmFinalCta />
       <SmmStickyCta />

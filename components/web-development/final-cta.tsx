@@ -8,8 +8,8 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 // paths route to the on-page form rather than shipping a dead link.
 export function WdFinalCta() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-black px-8 py-16 text-center md:py-20">
+    <section className="w-full">
+      <Reveal className="relative overflow-hidden bg-black px-6 py-16 text-center md:px-8 md:py-20">
         <RevealHeading as="h2" className="text-3xl font-black tracking-tight text-white md:text-5xl">
           Ready to Build Something That Loads Fast and Ranks?
         </RevealHeading>

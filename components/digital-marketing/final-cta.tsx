@@ -42,16 +42,16 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function DmFinalCta() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
-        <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
+    <section className="w-full">
+      <Reveal className="relative overflow-hidden bg-black text-center text-white">
+        <div className="relative px-6 pb-16 pt-20 md:px-8 md:pb-20 md:pt-24">
           <RevealHeading as="h2" className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Turn{" "}
             <span
               className="dm-gradient-text"
               style={{
                 backgroundImage:
-                  "linear-gradient(90deg, #fe5100, #ff4d93, #ffcc1c, #fe5100)",
+                  "linear-gradient(90deg, #ffcc1c, #ff4d93, #ffcc1c, #ffcc1c)",
               }}
             >
               Attention

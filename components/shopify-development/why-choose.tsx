@@ -1,9 +1,11 @@
-import { Target, Search, Smartphone, ShieldCheck, Headset, type LucideIcon } from "lucide-react";
+import {
+  Target, Search, Smartphone, ShieldCheck, Headset, Handshake, type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { SdSectionHeading } from "@/components/shopify-development/section-heading";
 import { sd } from "@/lib/shopify-development";
 
-const icons: LucideIcon[] = [Target, Search, Smartphone, ShieldCheck, Headset];
+const icons: LucideIcon[] = [Target, Search, Smartphone, ShieldCheck, Headset, Handshake];
 
 const accents = [
   "bg-brand text-white",
@@ -11,6 +13,7 @@ const accents = [
   "bg-accent-pink text-white",
   "bg-rating text-white",
   "bg-accent-yellow text-navy",
+  "bg-navy text-white",
 ] as const;
 
 export function SdWhyChoose() {

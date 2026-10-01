@@ -190,6 +190,9 @@
   --color-wgreen: #35c98a;
   --color-wdark: #111827;
   --color-wsoft: #f8f9fc;
+  --color-wpink: #ec4899;
+  --color-wred: #ef4444;
+  --color-wneon: #65a30d;
 }
 
 /* website-design page — scoped brand so shared token-based components
@@ -325,6 +328,13 @@
   --brand-text: #8a6d00; /* darker yellow for small text on cream — AA */
   --ring: #ffcc1c;
 }
+
+/* NOTE: the Navbar and Footer are deliberately NOT recoloured on this route.
+   They are rendered by app/(public)/layout.tsx as SIBLINGS of this wrapper, so
+   `.pm-page` cannot reach them and they keep the site-wide orange brand. Do not
+   hoist this palette to `<body>` via `body:has()` — the chrome stays orange by
+   design. The hero sets `--brand-foreground: #111111` locally so its own
+   yellow CTA stays readable regardless. */
 
 /* hero bento — near-black panel with warm yellow bloom, the bold "ad engine" ground */
 .pm-panel {
@@ -607,6 +617,13 @@ h2 {
 .pm-hero-h1 {
   font-size: clamp(2.25rem, 1.2rem + 3.2vw, 3.25rem) !important;
   line-height: 1.04 !important;
+}
+/* Digital marketing cinematic hero: 42px on a phone up to 78px on desktop,
+   over the client-supplied photograph. Same class-specificity escape as the
+   two above, because the global `h1` rule above is !important. */
+.dm-hero-h1 {
+  font-size: clamp(2.625rem, 1.3rem + 3.9vw, 4.875rem) !important;
+  line-height: 0.98 !important;
 }
 
 /* skeleton shimmer sweep (SEO hero idle card) */

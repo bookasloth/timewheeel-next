@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Users } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { WdOurWork } from "@/components/website-design/our-work";
-import { palette, wd, type WdPortfolioProject } from "@/lib/website-design";
+import { wd, type WdPortfolioProject } from "@/lib/website-design";
 import { cn } from "@/lib/utils";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
@@ -40,7 +40,7 @@ function BasVisual() {
   return (
     <Frame url="bookasloth.com">
       <Image
-        src="/products/bas-booking-16x9.png"
+        src="/bookasloth.png"
         alt="Book A Sloth, a modern booking platform design shown in a browser"
         width={1440}
         height={810}
@@ -54,56 +54,14 @@ function BasVisual() {
 function AlluminatyVisual() {
   return (
     <Frame url="alluminaty.app">
-      <div className="relative flex aspect-[16/10] bg-white">
-        <div className="flex w-1/5 border-r border-border/70 bg-wsoft p-3">
-          <div className="w-full space-y-2">
-            <span className="block text-[9px] font-black tracking-wide" style={{ color: palette.purple }}>
-              Alluminaty
-            </span>
-            {["Directory", "Events", "Mentors", "Giving", "Settings"].map((l, i) => (
-              <span
-                key={l}
-                className={cn(
-                  "block rounded-md px-2 py-1.5 text-[8px] font-semibold text-muted-foreground",
-                  i === 0 && "text-white",
-                )}
-                style={i === 0 ? { backgroundColor: palette.purple } : { backgroundColor: "transparent" }}
-              >
-                {l}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="flex-1 p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-black tracking-tight text-foreground">Class of 2019</span>
-            <span className="rounded-md px-2 py-1 text-[8px] font-bold text-white" style={{ backgroundColor: palette.purple }}>
-              Add member
-            </span>
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            {[
-              { n: "Ananya Mehta", r: "Product · Bengaluru", c: palette.purple },
-              { n: "Kabir Rao", r: "Engineering · Pune", c: palette.blue },
-              { n: "Sara D'Souza", r: "Finance · Mumbai", c: palette.orange },
-              { n: "Dev Patel", r: "Founder · Delhi", c: palette.green },
-            ].map((m) => (
-              <div key={m.n} className="rounded-lg border border-border/80 p-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="grid size-6 place-items-center rounded-full text-[8px] font-black text-white" style={{ backgroundColor: m.c }}>
-                    {m.n.charAt(0)}
-                  </span>
-                  <span className="text-[9px] font-bold text-foreground">{m.n}</span>
-                </div>
-                <span className="mt-1.5 block text-[8px] font-medium text-muted-foreground">{m.r}</span>
-                <span className="mt-1.5 inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[7px] font-semibold" style={{ backgroundColor: `${m.c}1a`, color: m.c }}>
-                  <Users className="size-2" /> Connected
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <Image
+        src="/alumi.png"
+        alt="Alluminaty, an alumni engagement platform for schools and colleges, shown in a browser"
+        width={1536}
+        height={1024}
+        sizes="(max-width: 1024px) 100vw, 55vw"
+        className="h-auto w-full"
+      />
     </Frame>
   );
 }

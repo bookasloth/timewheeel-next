@@ -7,7 +7,7 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 export function AiFinalCta() {
   const { finalCta } = aiAuto;
   return (
-    <section className="border-t border-border bg-surface/40">
+    <section className="w-full border-t border-border bg-surface/40">
       <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
         <Reveal>
           <RevealHeading as="h2" className="text-3xl font-black tracking-tight text-navy md:text-5xl">{finalCta.heading}</RevealHeading>

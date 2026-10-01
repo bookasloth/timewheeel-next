@@ -5,11 +5,15 @@ import { TiltCard } from "@/components/digital-marketing/tilt-card";
 import { cn } from "@/lib/utils";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
+// One distinct hue per service, expressed as two tones of that single colour:
+// `accent` is the bright tone used inside the near-black visual panels, `ink`
+// is the deeper tone used for small text on the cream page ground (AA).
 type PmService = {
   tag: string;
   title: string;
   body: string;
   accent: string;
+  ink: string;
 };
 
 const pmServices: PmService[] = [
@@ -18,36 +22,42 @@ const pmServices: PmService[] = [
     title: "Search Engine Optimization",
     body: "On-page, technical, and local SEO that lifts your rankings in Nagpur and brings steady, high-intent traffic to your site.",
     accent: "#ffcc1c",
+    ink: "#755b00",
   },
   {
     tag: "Paid Ads",
     title: "Google & Meta Ads (PPC)",
     body: "Profitable paid campaigns on Google, Instagram, and Facebook, tuned around the audiences and keywords that actually convert.",
-    accent: "#f4b400",
+    accent: "#60a5fa",
+    ink: "#1d4ed8",
   },
   {
     tag: "Social",
     title: "Social Media Marketing",
     body: "Consistent posting, reels, and community management that grow your following and turn engagement into real enquiries.",
-    accent: "#ea580c",
+    accent: "#fb7185",
+    ink: "#be123c",
   },
   {
     tag: "Content",
     title: "Content Marketing",
     body: "Blogs, landing pages, and social content written to rank, educate, and move readers toward getting in touch with you.",
-    accent: "#fb923c",
+    accent: "#4ade80",
+    ink: "#166534",
   },
   {
     tag: "Email & WhatsApp",
     title: "Email & WhatsApp Marketing",
     body: "Newsletters, offers, and follow-up campaigns on email and WhatsApp that nurture leads and bring customers back.",
-    accent: "#f59e0b",
+    accent: "#c084fc",
+    ink: "#7e22ce",
   },
   {
     tag: "Analytics",
     title: "Analytics & Reporting",
     body: "Clear monthly reporting across every channel, so you know what to scale, what to cut, and where the next win is coming from.",
-    accent: "#ffcc1c",
+    accent: "#22d3ee",
+    ink: "#0e7490",
   },
 ];
 
@@ -379,7 +389,7 @@ export function PmServices() {
                   </div>
                   <p
                     className="mt-4 text-xs font-bold uppercase tracking-widest"
-                    style={{ color: service.accent }}
+                    style={{ color: service.ink }}
                   >
                     {service.tag}
                   </p>
@@ -390,7 +400,7 @@ export function PmServices() {
                   <a
                     href="#contact"
                     className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:opacity-80"
-                    style={{ color: service.accent }}
+                    style={{ color: service.ink }}
                   >
                     Discuss this service
                     <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

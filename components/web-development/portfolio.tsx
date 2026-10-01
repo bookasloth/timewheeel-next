@@ -1,60 +1,16 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Reveal } from "@/components/reveal";
-import { wd } from "@/lib/web-development";
-import { products } from "@/lib/products";
-import { LoadMoreProjects } from "./load-more-projects";
+import { ClientSitesGrid } from "@/components/shared/client-sites-grid";
 
-const bySlug = new Map(products.map((p) => [p.slug, p]));
+// Web-dev palette (blue-forward), so the shared client grid cycles this.
+const ACCENTS = ["#269cef", "#29a66f", "#f45b0a", "#8b5cf6"];
 
 // Nested inside the "Our Work" section, below the four project cards.
 export function WdPortfolio() {
   return (
     <div id="work" className="mt-10">
-      <Reveal stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {wd.portfolio.items.map((item) => {
-          const p = bySlug.get(item.slug);
-          if (!p) return null;
-          const Icon = p.icon;
-          const isLive = Boolean(item.live);
-          const href = item.live ?? `/products/${p.slug}`;
-          return (
-            <Link
-              key={item.slug}
-              href={href}
-              {...(isLive ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-brand/50"
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  className="grid size-11 place-items-center rounded-xl"
-                  style={{ backgroundColor: `${p.accent}1a`, color: p.accent }}
-                >
-                  <Icon size={22} weight="duotone" />
-                </span>
-                <span
-                  className={
-                    isLive
-                      ? "inline-flex items-center gap-1 rounded-full bg-rating/10 px-2 py-0.5 text-[10px] font-bold text-rating"
-                      : "rounded-full bg-secondary px-2 py-0.5 text-[10px] font-bold text-muted-foreground"
-                  }
-                >
-                  {isLive ? "Live" : "In rollout"}
-                </span>
-              </div>
-              <h3 className="mt-4 flex items-center gap-1.5 text-lg font-bold">
-                {p.name}
-                <ArrowUpRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </h3>
-              <p className="mt-1 text-sm font-medium text-muted-foreground">{p.tagline}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.result}</p>
-            </Link>
-          );
-        })}
-      </Reveal>
-
-      {/* Load-more appends further cards, fetched on click (not preloaded). */}
-      <LoadMoreProjects />
+      {/* Real client builds, six up front and the rest behind "Load more".
+          linkTo="caseStudy" routes each card to its case study instead of
+          opening the live site, matching the website-design page. */}
+      <ClientSitesGrid accents={ACCENTS} linkTo="caseStudy" />
     </div>
   );
 }

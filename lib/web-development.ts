@@ -44,15 +44,7 @@ export const wd = {
   portfolio: {
     title: "Recent work",
     body: "A sample of products we've designed, built and shipped. Book A Sloth is live today; the rest are in active rollout.",
-    // Each references a product slug + optional live URL + one-line result.
-    items: [
-      { slug: "book-a-sloth", live: "https://bookasloth.com", result: "Booking platform, full product build, live in production." },
-      { slug: "alluminaty", result: "Alumni engagement platform, directories, events, giving." },
-      { slug: "ticket-dino", result: "Event ticketing at scale, sales, check-in, analytics." },
-      { slug: "coffee-for-me", result: "Creator monetization, tipping and audience support." },
-      { slug: "the-parliament", result: "Community & membership platform." },
-      { slug: "link-lantern", result: "Link-in-bio and profile pages." },
-    ],
+    items: [] as { slug: string; live?: string; result: string }[],
   },
 
   services: [

@@ -1,6 +1,13 @@
+import { ArrowUp, BarChart3, ClipboardCheck, ListChecks, MapPin } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+
+const icons = [ClipboardCheck, ListChecks, BarChart3, MapPin] as const;
+
+// One accent per item, from the same palette as the Local expertise and
+// What we do grids, so the page reads as a set.
+const ACCENTS = ["#269CEF", "#FE5100", "#8B5CF6", "#4AB765"] as const;
 
 export function SeoDeliverables() {
   return (
@@ -12,18 +19,43 @@ export function SeoDeliverables() {
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{seo.deliverables.body}</p>
         </Reveal>
         <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2">
-          {seo.deliverables.items.map((it) => (
-            <div key={it.k} className="rounded-2xl border border-border bg-card p-6">
-              <h3 className="font-bold">{it.k}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.v}</p>
-            </div>
-          ))}
+          {seo.deliverables.items.map((it, i) => {
+            const Icon = icons[i % icons.length];
+            const accent = ACCENTS[i % ACCENTS.length];
+            return (
+              <div
+                key={it.k}
+                className="relative overflow-hidden rounded-2xl border border-border bg-card p-6"
+              >
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: `radial-gradient(120% 80% at 100% 0%, ${accent}1f, transparent 60%)` }}
+                />
+                <span
+                  className="relative grid size-11 place-items-center rounded-xl"
+                  style={{ backgroundColor: `${accent}1a`, color: accent }}
+                >
+                  <Icon className="size-5" />
+                </span>
+                <h3 className="relative mt-4 text-lg font-bold">{it.k}</h3>
+                <p className="relative mt-1.5 text-sm leading-relaxed text-muted-foreground">{it.v}</p>
+              </div>
+            );
+          })}
         </Reveal>
+        {/* The audit lives at the top of the page, so this reads as a pointer
+            back up the page rather than a footnote. */}
         <Reveal>
-          <p className="mt-6 text-sm text-muted-foreground">
-            Want to see it now? Run the free audit at the top of this page, that scorecard is
-            exactly what every engagement starts with.
-          </p>
+          <div className="mt-6 flex items-start gap-3 rounded-2xl border border-border bg-card p-5">
+            <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+              <ArrowUp className="size-4" />
+            </span>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              Want to see it now? Run the free audit at the top of this page, that scorecard is
+              exactly what every engagement starts with.
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>

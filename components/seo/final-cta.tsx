@@ -5,7 +5,7 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SeoFinalCta() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
+    <section className="w-full px-6 py-16">
       <Reveal className="relative overflow-hidden rounded-3xl bg-black px-8 py-16 text-center md:py-20">
         <RevealHeading as="h2" className="text-3xl font-black tracking-tight text-white md:text-5xl">
           See exactly where your site stands, free

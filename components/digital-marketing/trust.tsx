@@ -18,21 +18,21 @@ import {
 } from "lucide-react";
 
 const statGradients = [
-  "bg-gradient-to-br from-[#ff4d93] to-[#fe5100]",
-  "bg-gradient-to-br from-[#ffcc1c] to-[#fe5100]",
+  "bg-gradient-to-br from-[#ff4d93] to-[#ffcc1c]",
+  "bg-gradient-to-br from-[#ffcc1c] to-[#ff4d93]",
   "bg-gradient-to-br from-[#4ab765] to-[#269cef]",
 ];
 
 // Placeholder trusted-brand marks, swap in real client logos when available.
 const brandMarks: Array<{ icon: LucideIcon; name: string; accent: string }> = [
   { icon: Hexagon, name: "Northwind", accent: "#ff4d93" },
-  { icon: Layers, name: "Vertex Labs", accent: "#fe5100" },
+  { icon: Layers, name: "Vertex Labs", accent: "#ffcc1c" },
   { icon: Zap, name: "Kinetiq", accent: "#ffcc1c" },
   { icon: Globe2, name: "Oryx & Co", accent: "#4ab765" },
   { icon: Compass, name: "Northstar", accent: "#269cef" },
   { icon: Box, name: "Flare.io", accent: "#8b5cf6" },
   { icon: ShieldHalf, name: "Sentinel", accent: "#25d366" },
-  { icon: Rocket, name: "Atlas Works", accent: "#fe5100" },
+  { icon: Rocket, name: "Atlas Works", accent: "#ffcc1c" },
   { icon: Sparkles, name: "Mosaic", accent: "#ffcc1c" },
   { icon: Asterisk, name: "Loom & Spine", accent: "#ff4d93" },
 ];

@@ -6,9 +6,9 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function Dm2FinalCta() {
   return (
-    <section className="mx-auto max-w-full px-6 py-20 md:py-28">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-black text-center text-white">
-        <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
+    <section className="w-full">
+      <Reveal className="relative overflow-hidden bg-black text-center text-white">
+        <div className="relative px-6 pb-16 pt-20 md:px-8 md:pb-20 md:pt-24">
           <RevealHeading as="h2" className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Turn{" "}
             <span

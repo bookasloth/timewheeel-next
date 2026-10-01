@@ -1,33 +1,17 @@
+import Image from "next/image";
 import { Reveal } from "@/components/reveal";
-import {
-  siNvidia,
-  siSupabase,
-  siGithub,
-  siTurso,
-  siClerk,
-  siClaude,
-  siVercel,
-  type SimpleIcon,
-} from "simple-icons";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { getClientLogos } from "@/lib/seo-client-logos";
 
-// ponytail: static logo wall, placeholder collaborators — swap for real partners.
-// OpenAI has no simple-icons glyph (trademark), so its official blossom path is inlined.
-type Logo = { icon?: SimpleIcon; path?: string; viewBox?: string; label: string };
+// Client logo wall. The list comes from /public/seo-client at build time — see
+// lib/seo-client-logos.ts. Add a file there and it appears here; no other edit.
 
-const openaiPath =
-  "M239.184 106.203a64.716 64.716 0 0 0-5.576-53.103C219.452 28.459 191 15.784 163.213 21.74A65.586 65.586 0 0 0 52.096 45.22a64.716 64.716 0 0 0-43.23 31.36c-14.31 24.602-11.061 55.634 8.033 76.74a64.665 64.665 0 0 0 5.525 53.102c14.174 24.65 42.644 37.324 70.446 31.36a64.72 64.72 0 0 0 48.754 21.744c28.481.025 53.714-18.361 62.414-45.481a64.767 64.767 0 0 0 43.229-31.36c14.137-24.558 10.875-55.423-8.083-76.483Zm-97.56 136.338a48.397 48.397 0 0 1-31.105-11.255l1.535-.87 51.67-29.825a8.595 8.595 0 0 0 4.247-7.367v-72.85l21.845 12.636c.218.111.37.32.409.563v60.367c-.056 26.818-21.783 48.545-48.601 48.601Zm-104.466-44.61a48.345 48.345 0 0 1-5.781-32.589l1.534.921 51.722 29.826a8.339 8.339 0 0 0 8.441 0l63.181-36.425v25.221a.87.87 0 0 1-.358.665l-52.335 30.184c-23.257 13.398-52.97 5.431-66.404-17.803ZM23.549 85.38a48.499 48.499 0 0 1 25.58-21.333v61.39a8.288 8.288 0 0 0 4.195 7.316l62.874 36.272-21.845 12.636a.819.819 0 0 1-.767 0L41.353 151.53c-23.211-13.454-31.171-43.144-17.804-66.405v.256Zm179.466 41.695-63.08-36.63L161.73 77.86a.819.819 0 0 1 .768 0l52.233 30.184a48.6 48.6 0 0 1-7.316 87.635v-61.391a8.544 8.544 0 0 0-4.4-7.213Zm21.742-32.69-1.535-.922-51.619-30.081a8.39 8.39 0 0 0-8.492 0L99.98 99.808V74.587a.716.716 0 0 1 .307-.665l52.233-30.133a48.652 48.652 0 0 1 72.236 50.391v.205ZM88.061 139.097l-21.845-12.585a.87.87 0 0 1-.41-.614V65.685a48.652 48.652 0 0 1 79.757-37.346l-1.535.87-51.67 29.825a8.595 8.595 0 0 0-4.246 7.367l-.051 72.697Zm11.868-25.58 28.138-16.217 28.188 16.218v32.434l-28.086 16.218-28.188-16.218-.052-32.434Z";
+const COLS = 4; // desktop columns; mobile is always 2
+const MOBILE_COLS = 2;
 
-const logos: Logo[] = [
-  { icon: siNvidia, label: "NVIDIA" },
-  { icon: siSupabase, label: "Supabase" },
-  { icon: siGithub, label: "GitHub" },
-  { path: openaiPath, viewBox: "0 0 256 260", label: "OpenAI" },
-  { icon: siTurso, label: "Turso" },
-  { icon: siClerk, label: "Clerk" },
-  { icon: siClaude, label: "Claude" },
-  { icon: siVercel, label: "Vercel" },
-];
+// The logo exports are mixed media: some are dark marks on an opaque white
+// canvas, others are light marks on transparency. The navy wall cannot show
+// either consistently, so each mark is placed on its own white plate.
 
 function Plus({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -40,13 +24,50 @@ function Plus({ className = "", style }: { className?: string; style?: React.CSS
   );
 }
 
+// Fractional positions of the interior grid lines, used for the plus marks.
+function interiorLines(lines: number): number[] {
+  return Array.from({ length: Math.max(0, lines - 1) }, (_, i) => ((i + 1) / lines) * 100);
+}
+
+const pct = (n: number) => `${n}%`;
+
+// Every crossing of an interior vertical line and an interior horizontal line.
+function crossings(cols: number, rows: number, mobile: boolean) {
+  const ys = interiorLines(rows);
+  const out: { key: string; left: number; top: number }[] = [];
+
+  if (mobile) {
+    // 2 columns -> a single interior vertical line at 50%.
+    for (const top of ys) out.push({ key: `m${top}`, left: 50, top });
+    return out;
+  }
+  for (const left of interiorLines(cols)) {
+    for (const top of ys) out.push({ key: `d${left}-${top}`, left, top });
+  }
+  return out;
+}
+
+// Oversized marks that need to render smaller than the standard h-14.
+const SMALL_LOGOS = new Set(["banarasee.png"]);
+// Undersized marks that need to render a little bigger than h-14.
+const BIG_LOGOS = new Set(["upsilon.png"]);
+
 export function SmmCollaborators() {
+  const logos = getClientLogos();
+  if (!logos.length) return null;
+
+  const rows = Math.ceil(logos.length / COLS);
+  // Trailing blanks keep the gap-px ground from showing through a short last row.
+  const blanks = rows * COLS - logos.length;
+  // Mobile runs 2-up, so it wraps at a different row than the desktop grid.
+  const mobileRows = Math.ceil((rows * COLS) / MOBILE_COLS);
+
   return (
     <section className="bg-navy py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <RevealHeading as="h2" className="text-center text-2xl font-bold tracking-tight md:text-3xl">
-            <span className="bg-gradient-to-r from-white/50 via-white to-white/50 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white/50 via-white to-white/50 bg-clip-text text-transparent transition-all duration-300 hover:[filter:drop-shadow(0_0_12px_rgba(255,255,255,0.8))_drop-shadow(0_0_32px_rgba(255,255,255,0.4))]">
               Companies we collaborate with.
             </span>
           </RevealHeading>
@@ -57,52 +78,59 @@ export function SmmCollaborators() {
           <ul className="relative mt-12 grid grid-cols-2 gap-px rounded-lg border border-white/10 bg-white/10 sm:grid-cols-4">
             {/* plus marks at interior line crossings */}
             <span aria-hidden className="pointer-events-none absolute inset-0">
-              {/* mobile: 1 vertical × 3 horizontal lines */}
-              {[25, 50, 75].map((top) => (
-                <Plus key={`m${top}`} className="sm:hidden" style={{ left: "50%", top: `${top}%` }} />
+              {crossings(MOBILE_COLS, mobileRows, true).map((c) => (
+                <Plus key={c.key} className="sm:hidden" style={{ left: pct(c.left), top: pct(c.top) }} />
               ))}
-              {/* desktop: 3 vertical × 1 horizontal line */}
-              {[25, 50, 75].map((left) => (
-                <Plus key={`d${left}`} className="hidden sm:block" style={{ left: `${left}%`, top: "50%" }} />
+              {crossings(COLS, rows, false).map((c) => (
+                <Plus key={c.key} className="hidden sm:block" style={{ left: pct(c.left), top: pct(c.top) }} />
               ))}
             </span>
-            {logos.map((l) => (
+
+            {logos.map((logo) => {
+              const small = SMALL_LOGOS.has(logo.file.toLowerCase());
+              const big = BIG_LOGOS.has(logo.file.toLowerCase());
+              const imgH = small ? "h-8" : big ? "h-20" : "h-14";
+              const boxCls = small ? "h-8 w-24" : big ? "h-20 w-56" : "h-14 w-40";
+              return (
               <li
-                key={l.label}
-                className="group flex items-center justify-center gap-2.5 bg-navy py-8 md:py-10"
+                key={logo.file}
+                className="group flex items-center justify-center gap-2.5 bg-navy py-8 transition-colors duration-300 hover:bg-white/[0.04] md:py-10"
               >
-                {l.icon ? (
-                  <svg
-                    role="img"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                    className="size-6 shrink-0 grayscale transition duration-300 group-hover:grayscale-0"
-                    style={{
-                      // monochrome at rest; brand colour on hover. Black marks
-                      // (GitHub, Vercel) get white so they stay visible on navy.
-                      fill:
-                        l.icon.hex && l.icon.hex !== "181717" && l.icon.hex !== "000000"
-                          ? `#${l.icon.hex}`
-                          : "#ffffff",
-                    }}
-                  >
-                    <path d={l.icon.path} />
-                  </svg>
+                {/* Static, in colour, no hover. Artwork that is itself near-black cannot read
+                    on the ink wall in its own colours, so only those are forced
+                    to a white silhouette; everything else shows brand colour. */}
+                {logo.photo ? (
+                  <span className="relative h-20 w-28 shrink-0 overflow-hidden rounded-md">
+                    <Image src={logo.src} alt={logo.label} fill sizes="112px" className="object-cover" />
+                  </span>
+                ) : logo.width && logo.height ? (
+                  // Intrinsic size, so the mark lays out at its own aspect and no
+                  // fixed wrapper box is left around it.
+                  <Image
+                    src={logo.src}
+                    alt={logo.label}
+                    width={logo.width}
+                    height={logo.height}
+                    sizes="160px"
+                    className={`${imgH} w-auto shrink-0 ${logo.dark ? "brightness-0 invert" : ""}`}
+                  />
                 ) : (
-                  <svg
-                    role="img"
-                    viewBox={l.viewBox ?? "0 0 256 260"}
-                    aria-hidden
-                    className="h-6 w-auto shrink-0 grayscale transition duration-300 group-hover:grayscale-0"
-                    style={{ fill: "#ffffff" }}
-                  >
-                    <path d={l.path} />
-                  </svg>
+                  <span className={`relative ${boxCls} shrink-0`}>
+                    <Image
+                      src={logo.src}
+                      alt={logo.label}
+                      fill
+                      sizes="160px"
+                      className={`object-contain ${logo.dark ? "brightness-0 invert" : ""}`}
+                    />
+                  </span>
                 )}
-                <span className="text-lg font-bold tracking-tight text-white/70 transition duration-300 group-hover:text-white md:text-xl">
-                  {l.label}
-                </span>
               </li>
+              );
+            })}
+
+            {Array.from({ length: blanks }, (_, i) => (
+              <li key={`blank-${i}`} aria-hidden className="bg-navy" />
             ))}
           </ul>
         </Reveal>

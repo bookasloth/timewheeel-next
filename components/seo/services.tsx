@@ -5,6 +5,10 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const icons = [MapPin, Wrench, FileText, Building2, ShoppingCart, Bot] as const;
 
+// One accent per card, from the palette the rest of the page uses. Yellow is
+// left out: at ~1.5:1 on white the glyph would be invisible in the tint tile.
+const ACCENTS = ["#269CEF", "#4AB765", "#FF4D93", "#8B5CF6", "#FE5100", "#14B8A6"] as const;
+
 export function SeoServices() {
   return (
     <section id="services" className="border-t border-border/60 bg-secondary/40">
@@ -22,9 +26,13 @@ export function SeoServices() {
         <Reveal stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {seo.services.map((s, i) => {
             const Icon = icons[i % icons.length];
+            const accent = ACCENTS[i % ACCENTS.length];
             return (
               <div key={s.name} className="rounded-2xl border border-border bg-card p-6">
-                <span className="grid size-11 place-items-center rounded-xl bg-brand/10 text-brand">
+                <span
+                  className="grid size-11 place-items-center rounded-xl"
+                  style={{ backgroundColor: `${accent}1a`, color: accent }}
+                >
                   <Icon className="size-5" />
                 </span>
                 <h3 className="mt-4 text-lg font-bold">{s.name}</h3>

@@ -15,6 +15,7 @@ import { SdTech } from "@/components/shopify-development/tech";
 import { SdFaq } from "@/components/shopify-development/faq";
 import { SdFinalCta } from "@/components/shopify-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
+import { LeadForm } from "@/components/shared/lead-form";
 
 const PATH = "/shopify-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -80,6 +81,26 @@ export default function ShopifyDevelopmentPage() {
       <SdTech />
       <SdFaq />
       <SdFinalCta />
+      <div id="lead">
+        <LeadForm
+          idPrefix="sd"
+          source="Shopify Development"
+          eyebrow="Start the conversation"
+          heading="Get Your Free Shopify Development Plan"
+          blurb="Tell us about your store and goals. We'll come back with a clear, honest Shopify plan, no obligation, no jargon."
+          infoRows={[
+            { k: "Based in", v: "Nagpur, Maharashtra" },
+            { k: "Serving", v: "Clients across India & abroad" },
+            { k: "Response", v: "Within one business day" },
+            { k: "Guarantees", v: "Honest timelines, never fake rankings" },
+          ]}
+          serviceOptions={sd.serviceOptions}
+          serviceLabel="Service you need"
+          submitLabel="Get My Free Shopify Plan"
+          successHeading="Thanks, we'll be in touch."
+          successBody="Your enquiry is in. We'll review your store and reach out within one business day with a clear next step."
+        />
+      </div>
       <GrowthBlueprintModal service="Shopify Development" />
     </div>
   );

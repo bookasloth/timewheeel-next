@@ -17,6 +17,7 @@ import { SeoComparison } from "@/components/seo/comparison";
 import { SeoLocalities } from "@/components/seo/localities";
 import { SeoFaq } from "@/components/seo/faq";
 import { SeoFinalCta } from "@/components/seo/final-cta";
+import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
 
 const PATH = "/seo-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -92,6 +93,7 @@ export default function SeoCompanyNagpurPage() {
       <SeoProcess />
       <SeoDeliverables />
       <SeoPricing />
+      <SmmCollaborators />
       <SeoComparison />
       <SeoLocalities />
       <SeoFaq />

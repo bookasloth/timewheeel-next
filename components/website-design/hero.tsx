@@ -3,31 +3,38 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { cn } from "@/lib/utils";
 
 const rotateTexts = [
-  "for Modern Businesses",
-  "for Bold Startups",
-  "for Local Brands",
-  "for Growing Stores",
+  "for Salons",
+  "for Tutors",
+  "for Clinics",
+  "for Restaurants",
+  "for Gyms",
 ];
 
 const rotateColors = [
-  "text-wblue",
-  "text-wpurple",
-  "text-worange",
+  "text-wpink",
   "text-wgreen",
+  "text-blue-600",
+  "text-wred",
+  "text-wneon",
 ];
 
 const panels = [
-  { id: 1, label: "Salons", img: "https://picsum.photos/id/26/400/600" },
-  { id: 2, label: "Tutors", img: "https://picsum.photos/id/24/400/600" },
-  { id: 3, label: "Clinics", img: "https://picsum.photos/id/20/400/600" },
-  { id: 4, label: "Restaurants", img: "https://picsum.photos/id/10/400/600" },
-  { id: 5, label: "Gyms", img: "https://picsum.photos/id/64/400/600" },
+  { id: 1, label: "Salons", img: "/salon.png", pill: "bg-wpink/15 border-wpink/25" },
+  { id: 2, label: "Tutors", img: "/tutors.png", pill: "bg-wgreen/15 border-wgreen/25" },
+  { id: 3, label: "Clinics", img: "/clinics.png", pill: "bg-blue-500/15 border-blue-500/25" },
+  { id: 4, label: "Restaurants", img: "/restaurant.png", pill: "bg-wred/15 border-wred/25" },
+  { id: 5, label: "Gyms", img: "/gym.png", pill: "bg-wneon/15 border-wneon/25" },
 ];
+
+// Widest string in the rotation. The heading is big enough that the phrase can
+// wrap to several lines, so reserving this width keeps the rotating word from
+// splitting across a line break and keeps the h1 height fixed as words change.
+const widestRotateText = rotateTexts.reduce((a, b) => (b.length > a.length ? b : a));
 
 function LandingHero() {
   const [rotateIndex, setRotateIndex] = useState(0);
@@ -53,33 +60,33 @@ function LandingHero() {
         {/* Text Content */}
         <div className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">
           <motion.h1
-            className="text-4xl font-black leading-[1.06] tracking-tight md:text-5xl lg:text-6xl"
+            className="text-5xl font-black leading-[1.24] tracking-tight md:text-6xl lg:text-7xl"
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.2, ease: "easeOut", delay: 0.15 }}
           >
-            <span className="text-wdark">Creative Web Design Company in Nagpur</span>
-            <br />
-            <span className="relative inline-flex">
+            <span className="text-wdark">Creative Web Design Company in Nagpur</span>{" "}
+            <span className="inline-grid">
               <span
                 aria-hidden
-                className={cn(
-                  "absolute inset-x-2 inset-y-0 -z-10 rounded-full bg-current opacity-15 blur-2xl transition-colors duration-500",
-                  activeColor
-                )}
-              />
-              <TextRotate
-                texts={rotateTexts}
-                onNext={setRotateIndex}
-                mainClassName={cn(
-                  "overflow-hidden whitespace-nowrap pr-2 pb-1 md:pb-2 rounded-lg transition-colors duration-500",
-                  activeColor
-                )}
-                staggerDuration={0.03}
-                staggerFrom="last"
-                rotationInterval={3000}
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              />
+                className="invisible col-start-1 row-start-1 justify-self-start whitespace-nowrap"
+              >
+                {widestRotateText}
+              </span>
+              <span className="col-start-1 row-start-1 flex items-center justify-self-start">
+                <TextRotate
+                  texts={rotateTexts}
+                  onNext={setRotateIndex}
+                  mainClassName={cn(
+                    "flex-nowrap overflow-hidden whitespace-nowrap pr-2 pb-1 md:pb-2 rounded-lg leading-[1.1] tracking-[0.04em] transition-colors duration-500",
+                    activeColor
+                  )}
+                  staggerDuration={0.03}
+                  staggerFrom="last"
+                  rotationInterval={3000}
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                />
+              </span>
             </span>
           </motion.h1>
 
@@ -134,37 +141,25 @@ function LandingHero() {
                   src={panel.img}
                   alt={panel.label}
                   fill
-                  className="object-cover"
+                  className={cn(
+                    "object-cover transition-all duration-500",
+                    isHovered ? "grayscale-0 scale-[1.02]" : "grayscale"
+                  )}
                   sizes="(max-width: 768px) 0px, 200px"
                 />
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <AnimatePresence>
-                    {isHovered && (
-                      <motion.span
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
-                        className="inline-block rounded-full bg-black/40 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm"
-                      >
-                        {panel.label}
-                      </motion.span>
+                  <motion.span
+                    animate={{ y: isHovered ? 0 : 0, opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className={cn(
+                      "inline-block rounded-full border px-4 py-1.5 text-sm font-normal backdrop-blur-md transition-all duration-500",
+                      isHovered
+                        ? "bg-gray-400/15 border-white/10 text-white/80 grayscale"
+                        : `text-white/90 ${panel.pill}`
                     )}
-                  </AnimatePresence>
-                </div>
-                <div className="absolute inset-x-0 top-0 p-4">
-                  <AnimatePresence>
-                    {!isHovered && (
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="text-xs font-bold uppercase tracking-wider text-white/70"
-                      >
-                        {panel.label}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
+                  >
+                    {panel.label}
+                  </motion.span>
                 </div>
               </motion.div>
             );

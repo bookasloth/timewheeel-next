@@ -7,8 +7,8 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function SmmFinalCta() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-20 pt-4 md:pb-24">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-black px-8 py-16 text-center text-white md:py-20">
+    <section className="w-full">
+      <Reveal className="relative overflow-hidden bg-black px-6 py-16 text-center text-white md:px-8 md:py-20">
         <div className="relative">
           <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white/85">
             <span className="size-1.5 rounded-full bg-accent-yellow" />

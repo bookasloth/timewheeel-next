@@ -108,10 +108,10 @@ export default function WebDevelopmentPage() {
           </h2>
         </div>
         <div className="grid gap-5 md:grid-cols-2">
-          <WebProjectCard title="Ticket Dino:" subtitle="Events that sell out" href="#" image="/hero/web-dev.png" accent="#3987C9" />
-          <WebProjectCard title="Book A Sloth:" subtitle="Bookings on autopilot" href="#" image="/hero/web-design.png" accent="#29a66f" />
-          <WebProjectCard title="CoffeeForMe:" subtitle="Orders, zero commission" href="#" image="/hero/social.png" accent="#f45b0a" />
-          <WebProjectCard title="The Parliament:" subtitle="Community on autopilot" href="#" image="/hero/shopify.png" accent="#ff4d93" />
+          <WebProjectCard title="Ticket Dino:" subtitle="Events that sell out" href="/case-studies/ticket-dino" image="/hero/web-dev.png" accent="#3987C9" />
+          <WebProjectCard title="Book A Sloth:" subtitle="Bookings on autopilot" href="/case-studies/book-a-sloth" image="/bookasloth.png" accent="#29a66f" />
+          <WebProjectCard title="CoffeeForMe:" subtitle="Orders, zero commission" href="/case-studies/coffee-for-me" image="/hero/social.png" accent="#f45b0a" />
+          <WebProjectCard title="The Parliament:" subtitle="Community on autopilot" href="/case-studies/the-parliament" image="/alumi.png" accent="#ff4d93" />
         </div>
 
         {/* Recent-work proof cards, stacked below the four project cards */}

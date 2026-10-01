@@ -9,7 +9,7 @@
   --text-dark: #1b1b1b;
   --text-muted: #667085;
 
-  --border-light: #ece8e3;
+  --border-light: var(--border, #ece8e3);
 
   --red: #ef4444;
   --red-soft: #fef0ee;
@@ -24,7 +24,10 @@
 
   font-family: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif,
     system-ui, sans-serif;
-  background: #ffffff;
+  background: var(--background, #f5f0e7);
+  /* Same paper grain as the site body so the section reads as one website. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-attachment: fixed;
   padding-block: 96px;
 }
 
@@ -134,12 +137,12 @@
 }
 
 .ba__card--bad {
-  background: #faf9f7;
-  border: 1px solid #eeebe6;
+  background: var(--secondary, #faf9f7);
+  border: 1px solid var(--border-light);
 }
 
 .ba__card--good {
-  background: #ffffff;
+  background: var(--card, #ffffff);
   border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border-light));
   box-shadow: var(--shadow-sm), var(--shadow-lg);
 }
@@ -291,7 +294,7 @@
   height: 48px;
   border-radius: 999px;
   border: 1px solid var(--border-light);
-  background: #ffffff;
+  background: var(--card, #ffffff);
   color: var(--accent);
   box-shadow: var(--shadow-sm);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),

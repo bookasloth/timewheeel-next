@@ -5,8 +5,8 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 export function AimFinalCta() {
   return (
-    <section className="mx-auto max-w-full px-6 py-20 md:py-28">
-      <Reveal className="relative overflow-hidden rounded-3xl text-center text-white aim-panel">
+    <section className="w-full">
+      <Reveal className="relative overflow-hidden text-center text-white aim-panel">
         <div aria-hidden className="pointer-events-none absolute inset-0 aim-dot-grid opacity-50" />
         <div
           aria-hidden
@@ -16,7 +16,7 @@ export function AimFinalCta() {
           aria-hidden
           className="pointer-events-none absolute -bottom-24 -left-16 size-72 rounded-full aim-bloom dm-drift opacity-40"
         />
-        <div className="relative px-8 pb-16 pt-20 md:pb-20 md:pt-24">
+        <div className="relative px-6 pb-16 pt-20 md:px-8 md:pb-20 md:pt-24">
           <RevealHeading as="h2" className="mx-auto max-w-3xl text-4xl font-black leading-[1.06] tracking-tight md:text-6xl">
             Ready to Put{" "}
             <span

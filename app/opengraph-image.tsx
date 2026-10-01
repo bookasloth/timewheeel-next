@@ -30,7 +30,18 @@ export default async function Image() {
             marginBottom: 36,
           }}
         >
-          <span style={{ color: "#fe5100", fontSize: 30, fontWeight: 800 }}>◆</span>
+          {/* Drawn as a rotated square, not the ◆ glyph: Satori's fallback
+              fonts do not cover U+25C6 and it fails the dynamic font fetch. */}
+          <span
+            style={{
+              display: "flex",
+              width: 18,
+              height: 18,
+              flexShrink: 0,
+              backgroundColor: "#fe5100",
+              transform: "rotate(45deg)",
+            }}
+          />
           <span style={{ fontSize: 30, fontWeight: 800, letterSpacing: 6 }}>
             TIMEWHEEL
           </span>

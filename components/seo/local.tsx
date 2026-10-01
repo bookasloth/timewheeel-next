@@ -5,6 +5,10 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const icons = [Locate, Languages, MapPin] as const;
 
+// One accent per card, from the same palette the digital-marketing and
+// client-grid sections use, so the page reads as a set.
+const ACCENTS = ["#269CEF", "#FF4D93", "#FE5100"] as const;
+
 export function SeoLocal() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
@@ -16,13 +20,28 @@ export function SeoLocal() {
       <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-3">
         {seo.local.cards.map((c, i) => {
           const Icon = icons[i % icons.length];
+          const accent = ACCENTS[i % ACCENTS.length];
           return (
-            <div key={c.title} className="rounded-2xl border border-border bg-card p-6">
-              <span className="grid size-11 place-items-center rounded-xl bg-brand/10 text-brand">
+            <div
+              key={c.title}
+              className="relative overflow-hidden rounded-2xl border border-border bg-card p-6"
+            >
+              {/* accent wash, clipped to the card. Titles stay in the default
+                  foreground: the accents are light enough to fail contrast at
+                  18px. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{ background: `radial-gradient(120% 80% at 100% 0%, ${accent}1f, transparent 60%)` }}
+              />
+              <span
+                className="relative grid size-11 place-items-center rounded-xl"
+                style={{ backgroundColor: `${accent}1a`, color: accent }}
+              >
                 <Icon className="size-5" />
               </span>
-              <h3 className="mt-4 text-lg font-bold">{c.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+              <h3 className="relative mt-4 text-lg font-bold">{c.title}</h3>
+              <p className="relative mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
             </div>
           );
         })}

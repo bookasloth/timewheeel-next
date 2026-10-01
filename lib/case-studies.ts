@@ -1,3 +1,6 @@
+import { productCaseStudies } from "./case-studies-products";
+import { clientSiteCaseStudies } from "./case-studies-clients";
+
 export type CaseStudyStat = { value: string; label: string };
 
 export type CaseStudyMeta = {
@@ -65,6 +68,10 @@ export type CaseStudy = {
 // ecosystem (lib/products.ts). To add a case study, drop a new entry in here
 // with `content` and it appears on the index plus its own
 // /case-studies/[slug] detail page driven by the generic template.
+//
+// The product-ecosystem entries live in lib/case-studies-products.ts and the
+// live client-site entries in lib/case-studies-clients.ts. Both are spread in at
+// the end of the array below.
 //
 // NOTE: the entries below are placeholder case studies added to demonstrate
 // the structure, swap them out for real client builds as they're documented.
@@ -524,6 +531,7 @@ export const caseStudies: CaseStudy[] = [
     image: null,
     tags: ["SEO", "Content", "Funnel"],
     href: "/case-studies/everything-powerlifting",
+    liveUrl: "https://everythingpowerlifting.com/",
     meta: {
       duration: "9 months",
       budget: "Ongoing retainer",
@@ -608,7 +616,9 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
   },
-  ];
+  ...productCaseStudies,
+  ...clientSiteCaseStudies,
+];
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
   return caseStudies.find((cs) => cs.slug === slug);

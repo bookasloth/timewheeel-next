@@ -21,13 +21,13 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 // Line icon + role + accent color for every node in the ecosystem.
 const NODE_META: Record<string, { icon: LucideIcon; role: string; accent: string }> = {
   SEO: { icon: Search, role: "Get found", accent: "#4AB765" },
-  "Paid Ads": { icon: Target, role: "Earn clicks", accent: "#FE5100" },
+  "Paid Ads": { icon: Target, role: "Earn clicks", accent: "#FFCC1C" },
   Content: { icon: PenLine, role: "Build trust", accent: "#FF4D93" },
   "Social Media": { icon: Share2, role: "Grow reach", accent: "#269CEF" },
   Email: { icon: Mail, role: "Nurture leads", accent: "#FFCC1C" },
   WhatsApp: { icon: MessageCircle, role: "Close conversations", accent: "#25D366" },
   Analytics: { icon: BarChart3, role: "Measure impact", accent: "#8B5CF6" },
-  Conversions: { icon: ArrowRight, role: "The one goal", accent: "#FE5100" },
+  Conversions: { icon: ArrowRight, role: "The one goal", accent: "#FFCC1C" },
 };
 
 // Channels placed around the TIMEWHEEL hub. The bottom-center spot is
@@ -58,10 +58,10 @@ function NodeCard({
   onEnter: () => void;
   onLeave: () => void;
 }) {
-  const meta = NODE_META[name] ?? { icon: Search, role: "Works together", accent: "#FE5100" };
+  const meta = NODE_META[name] ?? { icon: Search, role: "Works together", accent: "#FFCC1C" };
   const Icon = meta.icon;
   const isConversion = name === "Conversions";
-  const accent = isConversion ? "#FE5100" : meta.accent;
+  const accent = isConversion ? "#FFCC1C" : meta.accent;
   return (
     <div
       onMouseEnter={onEnter}
@@ -183,7 +183,7 @@ export function DmEcosystem() {
             {ORBIT.map(({ name, dx, dy }) => {
               const isConversion = name === "Conversions";
               const lit = active === name;
-              const accent = NODE_META[name]?.accent ?? "#FE5100";
+              const accent = NODE_META[name]?.accent ?? "#FFCC1C";
               return (
                 <line
                   key={name}
@@ -192,7 +192,7 @@ export function DmEcosystem() {
                   x2={CENTER + dx}
                   y2={CENTER + dy}
                   style={{
-                    stroke: lit ? accent : isConversion ? "#FE5100" : "#e4e4e8",
+                    stroke: lit ? accent : isConversion ? "#FFCC1C" : "#e4e4e8",
                     strokeWidth: lit ? 1.6 : 1,
                     opacity: lit ? 1 : isConversion ? 0.6 : 0.9,
                     transition:

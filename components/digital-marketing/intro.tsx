@@ -2,7 +2,7 @@ import { Reveal } from "@/components/reveal";
 import { dmIntroSteps } from "@/lib/digital-marketing";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
-const colors = ["#fe5100", "#269cef", "#4ab765", "#ff4d93", "#ffcc1c", "#fe5100"];
+const colors = ["#ffcc1c", "#269cef", "#4ab765", "#ff4d93", "#ffcc1c", "#ffcc1c"];
 const widths = ["100%", "86%", "72%", "58%", "44%", "30%"];
 
 // Premium vertical growth-path framework: Business → Strategy → Traffic →
@@ -37,7 +37,7 @@ function FunnelVisual() {
                     y1="0"
                     x2="1.5"
                     y2="100%"
-                    stroke="#fe5100"
+                    stroke="#ffcc1c"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeDasharray="24 200"

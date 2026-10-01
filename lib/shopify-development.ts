@@ -5,6 +5,16 @@
 // and an FAQ added for AI-search + rich results. Figures are illustrative.
 
 export const sd = {
+  serviceOptions: [
+    "New Shopify Store",
+    "Shopify Plus",
+    "Store Migration",
+    "Custom App Development",
+    "Headless Shopify",
+    "Theme Redesign",
+    "Maintenance & Support",
+  ],
+
   meta: {
     title: "Shopify Development Company in Nagpur | Timewheel",
     description:
@@ -58,6 +68,7 @@ export const sd = {
       { title: "Mobile First", desc: "Flawless experiences on the devices your customers use." },
       { title: "Scalable & Secure", desc: "Foundations that hold up as your traffic grows." },
       { title: "Ongoing Support", desc: "A partner after launch, not just a delivery date." },
+      { title: "Transparent Process", desc: "Fixed scope, clear timeline, and updates at every stage." },
     ],
   },
 
@@ -72,6 +83,7 @@ export const sd = {
       { title: "Subscription Stores", desc: "Recurring revenue with reliable subscription flows." },
       { title: "Multi-Store Setup", desc: "Multiple markets and brands from one clean system." },
       { title: "Custom Experiences", desc: "Product configurators and bespoke storefronts." },
+      { title: "Headless Builds", desc: "Shopify paired with a custom front end for full control." },
     ],
   },
 
@@ -79,22 +91,31 @@ export const sd = {
     label: "Our Work",
     heading: "Shopify Stores",
     headingAccent: "We've Built",
-    body: "Real problems, real solutions, measurable results. Illustrative examples of the work we do.",
+    body: "Live stores we designed and developed, running on Shopify today.",
     cards: [
-      {
-        name: "Fashion D2C Brand",
-        problem: "Slow, cluttered store with a leaking checkout.",
-        result: "Rebuilt on a custom theme, +38% conversion rate.",
+        {
+          name: "Everything Powerlifting",
+          href: "https://everythingpowerlifting.com/",
+          caseStudy: "everything-powerlifting",
+          image: "/shopify/everything-powerlifting.jpg",
+        accent: "#5e8e3e",
+        tag: "D2C fitness gear",
+        problem:
+          "Multi-brand gear store with lifting shoes, grip chalk and mouthpieces, regional pricing and trade buyers.",
+        result:
+          "Brand and category nav, wishlists, customer accounts, B2B enquiries and multi-currency checkout.",
       },
-      {
-        name: "B2B Electronics Supplier",
-        problem: "Manual wholesale ordering over email and phone.",
-        result: "Self-serve B2B portal, 60% fewer support tickets.",
-      },
-      {
-        name: "Subscription Wellness Store",
-        problem: "Migrating off a platform with poor retention tooling.",
-        result: "Shopify + subscriptions, 2.1x repeat purchase rate.",
+        {
+          name: "Leo Coffee",
+          href: "https://www.leocoffee.co.in/",
+          caseStudy: "leo-coffee",
+          image: "/shopify/leo-coffee.jpg",
+        accent: "#ff7a3d",
+        tag: "Subscription commerce",
+        problem:
+          "Specialty roaster selling pure coffee, chicory blends, decoction, instant, horeca bulk and equipment.",
+        result:
+          "Collection pages, 3 to 24 month subscriptions, horeca bulk ordering and a store locator.",
       },
     ],
   },
@@ -124,21 +145,33 @@ export const sd = {
         title: "Shopify Plus Development",
         desc: "Enterprise-grade stores with Shopify Scripts, Flow automation and custom checkout.",
         href: "/contact",
+        icon: "crown",
+        accent: "#5e8e3e",
+        points: ["Shopify Scripts & Functions", "Flow automation", "B2B & Plus checkout"],
       },
       {
         title: "Shopify Migration Services",
         desc: "Move from WooCommerce, Magento or any platform to Shopify with your data and SEO intact.",
         href: "/contact",
+        icon: "arrow-right-left",
+        accent: "#269cef",
+        points: ["Zero-downtime cutover", "301 redirect mapping", "Full data migration"],
       },
       {
         title: "Custom Development & Apps",
         desc: "Private apps, custom features and integrations built specifically for your business.",
         href: "/contact",
+        icon: "puzzle",
+        accent: "#7c4dff",
+        points: ["Private & custom apps", "ERP & CRM integrations", "Subscription logic"],
       },
       {
         title: "Headless Shopify Development",
         desc: "Ultra-fast storefronts on Hydrogen or Next.js, powered by the Storefront API.",
         href: "/contact",
+        icon: "boxes",
+        accent: "#ff7a3d",
+        points: ["Hydrogen & Next.js", "Storefront API & GraphQL", "Edge-rendered speed"],
       },
     ],
   },
@@ -148,7 +181,14 @@ export const sd = {
     heading: "Shopify Development for",
     headingAccent: "Different Industries",
     body: "Ecommerce is not one-size-fits-all. We build for the way your industry sells.",
-    items: ["Fashion", "Beauty", "Electronics", "Food & Beverage", "Healthcare", "B2B Business"],
+    items: [
+      { name: "Fashion", icon: "shirt", accent: "#ec4899" },
+      { name: "Beauty", icon: "sparkles", accent: "#7c4dff" },
+      { name: "Electronics", icon: "cpu", accent: "#269cef" },
+      { name: "Food & Beverage", icon: "utensils-crossed", accent: "#ff7a3d" },
+      { name: "Healthcare", icon: "heart-pulse", accent: "#5e8e3e" },
+      { name: "B2B Business", icon: "building-2", accent: "#0ea5e9" },
+    ],
   },
 
   tech: {
@@ -157,11 +197,42 @@ export const sd = {
     headingAccent: "Development Expertise",
     body: "The platforms, APIs and tools we connect and build with every day.",
     groups: [
-      { name: "Platform", items: ["Shopify", "Shopify Plus", "Liquid", "Shopify Functions"] },
-      { name: "APIs & Headless", items: ["Storefront API", "Admin API", "GraphQL", "Hydrogen"] },
-      { name: "Stack", items: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
-      { name: "Integrations", items: ["Payment Gateways", "CRM", "ERP", "Shipping"] },
-      { name: "Marketing & Ops", items: ["Marketing Tools", "Accounting", "WhatsApp", "Analytics"] },
+      {
+        name: "Platform",
+        icon: "layers",
+        accent: "#5e8e3e",
+        items: ["Shopify", "Shopify Plus", "Liquid", "Shopify Functions"],
+      },
+      {
+        name: "APIs & Headless",
+        icon: "code-xml",
+        accent: "#269cef",
+        items: ["Storefront API", "Admin API", "GraphQL", "Hydrogen"],
+      },
+      {
+        name: "Stack",
+        icon: "blocks",
+        accent: "#7c4dff",
+        items: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      },
+      {
+        name: "Integrations",
+        icon: "plug",
+        accent: "#ff7a3d",
+        items: ["Payment Gateways", "CRM", "ERP", "Shipping"],
+      },
+      {
+        name: "Marketing & Ops",
+        icon: "megaphone",
+        accent: "#ec4899",
+        items: ["Marketing Tools", "Accounting", "WhatsApp", "Analytics"],
+      },
+      {
+        name: "Migration Sources",
+        icon: "arrow-right-left",
+        accent: "#0ea5e9",
+        items: ["WooCommerce", "Magento", "BigCommerce", "Custom Build"],
+      },
     ],
   },
 

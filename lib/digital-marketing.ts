@@ -28,7 +28,7 @@ export const dmWhy = [
     number: "01",
     title: "Proven Track Record of Success",
     body: "Our experts have a history of delivering impressive results, helping businesses achieve higher search engine rankings and increased organic traffic.",
-    accent: "#fe5100",
+    accent: "#ffcc1c",
   },
   {
     number: "02",
@@ -58,7 +58,7 @@ export const dmServices: DmService[] = [
     tag: "Paid Advertising",
     title: "Paid Advertising",
     body: "We optimize targeted ad campaigns to reach your ideal audience, driving immediate traffic and conversions.",
-    accent: "#fe5100",
+    accent: "#ffcc1c",
   },
   {
     icon: MagnifyingGlass,
@@ -198,7 +198,7 @@ export const dmAudience = [
 ];
 
 export const dmMetrics = [
-  { label: "Organic Traffic", value: "Visits from search", accent: "#fe5100" },
+  { label: "Organic Traffic", value: "Visits from search", accent: "#ffcc1c" },
   { label: "Search Visibility", value: "Keyword reach", accent: "#4ab765" },
   { label: "Engagement", value: "Likes, clicks & shares", accent: "#ff4d93" },
   { label: "Leads", value: "Qualified enquiries", accent: "#269cef" },

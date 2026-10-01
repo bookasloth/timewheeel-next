@@ -2,10 +2,8 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { products } from "@/lib/products";
 import { site } from "@/lib/site";
-import { EstimateForm } from "@/components/estimate-form";
 
-// Site-wide footer. The coloured band and accents read `--footer-accent`
-// (falls back to --brand), so each page type can retint the footer.
+// Site-wide footer.
 
 const services = [
   { label: "SEO", href: "/seo-company-in-nagpur" },
@@ -42,19 +40,9 @@ const social = [
 ].filter((s) => s.href !== "#");
 
 
-// `accent` retints the footer per page type. When omitted it falls back to the
-// --footer-accent CSS var, then the global --brand (Timewheel orange).
-export function Footer({ accent }: { accent?: string }) {
-  const fa = accent ?? "var(--footer-accent, var(--brand))";
+export function Footer() {
   return (
     <footer className="mt-auto">
-      {/* Coloured CTA band — tint follows the current page type */}
-      <section className="text-white" style={{ background: fa }}>
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <EstimateForm accent={fa} />
-        </div>
-      </section>
-
       {/* Footer body */}
       <div className="border-t border-border/60 bg-secondary/60">
         <div className="mx-auto max-w-6xl px-6 py-14">
@@ -85,7 +73,6 @@ export function Footer({ accent }: { accent?: string }) {
 
             <div className="grid gap-10">
               <FooterCol title="Resources" links={resources} />
-              <FooterCol title="By Timewheel" links={products.slice(0, 5).map((p) => ({ label: p.name, href: p.href }))} />
             </div>
           </div>
 

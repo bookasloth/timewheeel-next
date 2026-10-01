@@ -8,7 +8,7 @@ import { OrbitRings } from "@/components/digital-marketing/dm-illustrations";
 // UI mockups only and are not claims about actual company performance.
 const floating = [
   { label: "+38% organic traffic", pos: "-top-3 -left-3", color: "#4ab765", delay: "0.2s" },
-  { label: "2.4K leads / month", pos: "top-[34%] -left-4", color: "#fe5100", delay: "0.5s" },
+  { label: "2.4K leads / month", pos: "top-[34%] -left-4", color: "#ffcc1c", delay: "0.5s" },
   { label: "ROAS 4.2x", pos: "bottom-8 -left-4", color: "#ff4d93", delay: "0.8s" },
   { label: "CTR 4.2%", pos: "-top-3 -right-3", color: "#269cef", delay: "0.4s" },
 ];
@@ -116,7 +116,7 @@ function CommandCenter() {
               </span>
             </div>
             <div className="mt-2">
-              <AreaChart color="#fe5100" />
+              <AreaChart color="#ffcc1c" />
             </div>
           </div>
 
@@ -132,7 +132,7 @@ function CommandCenter() {
                 </span>
               </div>
               <div className="mt-3 space-y-2.5">
-                <BarRow label="CTR" value="4.2%" color="#fe5100" pct="82%" />
+                <BarRow label="CTR" value="4.2%" color="#ffcc1c" pct="82%" />
                 <BarRow label="CPC" value="₹12" color="#269cef" pct="58%" />
                 <BarRow label="Conv." value="9%" color="#4ab765" pct="74%" />
               </div>
@@ -147,7 +147,7 @@ function CommandCenter() {
               <div className="mt-3 space-y-2.5">
                 <BarRow label="Organic traffic" value="82%" color="#4ab765" pct="82%" />
                 <BarRow label="Site authority" value="68%" color="#269cef" pct="68%" />
-                <BarRow label="Keyword coverage" value="58%" color="#fe5100" pct="58%" />
+                <BarRow label="Keyword coverage" value="58%" color="#ffcc1c" pct="58%" />
               </div>
             </div>
           </div>
@@ -194,7 +194,7 @@ export function DmHero() {
                 className="dm-gradient-text"
                 style={{
                   backgroundImage:
-                    "linear-gradient(90deg, #fe5100, #ff4d93, #ffcc1c, #fe5100)",
+                    "linear-gradient(90deg, #ffcc1c, #ff4d93, #ffcc1c, #ffcc1c)",
                 }}
               >
                 Digital Marketing

@@ -32,7 +32,6 @@ export function SmmFaq() {
                 )}
                 style={isOpen ? { borderColor: `${item.tone}66` } : undefined}
               >
-                <span aria-hidden className={cn("block h-[3px] bg-transparent transition-colors duration-300", isOpen && "bg-gradient-to-r from-brand via-accent-pink to-accent-yellow")} />
                 <h3>
                   <button
                     type="button"
@@ -42,10 +41,7 @@ export function SmmFaq() {
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="flex w-full items-center gap-4 px-6 py-5 text-left text-base font-semibold"
                   >
-                    <span
-                      className="grid size-7 shrink-0 place-items-center rounded-lg text-xs font-black tracking-tight"
-                      style={{ backgroundColor: `${item.tone}1a`, color: item.tone }}
-                    >
+                    <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-brand/10 text-xs font-black tracking-tight text-brand">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="flex-1">{item.q}</span>

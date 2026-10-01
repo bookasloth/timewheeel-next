@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
-import { PmHeroCentered } from "@/components/perf-marketing/hero-centered";
+import { DmCinematicHero } from "@/components/digital-marketing/cinematic-hero";
 import { PmTrust } from "@/components/perf-marketing/trust";
 import { PmIntro } from "@/components/perf-marketing/intro";
 import { PmWhy } from "@/components/perf-marketing/why";
@@ -14,6 +14,7 @@ import { PmFinalCta } from "@/components/perf-marketing/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { dmServiceOptions } from "@/lib/digital-marketing2";
+import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
 
 export const metadata: Metadata = {
   title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
@@ -140,7 +141,7 @@ export default function DigitalMarketing2Page() {
           ),
         }}
       />
-      <PmHeroCentered />
+      <DmCinematicHero />
       <PmTrust />
       <PmIntro />
       <PmWhy />
@@ -148,6 +149,7 @@ export default function DigitalMarketing2Page() {
       <PmAudience />
       <PmEcosystem />
       <PmTestimonials />
+      <SmmCollaborators />
       <PmFaq />
       <PmFinalCta />
       <div id="lead">

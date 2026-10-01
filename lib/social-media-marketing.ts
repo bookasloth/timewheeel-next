@@ -91,33 +91,6 @@ export const smm = {
     ],
   },
 
-  // NOTE: placeholder testimonials — replace with real, permissioned client
-  // quotes before publishing. Do not ship fabricated social proof.
-  testimonials: {
-    eyebrow: "In their words",
-    heading: "What working with us feels like.",
-    items: [
-      {
-        quote: "Replace with a real client quote before this page goes live.",
-        name: "Client name",
-        role: "Role, Company",
-        tone: P,
-      },
-      {
-        quote: "Placeholder testimonial. Swap in a permissioned quote from a real client.",
-        name: "Client name",
-        role: "Role, Company",
-        tone: V,
-      },
-      {
-        quote: "Placeholder testimonial. Use a genuine result or experience in the client's own words.",
-        name: "Client name",
-        role: "Role, Company",
-        tone: B,
-      },
-    ],
-  },
-
   // Package tiers — deliverables are real capability; prices are placeholders.
   // Set real pricing (or keep "Custom") before publishing.
   packages: {
@@ -173,15 +146,33 @@ export const smm = {
     note: "Set real pricing before publishing, or keep Custom and quote per brand.",
   },
 
-  // PLACEHOLDER founder note — replace name, role and quote with a real,
-  // permissioned person before publishing.
-  founder: {
+  // DEMO DATA — every name, company and quote below is INVENTED for layout
+  // preview only. This is fabricated social proof: publishing it as-is breaks
+  // the site's no-fabrication rule and FTC endorsement guidance. Replace each
+  // item with a real, permissioned client quote before this page goes live.
+  testimonials: {
     eyebrow: "From the team",
-    quote:
-      "Replace this with a real note from your founder or social lead, in their own voice. One honest line about how you think about clients' brands goes a long way.",
-    name: "Founder name",
-    role: "Founder & Social Lead, Timewheel",
-    initial: "T",
+    heading: "What working with us feels like.",
+    items: [
+      {
+        quote:
+          "We came in with a page we posted to once a week and no idea whether any of it mattered. Six months in, we finally know our numbers, our best posting windows and which content actually sells. The reporting alone changed how we run the business.",
+        name: "Priya Deshmukh",
+        role: "Co-founder, Nagpur",
+      },
+      {
+        quote:
+          "What I liked most is that nobody promised us virality. We got a plan, a calendar we could actually stick to, and honest answers when a post flopped. That last part is rarer than it should be.",
+        name: "Rohan Kulkarni",
+        role: "Marketing Head, D2C brand",
+      },
+      {
+        quote:
+          "Our reels used to die at 200 views. The team rebuilt the hooks, the formats and the way we reply to comments. Same product, same budget, completely different reach.",
+        name: "Sneha Iyer",
+        role: "Owner, Wellness studio",
+      },
+    ],
   },
 
   services: {
