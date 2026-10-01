@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { ChallengeForm } from "@/components/challenge/challenge-form";
 import { WebsitesShowcase } from "@/components/challenge/websites-showcase";
-import { CraftScroll } from "@/components/challenge/craft-scroll";
 import { site } from "@/lib/site";
 import { countLeadsBySource } from "@/lib/supabase-leads";
 import { Sparkles, PencilRuler, Rocket, Check } from "lucide-react";
@@ -154,8 +153,6 @@ export default async function ChallengePage() {
           </div>
         </div>
       </section>
-
-      <CraftScroll />
 
       {/* Join */}
       <section id="join" className="bg-secondary/60">
