@@ -1,0 +1,24 @@
+-- Phase 2b: lifecycle emails (delivered / upsell).
+-- Run once in the Supabase SQL Editor for project nefmwittrybufjqhpxip.
+--
+-- 1) Adds `delivered_url` so the team can record the live site URL; it is included
+--    in the "Your website is live" email when the status moves to `delivered`.
+alter table public.leads add column if not exists delivered_url text;
+
+-- 2) Wire the Database Webhook (no SQL needed, done in the dashboard):
+--    Supabase dashboard -> Database -> Webhooks -> "Create a new hook"
+--      Name:        lead-lifecycle
+--      Table:       public.leads
+--      Events:      Update
+--      Type:        HTTP Request
+--      Method:      POST
+--      URL:         https://timewheel.co.in/api/lifecycle
+--      HTTP Headers: add  x-lifecycle-secret : <same value as LIFECYCLE_SECRET on Vercel>
+--    Supabase posts { type, table, record, old_record } to the route; the route
+--    sends the stage email only when `status` actually changed to delivered/upsell.
+--
+-- Team workflow after setup:
+--   - Change a lead's `status` to `delivered` (and paste the live site URL into
+--     `delivered_url`)  -> "Your website is live" email is sent.
+--   - Change `status` to `upsell`                                -> upsell email is sent.
+--   - `new`, `contacted`, `won`, `lost` send nothing.
