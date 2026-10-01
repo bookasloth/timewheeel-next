@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
       { source: "/web-development-company-in-india", destination: "/web-development-company-in-nagpur", permanent: true },
       { source: "/digital-marketing2", destination: "/digital-marketing-company-in-nagpur", permanent: true },
       { source: "/performance-marketing-company-in-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
+      // Free-website offer consolidated onto the 30-days challenge page.
+      { source: "/free-website-nagpur", destination: "/30-days-30-websites", permanent: true },
     ];
   },
   images: {

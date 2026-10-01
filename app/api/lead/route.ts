@@ -274,10 +274,10 @@ export async function POST(request: Request) {
     await syncLeadContact({ email: l.email, name: l.name, source: l.source });
   }
 
-  // 1c) Welcome email to the lead (free-website Nagpur campaign only, so other
-  //     flows don't get a "free website" message). Transactional confirmation of
-  //     what they requested, so it goes to all such leads. Best-effort.
-  if (l.source === "free-website-nagpur") {
+  // 1c) Welcome email to the lead for the free-website offer (the 30-days
+  //     challenge), so other flows (contact, SEO audit) don't get it. A
+  //     transactional confirmation of what they requested. Best-effort.
+  if (l.source === "30-days-challenge" || l.source === "free-website-nagpur") {
     await sendWelcomeEmail({ to: l.email, name: l.name });
   }
 

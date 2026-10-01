@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
+import { getAttribution } from "@/lib/attribution";
 import { ArrowRight, CheckCircle2, PartyPopper, User, Mail, Phone, Globe, PencilLine } from "lucide-react";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
@@ -58,6 +59,7 @@ export function ChallengeForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const [consent, setConsent] = useState(false);
   const ft = useFormTracking("30-day-challenge");
 
   function set(field: FieldName, value: string) {
@@ -84,6 +86,8 @@ export function ChallengeForm() {
           budget: form.values.budget.trim() === "0" ? "Free (₹0)" : `₹${form.values.budget.trim()}`,
           service: "30 Day Website Challenge",
           source: "30-days-challenge",
+          marketing_consent: consent,
+          attribution: getAttribution(),
           company_website: honeypot,
         }),
       });
@@ -234,6 +238,19 @@ export function ChallengeForm() {
           {form.errors.message && <p className="mt-1.5 text-xs text-destructive">{form.errors.message}</p>}
         </div>
       </div>
+
+      <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm text-muted-foreground">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => { ft.onInteract(); setConsent(e.target.checked); }}
+          className="mt-0.5 size-4 shrink-0 rounded border-border accent-brand"
+        />
+        <span>
+          Keep me posted about offers and services that could help me grow (website upgrades, SEO, marketing).
+          You can opt out any time.
+        </span>
+      </label>
 
       <motion.button
         type="submit" disabled={status === "submitting"} whileTap={{ scale: 0.98 }}
