@@ -11,15 +11,15 @@
 -- 1) Column for the live site URL, used in the "Your website is live" email.
 alter table public.leads add column if not exists delivered_url text;
 
--- 2) pg_net (HTTP from Postgres).
-create extension if not exists pg_net with schema extensions;
+-- 2) pg_net (HTTP from Postgres). Plain create: in Supabase pg_net lives in the
+--    `net` schema and is called as net.http_post; do NOT force `with schema ...`.
+create extension if not exists pg_net;
 
 -- 3) On status change to delivered/upsell, POST the lead to /api/lifecycle.
 create or replace function public.notify_lead_lifecycle()
 returns trigger
 language plpgsql
 security definer
-set search_path = public, extensions
 as $$
 begin
   if new.status is distinct from old.status
