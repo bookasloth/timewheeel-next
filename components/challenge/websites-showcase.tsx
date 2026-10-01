@@ -4,13 +4,17 @@ import { Reveal } from "@/components/reveal";
 import { projects } from "@/components/about/work";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
-// "Real websites, really shipped" as a 5 x 6 grid of 30 spots (the challenge is
-// 30 websites). First cell is the "add your website here" CTA that jumps to the
-// form; then the sites already shipped; the rest are open spots.
-const GRID_TOTAL = 30;
-
-export function WebsitesShowcase() {
-  const openSpots = Math.max(0, GRID_TOTAL - 1 - projects.length);
+// "Real websites, really shipped" as a grid of `total` spots (the challenge is
+// 30 websites). Cell 1 is the "add your website here" CTA that jumps to the form;
+// then the sites already shipped; then "claimed" spots driven by the live lead
+// count; then the remaining open spots. Wired to the same counter as the hero, so
+// as people submit, open spots turn into claimed ones.
+export function WebsitesShowcase({ filled = 0, total = 30 }: { filled?: number; total?: number }) {
+  const nonCta = Math.max(0, total - 1); // the CTA takes one cell
+  const built = Math.min(projects.length, nonCta); // real shipped sites (always shown)
+  const claimed = Math.min(filled, nonCta); // live signups, capped to the grid
+  const reserved = Math.max(0, claimed - built); // claimed but not yet built
+  const open = Math.max(0, nonCta - built - reserved);
 
   return (
     <section className="border-b border-border/60">
@@ -40,7 +44,7 @@ export function WebsitesShowcase() {
           </Link>
 
           {/* shipped sites */}
-          {projects.map((p) => (
+          {projects.slice(0, built).map((p) => (
             <Link
               key={p.name}
               href={p.href}
@@ -57,10 +61,21 @@ export function WebsitesShowcase() {
             </Link>
           ))}
 
-          {/* open spots */}
-          {Array.from({ length: openSpots }).map((_, i) => (
+          {/* claimed spots (live signups beyond what's shipped) */}
+          {Array.from({ length: reserved }).map((_, i) => (
             <div
-              key={i}
+              key={`claimed-${i}`}
+              className="flex aspect-[4/3] flex-col items-center justify-center gap-1.5 rounded-xl border border-brand/25 bg-brand/5"
+            >
+              <span className="size-2 animate-pulse rounded-full bg-brand" />
+              <span className="text-[10px] font-bold uppercase tracking-wider text-brand-text/70">Claimed</span>
+            </div>
+          ))}
+
+          {/* open spots */}
+          {Array.from({ length: open }).map((_, i) => (
+            <div
+              key={`open-${i}`}
               className="flex aspect-[4/3] items-center justify-center rounded-xl border border-dashed border-border bg-secondary/30"
             >
               <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/50">

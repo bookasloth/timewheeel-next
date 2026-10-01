@@ -133,7 +133,7 @@ export default async function ChallengePage() {
         </div>
       </section>
 
-      <WebsitesShowcase />
+      <WebsitesShowcase filled={filled} total={TOTAL} />
 
       {/* How it works */}
       <section className="border-b border-border/60">
