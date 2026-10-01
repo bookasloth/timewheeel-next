@@ -7,6 +7,10 @@ export const EVENTS = {
   PAGE_VIEWED: "page_viewed",
   // submitted any lead form (challenge, estimate, audit, blueprint, contact)
   LEAD_CAPTURED: "lead_captured", // → Meta 'Lead', GA4 'generate_lead'
+  // form lifecycle (retargeting: started-but-not-submitted, abandonment funnels)
+  FORM_STARTED: "form_started", // first real interaction with a lead form
+  FORM_ABANDONED: "form_abandoned", // left with a partially filled, unsubmitted form
+  FORM_FIELD_ERROR: "form_field_error", // a field failed validation on submit
   // high-intent clicks (GTM also catches these via click triggers)
   BOOK_DEMO_CLICKED: "book_demo_clicked",
   CONTACT_WHATSAPP: "contact_whatsapp",

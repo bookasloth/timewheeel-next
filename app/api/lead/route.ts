@@ -8,6 +8,8 @@ import {
   renderReportEmailText,
 } from "@/lib/lead-email";
 import { site } from "@/lib/site";
+import { saveLead } from "@/lib/supabase-leads";
+import type { Attribution } from "@/lib/attribution";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
 // lives in the repo. Required env:
@@ -26,6 +28,14 @@ type Lead = {
   message?: string;
   source?: string;
   budget?: string; // "name your price" from the 30-day challenge; free text
+
+  // Qualification fields (free-website Nagpur campaign + richer forms).
+  category?: string; // business category, for later service targeting
+  location?: string; // area / locality (Nagpur campaign)
+  marketing_consent?: boolean; // explicit opt-in for future marketing contact
+  // First-touch attribution from the client (lib/attribution). Falls back to the
+  // tw_attribution cookie server-side when the body omits it.
+  attribution?: Attribution;
 
   company_website?: string; // honeypot, humans never see or fill this
   // Optional: also email the lead their SEO report link (audit "get fixes" flow).
@@ -52,6 +62,34 @@ function limited(ip: string): boolean {
 
 function clean(s: unknown): string {
   return typeof s === "string" ? s.trim().slice(0, 2000) : "";
+}
+
+// Merge client-sent attribution with the tw_attribution cookie (client wins).
+// Every value is string-cleaned and length-capped before it touches the DB.
+function resolveAttribution(fromBody: Attribution | undefined, cookieHeader: string | null): Attribution {
+  let fromCookie: Attribution = {};
+  const raw = cookieHeader ? /(?:^|;\s*)tw_attribution=([^;]+)/.exec(cookieHeader)?.[1] : undefined;
+  if (raw) {
+    try {
+      fromCookie = JSON.parse(decodeURIComponent(raw)) as Attribution;
+    } catch {
+      /* malformed cookie — ignore */
+    }
+  }
+  const merged = { ...fromCookie, ...(fromBody ?? {}) };
+  const out: Attribution = {};
+  for (const [k, v] of Object.entries(merged)) {
+    if (typeof v === "string" && v.trim()) out[k as keyof Attribution] = v.trim().slice(0, 200);
+  }
+  return out;
+}
+
+// One-line human summary for the notification email (source/medium/campaign).
+function summarizeCampaign(a: Attribution): string {
+  const parts = [a.utm_source, a.utm_medium, a.utm_campaign].filter(Boolean);
+  const base = parts.length ? parts.join(" / ") : "";
+  const click = a.gclid ? " · gclid" : a.fbclid ? " · fbclid" : "";
+  return base ? base + click : click ? click.replace(/^ · /, "") : "";
 }
 
 // ── Meta Conversions API (server-side 'Lead') ────────────────────────────────
@@ -192,11 +230,24 @@ export async function POST(request: Request) {
     service: clean(body.service),
     message: clean(body.message),
     budget: clean(body.budget) || undefined,
+    category: clean(body.category) || undefined,
+    location: clean(body.location) || undefined,
+    consent: typeof body.marketing_consent === "boolean" ? body.marketing_consent : undefined,
     source: clean(body.source) || "website",
     when: new Date().toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short",
     }) + " IST",
   };
+
+  // First-touch attribution: trust the client body, else recover from the
+  // tw_attribution cookie this browser set on its first visit.
+  const attribution = resolveAttribution(body.attribution, request.headers.get("cookie"));
+  const campaign = summarizeCampaign(attribution);
+
+  // Shared event id so the browser Meta pixel 'Lead' de-dupes against the
+  // server CAPI 'Lead' and the stored row ties to both. Generated up front so
+  // it is persisted with the lead, not only used for tracking.
+  const eventId = crypto.randomUUID();
 
   // Admin-only: full findings + exact fixes, capped and cleaned.
   const findings = Array.isArray(body.findings)
@@ -207,7 +258,30 @@ export async function POST(request: Request) {
         recommendation: clean(f.recommendation),
       }))
     : undefined;
-  const teamEmail = { ...l, findings };
+  const teamEmail = { ...l, campaign: campaign || undefined, findings };
+
+  // Persist the lead (authoritative store). Best-effort: a DB failure must not
+  // cost us the lead, the notification email below is the backup path.
+  await saveLead(
+    {
+      name: l.name,
+      business: l.business,
+      email: l.email,
+      phone: l.phone,
+      website: l.website || undefined,
+      service: l.service,
+      message: l.message,
+      budget: l.budget,
+      category: l.category,
+      location: l.location,
+      marketing_consent: l.consent,
+      source: l.source,
+      event_id: eventId,
+      ip: ip !== "unknown" ? ip : undefined,
+      user_agent: request.headers.get("user-agent") || undefined,
+    },
+    attribution,
+  );
 
   try {
     await transporter.sendMail({
@@ -262,7 +336,6 @@ export async function POST(request: Request) {
 
     // Fire the server-side Meta CAPI 'Lead' (deduped with the browser pixel on
     // eventId). Best-effort: never fail the request over ad tracking.
-    const eventId = crypto.randomUUID();
     await sendMetaCapiLead({
       eventId,
       email: l.email,

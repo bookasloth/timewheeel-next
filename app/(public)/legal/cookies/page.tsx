@@ -100,9 +100,39 @@ export default function CookiesPage() {
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-3 pr-6 font-mono text-xs">_ga / _gid</td>
-                <td className="py-3 pr-6">Google Analytics, anonymous usage stats</td>
+                <td className="py-3 pr-6">Google Analytics (via Google Tag Manager), anonymous usage stats</td>
                 <td className="py-3 pr-6">2 years / 24 hours</td>
                 <td className="py-3">Analytics</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <td className="py-3 pr-6 font-mono text-xs">_fbp / _fbc</td>
+                <td className="py-3 pr-6">Meta (Facebook) Pixel, measures ad performance and builds retargeting audiences</td>
+                <td className="py-3 pr-6">90 days</td>
+                <td className="py-3">Marketing</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <td className="py-3 pr-6 font-mono text-xs">_clck / _clsk</td>
+                <td className="py-3 pr-6">Microsoft Clarity, heatmaps and session replay to improve usability</td>
+                <td className="py-3 pr-6">1 year / session</td>
+                <td className="py-3">Analytics</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <td className="py-3 pr-6 font-mono text-xs">ph_* (PostHog)</td>
+                <td className="py-3 pr-6">PostHog, first-party product analytics (how our pages and forms are used)</td>
+                <td className="py-3 pr-6">1 year</td>
+                <td className="py-3">Analytics</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <td className="py-3 pr-6 font-mono text-xs">tw_attribution</td>
+                <td className="py-3 pr-6">Remembers which campaign brought you here, so enquiries are attributed correctly. No personal data.</td>
+                <td className="py-3 pr-6">90 days</td>
+                <td className="py-3">Marketing</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <td className="py-3 pr-6 font-mono text-xs">tw_marketing_consent</td>
+                <td className="py-3 pr-6">Stores your cookie-consent choice so marketing tools load only if you accept</td>
+                <td className="py-3 pr-6">1 year</td>
+                <td className="py-3">Essential</td>
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-3 pr-6 font-mono text-xs">theme_pref</td>
@@ -121,9 +151,12 @@ export default function CookiesPage() {
         </h2>
         <p>
           Some cookies are placed by third-party services embedded in our pages.
-          These include analytics providers and payment processors. We do not
-          control these third-party cookies. Please refer to the respective
-          third party&apos;s privacy policy for more information.
+          These include Google Analytics and Google Tag Manager, the Meta
+          (Facebook) Pixel, Microsoft Clarity, PostHog and payment processors. The
+          Meta Pixel, Google Analytics, Google Tag Manager and Microsoft Clarity
+          load only after you accept marketing cookies. We do not control these
+          third-party cookies. Please refer to the respective third party&apos;s
+          privacy policy for more information.
         </p>
       </section>
 

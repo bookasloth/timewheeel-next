@@ -6,6 +6,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { analytics, initAnalytics, EVENTS } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 let booted = false;
 
@@ -15,6 +16,9 @@ export function AnalyticsBridge() {
   useEffect(() => {
     if (booted) return;
     booted = true;
+    // First-touch attribution: capture utm_*/gclid/fbclid/referrer before the
+    // first ad param is lost to navigation. First-party, so it runs pre-consent.
+    captureAttribution();
     const boot = () => initAnalytics();
     const ric = (window as unknown as { requestIdleCallback?: (cb: () => void) => void })
       .requestIdleCallback;

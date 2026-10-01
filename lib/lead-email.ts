@@ -20,6 +20,12 @@ export type LeadEmail = {
   when: string;
   // Challenge signups name their own price (₹0+). Only set for that flow.
   budget?: string;
+  // Qualification fields (free-website campaign + richer lead forms).
+  category?: string;
+  location?: string;
+  consent?: boolean;
+  // One-line campaign summary built from first-touch attribution, when present.
+  campaign?: string;
   // Admin-only: the full audit findings + exact fixes. Never shown in the
   // public report; the team gets them here to action the lead.
   findings?: LeadFinding[];
@@ -70,7 +76,11 @@ export function renderLeadEmailHtml(l: LeadEmail): string {
             ${row("Phone", `<a href="tel:${esc(l.phone)}" style="color:${brand};text-decoration:none">${esc(l.phone)}</a>`)}
             ${row("Website", websiteCell)}
             ${row("Service", esc(l.service))}
+            ${l.category ? row("Category", esc(l.category)) : ""}
+            ${l.location ? row("Location", esc(l.location)) : ""}
             ${l.budget ? row("Their price", `<strong style="color:${brand}">${esc(l.budget)}</strong>`) : ""}
+            ${typeof l.consent === "boolean" ? row("Marketing consent", l.consent ? `<strong style="color:#29a66f">Yes</strong>` : `<span style="color:${muted}">No</span>`) : ""}
+            ${l.campaign ? row("Campaign", esc(l.campaign)) : ""}
           </table>
         </td></tr>
         <tr><td style="padding:20px 28px 4px">
@@ -185,7 +195,11 @@ export function renderLeadEmailText(l: LeadEmail): string {
     `Phone:    ${l.phone}`,
     `Website:  ${l.website || "–"}`,
     `Service:  ${l.service}`,
+    ...(l.category ? [`Category: ${l.category}`] : []),
+    ...(l.location ? [`Location: ${l.location}`] : []),
     ...(l.budget ? [`Price:    ${l.budget}`] : []),
+    ...(typeof l.consent === "boolean" ? [`Consent:  ${l.consent ? "Yes" : "No"}`] : []),
+    ...(l.campaign ? [`Campaign: ${l.campaign}`] : []),
     `When:     ${l.when}`,
     "",
     "Message:",

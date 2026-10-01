@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     ...getAllSlugs().map((slug) => `/blog/${slug}`),
     ...getAllTags().map((tag) => `/blog/tag/${slugify(tag)}`),
+    "/free-website-nagpur",
     "/digital-marketing",
     "/digital-marketing-company-in-nagpur",
     "/restaurant-marketing",

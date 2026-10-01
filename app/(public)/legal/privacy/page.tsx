@@ -114,8 +114,15 @@ export default function PrivacyPage() {
             Third-party payment gateways that process transactions securely.
           </li>
           <li>
-            <span className="font-medium text-foreground">Analytics:</span>{" "}
-            Privacy-focused analytics tools to understand usage patterns.
+            <span className="font-medium text-foreground">Analytics &amp; Advertising:</span>{" "}
+            Analytics and ad-measurement tools to understand usage and measure
+            campaigns, including Google Analytics and Google Tag Manager, the Meta
+            (Facebook) Pixel and Conversions API, Microsoft Clarity and PostHog.
+            The Meta Pixel, Google Analytics, Google Tag Manager and Microsoft
+            Clarity load only after you accept marketing cookies. We share hashed
+            contact details with Meta via its Conversions API to measure ad
+            conversions; we never share your raw email or phone with analytics or
+            ad platforms.
           </li>
           <li>
             <span className="font-medium text-foreground">

@@ -4,6 +4,7 @@
 // eventId, we pass it through so the browser Meta hit de-dupes against the
 // server-side Conversions API hit (same event_id).
 import { analytics, EVENTS } from "@/lib/analytics";
+import { getAttribution } from "@/lib/attribution";
 
 export function trackLead(
   source: string,
@@ -12,11 +13,15 @@ export function trackLead(
   if (typeof window === "undefined") return;
   const { eventId, ...rest } = extra ?? {};
   const idProp = eventId ? { event_id: eventId } : {};
+  // Campaign dimensions on every conversion so GA4/Meta/PostHog can break the
+  // funnel down by utm_source/campaign etc. First touch, never overwritten.
+  const attr = getAttribution();
 
   // GA4 via GTM: the existing generate_lead trigger + GA4 event tag read this.
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: "generate_lead", form_source: source, ...rest, ...idProp });
+  window.dataLayer.push({ event: "generate_lead", form_source: source, ...attr, ...rest, ...idProp });
 
   // Meta Pixel 'Lead' (+ PostHog, Clarity) through the bus, deduped on event_id.
-  analytics.track(EVENTS.LEAD_CAPTURED, { form_source: source, ...rest, ...idProp });
+  analytics.track(EVENTS.LEAD_CAPTURED, { form_source: source, ...attr, ...rest, ...idProp });
 }
+
