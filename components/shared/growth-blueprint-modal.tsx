@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { trackLead } from "@/lib/track";
+import { useFormTracking } from "@/hooks/use-form-tracking";
 
 // Full-screen "Startup Growth Blueprint" lead quiz. Reusable across service
 // pages: pass `service` (goes to /api/lead) and optional `intro` heading.
@@ -57,9 +58,13 @@ export function GrowthBlueprintModal({ service, intro }: Props) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const ft = useFormTracking("growth-blueprint");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const set = (k: keyof Answers, v: string) => setA((p) => ({ ...p, [k]: v }));
+  const set = (k: keyof Answers, v: string) => {
+    ft.onInteract();
+    setA((p) => ({ ...p, [k]: v }));
+  };
   const pick = (k: keyof Answers, v: string) => { set(k, v); next(); };
   const next = () => setStep((s) => Math.min(s + 1, STEPS));
 
@@ -223,6 +228,7 @@ void main(){
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) { setStatus("error"); setErrorMsg(data?.error ?? "Something went wrong. Please try again."); return; }
+      ft.onSubmitted();
       setStatus("success");
       trackLead("growth-blueprint", { service, value: a.budget, eventId: data?.eventId });
     } catch { setStatus("error"); setErrorMsg("Network error, please try again."); }

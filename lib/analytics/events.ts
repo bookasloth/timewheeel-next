@@ -11,6 +11,9 @@ export const EVENTS = {
   FORM_STARTED: "form_started", // first real interaction with a lead form
   FORM_ABANDONED: "form_abandoned", // left with a partially filled, unsubmitted form
   FORM_FIELD_ERROR: "form_field_error", // a field failed validation on submit
+  // engagement (retargeting: "visited + actually read" vs bounced)
+  SCROLL_50: "scroll_50", // scrolled at least halfway down a page
+  ENGAGED_30S: "engaged_30s", // 30s of active (visible) time on a page
   // high-intent clicks (GTM also catches these via click triggers)
   BOOK_DEMO_CLICKED: "book_demo_clicked",
   CONTACT_WHATSAPP: "contact_whatsapp",

@@ -9,11 +9,11 @@
 // Full form lifecycle is tracked for retargeting: form_started (first touch),
 // form_field_error (validation), form_abandoned (left partial + unsubmitted),
 // lead_captured (success, with first-touch attribution).
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { trackLead } from "@/lib/track";
 import { getAttribution } from "@/lib/attribution";
-import { analytics, EVENTS } from "@/lib/analytics";
+import { useFormTracking } from "@/hooks/use-form-tracking";
 
 type FieldName = "name" | "business" | "phone" | "email" | "category" | "location" | "website" | "message";
 
@@ -77,39 +77,11 @@ export function FreeWebsiteForm() {
   const [errorMsg, setErrorMsg] = useState("");
   const [honeypot, setHoneypot] = useState("");
 
-  // Form lifecycle tracking state (refs so handlers read live values).
-  const started = useRef(false);
-  const submitted = useRef(false);
-  const touched = useRef(false);
-
-  function markStarted() {
-    if (started.current) return;
-    started.current = true;
-    analytics.track(EVENTS.FORM_STARTED, { form_source: SOURCE, ...getAttribution() });
-  }
-
-  // Fire form_abandoned once if the visitor started but never submitted.
-  useEffect(() => {
-    const onLeave = () => {
-      if (started.current && !submitted.current && touched.current) {
-        submitted.current = true; // guard against double-fire
-        analytics.track(EVENTS.FORM_ABANDONED, { form_source: SOURCE, ...getAttribution() });
-      }
-    };
-    const onVis = () => {
-      if (document.visibilityState === "hidden") onLeave();
-    };
-    document.addEventListener("visibilitychange", onVis);
-    window.addEventListener("pagehide", onLeave);
-    return () => {
-      document.removeEventListener("visibilitychange", onVis);
-      window.removeEventListener("pagehide", onLeave);
-    };
-  }, []);
+  // Shared funnel tracking: form_started / form_field_error / form_abandoned.
+  const ft = useFormTracking(SOURCE);
 
   function set(field: FieldName, value: string) {
-    touched.current = true;
-    markStarted();
+    ft.onInteract();
     setForm((f) => ({ values: { ...f.values, [field]: value }, errors: { ...f.errors, [field]: undefined } }));
   }
 
@@ -118,10 +90,7 @@ export function FreeWebsiteForm() {
     const errors = validate(form.values);
     if (Object.keys(errors).length) {
       setForm((f) => ({ ...f, errors }));
-      analytics.track(EVENTS.FORM_FIELD_ERROR, {
-        form_source: SOURCE,
-        fields: Object.keys(errors).join(","),
-      });
+      ft.onErrors(Object.keys(errors));
       return;
     }
     setStatus("submitting");
@@ -152,7 +121,7 @@ export function FreeWebsiteForm() {
         setErrorMsg(data?.error ?? "Something went wrong. Please try again.");
         return;
       }
-      submitted.current = true;
+      ft.onSubmitted();
       setStatus("success");
       trackLead(SOURCE, { service: SERVICE, eventId: data?.eventId });
     } catch {
@@ -269,7 +238,7 @@ export function FreeWebsiteForm() {
           type="checkbox"
           checked={consent}
           onChange={(e) => {
-            markStarted();
+            ft.onInteract();
             setConsent(e.target.checked);
           }}
           className="mt-0.5 size-4 shrink-0 rounded border-border accent-brand"

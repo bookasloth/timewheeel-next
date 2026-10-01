@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowLeft, Loader2, MailCheck, ArrowRight } from "lucide-react";
 import { trackLead } from "@/lib/track";
+import { useFormTracking } from "@/hooks/use-form-tracking";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
 type Finding = { title: string; severity: string; category: string; recommendation: string };
@@ -24,6 +25,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
   const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
+  const ft = useFormTracking("seo-audit");
 
   const site = domain || "your site";
 
@@ -32,6 +34,9 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
     if (!name.trim() || !email.trim() || !phone.trim()) {
       setStatus("error");
       setError("Please fill in your name, email and phone.");
+      ft.onErrors(
+        [["name", name], ["email", email], ["phone", phone]].filter(([, v]) => !v.trim()).map(([k]) => k as string),
+      );
       return;
     }
     setStatus("submitting");
@@ -66,6 +71,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         setError(data?.error ?? "Something went wrong. Please try again.");
         return;
       }
+      ft.onSubmitted();
       setStatus("success");
       trackLead("seo-audit", { service: "SEO", eventId: data?.eventId });
     } catch {
@@ -127,7 +133,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => { ft.onInteract(); setName(e.target.value); }}
           placeholder="Your name"
           aria-label="Your name"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-brand/50"
@@ -135,7 +141,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => { ft.onInteract(); setEmail(e.target.value); }}
           placeholder="Your email"
           aria-label="Your email"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-brand/50"
@@ -143,7 +149,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         <input
           type="tel"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => { ft.onInteract(); setPhone(e.target.value); }}
           placeholder="Phone (+91…)"
           aria-label="Your phone"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-brand/50"

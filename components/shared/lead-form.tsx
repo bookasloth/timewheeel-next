@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Clock, Globe, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
 import { trackLead } from "@/lib/track";
+import { useFormTracking } from "@/hooks/use-form-tracking";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
@@ -62,14 +63,16 @@ export function LeadForm(p: Props) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [honeypot, setHoneypot] = useState("");
+  const ft = useFormTracking(p.source);
 
   function set(field: FieldName, value: string) {
+    ft.onInteract();
     setForm((f) => ({ values: { ...f.values, [field]: value }, errors: { ...f.errors, [field]: undefined } }));
   }
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const errors = validate(form.values);
-    if (Object.keys(errors).length) { setForm((f) => ({ ...f, errors })); return; }
+    if (Object.keys(errors).length) { setForm((f) => ({ ...f, errors })); ft.onErrors(Object.keys(errors)); return; }
     setStatus("submitting");
     setErrorMsg("");
     try {
@@ -84,6 +87,7 @@ export function LeadForm(p: Props) {
         setErrorMsg(data?.error ?? "Something went wrong. Please try again.");
         return;
       }
+      ft.onSubmitted();
       setStatus("success");
       trackLead(p.source, { service: form.values.service, eventId: data?.eventId });
     } catch {
