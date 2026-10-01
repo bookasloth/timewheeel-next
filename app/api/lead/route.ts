@@ -9,6 +9,7 @@ import {
 } from "@/lib/lead-email";
 import { site } from "@/lib/site";
 import { saveLead } from "@/lib/supabase-leads";
+import { syncLeadContact } from "@/lib/resend-contacts";
 import type { Attribution } from "@/lib/attribution";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
@@ -265,6 +266,12 @@ export async function POST(request: Request) {
     },
     attribution,
   );
+
+  // 1b) Add to the Resend nurture audience, but ONLY with explicit marketing
+  //     consent. Best-effort; never blocks or fails the lead.
+  if (l.consent === true) {
+    await syncLeadContact({ email: l.email, name: l.name, source: l.source });
+  }
 
   // 2) Notify the team by email (backup channel). Best-effort: if SMTP is not
   //    configured or the send fails, we have already stored the lead above.
