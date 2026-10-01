@@ -5,7 +5,11 @@ import { ChallengeForm } from "@/components/challenge/challenge-form";
 import { WebsitesShowcase } from "@/components/challenge/websites-showcase";
 import { CraftScroll } from "@/components/challenge/craft-scroll";
 import { site } from "@/lib/site";
+import { countLeadsBySource } from "@/lib/supabase-leads";
 import { Sparkles, PencilRuler, Rocket, Check } from "lucide-react";
+
+// Near-live counter: regenerate the page at most once a minute.
+export const revalidate = 60;
 
 const TITLE = "30 Days, 30 Websites Challenge";
 const DESC =
@@ -18,10 +22,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/30-days-30-websites" },
 };
 
-// Public "spots filled" counter. No DB. Bump FILLED by hand as signups land.
-// ponytail: manual count; wire to a real store only if you want it live/auto.
+// Public "spots filled" counter. TOTAL is the cap; the filled number is the live
+// count of real challenge submissions (see ChallengePage, from Supabase).
 const TOTAL = 30;
-const FILLED = 12;
 
 // Social-proof avatars for the "already joined" row (initials + accent tint).
 const avatars = [
@@ -71,7 +74,11 @@ const jsonLd = {
   organizer: { "@type": "Organization", name: site.name, url: site.url },
 };
 
-export default function ChallengePage() {
+export default async function ChallengePage() {
+  // Live "spots filled" = real submissions to this page, capped at TOTAL.
+  const filled = Math.min(await countLeadsBySource("30-days-challenge", TOTAL), TOTAL);
+  const shownAvatars = avatars.slice(0, Math.min(filled, avatars.length));
+  const extra = Math.max(0, filled - avatars.length);
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -107,13 +114,13 @@ export default function ChallengePage() {
             </p>
             <div className="mx-auto mt-9 max-w-md">
               <div className="flex items-baseline justify-between text-sm font-semibold">
-                <span><span className="text-brand">{FILLED}</span> / {TOTAL} spots filled</span>
-                <span className="text-muted-foreground">{TOTAL - FILLED} left</span>
+                <span><span className="text-brand">{filled}</span> / {TOTAL} spots filled</span>
+                <span className="text-muted-foreground">{TOTAL - filled} left</span>
               </div>
               <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-brand/15">
                 <div
                   className="h-full rounded-full bg-brand transition-all"
-                  style={{ width: `${Math.round((FILLED / TOTAL) * 100)}%` }}
+                  style={{ width: `${Math.round((filled / TOTAL) * 100)}%` }}
                 />
               </div>
             </div>
@@ -171,32 +178,40 @@ export default function ChallengePage() {
                 <div className="flex items-baseline justify-between">
                   <span className="text-sm font-semibold">Spots filled</span>
                   <span className="text-sm font-bold">
-                    <span className="text-brand">{FILLED}</span>
+                    <span className="text-brand">{filled}</span>
                     <span className="text-muted-foreground"> / {TOTAL}</span>
                   </span>
                 </div>
                 <div className="mt-2.5 h-2.5 overflow-hidden rounded-full bg-brand/15">
                   <div
                     className="h-full rounded-full bg-brand"
-                    style={{ width: `${Math.round((FILLED / TOTAL) * 100)}%` }}
+                    style={{ width: `${Math.round((filled / TOTAL) * 100)}%` }}
                   />
                 </div>
                 <div className="mt-4 flex items-center gap-3">
-                  <div className="flex -space-x-2.5">
-                    {avatars.map((a) => (
-                      <span
-                        key={a.i}
-                        className={`grid size-8 place-items-center rounded-full border-2 border-card text-[11px] font-bold text-white ${a.c}`}
-                      >
-                        {a.i}
-                      </span>
-                    ))}
-                    <span className="grid size-8 place-items-center rounded-full border-2 border-card bg-secondary text-[11px] font-bold text-foreground">
-                      +{FILLED - avatars.length}
-                    </span>
-                  </div>
+                  {filled > 0 && (
+                    <div className="flex -space-x-2.5">
+                      {shownAvatars.map((a) => (
+                        <span
+                          key={a.i}
+                          className={`grid size-8 place-items-center rounded-full border-2 border-card text-[11px] font-bold text-white ${a.c}`}
+                        >
+                          {a.i}
+                        </span>
+                      ))}
+                      {extra > 0 && (
+                        <span className="grid size-8 place-items-center rounded-full border-2 border-card bg-secondary text-[11px] font-bold text-foreground">
+                          +{extra}
+                        </span>
+                      )}
+                    </div>
+                  )}
                   <span className="text-xs text-muted-foreground">
-                    already claimed their spot. <span className="font-semibold text-brand-text">{TOTAL - FILLED} left</span>
+                    {filled > 0 ? (
+                      <>already claimed their spot. <span className="font-semibold text-brand-text">{TOTAL - filled} left</span></>
+                    ) : (
+                      <>Be the first to claim a spot. <span className="font-semibold text-brand-text">{TOTAL} open</span></>
+                    )}
                   </span>
                 </div>
               </div>
