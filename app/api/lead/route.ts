@@ -10,6 +10,7 @@ import {
 import { site } from "@/lib/site";
 import { saveLead } from "@/lib/supabase-leads";
 import { syncLeadContact } from "@/lib/resend-contacts";
+import { sendWelcomeEmail } from "@/lib/resend-email";
 import type { Attribution } from "@/lib/attribution";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
@@ -271,6 +272,13 @@ export async function POST(request: Request) {
   //     consent. Best-effort; never blocks or fails the lead.
   if (l.consent === true) {
     await syncLeadContact({ email: l.email, name: l.name, source: l.source });
+  }
+
+  // 1c) Welcome email to the lead (free-website Nagpur campaign only, so other
+  //     flows don't get a "free website" message). Transactional confirmation of
+  //     what they requested, so it goes to all such leads. Best-effort.
+  if (l.source === "free-website-nagpur") {
+    await sendWelcomeEmail({ to: l.email, name: l.name });
   }
 
   // 2) Notify the team by email (backup channel). Best-effort: if SMTP is not

@@ -210,3 +210,96 @@ export function renderLeadEmailText(l: LeadEmail): string {
       : []),
   ].join("\n");
 }
+
+// ── Lead-facing welcome email (free-website Nagpur campaign) ────────────────
+// Sent automatically to every new free-website lead right after they submit:
+// confirms the request, sets expectations, and asks for assets/timing to speed
+// up the build and keep them warm for the later upsell.
+
+const CONTACT_LINE = "team@timewheel.co.in · +91 79041 09359 · Nagpur, Maharashtra";
+
+export function renderWelcomeEmailHtml(firstName: string): string {
+  const brand = "#fe5100";
+  const ink = "#17130e";
+  const muted = "#6e675c";
+  const line = "#eceae6";
+  const name = esc(firstName || "there");
+  const step = (n: number, text: string) => `
+    <tr>
+      <td style="padding:6px 0;vertical-align:top;width:34px">
+        <span style="display:inline-block;width:24px;height:24px;border-radius:999px;background:${brand};color:#fff;font:700 13px/24px Arial,sans-serif;text-align:center">${n}</span>
+      </td>
+      <td style="padding:6px 0;font:400 15px/1.55 Arial,sans-serif;color:${ink};vertical-align:top">${text}</td>
+    </tr>`;
+  const bullet = (text: string) => `
+    <tr><td style="padding:4px 0 4px 2px;font:400 15px/1.5 Arial,sans-serif;color:${ink}">
+      <span style="color:${brand};font-weight:700">•</span>&nbsp; ${text}
+    </td></tr>`;
+
+  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f4f3f0">
+  <span style="display:none;max-height:0;overflow:hidden;opacity:0">Your free website spot is reserved. Here's what happens next.</span>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3f0;padding:24px 12px">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid ${line};border-radius:14px;overflow:hidden">
+        <tr><td style="background:${ink};padding:22px 28px">
+          <div style="font:800 18px/1 Arial,sans-serif;letter-spacing:.5px;color:#fff">TIME<span style="color:${brand}">WHEEL</span></div>
+        </td></tr>
+        <tr><td style="padding:30px 28px 6px">
+          <h1 style="margin:0 0 10px;font:800 23px/1.3 Arial,sans-serif;color:${ink}">We've got your free website request</h1>
+          <p style="margin:0;font:400 15px/1.65 Arial,sans-serif;color:${muted}">Hi ${name}, thanks for requesting your free website from Timewheel. We have your details and a spot is reserved for your business.</p>
+        </td></tr>
+        <tr><td style="padding:18px 28px 4px">
+          <div style="font:700 12px/1.4 Arial,sans-serif;color:${muted};text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">What happens next</div>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            ${step(1, "We'll call or WhatsApp you within one business day to confirm a few details.")}
+            ${step(2, "We design and build your website.")}
+            ${step(3, "You review, we refine, and it goes live. You own it fully.")}
+          </table>
+        </td></tr>
+        <tr><td style="padding:20px 28px 4px">
+          <div style="background:#faf9f7;border:1px solid ${line};border-left:3px solid ${brand};border-radius:8px;padding:16px 18px">
+            <div style="font:700 14px/1.4 Arial,sans-serif;color:${ink};margin-bottom:8px">To get you live faster, reply to this email with:</div>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+              ${bullet("A link to your current Instagram, Facebook, or Google listing (if you have one)")}
+              ${bullet("A few photos of your business, products, or work")}
+              ${bullet("The best time and number to reach you")}
+            </table>
+          </div>
+        </td></tr>
+        <tr><td style="padding:24px 28px 6px">
+          <a href="https://wa.me/917904109359" style="display:inline-block;background:${brand};color:#fff;font:700 15px/1 Arial,sans-serif;text-decoration:none;padding:14px 26px;border-radius:10px">Message us on WhatsApp</a>
+        </td></tr>
+        <tr><td style="padding:16px 28px 28px">
+          <p style="margin:0;font:400 15px/1.6 Arial,sans-serif;color:${ink}">Talk soon,<br><strong>The Timewheel Team</strong></p>
+        </td></tr>
+        <tr><td style="padding:16px 28px;background:#faf9f7;border-top:1px solid ${line}">
+          <p style="margin:0;font:400 12px/1.6 Arial,sans-serif;color:${muted}">${esc(CONTACT_LINE)}</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+}
+
+export function renderWelcomeEmailText(firstName: string): string {
+  return [
+    `Hi ${firstName || "there"},`,
+    "",
+    "Thanks for requesting your free website from Timewheel. We have your details and a spot is reserved for your business.",
+    "",
+    "What happens next:",
+    "1. We'll call or WhatsApp you within one business day to confirm a few details.",
+    "2. We design and build your website.",
+    "3. You review, we refine, and it goes live. You own it fully.",
+    "",
+    "To get you live faster, reply to this email with:",
+    "- A link to your current Instagram, Facebook, or Google listing (if you have one)",
+    "- A few photos of your business, products, or work",
+    "- The best time and number to reach you",
+    "",
+    "Talk soon,",
+    "The Timewheel Team",
+    CONTACT_LINE,
+  ].join("\n");
+}
