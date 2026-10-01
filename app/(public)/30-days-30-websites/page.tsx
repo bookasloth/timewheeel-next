@@ -5,6 +5,7 @@ import { ChallengeForm } from "@/components/challenge/challenge-form";
 import { WebsitesShowcase } from "@/components/challenge/websites-showcase";
 import { site } from "@/lib/site";
 import { countLeadsBySource } from "@/lib/supabase-leads";
+import { projects } from "@/components/about/work";
 import { Sparkles, PencilRuler, Rocket, Check } from "lucide-react";
 
 // Near-live counter: regenerate the page at most once a minute.
@@ -74,8 +75,11 @@ const jsonLd = {
 };
 
 export default async function ChallengePage() {
-  // Live "spots filled" = real submissions to this page, capped at TOTAL.
-  const filled = Math.min(await countLeadsBySource("30-days-challenge", TOTAL), TOTAL);
+  // Live "spots filled" = already-shipped sites + real submissions to this page,
+  // capped at TOTAL. The shipped sites count as claimed spots, so the counter and
+  // grid never read lower than the work already live.
+  const signups = await countLeadsBySource("30-days-challenge", TOTAL);
+  const filled = Math.min(Math.max(signups, projects.length), TOTAL);
   const shownAvatars = avatars.slice(0, Math.min(filled, avatars.length));
   const extra = Math.max(0, filled - avatars.length);
   return (
