@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/nav/navbar";
 import { Footer } from "@/components/footer";
+import { PreFooterGate } from "@/components/pre-footer-gate";
 import { ButtonGlow } from "@/components/button-glow";
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
@@ -9,6 +10,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
       <ButtonGlow />
       <Navbar />
       <main className="flex-1">{children}</main>
+      <PreFooterGate />
       <Footer />
     </>
   );
