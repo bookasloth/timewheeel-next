@@ -551,6 +551,25 @@ export const clientSiteCaseStudies: CaseStudy[] = [
             "Practical detail placed next to the trip it describes, not separated",
             "Cabins and camping presented as their own bookable options",
           ],
+          // Screenshots live in /public/case-studies/alpha-adventures/. The
+          // section renders only once both files exist on disk, so it is safe
+          // to leave this in place while they are still being captured.
+          comparison: {
+            before: {
+              src: "/case-studies/alpha-adventures/before.jpg",
+              alt: "Alpha Adventures website before the redesign",
+            },
+            after: {
+              src: "/case-studies/alpha-adventures/after.png",
+              alt: "Alpha Adventures website after the redesign",
+            },
+            beforeLabel: "Before",
+            afterLabel: "After",
+            // Matches the 1905x932 capture, so neither side is cropped.
+            aspect: "1905/932",
+            caption:
+              "Drag the handle: the same treks, led with the trip instead of the spec sheet.",
+          },
         },
       ],
       closing: {

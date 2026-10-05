@@ -1,8 +1,8 @@
-import { HeartHandshake, Users, Headset, Banknote } from "lucide-react";
+import { Banknote, Download, Headset, HeartHandshake } from "lucide-react";
 import { type CfData } from "@/lib/coffee-and-toffee";
 import { Reveal } from "@/components/reveal";
 
-const icons = [HeartHandshake, Users, Headset, Banknote];
+const icons = [HeartHandshake, Download, Headset, Banknote];
 
 export function CfBenefits({ data }: { data: CfData }) {
   return (
@@ -17,9 +17,9 @@ export function CfBenefits({ data }: { data: CfData }) {
           {data.benefits.items.map((item, i) => {
             const Icon = icons[i % icons.length];
             return (
-              <Reveal key={item.name} className="cf-benefit" stagger>
-                <span className="cf-benefit-ic">
-                  <Icon size={20} strokeWidth={1.7} aria-hidden="true" />
+              <Reveal key={item.name} className="cf-card cf-benefit" delay={i * 0.06}>
+                <span className="cf-card-ic cf-benefit-ic">
+                  <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
                 <h3 className="cf-card-title">{item.name}</h3>
                 <p className="cf-card-desc">{item.desc}</p>

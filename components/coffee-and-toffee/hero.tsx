@@ -14,6 +14,7 @@ type Chip = {
   float: string;
   tilt: string;
   delay: number;
+  hue: string;
 };
 
 // Floating supporter proof, the Ko-fi / BMAC signature. Positioned around the
@@ -26,6 +27,7 @@ const CHIPS: Chip[] = [
     float: "7.5s",
     tilt: "-4deg",
     delay: 0.5,
+    hue: "var(--cf-toffee-yellow)",
   },
   {
     initials: "RM",
@@ -34,6 +36,7 @@ const CHIPS: Chip[] = [
     float: "8.5s",
     tilt: "5deg",
     delay: 0.7,
+    hue: "var(--cf-matcha)",
   },
   {
     initials: "SP",
@@ -42,6 +45,7 @@ const CHIPS: Chip[] = [
     float: "9s",
     tilt: "3deg",
     delay: 0.9,
+    hue: "var(--cf-berry)",
   },
   {
     initials: "JD",
@@ -50,6 +54,7 @@ const CHIPS: Chip[] = [
     float: "7s",
     tilt: "-5deg",
     delay: 1.1,
+    hue: "var(--cf-sky)",
   },
 ];
 
@@ -101,7 +106,12 @@ export function CfHero({ data }: { data: CfData }) {
         <motion.div
           key={i}
           className="cf-chip hidden md:inline-flex"
-          style={{ ...c.pos, ["--cf-float" as string]: c.float, ["--cf-tilt" as string]: c.tilt }}
+          style={{
+            ...c.pos,
+            ["--cf-float" as string]: c.float,
+            ["--cf-tilt" as string]: c.tilt,
+            ["--chip-hue" as string]: c.hue,
+          }}
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: c.delay }}

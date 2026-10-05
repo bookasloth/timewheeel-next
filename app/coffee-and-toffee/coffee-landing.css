@@ -5,7 +5,12 @@
      · 2px solid black borders ARE the elevation — no drop shadows anywhere
      · 9999px pills for every button, tag, input and toggle
      · 40px cards / 24px feature cards / 16px small elements
-     · one caramel accent, reserved for the single primary action per view
+     · caramel is reserved for the primary action per view, so the CTA never
+       has to compete with decoration
+     · matcha / sky / berry exist only as *fills* — icon tiles, avatar dots,
+       stat tiles, step nodes, highlighter bands. They never carry meaning, so
+       the page can be colourful without turning into confetti
+     · one cocoa band (solution) breaks the oat rhythm and marks the pivot
      · chunky rounded display face for headings, clean sans for everything else
 
    Class prefix `.cf-` scoped under the `.cf` root (mirrors `.az` / `.sx`). */
@@ -30,6 +35,20 @@
   --cf-caramel-hover: #d2762a;
   --cf-caramel-deep: #b45a1e;  /* caramel dark enough for white text */
   --cf-toffee-yellow: #ffd96e;
+
+  /* supporting hues. Surface fills only — grounds, bands, icon tiles and
+     highlighters. Caramel above stays reserved for the primary action so the
+     CTA never has to compete with decoration for attention. */
+  --cf-cocoa: #402c21;        /* deep coffee — the page's one dark band */
+  --cf-cocoa-raised: #5b4030; /* raised cocoa surface inside that band */
+  --cf-cream: #fdf5ea;       /* ink on cocoa */
+  --cf-caramel-soft: #f7d3ac;
+  --cf-matcha: #7cc39a;
+  --cf-matcha-soft: #d5ecdf;
+  --cf-sky: #6fa6d6;
+  --cf-sky-soft: #d7e8f7;
+  --cf-berry: #ee6a5a;
+  --cf-berry-soft: #fadbd5;
 
   /* the sticker outline — the whole elevation system */
   --cf-sticker: #000000;
@@ -120,7 +139,7 @@
 }
 
 .cf-head--light .cf-h {
-  color: var(--cf-ink);
+  color: var(--cf-cream);
 }
 
 .cf-lede {
@@ -249,6 +268,22 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  isolation: isolate;
+}
+
+/* Warm halo behind the headline. The canvas is otherwise flat oat, so this
+   gives the top of the page somewhere for the eye to land. */
+.cf-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -8% -4% auto -4%;
+  height: 118%;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 52% at 50% 34%, rgba(255, 217, 110, 0.5), transparent 68%),
+    radial-gradient(44% 42% at 22% 74%, rgba(247, 211, 172, 0.72), transparent 70%),
+    radial-gradient(40% 40% at 80% 22%, rgba(213, 236, 223, 0.6), transparent 72%);
 }
 
 /* The decorative coffee video / gradient wash belong to the previous dark
@@ -303,6 +338,23 @@
   transform: rotate(-1.1deg);
 }
 
+/* One highlighter colour per word keeps the accent line from reading as a
+   single flat slab of yellow. */
+.cf-hero-accent .cf-hero-word:nth-child(4n + 2)::before {
+  background: var(--cf-matcha);
+  transform: rotate(1deg);
+}
+
+.cf-hero-accent .cf-hero-word:nth-child(4n + 3)::before {
+  background: var(--cf-caramel-soft);
+  transform: rotate(-1.6deg);
+}
+
+.cf-hero-accent .cf-hero-word:nth-child(4n + 4)::before {
+  background: var(--cf-sky-soft);
+  transform: rotate(0.8deg);
+}
+
 .cf-hero-body {
   margin-top: 26px;
   max-width: 600px;
@@ -345,8 +397,9 @@
   flex: none;
   border-radius: var(--cf-pill);
   border: 1.5px solid var(--cf-sticker);
+  /* Every chip hue is mid-to-light, so black initials stay legible on all. */
   color: var(--cf-ink);
-  background: var(--cf-toffee-yellow);
+  background: var(--chip-hue, var(--cf-toffee-yellow));
   font-size: 10.5px;
   font-weight: 800;
 }
@@ -376,24 +429,29 @@
   user-select: none;
 }
 
+/* Characters carry the hero, so give them real presence and a slow tilt.
+   --cf-tilt is already in use by the supporter chips, so the drift keyframe
+   doubles as a gentle rock. */
 .cf-deco-cup {
-  width: 108px;
-  top: 40%;
-  right: 4%;
+  width: 156px;
+  top: 38%;
+  right: 3%;
+  --cf-tilt: 6deg;
   animation: cf-float 8s ease-in-out infinite;
 }
 
 .cf-deco-toffee {
-  width: 94px;
-  top: 46%;
-  left: 4%;
+  width: 138px;
+  top: 44%;
+  left: 3%;
+  --cf-tilt: -7deg;
   animation: cf-float 9s ease-in-out infinite 0.5s;
 }
 
 .cf-deco-sparkle {
-  width: 32px;
-  top: 22%;
-  left: 30%;
+  width: 38px;
+  top: 20%;
+  left: 29%;
   animation: cf-twinkle 2.8s ease-in-out infinite;
 }
 
@@ -412,7 +470,7 @@
 /* ── stats (paper band between sticker rules) ── */
 
 .cf-stats {
-  background: var(--cf-surface);
+  background: var(--cf-wash);
   padding-block: 56px;
   border-block: var(--cf-stroke) solid var(--cf-sticker);
 }
@@ -427,8 +485,22 @@
   padding: 26px 20px;
   border: var(--cf-stroke) solid var(--cf-sticker);
   border-radius: var(--cf-radius);
-  background: var(--cf-oat);
+  background: var(--cf-surface);
   text-align: center;
+}
+
+/* Four numbers in a row: give each its own tint so the band reads as a set
+   of claims instead of one block of identical white tiles. */
+.cf-stats-grid > :nth-child(4n + 2) {
+  background: var(--cf-matcha-soft);
+}
+
+.cf-stats-grid > :nth-child(4n + 3) {
+  background: var(--cf-toffee-yellow);
+}
+
+.cf-stats-grid > :nth-child(4n + 4) {
+  background: var(--cf-berry-soft);
 }
 
 .cf-stat-value {
@@ -462,11 +534,21 @@
   border-radius: var(--cf-radius-card);
 }
 
-.cf-problem-ic {
-  background: var(--cf-wash);
+/* ── solution (the one dark band: the emotional pivot of the page) ── */
+
+.cf-solution {
+  background: var(--cf-cocoa);
+  border-block: var(--cf-stroke) solid var(--cf-sticker);
 }
 
-/* ── solution ── */
+.cf-solution .cf-lede {
+  color: rgba(253, 245, 234, 0.72);
+}
+
+.cf-solution .cf-head[data-ghost]::before {
+  background: var(--cf-toffee-yellow);
+  color: var(--cf-ink);
+}
 
 .cf-solution-list {
   display: grid;
@@ -479,7 +561,7 @@
   align-items: center;
   gap: 14px;
   padding: 20px 2px;
-  border-bottom: var(--cf-stroke) solid var(--cf-sticker);
+  border-bottom: var(--cf-stroke) solid rgba(253, 245, 234, 0.22);
 }
 
 .cf-solution-check {
@@ -492,13 +574,47 @@
   border: var(--cf-stroke) solid var(--cf-sticker);
   border-radius: var(--cf-pill);
   color: var(--cf-ink);
-  background: var(--cf-caramel);
+  background: var(--cf-matcha);
 }
 
 .cf-solution-text {
   font-size: 16.5px;
   font-weight: 500;
-  color: var(--cf-ink);
+  color: var(--cf-cream);
+}
+
+/* ── icon tile palette ──
+
+   Every grid of cards used to paint its tiles the same beige, which is what
+   made the page read flat. One hue per card, cycling on a 4-step: enough
+   colour to give each card an identity, light enough that the cards still
+   read as one system. */
+
+.cf-problem-ic,
+.cf-feature-ic,
+.cf-benefit-ic {
+  --tile: var(--cf-wash);
+  background: var(--tile);
+}
+
+:is(.cf-problem-grid, .cf-feature-grid, .cf-benefits-grid) > :nth-child(4n + 1)
+  :is(.cf-card-ic, .cf-feature-ic) {
+  --tile: var(--cf-caramel-soft);
+}
+
+:is(.cf-problem-grid, .cf-feature-grid, .cf-benefits-grid) > :nth-child(4n + 2)
+  :is(.cf-card-ic, .cf-feature-ic) {
+  --tile: var(--cf-matcha-soft);
+}
+
+:is(.cf-problem-grid, .cf-feature-grid, .cf-benefits-grid) > :nth-child(4n + 3)
+  :is(.cf-card-ic, .cf-feature-ic) {
+  --tile: var(--cf-sky-soft);
+}
+
+:is(.cf-problem-grid, .cf-feature-grid, .cf-benefits-grid) > :nth-child(4n + 4)
+  :is(.cf-card-ic, .cf-feature-ic) {
+  --tile: var(--cf-berry-soft);
 }
 
 /* ── features ── */
@@ -663,36 +779,40 @@
   border-block: var(--cf-stroke) solid var(--cf-sticker);
 }
 
+/* Four across, on the shared 19px title. The column cannot be made wide
+   enough for "Supporters, not customers" (223px) at every viewport — the
+   1025px breakpoint floor leaves only 184px of copy width, and no gap value
+   closes a 39px shortfall. So stop trying to fit it on one line and give every
+   title the same two-line box instead: the descs then share a baseline at
+   every width, whether the title runs to one line or two. */
 .cf-benefits-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  gap: 16px;
 }
 
 .cf-benefit {
-  text-align: center;
-  padding: 34px 26px;
+  padding: 32px 24px;
   border-radius: var(--cf-radius-card);
-  background: var(--cf-surface);
-  border: var(--cf-stroke) solid var(--cf-sticker);
 }
 
-.cf-benefit-ic {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  margin-inline: auto;
-  border: var(--cf-stroke) solid var(--cf-sticker);
-  border-radius: var(--cf-pill);
-  color: var(--cf-ink);
-  background: var(--cf-caramel);
+/* Two lines at the title's own 1.25 line-height. `balance` splits a wrapped
+   title evenly rather than orphaning a word.
+
+   The tile is display:inline-flex, so it sits on a text baseline and the
+   heading butts straight up against it — measured at 0px. Features already
+   space this pair with an 18px title margin; do the same here so the icon and
+   the heading read as two blocks instead of one stack. */
+.cf-benefit .cf-card-title {
+  margin-top: 22px;
+  min-height: 2.5em;
+  text-wrap: balance;
 }
 
+/* Descs differ by a line at this width; `pretty` keeps the last one from
+   orphaning two words. */
 .cf-benefit .cf-card-desc {
-  margin-inline: auto;
-  max-width: 250px;
+  text-wrap: pretty;
 }
 
 /* ── process ── */
@@ -727,6 +847,19 @@
   font-weight: 700;
 }
 
+/* Numbered steps: tint each node so the sequence is scannable at a glance. */
+.cf-process-grid > :nth-child(4n + 2) .cf-process-node {
+  background: var(--cf-matcha);
+}
+
+.cf-process-grid > :nth-child(4n + 3) .cf-process-node {
+  background: var(--cf-sky);
+}
+
+.cf-process-grid > :nth-child(4n + 4) .cf-process-node {
+  background: var(--cf-caramel-soft);
+}
+
 .cf-process-title {
   margin-top: 18px;
   font-family: var(--cf-font-display), ui-sans-serif, system-ui, sans-serif;
@@ -744,44 +877,71 @@
   display: none;
 }
 
-/* ── capabilities (pill tag row) ── */
+/* ── capabilities (compact pill tag row) ── */
+
+.cf-caps {
+  background: var(--cf-wash);
+  border-block: var(--cf-stroke) solid var(--cf-sticker);
+}
 
 .cf-caps-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 10px;
 }
 
 .cf-cap {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 24px 12px 13px;
+  gap: 9px;
+  padding: 7px 16px 7px 7px;
   border-radius: var(--cf-pill);
   background: var(--cf-surface);
   border: var(--cf-stroke) solid var(--cf-sticker);
 }
 
+/* Icon dot: the only filled part of the tag, so it carries the rhythm. */
 .cf-cap-ic {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 26px;
+  height: 26px;
   flex: none;
-  border: 1.5px solid var(--cf-sticker);
+  border: var(--cf-stroke) solid var(--cf-sticker);
   border-radius: var(--cf-pill);
   color: var(--cf-ink);
-  background: var(--cf-wash);
+  --tile: var(--cf-wash);
+  background: var(--tile);
+}
+
+/* Nine identical white pills read as a wall; cycle the dot fill to break it. */
+.cf-caps-grid > :nth-child(4n + 2) .cf-cap-ic {
+  --tile: var(--cf-matcha-soft);
+}
+
+.cf-caps-grid > :nth-child(4n + 3) .cf-cap-ic {
+  --tile: var(--cf-sky-soft);
+}
+
+.cf-caps-grid > :nth-child(4n + 4) .cf-cap-ic {
+  --tile: var(--cf-berry-soft);
 }
 
 .cf-cap-label {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
   color: var(--cf-ink);
 }
 
 /* ── testimonials ── */
+
+.cf-testimonials {
+  background: var(--cf-berry-soft);
+  border-block: var(--cf-stroke) solid var(--cf-sticker);
+}
 
 .cf-testimonials-grid {
   display: grid;
@@ -830,6 +990,15 @@
   font-weight: 800;
 }
 
+.cf-testimonials-grid > :nth-child(4n + 2) .cf-testimonial-av {
+  background: var(--cf-matcha);
+}
+
+.cf-testimonials-grid > :nth-child(4n + 3) .cf-testimonial-av {
+  background: var(--cf-sky);
+  color: var(--cf-cream);
+}
+
 .cf-testimonial-person strong {
   display: block;
   font-size: 15px;
@@ -855,7 +1024,7 @@
   margin-bottom: 14px;
 }
 
-.cf-faq-details {
+.cf-faq-card {
   border-radius: var(--cf-radius);
   border: var(--cf-stroke) solid var(--cf-sticker);
   background: var(--cf-surface);
@@ -866,8 +1035,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  width: 100%;
   padding: 22px 26px;
-  list-style: none;
+  background: none;
+  border: 0;
+  text-align: left;
   font-family: var(--cf-font-display), ui-sans-serif, system-ui, sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -877,8 +1049,19 @@
   user-select: none;
 }
 
-.cf-faq-q::-webkit-details-marker {
-  display: none;
+/* height auto-animates 0 -> content via the grid row trick */
+.cf-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+}
+
+.cf-faq-panel--open {
+  grid-template-rows: 1fr;
+}
+
+.cf-faq-panel > div {
+  overflow: hidden;
 }
 
 .cf-faq-plus {
@@ -889,7 +1072,7 @@
   border-radius: var(--cf-pill);
   border: var(--cf-stroke) solid var(--cf-sticker);
   background: var(--cf-toffee-yellow);
-  transition: transform 0.25s ease;
+  transition: transform 0.3s ease-out;
 }
 
 .cf-faq-plus::before,
@@ -914,15 +1097,14 @@
   transform: translate(-50%, -50%);
 }
 
-.cf-faq-details[open] .cf-faq-plus {
+.cf-faq-q[aria-expanded="true"] .cf-faq-plus {
   transform: rotate(45deg);
 }
 
-.cf-faq-a {
-  padding: 0 26px 24px;
-}
-
+/* padding lives on the <p>: padding on the collapsed element would floor the
+   0fr track at the pad size instead of collapsing to 0 */
 .cf-faq-a p {
+  padding: 0 26px 24px;
   font-size: 15px;
   line-height: 1.7;
   color: var(--cf-muted);
@@ -938,6 +1120,22 @@
   border-radius: var(--cf-radius-card);
   border: var(--cf-stroke) solid var(--cf-sticker);
   background: var(--cf-caramel);
+}
+
+/* Two-tone lift: a matcha wash bleeding in from the top-right so the closing
+   band doesn't read as a flat orange rectangle. */
+.cf-final-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(46% 60% at 88% 6%, rgba(213, 236, 223, 0.85), transparent 72%),
+    radial-gradient(40% 52% at 6% 96%, rgba(255, 217, 110, 0.6), transparent 74%);
+}
+
+.cf-final .cf-head[data-ghost]::before {
+  background: var(--cf-surface);
 }
 
 .cf-final-glow {
@@ -973,7 +1171,7 @@
   margin-top: 22px;
   border: var(--cf-stroke) solid var(--cf-sticker);
   border-radius: var(--cf-pill);
-  background: var(--cf-surface);
+  background: var(--cf-toffee-yellow);
   font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -1269,7 +1467,6 @@
 
 .cf-btn:focus-visible,
 .cf-faq-q:focus-visible,
-.cf-faq-details:focus-within,
 .cf-stepper button:focus-visible,
 .cf-mini-stepper button:focus-visible,
 .cf-field input:focus-visible,
@@ -1297,21 +1494,29 @@
   transform: translateY(-4px);
 }
 
+/* Compact tags: a 4px lift on a 44px pill reads as a jolt. */
+.cf-cap:hover {
+  transform: translateY(-2px);
+}
+
 .cf-feature:hover {
   background: var(--cf-oat-deep);
 }
 
 .cf-card-ic,
 .cf-feature-ic,
-.cf-cap-ic,
-.cf-benefit-ic {
+.cf-cap-ic {
   transition: transform 0.2s ease;
 }
 
 .cf-feature:hover .cf-feature-ic,
-.cf-cap:hover .cf-cap-ic,
-.cf-benefit:hover .cf-benefit-ic {
+.cf-cap:hover .cf-cap-ic {
   transform: rotate(-5deg) scale(1.06);
+}
+
+/* The 26px dot has no room for a scale bump. */
+.cf-cap:hover .cf-cap-ic {
+  transform: rotate(-8deg);
 }
 
 /* ── responsive ── */
@@ -1325,6 +1530,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* 4 across needs 273px per card to keep titles on one line; below this the
+     benefits grid has to drop to 2 or every title wraps. */
   .cf-benefits-grid {
     grid-template-columns: repeat(2, 1fr);
   }

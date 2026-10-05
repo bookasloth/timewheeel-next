@@ -1,16 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <!-- PLACEHOLDER: swap with a real wrapped-toffee illustration -->
-  <ellipse cx="100" cy="150" rx="52" ry="10" fill="#7c3aed" opacity="0.12"/>
-  <!-- left wrapper -->
-  <path d="M56 100 l-30 -20 v40 z" fill="#fcd34d" stroke="#2b2440" stroke-width="4" stroke-linejoin="round"/>
-  <!-- right wrapper -->
-  <path d="M144 100 l30 -20 v40 z" fill="#fcd34d" stroke="#2b2440" stroke-width="4" stroke-linejoin="round"/>
-  <!-- twists -->
-  <path d="M56 92 l-24 -8 M56 108 l-24 8 M144 92 l24 -8 M144 108 l24 8" stroke="#2b2440" stroke-width="3" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="A smiling toffee character">
+  <!-- Toffee character. Same construction as the cup: flat fill, one uniform
+       sticker outline, dot eyes + small smile. -->
+  <ellipse cx="100" cy="140" rx="52" ry="10" fill="#202020" opacity="0.1"/>
+
+  <!-- wrapper twists -->
+  <g fill="#ffd96e" stroke="#202020" stroke-width="5" stroke-linejoin="round">
+    <path d="M56 90 28 70v16l-9 14 9 14v16l28-20Z"/>
+    <path d="m144 90 28-20v16l9 14-9 14v16l-28-20Z"/>
+  </g>
+
   <!-- body -->
-  <rect x="56" y="74" width="88" height="52" rx="18" fill="#7c3aed" stroke="#2b2440" stroke-width="4"/>
-  <!-- shine -->
-  <rect x="66" y="82" width="20" height="12" rx="6" fill="#fff" opacity="0.35"/>
+  <rect x="52" y="78" width="96" height="54" rx="20" fill="#ee6a5a" stroke="#202020" stroke-width="5"/>
+  <rect x="64" y="89" width="19" height="10" rx="5" fill="#ffffff" opacity="0.32"/>
+
+  <!-- face -->
+  <circle cx="86" cy="108" r="5.5" fill="#202020"/>
+  <circle cx="114" cy="108" r="5.5" fill="#202020"/>
+  <path d="M85 120q15 13 30 0" stroke="#202020" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <circle cx="73" cy="120" r="6" fill="#fadbd5" opacity="0.6"/>
+  <circle cx="127" cy="120" r="6" fill="#fadbd5" opacity="0.6"/>
+
   <!-- sparkle -->
-  <path d="M118 96 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" fill="#fbbf24"/>
+  <path d="m150 52 4 11 11 4-11 4-4 11-4-11-11-4 11-4Z" fill="#7cc39a" stroke="#202020" stroke-width="3" stroke-linejoin="round"/>
 </svg>

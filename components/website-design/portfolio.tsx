@@ -55,7 +55,7 @@ function AlluminatyVisual() {
   return (
     <Frame url="alluminaty.app">
       <Image
-        src="/alumi.png"
+        src="/aluminaty.png"
         alt="Alluminaty, an alumni engagement platform for schools and colleges, shown in a browser"
         width={1536}
         height={1024}
