@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 const demos = [
   { icon: CalendarCheck, name: "Book A Sloth", blurb: "Bookings, payments and reminders on autopilot." },
   { icon: Ticket, name: "Ticket Dino", blurb: "Events, ticketing and check-in in one flow." },
-  { icon: Users, name: "Alluminaty", blurb: "An alumni network platform that runs itself." },
+  { icon: Users, name: "Alluminaty", blurb: "The modern social network where your alumni connect for life." },
   { icon: Coffee, name: "Coffee and Toffee", blurb: "A connected ordering and loyalty experience." },
   { icon: MonitorSmartphone, name: "Website or web app", blurb: "A custom build you fully own, start to finish." },
   { icon: Megaphone, name: "Digital marketing", blurb: "Performance, social and creative under one roof." },
