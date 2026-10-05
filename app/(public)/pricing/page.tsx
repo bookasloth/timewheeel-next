@@ -27,6 +27,17 @@ const trust = [
   { icon: MapPin, label: "Built in Nagpur" },
 ];
 
+// Pick black or white text for a filled button, by the accent's luminance,
+// so a light accent (yellow) gets dark ink and dark accents get white.
+function readableOn(hex: string): string {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16) / 255;
+  const g = parseInt(h.slice(2, 4), 16) / 255;
+  const b = parseInt(h.slice(4, 6), 16) / 255;
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return lum > 0.65 ? "#1f2937" : "#ffffff";
+}
+
 // Scarcity wording for the counter. Colour stays the service's own accent
 // (so the right counter always matches its left card); only the words change.
 function availabilityLabel(
@@ -58,6 +69,7 @@ function ServiceRow({ service }: { service: ServicePrice }) {
   const billing = unit.toLowerCase().includes("month") ? "Monthly" : "One-time";
 
   const label = availabilityLabel(slotsLeft, slotsTotal);
+  const onAccent = readableOn(accent);
   const booked = Math.max(slotsTotal - Math.max(slotsLeft, 0), 0);
   const bookedPct = Math.round((booked / slotsTotal) * 100);
 
@@ -169,20 +181,19 @@ function ServiceRow({ service }: { service: ServicePrice }) {
             <Link
               href={site.demoUrl}
               className={cn(
-                "rounded-lg px-4 py-2 text-sm font-semibold",
-                featured
-                  ? "bg-white text-foreground hover:bg-white/90"
-                  : "btn btn-primary text-brand-foreground",
+                "rounded-lg px-4 py-2 text-sm font-semibold transition-opacity hover:opacity-90",
+                featured && "bg-white text-foreground hover:bg-white/90",
               )}
+              style={
+                featured ? undefined : { backgroundColor: accent, color: onAccent }
+              }
             >
               Get started
             </Link>
             <Link
               href={href}
-              className={cn(
-                "text-sm font-semibold",
-                featured ? "text-white hover:underline" : "hover:text-brand",
-              )}
+              className="text-sm font-semibold hover:underline"
+              style={{ color: featured ? "#ffffff" : accentText }}
             >
               Learn more
             </Link>
