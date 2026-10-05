@@ -1,26 +1,20 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Fraunces, Inter, Caveat } from "next/font/google";
+import { Baloo_2, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/nav/navbar";
 import { Footer } from "@/components/footer";
 import "./coffee-landing.css";
 
-const serif = Fraunces({
-  variable: "--cf-font-serif",
+const display = Baloo_2({
+  variable: "--cf-font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["600", "700", "800"],
 });
 
-const sans = Inter({
+const sans = DM_Sans({
   variable: "--cf-font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const hand = Caveat({
-  variable: "--cf-font-hand",
-  subsets: ["latin"],
-  weight: ["500", "600"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -37,11 +31,9 @@ export default function CoffeeToffeeLayout({
   return (
     <>
       <Navbar />
-      {/* `.cf` owns the page ground (warm cream) and grows to fill the body
-          column, so no white seam shows between the nav, the page and the footer. */}
-      <div
-        className={`cf ${serif.variable} ${sans.variable} ${hand.variable}`}
-      >
+      {/* `.cf` owns the page ground (warm oat canvas) and grows to fill the body
+          column, so no seam shows between the nav, the page and the footer. */}
+      <div className={`cf ${display.variable} ${sans.variable}`}>
         <main className="cf-main">{children}</main>
       </div>
       <Footer />

@@ -14,7 +14,7 @@ export const cf = {
     primaryHref: "#start",
     secondaryLabel: "How it works",
     secondaryHref: "#how",
-    proof: "Free to start · 3% on contributions",
+    proof: "Free to start · no fees, ever",
   },
   widget: {
     name: "Coffee & Toffee",
@@ -23,9 +23,6 @@ export const cf = {
       { id: "coffee", name: "Coffee", price: 5, unit: "cup" },
       { id: "toffee", name: "Toffee", price: 10, unit: "piece" },
     ],
-    feeRate: 0.03,
-    feeLabel: "Cover the 3% fee so I get the full amount.",
-    feeNote: "to cover gateway fees",
     anonymousLabel: "Show me as anonymous.",
     namePlaceholder: "Name (optional)",
     emailPlaceholder: "Email (optional)",
@@ -185,7 +182,7 @@ export const cf = {
       { icon: "mail", label: "Posts, audio & free emails" },
       { icon: "download", label: "Supporter list with CSV export" },
       { icon: "zap", label: "Instant payouts to your bank" },
-      { icon: "percent", label: "3% per contribution, zero monthly" },
+      { icon: "gift", label: "Totally free, we take no cut" },
       { icon: "eye", label: "Anonymous support & privacy" },
       { icon: "bell", label: "Email alerts for every sale" },
     ],
@@ -226,8 +223,8 @@ export const cf = {
     title: "Questions creators ask",
     items: [
       {
-        q: "Is the page free to start?",
-        a: "Yes, 100%. Create your page free and start receiving support immediately. There's no setup fee and no monthly cost; Timewheel only takes 3% on each contribution, which supporters can choose to cover so you get the full amount.",
+        q: "Is it really free?",
+        a: "Yes, 100%. Create your page free and start receiving support immediately. There's no setup fee, no monthly cost, and no cut of your contributions. Every rupee a supporter sends lands in your pocket.",
       },
       {
         q: "How do creators get paid?",
@@ -262,7 +259,7 @@ export const cf = {
     primaryHref: "#start",
     secondaryLabel: "Talk to a human",
     secondaryHref: "#contact",
-    builtIn: "Payments, memberships, shop, posts · instant payouts · 3% only when you earn",
+    builtIn: "Payments, memberships, shop, posts · instant payouts · no fees, ever",
   },
 } as const;
 

@@ -18,7 +18,6 @@ const prices: Record<string, number> = Object.fromEntries(
 
 export function CfSupportWidget() {
   const [qty, setQty] = useState<Record<string, number>>({ ...cf.widget.defaults });
-  const [coverFee, setCoverFee] = useState(false);
   const [anonymous, setAnonymous] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,8 +29,7 @@ export function CfSupportWidget() {
       cf.widget.items.reduce((acc, it) => acc + (qty[it.id] || 0) * prices[it.id], 0),
     [qty]
   );
-  const fee = coverFee ? Math.round(subTotal * cf.widget.feeRate) : 0;
-  const total = subTotal + fee;
+  const total = subTotal;
   const max = cf.widget.noteMax;
 
   const step = (id: string, delta: number) =>
@@ -130,15 +128,6 @@ export function CfSupportWidget() {
 
       <div className="cf-widget-options">
         <label className="cf-toggle">
-          <span>{cf.widget.feeLabel}</span>
-          <input
-            type="checkbox"
-            checked={coverFee}
-            onChange={(e) => setCoverFee(e.target.checked)}
-          />
-          <span className="cf-switch" aria-hidden="true" />
-        </label>
-        <label className="cf-toggle">
           <span>{cf.widget.anonymousLabel}</span>
           <input
             type="checkbox"
@@ -150,11 +139,7 @@ export function CfSupportWidget() {
       </div>
 
       <div className="cf-widget-total">
-        <span className="cf-total-label">
-          {coverFee
-            ? `Includes ₹${fee} ${cf.widget.feeNote}`
-            : `You'll send`}
-        </span>
+        <span className="cf-total-label">{`You'll send`}</span>
         <span className="cf-total-value">₹{total}</span>
       </div>
 

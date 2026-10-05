@@ -13,7 +13,7 @@ export const creatorUi = {
     primaryHref: "#start",
     secondary: "See the concept",
     secondaryHref: "#showcase",
-    proof: "Free to start · 3% only when you earn · self-hostable",
+    proof: "Free to start · self-hostable",
     stats: [
       { value: 20, suffix: "k", label: "creators earning" },
       { value: 12, prefix: "₹", suffix: "L", label: "raised for creators" },
@@ -153,7 +153,7 @@ export const creatorUi = {
     bullets: [
       "Own your supporter list, CSV export any time",
       "Instant payouts, straight to your bank",
-      "3% per contribution, zero monthly fees",
+      "Totally free, we take no cut",
       "White-label domain & your own theme",
     ],
     metrics: [
@@ -238,7 +238,7 @@ export const creatorUi = {
       },
       {
         q: "What does it cost?",
-        a: "Nothing to start, nothing monthly. Timewheel takes 3% only when a supporter contributes, and supporters can choose to cover it so you keep the full amount.",
+        a: "Nothing to start, nothing monthly, and no cut of your contributions. Every rupee a supporter sends lands in your pocket.",
       },
       {
         q: "Do I own my supporter list?",

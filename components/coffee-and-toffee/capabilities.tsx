@@ -2,8 +2,8 @@ import {
   Bell,
   Download,
   EyeOff,
+  Gift,
   Mail,
-  Percent,
   Repeat,
   ShoppingBag,
   Wallet,
@@ -19,7 +19,7 @@ const iconMap = {
   mail: Mail,
   download: Download,
   zap: Zap,
-  percent: Percent,
+  gift: Gift,
   eye: EyeOff,
   bell: Bell,
 } as const;
@@ -39,7 +39,7 @@ export function CfCapabilities({ data }: { data: CfData }) {
             return (
               <Reveal key={item.label} className="cf-cap" delay={i * 0.04}>
                 <span className="cf-cap-ic">
-                  <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
+                  <Icon size={15} strokeWidth={1.8} aria-hidden="true" />
                 </span>
                 <span className="cf-cap-label">{item.label}</span>
               </Reveal>

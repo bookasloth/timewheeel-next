@@ -10,7 +10,9 @@ import { caseStudies, type CaseStudy } from "@/lib/case-studies";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { FaqAccordion } from "@/components/case-studies/faq-accordion";
 import { CountUpStat } from "@/components/case-studies/count-up";
+import { CaseStudyBeforeAfter } from "@/components/case-studies/before-after";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { publicAssetsExist } from "@/lib/public-assets";
 
 function slugify(s: string) {
   return s
@@ -206,6 +208,16 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
                   </ul>
                 ) : null}
                 {sec.table ? <SectionTable table={sec.table} accent={accent} /> : null}
+                {sec.comparison &&
+                publicAssetsExist([
+                  sec.comparison.before.src,
+                  sec.comparison.after.src,
+                ]) ? (
+                  <CaseStudyBeforeAfter
+                    comparison={sec.comparison}
+                    accent={accent}
+                  />
+                ) : null}
               </section>
             ))}
 

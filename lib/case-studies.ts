@@ -23,12 +23,26 @@ export type CaseStudyTable = {
   rows: { key: string; value: string; why?: string }[];
 };
 
+/** A drag-to-compare screenshot pair. Both sides are public-root paths and are
+ *  only rendered once the files exist on disk, so a case study can be written
+ *  before its screenshots are captured. */
+export type CaseStudyComparison = {
+  before: { src: string; alt: string };
+  after: { src: string; alt: string };
+  beforeLabel?: string;
+  afterLabel?: string;
+  /** Height-to-width ratio for the frame, e.g. "16/10". */
+  aspect?: string;
+  caption?: string;
+};
+
 export type CaseStudySection = {
   eyebrow: string;
   title: string;
   body: string;
   bullets?: string[];
   table?: CaseStudyTable;
+  comparison?: CaseStudyComparison;
   image?: { src: string; width: number; height: number };
 };
 

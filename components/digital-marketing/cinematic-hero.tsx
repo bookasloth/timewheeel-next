@@ -61,7 +61,7 @@ export function DmCinematicHero() {
         className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full lg:w-[52%] xl:w-[56%]"
       >
         <Image
-          src="/digital-marketing-hero.png"
+          src="/digital-marketing-hero1.png"
           alt=""
           fill
           priority

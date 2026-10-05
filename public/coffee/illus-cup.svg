@@ -1,19 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <!-- PLACEHOLDER: swap with a real coffee-cup illustration (keep ~square) -->
-  <ellipse cx="100" cy="168" rx="62" ry="12" fill="#7c3aed" opacity="0.12"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="A smiling coffee cup character">
+  <!-- Coffee cup character. Ko-fi construction: flat fill, one uniform sticker
+       outline, dot eyes + small smile. Colours mirror the .cf token set so the
+       illustration never drifts from the page. -->
+  <ellipse cx="100" cy="168" rx="60" ry="11" fill="#202020" opacity="0.1"/>
+
   <!-- steam -->
-  <path d="M78 48 c-8 -12 8 -18 0 -30" stroke="#8b5cf6" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
-  <path d="M100 44 c-8 -12 8 -18 0 -30" stroke="#fbbf24" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
-  <path d="M122 48 c-8 -12 8 -18 0 -30" stroke="#8b5cf6" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <g stroke="#b45a1e" stroke-width="5" stroke-linecap="round" opacity="0.75">
+    <path d="M84 46C76 34 92 28 84 16"/>
+    <path d="M100 42C92 30 108 24 100 12"/>
+    <path d="M116 46C108 34 124 28 116 16"/>
+  </g>
+
   <!-- saucer -->
-  <ellipse cx="100" cy="150" rx="58" ry="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/>
-  <!-- cup -->
-  <path d="M52 72 h96 l-8 58 a26 26 0 0 1 -25 22 h-30 a26 26 0 0 1 -25 -22 z" fill="#fff" stroke="#2b2440" stroke-width="4" stroke-linejoin="round"/>
+  <ellipse cx="100" cy="158" rx="58" ry="12" fill="#ede6dd" stroke="#202020" stroke-width="5"/>
+
+  <!-- handle (behind the body so it tucks in) -->
+  <path d="M145 92c19 0 25 18 21 31-4 13-14 17-22 15" fill="none" stroke="#202020" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- cup body -->
+  <path d="M56 76c0-6 4-10 10-10h68c6 0 10 4 10 10l-6 56c-1 14-13 24-27 24H89c-14 0-26-10-27-24Z" fill="#ffffff" stroke="#202020" stroke-width="5" stroke-linejoin="round"/>
+
   <!-- coffee surface -->
-  <ellipse cx="100" cy="74" rx="48" ry="10" fill="#7c3aed"/>
-  <ellipse cx="100" cy="72" rx="40" ry="7" fill="#8b5cf6"/>
-  <!-- handle -->
-  <path d="M148 84 a22 22 0 0 1 4 42" fill="none" stroke="#2b2440" stroke-width="6" stroke-linecap="round"/>
-  <!-- heart on cup -->
-  <path d="M100 108 c-6 -10 -22 -6 -22 6 c0 10 14 18 22 24 c8 -6 22 -14 22 -24 c0 -12 -16 -16 -22 -6 z" fill="#fbbf24"/>
+  <ellipse cx="100" cy="68" rx="44" ry="10" fill="#e08a3c" stroke="#202020" stroke-width="5"/>
+  <ellipse cx="90" cy="66" rx="12" ry="4" fill="#ffd96e" opacity="0.8"/>
+
+  <!-- face -->
+  <circle cx="86" cy="106" r="5.5" fill="#202020"/>
+  <circle cx="114" cy="106" r="5.5" fill="#202020"/>
+  <path d="M85 122q15 13 30 0" stroke="#202020" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <circle cx="73" cy="120" r="6.5" fill="#ee6a5a" opacity="0.4"/>
+  <circle cx="127" cy="120" r="6.5" fill="#ee6a5a" opacity="0.4"/>
+
+  <!-- heart badge -->
+  <path d="M100 133c-4-6-13-4-13 3 0 6 8 11 13 14 5-3 13-8 13-14 0-7-9-9-13-3Z" fill="#ffd96e" stroke="#202020" stroke-width="3.5" stroke-linejoin="round"/>
 </svg>
