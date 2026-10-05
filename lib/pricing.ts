@@ -154,7 +154,7 @@ export const serviceGroups: ServiceGroup[] = [
         href: "/digital-marketing-company-in-nagpur",
         icon: FileText,
         accent: "#ffcc1c",
-        accentText: "#b45309",
+        accentText: "#a16207",
         price: "₹8,000",
         unit: "/ month + ad spend",
         points: [
