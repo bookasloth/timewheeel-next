@@ -2,7 +2,9 @@
 // match the navbar "What We Built" dropdown (names, taglines, icons, accents
 // and hrefs are kept in sync with components/nav/navbar.tsx).
 //
-// Prices are "Starting ₹X" floors, not fixed quotes. Edit the numbers here.
+// Prices are "Starting ₹X" floors, not fixed quotes. `points` are the
+// inclusions shown on each card, and `capacity` drives the per-service
+// availability counter. Edit everything here, one place.
 
 import {
   Code,
@@ -14,17 +16,32 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 
+export type ServiceCapacity = {
+  /** intake month shown on the counter, e.g. "November 2026" */
+  month: string;
+  /** how many project slots are still open */
+  slotsLeft: number;
+  /** total slots we take that month (drives the dots) */
+  slotsTotal: number;
+};
+
 export type ServicePrice = {
   name: string;
   tagline: string;
   href: string;
   icon: Icon;
-  /** brand accent (hex), used as the icon dab */
+  /** brand accent (hex), used for the colour-coding on each row */
   accent: string;
+  /** readable text shade when `accent` is too light for type (e.g. yellow);
+      falls back to `accent` */
+  accentText?: string;
   /** starting price, e.g. "₹12,000" */
   price: string;
   /** billing unit, e.g. "/ project" or "/ month" */
   unit: string;
+  /** what's included, shown as the card's bullet list */
+  points: string[];
+  capacity: ServiceCapacity;
 };
 
 export type ServiceGroup = {
@@ -44,6 +61,13 @@ export const serviceGroups: ServiceGroup[] = [
         accent: "#47143D",
         price: "₹7,000",
         unit: "/ project",
+        points: [
+          "Up to 6 custom-designed pages",
+          "Mobile-first, conversion-focused layouts",
+          "Reusable design system + brand-consistent UI",
+          "2 rounds of revisions",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 4, slotsTotal: 6 },
       },
       {
         name: "Website Development",
@@ -53,6 +77,13 @@ export const serviceGroups: ServiceGroup[] = [
         accent: "#269cef",
         price: "₹12,000",
         unit: "/ project",
+        points: [
+          "Up to 8 hand-coded, responsive pages",
+          "Fast, SEO-ready, clean builds",
+          "CMS or no-code handoff",
+          "Forms, analytics & integrations",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 3, slotsTotal: 5 },
       },
       {
         name: "Shopify Development",
@@ -62,6 +93,13 @@ export const serviceGroups: ServiceGroup[] = [
         accent: "#5e8e3e",
         price: "₹18,000",
         unit: "/ project",
+        points: [
+          "Full Shopify storefront setup",
+          "Up to 20 products loaded",
+          "Payment & shipping configuration",
+          "Theme customization + launch support",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 2, slotsTotal: 4 },
       },
     ],
   },
@@ -76,6 +114,13 @@ export const serviceGroups: ServiceGroup[] = [
         accent: "#be123c",
         price: "₹10,000",
         unit: "/ month",
+        points: [
+          "12-15 scroll-stopping posts a month",
+          "Content calendar + captions",
+          "2 platforms managed end-to-end",
+          "Monthly performance report",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 5, slotsTotal: 8 },
       },
       {
         name: "Search Engine Optimization",
@@ -85,6 +130,13 @@ export const serviceGroups: ServiceGroup[] = [
         accent: "#4ab765",
         price: "₹15,000",
         unit: "/ month",
+        points: [
+          "On-page + technical SEO",
+          "10 target keywords tracked",
+          "Monthly content optimization",
+          "Rank & traffic reporting",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 4, slotsTotal: 6 },
       },
       {
         name: "Digital Marketing",
@@ -92,8 +144,16 @@ export const serviceGroups: ServiceGroup[] = [
         href: "/digital-marketing-company-in-nagpur",
         icon: FileText,
         accent: "#ffcc1c",
+        accentText: "#b45309",
         price: "₹8,000",
         unit: "/ month + ad spend",
+        points: [
+          "Google & Meta ads management",
+          "Campaign setup + ad creatives",
+          "Conversion tracking",
+          "Weekly optimization & reports",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 3, slotsTotal: 6 },
       },
     ],
   },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { serviceGroups } from "@/lib/pricing";
+import { ArrowRight, Check } from "lucide-react";
+import { serviceGroups, type ServicePrice } from "@/lib/pricing";
 import { site } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
@@ -10,7 +10,7 @@ import { breadcrumbLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing. Pay for what you run.",
+    "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing. Limited project slots each month.",
   alternates: { canonical: "/pricing" },
   openGraph: {
     title: "Pricing, Timewheel",
@@ -19,6 +19,124 @@ export const metadata: Metadata = {
     url: "/pricing",
   },
 };
+
+function ServiceRow({ service }: { service: ServicePrice }) {
+  const { icon: Icon, accent, name, tagline, href, price, unit, points, capacity } =
+    service;
+  const { month, slotsLeft, slotsTotal } = capacity;
+  const soldOut = slotsLeft <= 0;
+  // raw accent is used for fills (dab, border, dots); accentText is the
+  // readable shade for type, so light accents like yellow stay legible.
+  const accentText = service.accentText ?? accent;
+
+  return (
+    <div className="grid gap-5 md:grid-cols-3">
+      {/* 66% — pricing / details card */}
+      <div
+        className="flex flex-col rounded-2xl border border-l-4 border-border bg-card p-7 transition-colors hover:border-brand/40 md:col-span-2"
+        style={{ borderLeftColor: accent }}
+      >
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span
+              className="grid size-11 place-items-center rounded-xl"
+              style={{ backgroundColor: `${accent}1f`, color: accent }}
+            >
+              <Icon className="size-5" />
+            </span>
+            <div>
+              <p className="font-bold">{name}</p>
+              <p className="text-xs text-muted-foreground">{tagline}</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+              Starting
+            </p>
+            <div className="flex items-baseline gap-1.5">
+              <span
+                className="text-3xl font-extrabold leading-none"
+                style={{ color: accentText }}
+              >
+                {price}
+              </span>
+              <span className="text-xs text-muted-foreground">{unit}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="my-5 h-px w-full bg-border" />
+
+        <ul className="grid gap-2.5 sm:grid-cols-2">
+          {points.map((pt) => (
+            <li key={pt} className="flex items-start gap-2.5 text-sm">
+              <Check
+                className="mt-0.5 size-4 shrink-0"
+                style={{ color: accentText }}
+              />
+              <span className="text-muted-foreground">{pt}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex items-center gap-4 pt-1">
+          <Link
+            href={site.demoUrl}
+            className="btn btn-primary rounded-lg px-4 py-2 text-sm font-semibold text-brand-foreground"
+          >
+            Get started
+          </Link>
+          <Link href={href} className="text-sm font-semibold hover:text-brand">
+            Learn more
+          </Link>
+        </div>
+      </div>
+
+      {/* 33% — monthly availability counter */}
+      <div
+        className="flex flex-col items-center justify-center rounded-2xl border border-border bg-secondary/40 p-6 text-center"
+        style={{ backgroundColor: `${accent}0d` }}
+      >
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          {month}
+        </p>
+        <p
+          className="mt-1 text-5xl font-extrabold leading-none"
+          style={{ color: soldOut ? undefined : accentText }}
+        >
+          {soldOut ? "0" : slotsLeft}
+        </p>
+        <p className="mt-1 text-sm font-semibold">
+          {soldOut ? "fully booked" : slotsLeft === 1 ? "slot left" : "slots left"}
+        </p>
+
+        <div className="mt-4 flex justify-center gap-1.5">
+          {Array.from({ length: slotsTotal }).map((_, i) => (
+            <span
+              key={i}
+              className="size-2.5 rounded-full"
+              style={{
+                backgroundColor: i < slotsLeft ? accent : "var(--border)",
+              }}
+            />
+          ))}
+        </div>
+
+        <p className="mt-3 text-xs text-muted-foreground">
+          {slotsLeft} of {slotsTotal} project slots open
+        </p>
+
+        <Link
+          href={site.demoUrl}
+          className="mt-5 text-sm font-semibold hover:underline"
+          style={{ color: accentText }}
+        >
+          {soldOut ? "Join the waitlist" : "Reserve a slot"}
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export default function PricingPage() {
   return (
@@ -39,8 +157,8 @@ export default function PricingPage() {
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
           End-to-end tech and marketing, built in Nagpur. Every service has a
-          clear starting price, scope it up from there. No lock-in, no hidden
-          platform fees.
+          clear starting price and a limited number of project slots each month,
+          so the work stays good.
         </p>
       </Reveal>
 
@@ -53,60 +171,10 @@ export default function PricingPage() {
             </h2>
           </Reveal>
 
-          <Reveal stagger className="mt-6 grid gap-5 md:grid-cols-3">
-            {group.services.map((s) => {
-              const { icon: Icon, accent, name, tagline, href, price, unit } = s;
-              return (
-                <div
-                  key={name}
-                  className="flex flex-col rounded-2xl border border-border bg-card p-7 transition-colors hover:border-brand/40"
-                >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="grid size-11 place-items-center rounded-xl"
-                      style={{ backgroundColor: `${accent}1f`, color: accent }}
-                    >
-                      <Icon className="size-5" />
-                    </span>
-                    <div>
-                      <p className="font-bold">{name}</p>
-                      <p className="text-xs text-muted-foreground">{tagline}</p>
-                    </div>
-                  </div>
-
-                  <div className="my-5 h-px w-full bg-border" />
-
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                      Starting
-                    </p>
-                    <div className="mt-1 flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold leading-none">
-                        {price}
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        {unit}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex items-center gap-4 pt-1">
-                    <Link
-                      href={site.demoUrl}
-                      className="btn btn-primary rounded-lg px-4 py-2 text-sm font-semibold text-brand-foreground"
-                    >
-                      Get started
-                    </Link>
-                    <Link
-                      href={href}
-                      className="text-sm font-semibold hover:text-brand"
-                    >
-                      Learn more
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
+          <Reveal stagger className="mt-6 space-y-5">
+            {group.services.map((s) => (
+              <ServiceRow key={s.name} service={s} />
+            ))}
           </Reveal>
         </div>
       ))}
