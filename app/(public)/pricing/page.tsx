@@ -27,19 +27,17 @@ const trust = [
   { icon: MapPin, label: "Built in Nagpur" },
 ];
 
-// Urgency state for the monthly counter: green when open, amber at half,
-// red when almost gone. Colour drives the number, the bar and the badge.
-function availability(slotsLeft: number, slotsTotal: number) {
-  if (slotsLeft <= 0)
-    return { color: "#dc2626", label: "Fully booked" };
+// Scarcity wording for the counter. Colour stays the service's own accent
+// (so the right counter always matches its left card); only the words change.
+function availabilityLabel(
+  slotsLeft: number,
+  slotsTotal: number,
+): string | null {
+  if (slotsLeft <= 0) return "Fully booked";
   if (slotsLeft <= 2)
-    return {
-      color: "#dc2626",
-      label: slotsLeft === 1 ? "Last slot" : `Last ${slotsLeft} slots`,
-    };
-  if (slotsLeft / slotsTotal <= 0.5)
-    return { color: "#d97706", label: "Filling fast" };
-  return { color: "#16a34a", label: null as string | null };
+    return slotsLeft === 1 ? "Last slot" : `Last ${slotsLeft} slots`;
+  if (slotsLeft / slotsTotal <= 0.5) return "Filling fast";
+  return null;
 }
 
 function ServiceRow({ service }: { service: ServicePrice }) {
@@ -59,7 +57,7 @@ function ServiceRow({ service }: { service: ServicePrice }) {
   const accentText = service.accentText ?? accent;
   const billing = unit.toLowerCase().includes("month") ? "Monthly" : "One-time";
 
-  const avail = availability(slotsLeft, slotsTotal);
+  const label = availabilityLabel(slotsLeft, slotsTotal);
   const booked = Math.max(slotsTotal - Math.max(slotsLeft, 0), 0);
   const bookedPct = Math.round((booked / slotsTotal) * 100);
 
@@ -73,16 +71,18 @@ function ServiceRow({ service }: { service: ServicePrice }) {
         )}
         style={featured ? { backgroundColor: accent } : undefined}
       >
-        {featured && (
+        {featured ? (
           <div className="bg-white/15 py-1.5 text-center text-[11px] font-bold uppercase tracking-wider text-white">
             ★ Most popular
           </div>
+        ) : (
+          <div className="h-1.5 w-full" style={{ backgroundColor: accent }} />
         )}
 
         {/* accent header */}
         <div
           className="flex flex-wrap items-start justify-between gap-4 p-6"
-          style={!featured ? { backgroundColor: `${accent}14` } : undefined}
+          style={!featured ? { backgroundColor: `${accent}1a` } : undefined}
         >
           <div className="flex items-center gap-3">
             <span
@@ -198,17 +198,17 @@ function ServiceRow({ service }: { service: ServicePrice }) {
         <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
           {month}
         </p>
-        {avail.label && (
+        {label && (
           <span
             className="mx-auto mt-2 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-            style={{ backgroundColor: `${avail.color}1f`, color: avail.color }}
+            style={{ backgroundColor: `${accent}1f`, color: accentText }}
           >
-            {avail.label}
+            {label}
           </span>
         )}
         <p
           className="mt-2 text-5xl font-extrabold leading-none"
-          style={{ color: avail.color }}
+          style={{ color: accentText }}
         >
           {Math.max(slotsLeft, 0)}
         </p>
@@ -219,7 +219,7 @@ function ServiceRow({ service }: { service: ServicePrice }) {
         <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-border">
           <div
             className="h-full rounded-full"
-            style={{ width: `${bookedPct}%`, backgroundColor: avail.color }}
+            style={{ width: `${bookedPct}%`, backgroundColor: accent }}
           />
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
@@ -229,7 +229,7 @@ function ServiceRow({ service }: { service: ServicePrice }) {
         <Link
           href={site.demoUrl}
           className="mt-5 text-sm font-semibold hover:underline"
-          style={{ color: avail.color }}
+          style={{ color: accentText }}
         >
           {slotsLeft <= 0 ? "Join the waitlist" : "Reserve a slot"}
         </Link>
