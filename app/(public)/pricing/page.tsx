@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BadgeCheck, Check } from "lucide-react";
-import { products } from "@/lib/products";
-import { standardPlan, customPlan, productPricing } from "@/lib/pricing";
+import { ArrowRight, Check, ShieldCheck, CheckCircle2, MapPin } from "lucide-react";
+import { serviceGroups, type ServicePrice } from "@/lib/pricing";
 import { site } from "@/lib/site";
+import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
@@ -11,17 +11,232 @@ import { breadcrumbLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Per-product pricing built for ownership. No fragmented subscriptions, pay only for the systems you actually run.",
+    "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing. Limited project slots each month.",
   alternates: { canonical: "/pricing" },
   openGraph: {
     title: "Pricing, Timewheel",
     description:
-      "Per-product pricing built for ownership. No fragmented subscriptions, pay only for the systems you actually run.",
+      "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing.",
     url: "/pricing",
   },
 };
 
-const bySlug = Object.fromEntries(products.map((p) => [p.slug, p]));
+const trust = [
+  { icon: ShieldCheck, label: "No lock-in" },
+  { icon: CheckCircle2, label: "Pay per milestone" },
+  { icon: MapPin, label: "Built in Nagpur" },
+];
+
+// Urgency state for the monthly counter: green when open, amber at half,
+// red when almost gone. Colour drives the number, the bar and the badge.
+function availability(slotsLeft: number, slotsTotal: number) {
+  if (slotsLeft <= 0)
+    return { color: "#dc2626", label: "Fully booked" };
+  if (slotsLeft <= 2)
+    return {
+      color: "#dc2626",
+      label: slotsLeft === 1 ? "Last slot" : `Last ${slotsLeft} slots`,
+    };
+  if (slotsLeft / slotsTotal <= 0.5)
+    return { color: "#d97706", label: "Filling fast" };
+  return { color: "#16a34a", label: null as string | null };
+}
+
+function ServiceRow({ service }: { service: ServicePrice }) {
+  const {
+    icon: Icon,
+    accent,
+    name,
+    tagline,
+    href,
+    price,
+    unit,
+    points,
+    capacity,
+    featured,
+  } = service;
+  const { month, slotsLeft, slotsTotal } = capacity;
+  const accentText = service.accentText ?? accent;
+  const billing = unit.toLowerCase().includes("month") ? "Monthly" : "One-time";
+
+  const avail = availability(slotsLeft, slotsTotal);
+  const booked = Math.max(slotsTotal - Math.max(slotsLeft, 0), 0);
+  const bookedPct = Math.round((booked / slotsTotal) * 100);
+
+  return (
+    <div className="grid gap-5 md:grid-cols-3">
+      {/* 66% — pricing / details card */}
+      <div
+        className={cn(
+          "group relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg md:col-span-2",
+          featured ? "border-transparent text-white" : "border-border bg-card",
+        )}
+        style={featured ? { backgroundColor: accent } : undefined}
+      >
+        {featured && (
+          <div className="bg-white/15 py-1.5 text-center text-[11px] font-bold uppercase tracking-wider text-white">
+            ★ Most popular
+          </div>
+        )}
+
+        {/* accent header */}
+        <div
+          className="flex flex-wrap items-start justify-between gap-4 p-6"
+          style={!featured ? { backgroundColor: `${accent}14` } : undefined}
+        >
+          <div className="flex items-center gap-3">
+            <span
+              className="grid size-11 place-items-center rounded-xl"
+              style={
+                featured
+                  ? { backgroundColor: "rgba(255,255,255,0.18)", color: "#fff" }
+                  : { backgroundColor: `${accent}1f`, color: accent }
+              }
+            >
+              <Icon className="size-5" />
+            </span>
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-bold">{name}</p>
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
+                    featured
+                      ? "bg-white/20 text-white"
+                      : "bg-secondary text-muted-foreground",
+                  )}
+                >
+                  {billing}
+                </span>
+              </div>
+              <p
+                className={cn(
+                  "text-xs",
+                  featured ? "text-white/80" : "text-muted-foreground",
+                )}
+              >
+                {tagline}
+              </p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p
+              className={cn(
+                "text-[10px] font-medium uppercase tracking-wide",
+                featured ? "text-white/70" : "text-muted-foreground",
+              )}
+            >
+              Starting
+            </p>
+            <div className="flex items-baseline justify-end gap-1.5">
+              <span
+                className="text-3xl font-extrabold leading-none"
+                style={featured ? { color: "#fff" } : { color: accentText }}
+              >
+                {price}
+              </span>
+              <span
+                className={cn(
+                  "text-xs",
+                  featured ? "text-white/80" : "text-muted-foreground",
+                )}
+              >
+                {unit}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* body */}
+        <div className="flex flex-1 flex-col p-6 pt-5">
+          <ul className="grid gap-2.5 sm:grid-cols-2">
+            {points.map((pt) => (
+              <li key={pt} className="flex items-start gap-2.5 text-sm">
+                <Check
+                  className="mt-0.5 size-4 shrink-0"
+                  style={featured ? { color: "#fff" } : { color: accentText }}
+                />
+                <span
+                  className={featured ? "text-white/90" : "text-muted-foreground"}
+                >
+                  {pt}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 flex items-center gap-4 pt-1">
+            <Link
+              href={site.demoUrl}
+              className={cn(
+                "rounded-lg px-4 py-2 text-sm font-semibold",
+                featured
+                  ? "bg-white text-foreground hover:bg-white/90"
+                  : "btn btn-primary text-brand-foreground",
+              )}
+            >
+              Get started
+            </Link>
+            <Link
+              href={href}
+              className={cn(
+                "text-sm font-semibold",
+                featured ? "text-white hover:underline" : "hover:text-brand",
+              )}
+            >
+              Learn more
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 33% — monthly availability counter */}
+      <div
+        className="flex flex-col items-center justify-center rounded-2xl border border-border p-6 text-center transition-all duration-200 hover:shadow-lg"
+        style={{ backgroundColor: `${accent}0d` }}
+      >
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          {month}
+        </p>
+        {avail.label && (
+          <span
+            className="mx-auto mt-2 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
+            style={{ backgroundColor: `${avail.color}1f`, color: avail.color }}
+          >
+            {avail.label}
+          </span>
+        )}
+        <p
+          className="mt-2 text-5xl font-extrabold leading-none"
+          style={{ color: avail.color }}
+        >
+          {Math.max(slotsLeft, 0)}
+        </p>
+        <p className="mt-1 text-sm font-semibold">
+          {slotsLeft === 1 ? "slot left" : "slots left"}
+        </p>
+
+        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-border">
+          <div
+            className="h-full rounded-full"
+            style={{ width: `${bookedPct}%`, backgroundColor: avail.color }}
+          />
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          {booked} of {slotsTotal} booked
+        </p>
+
+        <Link
+          href={site.demoUrl}
+          className="mt-5 text-sm font-semibold hover:underline"
+          style={{ color: avail.color }}
+        >
+          {slotsLeft <= 0 ? "Join the waitlist" : "Reserve a slot"}
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export default function PricingPage() {
   return (
@@ -38,167 +253,62 @@ export default function PricingPage() {
           Pricing
         </p>
         <h1 className="mx-auto mt-3 max-w-3xl text-4xl font-extrabold md:text-6xl">
-          Pricing built for ownership
+          Transparent starting prices
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground">
-          No fragmented subscriptions and no platform commissions skimmed off the
-          top. Pay only for the systems you actually run, transparent, per
-          product.
+          End-to-end tech and marketing, built in Nagpur. Every service has a
+          clear starting price and a limited number of project slots each month,
+          so the work stays good.
         </p>
-      </Reveal>
-
-      {/* standard vs custom */}
-      <Reveal stagger className="mt-14 grid gap-5 md:grid-cols-2">
-        {/* standard */}
-        <div className="relative rounded-3xl border-2 border-brand bg-card p-8">
-          <span className="absolute right-6 top-6 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand">
-            Most popular
-          </span>
-          <h2 className="text-xl font-bold">{standardPlan.name}</h2>
-          <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-            {standardPlan.tagline}
-          </p>
-          <div className="mt-6 flex items-baseline gap-2">
-            <span className="text-4xl font-extrabold">{standardPlan.price}</span>
-            <span className="text-sm text-muted-foreground">
-              {standardPlan.unit}
+        <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          {trust.map(({ icon: Icon, label }) => (
+            <span key={label} className="flex items-center gap-2">
+              <Icon className="size-4 text-brand" />
+              {label}
             </span>
-          </div>
-          <ul className="mt-6 space-y-3">
-            {standardPlan.points.map((p) => (
-              <li key={p} className="flex items-center gap-3 text-sm font-medium">
-                <BadgeCheck className="size-5 shrink-0 text-navy" />
-                {p}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href={site.demoUrl}
-            className="btn btn-primary mt-8 block rounded-lg px-6 py-3 text-center text-sm font-semibold text-brand-foreground"
-          >
-            {standardPlan.cta}
-          </Link>
-        </div>
-
-        {/* custom */}
-        <div className="rounded-3xl border border-border bg-card p-8">
-          <h2 className="text-xl font-bold">{customPlan.name}</h2>
-          <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-            {customPlan.tagline}
-          </p>
-          <div className="mt-6 flex items-baseline gap-2">
-            <span className="text-4xl font-extrabold">{customPlan.price}</span>
-            <span className="text-sm text-muted-foreground">
-              {customPlan.unit}
-            </span>
-          </div>
-          <ul className="mt-6 space-y-3">
-            {customPlan.points.map((p) => (
-              <li key={p} className="flex items-center gap-3 text-sm font-medium">
-                <BadgeCheck className="size-5 shrink-0 text-navy" />
-                {p}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href={site.demoUrl}
-            className="btn btn-outline mt-8 block rounded-lg px-6 py-3 text-center text-sm font-semibold"
-          >
-            {customPlan.cta}
-          </Link>
+          ))}
         </div>
       </Reveal>
 
-      {/* per-product */}
-      <div className="mt-24">
-        <Reveal className="text-center">
-          <h2 className="text-3xl font-extrabold md:text-4xl">
-            Transparent pricing, by product
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-            Every product priced on its own. Mix and match, you only pay for
-            what you run.
-          </p>
-        </Reveal>
-
-        <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-2">
-          {productPricing.map((pp) => {
-            const product = bySlug[pp.slug];
-            if (!product) return null;
-            const { icon: Icon, accent, name, tagline, href } = product;
-            return (
-              <div
-                key={pp.slug}
-                className="flex flex-col rounded-2xl border border-border bg-card p-7 transition-colors hover:border-brand/40"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="grid size-11 place-items-center rounded-xl"
-                      style={{ backgroundColor: `${accent}1f`, color: accent }}
-                    >
-                      <Icon className="size-5" />
-                    </span>
-                    <div>
-                      <p className="font-bold">{name}</p>
-                      <p className="text-xs text-muted-foreground">{tagline}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-extrabold leading-none">
-                      {pp.price}
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {pp.unit}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="my-5 h-px w-full bg-border" />
-
-                <ul className="space-y-2.5">
-                  {pp.points.map((pt) => (
-                    <li key={pt} className="flex items-center gap-2.5 text-sm">
-                      <Check className="size-4 shrink-0 text-rating" />
-                      <span className="text-muted-foreground">{pt}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-6 flex items-center gap-4 pt-1">
-                  <Link
-                    href={site.demoUrl}
-                    className="btn btn-primary rounded-lg px-4 py-2 text-sm font-semibold text-brand-foreground"
-                  >
-                    Get started
-                  </Link>
-                  <Link
-                    href={href}
-                    className="text-sm font-semibold hover:text-brand"
-                  >
-                    Learn more
-                  </Link>
-                </div>
+      {/* service groups */}
+      {serviceGroups.map((group) => {
+        const GroupIcon = group.icon;
+        return (
+          <div key={group.title} className="mt-16">
+            <Reveal className="flex items-center gap-3">
+              <span className="grid size-10 place-items-center rounded-xl bg-secondary text-foreground">
+                <GroupIcon className="size-5" />
+              </span>
+              <div>
+                <h2 className="text-lg font-bold leading-tight">{group.title}</h2>
+                <p className="text-xs text-muted-foreground">{group.subtitle}</p>
               </div>
-            );
-          })}
-        </Reveal>
-      </div>
+            </Reveal>
+
+            <Reveal stagger className="mt-6 space-y-5">
+              {group.services.map((s) => (
+                <ServiceRow key={s.name} service={s} />
+              ))}
+            </Reveal>
+          </div>
+        );
+      })}
 
       {/* closing note + CTA */}
       <Reveal className="mt-20 rounded-3xl border border-border bg-secondary/50 px-8 py-12 text-center">
         <h2 className="text-2xl font-extrabold md:text-3xl">
-          Not sure which systems you need?
+          Not sure where to start?
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-          Book a demo and we&apos;ll map your workflows to the products that fit,
-          no pressure, no lock-in.
+          Tell us your goal and we&apos;ll scope the right mix of services and a
+          clear quote, no pressure, no lock-in.
         </p>
         <Link
           href={site.demoUrl}
-          className="btn btn-primary mt-7 inline-block rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
+          className="btn btn-primary mt-7 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
         >
           Book a Demo
+          <ArrowRight className="size-4" />
         </Link>
       </Reveal>
     </div>

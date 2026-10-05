@@ -1,99 +1,170 @@
-// ponytail: all numbers are PLACEHOLDERS, edit here when real pricing lands.
-// Currency ₹ assumed from timewheel.co.in; swap freely.
+// Starting prices for the six services we sell, grouped Tech / Marketing to
+// match the navbar "What We Built" dropdown (names, taglines, icons, accents
+// and hrefs are kept in sync with components/nav/navbar.tsx).
+//
+// Prices are "Starting ₹X" floors, not fixed quotes. `points` are the
+// inclusions shown on each card, and `capacity` drives the per-service
+// availability counter. Edit everything here, one place.
 
-export const standardPlan = {
-  name: "Standard",
-  tagline: "Pay-as-you-go. No setup fees, no monthly platform tax.",
-  price: "2.5% + ₹5",
-  unit: "per successful transaction",
-  points: [
-    "Every product, ready to use",
-    "Unlimited team members",
-    "Community support",
-  ],
-  cta: "Get started for free",
+import {
+  Code,
+  FileText,
+  MagnifyingGlass,
+  PenNib,
+  ShareNetwork,
+  Storefront,
+} from "@phosphor-icons/react/dist/ssr";
+import type { Icon } from "@phosphor-icons/react";
+
+export type ServiceCapacity = {
+  /** intake month shown on the counter, e.g. "November 2026" */
+  month: string;
+  /** how many project slots are still open */
+  slotsLeft: number;
+  /** total slots we take that month (drives the dots) */
+  slotsTotal: number;
 };
 
-export const customPlan = {
-  name: "Custom",
-  tagline: "Tailored rates for high-volume businesses.",
-  price: "Let's talk",
-  unit: "volume-based pricing",
-  points: [
-    "Dedicated account manager",
-    "Volume-based rates",
-    "Priority implementation & SLA",
-  ],
-  cta: "Contact sales",
-};
-
-export type ProductPrice = {
-  slug: string;
+export type ServicePrice = {
+  name: string;
+  tagline: string;
+  href: string;
+  icon: Icon;
+  /** brand accent (hex), used for the colour-coding on each row */
+  accent: string;
+  /** readable text shade when `accent` is too light for type (e.g. yellow);
+      falls back to `accent` */
+  accentText?: string;
+  /** starting price, e.g. "₹12,000" */
   price: string;
+  /** billing unit, e.g. "/ project" or "/ month" */
   unit: string;
+  /** what's included, shown as the card's bullet list */
   points: string[];
+  capacity: ServiceCapacity;
+  /** render as the filled flagship card with a "Most popular" tag */
+  featured?: boolean;
 };
 
-// keyed by product slug (see lib/products.ts)
-export const productPricing: ProductPrice[] = [
+export type ServiceGroup = {
+  title: string;
+  /** one-line descriptor shown beside the group title */
+  subtitle: string;
+  icon: Icon;
+  services: ServicePrice[];
+};
+
+export const serviceGroups: ServiceGroup[] = [
   {
-    slug: "book-a-sloth",
-    price: "₹19",
-    unit: "/ month",
-    points: ["Up to 500 bookings/mo", "Automated reminders", "Custom booking pages"],
+    title: "Tech",
+    subtitle: "Design it and build it.",
+    icon: Code,
+    services: [
+      {
+        name: "Website Design",
+        tagline: "Interfaces built to convert, not just impress.",
+        href: "/website-design-company-in-nagpur",
+        icon: PenNib,
+        accent: "#47143D",
+        price: "₹7,000",
+        unit: "/ project",
+        points: [
+          "Up to 6 custom-designed pages",
+          "Mobile-first, conversion-focused layouts",
+          "Reusable design system + brand-consistent UI",
+          "2 rounds of revisions",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 4, slotsTotal: 6 },
+      },
+      {
+        name: "Website Development",
+        tagline: "Fast, clean builds that ship on time.",
+        href: "/web-development-company-in-nagpur",
+        icon: Code,
+        accent: "#269cef",
+        price: "₹12,000",
+        unit: "/ project",
+        points: [
+          "Up to 8 hand-coded, responsive pages",
+          "Fast, SEO-ready, clean builds",
+          "CMS or no-code handoff",
+          "Forms, analytics & integrations",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 3, slotsTotal: 5 },
+        featured: true,
+      },
+      {
+        name: "Shopify Development",
+        tagline: "Storefronts tuned to sell.",
+        href: "/shopify-development-company-in-nagpur",
+        icon: Storefront,
+        accent: "#5e8e3e",
+        price: "₹18,000",
+        unit: "/ project",
+        points: [
+          "Full Shopify storefront setup",
+          "Up to 20 products loaded",
+          "Payment & shipping configuration",
+          "Theme customization + launch support",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 2, slotsTotal: 4 },
+      },
+    ],
   },
   {
-    slug: "ticket-dino",
-    price: "2%",
-    unit: "per ticket sold",
-    points: ["Unlimited events", "Real-time attendee analytics", "QR check-in"],
-  },
-  {
-    slug: "the-parliament",
-    price: "₹29",
-    unit: "/ month",
-    points: ["Unlimited members", "Recurring billing", "Access & role control"],
-  },
-  {
-    slug: "coffee-for-me",
-    price: "3%",
-    unit: "per contribution",
-    points: ["Instant payouts", "Supporter messages", "Zero monthly fee"],
-  },
-  {
-    slug: "link-lantern",
-    price: "Free",
-    unit: "forever",
-    points: ["Unlimited links", "Custom profile page", "Basic analytics"],
-  },
-  {
-    slug: "marketing-bug",
-    price: "₹9",
-    unit: "/ month",
-    points: ["Curated failure case studies", "Weekly teardown", "Searchable archive"],
-  },
-  {
-    slug: "alluminaty",
-    price: "₹49",
-    unit: "/ month",
-    points: ["Alumni directory", "Event & fundraising tools", "Verified school badges"],
-  },
-  {
-    slug: "whatsloom",
-    price: "₹25",
-    unit: "/ month",
-    points: ["Automated WhatsApp flows", "Broadcast campaigns", "Template library"],
-  },
-  {
-    slug: "serp-sutra",
-    price: "₹15",
-    unit: "/ month",
-    points: ["Daily rank tracking", "Competitor watch", "Weekly reports"],
-  },
-  {
-    slug: "2b-navodian",
-    price: "Free",
-    unit: "for schools",
-    points: ["Guided JNV enrolment", "Document checklist", "Deadline reminders"],
+    title: "Marketing",
+    subtitle: "Get found and grow it.",
+    icon: MagnifyingGlass,
+    services: [
+      {
+        name: "Social Media Marketing",
+        tagline: "Content that stops the scroll.",
+        href: "/social-media-marketing-company-in-nagpur",
+        icon: ShareNetwork,
+        accent: "#be123c",
+        price: "₹10,000",
+        unit: "/ month",
+        points: [
+          "12-15 scroll-stopping posts a month",
+          "Content calendar + captions",
+          "2 platforms managed end-to-end",
+          "Monthly performance report",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 5, slotsTotal: 8 },
+      },
+      {
+        name: "Search Engine Optimization",
+        tagline: "Rank higher. Get found. Get leads.",
+        href: "/seo-company-in-nagpur",
+        icon: MagnifyingGlass,
+        accent: "#4ab765",
+        price: "₹15,000",
+        unit: "/ month",
+        points: [
+          "On-page + technical SEO",
+          "10 target keywords tracked",
+          "Monthly content optimization",
+          "Rank & traffic reporting",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 4, slotsTotal: 6 },
+      },
+      {
+        name: "Digital Marketing",
+        tagline: "Ad spend that pays back.",
+        href: "/digital-marketing-company-in-nagpur",
+        icon: FileText,
+        accent: "#ffcc1c",
+        accentText: "#b45309",
+        price: "₹8,000",
+        unit: "/ month + ad spend",
+        points: [
+          "Google & Meta ads management",
+          "Campaign setup + ad creatives",
+          "Conversion tracking",
+          "Weekly optimization & reports",
+        ],
+        capacity: { month: "November 2026", slotsLeft: 3, slotsTotal: 6 },
+      },
+    ],
   },
 ];
