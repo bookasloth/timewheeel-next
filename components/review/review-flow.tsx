@@ -2,33 +2,27 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Copy,
-  Pencil,
-  RefreshCw,
-  Star,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ExternalLink, Loader2, Pencil, Star } from "lucide-react";
 import { analytics, EVENTS } from "@/lib/analytics";
 import {
   BRAND,
-  BUSINESS_TYPES,
+  COPIED_RESET_MS,
+  COPY,
   EMPTY_ANSWERS,
-  FEATURE_CHIPS,
   GOOGLE_REVIEW_URL,
-  QUESTIONS,
-  WELCOME,
-  generateReview,
   hasEnoughToGenerate,
+  isHappy,
+  ratingLabel,
+  requestReview,
   type ReviewAnswers,
 } from "@/lib/review";
 
-const LAST_STEP = QUESTIONS.length; // 5
-const RESULT_STEP = LAST_STEP + 1; // 6
+// Three steps: 1 rating, 2 write / private feedback, 3 result / thank-you.
+const STEP_RATING = 1;
+const STEP_WRITE = 2;
+const STEP_RESULT = 3;
+const TOTAL_STEPS = 3;
 
-// Framer-motion step transition (respects the direction of travel).
 const stepVariants = {
   enter: (dir: number) => ({ opacity: 0, x: dir >= 0 ? 24 : -24 }),
   center: { opacity: 1, x: 0 },
@@ -36,95 +30,77 @@ const stepVariants = {
 };
 
 export function ReviewFlow() {
-  const [step, setStep] = useState(0); // 0 welcome, 1..5 questions, 6 result
+  const [step, setStep] = useState(STEP_RATING);
   const [dir, setDir] = useState(1);
   const [answers, setAnswers] = useState<ReviewAnswers>(EMPTY_ANSWERS);
   const [review, setReview] = useState("");
-  const [variant, setVariant] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [writing, setWriting] = useState(false);
   const generatedRef = useRef(false);
+  const advanceTimer = useRef<number | null>(null);
+
+  const happy = isHappy(answers.rating);
 
   useEffect(() => {
     analytics.track(EVENTS.REVIEW_PAGE_VIEWED);
+    return () => {
+      if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    };
   }, []);
 
-  function set<K extends keyof ReviewAnswers>(key: K, value: ReviewAnswers[K]) {
-    setAnswers((a) => ({ ...a, [key]: value }));
+  function pickRating(rating: number) {
+    setAnswers((a) => ({ ...a, rating }));
+    analytics.track(EVENTS.REVIEW_RATING_SELECTED, { rating, happy: isHappy(rating) });
+    // Auto-advance after a beat so the choice registers visually.
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    advanceTimer.current = window.setTimeout(() => {
+      setDir(1);
+      setStep(STEP_WRITE);
+    }, 420);
   }
 
-  function toggleFeature(label: string) {
-    setAnswers((a) => ({
-      ...a,
-      features: a.features.includes(label)
-        ? a.features.filter((f) => f !== label)
-        : [...a.features, label],
-    }));
-  }
-
-  const canAdvance = useMemo(() => {
-    switch (step) {
-      case 1:
-        return answers.businessType !== "" &&
-          (answers.businessType !== "other" || answers.businessTypeOther.trim().length > 1);
-      case 2:
-        return answers.before.trim().length > 1;
-      case 3:
-        return answers.features.length > 0 || answers.featuresOther.trim().length > 1;
-      case 4:
-        return answers.changed.trim().length > 1;
-      case 5:
-        return true; // recommendation is optional
-      default:
-        return true;
-    }
-  }, [step, answers]);
-
-  function goNext() {
-    if (step === LAST_STEP) {
-      // Finishing the questions: generate once we land on the result.
-      if (!hasEnoughToGenerate(answers)) return;
-      const text = generateReview(answers, 0);
+  async function submitWrite() {
+    if (!hasEnoughToGenerate(answers) || writing) return;
+    if (happy) {
+      setWriting(true);
+      const text = await requestReview(answers);
       setReview(text);
-      setVariant(0);
       if (!generatedRef.current) {
-        analytics.track(EVENTS.REVIEW_QUESTIONS_COMPLETED, {
-          business_type: answers.businessType || "unset",
-          features_count: answers.features.length,
-        });
-        analytics.track(EVENTS.REVIEW_GENERATED, { length: text.length });
+        analytics.track(EVENTS.REVIEW_GENERATED, { rating: answers.rating, length: text.length });
         generatedRef.current = true;
       }
+      setWriting(false);
+    } else {
+      analytics.track(EVENTS.REVIEW_FEEDBACK_SUBMITTED, {
+        rating: answers.rating,
+        length: answers.experience.trim().length,
+      });
     }
     setDir(1);
-    setStep((s) => Math.min(RESULT_STEP, s + 1));
+    setStep(STEP_RESULT);
   }
 
   function goBack() {
     setDir(-1);
-    setStep((s) => Math.max(0, s - 1));
-  }
-
-  function rephrase() {
-    const next = variant + 1;
-    setVariant(next);
-    setReview(generateReview(answers, next));
+    setStep((s) => Math.max(STEP_RATING, s - 1));
   }
 
   function startOver() {
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
     setAnswers(EMPTY_ANSWERS);
     setReview("");
-    setVariant(0);
     setCopied(false);
     generatedRef.current = false;
     setDir(-1);
-    setStep(0);
+    setStep(STEP_RATING);
   }
 
-  async function copyReview() {
+  // Copy synchronously inside the click so the browser keeps the user gesture
+  // and the Google link (a real anchor) is never popup-blocked.
+  function copyBeforeGoogle() {
     try {
-      await navigator.clipboard.writeText(review);
+      navigator.clipboard?.writeText(review);
     } catch {
-      // Older browsers / blocked clipboard: fall back to a hidden textarea select.
       const ta = document.createElement("textarea");
       ta.value = review;
       ta.style.position = "fixed";
@@ -134,21 +110,17 @@ export function ReviewFlow() {
       try {
         document.execCommand("copy");
       } catch {
-        /* give up quietly; the text is still editable on screen */
+        /* text is still on screen to copy by hand */
       }
       document.body.removeChild(ta);
     }
     setCopied(true);
     analytics.track(EVENTS.REVIEW_COPIED, { length: review.length });
-    window.setTimeout(() => setCopied(false), 2200);
+    analytics.track(EVENTS.REVIEW_GOOGLE_CLICKED, { rating: answers.rating });
+    window.setTimeout(() => setCopied(false), COPIED_RESET_MS);
   }
 
-  function onGoogleClick() {
-    analytics.track(EVENTS.REVIEW_GOOGLE_CLICKED);
-  }
-
-  const progress =
-    step === 0 ? 0 : step > LAST_STEP ? 100 : Math.round((step / LAST_STEP) * 100);
+  const progress = Math.round((step / TOTAL_STEPS) * 100);
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-10 pt-6 sm:pt-10">
@@ -157,27 +129,20 @@ export function ReviewFlow() {
         <a href="/" className="text-sm font-semibold tracking-tight">
           {BRAND}
         </a>
+        <span className="text-xs text-muted-foreground">
+          Step {step} of {TOTAL_STEPS}
+        </span>
       </header>
 
       {/* Progress */}
-      {step > 0 && step <= LAST_STEP && (
-        <div className="mt-6">
-          <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
-            <span>
-              Question {step} of {LAST_STEP}
-            </span>
-            <span>{progress}%</span>
-          </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-            <motion.div
-              className="h-full rounded-full bg-brand"
-              initial={false}
-              animate={{ width: `${progress}%` }}
-              transition={{ type: "spring", stiffness: 160, damping: 24 }}
-            />
-          </div>
-        </div>
-      )}
+      <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+        <motion.div
+          className="h-full rounded-full bg-brand"
+          initial={false}
+          animate={{ width: `${progress}%` }}
+          transition={{ type: "spring", stiffness: 160, damping: 24 }}
+        />
+      </div>
 
       {/* Steps */}
       <div className="relative flex-1 pt-10">
@@ -189,115 +154,39 @@ export function ReviewFlow() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
           >
-            {step === 0 && <Welcome onStart={goNext} />}
-
-            {step === 1 && (
-              <QuestionShell q={QUESTIONS[0]}>
-                <div className="flex flex-wrap gap-2">
-                  {BUSINESS_TYPES.map((b) => (
-                    <Chip
-                      key={b.id}
-                      active={answers.businessType === b.id}
-                      onClick={() => set("businessType", b.id)}
-                    >
-                      {b.label}
-                    </Chip>
-                  ))}
-                </div>
-                {answers.businessType === "other" && (
-                  <input
-                    autoFocus
-                    value={answers.businessTypeOther}
-                    onChange={(e) => set("businessTypeOther", e.target.value)}
-                    placeholder="What do you do? e.g. tattoo studio"
-                    className={inputCls}
-                  />
-                )}
-                <input
-                  value={answers.city}
-                  onChange={(e) => set("city", e.target.value)}
-                  placeholder="Your city (optional)"
-                  className={`${inputCls} mt-3`}
-                />
-              </QuestionShell>
+            {step === STEP_RATING && (
+              <RatingStep rating={answers.rating} onPick={pickRating} />
             )}
 
-            {step === 2 && (
-              <QuestionShell q={QUESTIONS[1]}>
-                <textarea
-                  autoFocus
-                  value={answers.before}
-                  onChange={(e) => set("before", e.target.value)}
-                  placeholder={QUESTIONS[1].placeholder}
-                  rows={4}
-                  className={textareaCls}
-                />
-              </QuestionShell>
-            )}
-
-            {step === 3 && (
-              <QuestionShell q={QUESTIONS[2]}>
-                <div className="flex flex-wrap gap-2">
-                  {FEATURE_CHIPS.map((f) => (
-                    <Chip key={f} active={answers.features.includes(f)} onClick={() => toggleFeature(f)}>
-                      {f}
-                    </Chip>
-                  ))}
-                </div>
-                <input
-                  value={answers.featuresOther}
-                  onChange={(e) => set("featuresOther", e.target.value)}
-                  placeholder={QUESTIONS[2].placeholder}
-                  className={`${inputCls} mt-3`}
-                />
-              </QuestionShell>
-            )}
-
-            {step === 4 && (
-              <QuestionShell q={QUESTIONS[3]}>
-                <textarea
-                  autoFocus
-                  value={answers.changed}
-                  onChange={(e) => set("changed", e.target.value)}
-                  placeholder={QUESTIONS[3].placeholder}
-                  rows={4}
-                  className={textareaCls}
-                />
-              </QuestionShell>
-            )}
-
-            {step === 5 && (
-              <QuestionShell q={QUESTIONS[4]}>
-                <textarea
-                  autoFocus
-                  value={answers.recommend}
-                  onChange={(e) => set("recommend", e.target.value)}
-                  placeholder={QUESTIONS[4].placeholder}
-                  rows={4}
-                  className={textareaCls}
-                />
-              </QuestionShell>
-            )}
-
-            {step === RESULT_STEP && (
-              <Result
-                review={review}
-                onChange={setReview}
-                copied={copied}
-                onCopy={copyReview}
-                onGoogle={onGoogleClick}
-                onRephrase={rephrase}
-                onStartOver={startOver}
+            {step === STEP_WRITE && (
+              <WriteStep
+                happy={happy}
+                value={answers.experience}
+                onChange={(v) => setAnswers((a) => ({ ...a, experience: v }))}
               />
             )}
+
+            {step === STEP_RESULT &&
+              (happy ? (
+                <Result
+                  rating={answers.rating}
+                  review={review}
+                  onChange={setReview}
+                  copied={copied}
+                  onCopyGoogle={copyBeforeGoogle}
+                  onStartOver={startOver}
+                />
+              ) : (
+                <Thanks />
+              ))}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Footer controls for the question steps */}
-      {step >= 1 && step <= LAST_STEP && (
+      {/* Footer controls for the write step */}
+      {step === STEP_WRITE && (
         <div className="mt-8 flex items-center justify-between gap-3">
           <button
             type="button"
@@ -309,12 +198,21 @@ export function ReviewFlow() {
           </button>
           <button
             type="button"
-            onClick={goNext}
-            disabled={!canAdvance}
+            onClick={submitWrite}
+            disabled={!hasEnoughToGenerate(answers) || writing}
             className="btn btn-primary group inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-brand-foreground disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {step === LAST_STEP ? "Create my review" : "Next"}
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            {writing ? (
+              <>
+                <Loader2 className="size-4 animate-spin" />
+                Writing your review
+              </>
+            ) : (
+              <>
+                {happy ? COPY.write.cta : COPY.feedback.cta}
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </>
+            )}
           </button>
         </div>
       )}
@@ -322,121 +220,101 @@ export function ReviewFlow() {
   );
 }
 
-// ── pieces ──────────────────────────────────────────────────────────────────
+// ── pieces ───────────────────────────────────────────────────────────────────
 const inputCls =
   "w-full rounded-lg border border-border bg-background px-4 py-3 text-base outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/20";
 const textareaCls = `${inputCls} resize-none leading-relaxed`;
 
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
+function RatingStep({ rating, onPick }: { rating: number; onPick: (n: number) => void }) {
+  const [hover, setHover] = useState(0);
+  const shown = hover || rating;
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={`rounded-lg border px-3.5 py-2 text-sm font-medium transition-colors ${
-        active
-          ? "border-brand bg-brand text-brand-foreground"
-          : "border-border bg-card text-foreground hover:border-brand/50"
-      }`}
-    >
-      {children}
-    </button>
+    <div className="pt-4 text-center sm:pt-8">
+      <h1 className="text-2xl font-bold leading-snug tracking-tight sm:text-3xl">
+        {COPY.rating.title}
+      </h1>
+      <p className="mt-2 text-sm text-muted-foreground">{COPY.rating.help}</p>
+
+      <div
+        className="mt-8 flex items-center justify-center gap-1.5"
+        onMouseLeave={() => setHover(0)}
+      >
+        {[1, 2, 3, 4, 5].map((n) => (
+          <button
+            key={n}
+            type="button"
+            aria-label={`${n} star${n > 1 ? "s" : ""}`}
+            onMouseEnter={() => setHover(n)}
+            onFocus={() => setHover(n)}
+            onClick={() => onPick(n)}
+            className="rounded-md p-1 outline-none transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:ring-brand/40"
+          >
+            <Star
+              className={`size-10 transition-colors sm:size-12 ${
+                n <= shown ? "fill-[#fbbc04] text-[#fbbc04]" : "fill-transparent text-border"
+              }`}
+              strokeWidth={1.5}
+            />
+          </button>
+        ))}
+      </div>
+
+      <p className="mt-4 h-5 text-sm font-medium text-brand-text">{ratingLabel(shown)}</p>
+    </div>
   );
 }
 
-function QuestionShell({
-  q,
-  children,
+function WriteStep({
+  happy,
+  value,
+  onChange,
 }: {
-  q: (typeof QUESTIONS)[number];
-  children: React.ReactNode;
+  happy: boolean;
+  value: string;
+  onChange: (v: string) => void;
 }) {
+  const c = happy ? COPY.write : COPY.feedback;
   return (
     <div>
-      <h1 className="text-2xl font-bold leading-snug tracking-tight sm:text-3xl">{q.title}</h1>
-      {q.help && <p className="mt-2 text-sm text-muted-foreground">{q.help}</p>}
-      <div className="mt-6">{children}</div>
-    </div>
-  );
-}
-
-function Welcome({ onStart }: { onStart: () => void }) {
-  return (
-    <div className="pt-6">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-text">
-        {WELCOME.kicker}
-      </p>
-      <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-        {WELCOME.title}
-      </h1>
-      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{WELCOME.body}</p>
-      <ul className="mt-6 space-y-3">
-        {WELCOME.points.map((p) => (
-          <li key={p} className="flex items-start gap-3 text-sm">
-            <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-rating/15 text-rating">
-              <Check className="size-3.5" strokeWidth={3} />
-            </span>
-            <span>{p}</span>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        onClick={onStart}
-        className="btn btn-primary group mt-9 inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-base font-semibold text-brand-foreground sm:w-auto"
-      >
-        {WELCOME.cta}
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-      </button>
-    </div>
-  );
-}
-
-function Stars() {
-  return (
-    <div className="flex gap-0.5" aria-label="Five stars">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="size-5 fill-[#fbbc04] text-[#fbbc04]" strokeWidth={0} />
-      ))}
+      <h1 className="text-2xl font-bold leading-snug tracking-tight sm:text-3xl">{c.title}</h1>
+      <p className="mt-2 text-sm text-muted-foreground">{c.help}</p>
+      <div className="mt-6">
+        <textarea
+          autoFocus
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={c.placeholder}
+          rows={5}
+          className={`${textareaCls} text-base`}
+        />
+      </div>
     </div>
   );
 }
 
 function Result({
+  rating,
   review,
   onChange,
   copied,
-  onCopy,
-  onGoogle,
-  onRephrase,
+  onCopyGoogle,
   onStartOver,
 }: {
+  rating: number;
   review: string;
   onChange: (v: string) => void;
   copied: boolean;
-  onCopy: () => void;
-  onGoogle: () => void;
-  onRephrase: () => void;
+  onCopyGoogle: () => void;
   onStartOver: () => void;
 }) {
   return (
     <div>
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Your review is ready</h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">
-            Written from your answers. Edit anything before you post.
-          </p>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{COPY.result.title}</h1>
+          <p className="mt-1.5 text-sm text-muted-foreground">{COPY.result.help}</p>
         </div>
-        <Stars />
+        <ReadonlyStars rating={rating} />
       </div>
 
       <div className="mt-6">
@@ -447,53 +325,39 @@ function Result({
         <textarea
           value={review}
           onChange={(e) => onChange(e.target.value)}
-          rows={7}
+          rows={6}
           className={`${textareaCls} text-base`}
         />
-        <div className="mt-2 flex items-center justify-between">
-          <button
-            type="button"
-            onClick={onRephrase}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <RefreshCw className="size-3.5" />
-            Rephrase
-          </button>
-          <span className="text-xs text-muted-foreground">{review.trim().length} characters</span>
+        <div className="mt-2 text-right text-xs text-muted-foreground">
+          {review.trim().length} characters
         </div>
       </div>
 
-      <div className="mt-6 space-y-3">
-        <button
-          type="button"
-          onClick={onCopy}
-          disabled={!review.trim()}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3.5 text-base font-semibold text-foreground transition-colors hover:border-brand/50 disabled:opacity-40"
-        >
-          {copied ? (
-            <>
-              <Check className="size-4 text-rating" strokeWidth={3} />
-              Copied
-            </>
-          ) : (
-            <>
-              <Copy className="size-4" />
-              Copy review
-            </>
-          )}
-        </button>
+      <div className="mt-5">
         <a
           href={GOOGLE_REVIEW_URL}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={onGoogle}
-          className="btn btn-primary group inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-base font-semibold text-brand-foreground"
+          onClick={onCopyGoogle}
+          aria-disabled={!review.trim()}
+          className={`btn btn-primary group inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-base font-semibold text-brand-foreground ${
+            review.trim() ? "" : "pointer-events-none opacity-40"
+          }`}
         >
-          Leave Google review
-          <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+          {copied ? (
+            <>
+              <Check className="size-5" strokeWidth={3} />
+              {COPY.result.copied}
+            </>
+          ) : (
+            <>
+              {COPY.result.primary}
+              <ExternalLink className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </>
+          )}
         </a>
-        <p className="text-center text-xs text-muted-foreground">
-          Paste your review on the Google page that opens, then tap post.
+        <p className="mt-2 text-center text-xs text-muted-foreground">
+          Your review is copied, just paste it on the Google page and tap post.
         </p>
       </div>
 
@@ -504,6 +368,42 @@ function Result({
       >
         Start over
       </button>
+    </div>
+  );
+}
+
+function Thanks() {
+  return (
+    <div className="pt-6 text-center">
+      <span className="mx-auto inline-flex size-14 items-center justify-center rounded-full bg-rating/15 text-rating">
+        <Check className="size-7" strokeWidth={3} />
+      </span>
+      <h1 className="mt-6 text-2xl font-bold tracking-tight sm:text-3xl">{COPY.thanks.title}</h1>
+      <p className="mx-auto mt-3 max-w-md text-base leading-relaxed text-muted-foreground">
+        {COPY.thanks.body}
+      </p>
+      <a
+        href="/"
+        className="btn btn-primary mt-8 inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
+      >
+        Back to {BRAND}
+      </a>
+    </div>
+  );
+}
+
+function ReadonlyStars({ rating }: { rating: number }) {
+  return (
+    <div className="flex shrink-0 gap-0.5" aria-label={`${rating} of 5 stars`}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <Star
+          key={n}
+          className={`size-5 ${
+            n <= rating ? "fill-[#fbbc04] text-[#fbbc04]" : "fill-transparent text-border"
+          }`}
+          strokeWidth={1.5}
+        />
+      ))}
     </div>
   );
 }
