@@ -42,16 +42,23 @@ export type ServicePrice = {
   /** what's included, shown as the card's bullet list */
   points: string[];
   capacity: ServiceCapacity;
+  /** render as the filled flagship card with a "Most popular" tag */
+  featured?: boolean;
 };
 
 export type ServiceGroup = {
   title: string;
+  /** one-line descriptor shown beside the group title */
+  subtitle: string;
+  icon: Icon;
   services: ServicePrice[];
 };
 
 export const serviceGroups: ServiceGroup[] = [
   {
     title: "Tech",
+    subtitle: "Design it and build it.",
+    icon: Code,
     services: [
       {
         name: "Website Design",
@@ -84,6 +91,7 @@ export const serviceGroups: ServiceGroup[] = [
           "Forms, analytics & integrations",
         ],
         capacity: { month: "November 2026", slotsLeft: 3, slotsTotal: 5 },
+        featured: true,
       },
       {
         name: "Shopify Development",
@@ -105,6 +113,8 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     title: "Marketing",
+    subtitle: "Get found and grow it.",
+    icon: MagnifyingGlass,
     services: [
       {
         name: "Social Media Marketing",
