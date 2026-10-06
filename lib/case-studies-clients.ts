@@ -21,7 +21,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Mumbai NGO founded in 2022, empowering underprivileged women through skills, education, food support and self-help groups.",
     accent: "#47143D",
-    image: null,
+    image: {
+      src: "/portfolio/DRU Foundation Women Empowerment Poster.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["NGO", "Web Design", "Nonprofit"],
     href: "/case-studies/dru-foundation",
     liveUrl: "https://drufoundation.org/",
@@ -83,7 +87,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Flexible workspace brand in Nagpur and Pune, offering hot desks, dedicated desks, private cabins and meeting rooms.",
     accent: "#7c4dff",
-    image: null,
+    image: {
+      src: "/portfolio/Eureka Coworking_ Good People, Better Ideas.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Coworking", "Web Design", "Local SEO"],
     href: "/case-studies/eureka-coworking",
     liveUrl: "https://eurekacoworking.in/",
@@ -145,7 +153,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Mumbai solar company delivering residential, commercial and industrial systems with end-to-end EPC and subsidy support.",
     accent: "#ff7a3d",
-    image: null,
+    image: {
+      src: "/portfolio/rising-sun.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Solar", "EPC", "Web Design"],
     href: "/case-studies/rising-sun-electric",
     liveUrl: "https://solarrse.com/",
@@ -207,8 +219,12 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "One-stop startup support covering technology, marketing, hiring, compliance, accounting, funding and operations.",
     accent: "#269cef",
-    image: null,
-    tags: ["SaaS", "Web Design", "Service Business"],
+    image: {
+      src: "/portfolio/wecos.png",
+      width: 1200,
+      height: 675,
+    },
+    tags: ["Startup", "Web Design", "Services"],
     href: "/case-studies/wecos",
     liveUrl: "https://wecos.online/",
     meta: { readTime: "2 min", services: ["Web Design", "Development"] },
@@ -269,7 +285,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Founder-led brand site for an SEO, AEO and GEO consultant, packaging productised engagements and case studies.",
     accent: "#35c98a",
-    image: null,
+    image: {
+      src: "/portfolio/shubham-datarkar.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Personal Brand", "SEO", "Web Design"],
     href: "/case-studies/shubham-datarkar",
     liveUrl: "https://shubhamdatarkar.com/",
@@ -331,7 +351,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Ahmedabad film studio delivering ad films, TV commercials, brand films and documentaries with in-house post-production.",
     accent: "#7c4dff",
-    image: null,
+    image: {
+      src: "/portfolio/adetc-studios.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Video", "Production Studio", "Web Design"],
     href: "/case-studies/adetc-studios",
     liveUrl: "https://adetcstudios.com/",
@@ -393,7 +417,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Pan-India UPS provider offering annual maintenance contracts, rental, multi-brand supply and battery replacement.",
     accent: "#ff7a3d",
-    image: null,
+    image: {
+      src: "/portfolio/power-consilium.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Power Systems", "Web Design", "B2B"],
     href: "/case-studies/power-consilium",
     liveUrl: "https://power-consilium.com/",
@@ -455,7 +483,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Architecture and interior design studio presenting residential and commercial design work and project enquiries.",
     accent: "#35c98a",
-    image: null,
+    image: {
+      src: "/portfolio/Ashlar-Studios.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Architecture", "Portfolio", "Web Design"],
     href: "/case-studies/ashlar-studio",
     liveUrl: "https://ashlar-studio.vercel.app/",
@@ -517,7 +549,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Adventure operator running curated Sahyadri, Himalayan and Central India treks, fort cabins and camping.",
     accent: "#47143D",
-    image: null,
+    image: {
+      src: "/portfolio/alpha-adventures.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Travel", "Adventure", "Web Design"],
     href: "/case-studies/alpha-adventures",
     liveUrl: "https://alphaadventures.in/",
@@ -598,7 +634,11 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     summary:
       "Nagpur education consultancy offering career counselling, college planning and study-abroad guidance for MBBS students.",
     accent: "#7c4dff",
-    image: null,
+    image: {
+      src: "/portfolio/edulocus-thmb.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Education", "Consulting", "Web Design"],
     href: "/case-studies/edulocus",
     liveUrl: "https://edulocus.vercel.app/",

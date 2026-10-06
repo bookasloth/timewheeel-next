@@ -47,8 +47,8 @@ function BookASlothVisual() {
     <Frame url="bookasloth.com">
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary/40">
         <Image
-          src="/products/bas-booking-16x9.png"
-          alt="Book A Sloth, a booking platform interface shown in a browser"
+          src="/portfolio/Sloth Booking App Celebration (1).png"
+          alt="Book A Sloth"
           width={720}
           height={405}
           className="absolute inset-0 h-full w-full object-cover object-top"
@@ -61,55 +61,14 @@ function BookASlothVisual() {
 function AlluminatyVisual() {
   return (
     <Frame url="alluminaty.app">
-      <div className="flex aspect-[16/10] bg-white">
-        <div className="flex w-[30%] flex-col gap-1 border-r border-border/70 bg-secondary/40 p-2.5">
-          <span className="text-[8px] font-black tracking-wide" style={{ color: BAS_BLUE }}>
-            Alluminaty
-          </span>
-          {["Directory", "Events", "Mentors", "Giving"].map((l, i) => (
-            <span
-              key={l}
-              className="rounded-md px-1.5 py-1 text-[8px] font-semibold text-muted-foreground"
-              style={i === 0 ? { backgroundColor: BAS_BLUE, color: "#fff" } : undefined}
-            >
-              {l}
-            </span>
-          ))}
-        </div>
-        <div className="flex-1 p-2.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[8px] font-black tracking-tight text-foreground">
-              Class of 2019
-            </span>
-            <span
-              className="rounded-md px-1.5 py-0.5 text-[7px] font-bold text-white"
-              style={{ backgroundColor: BAS_BLUE }}
-            >
-              Add member
-            </span>
-          </div>
-          <div className="mt-2 grid grid-cols-2 gap-1.5">
-            {[
-              { n: "Ananya M", r: "Product · BLR", c: BAS_BLUE },
-              { n: "Kabir R", r: "Eng · PUN", c: "#fe5100" },
-              { n: "Sara D", r: "Finance · MUM", c: "#4ab765" },
-              { n: "Dev P", r: "Founder · DEL", c: BTC_YELLOW },
-            ].map((m) => (
-              <div key={m.n} className="rounded-md border border-border/80 p-1.5">
-                <div className="flex items-center gap-1">
-                  <span
-                    className="grid size-4 place-items-center rounded-full text-[6px] font-black text-white"
-                    style={{ backgroundColor: m.c }}
-                  >
-                    {m.n.charAt(0)}
-                  </span>
-                  <span className="text-[7px] font-bold text-foreground">{m.n}</span>
-                </div>
-                <span className="text-[6px] font-medium text-muted-foreground">{m.r}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="relative aspect-[16/10] overflow-hidden bg-secondary/40">
+        <Image
+          src="/portfolio/Alumni Connections Campus Collage.png"
+          alt="Alluminaty"
+          width={720}
+          height={405}
+          className="absolute inset-0 h-full w-full object-cover object-top"
+        />
       </div>
     </Frame>
   );
@@ -118,46 +77,14 @@ function AlluminatyVisual() {
 function CoffeeVisual() {
   return (
     <Frame url="coffeeandtoffee.in">
-      <div className="flex aspect-[16/10] flex-col gap-2 bg-white p-3">
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1">
-            <Coffee className="size-3" style={{ color: BTC_YELLOW }} />
-            <span className="text-[8px] font-black tracking-tight">Coffee &amp; Toffee</span>
-          </span>
-          <span className="rounded border border-border px-1.5 py-0.5 text-[7px] font-bold text-muted-foreground">
-            Menu
-          </span>
-        </div>
-        <div className="flex items-center gap-2 rounded-lg p-2" style={{ backgroundColor: "#ffcc1c1a" }}>
-          <span
-            className="grid size-8 shrink-0 place-items-center rounded-full text-[9px] font-black text-white"
-            style={{ backgroundColor: BTC_YELLOW }}
-          >
-            PA
-          </span>
-          <div>
-            <span className="block text-[8px] font-black tracking-tight">
-              Pixel &amp; Pin Studio
-            </span>
-            <span className="text-[7px] font-medium text-muted-foreground">
-              128 monthly supporters
-            </span>
-          </div>
-        </div>
-        <div className="flex items-center justify-between rounded-lg border border-border bg-white p-2">
-          <div>
-            <span className="block text-[8px] font-black">Buy a coffee, ₹99</span>
-            <span className="text-[7px] font-medium text-muted-foreground">
-              Funds the next video.
-            </span>
-          </div>
-          <span
-            className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[7px] font-bold text-white"
-            style={{ backgroundColor: BTC_YELLOW }}
-          >
-            <Heart className="size-2 fill-current" /> Support
-          </span>
-        </div>
+      <div className="relative aspect-[16/10] overflow-hidden bg-secondary/40">
+        <Image
+          src="/portfolio/coffee.png"
+          alt="Coffee &amp; Toffee"
+          width={720}
+          height={405}
+          className="absolute inset-0 h-full w-full object-cover object-top"
+        />
       </div>
     </Frame>
   );
