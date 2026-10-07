@@ -98,7 +98,11 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Occasion Cakes baked beautifully but was invisible in local search. Orders came from walk-ins and aggregators that ate the margin. We made search for 'birthday cake near me' surface them.",
     accent: "#F59E0B",
-    image: null,
+    image: {
+      src: "/portfolio/occasion cake.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Local SEO", "Content", "Google Business"],
     href: "/case-studies/occasion-cakes",
     liveUrl: "#",
@@ -209,7 +213,11 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Khiladi Adda was scaling spend while CPI crept up and creative fatigued fast. In a heavily policy-restricted category, we built a compliant hook machine that cut cost-per-install by a third.",
     accent: "#7C3AED",
-    image: null,
+    image: {
+      src: "/portfolio/khiladi adda.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Ad Copy", "Performance", "Creative Testing"],
     href: "/case-studies/khiladi-adda",
     liveUrl: "#",
@@ -320,7 +328,11 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Plotted land is a commodity, so every competitor sold on price and drowned in low-quality leads. We sold the life the land makes possible, and tripled qualified site visits.",
     accent: "#16A34A",
-    image: null,
+    image: {
+      src: "/portfolio/stone acres.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Campaign", "Copywriting", "Performance"],
     href: "/case-studies/stone-acres",
     liveUrl: "#",

@@ -91,13 +91,12 @@ export function SmmHero() {
                   />
                 ))}
               </div>
-              {/* right column: single 9:16 reel, click to play */}
-              {/* Swap `video` for a real 9:16 reel file (e.g. /public/reel.mp4) */}
+              {/* right column: single 9:16 reel, cover image only, opens on Instagram */}
               <div className="h-full pt-10">
                 <SmmReelCard
                   src={smm.hero.gallery[3].src}
                   alt={smm.hero.gallery[3].alt}
-                  video="/coffee.mp4"
+                  href="https://www.instagram.com/reel/DXegKe7CHSK/"
                 />
               </div>
             </div>

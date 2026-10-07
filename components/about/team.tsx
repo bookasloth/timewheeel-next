@@ -3,8 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Only real people belong here. Placeholder profiles were removed because
-// invented team members undermine E-E-A-T. Add Aastha and Durga (photos in
-// public/team) once their roles are confirmed.
+// invented team members undermine E-E-A-T.
 const members = [
   {
     name: "Shubham N Datarkar",
@@ -12,6 +11,20 @@ const members = [
     line: "Founds and leads Timewheel. Ships the studio's own products and runs SEO, AI-search and growth work for clients across India.",
     img: "/team/shubham.png",
     accent: "#fe5100",
+  },
+  {
+    name: "Durga Laxne",
+    role: "Marketing & SEO",
+    line: "Search research and positioning that gets businesses found.",
+    img: "/team/durga.png",
+    accent: "#2563eb",
+  },
+  {
+    name: "Aastha Nikhare",
+    role: "Product & Engineering",
+    line: "Fast, clean builds and launch-ready platforms on modern web tech.",
+    img: "/team/aastha-nikhare.png",
+    accent: "#8b5cf6",
   },
 ];
 

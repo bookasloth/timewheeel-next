@@ -1,7 +1,9 @@
 import { Reveal } from "@/components/reveal";
+import Image from "next/image";
 import { Heart, ChatCircle, BookmarkSimple } from "@phosphor-icons/react/dist/ssr";
 import { smm } from "@/lib/social-media-marketing";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { CarouselScroller } from "./carousel-scroller";
 
 // Illustrative creative gallery — sample post concepts styled as social cards.
 // Not real client work; shows the format range (reel / carousel / story / post).
@@ -23,44 +25,36 @@ export function SmmFeed() {
         {smm.feed.posts.map((p, i) => (
           <Reveal key={p.caption} delay={i * 0.05}>
             <figure className="group overflow-hidden rounded-2xl border border-border bg-card shadow-[0_18px_44px_-30px_rgba(26,29,36,0.4)]">
-              {/* content tile — gradient stand-in for the creative */}
+              {/* content tile — real posts link out; reels embed; rest are creative stand-ins */}
               <div className="relative aspect-[4/5] overflow-hidden bg-black">
-                {p.kind === "Reel" && i === 0 ? (
+                {p.img && p.href && (!p.imgs || p.imgs.length <= 1) ? (
+                  <a href={p.href} target="_blank" rel="noreferrer" className="absolute inset-0 flex h-full w-full" />
+                ) : null}
+                {p.kind === "Reel" ? (
                   <iframe
-                    src="https://www.instagram.com/reel/DLURV6ezU02/embed"
+                    src={p.embedUrl ?? "https://www.instagram.com/reel/DLURV6ezU02/embed"}
                     className="absolute inset-0 h-full w-full border-0"
-                    title="Instagram Reel"
+                    title={p.caption}
                     loading="lazy"
                     scrolling="no"
                     allow="encrypted-media"
                   />
-                ) : p.kind === "Reel" && i === 1 ? (
-                  <iframe
-                    src="https://www.instagram.com/reel/DRn99DVEmyc/embed"
-                    className="absolute inset-0 h-full w-full border-0"
-                    title="Instagram Reel"
-                    loading="lazy"
-                    scrolling="no"
-                    allow="encrypted-media"
-                  />
-                ) : p.kind === "Reel" && i === 4 ? (
-                  <iframe
-                    src="https://www.instagram.com/reel/DRn99DVEmyc/embed"
-                    className="absolute inset-0 h-full w-full border-0"
-                    title="Instagram Reel"
-                    loading="lazy"
-                    scrolling="no"
-                    allow="encrypted-media"
-                  />
-                ) : p.kind === "Reel" ? (
-                  <iframe
-                    src="https://www.instagram.com/reel/DLURV6ezU02/embed"
-                    className="absolute inset-0 h-full w-full border-0"
-                    title="Instagram Reel"
-                    loading="lazy"
-                    scrolling="no"
-                    allow="encrypted-media"
-                  />
+                ) : p.imgs ? (
+                  <CarouselScroller imgs={p.imgs} caption={p.caption} href={p.href} />
+                ) : p.img ? (
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={p.img}
+                      alt={p.caption}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <p className="absolute inset-x-4 bottom-4 text-lg font-bold leading-snug text-white drop-shadow-sm">
+                      {p.caption}
+                    </p>
+                  </div>
                 ) : (
                   <div
                     className="relative h-full w-full"
@@ -69,9 +63,6 @@ export function SmmFeed() {
                     }}
                   >
                     <div className="absolute inset-0 opacity-25 mix-blend-overlay [background:radial-gradient(circle_at_30%_20%,#fff_0,transparent_45%)]" />
-                    <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy">
-                      {p.kind}
-                    </span>
                     <p className="absolute inset-x-4 bottom-4 text-lg font-bold leading-snug text-white drop-shadow-sm">
                       {p.caption}
                     </p>
