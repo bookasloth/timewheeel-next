@@ -53,7 +53,6 @@ export type PayRequest = {
   email: string;
   phone?: string;
   source?: string;
-  company_website?: string; // honeypot, rejected server-side when filled
 };
 
 // Full flow: order -> Zoho session -> widget -> server verify.
