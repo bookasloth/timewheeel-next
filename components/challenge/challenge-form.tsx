@@ -5,14 +5,17 @@ import { motion } from "framer-motion";
 import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
 import { getAttribution } from "@/lib/attribution";
-import { ArrowRight, CheckCircle2, PartyPopper, User, Mail, Phone, Globe, PencilLine } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, PartyPopper, User, Mail, Phone, Globe, PencilLine, ShieldCheck } from "lucide-react";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
+import { OUTCOME_TEXT, PAY_MAX, payWithZoho, type Outcome } from "@/lib/zoho-checkout";
 
 // Signup form for the "30 days, 30 websites" challenge. Posts to /api/lead
 // (source + service fixed here) so it reuses the existing SMTP notification,
 // honeypot, rate limit and validation. The one extra field is "budget":
-// pay what you want, ₹0 and up, with quick-pick chips for feel.
+// pay what you want, ₹0 and up, with quick-pick chips for feel. A paid price
+// opens Zoho checkout (same flow as /pay) right after the signup is saved, so a
+// closed or failed payment never costs anyone their spot.
 
 type FieldName = "name" | "business" | "email" | "phone" | "budget" | "message";
 
@@ -38,6 +41,7 @@ function validate(v: FormState["values"]): Partial<Record<FieldName, string>> {
   // budget: any whole number >= 0, including 0.
   if (!v.budget.trim()) e.budget = "Name your price. Free is welcome.";
   else if (!/^\d+$/.test(v.budget.trim())) e.budget = "Enter a whole number (₹0 or more).";
+  else if (Number(v.budget.trim()) > PAY_MAX) e.budget = `Online payments go up to ₹${PAY_MAX.toLocaleString("en-IN")}.`;
   if (!v.message.trim() || v.message.trim().length < 10) e.message = "Tell us a little more (10+ characters).";
   return e;
 }
@@ -62,6 +66,9 @@ export function ChallengeForm() {
   const hp = useHoneypot();
   const [consent, setConsent] = useState(false);
   const ft = useFormTracking("30-day-challenge");
+  const [pay, setPay] = useState<Outcome | "opening" | null>(null);
+  const [payError, setPayError] = useState("");
+  const price = /^\d+$/.test(form.values.budget.trim()) ? Number(form.values.budget.trim()) : 0;
 
   function set(field: FieldName, value: string) {
     ft.onInteract();
@@ -101,9 +108,28 @@ export function ChallengeForm() {
       ft.onSubmitted();
       setStatus("success");
       trackLead("30-day-challenge", { value: form.values.budget, eventId: data?.eventId });
+      if (price > 0) void checkout();
     } catch {
       setStatus("error");
       setErrorMsg("Network error, please try again.");
+    }
+  }
+
+  async function checkout() {
+    setPay("opening");
+    setPayError("");
+    try {
+      setPay(await payWithZoho({
+        amount: price,
+        purpose: `30 Days, 30 Websites: ${form.values.business.trim()}`.slice(0, 200),
+        name: form.values.name.trim(),
+        email: form.values.email.trim(),
+        phone: form.values.phone.trim(),
+        source: "30-days-challenge",
+      }));
+    } catch (err) {
+      setPay(null);
+      setPayError(err instanceof Error ? err.message : "Couldn't open the payment window. Please try again.");
     }
   }
 
@@ -129,6 +155,41 @@ export function ChallengeForm() {
         <p className="mx-auto mt-4 max-w-md text-muted-foreground">
           Spot claimed. I&apos;ll reach out on your email or phone with the next step. Your website is coming.
         </p>
+        {price > 0 && (
+          <div className="mx-auto mt-8 max-w-sm rounded-2xl border border-border bg-background/60 p-5">
+            {pay === "paid" ? (
+              <p className="flex items-center justify-center gap-2 text-sm font-semibold text-foreground">
+                <CheckCircle2 className="size-4 shrink-0 text-rating" />
+                {inr(String(price))} received. Your receipt is on its way to {form.values.email.trim()}.
+              </p>
+            ) : pay === "opening" ? (
+              <p className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="size-4 animate-spin" /> Opening secure checkout for {inr(String(price))}…
+              </p>
+            ) : (
+              <>
+                {pay && (
+                  <p role="status" className={`text-sm ${OUTCOME_TEXT[pay].tone === "bad" ? "text-destructive" : "text-muted-foreground"}`}>
+                    {OUTCOME_TEXT[pay].text}
+                  </p>
+                )}
+                {payError && <p role="alert" className="text-sm text-destructive">{payError}</p>}
+                {pay !== "processing" && (
+                  <>
+                    <button
+                      type="button" onClick={checkout}
+                      className="group btn btn-primary mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-brand-foreground"
+                    >
+                      Pay {inr(String(price))} now
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    </button>
+                    <p className="mt-2 text-xs text-muted-foreground">Your spot is saved either way.</p>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </motion.div>
     );
   }
@@ -250,7 +311,7 @@ export function ChallengeForm() {
         type="submit" disabled={status === "submitting"} whileTap={{ scale: 0.98 }}
         className="group btn btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-brand-foreground disabled:opacity-60"
       >
-        {status === "submitting" ? "Claiming your spot…" : "Claim my spot"}
+        {status === "submitting" ? "Claiming your spot…" : price > 0 ? `Claim my spot and pay ${inr(String(price))}` : "Claim my spot"}
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
       </motion.button>
 
@@ -260,6 +321,11 @@ export function ChallengeForm() {
       <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs text-muted-foreground">
         <CheckCircle2 className="size-3.5 text-rating" /> Free or paid, everyone gets a real website.
       </p>
+      {price > 0 && (
+        <p className="mt-1.5 flex items-center justify-center gap-1.5 text-center text-xs text-muted-foreground">
+          <ShieldCheck className="size-3.5" /> Secured by Zoho Payments. UPI, cards and net banking.
+        </p>
+      )}
     </form>
   );
 }
