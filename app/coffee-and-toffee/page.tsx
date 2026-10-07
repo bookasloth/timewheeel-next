@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/coffee-and-toffee" },
   openGraph: {
     type: "website",
+    url: "/coffee-and-toffee",
     title: cf.meta.title,
     description: cf.meta.description,
     siteName: "Timewheel",
@@ -36,7 +37,9 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description: cf.meta.description,
-  author: { "@type": "Organization", name: "Timewheel" },
+  url: "https://timewheel.co.in/coffee-and-toffee",
+  author: { "@type": "Organization", "@id": "https://timewheel.co.in/#organization", name: "Timewheel" },
+  publisher: { "@id": "https://timewheel.co.in/#organization" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
 };
 

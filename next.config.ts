@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Baseline security headers (live site only sent HSTS). No CSP on purpose:
+  // a strict policy would break GTM and the Meta pixel.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
+        ],
+      },
+    ];
+  },
   // 301s from the pre-rename URLs so inbound links + rankings survive the move
   // to the unified <service>-company-in-nagpur structure.
   async redirects() {

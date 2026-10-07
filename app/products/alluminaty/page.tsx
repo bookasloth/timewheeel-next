@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: az.meta.description,
   openGraph: {
     type: "website",
+    url: "/products/alluminaty",
     title: az.meta.title,
     description: az.meta.description,
     siteName: "Timewheel",
@@ -36,7 +37,9 @@ const jsonLd = {
   applicationCategory: "CommunityApplication",
   operatingSystem: "Web",
   description: az.meta.description,
-  author: { "@type": "Organization", name: "Timewheel" },
+  url: "https://timewheel.co.in/products/alluminaty",
+  author: { "@type": "Organization", "@id": "https://timewheel.co.in/#organization", name: "Timewheel" },
+  publisher: { "@id": "https://timewheel.co.in/#organization" },
   offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
 };
 

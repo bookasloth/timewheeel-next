@@ -6,8 +6,8 @@ import { site } from "@/lib/site";
 
 type Thing = Record<string, unknown>;
 
-const ORG_ID = `${site.url}/#organization`;
-const SITE_ID = `${site.url}/#website`;
+export const ORG_ID = `${site.url}/#organization`;
+export const SITE_ID = `${site.url}/#website`;
 
 // Only real social profiles, placeholder "#" links are dropped.
 const sameAs = Object.values(site.social).filter((u) => u !== "#");
@@ -147,8 +147,45 @@ export function localBusinessLd(): Thing {
     },
     hasMap: `https://www.google.com/maps/search/?api=1&query=${site.contact.geo.lat},${site.contact.geo.lng}`,
     areaServed: { "@type": "City", name: site.contact.city },
-    // ponytail: keep in sync with site.contact.hours (human string), schema needs machine format.
-    openingHours: "Mo-Sa 10:00-19:00",
+    openingHours: site.contact.openingHours,
+    parentOrganization: { "@id": ORG_ID },
     ...(sameAs.length ? { sameAs } : {}),
+  };
+}
+
+/** Reference to the canonical Organization node, so every page links into one entity graph. */
+export const orgRef = (): Thing => ({ "@id": ORG_ID });
+
+/** WebPage-family node (AboutPage, ContactPage, CollectionPage...) tied to the WebSite + Org. */
+export function webPageLd(opts: {
+  type?: string;
+  name: string;
+  path: string;
+  description?: string;
+  mainEntity?: Thing;
+}): Thing {
+  const url = `${site.url}${opts.path}`;
+  return {
+    "@type": opts.type ?? "WebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: opts.name,
+    ...(opts.description ? { description: opts.description } : {}),
+    isPartOf: { "@id": SITE_ID },
+    publisher: { "@id": ORG_ID },
+    ...(opts.mainEntity ? { mainEntity: opts.mainEntity } : {}),
+  };
+}
+
+/** ItemList of internal URLs (for CollectionPage mainEntity). */
+export function itemListLd(items: { name: string; path: string }[]): Thing {
+  return {
+    "@type": "ItemList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: `${site.url}${it.path}`,
+    })),
   };
 }
