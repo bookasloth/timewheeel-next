@@ -4,24 +4,24 @@ import { RevealHeading } from "@/components/anim/reveal-heading";
 
 const members = [
   {
-    name: "Devika Rao",
-    role: "Design Lead",
+    name: "Shubham Datarkar",
+    role: "Founder & Design",
     line: "Brand identity, interfaces and the detail that makes products feel intentional.",
-    img: "https://picsum.photos/seed/timewheel-devika/600/750",
+    img: "/team/shubham.png",
     accent: "#fe5100",
   },
   {
-    name: "Arjun Mehta",
-    role: "Engineering Lead",
-    line: "Fast, clean builds and launch-ready platforms on modern web tech.",
-    img: "https://picsum.photos/seed/timewheel-arjun/600/750",
+    name: "Durga Laxne",
+    role: "Marketing & SEO",
+    line: "Search research and positioning that gets businesses found.",
+    img: "/team/durga.png",
     accent: "#2563eb",
   },
   {
-    name: "Isha Patil",
-    role: "Strategy & SEO",
-    line: "Search research and positioning that gets businesses found.",
-    img: "https://picsum.photos/seed/timewheel-isha/600/750",
+    name: "Aastha Nikhare",
+    role: "Product & Engineering",
+    line: "Fast, clean builds and launch-ready platforms on modern web tech.",
+    img: "/team/aastha-nikhare.png",
     accent: "#8b5cf6",
   },
 ];

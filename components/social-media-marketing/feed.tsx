@@ -1,3 +1,4 @@
+import  from "next/image";
 import { Reveal } from "@/components/reveal";
 import { Heart, ChatCircle, BookmarkSimple } from "@phosphor-icons/react/dist/ssr";
 import { smm } from "@/lib/social-media-marketing";
@@ -61,11 +62,35 @@ export function SmmFeed() {
                     scrolling="no"
                     allow="encrypted-media"
                   />
+                ) : p.img ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open the ${p.kind} on Instagram`}
+                    className="relative block h-full w-full"
+                  >
+                    <
+                      src={p.img}
+                      alt={p.caption}
+                      fill
+                      sizes="(min-width: 1024px) 31vw, (min-width: 640px) 48vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    {/* bottom gradient for caption legibility */}
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent" />
+                    <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy">
+                      {p.kind}
+                    </span>
+                    <p className="absolute inset-x-4 bottom-4 text-lg font-bold leading-snug text-white drop-shadow-sm">
+                      {p.caption}
+                    </p>
+                  </a>
                 ) : (
                   <div
                     className="relative h-full w-full"
                     style={{
-                      backgroundImage: `linear-gradient(150deg, ${p.tone} 0%, ${p.tone}b3 55%, ${p.tone}66 100%)`,
+                      background: `linear-gradient(150deg, ${p.tone} 0%, ${p.tone}b3 55%, ${p.tone}66 100%)`,
                     }}
                   >
                     <div className="absolute inset-0 opacity-25 mix-blend-overlay [background:radial-gradient(circle_at_30%_20%,#fff_0,transparent_45%)]" />

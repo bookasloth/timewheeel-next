@@ -85,9 +85,9 @@ export const smm = {
       { kind: "Reel", caption: "Launch teaser, 15s hook-led edit", tone: P },
       { kind: "Carousel", caption: "5-slide how-to your audience saves", tone: V },
       { kind: "Story", caption: "Behind-the-scenes with a poll sticker", tone: O },
-      { kind: "Post", caption: "Bold quote card in brand type", tone: B },
-      { kind: "Reel", caption: "Trend-jack cut to your product", tone: G },
-      { kind: "Carousel", caption: "Before / after in three frames", tone: Y },
+      { kind: "Carousel", caption: "Gastrodoc Amarnath — Carousel", tone: O, href: "https://www.instagram.com/p/DJtAP20o5ay/" },
+      { kind: "Carousel", caption: "Raka Entertainment — Carousel", tone: Y, href: "https://www.instagram.com/p/DNZfpl8zsv9/" },
+      { kind: "Carousel", caption: "Everything Powerlifting — Carousel", tone: V, href: "https://www.instagram.com/p/DT65kV_gbEx/" },
     ],
   },
 
