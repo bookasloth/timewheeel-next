@@ -13,7 +13,7 @@ const baseMetadata: Metadata = {
     "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
 };
 
-const PER_PAGE = 6;
+const PER_PAGE = 12;
 
 type Props = { searchParams: Promise<{ page?: string }> };
 

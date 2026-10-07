@@ -4,7 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import type { CaseStudy } from "@/lib/case-studies";
 
 export function CaseStudyCard({ cs }: { cs: CaseStudy }) {
-  const imgSrc = `https://picsum.photos/seed/${cs.slug}/900/600`;
+  const imgSrc =
+    cs.image?.src ?? `https://picsum.photos/seed/${cs.slug}/900/600`;
 
   return (
     <Link

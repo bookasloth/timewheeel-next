@@ -19,7 +19,11 @@ export const productCaseStudies: CaseStudy[] = [
     summary:
       "A modern social network for alumni. Graduates discover each other by batch, city, company or profession, build professional profiles, find mentors, share opportunities and stay connected for life.",
     accent: "#269cef",
-    image: null,
+    image: {
+      src: "/portfolio/Alumni Connections Campus Collage.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Product Design", "Web App", "Dashboard", "Membership"],
     href: "/case-studies/alluminaty",
     liveUrl: "/products/alluminaty",
@@ -97,7 +101,11 @@ export const productCaseStudies: CaseStudy[] = [
     summary:
       "An India-first appointment booking and scheduling platform. 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, automatic WhatsApp and email reminders, and GST invoicing.",
     accent: "#fe5100",
-    image: null,
+    image: {
+      src: "/portfolio/Sloth Booking App Celebration (1).png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Product Design", "Design System", "Payments", "Scheduling"],
     href: "/case-studies/book-a-sloth",
     liveUrl: "https://bookasloth.com",
@@ -177,7 +185,11 @@ export const productCaseStudies: CaseStudy[] = [
     summary:
       "A creator monetization platform where audiences support creators through simple, meaningful contributions. Sustainable income for creators, and a direct line to the community that funds it.",
     accent: "#ffcc1c",
-    image: null,
+    image: {
+      src: "/portfolio/coffee.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Product Design", "Payments", "Creator Tools", "Payouts"],
     href: "/case-studies/coffee-for-me",
     meta: { readTime: "3 min", services: ["Product Design", "UI / UX", "Payments"] },
@@ -254,7 +266,11 @@ export const productCaseStudies: CaseStudy[] = [
     summary:
       "An event ticketing and management platform for organizers who need reliability at scale: ticket sales, attendee management, real-time analytics and operational workflows.",
     accent: "#269cef",
-    image: null,
+    image: {
+      src: "/portfolio/ticket.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Product Design", "Ticketing", "Analytics", "Scale"],
     href: "/case-studies/ticket-dino",
     liveUrl: "/products/ticket-dino",
@@ -332,7 +348,11 @@ export const productCaseStudies: CaseStudy[] = [
     summary:
       "Membership and subscription management for communities, organizations and digital institutions: recurring memberships, secure payments, engagement and access control in one place.",
     accent: "#ff4d93",
-    image: null,
+    image: {
+      src: "/portfolio/Alumni Connections Campus Collage.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Membership", "Subscriptions", "Access Control", "Payments"],
     href: "/case-studies/the-parliament",
     meta: { readTime: "3 min", services: ["Product Design", "UI / UX", "Membership"] },
@@ -402,371 +422,6 @@ export const productCaseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "link-lantern",
-    name: "Link Lantern",
-    tagline: "One link that holds a whole profile",
-    category: "Profiles · Link in Bio",
-    summary:
-      "A link and profile page for sharing work, writing and contact details from a single URL, with unlimited links and basic analytics at no monthly cost.",
-    accent: "#4ab765",
-    image: null,
-    tags: ["Product Design", "Profiles", "Analytics"],
-    href: "/case-studies/link-lantern",
-    meta: { readTime: "2 min", services: ["Product Design", "UI / UX"] },
-    content: {
-      hero: {
-        title: "One link.",
-        titleAccent: "Everything you make.",
-        summary:
-          "Link Lantern is a profile page for the people whose work is scattered across a dozen platforms and needs one durable URL to point at.",
-        primaryCta: { label: "Book a call", href: "/book-a-demo" },
-        secondaryCta: { label: "More case studies", href: "/case-studies" },
-      },
-      stats: [
-        { value: "Free", label: "forever" },
-        { value: "Unlimited", label: "links" },
-        { value: "Custom", label: "profile page" },
-        { value: "Basic", label: "analytics" },
-      ],
-      sections: [
-        {
-          eyebrow: "The Challenge",
-          title: "The bio link became a bottleneck.",
-          body: "The one-link page solved a 2018 problem and then kept the problem shape. A fixed slot list, a preview that no longer looks like the profile, and no idea which links anyone actually clicks.",
-          bullets: [
-            "One destination forced for a body of work",
-            "No signal on which links get used",
-            "Pages that drift out of sync with the profiles they replace",
-          ],
-        },
-        {
-          eyebrow: "The Approach",
-          title: "Free at the base, honest about the ceiling.",
-          body: "The interesting constraint here was price. A link page is infrastructure, not a premium product, so the base plan stays free and complete for the common case, with analytics included rather than held back.",
-          bullets: [
-            "Unlimited links on the free plan",
-            "Custom profile page rather than a fixed template",
-            "Basic analytics so links can be judged on clicks",
-          ],
-        },
-        {
-          eyebrow: "Status",
-          title: "Early, and deliberately unpriced up.",
-          body: "The plan is free forever with unlimited links, a custom profile page and basic analytics. No monthly fee is attached to the base product. More detail on the roadmap hasn't been published yet, so treat this entry as a starting point rather than a finished case study.",
-        },
-      ],
-      closing: {
-        title: "Want your links in one place?",
-        body: "Tell us what you need to share and we'll show you how Link Lantern handles it.",
-        ctaLabel: "Book a call",
-        ctaHref: "/book-a-demo",
-      },
-    },
-    faq: [
-      {
-        q: "What is Link Lantern?",
-        a: "A link and profile page for sharing work, writing and contact details from a single URL.",
-      },
-      {
-        q: "How much does it cost?",
-        a: "Free forever, including unlimited links, a custom profile page and basic analytics.",
-      },
-    ],
-  },
-  {
-    slug: "marketing-bug",
-    name: "Marketing Bug",
-    tagline: "Learn from campaigns that failed",
-    category: "Marketing · Research",
-    summary:
-      "A research product for marketers: curated failure case studies, weekly teardowns of campaigns that did not work, and a searchable archive to learn from.",
-    accent: "#fe5100",
-    image: null,
-    tags: ["Product Design", "Research", "Content"],
-    href: "/case-studies/marketing-bug",
-    meta: { readTime: "2 min", services: ["Product Design", "Content"] },
-    content: {
-      hero: {
-        title: "Study the campaigns",
-        titleAccent: "that did not work.",
-        summary:
-          "Marketing Bug is built on a contrarian idea: failures are more instructive than wins, so they get documented properly instead of quietly deleted.",
-        primaryCta: { label: "Book a call", href: "/book-a-demo" },
-        secondaryCta: { label: "More case studies", href: "/case-studies" },
-      },
-      stats: [
-        { value: "₹9", label: "per month" },
-        { value: "Weekly", label: "teardown" },
-        { value: "Curated", label: "failure case studies" },
-        { value: "Searchable", label: "archive" },
-      ],
-      sections: [
-        {
-          eyebrow: "The Challenge",
-          title: "Marketing post-mortems do not survive.",
-          body: "Every team runs campaigns that fail and almost none of them write down why. The analysis lives in someone's head for about a fortnight, then the account is deleted and the next team repeats the same spend against the same mistake.",
-          bullets: [
-            "Failed campaigns deleted rather than analysed",
-            "Lessons held informally and lost with staff turnover",
-            "No shared reference to check a decision against",
-          ],
-        },
-        {
-          eyebrow: "The Approach",
-          title: "Archive the losses.",
-          body: "We inverted the usual format. Instead of celebrating wins, each entry records what was run, what it cost, what was expected and what happened, so the archive compounds as a body of evidence rather than a trophy shelf.",
-          bullets: [
-            "Curated failure case studies as the primary content",
-            "A weekly teardown of a campaign that underperformed",
-            "Searchable archive, so a lesson is findable before the same budget is spent",
-          ],
-        },
-        {
-          eyebrow: "What's Shipped",
-          title: "Priced as a reference, not a course.",
-          body: "The published plan is ₹9 per month for the curated failure case studies, the weekly teardown and the searchable archive. The build is content and retrieval work rather than software, and the price reflects that.",
-        },
-      ],
-      closing: {
-        title: "Learning from other people's failures?",
-        body: "Tell us which channel keeps surprising you, and we'll show you what the archive covers.",
-        ctaLabel: "Book a call",
-        ctaHref: "/book-a-demo",
-      },
-    },
-    faq: [
-      {
-        q: "What is Marketing Bug?",
-        a: "A research product for marketers, built around curated failure case studies, a weekly campaign teardown and a searchable archive of campaigns that did not work.",
-      },
-      {
-        q: "How much does it cost?",
-        a: "₹9 per month for the curated failure case studies, the weekly teardown and the searchable archive.",
-      },
-    ],
-  },
-  {
-    slug: "whatsloom",
-    name: "WhatsLoom",
-    tagline: "WhatsApp workflows on autopilot",
-    category: "Messaging · Automation",
-    summary:
-      "A WhatsApp automation platform: automated message flows, broadcast campaigns and a reusable template library, so customer conversations run without manual follow-up.",
-    accent: "#4ab765",
-    image: null,
-    tags: ["Automation", "WhatsApp", "Messaging", "Campaigns"],
-    href: "/case-studies/whatsloom",
-    meta: { readTime: "2 min", services: ["Product Design", "Automation"] },
-    content: {
-      hero: {
-        title: "Conversations that keep going",
-        titleAccent: "without you.",
-        summary:
-          "WhatsLoom turns the follow-up work that eats an afternoon into automated WhatsApp flows and broadcast campaigns, built from a reusable template library.",
-        primaryCta: { label: "Book a call", href: "/book-a-demo" },
-        secondaryCta: { label: "More case studies", href: "/case-studies" },
-      },
-      stats: [
-        { value: "₹25", label: "per month" },
-        { value: "Automated", label: "WhatsApp flows" },
-        { value: "Broadcast", label: "campaigns" },
-        { value: "Template", label: "library" },
-      ],
-      sections: [
-        {
-          eyebrow: "The Challenge",
-          title: "The channel customers prefer is the one nobody can automate.",
-          body: "Most customers would rather message than call or email, so the work lands in a personal WhatsApp account. That makes it impossible to template, schedule, or hand over, and the follow-up depends on whoever replied last.",
-          bullets: [
-            "Customer conversations trapped in personal accounts",
-            "Repeated messages retyped from scratch every time",
-            "No record of what was sent or when",
-          ],
-        },
-        {
-          eyebrow: "The Approach",
-          title: "Automate the repetitive, keep a person for the rest.",
-          body: "We targeted the messages that are genuinely identical between customers, and left anything requiring judgement to a human. The template library is the core of it, so a workflow is assembled from proven messages instead of starting blank.",
-          bullets: [
-            "Automated WhatsApp flows for the repeatable messages",
-            "Broadcast campaigns for announcements and offers",
-            "Template library so common replies are written once",
-          ],
-        },
-        {
-          eyebrow: "What's Shipped",
-          title: "Templated first, automated second.",
-          body: "The published plan is ₹25 per month and covers automated WhatsApp flows, broadcast campaigns and the template library. Flow detail beyond the published feature list hasn't been documented publicly, so this entry covers the product's stated scope.",
-        },
-      ],
-      closing: {
-        title: "Drowning in WhatsApp follow-ups?",
-        body: "Tell us which conversations eat the most time and we'll show you what can be automated.",
-        ctaLabel: "Book a call",
-        ctaHref: "/book-a-demo",
-      },
-    },
-    faq: [
-      {
-        q: "What does WhatsLoom do?",
-        a: "Automates WhatsApp messaging for businesses, with automated flows, broadcast campaigns and a template library for common replies.",
-      },
-      {
-        q: "How much does it cost?",
-        a: "₹25 per month, including automated WhatsApp flows, broadcast campaigns and the template library.",
-      },
-    ],
-  },
-  {
-    slug: "serp-sutra",
-    name: "SERP Sutra",
-    tagline: "Daily visibility into how you rank",
-    category: "SEO · Analytics",
-    summary:
-      "An SEO visibility monitor: daily rank tracking, competitor watch and weekly reports, so a team can see movement without living in a spreadsheet.",
-    accent: "#ff4d93",
-    image: null,
-    tags: ["SEO", "Analytics", "Reporting", "Tracking"],
-    href: "/case-studies/serp-sutra",
-    meta: { readTime: "2 min", services: ["Product Design", "Analytics"] },
-    content: {
-      hero: {
-        title: "Know where you rank",
-        titleAccent: "before the monthly report.",
-        summary:
-          "SERP Sutra tracks positions daily, watches competitors and sends a weekly summary, so SEO movement is visible the week it happens.",
-        primaryCta: { label: "Book a call", href: "/book-a-demo" },
-        secondaryCta: { label: "More case studies", href: "/case-studies" },
-      },
-      stats: [
-        { value: "₹15", label: "per month" },
-        { value: "Daily", label: "rank tracking" },
-        { value: "Competitor", label: "watch" },
-        { value: "Weekly", label: "reports" },
-      ],
-      sections: [
-        {
-          eyebrow: "The Challenge",
-          title: "Monthly reporting hides the week that mattered.",
-          body: "A rank report that lands once a month cannot tell you whether a change worked, because the interesting movement happened weeks earlier and got averaged away. By the time it arrives, the cause has scrolled out of memory.",
-          bullets: [
-            "Movement only visible in a monthly summary",
-            "No view of which competitor moved and when",
-            "Manual exports across several tools to answer one question",
-          ],
-        },
-        {
-          eyebrow: "The Approach",
-          title: "Shorten the feedback loop.",
-          body: "The product is deliberately narrow: track daily, compare against competitors, and summarise weekly. Reducing the interval from a month to a day is the whole idea, because a fast loop is what turns ranking data into a decision.",
-          bullets: [
-            "Daily rank tracking across tracked terms",
-            "Competitor watch to see who is gaining on the same queries",
-            "Weekly reports that summarise movement rather than dump it",
-          ],
-        },
-        {
-          eyebrow: "What's Shipped",
-          title: "Monitoring, not a full SEO suite.",
-          body: "The published plan is ₹15 per month covering daily rank tracking, competitor watch and weekly reports. It is a visibility tool rather than an all-in-one SEO platform, and is meant to sit alongside the work rather than replace it.",
-        },
-      ],
-      closing: {
-        title: "Finding out too late?",
-        body: "Tell us which pages and terms matter most and we'll show you what daily visibility changes.",
-        ctaLabel: "Book a call",
-        ctaHref: "/book-a-demo",
-      },
-    },
-    faq: [
-      {
-        q: "What does SERP Sutra do?",
-        a: "Tracks how a site ranks for its target terms every day, watches competitors, and sends weekly reports summarising movement.",
-      },
-      {
-        q: "How much does it cost?",
-        a: "₹15 per month, including daily rank tracking, competitor watch and weekly reports.",
-      },
-      {
-        q: "Is it a full SEO platform?",
-        a: "No. It is a visibility and monitoring tool, intended to sit alongside SEO work rather than replace it.",
-      },
-    ],
-  },
-  {
-    slug: "2b-navodian",
-    name: "2B Navodian",
-    tagline: "Guided JNV enrolment for schools",
-    category: "Education · Admissions",
-    summary:
-      "A free enrolment assistant for schools guiding students through JNV admission: a document checklist, step-by-step process and deadline reminders.",
-    accent: "#ffcc1c",
-    image: null,
-    tags: ["Product Design", "Admissions", "Education", "Free"],
-    href: "/case-studies/2b-navodian",
-    meta: { readTime: "2 min", services: ["Product Design", "Web App"] },
-    content: {
-      hero: {
-        title: "JNV enrolment, guided",
-        titleAccent: "for every student.",
-        summary:
-          "2B Navodian takes a confusing admissions process and turns it into a checklist: what documents are needed, what the steps are, and when the deadlines fall.",
-        primaryCta: { label: "Book a call", href: "/book-a-demo" },
-        secondaryCta: { label: "More case studies", href: "/case-studies" },
-      },
-      stats: [
-        { value: "Free", label: "for schools" },
-        { value: "Guided", label: "JNV enrolment" },
-        { value: "Checklist", label: "of required documents" },
-        { value: "Reminders", label: "before deadlines" },
-      ],
-      sections: [
-        {
-          eyebrow: "The Challenge",
-          title: "Admissions guidance lives in a WhatsApp forward.",
-          body: "The information exists, but it is scattered across a notification, a circular and whoever at the school happens to know the answer this year. Students and parents get different versions, and a missed deadline is discovered too late to fix.",
-          bullets: [
-            "Requirements circulated as forwards and PDFs of unclear origin",
-            "No single list of documents actually needed",
-            "Deadlines missed because they were not tracked",
-          ],
-        },
-        {
-          eyebrow: "The Approach",
-          title: "Turn guidance into a checklist.",
-          body: "The insight was that most of the anxiety in an admissions process is not about the form, it is about not knowing what comes next. So the product is a tracked list with reminders, and the paperwork is attached to the step it belongs to.",
-          bullets: [
-            "Guided, step-by-step JNV enrolment flow",
-            "Document checklist so nothing is discovered missing on the day",
-            "Deadline reminders for students and parents",
-            "Free for schools, removing the budget objection entirely",
-          ],
-        },
-        {
-          eyebrow: "Status",
-          title: "Free, and the pricing is the strategy.",
-          body: "The product is free for schools. That is a deliberate choice rather than a trial: the value only lands once a school hands it to students and parents, so charging the school would suppress exactly the distribution the product needs. School-specific deployment detail hasn't been published yet.",
-        },
-      ],
-      closing: {
-        title: "Guiding admissions every year?",
-        body: "Tell us how your school runs enrolment today, and we'll show you what a shared checklist changes.",
-        ctaLabel: "Book a call",
-        ctaHref: "/book-a-demo",
-      },
-    },
-    faq: [
-      {
-        q: "What is 2B Navodian?",
-        a: "A free enrolment assistant for schools, guiding students through the JNV admission process with a document checklist, a guided flow and deadline reminders.",
-      },
-        {
-          q: "Does it cost anything?",
-          a: "No. It is free for schools.",
-        },
-      ],
-    },
-  {
     slug: "leo-coffee",
     name: "Leo Coffee",
     tagline: "Subscriptions, horeca bulk and a store locator in one Shopify build",
@@ -774,7 +429,11 @@ export const productCaseStudies: CaseStudy[] = [
     summary:
       "A specialty roaster's Shopify store covering everything under one roof: collection pages, 3 to 24 month subscriptions, horeca bulk ordering for businesses, and a store locator for walk-in buyers.",
     accent: "#ff7a3d",
-    image: null,
+    image: {
+      src: "/portfolio/Leo-coffee.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Shopify", "Subscriptions", "B2B / Horeca", "Store Locator"],
     href: "/case-studies/leo-coffee",
     liveUrl: "https://www.leocoffee.co.in/",
