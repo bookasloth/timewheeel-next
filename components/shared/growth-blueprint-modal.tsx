@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
+import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
 // Full-screen "Startup Growth Blueprint" lead quiz. Reusable across service
 // pages: pass `service` (goes to /api/lead) and optional `intro` heading.
@@ -57,7 +58,7 @@ export function GrowthBlueprintModal({ service, intro }: Props) {
   const [a, setA] = useState<Answers>(emptyAnswers);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
-  const [honeypot, setHoneypot] = useState("");
+  const hp = useHoneypot();
   const ft = useFormTracking("growth-blueprint");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -223,7 +224,7 @@ void main(){
           service,
           message,
           source: `Growth Blueprint — ${service} — ${score}`,
-          company_website: honeypot,
+          ...hp.payload(),
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -293,9 +294,7 @@ void main(){
             {step === 7 && (
               <>
                 <div className="gbp-sub">Enter your details and I’ll send your personalized 7-week action plan.</div>
-                {/* Honeypot: hidden from humans, bots fill it and get dropped server-side. */}
-                <input className="gbp-hp" tabIndex={-1} autoComplete="off" aria-hidden
-                  value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+                <Honeypot {...hp.field} />
                 <input className="gbp-input" placeholder="First Name" value={a.firstName} onChange={(e) => set("firstName", e.target.value)} />
                 <input className="gbp-input" placeholder="Last Name" value={a.lastName} onChange={(e) => set("lastName", e.target.value)} />
                 <input className="gbp-input" type="email" placeholder="Your Email" value={a.email} onChange={(e) => set("email", e.target.value)} />
@@ -329,7 +328,6 @@ void main(){
         .gbp-quote { margin: 60px auto 0; font-size: 13px; color: #aeb3b9; max-width: 500px; }
         .gbp-close { position: absolute; top: 20px; right: 30px; font-size: 22px; cursor: pointer; color: #fff; z-index: 2; background: none; border: none; }
         .gbp-err { color: #ff8a80; font-size: 14px; margin-top: 12px; }
-        .gbp-hp { position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden; }
         @media (max-width: 768px) { .gbp-heading { font-size: 22px; } }
       `}</style>
     </div>

@@ -6,6 +6,7 @@ import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
 // Reusable lead-capture section. Submits to /api/lead. Copy is passed per page.
 type FieldName = "name" | "business" | "email" | "phone" | "website" | "service" | "message";
@@ -62,7 +63,7 @@ export function LeadForm(p: Props) {
   const [form, setForm] = useState<FormState>(empty);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
-  const [honeypot, setHoneypot] = useState("");
+  const hp = useHoneypot();
   const ft = useFormTracking(p.source);
 
   function set(field: FieldName, value: string) {
@@ -79,7 +80,7 @@ export function LeadForm(p: Props) {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form.values, source: p.source, company_website: honeypot }),
+        body: JSON.stringify({ ...form.values, source: p.source, ...hp.payload() }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -165,18 +166,7 @@ export function LeadForm(p: Props) {
 
           <Reveal delay={0.1}>
             <form onSubmit={submit} noValidate className="rounded-3xl border border-border bg-card p-7 md:p-9">
-              {/* Honeypot: hidden from humans; bots fill it and get silently dropped. */}
-              <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-                <label htmlFor={id("company_website")}>Company website</label>
-                <input
-                  id={id("company_website")}
-                  type="text"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={honeypot}
-                  onChange={(e) => setHoneypot(e.target.value)}
-                />
-              </div>
+              <Honeypot {...hp.field} />
               <div className="grid gap-4 sm:grid-cols-2">
                 {text("name", "Name", "text", "Your full name", "name")}
                 {text("business", "Business Name", "text", "Your company", "organization")}

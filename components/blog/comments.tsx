@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { CornerDownRight, CheckCircle2 } from "lucide-react";
 import type { Comment } from "@/lib/blog";
+import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
 function Avatar({ name }: { name: string }) {
   const initials = name.split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -25,7 +26,8 @@ export function Comments({
   postTitle: string;
   comments: Comment[];
 }) {
-  const [form, setForm] = useState({ name: "", email: "", comment: "", company_website: "" });
+  const [form, setForm] = useState({ name: "", email: "", comment: "" });
+  const hp = useHoneypot();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
 
@@ -42,7 +44,7 @@ export function Comments({
       const res = await fetch("/api/comment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, postSlug, postTitle }),
+        body: JSON.stringify({ ...form, postSlug, postTitle, ...hp.payload() }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -126,16 +128,7 @@ export function Comments({
               className={inputBase}
             />
           </div>
-          {/* honeypot */}
-          <input
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden
-            value={form.company_website}
-            onChange={(e) => setForm((f) => ({ ...f, company_website: e.target.value }))}
-            className="absolute -left-[9999px] h-0 w-0"
-          />
+          <Honeypot {...hp.field} />
           {status === "error" && <p className="text-sm text-destructive">{error}</p>}
           <button
             type="submit"

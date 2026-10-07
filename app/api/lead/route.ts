@@ -11,6 +11,7 @@ import { site } from "@/lib/site";
 import { saveLead } from "@/lib/supabase-leads";
 import { syncLeadContact } from "@/lib/resend-contacts";
 import { sendWelcomeEmail } from "@/lib/resend-email";
+import { checkHoneypot } from "@/lib/honeypot";
 import type { Attribution } from "@/lib/attribution";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
@@ -39,7 +40,8 @@ type Lead = {
   // tw_attribution cookie server-side when the body omits it.
   attribution?: Attribution;
 
-  company_website?: string; // honeypot, humans never see or fill this
+  hp_x?: string; // bot trap + time-to-submit, see lib/honeypot
+  hp_t?: number;
   // Optional: also email the lead their SEO report link (audit "get fixes" flow).
   sendReport?: boolean;
   domain?: string;
@@ -186,8 +188,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  // Honeypot: a bot filled the hidden field. Pretend success, send nothing.
-  if (clean(body.company_website)) {
+  // Bot trap (lib/honeypot). Filled fast: a bot, so pretend success and send
+  // nothing, but log enough to recover the lead if we got it wrong. Filled
+  // slowly: most likely autofill, so the lead goes through flagged.
+  const hp = checkHoneypot(body);
+  if (hp.verdict === "bot") {
+    console.warn("[honeypot] dropped /api/lead", JSON.stringify({
+      ms: hp.ms, source: clean(body.source), name: clean(body.name),
+      email: clean(body.email), phone: clean(body.phone),
+    }));
     return NextResponse.json({ ok: true });
   }
 
@@ -242,7 +251,12 @@ export async function POST(request: Request) {
         recommendation: clean(f.recommendation),
       }))
     : undefined;
-  const teamEmail = { ...l, campaign: campaign || undefined, findings };
+  const flag =
+    hp.verdict === "suspect"
+      ? `Hidden bot-trap field was filled (${hp.ms}ms after the form showed). Probably autofill; sanity-check before replying.`
+      : undefined;
+  if (flag) console.warn("[honeypot] kept /api/lead", JSON.stringify({ ms: hp.ms, eventId }));
+  const teamEmail = { ...l, campaign: campaign || undefined, findings, flag };
 
   // 1) Persist to the authoritative store FIRST, so a lead is never lost to a
   //    missing/broken email config. Best-effort, but tracked: `saved` tells us
@@ -299,7 +313,7 @@ export async function POST(request: Request) {
         from: LEAD_FROM || SMTP_USER,
         to: LEAD_TO,
         replyTo: `${l.name} <${l.email}>`,
-        subject: `New lead: ${l.service}, ${l.business} (${l.source})`,
+        subject: `${flag ? "[Check] " : ""}New lead: ${l.service}, ${l.business} (${l.source})`,
         text: renderLeadEmailText(teamEmail),
         html: renderLeadEmailHtml(teamEmail),
       });

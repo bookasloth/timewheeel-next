@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { checkHoneypot } from "@/lib/honeypot";
 
 // Blog comment -> email for moderation (no public DB). Same SMTP env as leads.
 // Comments are emailed to LEAD_TO; approve and add them to the post's
@@ -28,7 +29,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  if (clean(b.company_website)) return NextResponse.json({ ok: true }); // honeypot
+  // Bot trap (lib/honeypot): drop fast fills, but log them so a real comment
+  // can be recovered. Slow fills are most likely autofill and go through flagged.
+  const hp = checkHoneypot(b);
+  if (hp.verdict === "bot") {
+    console.warn("[honeypot] dropped /api/comment", JSON.stringify({
+      ms: hp.ms, post: clean(b.postSlug), name: clean(b.name), email: clean(b.email),
+    }));
+    return NextResponse.json({ ok: true });
+  }
+  const suspect = hp.verdict === "suspect";
 
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -67,11 +77,12 @@ export async function POST(request: Request) {
       from: LEAD_FROM || SMTP_USER,
       to: LEAD_TO,
       replyTo: `${name} <${email}>`,
-      subject: `New blog comment on "${postTitle}"`,
+      subject: `${suspect ? "[Check] " : ""}New blog comment on "${postTitle}"`,
       text: [
         `New comment (pending moderation)`,
         `Post: ${postTitle} (/blog/${postSlug})`,
         `From: ${name} <${email}>`,
+        ...(suspect ? [`Check: hidden bot-trap field was filled (${hp.ms}ms after the form showed). Probably autofill.`] : []),
         "",
         comment,
       ].join("\n"),
