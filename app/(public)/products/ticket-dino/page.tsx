@@ -10,7 +10,7 @@ const description =
   "Ticket Dino, an event ticketing and management platform for modern organizers, from ticket sales and attendee management to analytics. Launching soon.";
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   alternates: { canonical: url },
   openGraph: { type: "website", url, siteName: site.name, title, description },

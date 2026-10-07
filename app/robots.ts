@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 
-// AI search/answer crawlers we explicitly welcome — GEO intent signal.
+// AI search/answer crawlers we explicitly welcome, a GEO intent signal.
 // (All are allowed by the "*" rule anyway; naming them makes intent clear
 // and survives any future disallow tightening.)
 const aiCrawlers = [

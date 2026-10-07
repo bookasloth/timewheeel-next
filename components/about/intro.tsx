@@ -13,18 +13,19 @@ export function AboutIntro() {
             <span className="h-px w-12 bg-brand/40" />
           </div>
           <RevealHeading as="h2" className="mt-5 text-3xl font-extrabold leading-[1.12] tracking-tight md:text-[2.6rem]">
-            We turn ideas into
-            <br className="hidden sm:block" /> digital experiences people
-            remember.
+            What is Timewheel?
           </RevealHeading>
         </Reveal>
 
         <Reveal delay={0.1}>
           <div className="max-w-xl space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
-              At TIMEWHEEL, we combine strategy, design, and technology to
-              create digital experiences that help businesses communicate
-              better, look better, and grow with confidence.
+              Timewheel (Timewheel Internet Pvt. Ltd.) is a product studio and
+              digital agency based in Nagpur, Maharashtra, founded and led by
+              Shubham N Datarkar. We build websites, web apps, SEO and digital
+              marketing systems for businesses across India, and we design,
+              build and run our own products, including Book A Sloth and
+              Alluminaty.
             </p>
             <p>
               We believe great digital products should not only look good. They

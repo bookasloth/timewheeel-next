@@ -13,18 +13,23 @@ import { BasIntegrations } from "@/components/book-a-sloth/integrations";
 import { BasPricing } from "@/components/book-a-sloth/pricing";
 import { BasTestimonials } from "@/components/book-a-sloth/testimonials";
 
+// Title set here (not from lib copy) to keep the site-wide ", Timewheel" suffix
+// and avoid the em-dash in the lib string.
+const META_TITLE = "Book A Sloth: Appointment Booking & Scheduling Software, Timewheel";
+
 export const metadata: Metadata = {
-  title: { absolute: bas.meta.title },
+  title: { absolute: META_TITLE },
   description: bas.meta.description,
   openGraph: {
     type: "website",
-    title: bas.meta.title,
+    url: "/products/book-a-sloth",
+    title: META_TITLE,
     description: bas.meta.description,
     siteName: "Timewheel",
   },
   twitter: {
     card: "summary_large_image",
-    title: bas.meta.title,
+    title: META_TITLE,
     description: bas.meta.description,
   },
   alternates: { canonical: "/products/book-a-sloth" },
