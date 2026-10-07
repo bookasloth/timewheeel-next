@@ -2,11 +2,13 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
+// Only real people belong here. Placeholder profiles were removed because
+// invented team members undermine E-E-A-T.
 const members = [
   {
-    name: "Shubham Datarkar",
-    role: "Founder & Design",
-    line: "Brand identity, interfaces and the detail that makes products feel intentional.",
+    name: "Shubham N Datarkar",
+    role: "Founder",
+    line: "Founds and leads Timewheel. Ships the studio's own products and runs SEO, AI-search and growth work for clients across India.",
     img: "/team/shubham.png",
     accent: "#fe5100",
   },

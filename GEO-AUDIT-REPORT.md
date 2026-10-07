@@ -1,111 +1,177 @@
 # GEO Audit Report: Timewheel
 
-**Audit Date:** 2026-09-25 (post-fix re-evaluation)
+**Audit Date:** 2026-10-07
 **URL:** https://timewheel.co.in
-**Business Type:** Local Agency / Services (Nagpur digital agency) + own SaaS products
-**Pages Analyzed:** 8 sampled from 39-URL sitemap
-**Status:** Fixes from this cycle shipped and verified live on production.
+**Business Type:** Local Agency / Services (Nagpur digital agency) + own products (Book A Sloth, Alluminaty, Ticket Dino, Coffee and Toffee)
+**Pages Analyzed:** ~20 live pages sampled from the sitemap (home, about, contact, case studies, blog, product pages, 5 service microsites, campaign pages)
+**Method:** 4 parallel audit streams (Technical, Schema, Content/Citability, Brand/Platform), with fixes applied on branch `fix/geo-audit-oct-2026`
+**Previous audit:** 2026-09-25, 78/100 (see git history of this file)
 
 ---
 
 ## Executive Summary
 
-**Overall GEO Score: 78/100 (Good)** — up from 72 at first audit.
+**Overall GEO Score: 69/100 (Fair) live today, ~72/100 projected once this PR deploys.**
 
-Timewheel is technically excellent and now carries a real entity identity: server-side rendered, all major AI crawlers explicitly allowed, a rich `llms.txt`, complete sitemap, and deep, clean schema. This cycle closed every on-page gap from the first audit — the Organization schema now ships a logo, postal address, and `sameAs` links to LinkedIn / Instagram / Google; the flagship blog article is attributed to a credentialed Person; and the unverifiable AggregateRating was removed. The remaining ceiling is **Brand Authority**, which is entirely off-page (third-party mentions and AI-index presence) and grows with time and promotion, not code.
+The on-site foundation is strong: every key page is server-rendered, all major AI crawlers are explicitly allowed, `llms.txt` and the sitemap are complete, and schema now links into a single Organization entity. The score is lower than last cycle's 78 because this audit was stricter in two places. First, the brand scan found that "Timewheel" on Wikipedia/Wikidata is a Budapest monument, so AI models have a competing entity and no Timewheel Internet entry to disambiguate it. Second, the content review found that `/about` was showing three invented team members with stock photos, a serious trust problem (now fixed). The remaining ceiling is almost entirely off-page: brand authority and Bing/AI-index discovery.
 
 ### Score Breakdown
 
-| Category | Score | Weight | Weighted | Change |
-|---|---|---|---|---|
-| AI Citability | 83/100 | 25% | 20.75 | +1 |
-| Brand Authority | 62/100 | 20% | 12.40 | +17 |
-| Content E-E-A-T | 74/100 | 20% | 14.80 | +6 |
-| Technical GEO | 90/100 | 15% | 13.50 | — |
-| Schema & Structured Data | 93/100 | 10% | 9.30 | +8 |
-| Platform Optimization | 72/100 | 10% | 7.20 | +2 |
-| **Overall GEO Score** | | | **78/100** | **+6** |
+| Category | Live score | After this PR | Weight | Weighted (after) | vs 09-25 |
+|---|---|---|---|---|---|
+| AI Citability | 79/100 | ~82 | 25% | 20.5 | -1 |
+| Brand Authority | 36/100 | 36 | 20% | 7.2 | -26 (stricter scan) |
+| Content E-E-A-T | 66/100 | ~72 | 20% | 14.4 | -2 |
+| Technical GEO | 91/100 | ~95 | 15% | 14.25 | +5 |
+| Schema & Structured Data | ~90/100 | 95 | 10% | 9.5 | +2 |
+| Platform Optimization | 58/100 | 58 | 10% | 5.8 | -14 (stricter scan) |
+| **Overall GEO Score** | **69/100** | **~72/100** | | **71.65** | |
+
+"After this PR" scores are projections from the stream that made the fixes; they become real only after merge and deploy.
 
 ---
 
-## Fixed This Cycle (Verified Live)
+## Fixed In This PR
 
-- ✅ **`sameAs` populated** — LinkedIn, Instagram, and Google profiles now in Organization + LocalBusiness schema. Entity anchor exists where there was none.
-- ✅ **Organization `logo`** — `/logo.webp` (1254×1254) ships and is wired into schema; feeds knowledge-panel / AI entity cards.
-- ✅ **Homepage Organization postal address** — full address now on the Org node, consistent with LocalBusiness.
-- ✅ **Blog author is a credentialed Person** — flagship article attributed to Shubham N Datarkar ("Founder, Timewheel") with bio, in both the visible byline and `Article` schema (`author` → `Person`, `worksFor` → Org).
-- ✅ **Unbacked AggregateRating removed** — Book A Sloth no longer emits a self-declared 4.9/180 rating (Google review-snippet policy risk). `AggregateOffer` (real pricing) retained.
-- ✅ **About H1 spacing** — now parses as one line: "We build digital experiences that move businesses forward."
-- ✅ **Dead social links removed** — footer and website-design hero now render only real profiles (LinkedIn, Instagram); placeholder X / YouTube links are filtered out until real URLs are added.
+**Content / E-E-A-T**
+- `/about` team: removed 3 invented people ("Devika Rao", "Arjun Mehta", "Isha Patil") with placeholder photos; now shows the real founder, Shubham N Datarkar (`components/about/team.tsx`).
+- `/about` intro: new "What is Timewheel?" heading with an answer-first, self-contained definition (legal name, city, founder, services, products) (`components/about/intro.tsx`).
+- Homepage FAQ: new first question "What is Timewheel?"; flows into FAQPage schema automatically (`lib/home-faq.ts`).
+- Blog post: removed all 29 em-dashes from `content/blog/top-10-digital-marketing-companies-nagpur.md` (house style); empty table cells now read "n/a".
+
+**Schema**
+- `/contact`: the Organization node had no `@id` and a shorter address, so it read as a second company. Now `ContactPage` + Organization `@id` + BreadcrumbList.
+- `/case-studies`: added `CollectionPage` + `ItemList` of all case studies.
+- `/30-days-30-websites`: Event now has `location` (online), organizer linked to the Org `@id`, and a breadcrumb.
+- `/coffee-and-toffee`, `/products/alluminaty`: author/publisher linked to Org `@id`, `url` added.
+- `/creators`: breadcrumb added.
+- LocalBusiness `openingHours` now sourced from `site.contact.openingHours` next to the human hours string (`lib/site.ts`, `lib/jsonld.ts`). New helpers `orgRef()`, `webPageLd()`, `itemListLd()`.
+
+**Technical**
+- Security headers added in `next.config.ts`: X-Content-Type-Options, Referrer-Policy, Permissions-Policy (no CSP, to avoid breaking GTM / Meta pixel).
+- `app/sitemap.ts`: real per-group `lastModified` dates (blog posts use their own dates) instead of `new Date()` on every URL, plus `priority` / `changeFrequency`; added `/book-a-demo`.
+- `public/llms.txt`: rewritten to cover every sitemap route, including all 22 case studies, `/30-days-30-websites`, `/coffee-and-toffee`, `/creators`, `/book-a-demo`, legal pages; real Alluminaty description replaces the placeholder.
+- `/products/ticket-dino`: title no longer doubles the brand ("..., Timewheel, Timewheel").
+- `/products/book-a-sloth`: title cleaned (no em-dash), og:url added.
+- `/case-studies`: og:url pointed at the homepage; now correct. og:url also added on `/30-days-30-websites`, `/coffee-and-toffee`, `/creators`, `/contact`, `/products/alluminaty`.
 
 ---
 
 ## Critical Issues
-_None._
+_None remaining._ (The invented team on `/about` was critical and is fixed in this PR.)
 
 ## High Priority Issues
-_None remaining._ All high-priority items from the first audit are resolved and live.
+
+1. **Entity collision, no Wikidata item.** Wikipedia/Wikidata "Timewheel" (Q186596) is a Budapest monument. Create Wikidata items for Timewheel Internet Pvt. Ltd. (Nagpur, website, founder, CIN), Shubham N Datarkar, and Book A Sloth (linked as product), then add the Wikidata URLs to `sameAs` in `lib/site.ts`.
+2. **No Bing verification / IndexNow.** Bing's index powers ChatGPT search and Copilot. Verify in Bing Webmaster Tools, submit the sitemap, add `metadata.verification.other["msvalidate.01"]` in `app/layout.tsx`, and add an IndexNow key file in `public/` with a post-deploy ping.
+3. **Zero third-party directory presence.** Not found on Clutch, GoodFirms, DesignRush, Justdial, IndiaMART, Sulekha. List with identical NAP.
+4. **Blog depth.** One post. Topical authority and the "Experience" signal need 3 to 5 first-hand posts (real project data from case studies and Book A Sloth).
 
 ## Medium Priority Issues
 
-1. **Off-page brand authority is thin.** New social profiles are live but have little published presence yet, and there are no notable third-party mentions (Reddit, YouTube, press, directories). This is the single biggest remaining lever on the score. Not a code fix — requires publishing and outreach over time.
-2. **Blog depth.** One flagship article plus tag pages. Topical authority grows with volume; add 2–3 more core-topic articles.
+5. **`/30-days-30-websites` Event has no `startDate`.** Google will not treat it as an event. Add the real date, or downgrade the type to WebPage + Offer.
+6. **`/case-studies` has no summary passage** above the cards (295 words total). Add a 2 to 3 sentence answer-first intro with real aggregate facts.
+7. **`/about` stats section** ("Work that moved real numbers") was not verified against real data; confirm or soften.
+8. **Google Business Profile `sameAs`** uses a `share.google` short link; replace with the full `?cid=` Maps URL.
+9. **Team section now has one card** in a 3-column grid; add Aastha Nikhare and Durga (photos already in `public/team/`) once roles are confirmed.
 
 ## Low Priority Issues
 
-3. **Missing X / YouTube profiles.** Both are still `"#"` in `lib/site.ts`; the footer/hero now hide them automatically, but real profiles would add two more `sameAs` anchors. Add URLs when the accounts exist.
-4. **Author has no personal `sameAs`.** The `Person` author carries no personal profile link (e.g. a personal LinkedIn); adding one strengthens author-entity recognition.
-5. **`openingHours` sync.** Keep schema `openingHours` in sync with the human hours string in `site.contact.hours` (already flagged in code).
+10. Author `Person` has no personal `sameAs` (e.g. personal LinkedIn).
+11. X and YouTube are still `"#"` in `lib/site.ts`; create @timewheelinternet handles (YouTube @timewheel is taken).
+12. `/book-a-demo` title uses "|" instead of the site's ", Timewheel" pattern; `/products/book-a-sloth` emits two `twitter:card` tags.
+13. HSTS lacks `includeSubDomains` (add only after checking every subdomain is HTTPS).
+14. `/pricing`, `/blog` only carry breadcrumbs; legal pages and `/seo-report` carry no schema.
+15. (Fixed in this PR) `lib/book-a-sloth.ts` title string em-dash cleaned to match page metadata.
+16. Blog tag pages are not listed in `llms.txt`.
 
 ---
 
 ## Category Deep Dives
 
-### AI Citability (83/100)
-Strong. FAQPage + Question/Answer blocks on service, product, and blog pages give AI engines clean extractable answers. Money pages are deep (SEO page 5.4k words, blog 5.4k, About 4.5k). H1s are clear and now all parse cleanly (About H1 spacing fixed). SSR delivers full text with no JS dependency.
+### AI Citability (79 live, ~82 after)
+Homepage FAQ and `/seo-company-in-nagpur` are answer-first and highly quotable. Weak spots were slogan-only intros. Example rewrite on `/about`:
+- Before: "We combine strategy, design, and technology to create digital experiences..."
+- After (under "What is Timewheel?"): "Timewheel (Timewheel Internet Pvt. Ltd.) is a product studio and digital agency based in Nagpur, Maharashtra, founded and led by Shubham N Datarkar..."
+`/case-studies` remains the thinnest key page.
 
-### Brand Authority (62/100)
-The on-page entity foundation is now solid: `sameAs` links to LinkedIn, Instagram, and Google, plus a logo, give AI systems something to resolve "Timewheel" against — a jump from the previous zero-anchor state. Off-site mention volume remains low for a young brand and needs deliberate building. This is the category holding the composite back and the clear focus for the next 30–90 days.
+### Brand Authority (36)
+| Platform | Status |
+|---|---|
+| Google Business Profile | Found (linked in schema) |
+| LinkedIn company | Found, 38 followers |
+| Instagram | Found |
+| YouTube | Not found (@timewheel belongs to another account) |
+| X | Not found (Book A Sloth has x.com/bookasloth) |
+| Wikipedia / Wikidata | Not found; name collides with Budapest monument |
+| Clutch / GoodFirms / DesignRush / Justdial | Not found |
+| Crunchbase, Reddit | Unverified (blocked during scan) |
+| Press | Not found |
+| Book A Sloth on PeerPush | Found |
 
-### Content E-E-A-T (74/100)
-Good and improved. Real NAP (phone, street address, geo), case studies with specific metrics, full legal suite, and honest, non-hyped copy. The flagship blog article now has a named, credentialed author (Experience/Expertise signal), and the trust-denting fake rating is gone. Further gains come from author depth across more articles.
+### Content E-E-A-T (66 live, ~72 after)
+Strengths: named, dated author on the blog; legal name and address present. Weaknesses: invented team (fixed), one blog post, no founder credentials or founding year on site, testimonials unverified.
 
-### Technical GEO (90/100)
-Excellent. Next.js SSR, `robots.txt` explicitly allows GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Meta-ExternalAgent and more; `llms.txt` present and rich; sitemap complete with lastmod; canonical + full Open Graph + Twitter meta.
+### Technical GEO (91 live, ~95 after)
+All key pages return 200, are SSR, carry self-referencing canonicals and meta descriptions. AI crawlers explicitly allowed in `robots.ts`. Gaps were security headers, stale sitemap dates, missing og:url, and one doubled title; all fixed here.
 
-### Schema & Structured Data (93/100)
-Excellent and now near-complete: Organization (with logo, address, sameAs), WebSite, ProfessionalService (PostalAddress + GeoCoordinates + hasMap + openingHours), Service, FAQPage, BreadcrumbList, Article (with Person author), SoftwareApplication, AggregateOffer. Typed builders in `lib/jsonld.ts` keep it maintainable. The policy-risk AggregateRating is gone.
+### Schema & Structured Data (~90 live, 95 after)
+Organization (logo, address, sameAs), LocalBusiness, Person author, Service, FAQPage, BreadcrumbList across microsites. This PR links every page to the single `https://timewheel.co.in/#organization` entity and fills schema on the newer pages.
 
-### Platform Optimization (72/100)
-Structurally ready: FAQ/answer blocks suit Google AI Overviews and Perplexity; `llms.txt` + clean SSR suit ChatGPT search; local schema suits "near me" / map-pack answers; logo + sameAs feed entity cards. Actual citation presence across platforms will build as AI crawlers re-index the new signals.
+### Platform Optimization (58)
+On-site readiness is high; discovery is the gap. No Bing verification tag, no IndexNow key, and the scripted web search could not surface timewheel.co.in for its own domain name. Fixing Bing + Wikidata is the highest-leverage move for ChatGPT, Copilot and Perplexity.
 
 ---
 
-## Next 30–90 Days (Off-Page Focus)
+## Quick Wins (This Week)
 
-### Now that on-page is done
-- [ ] Publish regularly to the new LinkedIn / Instagram; make the Google Business Profile complete and active
-- [ ] Earn third-party mentions: local directories, relevant Reddit threads, guest posts, press
-- [ ] Add a personal profile link to the author `Person` schema
-- [ ] Publish 2–3 more core-topic blog articles with named authors
-- [ ] Add real X / YouTube URLs (or remove the dead footer links)
+1. Merge this PR (on-site fixes go live on deploy).
+2. Bing Webmaster Tools: verify, submit sitemap, then add the `msvalidate.01` tag and an IndexNow key.
+3. Create the 3 Wikidata items and add them to `sameAs`.
+4. Send the `/review` link to 15+ past clients to grow Google reviews.
+5. Add the real `/30-days-30-websites` start date and Aastha / Durga roles.
 
-### Verify indexing (allow days to weeks)
-- [ ] Submit sitemap in Search Console; confirm GPTBot / ClaudeBot / PerplexityBot hits in server logs
-- [ ] Test brand queries in ChatGPT / Perplexity / Google AI Overviews for citation and entity-card presence
-- [ ] Re-run this audit in ~30 days to measure Brand Authority movement
+## 30-Day Action Plan
+
+### Week 1: Discovery
+- [ ] Merge + deploy this PR; re-check headers and JSON-LD live
+- [ ] Bing Webmaster Tools + IndexNow
+- [ ] Google Search Console: resubmit sitemap
+
+### Week 2: Entity
+- [ ] Wikidata: company, founder, Book A Sloth
+- [ ] Replace GBP short link with full `?cid=` URL; add Wikidata + founder LinkedIn to `sameAs`
+- [ ] Create YouTube and X @timewheelinternet; add to `lib/site.ts`
+
+### Week 3: Directories + Reviews
+- [ ] Clutch, GoodFirms, DesignRush, Justdial, IndiaMART, Sulekha (identical NAP)
+- [ ] Book A Sloth on G2, Capterra India, Product Hunt
+- [ ] 15+ Google reviews via `/review`
+
+### Week 4: Content Depth
+- [ ] 2 first-hand blog posts (a case study deep dive, a Book A Sloth build story)
+- [ ] Answer-first intro on `/case-studies`
+- [ ] Verify `/about` stats and testimonials; add founder credentials and founding year
 
 ---
 
 ## Appendix: Pages Analyzed
 
-| URL | Title | Notable |
-|---|---|---|
-| / | Timewheel, Build on systems you control forever | Org+WebSite+SoftwareApp graph; logo + address + sameAs ✅ |
-| /seo-company-in-nagpur | SEO Company in Nagpur \| Local + AI Search Visibility | Full local schema (ProfessionalService, Geo, FAQ, Service); 5.4k words |
-| /blog/top-10-digital-marketing-companies-nagpur | Top 10 Digital Marketing Companies in Nagpur (2026) | Article + FAQ; Person author (Shubham N Datarkar) ✅ |
-| /about | About, Digital Design & Development | H1 spacing fixed ✅ |
-| /products/book-a-sloth | Book A Sloth — Appointment Booking & Scheduling | SoftwareApp + AggregateOffer; AggregateRating removed ✅ |
-| /robots.txt | — | All AI crawlers allowed |
-| /llms.txt | — | Present, rich, well-structured |
-| /sitemap.xml | — | 39 URLs, lastmod present |
+| URL | Notes |
+|---|---|
+| / | Strong FAQ; new "What is Timewheel?" Q |
+| /about | Invented team (fixed); slogan intro (fixed); stats unverified |
+| /contact | Duplicate Org node (fixed) |
+| /case-studies (+1 case study) | og:url wrong (fixed); thin intro; schema added |
+| /blog, 1 post | Single post; em-dashes (fixed) |
+| /30-days-30-websites | Event missing startDate; location/organizer fixed |
+| /coffee-and-toffee | Org link + og:url added |
+| /creators | Breadcrumb + og:url added |
+| /pricing | Breadcrumb only |
+| /seo-company-in-nagpur | Highly citable; missing security headers (fixed) |
+| /web-development-company-in-nagpur | Missing security headers (fixed) |
+| /digital-marketing-company-in-nagpur | OK |
+| /products/book-a-sloth | Title cleaned, og:url added |
+| /products/alluminaty | Org link, og:url added |
+| /products/ticket-dino | Doubled brand in title (fixed) |
+| /robots.txt, /sitemap.xml, /llms.txt | All present; sitemap dates + llms.txt coverage fixed |

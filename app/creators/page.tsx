@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { creatorUi } from "@/lib/creator";
+import { breadcrumbLd } from "@/lib/jsonld";
 import { CtHero } from "@/components/creators/hero";
 import { CtTicker } from "@/components/creators/ticker";
 import { CtShowcase } from "@/components/creators/showcase";
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/creators" },
   openGraph: {
     type: "website",
+    url: "/creators",
     title: creatorUi.meta.title,
     description: creatorUi.meta.description,
     siteName: "Timewheel",
@@ -42,6 +44,7 @@ export default function CreatorsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd([{ name: "Home", path: "/" }, { name: "Creators", path: "/creators" }])) }} />
       <CtHero />
       <CtTicker />
       <CtShowcase />

@@ -19,6 +19,8 @@ export const site = {
     geo: { lat: 21.1215218, lng: 79.0567245 },
     responseTime: "Within 1 business day",
     hours: "Mon–Sat · 10:00–19:00 IST",
+    // Machine-readable twin of `hours` for schema.org openingHours. Edit both together.
+    openingHours: "Mo-Sa 10:00-19:00",
   },
   social: {
     twitter: "#",

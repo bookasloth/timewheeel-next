@@ -4,13 +4,21 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { JsonLd } from "@/components/json-ld";
-import { breadcrumbLd } from "@/lib/jsonld";
+import { breadcrumbLd, itemListLd, webPageLd } from "@/lib/jsonld";
 import { Reveal } from "@/components/reveal";
 
 const baseMetadata: Metadata = {
   title: "Case Studies",
   description:
     "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
+  openGraph: {
+    type: "website",
+    url: "/case-studies",
+    siteName: "Timewheel",
+    title: "Case Studies, Timewheel",
+    description:
+      "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
+  },
 };
 
 const PER_PAGE = 12;
@@ -50,6 +58,19 @@ export default async function CaseStudiesPage({ searchParams }: Props) {
           { name: "Home", path: "/" },
           { name: "Case Studies", path: "/case-studies" },
         ])}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          ...webPageLd({
+            type: "CollectionPage",
+            name: "Timewheel Case Studies",
+            path: "/case-studies",
+            mainEntity: itemListLd(
+              caseStudies.map((c) => ({ name: c.name, path: `/case-studies/${c.slug}` })),
+            ),
+          }),
+        }}
       />
       <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <Reveal>

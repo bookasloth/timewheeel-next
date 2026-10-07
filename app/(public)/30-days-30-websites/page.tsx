@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { ChallengeForm } from "@/components/challenge/challenge-form";
 import { WebsitesShowcase } from "@/components/challenge/websites-showcase";
 import { site } from "@/lib/site";
+import { breadcrumbLd, ORG_ID } from "@/lib/jsonld";
 import { countLeadsBySource } from "@/lib/supabase-leads";
 import { projects } from "@/components/about/work";
 import { Sparkles, PencilRuler, Rocket, Check } from "lucide-react";
@@ -18,7 +19,7 @@ const DESC =
 export const metadata: Metadata = {
   title: { absolute: `${TITLE}, Timewheel` },
   description: DESC,
-  openGraph: { type: "website", title: TITLE, description: DESC, siteName: "Timewheel" },
+  openGraph: { type: "website", url: "/30-days-30-websites", title: TITLE, description: DESC, siteName: "Timewheel" },
   alternates: { canonical: "/30-days-30-websites" },
 };
 
@@ -71,8 +72,14 @@ const jsonLd = {
   description: DESC,
   url: `${site.url}/30-days-30-websites`,
   eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
-  organizer: { "@type": "Organization", name: site.name, url: site.url },
+  location: { "@type": "VirtualLocation", url: `${site.url}/30-days-30-websites` },
+  organizer: { "@type": "Organization", "@id": ORG_ID, name: site.name, url: site.url },
 };
+
+const crumbsLd = breadcrumbLd([
+  { name: "Home", path: "/" },
+  { name: "30 Days, 30 Websites", path: "/30-days-30-websites" },
+]);
 
 export default async function ChallengePage() {
   // Live "spots filled" = already-shipped sites + real submissions to this page,
@@ -85,6 +92,7 @@ export default async function ChallengePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }} />
 
       {/* Hero */}
       <section className="relative overflow-x-clip border-b border-border/60 bg-secondary/40">

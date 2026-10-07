@@ -4,33 +4,67 @@
 
 Based in Nagpur, Maharashtra, India. Serving clients across India and worldwide.
 Contact: hello@timewheel.co.in
+Sitemap: https://timewheel.co.in/sitemap.xml
 
 ## Services
 - [Digital Marketing Company in Nagpur](https://timewheel.co.in/digital-marketing-nagpur): SEO, social media, Google Ads, content and websites for Nagpur businesses.
-- [SEO Company in Nagpur](https://timewheel.co.in/seo-company-in-nagpur): Local SEO, technical SEO, content and AI-search (AEO) visibility, with a free instant audit.
-- [Web Development Company in Nagpur](https://timewheel.co.in/web-development-company-in-nagpur): Websites and web applications.
-- [Website Design](https://timewheel.co.in/website-design-company-in-nagpur): Conversion-focused website design.
-- [Web App Development](https://timewheel.co.in/web-app-development-company-in-nagpur): Custom web applications.
-- [Restaurant Marketing](https://timewheel.co.in/restaurant-marketing): Marketing for restaurants and cafes.
+- [Digital Marketing Company in Nagpur (paid ads focus)](https://timewheel.co.in/digital-marketing-company-in-nagpur): ROI-focused paid ads, SEO, social and content.
 - [Digital Marketing](https://timewheel.co.in/digital-marketing): Full-service digital marketing.
-- [Digital Marketing Company in Nagpur](https://timewheel.co.in/digital-marketing-company-in-nagpur): ROI-focused paid ads, SEO, social and content.
-- [Social Media Marketing Company in Nagpur](https://timewheel.co.in/social-media-marketing-company-in-nagpur): Social media strategy, content and management.
+- [SEO Company in Nagpur](https://timewheel.co.in/seo-company-in-nagpur): Local SEO, technical SEO, content and AI-search (AEO) visibility, with a free instant audit.
+- [Web Development Company in Nagpur](https://timewheel.co.in/web-development-company-in-nagpur): Fast, SEO-ready websites and web applications built on a fixed price.
+- [Website Design Company in Nagpur](https://timewheel.co.in/website-design-company-in-nagpur): Conversion-focused website design.
+- [Web App Development Company in Nagpur](https://timewheel.co.in/web-app-development-company-in-nagpur): Custom web applications.
 - [Shopify Development Company in Nagpur](https://timewheel.co.in/shopify-development-company-in-nagpur): Shopify store design, build and optimisation.
+- [Social Media Marketing Company in Nagpur](https://timewheel.co.in/social-media-marketing-company-in-nagpur): Social media strategy, content and management.
 - [AI Marketing Automation Company in Nagpur](https://timewheel.co.in/ai-marketing-automation-company-in-nagpur): AI-driven marketing automation.
 - [AI Automation Agency in Nagpur](https://timewheel.co.in/ai-automation-agency-in-nagpur): AI workflow and business-process automation.
+- [Restaurant Marketing](https://timewheel.co.in/restaurant-marketing): Marketing for restaurants and cafes.
+- [30 Days, 30 Websites](https://timewheel.co.in/30-days-30-websites): A challenge to build 30 websites in 30 days on a pay-what-you-want basis, including ₹0.
 
 ## Products
 - [Book A Sloth](https://timewheel.co.in/products/book-a-sloth): An India-first appointment booking and scheduling platform Timewheel designed and built. 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, WhatsApp and email reminders, GST invoicing, and a business dashboard. Live at https://bookasloth.com.
-- [Alluminaty](https://timewheel.co.in/products/alluminaty): A Timewheel product. See the page for details.
-- [Ticket Dino](https://timewheel.co.in/products/ticket-dino): An event ticketing product by Timewheel.
+- [Alluminaty](https://timewheel.co.in/products/alluminaty): A social network for alumni that an institution owns under its own brand: a verified alumni directory, mentorship, jobs and referrals, chapters, events and reunions, and scholarship fundraising.
+- [Ticket Dino](https://timewheel.co.in/products/ticket-dino): An event ticketing and management platform for organizers, covering ticket sales, attendee management and analytics. Launching soon.
+- [Coffee & Toffee](https://timewheel.co.in/coffee-and-toffee): A creator monetization platform: accept coffees, toffees, memberships and shop sales from one page, with instant payouts and full ownership of the supporter list.
+- [Coffee & Toffee for Creators](https://timewheel.co.in/creators): A self-hostable, creator-first support platform with profiles, updates, supporter walls and instant payouts.
+
+## Case Studies
+- [All case studies](https://timewheel.co.in/case-studies): How Timewheel designs, builds and ships websites, products and marketing, with the challenges and decisions behind each one.
+- [Occasion Cakes](https://timewheel.co.in/case-studies/occasion-cakes): Ranking a UAE cake shop #1 for 40+ local searches.
+- [Khiladi Adda](https://timewheel.co.in/case-studies/khiladi-adda): Ad copy that cut cost-per-install for a gaming app.
+- [Stone & Acres](https://timewheel.co.in/case-studies/stone-acres): Selling land by turning plots into life stories.
+- [Corart](https://timewheel.co.in/case-studies/corart): Meta lead-gen that turned clicks into customers.
+- [Everything Powerlifting](https://timewheel.co.in/case-studies/everything-powerlifting): Tripling organic traffic for a powerlifting-gear brand.
+- [DRU Foundation](https://timewheel.co.in/case-studies/dru-foundation): An NGO site that makes its work findable.
+- [Eureka Coworking](https://timewheel.co.in/case-studies/eureka-coworking): A coworking brand built to convert enquiries.
+- [Rising Sun Electric](https://timewheel.co.in/case-studies/rising-sun-electric): Solar EPC, explained without the jargon.
+- [WeCos](https://timewheel.co.in/case-studies/wecos): Seven services, one front door.
+- [Shubham Datarkar](https://timewheel.co.in/case-studies/shubham-datarkar): Turning a consultant into a product business.
+- [AdEtc Studios](https://timewheel.co.in/case-studies/adetc-studios): A production studio site showing the work, not the studio.
+- [Power Consilium](https://timewheel.co.in/case-studies/power-consilium): A pan-India UPS supplier, made reachable online.
+- [Ashlar Studio](https://timewheel.co.in/case-studies/ashlar-studio): An architecture site that gives the work room on the page.
+- [Alpha Adventures](https://timewheel.co.in/case-studies/alpha-adventures): Selling a trek in a scrolling feed.
+- [Edulocus](https://timewheel.co.in/case-studies/edulocus): Guiding a student through a decision that lasts years.
+- [Alluminaty build](https://timewheel.co.in/case-studies/alluminaty): The social network for your alumni.
+- [Book A Sloth build](https://timewheel.co.in/case-studies/book-a-sloth): Booking, payments and reminders in one system.
+- [Coffee and Toffee build](https://timewheel.co.in/case-studies/coffee-for-me): Direct audience-to-creator support.
+- [Ticket Dino build](https://timewheel.co.in/case-studies/ticket-dino): Event ticketing that holds at scale.
+- [The Parliament](https://timewheel.co.in/case-studies/the-parliament): Memberships, billing and access control.
+- [Leo Coffee](https://timewheel.co.in/case-studies/leo-coffee): Subscriptions, horeca bulk orders and a store locator in one Shopify build.
 
 ## Company
-- [About](https://timewheel.co.in/about): Who Timewheel is and how we work.
+- [About](https://timewheel.co.in/about): A digital design and development partner helping businesses build websites and digital experiences that are clear, modern and built to grow.
 - [Solutions](https://timewheel.co.in/solutions): Product and service overview.
-- [Pricing](https://timewheel.co.in/pricing): Plans and pricing.
-- [Contact](https://timewheel.co.in/contact): Get in touch.
-- [Case Studies](https://timewheel.co.in/case-studies): Client work and results.
+- [Pricing](https://timewheel.co.in/pricing): Transparent starting prices for website design, development, Shopify, social media, SEO and digital marketing.
+- [Book a Demo](https://timewheel.co.in/book-a-demo): Book a live demo of Book A Sloth, Ticket Dino, websites, digital marketing, SEO or AI automation.
+- [Contact](https://timewheel.co.in/contact): Send a product idea, project brief or question; replies within one business day.
 
-## Resources
-- [Blog](https://timewheel.co.in/blog): Articles on SEO, marketing and building online.
-- [Top 10 Digital Marketing Companies in Nagpur](https://timewheel.co.in/blog/top-10-digital-marketing-companies-nagpur): A ranked, criteria-based guide to the leading digital marketing companies in Nagpur.
+## Blog
+- [Blog](https://timewheel.co.in/blog): Guides on digital marketing, SEO, AI search and building online.
+- [Top 10 Digital Marketing Companies in Nagpur (2026)](https://timewheel.co.in/blog/top-10-digital-marketing-companies-nagpur): A ranked, criteria-based guide to the leading digital marketing companies in Nagpur, with specialties, pricing context and how to choose.
+
+## Optional
+- [Privacy Policy](https://timewheel.co.in/legal/privacy)
+- [Terms of Service](https://timewheel.co.in/legal/terms)
+- [Cookie Policy](https://timewheel.co.in/legal/cookies)
+- [Refund Policy](https://timewheel.co.in/legal/refund)

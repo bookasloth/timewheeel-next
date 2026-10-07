@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@/lib/site";
+import { breadcrumbLd, organizationLd, orgRef, webPageLd } from "@/lib/jsonld";
 import { ContactHero } from "@/components/contact/contact-hero";
 import { ContactChannels } from "@/components/contact/contact-channels";
 import { ContactSteps } from "@/components/contact/contact-steps";
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "Contact Timewheel, a product idea, a project brief, or a question. We reply within one business day with a clear, scoped next step.",
   openGraph: {
     type: "website",
+    url: "/contact",
     title: "Contact, Timewheel",
     description:
       "Say hello. We read every message, replies within one business day.",
@@ -20,25 +21,22 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
+// ContactPage + canonical Organization (stable @id) + breadcrumb in one graph.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: site.name,
-  url: site.url,
-  email: site.contact.email,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: site.contact.city,
-    addressRegion: site.contact.region,
-    addressCountry: "IN",
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "sales",
-    email: site.contact.email,
-    areaServed: "IN",
-    availableLanguage: ["en", "hi"],
-  },
+  "@graph": [
+    webPageLd({
+      type: "ContactPage",
+      name: "Contact Timewheel",
+      path: "/contact",
+      mainEntity: orgRef(),
+    }),
+    organizationLd(),
+    { ...breadcrumbLd([
+      { name: "Home", path: "/" },
+      { name: "Contact", path: "/contact" },
+    ]), "@context": undefined },
+  ],
 };
 
 // FAQPage, mirrors the visible contact FAQ (source: contact-faq faqs).
