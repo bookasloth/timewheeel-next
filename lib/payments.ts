@@ -90,7 +90,11 @@ async function notifyPaid(p: PaymentRow) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
   const from = process.env.RESEND_FROM || "Timewheel <team@timewheel.co.in>";
-  const team = process.env.PAYMENTS_NOTIFY_TO || process.env.LEAD_TO || site.contact.email;
+  // LEAD_TO / PAYMENTS_NOTIFY_TO may hold several comma-separated addresses.
+  const team = (process.env.PAYMENTS_NOTIFY_TO || process.env.LEAD_TO || site.contact.email)
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
   const lines = [
     ["Amount", inr(p.amount)],
     ["For", p.purpose],
@@ -100,22 +104,24 @@ async function notifyPaid(p: PaymentRow) {
   const table = lines.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#77736C">${k}</td><td style="padding:4px 0"><b>${esc(v)}</b></td></tr>`).join("");
   const text = lines.map(([k, v]) => `${k}: ${v}`).join("\n");
 
-  const send = (to: string, subject: string, intro: string) =>
-    fetch("https://api.resend.com/emails", {
+  const send = async (to: string[], subject: string, intro: string) => {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from,
-        to: [to],
+        to,
         reply_to: "team@timewheel.co.in",
         subject,
         html: `<p>${esc(intro)}</p><table>${table}</table><p style="color:#77736C">Timewheel Internet Pvt. Ltd. · ${site.url}</p>`,
         text: `${intro}\n\n${text}`,
       }),
     });
+    if (!res.ok) console.error("Payment email failed:", subject, res.status, await res.text().catch(() => ""));
+  };
 
   await Promise.all([
-    send(p.email, `Payment received: ${inr(p.amount)}`, `Hi ${p.name.split(/\s+/)[0]}, we've received your payment. Thank you!`),
+    send([p.email], `Payment received: ${inr(p.amount)}`, `Hi ${p.name.split(/\s+/)[0]}, we've received your payment. Thank you!`),
     send(team, `Paid ${inr(p.amount)}: ${p.purpose}`, `${p.name} (${p.email}${p.phone ? `, ${p.phone}` : ""}) paid via Zoho Payments.`),
   ]);
 }
