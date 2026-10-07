@@ -3,6 +3,8 @@ import { PAY_MAX, PAY_MIN } from "@/lib/zoho-checkout";
 
 // Creates a pending payment row. Its id becomes the Zoho reference_number, and its
 // amount is the ONLY amount Zoho will be asked to charge (see /api/zoho/session).
+// No honeypot: browser autofill fills off-screen "company" fields and blocked real
+// payers. A fake order gains nothing (it still has to be paid), so none is needed.
 export const runtime = "nodejs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -10,7 +12,6 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function POST(req: Request) {
   const b = await req.json().catch(() => null);
   if (!b || typeof b !== "object") return Response.json({ error: "Invalid request" }, { status: 400 });
-  if (b.company_website) return Response.json({ error: "Invalid request" }, { status: 400 }); // honeypot
 
   const name = String(b.name ?? "").trim().slice(0, 120);
   const email = String(b.email ?? "").trim().slice(0, 200);

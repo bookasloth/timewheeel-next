@@ -32,7 +32,6 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
   const [busy, setBusy] = useState(false);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
-  const [honeypot, setHoneypot] = useState("");
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setV((s) => ({ ...s, [k]: e.target.value }));
@@ -54,7 +53,6 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
         name: v.name.trim(),
         email: v.email.trim(),
         phone: v.phone.trim() || undefined,
-        ...(honeypot && { company_website: honeypot }),
       });
       setOutcome(result);
     } catch (err) {
@@ -84,11 +82,6 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
 
   return (
     <form onSubmit={submit} noValidate className="rounded-2xl border border-border bg-card p-7 md:p-9">
-      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-        <label htmlFor="pay-company_website">Company website</label>
-        <input id="pay-company_website" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
-      </div>
-
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor="pay-amount" className="mb-1.5 block text-sm font-semibold">Amount</label>
