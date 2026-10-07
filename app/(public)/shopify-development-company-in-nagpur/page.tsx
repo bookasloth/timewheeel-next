@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { sd } from "@/lib/shopify-development";
 import { organizationLd, breadcrumbLd, faqLd } from "@/lib/jsonld";
@@ -24,18 +25,7 @@ export const metadata: Metadata = {
   title: { absolute: sd.meta.title },
   description: sd.meta.description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: sd.meta.title,
-    description: sd.meta.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: sd.meta.title,
-    description: sd.meta.description,
-  },
+  ...social({ path: url, title: sd.meta.title, description: sd.meta.description }),
 };
 
 const serviceLd = {

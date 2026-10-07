@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Link from "next/link";
 import { ArrowRight, Check, ShieldCheck, CheckCircle2, MapPin } from "lucide-react";
 import { serviceGroups, type ServicePrice } from "@/lib/pricing";
@@ -8,17 +9,14 @@ import { Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
 
+const DESC =
+  "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing. Limited project slots each month.";
+
 export const metadata: Metadata = {
-  title: "Pricing",
-  description:
-    "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing. Limited project slots each month.",
+  title: "Pricing for Websites, SEO and Digital Marketing",
+  description: DESC,
   alternates: { canonical: "/pricing" },
-  openGraph: {
-    title: "Pricing, Timewheel",
-    description:
-      "Transparent starting prices for every service, website design, development, Shopify, social media, SEO and digital marketing.",
-    url: "/pricing",
-  },
+  ...social({ path: "/pricing", title: "Pricing for Websites, SEO and Digital Marketing", description: DESC }),
 };
 
 const trust = [
@@ -195,7 +193,7 @@ function ServiceRow({ service }: { service: ServicePrice }) {
               className="text-sm font-semibold hover:underline"
               style={{ color: featured ? "#ffffff" : accentText }}
             >
-              Learn more
+              Learn more<span className="sr-only"> about {name}</span>
             </Link>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Link from "next/link";
 import { ArrowUpRight, BriefcaseBusiness, Mail, MapPin, Users } from "lucide-react";
 import { JsonLd } from "@/components/json-ld";
@@ -17,18 +18,7 @@ export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESC,
   alternates: { canonical: "/careers" },
-  openGraph: {
-    type: "website",
-    url: `${site.url}/careers`,
-    siteName: site.name,
-    title: TITLE,
-    description: DESC,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: TITLE,
-    description: DESC,
-  },
+  ...social({ path: "/careers", title: TITLE, description: DESC }),
 };
 
 // No FAQPage here: the index renders no visible questions. The role detail

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { breadcrumbLd, organizationLd, orgRef, webPageLd } from "@/lib/jsonld";
 import { ContactHero } from "@/components/contact/contact-hero";
 import { ContactChannels } from "@/components/contact/contact-channels";
@@ -6,19 +7,15 @@ import { ContactSteps } from "@/components/contact/contact-steps";
 import { ContactLocate } from "@/components/contact/contact-locate";
 import { ContactFaq, faqs } from "@/components/contact/contact-faq";
 
+const TITLE = "Contact Timewheel, Web and Marketing Agency in Nagpur";
+const DESC =
+  "Contact Timewheel, a product idea, a project brief, or a question. We reply within one business day with a clear, scoped next step.";
+
 export const metadata: Metadata = {
-  title: { absolute: "Contact, Timewheel" },
-  description:
-    "Contact Timewheel, a product idea, a project brief, or a question. We reply within one business day with a clear, scoped next step.",
-  openGraph: {
-    type: "website",
-    url: "/contact",
-    title: "Contact, Timewheel",
-    description:
-      "Say hello. We read every message, replies within one business day.",
-    siteName: "Timewheel",
-  },
+  title: { absolute: TITLE },
+  description: DESC,
   alternates: { canonical: "/contact" },
+  ...social({ path: "/contact", title: TITLE, description: DESC }),
 };
 
 // ContactPage + canonical Organization (stable @id) + breadcrumb in one graph.

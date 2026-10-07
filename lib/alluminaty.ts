@@ -2,7 +2,7 @@ export const az = {
   meta: {
     title: "Alluminaty, Where Your Alumni Network Lives",
     description:
-      "Alluminaty is the modern social network for alumni, a verified community your institution owns. Keep graduates reachable, support students with mentors and jobs, and fund scholarships, all under your brand.",
+      "Alluminaty is the modern alumni network your institution owns. Keep graduates reachable, connect students with mentors and jobs, and fund scholarships.",
   },
   hero: {
     titleLine1: "Where your",

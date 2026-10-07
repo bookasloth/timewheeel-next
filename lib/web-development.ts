@@ -5,9 +5,9 @@
 
 export const wd = {
   meta: {
-    title: "Web Development Company in Nagpur | Fixed Price, 6 Weeks",
+    title: "Web Development Company in Nagpur | Fixed Price",
     description:
-      "Web development company in Nagpur building fast, SEO-ready websites and web apps on Next.js, WordPress and Shopify. Fixed scope, fixed price, launched in about six weeks, and you own the code.",
+      "Web development company in Nagpur building fast, SEO-ready sites and web apps on Next.js, WordPress and Shopify. Fixed price, about six weeks, you own the code.",
   },
 
   hero: {

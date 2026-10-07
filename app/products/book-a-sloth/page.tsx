@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { bas } from "@/lib/book-a-sloth";
 import { BasHero } from "@/components/book-a-sloth/hero";
 import { BasProblem } from "@/components/book-a-sloth/problem";
@@ -15,23 +16,12 @@ import { BasTestimonials } from "@/components/book-a-sloth/testimonials";
 
 // Title set here (not from lib copy) to keep the site-wide ", Timewheel" suffix
 // and avoid the em-dash in the lib string.
-const META_TITLE = "Book A Sloth: Appointment Booking & Scheduling Software, Timewheel";
+const META_TITLE = "Book A Sloth: Appointment Booking & Scheduling Software";
 
 export const metadata: Metadata = {
   title: { absolute: META_TITLE },
   description: bas.meta.description,
-  openGraph: {
-    type: "website",
-    url: "/products/book-a-sloth",
-    title: META_TITLE,
-    description: bas.meta.description,
-    siteName: "Timewheel",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: META_TITLE,
-    description: bas.meta.description,
-  },
+  ...social({ path: "/products/book-a-sloth", title: META_TITLE, description: bas.meta.description }),
   alternates: { canonical: "/products/book-a-sloth" },
 };
 

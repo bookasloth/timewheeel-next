@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { ComingSoon } from "@/components/shared/coming-soon";
@@ -13,8 +14,7 @@ export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: url },
-  openGraph: { type: "website", url, siteName: site.name, title, description },
-  twitter: { card: "summary_large_image", title, description },
+  ...social({ path: url, title, description }),
 };
 
 const crumbs = [

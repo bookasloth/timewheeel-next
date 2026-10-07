@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { DmCinematicHero } from "@/components/digital-marketing/cinematic-hero";
@@ -16,25 +17,15 @@ import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal
 import { dmServiceOptions } from "@/lib/digital-marketing2";
 import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
 
+const TITLE = "Digital Marketing Agency in Nagpur: SEO & Ads";
+const DESC =
+  "Full-service digital marketing agency in Nagpur for SEO, paid ads, social media, content, email and WhatsApp marketing, run as one system with clear reports.";
+
 export const metadata: Metadata = {
-  title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
-  description:
-    "Hire a full-service digital marketing agency in Nagpur for SEO, paid ads, social media, content, email and WhatsApp marketing, one connected growth system with clear reports.",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: `${site.url}/digital-marketing-company-in-nagpur` },
-  openGraph: {
-    type: "website",
-    url: `${site.url}/digital-marketing-company-in-nagpur`,
-    siteName: site.name,
-    title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
-    description:
-      "Full-service digital marketing in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp, all working toward one goal.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Digital Marketing Agency in Nagpur | SEO, PPC, Social & More",
-    description:
-      "Full-service digital marketing in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp, all working toward one goal.",
-  },
+  ...social({ path: "/digital-marketing-company-in-nagpur", title: TITLE, description: DESC, image: false }),
 };
 
 const jsonLd = {

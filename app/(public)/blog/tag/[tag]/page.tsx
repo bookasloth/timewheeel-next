@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight } from "lucide-react";
@@ -13,10 +14,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
   const { tag } = await params;
   const label = getAllTags().find((t) => slugify(t) === tag) ?? tag;
+  const title = `${label} Articles and Guides, Timewheel Blog`;
+  const description = `Timewheel articles and guides on ${label}: practical, no-fluff advice for growing businesses on marketing, search, AI visibility and websites.`;
   return {
-    title: `${label}, Blog`,
-    description: `Timewheel blog posts tagged ${label}.`,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `/blog/tag/${tag}` },
+    ...social({ path: `/blog/tag/${tag}`, title, description }),
   };
 }
 

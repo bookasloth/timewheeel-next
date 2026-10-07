@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/lib/site";
@@ -28,18 +29,7 @@ export const metadata: Metadata = {
   title: wd.meta.title,
   description: wd.meta.description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: wd.meta.title,
-    description: wd.meta.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: wd.meta.title,
-    description: wd.meta.description,
-  },
+  ...social({ path: url, title: wd.meta.title, description: wd.meta.description }),
   // Local-intent hints for the "in Nagpur" query.
   other: { "geo.region": "IN-MH", "geo.placename": "Nagpur" },
 };

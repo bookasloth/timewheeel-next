@@ -31,7 +31,7 @@ export const bas = {
     title:
       "Book A Sloth: Appointment Booking & Scheduling Software, Timewheel",
     description:
-      "Book A Sloth is an India-first appointment booking and scheduling platform: 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, WhatsApp and email reminders, and GST invoicing. Designed and built by Timewheel.",
+      "Book A Sloth is India-first appointment booking software: 24/7 booking pages, UPI and Razorpay payments, Google Calendar sync, WhatsApp reminders, GST invoices.",
   },
   nav: {
     links: [
