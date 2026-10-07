@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 // Throwing returns 500, so Zoho retries delivery.
 export async function POST(req: Request) {
   const raw = await req.text(); // raw body: the signature covers exact bytes
-  const key = process.env.ZOHO_PAY_WEBHOOK_SIGNING_KEY;
+  const key = process.env.ZOHO_PAY_WEBHOOK_SIGNING_KEY?.trim(); // tolerate stray whitespace from pasted env values
   if (!key || !verifyWebhookSignature(raw, req.headers.get("x-zoho-webhook-signature"), key)) {
     return new Response("Invalid signature", { status: 401 });
   }
