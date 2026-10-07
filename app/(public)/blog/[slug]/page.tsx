@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: "summary_large_image",
       title: meta.ogTitle ?? meta.title,
       description: meta.ogDescription ?? meta.description,
+      images: [`${url}/opengraph-image`],
     },
   };
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { organizationLd, breadcrumbLd, localBusinessLd } from "@/lib/jsonld";
@@ -26,18 +27,7 @@ export const metadata: Metadata = {
   title: seo.meta.title,
   description: seo.meta.description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: seo.meta.title,
-    description: seo.meta.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: seo.meta.title,
-    description: seo.meta.description,
-  },
+  ...social({ path: url, title: seo.meta.title, description: seo.meta.description }),
   other: { "geo.region": "IN-MH", "geo.placename": "Nagpur" },
 };
 

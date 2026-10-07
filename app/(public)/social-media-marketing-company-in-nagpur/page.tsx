@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { smm } from "@/lib/social-media-marketing";
 import { organizationLd, localBusinessLd, breadcrumbLd } from "@/lib/jsonld";
@@ -25,24 +26,13 @@ const PATH = "/social-media-marketing-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 const title = "Social Media Marketing Company in Nagpur | Timewheel";
 const description =
-  "Social media marketing company in Nagpur, strategy, content, creative, community and paid social under one roof. One consistent brand voice, clear reporting and honest timelines.";
+  "Social media marketing company in Nagpur for strategy, content, creative, community and paid social. One consistent brand voice and clear, honest reporting.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title,
-    description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
+  ...social({ path: url, title, description }),
   // Local-intent hints for the "in Nagpur" query.
   other: { "geo.region": "IN-MH", "geo.placename": "Nagpur" },
 };

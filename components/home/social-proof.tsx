@@ -180,7 +180,7 @@ export function SocialProof() {
 
       <div className="mt-6">
         <Link
-          href="#"
+          href="/case-studies"
           className="btn btn-outline inline-flex items-center rounded-lg px-5 py-2.5 text-sm font-semibold"
         >
           Open Customers

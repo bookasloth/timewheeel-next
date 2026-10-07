@@ -7,7 +7,7 @@ export const wa = {
   meta: {
     title: "Web App Development | Custom Web Applications, Timewheel",
     description:
-      "Custom web applications designed around your business, dashboards, customer portals, internal platforms and SaaS products. Planned, designed, built and launched to scale.",
+      "Custom web application development in Nagpur: dashboards, customer portals, internal platforms and SaaS products, planned, designed and built to scale.",
   },
 
   hero: {

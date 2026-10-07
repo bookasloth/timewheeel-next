@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { creatorUi } from "@/lib/creator";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { CtHero } from "@/components/creators/hero";
@@ -16,18 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: creatorUi.meta.title },
   description: creatorUi.meta.description,
   alternates: { canonical: "/creators" },
-  openGraph: {
-    type: "website",
-    url: "/creators",
-    title: creatorUi.meta.title,
-    description: creatorUi.meta.description,
-    siteName: "Timewheel",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: creatorUi.meta.title,
-    description: creatorUi.meta.description,
-  },
+  ...social({ path: "/creators", title: creatorUi.meta.title, description: creatorUi.meta.description }),
 };
 
 const faqLd = {

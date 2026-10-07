@@ -2,7 +2,7 @@ export const cf = {
   meta: {
     title: "Coffee & Toffee, Fund Your Creative Work",
     description:
-      "A creator monetization platform that turns casual fans into warm supporters. Accept coffees, toffees, memberships, and shop sales from one friendly page, with instant payouts and 100% ownership of your supporter list.",
+      "Coffee & Toffee is a creator monetization platform. Accept coffees, memberships and shop sales from one page, with instant payouts and your own supporter list.",
   },
   hero: {
     badge: "Loved by creators on Timewheel",

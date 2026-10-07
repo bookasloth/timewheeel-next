@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
 import { JobDetail } from "@/components/careers/role-detail";
@@ -29,18 +30,7 @@ export async function generateMetadata({
     title: { absolute: title },
     description,
     alternates: { canonical: `/careers/${job.slug}` },
-    openGraph: {
-      type: "article",
-      url: `${site.url}/careers/${job.slug}`,
-      siteName: site.name,
-      title,
-      description,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
+  ...social({ path: `/careers/${job.slug}`, title, description, type: "article" }),
   };
 }
 

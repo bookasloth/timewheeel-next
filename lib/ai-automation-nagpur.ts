@@ -6,9 +6,9 @@
 
 export const aiAuto = {
   meta: {
-    title: "AI Automation Agency in Nagpur | AI & Marketing Automation",
+    title: "AI Automation Agency in Nagpur | WhatsApp & CRM",
     description:
-      "AI automation agency in Nagpur helping businesses implement AI and marketing automation, WhatsApp and CRM workflows, chatbots and lead nurturing. One team, practical implementation, systems you own.",
+      "AI automation agency in Nagpur for marketing automation, WhatsApp and CRM workflows, chatbots and lead nurturing. Practical setup on systems you own.",
   },
 
   hero: {

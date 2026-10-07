@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { Star } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { site } from "@/lib/site";
 
 const quotes = [
   "We stopped depending on disconnected tools for bookings and payments. Everything now runs through one stable workflow built for ownership.",
@@ -52,12 +52,14 @@ export function Testimonials() {
           ))}
         </Reveal>
         <Reveal className="mt-10 flex justify-center">
-          <Link
-            href="#"
+          <a
+            href={site.social.google}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-green inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white"
           >
-            Read all testimonials on Trustpilot
-          </Link>
+            Read our reviews on Google
+          </a>
         </Reveal>
       </div>
     </section>

@@ -18,7 +18,7 @@ export const sd = {
   meta: {
     title: "Shopify Development Company in Nagpur | Timewheel",
     description:
-      "Build, customize, migrate and scale Shopify stores with a development team that understands ecommerce, performance and growth. Shopify Plus, headless, apps and integrations.",
+      "Shopify development company in Nagpur to build, customize, migrate and scale stores. Shopify Plus, headless builds, apps and integrations, tuned for speed.",
   },
 
   hero: {

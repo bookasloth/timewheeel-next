@@ -37,7 +37,7 @@ export const smm = {
   meta: {
     title: "Social Media Marketing Company in Nagpur | Timewheel",
     description:
-      "Social media marketing company in Nagpur, strategy, content, creative, community and paid social under one roof. One consistent brand voice, clear reporting and honest timelines.",
+      "Social media marketing company in Nagpur for strategy, content, creative, community and paid social. One consistent brand voice and clear, honest reporting.",
   },
 
   hero: {

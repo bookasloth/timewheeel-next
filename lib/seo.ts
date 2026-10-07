@@ -5,9 +5,9 @@
 
 export const seo = {
   meta: {
-    title: "SEO Company in Nagpur | Local + AI Search Visibility",
+    title: "SEO Company in Nagpur | Local & AI Search",
     description:
-      "SEO company in Nagpur for local SEO, technical fixes, content and AI-search (AEO) visibility. Run a free instant audit of your site, get honest timelines, and no ranking guarantees we can't keep.",
+      "SEO company in Nagpur for local SEO, technical fixes, content and AI search (AEO) visibility. Free instant site audit, honest timelines, no fake guarantees.",
   },
 
   hero: {

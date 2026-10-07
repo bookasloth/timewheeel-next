@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { cf } from "@/lib/coffee-and-toffee";
 import { CfHero } from "@/components/coffee-and-toffee/hero";
 import { CfStats } from "@/components/coffee-and-toffee/stats";
@@ -16,18 +17,7 @@ export const metadata: Metadata = {
   title: { absolute: cf.meta.title },
   description: cf.meta.description,
   alternates: { canonical: "/coffee-and-toffee" },
-  openGraph: {
-    type: "website",
-    url: "/coffee-and-toffee",
-    title: cf.meta.title,
-    description: cf.meta.description,
-    siteName: "Timewheel",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: cf.meta.title,
-    description: cf.meta.description,
-  },
+  ...social({ path: "/coffee-and-toffee", title: cf.meta.title, description: cf.meta.description }),
 };
 
 const jsonLd = {

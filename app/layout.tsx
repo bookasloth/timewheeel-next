@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s, Timewheel",
   },
   description:
-    "Timewheel helps creators, consultants, agencies & growing businesses run bookings, payments, events & communities on systems they own, no fragmented SaaS, no platform commissions, no rented infrastructure.",
+    "Timewheel helps creators, consultants and growing businesses run bookings, payments, events and communities on systems they own, with no platform commissions.",
   keywords: [
     "Timewheel",
     "self-hosted business tools",

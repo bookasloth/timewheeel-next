@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { RmHero } from "@/components/restaurant-marketing/hero";
@@ -13,25 +14,15 @@ import { RmFinalCta } from "@/components/restaurant-marketing/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { RmContact } from "@/components/restaurant-marketing/contact";
 
+const TITLE = "Digital Marketing Agency for Restaurants";
+const DESC =
+  "Restaurant digital marketing agency for social media, local SEO, content, video and paid ads that bring more walk-ins, table bookings and repeat guests.";
+
 export const metadata: Metadata = {
-  title: "Digital Marketing Agency for Restaurants | Social Media Strategies",
-  description:
-    "Boost your restaurant's brand engagement and bring more customers with our top-rated digital marketing agency for restaurants, social media, local SEO, content, video, and paid ads.",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: `${site.url}/restaurant-marketing` },
-  openGraph: {
-    type: "website",
-    url: `${site.url}/restaurant-marketing`,
-    siteName: site.name,
-    title: "Digital Marketing Agency for Restaurants | Social Media Strategies",
-    description:
-      "Restaurant marketing agency with top social media and digital marketing services, more walk-ins, more table bookings, more repeat guests across India.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Digital Marketing Agency for Restaurants | Social Media Strategies",
-    description:
-      "Restaurant marketing agency with top social media and digital marketing services, more walk-ins, more table bookings, more repeat guests across India.",
-  },
+  ...social({ path: "/restaurant-marketing", title: TITLE, description: DESC }),
 };
 
 const jsonLd = {

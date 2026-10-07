@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { organizationLd, breadcrumbLd, faqLd } from "@/lib/jsonld";
 import { aimFaq, aimServiceOptions } from "@/lib/ai-marketing";
@@ -18,25 +19,15 @@ import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal
 const PATH = "/ai-marketing-automation-company-in-nagpur";
 const url = `${site.url}${PATH}`;
 
+const TITLE = "AI Marketing Automation Company in Nagpur";
+const DESC =
+  "AI marketing automation in Nagpur: smarter ads, WhatsApp chatbots, lead scoring, AI content and journeys in one system that converts more enquiries.";
+
 export const metadata: Metadata = {
-  title: "AI Marketing Automation Company in Nagpur",
-  description:
-    "AI marketing automation in Nagpur, smarter ads, WhatsApp chatbots, predictive lead scoring, AI content and journey automation, one connected system that captures and converts more enquiries.",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: "AI Marketing Automation Company in Nagpur",
-    description:
-      "AI-powered marketing automation in Nagpur, ads, chatbots, lead scoring, content and journeys working as one system.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AI Marketing Automation Company in Nagpur",
-    description:
-      "AI-powered marketing automation in Nagpur, ads, chatbots, lead scoring, content and journeys working as one system.",
-  },
+  ...social({ path: url, title: TITLE, description: DESC }),
 };
 
 const crumbs = [

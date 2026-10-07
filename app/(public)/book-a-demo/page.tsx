@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import {
   CalendarCheck,
   Ticket,
@@ -17,15 +18,15 @@ import { JsonLd } from "@/components/json-ld";
 import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
 
-const TITLE = "Book a Demo | Timewheel";
+const TITLE = "Book a Demo of Our Products and Services | Timewheel";
 const DESC =
-  "See it live. Pick the demo you want, from Book A Sloth and Ticket Dino to websites, digital marketing, SEO and AI automation. We reply with a time within one business day.";
+  "See it live. Pick a demo, from Book A Sloth and Ticket Dino to websites, marketing, SEO and AI automation. We reply with a time within one business day.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESC,
   alternates: { canonical: "/book-a-demo" },
-  openGraph: { type: "website", url: `${site.url}/book-a-demo`, siteName: site.name, title: TITLE, description: DESC },
+  ...social({ path: "/book-a-demo", title: TITLE, description: DESC }),
 };
 
 // The demos a prospect can book. Products first, then services. The form's

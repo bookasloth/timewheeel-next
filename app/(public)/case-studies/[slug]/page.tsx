@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
 import { CaseStudyDetail } from "@/components/case-studies/case-study-detail";
@@ -19,21 +20,12 @@ export async function generateMetadata({
   const cs = getCaseStudy(slug);
   if (!cs) return {};
   const title = `${cs.name}, Case Study by Timewheel`;
+  const description = cs.metaDescription ?? cs.summary;
   return {
     title: { absolute: title },
-    description: cs.summary,
+    description,
     alternates: { canonical: cs.href },
-    openGraph: {
-      type: "website",
-      title,
-      description: cs.summary,
-      siteName: "Timewheel",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: cs.summary,
-    },
+    ...social({ path: cs.href, title, description }),
   };
 }
 

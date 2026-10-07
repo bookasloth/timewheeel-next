@@ -6,7 +6,7 @@ export const dmNagpur = {
   meta: {
     title: "Digital Marketing Company in Nagpur | Timewheel",
     description:
-      "Digital marketing company in Nagpur for SEO, social media, Google Ads, content and websites. One team, honest reporting, and systems you own. Start with a free instant audit of your site.",
+      "Digital marketing company in Nagpur for SEO, social media, Google Ads, content and websites. One team, honest reporting. Start with a free instant site audit.",
   },
 
   hero: {
