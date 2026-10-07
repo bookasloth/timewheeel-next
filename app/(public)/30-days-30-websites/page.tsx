@@ -56,7 +56,7 @@ const steps = [
   {
     icon: Sparkles,
     title: "Name your price",
-    body: "Pay what you want, ₹0 to anything. The goal is a website for everyone, not the money.",
+    body: "Pay what you want, ₹0 to anything, securely by UPI or card. The goal is a website for everyone, not the money.",
   },
   {
     icon: Rocket,
