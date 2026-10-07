@@ -19,6 +19,13 @@ export const EVENTS = {
   CONTACT_WHATSAPP: "contact_whatsapp",
   CONTACT_CLICK: "contact_click",
   SEO_AUDIT_STARTED: "seo_audit_started",
+  // review-generator funnel (/review): turn real customer feedback into a
+  // copy-paste Google review. One event per meaningful step.
+  REVIEW_PAGE_VIEWED: "review_page_viewed",
+  REVIEW_QUESTIONS_COMPLETED: "review_questions_completed",
+  REVIEW_GENERATED: "review_generated",
+  REVIEW_COPIED: "review_copied",
+  REVIEW_GOOGLE_CLICKED: "review_google_clicked",
 } as const;
 
 export type EventName = (typeof EVENTS)[keyof typeof EVENTS];

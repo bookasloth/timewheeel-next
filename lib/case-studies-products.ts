@@ -14,10 +14,10 @@ export const productCaseStudies: CaseStudy[] = [
   {
     slug: "alluminaty",
     name: "Alluminaty",
-    tagline: "One platform for directories, events and giving",
+    tagline: "The social network for your alumni",
     category: "Education · Community Platform",
     summary:
-      "An alumni engagement platform for schools, colleges and universities. Directories, events, reunions, mentorship and giving live in one place, instead of spreadsheets, PDFs and group chats.",
+      "A modern social network for alumni. Graduates discover each other by batch, city, company or profession, build professional profiles, find mentors, share opportunities and stay connected for life.",
     accent: "#269cef",
     image: {
       src: "/portfolio/Alumni Connections Campus Collage.png",
@@ -30,50 +30,50 @@ export const productCaseStudies: CaseStudy[] = [
     meta: { readTime: "3 min", services: ["Product Design", "UI / UX", "Web App"] },
     content: {
       hero: {
-        title: "The alumni network, finally",
-        titleAccent: "in one place.",
+        title: "The alumni network your",
+        titleAccent: "graduates actually use.",
         summary:
-          "Schools and colleges run alumni relations on spreadsheets, shared documents and group chats. Alluminaty replaces that with a single platform for directories, events, mentorship and giving.",
+          "Most institutions lose touch with graduates the moment they leave. Alluminaty gives them a modern social network, built so alumni discover each other, connect and stay close for life.",
         primaryCta: { label: "Book a call", href: "/book-a-demo" },
         secondaryCta: { label: "More case studies", href: "/case-studies" },
       },
       stats: [
         { value: "₹49", label: "per month" },
-        { value: "Directory", label: "searchable alumni profiles" },
-        { value: "Events", label: "and fundraising tools" },
-        { value: "Verified", label: "school badges" },
+        { value: "Directory", label: "search by batch, city, company" },
+        { value: "Chapters", label: "events, reunions & mentorship" },
+        { value: "Verified", label: "member badges" },
       ],
       sections: [
         {
           eyebrow: "The Challenge",
-          title: "Alumni data rots in shared documents.",
-          body: "Most institutions hold their alumni list in a spreadsheet someone exported two years ago. Contact details go stale, nobody can search it, and events are organised through WhatsApp groups that die the moment the cohort graduates.",
+          title: "The community fades after graduation.",
+          body: "Every institution builds a tight community, then graduation scatters it. Batchmates lose touch, there's no way to find a mentor or an open role, and the group chats die the moment the cohort moves on.",
           bullets: [
-            "Alumni records spread across spreadsheets, PDFs and personal contacts",
+            "Classmates spread across cities, companies and countries",
             "No way for a graduate to find a batchmate, mentor or open role",
-            "Events, reunions and giving run manually, off-platform",
+            "Events, chapters and opportunities run on dying group chats",
           ],
         },
         {
           eyebrow: "The Approach",
-          title: "One system for the whole relationship.",
-          body: "Rather than adding another tool, we collapsed the lifecycle into a single product. Identity and directory first, because a network nobody can search is just a list. Events and giving on top of it, so re-engagement is two clicks from a profile instead of a mail merge.",
+          title: "Built like a social network, not a database.",
+          body: "Rather than another admin tool, we built the product graduates want to open. A verified identity and directory first, because a network nobody can search is just a list. Then a feed, chapters, events, mentorship and opportunities on top, so reconnecting is two taps from a profile.",
           bullets: [
-            "Searchable alumni directory with structured profiles and filters",
-            "Events, reunions and mentorship programs run in-product",
-            "Fundraising and community engagement tools",
-            "Verified school badges so listings carry institutional trust",
+            "Verified alumni directory with professional profiles and filters",
+            "Feed, chapters, events and reunions in one product",
+            "Jobs, referrals, mentorship and alumni opportunities",
+            "Verified member badges so the network stays trusted",
           ],
         },
         {
           eyebrow: "What's Shipped",
           title: "Priced for a single institution, not an enterprise deal.",
-          body: "The published plan is ₹49 per month and includes the alumni directory, event and fundraising tools, and verified school badges. That price point is the point: the platform is built so a single college can adopt it without a procurement cycle.",
+          body: "The published plan is ₹49 per month and includes the alumni directory, events and giving tools, and verified member badges. That price point is the point: the platform is built so a single college can adopt it without a procurement cycle.",
         },
       ],
       closing: {
-        title: "Running alumni relations on a spreadsheet?",
-        body: "Tell us how your institution handles directories, events and giving today, and we'll show you what one platform looks like.",
+        title: "Want a home for your alumni?",
+        body: "Tell us about your institution and the community you want to keep connected, and we'll show you what one platform looks like.",
         ctaLabel: "Book a call",
         ctaHref: "/book-a-demo",
       },
@@ -81,15 +81,15 @@ export const productCaseStudies: CaseStudy[] = [
     faq: [
       {
         q: "Who is Alluminaty for?",
-        a: "Schools, colleges, universities and coaching networks that want a verified, long-lived alumni network covering directories, events, groups, mentorship and giving.",
+        a: "Schools, colleges, universities and coaching networks that want a modern, lifelong alumni community, directory, professional profiles, chapters, events, mentorship and opportunities in one product.",
       },
       {
         q: "What does Alluminaty cost?",
-        a: "₹49 per month, including the alumni directory, event and fundraising tools, and verified school badges.",
+        a: "₹49 per month, including the alumni directory, events and giving tools, and verified member badges.",
       },
       {
-        q: "What does it replace?",
-        a: "Alumni spreadsheets, shared documents and WhatsApp groups, plus the separate tools institutions usually bolt on for events and donations.",
+        q: "What makes it different?",
+        a: "It is built like a social network graduates want to open, not an admin tool. Verified profiles, a feed, chapters, events, mentorship and opportunities keep alumni connected long after graduation.",
       },
     ],
   },

@@ -35,17 +35,17 @@ export const products: Product[] = [
   {
     slug: "alluminaty",
     name: "Alluminaty",
-    tagline: "Connect Schools & Alumni",
+    tagline: "Where Your Alumni Network Lives",
     icon: GraduationCap,
     accent: "#269cef",
     href: "/products/alluminaty",
     featured: true,
     blurb:
-      "An alumni engagement platform that keeps schools, colleges, and their graduates connected long after they leave, directories, events, mentorship, and giving in one place instead of scattered spreadsheets and group chats.",
+      "The modern social network for alumni, a verified community your institution owns. Keep graduates reachable, give students mentors and jobs, and fund scholarships, all under your brand.",
     bullets: [
-      "Searchable alumni directories and profiles",
-      "Events, reunions, and mentorship programs",
-      "Fundraising and community engagement tools",
+      "Verified alumni directory your institution owns",
+      "Mentors, referrals and jobs for your students",
+      "Chapters, events and giving in one branded home",
     ],
   },
   {
