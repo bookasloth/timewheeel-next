@@ -1,32 +1,32 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { syncNewsletterContact } from "@/lib/resend-contacts";
+import { sendEmail, sendNewsletterWelcome } from "@/lib/resend-email";
 
-// ponytail: no key => accept + log, so footer works before Resend is wired.
+// Footer / blog newsletter signup: welcome email to the subscriber, upsert into
+// the Resend newsletter audience (RESEND_NEWSLETTER_AUDIENCE_ID) for broadcasts,
+// and a heads-up to NEWSLETTER_TO. All best-effort: Resend not configured ->
+// accept + log, so the form never breaks.
+export const runtime = "nodejs";
+
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(req: Request) {
-  const { email } = await req.json().catch(() => ({ email: "" }));
-  if (!email || typeof email !== "string" || !email.includes("@")) {
-    return NextResponse.json({ error: "invalid email" }, { status: 400 });
-  }
+  const { email: raw } = await req.json().catch(() => ({ email: "" }));
+  const email = typeof raw === "string" ? raw.trim().slice(0, 200) : "";
+  if (!EMAIL.test(email)) return NextResponse.json({ error: "invalid email" }, { status: 400 });
 
-  const key = process.env.RESEND_API_KEY;
-  const to = process.env.NEWSLETTER_TO;
-  const from = process.env.RESEND_FROM;
-
-  if (!key || !to || !from) {
+  if (!process.env.RESEND_API_KEY) {
     console.log("[newsletter] signup (no Resend configured):", email);
     return NextResponse.json({ ok: true });
   }
 
-  try {
-    const resend = new Resend(key);
-    await resend.emails.send({
-      from,
-      to,
-      subject: "New newsletter signup",
-      text: `New signup: ${email}`,
-    });
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "send failed" }, { status: 500 });
-  }
+  const team = process.env.NEWSLETTER_TO;
+  await Promise.all([
+    sendNewsletterWelcome(email),
+    syncNewsletterContact(email),
+    team
+      ? sendEmail(team, { subject: "New newsletter signup", html: `<p>New signup: ${email.replace(/</g, "&lt;")}</p>`, text: `New signup: ${email}` }, email)
+      : Promise.resolve(false),
+  ]);
+  return NextResponse.json({ ok: true });
 }

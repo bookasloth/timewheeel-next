@@ -18,13 +18,18 @@ function splitName(full: string): { first: string; last: string } {
 }
 
 // Upsert a contact into the leads audience. Returns true on a 2xx. Never throws.
-export async function syncLeadContact(opts: {
-  email: string;
-  name: string;
-  source: string;
-}): Promise<boolean> {
+export function syncLeadContact(opts: { email: string; name: string; source: string }): Promise<boolean> {
+  return syncContact(process.env.RESEND_LEADS_AUDIENCE_ID, opts);
+}
+
+// Newsletter subscribers get their own audience (RESEND_NEWSLETTER_AUDIENCE_ID),
+// so marketing broadcasts and lead nurture stay separate lists.
+export function syncNewsletterContact(email: string): Promise<boolean> {
+  return syncContact(process.env.RESEND_NEWSLETTER_AUDIENCE_ID, { email, name: "" });
+}
+
+async function syncContact(audienceId: string | undefined, opts: { email: string; name: string }): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
-  const audienceId = process.env.RESEND_LEADS_AUDIENCE_ID;
   if (!key || !audienceId || !opts.email) return false; // not configured -> skip
 
   const { first, last } = splitName(opts.name);

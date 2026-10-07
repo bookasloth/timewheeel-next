@@ -8,6 +8,8 @@
 // Required env (server-only): SUPABASE_URL, SUPABASE_SECRET_KEY.
 import type { ZohoPayment } from "@/lib/zoho-payments";
 import { site } from "@/lib/site";
+import { paymentReceipt, teamPayment } from "@/lib/email/templates";
+import { sendEmail } from "@/lib/resend-email";
 
 export type PaymentRow = {
   id: string;
@@ -18,6 +20,7 @@ export type PaymentRow = {
   email: string;
   phone: string | null;
   status: "pending" | "paid";
+  source?: string | null; // "pay-page", "30-days-challenge", ...
   provider_payment_id: string | null;
   paid_at: string | null;
 };
@@ -81,47 +84,32 @@ export async function markPaid(id: string, payment: ZohoPayment) {
   if (flipped) await notifyPaid({ ...flipped, amount: Number(flipped.amount) }).catch((e) => console.error("Payment notify failed:", e));
 }
 
-const inr = (n: number) => `₹${n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
-
 // Receipt to the payer + alert to the team, via Resend. Best-effort: a failed
 // email must never undo a confirmed payment.
 async function notifyPaid(p: PaymentRow) {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return;
-  const from = process.env.RESEND_FROM || "Timewheel <team@timewheel.co.in>";
   // LEAD_TO / PAYMENTS_NOTIFY_TO may hold several comma-separated addresses.
   const team = (process.env.PAYMENTS_NOTIFY_TO || process.env.LEAD_TO || site.contact.email)
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-  const lines = [
-    ["Amount", inr(p.amount)],
-    ["For", p.purpose],
-    ["Zoho payment ID", p.provider_payment_id ?? ""],
-    ["Reference", p.id],
-  ];
-  const table = lines.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#77736C">${k}</td><td style="padding:4px 0"><b>${esc(v)}</b></td></tr>`).join("");
-  const text = lines.map(([k, v]) => `${k}: ${v}`).join("\n");
-
-  const send = async (to: string[], subject: string, intro: string) => {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from,
-        to,
-        reply_to: "team@timewheel.co.in",
-        subject,
-        html: `<p>${esc(intro)}</p><table>${table}</table><p style="color:#77736C">Timewheel Internet Pvt. Ltd. · ${site.url}</p>`,
-        text: `${intro}\n\n${text}`,
-      }),
-    });
-    if (!res.ok) console.error("Payment email failed:", subject, res.status, await res.text().catch(() => ""));
-  };
-
+  const reference = p.id;
   await Promise.all([
-    send([p.email], `Payment received: ${inr(p.amount)}`, `Hi ${p.name.split(/\s+/)[0]}, we've received your payment. Thank you!`),
-    send(team, `Paid ${inr(p.amount)}: ${p.purpose}`, `${p.name} (${p.email}${p.phone ? `, ${p.phone}` : ""}) paid via Zoho Payments.`),
+    sendEmail(
+      p.email,
+      paymentReceipt({
+        name: p.name,
+        amount: p.amount,
+        purpose: p.purpose,
+        paymentId: p.provider_payment_id,
+        reference,
+        paidAt: p.paid_at ? new Date(p.paid_at) : new Date(),
+        challenge: p.source === "30-days-challenge",
+      }),
+    ),
+    sendEmail(
+      team,
+      teamPayment({ name: p.name, email: p.email, phone: p.phone, amount: p.amount, purpose: p.purpose, paymentId: p.provider_payment_id, reference }),
+      p.email,
+    ),
   ]);
 }

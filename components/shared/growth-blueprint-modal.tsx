@@ -204,12 +204,12 @@ void main(){
     const score = scoreLead(a);
     const message =
       `[${score} LEAD] Startup Growth Blueprint\n` +
-      `Website: ${a.website || "—"}\n` +
-      `Experience: ${a.experience || "—"}\n` +
-      `Goal: ${a.goal || "—"}\n` +
-      `Revenue/yr: ${a.revenue || "—"}\n` +
-      `Budget/mo: ${a.budget || "—"}\n` +
-      `Execution: ${a.execution || "—"}`;
+      `Website: ${a.website || "-"}\n` +
+      `Experience: ${a.experience || "-"}\n` +
+      `Goal: ${a.goal || "-"}\n` +
+      `Revenue/yr: ${a.revenue || "-"}\n` +
+      `Budget/mo: ${a.budget || "-"}\n` +
+      `Execution: ${a.execution || "-"}`;
     setStatus("submitting"); setErrorMsg("");
     try {
       const res = await fetch("/api/lead", {
