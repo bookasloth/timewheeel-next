@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowLeft, Loader2, MailCheck, ArrowRight } from "lucide-react";
 import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
+import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
 type Finding = { title: string; severity: string; category: string; recommendation: string };
@@ -22,7 +23,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [honeypot, setHoneypot] = useState("");
+  const hp = useHoneypot();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const ft = useFormTracking("seo-audit");
@@ -58,7 +59,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
           service: "SEO",
           message,
           source: "SEO Audit — email my fixes",
-          company_website: honeypot,
+          ...hp.payload(),
           sendReport: true,
           domain: site,
           scores,
@@ -119,15 +120,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         issue we found and exactly how to fix it.
       </p>
 
-      {/* honeypot */}
-      <input
-        className="absolute left-[-9999px] h-0 w-0"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden
-        value={honeypot}
-        onChange={(e) => setHoneypot(e.target.value)}
-      />
+      <Honeypot {...hp.field} />
 
       <div className="mt-5 space-y-3">
         <input

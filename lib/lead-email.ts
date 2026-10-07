@@ -29,6 +29,8 @@ export type LeadEmail = {
   // Admin-only: the full audit findings + exact fixes. Never shown in the
   // public report; the team gets them here to action the lead.
   findings?: LeadFinding[];
+  // Set when the bot trap was filled slowly (likely autofill): eyeball it first.
+  flag?: string;
 };
 
 function esc(s: string): string {
@@ -70,6 +72,7 @@ export function renderLeadEmailHtml(l: LeadEmail): string {
         </td></tr>
         <tr><td style="padding:12px 28px 4px">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            ${l.flag ? row("Check", `<strong style="color:#b45309">${esc(l.flag)}</strong>`) : ""}
             ${row("Name", esc(l.name))}
             ${row("Business", esc(l.business))}
             ${row("Email", `<a href="mailto:${esc(l.email)}" style="color:${brand};text-decoration:none">${esc(l.email)}</a>`)}
@@ -188,6 +191,7 @@ export function renderReportEmailText(r: ReportEmail): string {
 export function renderLeadEmailText(l: LeadEmail): string {
   return [
     `New lead from ${l.source}`,
+    ...(l.flag ? [`CHECK: ${l.flag}`] : []),
     "",
     `Name:     ${l.name}`,
     `Business: ${l.business}`,

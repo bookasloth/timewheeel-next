@@ -7,6 +7,7 @@ import { useFormTracking } from "@/hooks/use-form-tracking";
 import { getAttribution } from "@/lib/attribution";
 import { ArrowRight, CheckCircle2, PartyPopper, User, Mail, Phone, Globe, PencilLine } from "lucide-react";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
 // Signup form for the "30 days, 30 websites" challenge. Posts to /api/lead
 // (source + service fixed here) so it reuses the existing SMTP notification,
@@ -58,7 +59,7 @@ export function ChallengeForm() {
   const [form, setForm] = useState<FormState>(empty);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
-  const [honeypot, setHoneypot] = useState("");
+  const hp = useHoneypot();
   const [consent, setConsent] = useState(false);
   const ft = useFormTracking("30-day-challenge");
 
@@ -88,7 +89,7 @@ export function ChallengeForm() {
           source: "30-days-challenge",
           marketing_consent: consent,
           attribution: getAttribution(),
-          company_website: honeypot,
+          ...hp.payload(),
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -163,14 +164,7 @@ export function ChallengeForm() {
       onSubmit={submit} noValidate
       className="rounded-3xl border border-border bg-card p-7 shadow-[0_24px_70px_-40px_rgba(23,19,14,0.45)] md:p-9"
     >
-      {/* Honeypot: hidden from humans; bots fill it and get silently dropped. */}
-      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-        <label htmlFor={id("company_website")}>Company website</label>
-        <input
-          id={id("company_website")} type="text" tabIndex={-1} autoComplete="off"
-          value={honeypot} onChange={(e) => setHoneypot(e.target.value)}
-        />
-      </div>
+      <Honeypot {...hp.field} />
 
       <div className="grid gap-4 sm:grid-cols-2">
         {text("name", "Your name", "text", "Full name", "name")}
