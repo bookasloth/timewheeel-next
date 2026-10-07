@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 import nodemailer from "nodemailer";
-import {
-  renderLeadEmailHtml,
-  renderLeadEmailText,
-  renderReportEmailHtml,
-  renderReportEmailText,
-} from "@/lib/lead-email";
+import { teamLead } from "@/lib/email/templates";
 import { site } from "@/lib/site";
 import { saveLead } from "@/lib/supabase-leads";
 import { syncLeadContact } from "@/lib/resend-contacts";
-import { sendWelcomeEmail } from "@/lib/resend-email";
+import { sendChallengeWelcome, sendEnquiryReceived, sendSeoReport } from "@/lib/resend-email";
 import { checkHoneypot } from "@/lib/honeypot";
 import type { Attribution } from "@/lib/attribution";
 
@@ -257,6 +252,8 @@ export async function POST(request: Request) {
       : undefined;
   if (flag) console.warn("[honeypot] kept /api/lead", JSON.stringify({ ms: hp.ms, eventId }));
   const teamEmail = { ...l, campaign: campaign || undefined, findings, flag };
+  const reportDomain = clean(body.domain);
+  const reportSite = reportDomain ? reportDomain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : "";
 
   // 1) Persist to the authoritative store FIRST, so a lead is never lost to a
   //    missing/broken email config. Best-effort, but tracked: `saved` tells us
@@ -288,11 +285,32 @@ export async function POST(request: Request) {
     await syncLeadContact({ email: l.email, name: l.name, source: l.source });
   }
 
-  // 1c) Welcome email to the lead for the free-website offer (the 30-days
-  //     challenge), so other flows (contact, SEO audit) don't get it. A
-  //     transactional confirmation of what they requested. Best-effort.
+  // 1c) Exactly one email to the lead, picked by flow (Resend, best-effort):
+  //     challenge welcome (free or paid price), the SEO report they asked for,
+  //     or a "we've got your enquiry" confirmation for every other form.
   if (l.source === "30-days-challenge" || l.source === "free-website-nagpur") {
-    await sendWelcomeEmail({ to: l.email, name: l.name });
+    // budget arrives as "₹499" or "Free (₹0)" from the challenge form.
+    const price = Number((l.budget ?? "").replace(/\D/g, "")) || 0;
+    await sendChallengeWelcome({ to: l.email, name: l.name, business: l.business, price });
+  } else if (body.sendReport && reportSite) {
+    // Report URL is built server-side from our own domain so a client can't
+    // point it elsewhere.
+    await sendSeoReport({
+      to: l.email,
+      name: l.name,
+      domain: reportSite,
+      scores: { overall: body.scores?.overall ?? null, ai: body.scores?.ai ?? null, seo: body.scores?.seo ?? null },
+      reportUrl: `${site.url}/seo-report?site=${encodeURIComponent(reportSite)}`,
+    });
+  } else {
+    await sendEnquiryReceived({
+      to: l.email,
+      name: l.name,
+      service: l.service,
+      business: l.business,
+      message: l.message,
+      blueprint: l.source.startsWith("Growth Blueprint"),
+    });
   }
 
   // 2) Notify the team by email (backup channel). Best-effort: if SMTP is not
@@ -308,56 +326,17 @@ export async function POST(request: Request) {
       secure: SMTP_SECURE === "true" || port === 465,
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
+    const mail = teamLead(teamEmail);
     try {
       await transporter.sendMail({
         from: LEAD_FROM || SMTP_USER,
         to: LEAD_TO,
         replyTo: `${l.name} <${l.email}>`,
-        subject: `${flag ? "[Check] " : ""}New lead: ${l.service}, ${l.business} (${l.source})`,
-        text: renderLeadEmailText(teamEmail),
-        html: renderLeadEmailHtml(teamEmail),
+        subject: mail.subject,
+        text: mail.text,
+        html: mail.html,
       });
       emailed = true;
-
-      // Optional second email TO the lead: their SEO report link. The report URL
-      // is built server-side from our own domain so a client can't point it
-      // elsewhere. Failure here must not fail the request.
-      if (body.sendReport) {
-        const domain = clean(body.domain);
-        const site_ = domain ? domain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : "";
-        if (site_) {
-          const reportUrl = `${site.url}/seo-report?site=${encodeURIComponent(site_)}`;
-          try {
-            await transporter.sendMail({
-              from: LEAD_FROM || SMTP_USER,
-              to: l.email,
-              subject: `Your SEO audit for ${site_} is ready`,
-              text: renderReportEmailText({
-                name: l.name,
-                domain: site_,
-                scores: {
-                  overall: body.scores?.overall ?? null,
-                  ai: body.scores?.ai ?? null,
-                  seo: body.scores?.seo ?? null,
-                },
-                reportUrl,
-              }),
-              html: renderReportEmailHtml({
-                name: l.name,
-                domain: site_,
-                scores: {
-                  overall: body.scores?.overall ?? null,
-                  ai: body.scores?.ai ?? null,
-                  seo: body.scores?.seo ?? null,
-                },
-                reportUrl,
-              }),
-            });
-          } catch (err) {
-            console.error("Report email to lead failed:", err);
-          }
-        }
-      }
     } catch (err) {
       console.error("Lead email send failed:", err);
     }
