@@ -25,6 +25,7 @@ const members = [
     line: "Fast, clean builds and launch-ready platforms on modern web tech.",
     img: "/team/aastha-nikhare.png",
     accent: "#8b5cf6",
+    imgClass: "scale-[1.2] object-top group-hover:scale-[1.25]",
   },
 ];
 
@@ -59,7 +60,7 @@ export function AboutTeam() {
                   alt={m.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  className={`object-cover transition-transform duration-500 group-hover:scale-[1.04] ${m.imgClass ?? ""}`}
                 />
                 <span
                   className="absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-white"

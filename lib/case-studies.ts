@@ -99,9 +99,9 @@ export const caseStudies: CaseStudy[] = [
     category: "D2C · Bakery (UAE)",
     summary:
       "Occasion Cakes baked beautifully but was invisible in local search. Orders came from walk-ins and aggregators that ate the margin. We made search for 'birthday cake near me' surface them.",
-    metaDescription:
+metaDescription:
       "Occasion Cakes baked beautifully but was invisible in local search, losing margin to aggregators. We made 'birthday cake near me' searches surface them.",
-    accent: "#F59E0B",
+    accent: "#f50b9f",
     image: {
       src: "/portfolio/occasion cake.png",
       width: 1200,
@@ -216,9 +216,9 @@ export const caseStudies: CaseStudy[] = [
     category: "Real-Money Gaming",
     summary:
       "Khiladi Adda was scaling spend while CPI crept up and creative fatigued fast. In a heavily policy-restricted category, we built a compliant hook machine that cut cost-per-install by a third.",
-    metaDescription:
+metaDescription:
       "Khiladi Adda's cost per install crept up as creative fatigued. In a policy-restricted category, we built a compliant hook machine that cut CPI by a third.",
-    accent: "#7C3AED",
+    accent: "#e03913",
     image: {
       src: "/portfolio/khiladi adda.png",
       width: 1200,
@@ -566,7 +566,11 @@ export const caseStudies: CaseStudy[] = [
     metaDescription:
       "Everything Powerlifting made gear serious lifters wanted, but search barely knew it existed. Over nine months we tripled organic traffic, 292 to 889 a month.",
     accent: "#DC2626",
-    image: null,
+    image: {
+      src: "/portfolio/everything-power.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["SEO", "Content", "Funnel"],
     href: "/case-studies/everything-powerlifting",
     liveUrl: "https://everythingpowerlifting.com/",

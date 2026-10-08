@@ -97,7 +97,7 @@ export const sd = {
           name: "Everything Powerlifting",
           href: "https://everythingpowerlifting.com/",
           caseStudy: "everything-powerlifting",
-          image: "/shopify/everything-powerlifting.jpg",
+          image: "/portfolio/Powerlifting Strength Collage Poster.png",
         accent: "#5e8e3e",
         tag: "D2C fitness gear",
         problem:
@@ -109,7 +109,7 @@ export const sd = {
           name: "Leo Coffee",
           href: "https://www.leocoffee.co.in/",
           caseStudy: "leo-coffee",
-          image: "/shopify/leo-coffee.jpg",
+          image: "/portfolio/Leo-coffee.png",
         accent: "#ff7a3d",
         tag: "Subscription commerce",
         problem:

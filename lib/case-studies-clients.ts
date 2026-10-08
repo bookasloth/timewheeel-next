@@ -20,9 +20,9 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     category: "NGO",
     summary:
       "Mumbai NGO founded in 2022, empowering underprivileged women through skills, education, food support and self-help groups.",
-    accent: "#47143D",
+    accent: "#24482c",
     image: {
-      src: "/portfolio/DRU Foundation Women Empowerment Poster.png",
+      src: "/portfolio/dru-foundation.png",
       width: 1200,
       height: 675,
     },
@@ -88,7 +88,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Flexible workspace brand in Nagpur and Pune, offering hot desks, dedicated desks, private cabins and meeting rooms.",
     accent: "#7c4dff",
     image: {
-      src: "/portfolio/Eureka Coworking_ Good People, Better Ideas.png",
+      src: "/portfolio/eureka2.png",
       width: 1200,
       height: 675,
     },
@@ -154,7 +154,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Mumbai solar company delivering residential, commercial and industrial systems with end-to-end EPC and subsidy support.",
     accent: "#ff7a3d",
     image: {
-      src: "/portfolio/rising-sun.png",
+      src: "/portfolio/rising-sun2.png",
       width: 1200,
       height: 675,
     },
@@ -220,7 +220,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "One-stop startup support covering technology, marketing, hiring, compliance, accounting, funding and operations.",
     accent: "#269cef",
     image: {
-      src: "/portfolio/wecos.png",
+      src: "/portfolio/wecos2.png",
       width: 1200,
       height: 675,
     },
@@ -284,9 +284,9 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     category: "Personal Brand",
     summary:
       "Founder-led brand site for an SEO, AEO and GEO consultant, packaging productised engagements and case studies.",
-    accent: "#35c98a",
+    accent: "#35c955",
     image: {
-      src: "/portfolio/shubham-datarkar.png",
+      src: "/portfolio/shubham-port2.png",
       width: 1200,
       height: 675,
     },
@@ -352,7 +352,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Ahmedabad film studio delivering ad films, TV commercials, brand films and documentaries with in-house post-production.",
     accent: "#7c4dff",
     image: {
-      src: "/portfolio/adetc-studios.png",
+      src: "/portfolio/adetc2.png",
       width: 1200,
       height: 675,
     },
@@ -418,7 +418,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Pan-India UPS provider offering annual maintenance contracts, rental, multi-brand supply and battery replacement.",
     accent: "#ff7a3d",
     image: {
-      src: "/portfolio/power-consilium.png",
+      src: "/portfolio/powerr-consilium2.png",
       width: 1200,
       height: 675,
     },
@@ -484,7 +484,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Architecture and interior design studio presenting residential and commercial design work and project enquiries.",
     accent: "#35c98a",
     image: {
-      src: "/portfolio/Ashlar-Studios.png",
+      src: "/portfolio/ashlar2.png",
       width: 1200,
       height: 675,
     },
@@ -548,9 +548,9 @@ export const clientSiteCaseStudies: CaseStudy[] = [
     category: "Travel & Adventure",
     summary:
       "Adventure operator running curated Sahyadri, Himalayan and Central India treks, fort cabins and camping.",
-    accent: "#47143D",
+    accent: "#209025",
     image: {
-      src: "/portfolio/alpha-adventures.png",
+      src: "/portfolio/alpha2.png",
       width: 1200,
       height: 675,
     },
@@ -635,7 +635,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Nagpur education consultancy offering career counselling, college planning and study-abroad guidance for MBBS students.",
     accent: "#7c4dff",
     image: {
-      src: "/portfolio/edulocus-thmb.png",
+      src: "/portfolio/Edulocus2.png",
       width: 1200,
       height: 675,
     },

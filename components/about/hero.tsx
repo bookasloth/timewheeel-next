@@ -74,7 +74,7 @@ export function AboutHero() {
           />
           <div className="relative overflow-hidden rounded-[1.5rem] border border-border bg-card shadow-[0_50px_100px_-40px_rgba(15,17,17,0.3)] h-[380px] lg:h-[440px]">
             <Image
-              src="/about.jpeg"
+              src="/portfolio/about1.png"
               alt="About Timewheel, our team and workspace"
               width={735}
               height={1102}
