@@ -48,7 +48,7 @@ export function SmmReelCard({
           src={src}
           alt={alt}
           fill
-          priority
+          preload
           sizes="(min-width: 1024px) 20vw, 45vw"
           className="object-cover"
         />

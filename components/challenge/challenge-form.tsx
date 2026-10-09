@@ -77,6 +77,7 @@ export function ChallengeForm() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "submitting") return;
     const errors = validate(form.values);
     if (Object.keys(errors).length) { setForm((f) => ({ ...f, errors })); ft.onErrors(Object.keys(errors)); return; }
     setStatus("submitting");
@@ -311,8 +312,14 @@ export function ChallengeForm() {
         type="submit" disabled={status === "submitting"} whileTap={{ scale: 0.98 }}
         className="group btn btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-brand-foreground disabled:opacity-60"
       >
-        {status === "submitting" ? "Claiming your spot…" : price > 0 ? `Claim my spot and pay ${inr(String(price))}` : "Claim my spot"}
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+        {status === "submitting" ? (
+          <><Loader2 className="size-4 animate-spin" /> Claiming your spot…</>
+        ) : (
+          <>
+            {price > 0 ? `Claim my spot and pay ${inr(String(price))}` : "Claim my spot"}
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+          </>
+        )}
       </motion.button>
 
       {status === "error" && (

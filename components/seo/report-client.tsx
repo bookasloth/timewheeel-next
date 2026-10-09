@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Loader2, AlertCircle, ArrowRight, Lock, ShieldCheck } from "lucide-react";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { Skeleton, SkeletonGroup } from "@/components/ui/skeleton";
 
 type Scores = { overall: number | null; ai: number | null; seo: number | null };
 type Finding = { title: string; severity: string; category: string };
@@ -103,8 +104,57 @@ function LockedFix() {
   );
 }
 
+// Report-shaped placeholder for the ~15s audit: same card sizes as the score
+// summary and finding cards below, so the real report drops in without a jump.
+function ReportSkeleton({ domain }: { domain: string }) {
+  return (
+    <SkeletonGroup label={`Building your report for ${domain}`}>
+      <div className="mt-8 grid items-center gap-8 rounded-3xl border border-border bg-card p-8 md:grid-cols-[auto_1fr]">
+        <div className="flex flex-col items-center gap-3">
+          <Skeleton className="size-[150px] rounded-full" />
+          <Skeleton className="h-6 w-16 rounded-full" />
+        </div>
+        <div>
+          <Skeleton className="h-6 w-48" />
+          <Skeleton className="mt-2 h-4 w-full max-w-sm" />
+          <Skeleton className="mt-1.5 h-4 w-24" />
+          <div className="mt-4">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="flex items-center justify-between border-b border-border py-3 last:border-0">
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-1.5 w-24 rounded-full" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+        <Loader2 className="size-4 animate-spin text-brand-text" />
+        Crawling {domain} and scoring it, about 15 seconds.
+      </p>
+      <ol className="mt-6 space-y-4">
+        {[0, 1, 2].map((i) => (
+          <li key={i} className="rounded-2xl border border-border bg-card p-6">
+            <div className="flex gap-3">
+              <Skeleton className="h-5 w-6" />
+              <Skeleton className="h-5 w-20 rounded-full" />
+              <Skeleton className="h-5 w-16 rounded-full" />
+            </div>
+            <Skeleton className="mt-4 h-5 w-3/4" />
+            <Skeleton className="mt-3 h-4 w-full" />
+            <Skeleton className="mt-4 h-24 w-full rounded-xl" />
+          </li>
+        ))}
+      </ol>
+    </SkeletonGroup>
+  );
+}
+
 export function SeoReportClient() {
-  const [site, setSite] = useState("");
+  // null until the query string has been read on the client. The page is
+  // static, so the server can't know ?site=; rendering "no site" before then
+  // flashed an empty state at every visitor who did have one.
+  const [site, setSite] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
@@ -132,12 +182,14 @@ export function SeoReportClient() {
   useEffect(() => {
     if (ran.current) return;
     ran.current = true;
-    const s = new URLSearchParams(window.location.search).get("site") ?? "";
+    const s = new URLSearchParams(window.location.search).get("site")?.trim() ?? "";
     setSite(s);
     if (s) run(s);
   }, [run]);
 
   const domain = result?.domain || site || "your site";
+  // Static page: a date rendered on the server would be the build date.
+  const today = site === null ? null : new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
   const shown = result?.findings.length ?? 0;
   const locked = Math.max((result?.findingsTotal ?? 0) - shown, 0);
 
@@ -169,13 +221,13 @@ export function SeoReportClient() {
               <h1 className="text-3xl font-black tracking-tight md:text-5xl">{domain}</h1>
             </div>
             <p className="mt-3 text-sm text-white/60">
-              Prepared by Timewheel · {new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}
+              Prepared by Timewheel{today && ` · ${today}`}
               {result?.pageCount ? ` · ${result.pageCount} pages scanned` : ""}
             </p>
           </div>
         </div>
 
-        {!site && (
+        {site === "" && (
           <div className="mt-8 rounded-2xl border border-border bg-card p-8 text-center">
             <p className="text-base font-bold text-foreground">No site to report on</p>
             <p className="mt-2 text-sm text-muted-foreground">Run a free audit to generate your report.</p>
@@ -185,15 +237,10 @@ export function SeoReportClient() {
           </div>
         )}
 
-        {status === "loading" && (
-          <div className="mt-16 flex flex-col items-center gap-3 text-center text-muted-foreground">
-            <Loader2 className="size-6 animate-spin text-brand-text" />
-            <p className="text-sm">Building your full report for {domain}… about 15 seconds.</p>
-          </div>
-        )}
+        {(site === null || status === "loading") && <ReportSkeleton domain={domain} />}
 
         {status === "error" && (
-          <div className="mt-8 rounded-2xl border border-destructive/30 bg-destructive/5 p-6">
+          <div role="alert" className="mt-8 rounded-2xl border border-destructive/30 bg-destructive/5 p-6">
             <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
               <AlertCircle className="size-4" /> {error}
             </p>

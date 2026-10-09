@@ -43,9 +43,11 @@ export function ReviewFlow() {
   const [variant, setVariant] = useState(0);
   const [copied, setCopied] = useState(false);
   const generatedRef = useRef(false);
+  const copiedTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     analytics.track(EVENTS.REVIEW_PAGE_VIEWED);
+    return () => window.clearTimeout(copiedTimer.current);
   }, []);
 
   function set<K extends keyof ReviewAnswers>(key: K, value: ReviewAnswers[K]) {
@@ -140,7 +142,9 @@ export function ReviewFlow() {
     }
     setCopied(true);
     analytics.track(EVENTS.REVIEW_COPIED, { length: review.length });
-    window.setTimeout(() => setCopied(false), 2200);
+    // Restart rather than stack, so a second copy keeps "Copied" up its full 2.2s.
+    window.clearTimeout(copiedTimer.current);
+    copiedTimer.current = window.setTimeout(() => setCopied(false), 2200);
   }
 
   function onGoogleClick() {

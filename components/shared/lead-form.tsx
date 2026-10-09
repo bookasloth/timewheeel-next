@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, Clock, Globe, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Globe, Loader2, Mail, MapPin, Phone, ShieldCheck, Timer } from "lucide-react";
 import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
 import { Reveal } from "@/components/reveal";
@@ -72,6 +72,7 @@ export function LeadForm(p: Props) {
   }
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "submitting") return;
     const errors = validate(form.values);
     if (Object.keys(errors).length) { setForm((f) => ({ ...f, errors })); ft.onErrors(Object.keys(errors)); return; }
     setStatus("submitting");
@@ -165,7 +166,7 @@ export function LeadForm(p: Props) {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <form onSubmit={submit} noValidate className="rounded-3xl border border-border bg-card p-7 md:p-9">
+            <form onSubmit={submit} noValidate aria-busy={status === "submitting"} className="rounded-3xl border border-border bg-card p-7 md:p-9">
               <Honeypot {...hp.field} />
               <div className="grid gap-4 sm:grid-cols-2">
                 {text("name", "Name", "text", "Your full name", "name")}
@@ -203,8 +204,11 @@ export function LeadForm(p: Props) {
                 type="submit" disabled={status === "submitting"}
                 className="group btn btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold text-brand-foreground disabled:opacity-60"
               >
-                {status === "submitting" ? "Sending…" : p.submitLabel}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                {status === "submitting" ? (
+                  <><Loader2 className="size-4 animate-spin" /> Sending…</>
+                ) : (
+                  <>{p.submitLabel} <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" /></>
+                )}
               </button>
               {status === "error" && (
                 <p role="alert" className="mt-3 text-center text-sm text-destructive">{errorMsg}</p>

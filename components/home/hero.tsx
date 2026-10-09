@@ -6,6 +6,7 @@ import { ArrowRight, Database, BadgePercent, LayoutDashboard, TrendingUp } from 
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { BlackHoleHeroSection } from "@/components/ui/blackhole-hero-section";
+import { skipEntrance, useIsClientMount } from "@/components/anim/entrance";
 
 // Dark, centered hero (Lexend-style): headline with a typewriter word, big CTA,
 // and a 4-card feature row.
@@ -86,11 +87,13 @@ function DriftingBlackHole() {
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const clientMount = useIsClientMount();
 
   useGSAP(
     () => {
       const q = gsap.utils.selector(ref);
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      // Don't re-hide a hero the visitor already sees on a hard load.
+      if (skipEntrance(ref.current!, clientMount)) return;
       gsap.timeline()
         .from(q(".hero-up"), { opacity: 0, y: 22, duration: 0.7, ease: "power3.out", stagger: 0.1 });
     },

@@ -36,7 +36,7 @@ export function Screenshot({
           alt={alt}
           width={width ?? 1200}
           height={height ?? 700}
-          priority={priority}
+          preload={priority}
           sizes={sizes ?? "(max-width: 768px) 100vw, 80vw"}
           className="h-auto w-full"
         />

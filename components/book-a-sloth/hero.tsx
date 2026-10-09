@@ -40,7 +40,7 @@ export function BasHero() {
                 alt={bas.hero.shotAlt}
                 width={shot.width}
                 height={shot.height}
-                priority
+                preload
                 sizes="(max-width: 1024px) 100vw, 47vw"
               />
             </div>

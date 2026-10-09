@@ -85,7 +85,7 @@ export function SmmHero() {
                     alt={img.alt}
                     width={1080}
                     height={1350}
-                    priority={i === 0}
+                    preload={i === 0}
                     sizes="(min-width: 1024px) 20vw, 45vw"
                     className={`h-auto w-full min-h-0 flex-1 rounded-2xl border border-border object-cover shadow-[0_24px_60px_-28px_rgba(26,29,36,0.28)] lg:aspect-auto ${postRatios[i % postRatios.length]}`}
                   />

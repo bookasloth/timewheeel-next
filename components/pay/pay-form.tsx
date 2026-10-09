@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
-import { OUTCOME_TEXT, PAY_MAX, PAY_MIN, payWithZoho, type Outcome } from "@/lib/zoho-checkout";
+import { OUTCOME_TEXT, PAY_MAX, PAY_MIN, payWithZoho, preloadCheckout, type Outcome } from "@/lib/zoho-checkout";
 
 const inputBase =
   "w-full rounded-lg border bg-background px-3.5 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground/70";
@@ -32,6 +32,9 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
   const [busy, setBusy] = useState(false);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
+  // Synchronous guard: each submit creates a payment order, so a second submit
+  // must never slip through before React re-renders the disabled button.
+  const inFlight = useRef(false);
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setV((s) => ({ ...s, [k]: e.target.value }));
@@ -42,7 +45,8 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
     e.preventDefault();
     const errs = validate(v);
     setErrors(errs);
-    if (Object.keys(errs).length) return;
+    if (Object.keys(errs).length || inFlight.current) return;
+    inFlight.current = true;
     setBusy(true);
     setOutcome(null);
     setErrorMsg("");
@@ -58,6 +62,7 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong, please try again.");
     } finally {
+      inFlight.current = false;
       setBusy(false);
     }
   }
@@ -81,7 +86,7 @@ export function PayForm({ defaultAmount = "", defaultPurpose = "" }: { defaultAm
   const note = outcome ? OUTCOME_TEXT[outcome] : null;
 
   return (
-    <form onSubmit={submit} noValidate className="rounded-2xl border border-border bg-card p-7 md:p-9">
+    <form onSubmit={submit} onFocus={preloadCheckout} noValidate aria-busy={busy} className="rounded-2xl border border-border bg-card p-7 md:p-9">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor="pay-amount" className="mb-1.5 block text-sm font-semibold">Amount</label>

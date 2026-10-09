@@ -201,6 +201,7 @@ void main(){
   }, [open]);
 
   async function submit() {
+    if (status === "submitting") return;
     const score = scoreLead(a);
     const message =
       `[${score} LEAD] Startup Growth Blueprint\n` +
@@ -302,7 +303,7 @@ void main(){
                 <button className="gbp-next" onClick={submit} disabled={status === "submitting"}>
                   {status === "submitting" ? "Sending…" : "Get My Action Plan"}
                 </button>
-                {status === "error" && <p className="gbp-err">{errorMsg}</p>}
+                {status === "error" && <p role="alert" className="gbp-err">{errorMsg}</p>}
               </>
             )}
 

@@ -4,10 +4,13 @@ import { useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { skipEntrance, useIsClientMount } from "@/components/anim/entrance";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 // Fade + rise on scroll. Wrap any block. `stagger` animates direct children instead.
+// Skipped under reduced motion, and for blocks already painted above the fold
+// on a hard load (see components/anim/entrance.ts).
 export function Reveal({
   children,
   className,
@@ -24,9 +27,11 @@ export function Reveal({
   "data-ghost"?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const clientMount = useIsClientMount();
 
   useGSAP(
     () => {
+      if (skipEntrance(ref.current!, clientMount)) return;
       const targets = stagger
         ? (gsap.utils.toArray(ref.current!.children) as HTMLElement[])
         : [ref.current!];

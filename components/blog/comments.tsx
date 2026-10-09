@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CornerDownRight, CheckCircle2 } from "lucide-react";
+import { CornerDownRight, CheckCircle2, Loader2 } from "lucide-react";
 import type { Comment } from "@/lib/blog";
 import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
@@ -33,6 +33,7 @@ export function Comments({
 
   async function submit(e: FormEvent) {
     e.preventDefault();
+    if (status === "submitting") return;
     if (!form.name.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) || form.comment.trim().length < 5) {
       setStatus("error");
       setError("Please add your name, a valid email and a comment.");
@@ -95,17 +96,17 @@ export function Comments({
       </div>
 
       {status === "success" ? (
-        <div className="mt-5 flex items-center gap-3 rounded-2xl border border-border bg-secondary/40 p-6">
+        <div role="status" className="mt-5 flex items-center gap-3 rounded-2xl border border-border bg-secondary/40 p-6">
           <CheckCircle2 className="size-6 shrink-0 text-rating" />
           <p className="text-sm text-muted-foreground">
             Thanks, your comment was submitted and will appear after moderation.
           </p>
         </div>
       ) : (
-        <form onSubmit={submit} noValidate className="mt-5 space-y-4">
+        <form onSubmit={submit} noValidate aria-busy={status === "submitting"} className="mt-5 space-y-4">
           <textarea
             rows={4}
-            placeholder="Your comment"
+            placeholder="Your comment" aria-label="Your comment"
             value={form.comment}
             onChange={(e) => setForm((f) => ({ ...f, comment: e.target.value }))}
             className={inputBase}
@@ -113,7 +114,7 @@ export function Comments({
           <div className="grid gap-4 sm:grid-cols-2">
             <input
               type="text"
-              placeholder="Name *"
+              placeholder="Name *" aria-label="Name"
               autoComplete="name"
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -121,7 +122,7 @@ export function Comments({
             />
             <input
               type="email"
-              placeholder="Email *"
+              placeholder="Email *" aria-label="Email"
               autoComplete="email"
               value={form.email}
               onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
@@ -129,13 +130,13 @@ export function Comments({
             />
           </div>
           <Honeypot {...hp.field} />
-          {status === "error" && <p className="text-sm text-destructive">{error}</p>}
+          {status === "error" && <p role="alert" className="text-sm text-destructive">{error}</p>}
           <button
             type="submit"
             disabled={status === "submitting"}
             className="btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground disabled:opacity-60"
           >
-            {status === "submitting" ? "Submitting…" : "Submit comment"}
+            {status === "submitting" ? <><Loader2 className="size-4 animate-spin" /> Submitting…</> : "Submit comment"}
           </button>
         </form>
       )}

@@ -39,6 +39,12 @@ function loadWidget() {
   return widget;
 }
 
+// Start fetching the widget script early (e.g. once the payer starts typing)
+// so "Pay" doesn't wait on it. Failures are retried by payWithZoho.
+export function preloadCheckout() {
+  loadWidget().catch(() => {});
+}
+
 async function post(url: string, body: object) {
   const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const data = await res.json().catch(() => ({}));
