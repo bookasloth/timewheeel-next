@@ -7,6 +7,7 @@ import { saveLead } from "@/lib/supabase-leads";
 import { syncLeadContact } from "@/lib/resend-contacts";
 import { sendChallengeWelcome, sendEnquiryReceived, sendSeoReport } from "@/lib/resend-email";
 import { checkHoneypot } from "@/lib/honeypot";
+import { clientIp, isRateLimited } from "@/lib/rate-limit";
 import type { Attribution } from "@/lib/attribution";
 
 // Lead capture -> email over SMTP. Credentials come from env so nothing secret
@@ -45,19 +46,8 @@ type Lead = {
   findings?: Array<{ title?: string; severity?: string; category?: string; recommendation?: string }>;
 };
 
-// Best-effort in-memory rate limit. ponytail: per-instance only; move to a
-// shared store (Redis/Upstash) if this ever runs on multiple instances.
-const hits = new Map<string, number[]>();
-const WINDOW = 10 * 60_000;
-const MAX = 5;
-
-function limited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > MAX;
-}
+// Per client IP, shared across instances (lib/rate-limit).
+const LEAD_LIMIT = { windowSeconds: 10 * 60, max: 5 };
 
 function clean(s: unknown): string {
   return typeof s === "string" ? s.trim().slice(0, 2000) : "";
@@ -195,11 +185,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    request.headers.get("x-real-ip") ||
-    "unknown";
-  if (limited(ip)) {
+  const ip = clientIp(request);
+  if (await isRateLimited(`lead:${ip}`, LEAD_LIMIT)) {
     return NextResponse.json(
       { error: "Too many submissions. Please try again in a few minutes." },
       { status: 429 },
