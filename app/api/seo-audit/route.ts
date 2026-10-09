@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { clientIp, isRateLimited } from "@/lib/rate-limit";
 
 // Proxy for the SEO / AI-visibility audit tool (owned by us, deployed at
 // shubhamdatarkar.com). The tool is a 3-step, id-based job:
@@ -13,6 +14,12 @@ export const maxDuration = 60;
 
 const BASE =
   process.env.SEO_AUDIT_BASE ?? "https://shubhamdatarkar.com/api/tools/seo-audit";
+
+// Each audit holds a function for ~15 s and makes the audit tool crawl a site,
+// so cap it per visitor (enough for a few sites plus their report pages) and
+// overall, so a script spread across many IPs still can't run up the bill.
+const PER_IP_LIMIT = { windowSeconds: 60 * 60, max: 10 };
+const GLOBAL_LIMIT = { windowSeconds: 60 * 60, max: 300 };
 
 function normalizeUrl(raw: string): string | null {
   const trimmed = raw.trim();
@@ -53,6 +60,17 @@ export async function GET(request: Request) {
     return NextResponse.json(
       { error: "Please enter a valid website URL (e.g. yourbusiness.com)." },
       { status: 400 },
+    );
+  }
+
+  // Per-IP first, so one noisy visitor doesn't use up the global allowance.
+  if (
+    (await isRateLimited(`seo-audit:${clientIp(request)}`, PER_IP_LIMIT)) ||
+    (await isRateLimited("seo-audit:all", GLOBAL_LIMIT))
+  ) {
+    return NextResponse.json(
+      { error: "You've run a lot of audits in a short time. Please try again in a little while." },
+      { status: 429 },
     );
   }
 
