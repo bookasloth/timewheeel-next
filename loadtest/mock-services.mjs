@@ -1,7 +1,8 @@
 // Local stand-ins for the external services the API routes call, so a load test
 // exercises our code without touching real data:
 //
-//   Supabase REST   POST /rest/v1/leads, POST /rest/v1/payments
+//   Supabase REST   POST /rest/v1/leads, POST /rest/v1/payments,
+//                   POST /rest/v1/rpc/rate_limit_hit (shared rate limit)
 //   SEO audit tool  POST /seo-audit/start, POST /seo-audit/step, GET /seo-audit/:id
 //
 // The audit mock answers "crawling" until MOCK_AUDIT_MS has passed for that job
@@ -19,7 +20,8 @@ const AUDIT_MS = Number(process.env.MOCK_AUDIT_MS ?? 12_000);
 const DB_MS = Number(process.env.MOCK_DB_MS ?? 40); // typical Supabase insert latency
 
 const jobs = new Map(); // audit id -> started at
-const stats = { leads: 0, payments: 0, auditsStarted: 0, auditSteps: 0, auditResults: 0, other: 0 };
+const rateHits = new Map(); // rate-limit key@window -> hits
+const stats = { leads: 0, payments: 0, rateLimitCalls: 0, auditsStarted: 0, auditSteps: 0, auditResults: 0, other: 0 };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const auditResult = (id) => ({
@@ -66,6 +68,17 @@ export function startMockServices(port = Number(process.env.MOCK_PORT ?? 4010)) 
       await sleep(DB_MS);
       stats.payments++;
       return send(res, 201, [{ id: randomUUID(), ...body, status: "pending", created_at: new Date().toISOString(), paid_at: null }]);
+    }
+
+    // Same contract as public.rate_limit_hit (supabase/migrations/0004): fixed
+    // windows, returns true once a key goes over p_max in the current window.
+    if (req.method === "POST" && pathname === "/rest/v1/rpc/rate_limit_hit") {
+      const { p_key, p_window_seconds, p_max } = await readJson(req);
+      const bucket = `${p_key}@${Math.floor(Date.now() / 1000 / p_window_seconds)}`;
+      const n = (rateHits.get(bucket) ?? 0) + 1;
+      rateHits.set(bucket, n);
+      stats.rateLimitCalls++;
+      return send(res, 200, n > p_max);
     }
 
     if (req.method === "POST" && pathname === "/seo-audit/start") {
