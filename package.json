@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "loadtest:serve": "node loadtest/serve.mjs",
+    "loadtest": "k6 run loadtest/k6/api.js",
+    "loadtest:smoke": "k6 run -e PROFILE=smoke loadtest/k6/api.js"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
