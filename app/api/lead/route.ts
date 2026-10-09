@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import crypto from "node:crypto";
 import nodemailer from "nodemailer";
 import { teamLead } from "@/lib/email/templates";
@@ -280,45 +280,49 @@ export async function POST(request: Request) {
   );
 
   // 1b) Add to the Resend nurture audience, but ONLY with explicit marketing
-  //     consent. Best-effort; never blocks or fails the lead.
-  if (l.consent === true) {
-    await syncLeadContact({ email: l.email, name: l.name, source: l.source });
-  }
+  //     consent. Best-effort; never fails the lead.
+  const syncContact = async () => {
+    if (l.consent === true) await syncLeadContact({ email: l.email, name: l.name, source: l.source });
+  };
 
   // 1c) Exactly one email to the lead, picked by flow (Resend, best-effort):
   //     challenge welcome (free or paid price), the SEO report they asked for,
   //     or a "we've got your enquiry" confirmation for every other form.
-  if (l.source === "30-days-challenge" || l.source === "free-website-nagpur") {
-    // budget arrives as "₹499" or "Free (₹0)" from the challenge form.
-    const price = Number((l.budget ?? "").replace(/\D/g, "")) || 0;
-    await sendChallengeWelcome({ to: l.email, name: l.name, business: l.business, price });
-  } else if (body.sendReport && reportSite) {
-    // Report URL is built server-side from our own domain so a client can't
-    // point it elsewhere.
-    await sendSeoReport({
-      to: l.email,
-      name: l.name,
-      domain: reportSite,
-      scores: { overall: body.scores?.overall ?? null, ai: body.scores?.ai ?? null, seo: body.scores?.seo ?? null },
-      reportUrl: `${site.url}/seo-report?site=${encodeURIComponent(reportSite)}`,
-    });
-  } else {
-    await sendEnquiryReceived({
-      to: l.email,
-      name: l.name,
-      service: l.service,
-      business: l.business,
-      message: l.message,
-      blueprint: l.source.startsWith("Growth Blueprint"),
-    });
-  }
+  const emailLead = async () => {
+    if (l.source === "30-days-challenge" || l.source === "free-website-nagpur") {
+      // budget arrives as "₹499" or "Free (₹0)" from the challenge form.
+      const price = Number((l.budget ?? "").replace(/\D/g, "")) || 0;
+      await sendChallengeWelcome({ to: l.email, name: l.name, business: l.business, price });
+    } else if (body.sendReport && reportSite) {
+      // Report URL is built server-side from our own domain so a client can't
+      // point it elsewhere.
+      await sendSeoReport({
+        to: l.email,
+        name: l.name,
+        domain: reportSite,
+        scores: { overall: body.scores?.overall ?? null, ai: body.scores?.ai ?? null, seo: body.scores?.seo ?? null },
+        reportUrl: `${site.url}/seo-report?site=${encodeURIComponent(reportSite)}`,
+      });
+    } else {
+      await sendEnquiryReceived({
+        to: l.email,
+        name: l.name,
+        service: l.service,
+        business: l.business,
+        message: l.message,
+        blueprint: l.source.startsWith("Growth Blueprint"),
+      });
+    }
+  };
 
-  // 2) Notify the team by email (backup channel). Best-effort: if SMTP is not
-  //    configured or the send fails, we have already stored the lead above.
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LEAD_TO, LEAD_FROM, SMTP_SECURE } =
-    process.env;
-  let emailed = false;
-  if (SMTP_HOST && SMTP_USER && SMTP_PASS && LEAD_TO) {
+  // 2) Notify the team by email (backup channel). Resolves true when sent.
+  const emailTeam = async (): Promise<boolean> => {
+    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, LEAD_TO, LEAD_FROM, SMTP_SECURE } =
+      process.env;
+    if (!(SMTP_HOST && SMTP_USER && SMTP_PASS && LEAD_TO)) {
+      console.error("Lead email not configured: missing SMTP_* / LEAD_TO env vars.");
+      return false;
+    }
     const port = Number(SMTP_PORT) || 587;
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
@@ -336,33 +340,43 @@ export async function POST(request: Request) {
         text: mail.text,
         html: mail.html,
       });
-      emailed = true;
+      return true;
     } catch (err) {
       console.error("Lead email send failed:", err);
+      return false;
     }
-  } else {
-    console.error("Lead email not configured: missing SMTP_* / LEAD_TO env vars.");
-  }
+  };
 
   // 3) Server-side Meta CAPI 'Lead' (deduped with the browser pixel on eventId).
   //    Best-effort: never fail the request over ad tracking.
-  await sendMetaCapiLead({
-    eventId,
-    email: l.email,
-    phone: l.phone,
-    ip: ip !== "unknown" ? ip : undefined,
-    userAgent: request.headers.get("user-agent") || undefined,
-    cookie: request.headers.get("cookie") || undefined,
-    sourceUrl: request.headers.get("referer") || site.url,
-  });
+  const trackLead = () =>
+    sendMetaCapiLead({
+      eventId,
+      email: l.email,
+      phone: l.phone,
+      ip: ip !== "unknown" ? ip : undefined,
+      userAgent: request.headers.get("user-agent") || undefined,
+      cookie: request.headers.get("cookie") || undefined,
+      sourceUrl: request.headers.get("referer") || site.url,
+    });
 
-  // Success as long as the lead landed somewhere (DB or email). Only hard-fail
-  // when every channel missed, so we never tell a visitor "sent" having lost it.
-  if (!saved && !emailed) {
+  // Saved: the lead is safe, so reply now and run every notification after the
+  // response (next/server `after`) instead of making the visitor wait on Resend,
+  // SMTP and Meta in turn. They're independent, so they run side by side.
+  if (saved) {
+    after(() => Promise.allSettled([syncContact(), emailLead(), emailTeam(), trackLead()]));
+    return NextResponse.json({ ok: true, eventId });
+  }
+
+  // Not saved: the team email is the only copy, so wait for it. Only hard-fail
+  // when every channel missed, so we never tell a visitor "sent" having lost it
+  // (and never confirm or track a lead we don't have).
+  if (!(await emailTeam())) {
     return NextResponse.json(
       { error: "Sorry, we couldn't save your enquiry. Please try again or email us directly." },
       { status: 502 },
     );
   }
+  after(() => Promise.allSettled([syncContact(), emailLead(), trackLead()]));
   return NextResponse.json({ ok: true, eventId });
 }
