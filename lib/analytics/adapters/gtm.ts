@@ -2,7 +2,7 @@
 // tags (Book Demo / WhatsApp / Phone / Email) and the generate_lead → GA4 event,
 // all managed in the GTM dashboard. Loading GTM here (after consent) is what turns
 // GA4 + those conversions on. track() pushes to dataLayer so GTM triggers fire.
-import type { Adapter, Props } from "./types";
+import type { Adapter, Props, Vital } from "./types";
 
 // ponytail: falls back to the known container so it still works without the env var.
 const CONTAINER_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-W8T4XS6B";
@@ -31,6 +31,24 @@ const gtm: Adapter = {
     if (typeof window === "undefined") return;
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "page_view", ...props });
+  },
+  // GTM: Custom Event trigger "web_vitals" -> GA4 Event tag named {{metric_name}}
+  // with these as parameters (setup steps in docs/web-vitals.md).
+  vital(m: Vital) {
+    if (typeof window === "undefined") return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "web_vitals",
+      metric_name: m.name,
+      metric_value: m.value,
+      metric_delta: m.delta,
+      metric_id: m.id,
+      metric_rating: m.rating,
+      metric_page: m.page,
+      navigation_type: m.navigationType,
+      // GA4 sums `value`, so send the delta; CLS x1000 so it survives rounding.
+      value: Math.round(m.name === "CLS" ? m.delta * 1000 : m.delta),
+    });
   },
 };
 

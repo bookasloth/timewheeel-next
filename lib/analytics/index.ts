@@ -11,7 +11,7 @@
 //     tools (never backfilled into ad networks).
 import { assertKnownEvent } from "./events";
 import { getConsent, onConsentChange, setConsent, isGranted, hasDecided } from "./consent";
-import type { Adapter, Props } from "./adapters/types";
+import type { Adapter, Props, Vital } from "./adapters/types";
 import posthog from "./adapters/posthog";
 import pixel from "./adapters/pixel";
 import clarity from "./adapters/clarity";
@@ -22,6 +22,12 @@ import gtm from "./adapters/gtm";
 const ADAPTERS: Adapter[] = [posthog, pixel, clarity, gtm];
 
 const ready = new Set<Adapter>();
+
+// Vitals from this page load, held for consent-gated tools. The first tap on the
+// consent banner is itself what finalises LCP, so without this a first visit
+// that clicks "Accept" would never report it. Vitals only; other events fired
+// before consent are still dropped.
+const heldVitals: Vital[] = [];
 
 function initAdapter(a: Adapter) {
   if (ready.has(a)) return;
@@ -43,10 +49,22 @@ export function initAnalytics() {
   ADAPTERS.filter((a) => !a.needsConsent).forEach(initAdapter);
   if (isGranted()) ADAPTERS.filter((a) => a.needsConsent).forEach(initAdapter);
   onConsentChange((v) => {
-    if (v === "granted") ADAPTERS.filter((a) => a.needsConsent).forEach(initAdapter);
+    if (v === "granted") {
+      const gated = ADAPTERS.filter((a) => a.needsConsent);
+      gated.forEach(initAdapter);
+      for (const m of heldVitals.splice(0)) gated.forEach((a) => send(() => a.vital?.(m)));
+    }
     // "denied" after a prior "granted" would need a reload to fully unload SDKs;
     // we just stop routing new events to them (activeAdapters drops them).
   });
+}
+
+function send(fn: () => void) {
+  try {
+    fn();
+  } catch {
+    /* ignore */
+  }
 }
 
 export const analytics = {
@@ -68,6 +86,11 @@ export const analytics = {
         /* ignore */
       }
     });
+  },
+  // Core Web Vitals: only adapters that implement vital() (GA4 via GTM, PostHog).
+  vital(metric: Vital) {
+    activeAdapters().forEach((a) => send(() => a.vital?.(metric)));
+    if (!isGranted() && heldVitals.length < 20) heldVitals.push(metric);
   },
   identify(id: string, props: Props = {}) {
     if (!id) return;
