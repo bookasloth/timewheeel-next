@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
@@ -27,18 +28,7 @@ export const metadata: Metadata = {
   title: { absolute: wd.meta.title },
   description: wd.meta.description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: wd.meta.title,
-    description: wd.meta.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: wd.meta.title,
-    description: wd.meta.description,
-  },
+  ...social({ path: url, title: wd.meta.title, description: wd.meta.description }),
 };
 
 const serviceLd = {

@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
+
+const TITLE = "Privacy Policy, How Timewheel Handles Your Data";
+const DESC =
+  "Learn how Timewheel collects, uses, stores and protects your personal information when you use our website, forms, payments and services, and your rights.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Privacy Policy | Timewheel" },
-  description:
-    "Learn how Timewheel collects, uses, and protects your personal information.",
+  title: { absolute: TITLE },
+  description: DESC,
   alternates: { canonical: "/legal/privacy" },
+  ...social({ path: "/legal/privacy", title: TITLE, description: DESC }),
 };
 
 export default function PrivacyPage() {

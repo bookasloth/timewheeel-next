@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Link from "next/link";
 import { ChevronRight, Search, Share2, Target, Globe, PenLine, MessageCircle } from "lucide-react";
 import { site } from "@/lib/site";
@@ -15,18 +16,7 @@ export const metadata: Metadata = {
   title: { absolute: dm.meta.title },
   description: dm.meta.description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: dm.meta.title,
-    description: dm.meta.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: dm.meta.title,
-    description: dm.meta.description,
-  },
+  ...social({ path: url, title: dm.meta.title, description: dm.meta.description }),
   other: { "geo.region": "IN-MH", "geo.placename": "Nagpur" },
 };
 

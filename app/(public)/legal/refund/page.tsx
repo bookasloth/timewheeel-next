@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
+
+const TITLE = "Refund Policy and Service Levels (SLA) | Timewheel";
+const DESC =
+  "Review Timewheel's refund policy, service-level commitments and support response targets for our projects, retainers and products, and how to raise a request.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Refund & SLA | Timewheel" },
-  description:
-    "Review Timewheel's refund policy, service-level commitments, and support response targets.",
+  title: { absolute: TITLE },
+  description: DESC,
   alternates: { canonical: "/legal/refund" },
+  ...social({ path: "/legal/refund", title: TITLE, description: DESC }),
 };
 
 export default function RefundPage() {

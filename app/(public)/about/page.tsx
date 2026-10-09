@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { AboutHero } from "@/components/about/hero";
 import { AboutIntro } from "@/components/about/intro";
 import { AboutCompany } from "@/components/about/company";
@@ -17,24 +18,13 @@ import { breadcrumbLd, organizationLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
 
 const description =
-  "TIMEWHEEL is a digital design and development partner helping ambitious businesses build websites and digital experiences that are clear, modern, and built to grow.";
+  "Timewheel is a Nagpur design and development partner helping ambitious businesses build clear, modern websites and digital experiences that grow.";
 
 export const metadata: Metadata = {
   title: "About, Digital Design & Development",
   description,
   alternates: { canonical: `${site.url}/about` },
-  openGraph: {
-    type: "website",
-    url: `${site.url}/about`,
-    siteName: site.name,
-    title: "About Timewheel, Digital Design & Development",
-    description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About Timewheel, Digital Design & Development",
-    description,
-  },
+  ...social({ path: "/about", title: "About Timewheel, Digital Design & Development", description }),
 };
 
 const aboutLd = {

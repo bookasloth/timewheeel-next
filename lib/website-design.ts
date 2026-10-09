@@ -30,7 +30,7 @@ export const wd = {
   meta: {
     title: "Top Web Design Company in Nagpur | Timewheel",
     description:
-      "Timewheel is the top web design company in Nagpur, designing and building premium websites for startups and growing businesses. Strategy, UI design and clean development under one roof.",
+      "Website design company in Nagpur creating premium websites for startups and growing businesses, with strategy, UI design and clean development under one roof.",
   },
 
   breadcrumb: ["Home", "Website Design"],

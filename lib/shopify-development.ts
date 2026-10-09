@@ -18,7 +18,7 @@ export const sd = {
   meta: {
     title: "Shopify Development Company in Nagpur | Timewheel",
     description:
-      "Build, customize, migrate and scale Shopify stores with a development team that understands ecommerce, performance and growth. Shopify Plus, headless, apps and integrations.",
+      "Shopify development company in Nagpur to build, customize, migrate and scale stores. Shopify Plus, headless builds, apps and integrations, tuned for speed.",
   },
 
   hero: {
@@ -97,7 +97,7 @@ export const sd = {
           name: "Everything Powerlifting",
           href: "https://everythingpowerlifting.com/",
           caseStudy: "everything-powerlifting",
-          image: "/shopify/everything-powerlifting.jpg",
+          image: "/portfolio/Powerlifting Strength Collage Poster.png",
         accent: "#5e8e3e",
         tag: "D2C fitness gear",
         problem:
@@ -109,7 +109,7 @@ export const sd = {
           name: "Leo Coffee",
           href: "https://www.leocoffee.co.in/",
           caseStudy: "leo-coffee",
-          image: "/shopify/leo-coffee.jpg",
+          image: "/portfolio/Leo-coffee.png",
         accent: "#ff7a3d",
         tag: "Subscription commerce",
         problem:

@@ -66,6 +66,8 @@ export type CaseStudy = {
   tagline: string;
   category: string;
   summary: string;
+  // Search/social description when the summary runs past ~160 characters.
+  metaDescription?: string;
   accent: string;
   image: { src: string; width: number; height: number } | null;
   tags: string[];
@@ -97,8 +99,14 @@ export const caseStudies: CaseStudy[] = [
     category: "D2C · Bakery (UAE)",
     summary:
       "Occasion Cakes baked beautifully but was invisible in local search. Orders came from walk-ins and aggregators that ate the margin. We made search for 'birthday cake near me' surface them.",
-    accent: "#F59E0B",
-    image: null,
+metaDescription:
+      "Occasion Cakes baked beautifully but was invisible in local search, losing margin to aggregators. We made 'birthday cake near me' searches surface them.",
+    accent: "#f50b9f",
+    image: {
+      src: "/portfolio/occasion cake.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Local SEO", "Content", "Google Business"],
     href: "/case-studies/occasion-cakes",
     liveUrl: "#",
@@ -208,8 +216,14 @@ export const caseStudies: CaseStudy[] = [
     category: "Real-Money Gaming",
     summary:
       "Khiladi Adda was scaling spend while CPI crept up and creative fatigued fast. In a heavily policy-restricted category, we built a compliant hook machine that cut cost-per-install by a third.",
-    accent: "#7C3AED",
-    image: null,
+metaDescription:
+      "Khiladi Adda's cost per install crept up as creative fatigued. In a policy-restricted category, we built a compliant hook machine that cut CPI by a third.",
+    accent: "#e03913",
+    image: {
+      src: "/portfolio/khiladi adda.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Ad Copy", "Performance", "Creative Testing"],
     href: "/case-studies/khiladi-adda",
     liveUrl: "#",
@@ -319,8 +333,14 @@ export const caseStudies: CaseStudy[] = [
     category: "Real Estate · Plotted Land",
     summary:
       "Plotted land is a commodity, so every competitor sold on price and drowned in low-quality leads. We sold the life the land makes possible, and tripled qualified site visits.",
+    metaDescription:
+      "Plotted land is a commodity, so rivals sold on price and drowned in weak leads. We sold the life the land makes possible and tripled qualified site visits.",
     accent: "#16A34A",
-    image: null,
+    image: {
+      src: "/portfolio/stone acres.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Campaign", "Copywriting", "Performance"],
     href: "/case-studies/stone-acres",
     liveUrl: "#",
@@ -430,6 +450,8 @@ export const caseStudies: CaseStudy[] = [
     category: "D2C · Custom Art",
     summary:
       "Corart got clicks but not customers. A high-consideration custom product leaked at every post-click step, so we fixed the funnel and qualified intent before letting spend scale.",
+    metaDescription:
+      "Corart got clicks but not customers. We fixed every leaky post-click step of a high-consideration custom product and qualified intent before scaling spend.",
     accent: "#EC4899",
     image: null,
     tags: ["Performance", "Landing Pages", "Creative"],
@@ -541,8 +563,14 @@ export const caseStudies: CaseStudy[] = [
     category: "D2C · Strength Gear",
     summary:
       "Everything Powerlifting made gear serious lifters wanted, but organic search barely knew it existed. ~290 visits a month, ~100 ranking keywords, and zero paid traffic meant growth depended entirely on organic they weren't capturing. The questions their athletes Googled mid-workout went to everyone else.",
+    metaDescription:
+      "Everything Powerlifting made gear serious lifters wanted, but search barely knew it existed. Over nine months we tripled organic traffic, 292 to 889 a month.",
     accent: "#DC2626",
-    image: null,
+    image: {
+      src: "/portfolio/everything-power.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["SEO", "Content", "Funnel"],
     href: "/case-studies/everything-powerlifting",
     liveUrl: "https://everythingpowerlifting.com/",

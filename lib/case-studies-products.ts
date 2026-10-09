@@ -18,9 +18,11 @@ export const productCaseStudies: CaseStudy[] = [
     category: "Education · Community Platform",
     summary:
       "A modern social network for alumni. Graduates discover each other by batch, city, company or profession, build professional profiles, find mentors, share opportunities and stay connected for life.",
+    metaDescription:
+      "A modern alumni social network: graduates find each other by batch, city or company, build profiles, find mentors and share opportunities for life.",
     accent: "#269cef",
     image: {
-      src: "/portfolio/Alumni Connections Campus Collage.png",
+      src: "/portfolio/alluminaty2.png",
       width: 1200,
       height: 675,
     },
@@ -100,9 +102,11 @@ export const productCaseStudies: CaseStudy[] = [
     category: "SaaS · Booking Platform",
     summary:
       "An India-first appointment booking and scheduling platform. 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, automatic WhatsApp and email reminders, and GST invoicing.",
+    metaDescription:
+      "India-first appointment booking platform with 24/7 booking pages, UPI and Razorpay payments, Google Calendar sync, WhatsApp reminders and GST invoicing.",
     accent: "#fe5100",
     image: {
-      src: "/portfolio/Sloth Booking App Celebration (1).png",
+      src: "/portfolio/bookasloth2.png",
       width: 1200,
       height: 675,
     },
@@ -184,9 +188,11 @@ export const productCaseStudies: CaseStudy[] = [
     category: "Creator Tools · Monetization",
     summary:
       "A creator monetization platform where audiences support creators through simple, meaningful contributions. Sustainable income for creators, and a direct line to the community that funds it.",
+    metaDescription:
+      "A creator monetization platform where audiences back creators with small, meaningful contributions: steady income for creators, a direct line to fans.",
     accent: "#ffcc1c",
     image: {
-      src: "/portfolio/coffee.png",
+      src: "/portfolio/coffee-toffee.png",
       width: 1200,
       height: 675,
     },
@@ -265,9 +271,11 @@ export const productCaseStudies: CaseStudy[] = [
     category: "Events · Ticketing",
     summary:
       "An event ticketing and management platform for organizers who need reliability at scale: ticket sales, attendee management, real-time analytics and operational workflows.",
+    metaDescription:
+      "Event ticketing and management platform for organizers who need reliability at scale: ticket sales, attendee management, live analytics and workflows.",
     accent: "#269cef",
     image: {
-      src: "/portfolio/ticket.png",
+      src: "/portfolio/ticket-dino.png",
       width: 1200,
       height: 675,
     },
@@ -347,9 +355,11 @@ export const productCaseStudies: CaseStudy[] = [
     category: "Community · Membership",
     summary:
       "Membership and subscription management for communities, organizations and digital institutions: recurring memberships, secure payments, engagement and access control in one place.",
+    metaDescription:
+      "Membership and subscription management for communities and organizations: recurring memberships, secure payments, engagement and access control together.",
     accent: "#ff4d93",
     image: {
-      src: "/portfolio/Alumni Connections Campus Collage.png",
+      src: "/portfolio/alluminaty2.png",
       width: 1200,
       height: 675,
     },
@@ -428,9 +438,11 @@ export const productCaseStudies: CaseStudy[] = [
     category: "D2C · Subscription Coffee",
     summary:
       "A specialty roaster's Shopify store covering everything under one roof: collection pages, 3 to 24 month subscriptions, horeca bulk ordering for businesses, and a store locator for walk-in buyers.",
+    metaDescription:
+      "A specialty coffee roaster's Shopify store with collections, 3 to 24 month subscriptions, bulk ordering for cafes and a store locator for walk-in buyers.",
     accent: "#ff7a3d",
     image: {
-      src: "/portfolio/Leo-coffee.png",
+      src: "/portfolio/leoo-coffee2.png",
       width: 1200,
       height: 675,
     },

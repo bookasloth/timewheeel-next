@@ -3,8 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 
 // Only real people belong here. Placeholder profiles were removed because
-// invented team members undermine E-E-A-T. Add Aastha and Durga (photos in
-// public/team) once their roles are confirmed.
+// invented team members undermine E-E-A-T.
 const members = [
   {
     name: "Shubham N Datarkar",
@@ -12,6 +11,21 @@ const members = [
     line: "Founds and leads Timewheel. Ships the studio's own products and runs SEO, AI-search and growth work for clients across India.",
     img: "/team/shubham.png",
     accent: "#fe5100",
+  },
+  {
+    name: "Durga Laxne",
+    role: "Marketing & SEO",
+    line: "Search research and positioning that gets businesses found.",
+    img: "/team/durga.png",
+    accent: "#2563eb",
+  },
+  {
+    name: "Aastha Nikhare",
+    role: "Product & Engineering",
+    line: "Fast, clean builds and launch-ready platforms on modern web tech.",
+    img: "/team/aastha-nikhare.png",
+    accent: "#8b5cf6",
+    imgClass: "scale-[1.2] object-top group-hover:scale-[1.25]",
   },
 ];
 
@@ -46,7 +60,7 @@ export function AboutTeam() {
                   alt={m.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  className={`object-cover transition-transform duration-500 group-hover:scale-[1.04] ${m.imgClass ?? ""}`}
                 />
                 <span
                   className="absolute bottom-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-white"

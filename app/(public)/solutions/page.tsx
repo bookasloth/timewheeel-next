@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { PageShell } from "@/components/page-shell";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
 
+const TITLE = "Solutions for Bookings, Events and Communities";
+const DESC =
+  "Explore Timewheel solutions: booking, ticketing, membership and creator platforms, plus custom websites and apps, all on systems your business owns.";
+
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: "/solutions" },
-  openGraph: { title: "Solutions, Timewheel", url: "/solutions" },
+  ...social({ path: "/solutions", title: TITLE, description: DESC }),
 };
 
 export default function SolutionsPage() {

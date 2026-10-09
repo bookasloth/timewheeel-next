@@ -4,10 +4,10 @@ import { sendDeliveredEmail, sendUpsellEmail } from "@/lib/resend-email";
 // Lifecycle email trigger. Sends the stage-appropriate lead email (delivered /
 // upsell) via Resend when a lead advances through the funnel.
 //
-// Driven by a Supabase Database Webhook on the `leads` table (configured in the
-// Supabase dashboard, no SQL needed): when the team changes a lead's `status` to
-// `delivered` or `upsell`, Supabase POSTs the row here and the matching email goes
-// out. Can also be called manually with {stage, email, name, site_url}.
+// Driven by the pg_net trigger in supabase/migrations/0002_lead_lifecycle.sql:
+// when the team changes a lead's `status` to `delivered` or `upsell`, Postgres
+// POSTs {stage, email, name, site_url} here and the matching email goes out.
+// Also accepts the Supabase Database Webhook shape ({record, old_record}).
 //
 // Protected by a shared secret header so the public can't trigger emails.
 // Env (server-only): LIFECYCLE_SECRET (required — fails closed without it) and

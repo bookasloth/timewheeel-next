@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { aiAuto } from "@/lib/ai-automation-nagpur";
 import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
@@ -18,18 +19,7 @@ export const metadata: Metadata = {
   title: aiAuto.meta.title,
   description: aiAuto.meta.description,
   alternates: { canonical: url },
-  openGraph: {
-    type: "website",
-    url,
-    siteName: site.name,
-    title: aiAuto.meta.title,
-    description: aiAuto.meta.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: aiAuto.meta.title,
-    description: aiAuto.meta.description,
-  },
+  ...social({ path: url, title: aiAuto.meta.title, description: aiAuto.meta.description }),
 };
 
 const serviceLd = {

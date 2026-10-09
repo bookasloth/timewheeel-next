@@ -23,11 +23,21 @@ const Y = "#ffcc1c"; // honey
 const G = "#29a66f"; // green
 const T = "#14b8a6"; // teal
 
+export type SmmFeedPost = {
+  kind: "Reel" | "Carousel" | "Story" | "Post";
+  caption: string;
+  tone: string;
+  img?: string;
+  imgs?: string[];
+  href?: string;
+  embedUrl?: string;
+};
+
 export const smm = {
   meta: {
     title: "Social Media Marketing Company in Nagpur | Timewheel",
     description:
-      "Social media marketing company in Nagpur, strategy, content, creative, community and paid social under one roof. One consistent brand voice, clear reporting and honest timelines.",
+      "Social media marketing company in Nagpur for strategy, content, creative, community and paid social. One consistent brand voice and clear, honest reporting.",
   },
 
   hero: {
@@ -43,7 +53,7 @@ export const smm = {
       { src: "/hero/social.png", alt: "Social media content by Timewheel" },
       { src: "/hero/seo.png", alt: "Content strategy and planning" },
       { src: "/hero/web-dev.png", alt: "Campaign performance reporting" },
-      { src: "/hero/web-design.png", alt: "Brand creative across platforms" },
+      { src: "/reels/coworking-reel-cover.jpg", alt: "Instagram reel cover by Eureka CoWorking" },
     ],
   },
 
@@ -81,14 +91,54 @@ export const smm = {
     eyebrow: "Creative in action",
     heading: "The kind of content we make.",
     body: "Reels, carousels and stories built on templates your brand owns, so every post looks like you and works on its platform.",
-    posts: [
-      { kind: "Reel", caption: "Launch teaser, 15s hook-led edit", tone: P },
-      { kind: "Carousel", caption: "5-slide how-to your audience saves", tone: V },
-      { kind: "Story", caption: "Behind-the-scenes with a poll sticker", tone: O },
-      { kind: "Post", caption: "Bold quote card in brand type", tone: B },
-      { kind: "Reel", caption: "Trend-jack cut to your product", tone: G },
-      { kind: "Carousel", caption: "Before / after in three frames", tone: Y },
-    ],
+posts: [
+      {
+        kind: "Reel",
+        caption: "Launch teaser, 15s hook-led edit",
+        tone: P,
+        embedUrl: "https://www.instagram.com/reel/DLURV6ezU02/embed",
+      },
+      {
+        kind: "Carousel",
+        caption: "30 Years of Sizzle. One Shot to Scale It. — Dhawade Vadewale",
+        tone: V,
+        href: "https://www.instagram.com/p/DJtAP20o5ay/",
+        img: "/feed/dhawade-vadewale.jpg",
+        imgs: ["/feed/dhawade-vadewale.jpg", "/feed/dhawade-vadewale-2.jpg"],
+      },
+      {
+        kind: "Post",
+        caption: "सकाळ झाली की फक्त गरम चहा हाच जोडीदार! — Dhawade Vadewale",
+        tone: O,
+        href: "https://www.instagram.com/p/DNZfpl8zsv9/",
+        img: "/feed/dhawade-chai.jpg",
+      },
+      {
+        kind: "Reel",
+        caption: "Coworking space, shot to scroll-stop — Eureka Coworking",
+        tone: T,
+        embedUrl: "https://www.instagram.com/reel/DWrHe7PiAuT/embed",
+      },
+      {
+        kind: "Reel",
+        caption: "Trend-jack cut to your product",
+        tone: G,
+        embedUrl: "https://www.instagram.com/reel/DRn99DVEmyc/embed",
+      },
+      {
+        kind: "Carousel",
+        caption: "Power starts at the floor — Everything Powerlifting",
+        tone: Y,
+        href: "https://www.instagram.com/p/DT65kV_gbEx/",
+        img: "/feed/everything-powerlifting.jpg",
+        imgs: [
+          "/feed/everything-powerlifting.jpg",
+          "/feed/everything-powerlifting-2.jpg",
+          "/feed/everything-powerlifting-3.jpg",
+          "/feed/everything-powerlifting-4.jpg",
+        ],
+      },
+    ] as SmmFeedPost[],
   },
 
   // Package tiers — deliverables are real capability; prices are placeholders.

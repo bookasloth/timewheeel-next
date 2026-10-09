@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { ChallengeForm } from "@/components/challenge/challenge-form";
@@ -19,7 +20,7 @@ const DESC =
 export const metadata: Metadata = {
   title: { absolute: `${TITLE}, Timewheel` },
   description: DESC,
-  openGraph: { type: "website", url: "/30-days-30-websites", title: TITLE, description: DESC, siteName: "Timewheel" },
+  ...social({ path: "/30-days-30-websites", title: TITLE, description: DESC }),
   alternates: { canonical: "/30-days-30-websites" },
 };
 
@@ -56,7 +57,7 @@ const steps = [
   {
     icon: Sparkles,
     title: "Name your price",
-    body: "Pay what you want, ₹0 to anything. The goal is a website for everyone, not the money.",
+    body: "Pay what you want, ₹0 to anything, securely by UPI or card. The goal is a website for everyone, not the money.",
   },
   {
     icon: Rocket,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { caseStudies } from "@/lib/case-studies";
@@ -7,18 +8,14 @@ import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd, itemListLd, webPageLd } from "@/lib/jsonld";
 import { Reveal } from "@/components/reveal";
 
+const TITLE = "Case Studies: Websites, Apps and Growth Work";
+const DESC =
+  "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.";
+
 const baseMetadata: Metadata = {
-  title: "Case Studies",
-  description:
-    "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
-  openGraph: {
-    type: "website",
-    url: "/case-studies",
-    siteName: "Timewheel",
-    title: "Case Studies, Timewheel",
-    description:
-      "How Timewheel designs, builds and ships digital products, booking platforms, dashboards, automation and more, with the challenges and decisions behind each one.",
-  },
+  title: TITLE,
+  description: DESC,
+  ...social({ path: "/case-studies", title: TITLE, description: DESC }),
 };
 
 const PER_PAGE = 12;

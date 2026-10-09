@@ -19,12 +19,12 @@ export const clientSites: ClientSite[] = [
     name: "DRU Foundation",
     href: "https://drufoundation.org/",
     caseStudySlug: "dru-foundation",
-    accent: "#47143D",
+    accent: "#49eb2d",
     iconKey: "heart",
     category: "NGO",
     description:
       "Mumbai NGO founded in 2022, empowering underprivileged women through skills, education, food support and self-help groups.",
-    image: "/portfolio/DRU Foundation Women Empowerment Poster.png",
+    image: "/portfolio/dru-foundation.png",
   },
   {
     name: "Eureka Coworking",
@@ -35,7 +35,7 @@ export const clientSites: ClientSite[] = [
     category: "Coworking",
     description:
       "Flexible workspace brand in Nagpur and Pune, offering hot desks, dedicated desks, private cabins and meeting rooms.",
-    image: "/portfolio/Eureka Coworking_ Good People, Better Ideas.png",
+    image: "/portfolio/eureka-cowork.png",
   },
   {
     name: "Rising Sun Electric",
@@ -46,7 +46,7 @@ export const clientSites: ClientSite[] = [
     category: "Solar EPC",
     description:
       "Mumbai solar company delivering residential, commercial and industrial systems with end-to-end EPC and subsidy support.",
-    image: "/portfolio/Stone and Acres Land Development Poster.png",
+    image: "/portfolio/rising-sun.png",
   },
   {
     name: "WeCos",
@@ -68,7 +68,7 @@ export const clientSites: ClientSite[] = [
     category: "Personal Brand",
     description:
       "Founder-led brand site for an SEO, AEO and GEO consultant, packaging productised engagements and case studies.",
-    image: "/portfolio/Occasion Cakes Celebration Collage.png",
+    image: "/portfolio/shubham-datarkar.png",
   },
   {
     name: "AdEtc Studios",
@@ -79,7 +79,7 @@ export const clientSites: ClientSite[] = [
     category: "Production Studio",
     description:
       "Ahmedabad film studio delivering ad films, TV commercials, brand films and documentaries with in-house post-production.",
-    image: "/portfolio/Khiladi Adda Ludo Gaming Collage.png",
+    image: "/portfolio/adetc-std.png",
   },
   {
     name: "Power Consilium",
@@ -90,7 +90,7 @@ export const clientSites: ClientSite[] = [
     category: "Power Systems",
     description:
       "Pan-India UPS provider offering annual maintenance contracts, rental, multi-brand supply and battery replacement.",
-    image: "/portfolio/Powerlifting Strength Collage Poster.png",
+    image: "/portfolio/powerr-consilium.png",
   },
   {
     name: "Ashlar Studio",
@@ -101,7 +101,7 @@ export const clientSites: ClientSite[] = [
     category: "Architecture",
     description:
       "Architecture and interior design studio presenting residential and commercial design work and project enquiries.",
-    image: "/portfolio/Stone and Acres Land Development Poster.png",
+    image: "/portfolio/ashlar-std.png",
   },
   {
     name: "Alpha Adventures",
@@ -112,7 +112,7 @@ export const clientSites: ClientSite[] = [
     category: "Travel & Adventure",
     description:
       "Adventure operator running curated Sahyadri, Himalayan and Central India treks, fort cabins and camping.",
-    image: "/portfolio/Eureka Coworking_ Good People, Better Ideas.png",
+    image: "/portfolio/alpha-adven.png",
   },
   {
     name: "Edulocus",
@@ -123,6 +123,6 @@ export const clientSites: ClientSite[] = [
     category: "Education",
     description:
       "Nagpur education consultancy offering career counselling, college planning and study-abroad guidance for MBBS students.",
-    image: "/portfolio/Alumni Connections Campus Collage.png",
+    image: "/portfolio/edulocusss.png",
   },
 ];

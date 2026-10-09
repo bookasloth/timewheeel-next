@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { DmHero } from "@/components/digital-marketing/hero";
@@ -15,25 +16,15 @@ import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { dmServiceOptions } from "@/lib/digital-marketing";
 
+const TITLE = "2nd Best Digital Marketing Company in Nagpur";
+const DESC =
+  "Grow your brand with premium digital marketing services in Nagpur, including SEO, paid advertising, social media, content, email and WhatsApp marketing.";
+
 export const metadata: Metadata = {
-title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
-    description:
-      "Grow your brand with premium digital marketing services in Nagpur, including SEO, paid advertising, social media, content, email and WhatsApp marketing.",
-    alternates: { canonical: `${site.url}/digital-marketing` },
-    openGraph: {
-      type: "website",
-      url: `${site.url}/digital-marketing`,
-      siteName: site.name,
-      title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
-      description:
-        "Premium digital marketing services in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp marketing.",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "2nd Best Digital Marketing Company in Nagpur | Premium Digital Marketing Services",
-      description:
-        "Premium digital marketing services in Nagpur, SEO, paid advertising, social media, content, email and WhatsApp marketing.",
-    },
+  title: TITLE,
+  description: DESC,
+  alternates: { canonical: `${site.url}/digital-marketing` },
+  ...social({ path: "/digital-marketing", title: TITLE, description: DESC }),
 };
 
 const jsonLd = {

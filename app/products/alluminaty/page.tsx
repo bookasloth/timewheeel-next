@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { az } from "@/lib/alluminaty";
 import { AzHero } from "@/components/alluminaty/hero";
 import { AzStats } from "@/components/alluminaty/stats";
@@ -15,18 +16,7 @@ import { AzFinalCta } from "@/components/alluminaty/final-cta";
 export const metadata: Metadata = {
   title: { absolute: az.meta.title },
   description: az.meta.description,
-  openGraph: {
-    type: "website",
-    url: "/products/alluminaty",
-    title: az.meta.title,
-    description: az.meta.description,
-    siteName: "Timewheel",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: az.meta.title,
-    description: az.meta.description,
-  },
+  ...social({ path: "/products/alluminaty", title: az.meta.title, description: az.meta.description }),
   alternates: { canonical: "/products/alluminaty" },
 };
 

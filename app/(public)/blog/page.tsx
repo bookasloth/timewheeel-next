@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { getAllPosts } from "@/lib/blog";
 import { BlogListing } from "@/components/blog/blog-listing";
 
+const TITLE = "Digital Marketing, SEO and AI Search Blog";
+const DESC =
+  "Practical guides on digital marketing, SEO, AI search and building without platform lock-in, written by the Timewheel team for growing businesses.";
+
 export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Guides on digital marketing, SEO, AI search and building without platform lock-in, from the Timewheel team.",
+  title: TITLE,
+  description: DESC,
   alternates: { canonical: "/blog" },
-  openGraph: {
-    title: "Blog, Timewheel",
-    description:
-      "Guides on digital marketing, SEO, AI search and building without platform lock-in, from the Timewheel team.",
-    url: "/blog",
-  },
+  ...social({ path: "/blog", title: TITLE, description: DESC }),
 };
 
 export default function BlogPage() {

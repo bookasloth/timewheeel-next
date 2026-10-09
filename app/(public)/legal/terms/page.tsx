@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
+
+const TITLE = "Terms of Service for Timewheel Products and Services";
+const DESC =
+  "Read the terms and conditions that govern your use of the Timewheel website, products and services, from orders and payments to your rights and ours.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Terms of Service | Timewheel" },
-  description:
-    "Read the terms and conditions governing your use of Timewheel products and services.",
+  title: { absolute: TITLE },
+  description: DESC,
   alternates: { canonical: "/legal/terms" },
+  ...social({ path: "/legal/terms", title: TITLE, description: DESC }),
 };
 
 export default function TermsPage() {

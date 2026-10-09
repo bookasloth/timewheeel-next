@@ -63,7 +63,7 @@ function AlluminatyVisual() {
     <Frame url="alluminaty.app">
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary/40">
         <Image
-          src="/portfolio/Alumni Connections Campus Collage.png"
+          src="/portfolio/alluminaty-parlia.png"
           alt="Alluminaty"
           width={720}
           height={405}
@@ -79,7 +79,7 @@ function CoffeeVisual() {
     <Frame url="coffeeandtoffee.in">
       <div className="relative aspect-[16/10] overflow-hidden bg-secondary/40">
         <Image
-          src="/portfolio/coffee.png"
+          src="/portfolio/coffee-toffee.png"
           alt="Coffee &amp; Toffee"
           width={720}
           height={405}

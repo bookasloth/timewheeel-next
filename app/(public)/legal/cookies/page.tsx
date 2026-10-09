@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { social } from "@/lib/metadata";
+
+const TITLE = "Cookie Policy, How Timewheel Uses Cookies";
+const DESC =
+  "Learn which cookies Timewheel uses on timewheel.co.in, why we use them for analytics and ads, and how to accept, decline or change your cookie preferences.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Cookie Policy | Timewheel" },
-  description:
-    "Learn about the cookies Timewheel uses and how you can manage your preferences.",
+  title: { absolute: TITLE },
+  description: DESC,
   alternates: { canonical: "/legal/cookies" },
+  ...social({ path: "/legal/cookies", title: TITLE, description: DESC }),
 };
 
 export default function CookiesPage() {
