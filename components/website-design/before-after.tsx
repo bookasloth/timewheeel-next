@@ -27,7 +27,7 @@ export function WdBeforeAfter() {
             src="/bookasloth-new.PNG"
             alt="Book A Sloth website after the redesign"
             fill
-            priority
+            preload
             sizes="(min-width: 1024px) 896px, 100vw"
             className="object-cover object-top"
           />

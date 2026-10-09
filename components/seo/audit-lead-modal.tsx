@@ -32,6 +32,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "submitting") return;
     if (!name.trim() || !email.trim() || !phone.trim()) {
       setStatus("error");
       setError("Please fill in your name, email and phone.");
@@ -104,7 +105,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
   }
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border border-border bg-card p-7">
+    <form onSubmit={submit} aria-busy={status === "submitting"} className="rounded-2xl border border-border bg-card p-7">
       <button
         type="button"
         onClick={onClose}
@@ -149,7 +150,7 @@ export function AuditLeadPanel({ onClose, domain, scores, findings, findingsTota
         />
       </div>
 
-      {status === "error" && <p className="mt-3 text-xs text-destructive">{error}</p>}
+      {status === "error" && <p role="alert" className="mt-3 text-xs text-destructive">{error}</p>}
 
       <button
         type="submit"

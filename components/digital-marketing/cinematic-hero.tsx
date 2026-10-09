@@ -64,7 +64,7 @@ export function DmCinematicHero() {
           src="/digital-marketing-hero1.png"
           alt=""
           fill
-          priority
+          preload
           sizes="(min-width: 1280px) 56vw, (min-width: 1024px) 52vw, 100vw"
           className="object-cover object-[62%_45%]"
           style={{

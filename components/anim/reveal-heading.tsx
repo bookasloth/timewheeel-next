@@ -5,15 +5,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
+import { skipEntrance, useIsClientMount } from "@/components/anim/entrance";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
-
-function prefersReducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-}
 
 // Heading whose lines slide up from a clip mask when scrolled into view (once).
 // Mirrors the Norio "line-mask reveal": SplitText into lines + mask, staggered.
@@ -33,11 +27,14 @@ export function RevealHeading({
   start?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
+  const clientMount = useIsClientMount();
 
   useGSAP(
     () => {
       const el = ref.current;
-      if (!el || prefersReducedMotion()) return;
+      // Also skipped when hydrating a heading the visitor can already see, so
+      // the hero h1 never blinks out on a hard load.
+      if (!el || skipEntrance(el, clientMount)) return;
 
       // Hide until the split runs so above-the-fold headings don't flash the
       // un-split text first (fonts.ready is async). Fallback reveals it anyway if

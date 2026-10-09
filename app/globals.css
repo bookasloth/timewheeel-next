@@ -127,8 +127,28 @@
     border-color 0.2s ease,
     filter 0.2s ease;
 }
-.btn:hover {
-  filter: brightness(0.93);
+/* Hover only where a real pointer hovers: on touch screens :hover sticks after
+   a tap, which left the primary button stuck white. Disabled buttons (e.g.
+   mid-submit) don't react at all. */
+@media (hover: hover) {
+  .btn:hover:not(:disabled) {
+    filter: brightness(0.93);
+  }
+}
+/* Pressed: instant darken, no movement. The tap/click feedback on every device. */
+.btn:active:not(:disabled) {
+  filter: brightness(0.86);
+  transition-duration: 0s;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+.btn:disabled {
+  cursor: not-allowed;
+}
+.btn[aria-busy="true"] {
+  cursor: progress;
 }
 
 /* primary. Solid brand fill; on hover it flips to white with a 1px brand
@@ -164,14 +184,16 @@
   transition: opacity 0.25s ease;
   pointer-events: none;
 }
-.btn-primary:hover {
-  background: #fff;
-  color: var(--brand-text);
-  border-color: var(--brand);
-  filter: none;
-}
-.btn-primary:hover::before {
-  opacity: 1;
+@media (hover: hover) {
+  .btn-primary:hover:not(:disabled) {
+    background: #fff;
+    color: var(--brand-text);
+    border-color: var(--brand);
+    filter: none;
+  }
+  .btn-primary:hover:not(:disabled)::before {
+    opacity: 1;
+  }
 }
 
 /* green, positive / WhatsApp actions */
@@ -509,10 +531,12 @@
   color: var(--foreground);
   border: 1px solid var(--border);
 }
-.btn-outline:hover {
-  background: var(--brand);
-  color: #fff;
-  border-color: var(--brand);
+@media (hover: hover) {
+  .btn-outline:hover:not(:disabled) {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand);
+  }
 }
 
 /* hero active-word progress bar, scaleX 0→1 over the 2s cycle */
@@ -624,6 +648,35 @@ h2 {
 .dm-hero-h1 {
   font-size: clamp(2.625rem, 1.3rem + 3.9vw, 4.875rem) !important;
   line-height: 0.98 !important;
+}
+
+/* Skeleton placeholders (components/ui/skeleton.tsx). The block fades in only
+   after --skeleton-delay, so a fast load swaps straight to content with no
+   flash; there's no minimum display time. Pure CSS, so no timers to race. */
+@keyframes skeleton-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+.skeleton-delay {
+  animation: skeleton-in 0.2s ease-out var(--skeleton-delay, 150ms) both;
+}
+.skeleton {
+  background: var(--muted);
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+  .skeleton-delay {
+    animation-duration: 1ms;
+  }
 }
 
 /* skeleton shimmer sweep (SEO hero idle card) */

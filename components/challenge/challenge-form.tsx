@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { trackLead } from "@/lib/track";
 import { useFormTracking } from "@/hooks/use-form-tracking";
 import { getAttribution } from "@/lib/attribution";
-import { ArrowRight, CheckCircle2, PartyPopper, User, Mail, Phone, Globe, PencilLine } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, PartyPopper, User, Mail, Phone, Globe, PencilLine } from "lucide-react";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 
@@ -70,6 +70,7 @@ export function ChallengeForm() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "submitting") return;
     const errors = validate(form.values);
     if (Object.keys(errors).length) { setForm((f) => ({ ...f, errors })); ft.onErrors(Object.keys(errors)); return; }
     setStatus("submitting");
@@ -250,8 +251,11 @@ export function ChallengeForm() {
         type="submit" disabled={status === "submitting"} whileTap={{ scale: 0.98 }}
         className="group btn btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-brand-foreground disabled:opacity-60"
       >
-        {status === "submitting" ? "Claiming your spot…" : "Claim my spot"}
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+        {status === "submitting" ? (
+          <><Loader2 className="size-4 animate-spin" /> Claiming your spot…</>
+        ) : (
+          <>Claim my spot <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" /></>
+        )}
       </motion.button>
 
       {status === "error" && (

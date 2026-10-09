@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Link2, ArrowRight, ArrowUp, ArrowLeft, Loader2, Check, ChevronRight, AlertCircle, TrendingUp, Star } from "lucide-react";
@@ -118,7 +118,7 @@ function ImagePanel() {
         alt="Preview of the Timewheel SEO audit"
         width={1536}
         height={1024}
-        priority
+        preload
         sizes="(min-width: 1024px) 45vw, 90vw"
         className="h-auto w-full"
       />
@@ -198,7 +198,7 @@ function LoadingCard() {
           </ul>
         </div>
 
-        <div className="mt-5 flex items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 px-4 py-3 text-center text-[13px] font-semibold text-foreground">
+        <div role="status" className="mt-5 flex items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 px-4 py-3 text-center text-[13px] font-semibold text-foreground">
           <Loader2 className="size-4 animate-spin text-brand-text" />
           Crawling your site and scoring… about 15 seconds.
         </div>
@@ -214,18 +214,24 @@ export function SeoHero() {
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
 
+  // Aborted on unmount so a slow audit can't resolve into a page that's gone.
+  const inflight = useRef<AbortController | null>(null);
+  useEffect(() => () => inflight.current?.abort(), []);
+
   async function run(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "loading") return;
     if (!url.trim()) {
       setStatus("error");
       setError("Enter your website URL to see its scores.");
       return;
     }
+    const ctrl = (inflight.current = new AbortController());
     setStatus("loading");
     setError("");
     setShowForm(false);
     try {
-      const res = await fetch(`/api/seo-audit?url=${encodeURIComponent(url.trim())}`);
+      const res = await fetch(`/api/seo-audit?url=${encodeURIComponent(url.trim())}`, { signal: ctrl.signal });
       const data = await res.json();
       if (!res.ok) {
         setStatus("error");
@@ -235,6 +241,7 @@ export function SeoHero() {
       setResult(data);
       setStatus("success");
     } catch {
+      if (ctrl.signal.aborted) return;
       setStatus("error");
       setError("Network error, please try again.");
     }
@@ -271,6 +278,7 @@ export function SeoHero() {
 
           <form
             onSubmit={run}
+            aria-busy={status === "loading"}
             className="mt-9 flex max-w-xl flex-col gap-2 rounded-2xl border border-border bg-card p-2 sm:flex-row sm:items-center sm:rounded-full"
           >
             <div className="relative flex-1">
@@ -300,7 +308,7 @@ export function SeoHero() {
           </form>
 
           {status === "error" && (
-            <p className="mt-4 flex items-center gap-2 text-xs text-destructive">
+            <p role="alert" className="mt-4 flex items-center gap-2 text-xs text-destructive">
               <AlertCircle className="size-3.5 shrink-0" /> {error}
             </p>
           )}

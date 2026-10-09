@@ -124,7 +124,7 @@ export function Navbar() {
             alt=""
             width={32}
             height={32}
-            priority
+            loading="eager"
             className="size-8"
           />
           <span

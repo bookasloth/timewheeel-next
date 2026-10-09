@@ -52,7 +52,7 @@ export function SdHero() {
               src="/hero/shopify.png"
               alt="Shopify development by Timewheel"
               fill
-              priority
+              preload
               sizes="(min-width: 768px) 45vw, 90vw"
               className="object-cover"
             />

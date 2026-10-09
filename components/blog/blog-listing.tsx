@@ -18,10 +18,16 @@ function fmt(date: string): string {
     : d.toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
 }
 
-function Thumb({ post, className = "" }: { post: PostMeta; className?: string }) {
+function Thumb({ post, className = "", eager = false }: { post: PostMeta; className?: string; eager?: boolean }) {
   return post.cover ? (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={post.cover} alt={post.title} className={`w-full object-cover ${className}`} />
+    <img
+      src={post.cover}
+      alt={post.title}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+      className={`w-full object-cover ${className}`}
+    />
   ) : (
     <div className={`flex w-full items-center justify-center bg-gradient-to-br from-brand/25 to-brand/5 ${className}`}>
       <span className="text-lg font-black tracking-tight text-brand/80">
@@ -62,7 +68,7 @@ function Featured({ post }: { post: PostMeta }) {
       href={`/blog/${post.slug}`}
       className="group grid overflow-hidden rounded-3xl border border-border bg-card transition-colors hover:border-brand/50 md:grid-cols-2"
     >
-      <Thumb post={post} className="h-full min-h-[220px]" />
+      <Thumb post={post} eager className="h-full min-h-[220px]" />
       <div className="flex flex-col justify-center p-7 md:p-10">
         <span className="text-xs font-bold uppercase tracking-wide text-brand-text">Featured · {post.category}</span>
         <RevealHeading as="h2" className="mt-3 text-2xl font-black leading-tight tracking-tight md:text-3xl">{post.title}</RevealHeading>
@@ -98,6 +104,7 @@ export function BlogListing({ posts }: { posts: PostMeta[] }) {
           {categories.map((c) => (
             <button
               key={c}
+              aria-pressed={cat === c}
               onClick={() => { setCat(c); setCount(PAGE); }}
               className={`rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors ${
                 cat === c ? "border-brand bg-brand/10 text-brand" : "border-border text-muted-foreground hover:border-brand/50"
