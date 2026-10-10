@@ -173,6 +173,38 @@ export function newsletterWelcome(): Rendered {
   });
 }
 
+// Academy interest registration (/api/academy/interest). Nothing is open for
+// payment yet, so the email promises only what's true: details come first.
+export function academyInterest(o: { name: string; program: string; programUrl: string; enrolling: boolean }): Rendered {
+  return renderEmail({
+    subject: `You're on the list: ${o.program}`,
+    preheader: "Thanks for registering your interest in Timewheel Digital Marketing Academy.",
+    hero: { tone: "brand", icon: "check", title: "You're on the list", subtitle: o.program },
+    title: `Hi ${first(o.name)},`,
+    blocks: [
+      {
+        type: "p",
+        text: o.enrolling
+          ? `Thanks for applying to ${o.program} at Timewheel Digital Marketing Academy. We'll be in touch by email about next steps.`
+          : `Thanks for registering your interest in ${o.program} at Timewheel Digital Marketing Academy. The program isn't open for enrollment yet.`,
+      },
+      {
+        type: "steps",
+        title: "What happens next",
+        items: [
+          "We email you when cohort details are ready: dates, format and fees.",
+          "You decide then whether to join. Registering commits you to nothing.",
+          "Until then, the program page has the full curriculum and sample projects.",
+        ],
+      },
+      { type: "p", text: "Every program includes a Timewheel certificate, help completing Google, Meta, HubSpot and LinkedIn certifications, and internships at Timewheel and our sister companies." },
+      { type: "button", href: o.programUrl, label: "View the program" },
+      { type: "p", text: "We only use your email for Academy updates. Reply \"remove me\" any time and we'll delete your details.", muted: true },
+    ],
+    footnote: "You're receiving this because you registered interest at timewheel.co.in/academy.",
+  });
+}
+
 // Lifecycle: lead status -> delivered.
 export function websiteLive(o: { name: string; siteUrl?: string }): Rendered {
   const url = o.siteUrl && /^https?:\/\//i.test(o.siteUrl) ? o.siteUrl : "";
@@ -286,6 +318,42 @@ export function teamLead(l: LeadEmail): Rendered {
     signoff: false,
     help: false,
     footnote: `Submitted on timewheel.co.in. Reply to this email to reach ${l.name}.`,
+  });
+}
+
+export function teamAcademyInterest(o: {
+  name: string;
+  email: string;
+  institution?: string;
+  stage?: string;
+  program: string;
+  campaign?: string;
+  saved: boolean; // false = the DB missed it, this email is the only copy
+  flag?: string;
+}): Rendered {
+  const rows: Row[] = [
+    ["Name", o.name],
+    ["Email", o.email, `mailto:${o.email}`],
+    ["Program", o.program],
+    ["Institution", o.institution || "-"],
+    ["Stage", o.stage || "-"],
+  ];
+  if (o.campaign) rows.push(["Campaign", o.campaign]);
+  const callouts: Block[] = [
+    ...(o.flag ? ([{ type: "callout", label: "Check", value: o.flag, tone: "danger" }] as Block[]) : []),
+    ...(!o.saved
+      ? ([{ type: "callout", label: "Not in the database", value: "Supabase didn't take this row (not configured, or migration 0005 not applied). This email is the only copy.", tone: "danger" }] as Block[])
+      : []),
+  ];
+  return renderEmail({
+    subject: `${o.flag ? "[Check] " : ""}Academy interest: ${o.program}, ${o.name}`,
+    preheader: `${o.name} registered interest in ${o.program}.`,
+    kicker: "Academy interest",
+    title: `${o.program}, ${o.name}`,
+    blocks: [...callouts, { type: "rows", rows }],
+    signoff: false,
+    help: false,
+    footnote: `Submitted on timewheel.co.in/academy. Reply to this email to reach ${o.name}.`,
   });
 }
 

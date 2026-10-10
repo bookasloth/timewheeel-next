@@ -19,6 +19,7 @@ const company = [
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
   { label: "Careers", href: "/careers" },
+  { label: "Academy", href: "/academy" },
   { label: "30 Days, 30 Websites", href: "/30-days-30-websites" },
 ];
 

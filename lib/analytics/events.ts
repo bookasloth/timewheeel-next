@@ -19,6 +19,9 @@ export const EVENTS = {
   CONTACT_WHATSAPP: "contact_whatsapp",
   CONTACT_CLICK: "contact_click",
   SEO_AUDIT_STARTED: "seo_audit_started",
+  // Academy interest registration (/academy). A student, not a business lead,
+  // so it never fires lead_captured / Meta 'Lead' / GA4 generate_lead.
+  ACADEMY_INTEREST: "academy_interest",
   // review-generator funnel (/review): turn real customer feedback into a
   // copy-paste Google review. One event per meaningful step.
   REVIEW_PAGE_VIEWED: "review_page_viewed",

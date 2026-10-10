@@ -2,6 +2,7 @@
 // exercises our code without touching real data:
 //
 //   Supabase REST   POST /rest/v1/leads, POST /rest/v1/payments,
+//                   POST /rest/v1/academy_interest (409 on a repeat email+program),
 //                   POST /rest/v1/rpc/rate_limit_hit (shared rate limit)
 //   SEO audit tool  POST /seo-audit/start, POST /seo-audit/step, GET /seo-audit/:id
 //
@@ -21,7 +22,8 @@ const DB_MS = Number(process.env.MOCK_DB_MS ?? 40); // typical Supabase insert l
 
 const jobs = new Map(); // audit id -> started at
 const rateHits = new Map(); // rate-limit key@window -> hits
-const stats = { leads: 0, payments: 0, rateLimitCalls: 0, auditsStarted: 0, auditSteps: 0, auditResults: 0, other: 0 };
+const academy = new Set(); // "email|program" pairs, the table's unique key
+const stats = { leads: 0, payments: 0, academyInterest: 0, rateLimitCalls: 0, auditsStarted: 0, auditSteps: 0, auditResults: 0, other: 0 };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const auditResult = (id) => ({
@@ -68,6 +70,20 @@ export function startMockServices(port = Number(process.env.MOCK_PORT ?? 4010)) 
       await sleep(DB_MS);
       stats.payments++;
       return send(res, 201, [{ id: randomUUID(), ...body, status: "pending", created_at: new Date().toISOString(), paid_at: null }]);
+    }
+
+    // Same contract as public.academy_interest (supabase/migrations/0005):
+    // PostgREST answers a unique violation with 409 and Postgres code 23505.
+    if (req.method === "POST" && pathname === "/rest/v1/academy_interest") {
+      const body = await readJson(req);
+      await sleep(DB_MS);
+      const key = `${body.email}|${body.program_slug}`;
+      if (academy.has(key)) {
+        return send(res, 409, { code: "23505", message: 'duplicate key value violates unique constraint "academy_interest_email_program_key"' });
+      }
+      academy.add(key);
+      stats.academyInterest++;
+      return send(res, 201);
     }
 
     // Same contract as public.rate_limit_hit (supabase/migrations/0004): fixed
