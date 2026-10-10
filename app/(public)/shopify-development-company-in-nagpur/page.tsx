@@ -17,6 +17,7 @@ import { SdFaq } from "@/components/shopify-development/faq";
 import { SdFinalCta } from "@/components/shopify-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { LeadForm } from "@/components/shared/lead-form";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const PATH = "/shopify-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -70,6 +71,7 @@ export default function ShopifyDevelopmentPage() {
       <SdIndustries />
       <SdTech />
       <SdFaq />
+      <RelatedServices current="/shopify-development-company-in-nagpur" showResults={false} />
       <SdFinalCta />
       <div id="lead">
         <LeadForm

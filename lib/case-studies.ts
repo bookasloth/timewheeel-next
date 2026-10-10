@@ -78,6 +78,8 @@ export type CaseStudy = {
   faq?: CaseStudyFaq[];
   /** Template data for the generic detail page. */
   content: CaseStudyContent;
+  /** Demo entry, not a documented client build: never featured or linked as proof. */
+  placeholder?: boolean;
 };
 
 // Real, documented client builds, deliberately separate from the product
@@ -94,6 +96,7 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "occasion-cakes",
+    placeholder: true,
     name: "Occasion Cakes",
     tagline: "Ranking a UAE cake shop #1 for 40+ local searches",
     category: "D2C · Bakery (UAE)",
@@ -211,6 +214,7 @@ metaDescription:
   },
   {
     slug: "khiladi-adda",
+    placeholder: true,
     name: "Khiladi Adda",
     tagline: "Ad copy that cut cost-per-install for a gaming app",
     category: "Real-Money Gaming",
@@ -328,6 +332,7 @@ metaDescription:
   },
   {
     slug: "stone-acres",
+    placeholder: true,
     name: "Stone & Acres",
     tagline: "Selling land by turning plots into life stories",
     category: "Real Estate · Plotted Land",
@@ -445,6 +450,7 @@ metaDescription:
   },
   {
     slug: "corart",
+    placeholder: true,
     name: "Corart",
     tagline: "Meta lead-gen that turned clicks into customers",
     category: "D2C · Custom Art",

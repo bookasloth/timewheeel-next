@@ -17,6 +17,7 @@ import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { dmServiceOptions } from "@/lib/digital-marketing2";
 import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const TITLE = "Digital Marketing Agency in Nagpur: SEO & Ads";
 const DESC =
@@ -99,6 +100,7 @@ export default function DigitalMarketing2Page() {
       <PmTestimonials />
       <SmmCollaborators />
       <PmFaq />
+      <RelatedServices current="/digital-marketing-company-in-nagpur" />
       <PmFinalCta />
       <div id="lead">
         <LeadForm

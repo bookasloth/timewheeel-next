@@ -13,7 +13,7 @@ Rule of the whole doc: **one page = one query = one intent.** If a page tries to
 | Decide | Example |
 |---|---|
 | **Target query** (exactly how people type it) | `digital marketing company in nagpur` |
-| **URL slug** = the query, hyphenated, no fluff | `/digital-marketing-nagpur` |
+| **URL slug** = the query, hyphenated, no fluff | `/seo-company-in-nagpur` |
 | **Search intent** | commercial / local, they want to *hire* |
 | **The one-sentence answer** AI will quote | "A digital marketing company in Nagpur handles SEO, social media, Google Ads and web design for local businesses." |
 
@@ -32,10 +32,10 @@ const description = "…150–160 chars, contains the query + Nagpur + a real ho
 export const metadata: Metadata = {
   title: "Digital Marketing Company in Nagpur | Timewheel", // query first, ≤60 chars
   description,
-  alternates: { canonical: `${site.url}/digital-marketing-nagpur` }, // ALWAYS set canonical
+  alternates: { canonical: `${site.url}/seo-company-in-nagpur` }, // ALWAYS set canonical
   openGraph: {
     type: "website",
-    url: `${site.url}/digital-marketing-nagpur`,
+    url: `${site.url}/seo-company-in-nagpur`,
     siteName: site.name,
     title: "Digital Marketing Company in Nagpur | Timewheel",
     description,

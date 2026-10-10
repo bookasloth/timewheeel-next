@@ -15,6 +15,7 @@ import { DmFinalCta } from "@/components/digital-marketing/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { dmServiceOptions } from "@/lib/digital-marketing";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const TITLE = "2nd Best Digital Marketing Company in Nagpur";
 const DESC =
@@ -127,6 +128,7 @@ export default function DigitalMarketingPage() {
           in lib/digital-marketing.ts, re-add <DmCaseStudies /> then. */}
       <DmTestimonials />
       <DmFaq />
+      <RelatedServices current="/digital-marketing" />
       <DmFinalCta />
       <div id="lead">
         <LeadForm

@@ -20,6 +20,7 @@ import { WdTestimonials } from "@/components/website-design/testimonials";
 import { WdFaq } from "@/components/website-design/faq";
 import { WdFinalCta } from "@/components/website-design/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const PATH = "/website-design-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -85,6 +86,7 @@ export default function WebsiteDesignPage() {
       <WdWhy />
       <WdTestimonials />
       <WdFaq />
+      <RelatedServices current="/website-design-company-in-nagpur" showResults={false} />
       <WdFinalCta />
       <div id="lead">
         <LeadForm
