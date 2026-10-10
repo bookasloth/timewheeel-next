@@ -14,6 +14,7 @@ import {
   Storefront,
   PresentationChart,
   BookOpenText,
+  GraduationCap,
 } from "@phosphor-icons/react/dist/ssr";
 import type { Icon } from "@phosphor-icons/react";
 import { featuredProducts } from "@/lib/products";
@@ -50,6 +51,7 @@ const serviceGroups: { title: string; icon: Icon; items: NavService[] }[] = [
 const resourceItems = [
   { name: "Case Studies", href: "/case-studies", icon: PresentationChart, accent: "#fe5100" },
   { name: "Blog", href: "/blog", icon: BookOpenText, accent: "#269cef" },
+  { name: "Academy", href: "/academy", icon: GraduationCap, accent: "#29a66f" },
 ];
 
 const navLinks = [

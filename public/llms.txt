@@ -54,6 +54,12 @@ Sitemap: https://timewheel.co.in/sitemap.xml
 - [Book a Demo](https://timewheel.co.in/book-a-demo): Book a live demo of Book A Sloth, Ticket Dino, websites, digital marketing, SEO or AI automation.
 - [Contact](https://timewheel.co.in/contact): Send a product idea, project brief or question; replies within one business day.
 
+## Academy
+- [Timewheel Digital Marketing Academy](https://timewheel.co.in/academy): Project-based digital marketing learning for college students, fresh graduates and beginners. Learn, Execute, Measure, Prove. Timewheel certificate on completion, help completing Google, Meta, HubSpot and LinkedIn online certifications, and internships in-house at Timewheel and its sister companies. First cohorts in planning; not yet open for enrollment.
+- [Programs](https://timewheel.co.in/academy/programs): SEO, Content and Social Media Marketing, and AI for Digital Marketing first; Performance Marketing and Analytics and Growth Marketing later.
+- [Practical projects](https://timewheel.co.in/academy/projects): Sample assignments (SEO audit, content cluster, 30-day content calendar, landing-page plan, AI workflow, campaign analysis). Sample briefs, not client work.
+- [Academy FAQ](https://timewheel.co.in/academy/faq): Enrollment status, fees, format, certificates, internships and data use.
+
 ## Blog
 - [Blog](https://timewheel.co.in/blog): Guides on digital marketing, SEO, AI search and building online.
 - [Top 10 Digital Marketing Companies in Nagpur (2026)](https://timewheel.co.in/blog/top-10-digital-marketing-companies-nagpur): A ranked, criteria-based guide to the leading digital marketing companies in Nagpur, with specialties, pricing context and how to choose.

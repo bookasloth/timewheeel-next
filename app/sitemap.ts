@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { getAllPosts, getAllTags, slugify } from "@/lib/blog";
 import { caseStudies } from "@/lib/case-studies";
 import { jobs } from "@/lib/jobs";
+import { programPath, programs } from "@/lib/academy";
 
 // Real "last changed" dates instead of new Date() on every crawl, which tells
 // crawlers everything changed every time and weakens the freshness signal.
@@ -11,6 +12,7 @@ const SITE_UPDATED = "2026-10-07"; // home, services, company pages
 const CASE_STUDIES_UPDATED = "2026-10-07";
 const PRODUCTS_UPDATED = "2026-10-07";
 const CAREERS_UPDATED = "2026-10-09";
+const ACADEMY_UPDATED = "2026-10-10";
 const LEGAL_UPDATED = "2026-06-01";
 
 type Entry = MetadataRoute.Sitemap[number];
@@ -46,6 +48,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/30-days-30-websites", SITE_UPDATED, 0.7, "weekly"),
     entry("/careers", CAREERS_UPDATED, 0.5, "weekly"),
     ...jobs.map((j) => entry(`/careers/${j.slug}`, CAREERS_UPDATED, 0.5, "weekly")),
+    entry("/academy", ACADEMY_UPDATED, 0.7, "monthly"),
+    entry("/academy/programs", ACADEMY_UPDATED, 0.6, "monthly"),
+    ...programs.map((p) => entry(programPath(p), ACADEMY_UPDATED, p.status === "upcoming" ? 0.4 : 0.6, "monthly")),
+    ...["/academy/projects", "/academy/about", "/academy/faq"].map((p) => entry(p, ACADEMY_UPDATED, 0.5, "monthly")),
     entry("/case-studies", CASE_STUDIES_UPDATED, 0.8, "weekly"),
     ...caseStudies.map((cs) => entry(cs.href, CASE_STUDIES_UPDATED, 0.7, "monthly")),
     entry("/blog", latestPost, 0.8, "weekly"),
