@@ -7,7 +7,6 @@
 // unverified -> the send fails and we log, never throwing.
 import type { Rendered } from "@/lib/email/layout";
 import {
-  academyInterest,
   challengeWelcome,
   enquiryReceived,
   growthUpsell,
@@ -51,10 +50,6 @@ export const sendEnquiryReceived = (o: { to: string; name: string; service: stri
 
 // SEO audit "email me my fixes".
 export const sendSeoReport = (o: Parameters<typeof seoReport>[0] & { to: string }) => sendEmail(o.to, seoReport(o));
-
-// Academy "you're on the list" confirmation.
-export const sendAcademyInterest = (o: Parameters<typeof academyInterest>[0] & { to: string }) =>
-  sendEmail(o.to, academyInterest(o));
 
 export const sendNewsletterWelcome =(to: string) => sendEmail(to, newsletterWelcome());
 
