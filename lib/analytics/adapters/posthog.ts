@@ -5,7 +5,7 @@
 // ponytail: no posthog-js dependency; the hosted array.js gives us init/capture/
 // identify/reset. Events fired before array.js finishes loading are dropped (not
 // queued) — acceptable, boot happens on first idle so real events land after.
-import type { Adapter, Props } from "./types";
+import type { Adapter, Props, Vital } from "./types";
 
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const HOST = (process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com").replace(/\/$/, "");
@@ -47,6 +47,10 @@ const posthog: Adapter = {
   page(props: Props = {}) {
     if (!ready || !window.posthog) return;
     window.posthog.capture("$pageview", props as Record<string, unknown>);
+  },
+  vital(m: Vital) {
+    if (!ready || !window.posthog) return;
+    window.posthog.capture("web_vital", { ...m });
   },
 };
 

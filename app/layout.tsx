@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { AnalyticsBridge } from "@/components/analytics-bridge";
 import { EngagementTracker } from "@/components/engagement-tracker";
+import { WebVitals } from "@/components/web-vitals";
 import { ConsentBanner } from "@/components/consent-banner";
 import "./globals.css";
 
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Analytics />
         <AnalyticsBridge />
         <EngagementTracker />
+        <WebVitals />
         <ConsentBanner />
       </body>
     </html>
