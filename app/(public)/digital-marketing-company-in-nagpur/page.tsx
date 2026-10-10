@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
-import { breadcrumbLd } from "@/lib/jsonld";
+import { breadcrumbLd, faqLd } from "@/lib/jsonld";
+import { pmFaq } from "@/lib/perf-marketing";
 import { DmCinematicHero } from "@/components/digital-marketing/cinematic-hero";
 import { PmTrust } from "@/components/perf-marketing/trust";
 import { PmIntro } from "@/components/perf-marketing/intro";
@@ -60,52 +61,8 @@ const jsonLd = {
   ],
 };
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Is digital marketing necessary for every business?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes, every business can benefit from digital marketing. Whether you're a small startup or a large corporation, digital marketing helps you reach a wider audience, increase brand visibility, and drive sales through online platforms. It's an essential part of any modern business strategy.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Why should I consider hiring a digital marketing agency?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Hiring a digital marketing agency allows businesses to leverage the expertise of professionals who specialize in various digital marketing techniques. It saves time and effort, ensures the use of the latest tools and strategies, and helps your business grow by reaching a larger audience.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Which locations do you serve with your business solutions?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We deliver the best solutions to your business needs in the city of Nagpur, Pune, Mumbai and the Entire State of Maharashtra and a lot of cities in India.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What services do you offer in digital marketing and website development?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We offer a wide range of services digital media planning, web design, and web development services including e-commerce and social media content marketing.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How can marketing techniques improve business growth?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Effective marketing techniques, such as search engine optimization (SEO), social media advertising, and email campaigns, help businesses connect with potential customers, drive traffic to their websites, and increase conversions. Using the right techniques can significantly impact business growth and success.",
-      },
-    },
-  ],
-};
+// FAQPage, built from the FAQ the page actually shows (PmFaq reads the same list).
+const faqJsonLd = faqLd(pmFaq);
 
 export default function DigitalMarketing2Page() {
   return (

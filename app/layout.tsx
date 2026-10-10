@@ -52,7 +52,8 @@ export const metadata: Metadata = {
     description:
       "One connected ecosystem for bookings, payments, events, and communities, built for ownership.",
   },
-  alternates: { canonical: siteUrl },
+  // No site-wide canonical: a page that inherited one would tell Google it's a
+  // duplicate of the homepage. Every indexable page sets its own.
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

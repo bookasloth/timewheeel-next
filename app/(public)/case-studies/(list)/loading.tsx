@@ -3,13 +3,18 @@ import { Skeleton, SkeletonGroup } from "@/components/ui/skeleton";
 // /case-studies reads ?page=, so it renders per request. This fallback is
 // prefetched, which makes clicking into the list instant while the grid
 // streams in. Mirrors page.tsx: header, then the 3-col card grid.
+//
+// Lives in the (list) route group so it never wraps /case-studies/[slug]:
+// above [slug] it put this heading in every case study's HTML and turned
+// unknown slugs into 200s instead of 404s. The heading is a div, not an h1,
+// because the fallback also sits in the list page's own server HTML.
 export default function Loading() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
       <p className="text-sm font-semibold uppercase tracking-wide text-brand-text">Case Studies</p>
-      <h1 className="mt-3 max-w-2xl text-4xl font-black tracking-tight md:text-5xl">
+      <div className="mt-3 max-w-2xl text-4xl font-black tracking-tight md:text-5xl">
         Work we designed, built and shipped
-      </h1>
+      </div>
       <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
         The challenges, decisions and results behind real builds by Timewheel.
       </p>
