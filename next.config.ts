@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
       { source: "/digital-marketing-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
       { source: "/ai-marketing-automation-company-in-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
       { source: "/creators", destination: "/coffee-and-toffee", permanent: true },
+      { source: "/digital-marketing", destination: "/digital-marketing-company-in-nagpur", permanent: true },
     ];
   },
   images: {

@@ -3,8 +3,6 @@ import { caseStudies, type CaseStudy } from "@/lib/case-studies";
 // Service landing pages, in the order they're cross-linked, and which case-study
 // tags count as proof for each. Drives the "Related services" / "Results"
 // blocks on service pages, the service links on case studies and the footer.
-// `/digital-marketing` is left out on purpose: it overlaps the digital
-// marketing page below, and internal links should back one page per topic.
 
 // `name` is the link text on service pages; `short` is for tight spots like the footer.
 export type ServicePage = { name: string; short: string; href: string; blurb: string; tags: string[] };
