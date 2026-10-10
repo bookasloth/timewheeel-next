@@ -36,7 +36,7 @@ export const bas = {
   nav: {
     links: [
       { label: "Work", href: "#product" },
-      { label: "Services", href: "/digital-marketing" },
+      { label: "Services", href: "/web-app-development-company-in-nagpur" },
       { label: "About", href: "/about" },
     ],
   },

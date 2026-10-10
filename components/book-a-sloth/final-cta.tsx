@@ -10,7 +10,7 @@ export function BasFinalCta() {
         <h2 className="sx-cta2-title">{bas.final.big}</h2>
         <p className="sx-cta2-body">{bas.final.body}</p>
         <div className="sx-cta2-actions">
-          <Link href="/digital-marketing" className="sx-cta2-btn sx-cta2-btn--primary">
+          <Link href="/web-app-development-company-in-nagpur" className="sx-cta2-btn sx-cta2-btn--primary">
             {bas.final.primary}
             <ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
           </Link>

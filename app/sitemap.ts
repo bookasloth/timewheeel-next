@@ -25,7 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const latestPost = posts[0]?.date || SITE_UPDATED;
 
   const services = [
-    "/digital-marketing",
     "/digital-marketing-company-in-nagpur",
     "/seo-company-in-nagpur",
     "/web-development-company-in-nagpur",

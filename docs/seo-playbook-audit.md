@@ -86,8 +86,9 @@ for this reason); the `/ai-automation-agency-in-nagpur` results are labelled
 
 **Update 2026-10-10:** `/digital-marketing-nagpur` and `/ai-marketing-automation-company-in-nagpur`
 were retired and now 301 to `/digital-marketing-company-in-nagpur`; `/creators` 301s to
-`/coffee-and-toffee`; `/ai-automation-agency-in-nagpur` was removed (404). Two pages still
-overlap: `/digital-marketing` and `/digital-marketing-company-in-nagpur`.
+`/coffee-and-toffee`; `/ai-automation-agency-in-nagpur` was removed (404). `/digital-marketing` now
+301s to `/digital-marketing-company-in-nagpur` too, so one page owns the query,
+and both "2nd Best" headlines are gone with the retired pages.
 
 They split ranking signals for one query. Recommendation: keep the navbar page,
 301 the other two to it (after checking in Search Console which one has

@@ -263,13 +263,6 @@
   --ring: #4ab765;
 }
 
-/* ── Performance Marketing (app/(public)/digital-marketing2) ──
-    Yellow-focused: yellow as the primary accent. */
-.dm2-page {
-  --brand: #ffcc1c;
-  --brand-text: #c9a000;
-  --ring: #ffcc1c;
-}
 
 /* ── Digital Marketing, AI-style layout (app/(public)/digital-marketing-company-in-nagpur) ──
     Black panels + bright yellow accent. */
