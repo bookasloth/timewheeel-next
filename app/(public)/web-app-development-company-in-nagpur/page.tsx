@@ -15,6 +15,7 @@ import { WaProcess } from "@/components/web-app-development/process";
 import { WaBenefits } from "@/components/web-app-development/benefits";
 import { WaFinalCta } from "@/components/web-app-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const PATH = "/web-app-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -64,6 +65,7 @@ export default function WebAppDevelopmentPage() {
       <WaTechStack />
       <WaProcess />
       <WaBenefits />
+      <RelatedServices current="/web-app-development-company-in-nagpur" />
       <WaFinalCta />
       <div id="lead">
         <LeadForm

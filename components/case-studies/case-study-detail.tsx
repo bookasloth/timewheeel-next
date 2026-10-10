@@ -6,7 +6,8 @@ import {
   ArrowUpRight,
   BadgeCheck,
 } from "lucide-react";
-import { caseStudies, type CaseStudy } from "@/lib/case-studies";
+import type { CaseStudy } from "@/lib/case-studies";
+import { realCaseStudies, servicesFor } from "@/lib/services";
 import { CaseStudyCard } from "@/components/case-studies/case-study-card";
 import { FaqAccordion } from "@/components/case-studies/faq-accordion";
 import { CountUpStat } from "@/components/case-studies/count-up";
@@ -93,7 +94,13 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
   const { hero, stats, sections, closing } = content;
   const accent = cs.accent;
   const { meta, quote, faq, liveUrl } = cs;
-  const related = caseStudies.filter((c) => c.slug !== cs.slug);
+  // Services this build is proof for, linked so the result passes weight to the
+  // page that sells it. "More case studies" shows real builds only, same
+  // services first.
+  const services = servicesFor(cs);
+  const shared = (c: CaseStudy) => servicesFor(c).some((s) => services.includes(s));
+  const others = realCaseStudies.filter((c) => c.slug !== cs.slug);
+  const related = [...others.filter(shared), ...others.filter((c) => !shared(c))];
 
   return (
     <article>
@@ -176,6 +183,23 @@ export function CaseStudyDetail({ cs }: { cs: CaseStudy }) {
             </a>
           ) : null}
         </div>
+
+        {services.length ? (
+          <p className="mt-6 text-sm text-muted-foreground">
+            Services behind this result:{" "}
+            {services.map((s, i) => (
+              <span key={s.href}>
+                {i ? ", " : ""}
+                <Link
+                  href={s.href}
+                  className="font-semibold text-foreground underline underline-offset-4 transition-colors hover:text-brand-text"
+                >
+                  {s.name}
+                </Link>
+              </span>
+            ))}
+          </p>
+        ) : null}
       </div>
 
       {/* body */}

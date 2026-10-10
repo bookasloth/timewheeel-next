@@ -21,6 +21,7 @@ import { SmmFaq } from "@/components/social-media-marketing/faq";
 import { SmmFinalCta } from "@/components/social-media-marketing/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const PATH = "/social-media-marketing-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -96,6 +97,7 @@ export default function SocialMediaMarketingPage() {
       <SmmCollaborators />
       <SmmSocialProof />
       <SmmFaq />
+      <RelatedServices current="/social-media-marketing-company-in-nagpur" />
       <SmmFinalCta />
       <SmmStickyCta />
       <LeadForm

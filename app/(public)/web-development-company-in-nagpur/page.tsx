@@ -21,6 +21,7 @@ import { WdFinalCta } from "@/components/web-development/final-cta";
 import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { Reveal } from "@/components/reveal";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const PATH = "/web-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -133,6 +134,7 @@ export default function WebDevelopmentPage() {
       <WdOwnership />
       <WdIndustries />
       <WdFaq />
+      <RelatedServices current="/web-development-company-in-nagpur" showResults={false} />
       <WdFinalCta />
       <LeadForm
         idPrefix="wd"

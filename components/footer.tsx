@@ -1,18 +1,15 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { products } from "@/lib/products";
+import { featuredProducts } from "@/lib/products";
+import { servicePages } from "@/lib/services";
 import { site } from "@/lib/site";
 
 // Site-wide footer.
 
-const services = [
-  { label: "SEO", href: "/seo-company-in-nagpur" },
-  { label: "Digital Marketing", href: "/digital-marketing" },
-  { label: "Web Development", href: "/web-development-company-in-nagpur" },
-  { label: "Web App Development", href: "/web-app-development-company-in-nagpur" },
-  { label: "Website Design", href: "/website-design-company-in-nagpur" },
-  { label: "Restaurant Marketing", href: "/restaurant-marketing" },
-];
+// Plain links in every page's HTML, so each of these is one click from anywhere.
+const services = servicePages.map((s) => ({ label: s.short, href: s.href }));
+
+const productLinks = featuredProducts.map((p) => ({ label: p.name, href: p.href }));
 
 const company = [
   { label: "About", href: "/about" },
@@ -21,6 +18,8 @@ const company = [
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blog" },
+  { label: "Careers", href: "/careers" },
+  { label: "30 Days, 30 Websites", href: "/30-days-30-websites" },
 ];
 
 const resources = [
@@ -72,6 +71,7 @@ export function Footer() {
             <FooterCol title="Company" links={company} />
 
             <div className="grid gap-10">
+              <FooterCol title="Products" links={productLinks} />
               <FooterCol title="Resources" links={resources} />
             </div>
           </div>

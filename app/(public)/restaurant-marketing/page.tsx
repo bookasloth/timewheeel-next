@@ -13,6 +13,7 @@ import { RmFaq } from "@/components/restaurant-marketing/faq";
 import { RmFinalCta } from "@/components/restaurant-marketing/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { RmContact } from "@/components/restaurant-marketing/contact";
+import { RelatedServices } from "@/components/shared/related-services";
 
 const TITLE = "Digital Marketing Agency for Restaurants";
 const DESC =
@@ -107,6 +108,7 @@ export default function RestaurantMarketingPage() {
       <RmServices />
       <RmTestimonials />
       <RmFaq />
+      <RelatedServices current="/restaurant-marketing" />
       <RmFinalCta />
       <RmContact />
       <GrowthBlueprintModal service="Restaurant Marketing" />

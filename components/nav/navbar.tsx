@@ -85,6 +85,12 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  // Close the services menu after navigating (it can be opened by click now).
+  const [menuPath, setMenuPath] = useState(pathname);
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setOpenMenu(null);
+  }
   const light = pathname === "/" && !scrolled && !mobileOpen;
   const linkBase = "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors";
   const linkTone = light ? "text-white/85 hover:text-white" : "text-foreground/90 hover:text-foreground";
@@ -145,7 +151,12 @@ export function Navbar() {
             onMouseEnter={openServices}
             onMouseLeave={scheduleClose}
           >
-            <button className={cn(linkBase, linkTone)}>
+            <button
+              className={cn(linkBase, linkTone)}
+              aria-expanded={openMenu === "services"}
+              aria-controls="nav-services-menu"
+              onClick={() => setOpenMenu((m) => (m === "services" ? null : "services"))}
+            >
               What We Offer
               <ChevronDown
                 className={cn(
@@ -154,12 +165,18 @@ export function Navbar() {
                 )}
               />
             </button>
-            {openMenu === "services" && (
-              <div
-                className="fixed left-1/2 top-16 w-[min(1060px,92vw)] -translate-x-1/2 pt-3"
-                onMouseEnter={openServices}
-                onMouseLeave={scheduleClose}
-              >
+            {/* Always in the HTML, hidden until opened: crawlers don't hover, so
+                a panel that only mounted on hover hid every service and product
+                link from search engines. */}
+            <div
+              id="nav-services-menu"
+              className={cn(
+                "fixed left-1/2 top-16 w-[min(1060px,92vw)] -translate-x-1/2 pt-3",
+                openMenu !== "services" && "hidden",
+              )}
+              onMouseEnter={openServices}
+              onMouseLeave={scheduleClose}
+            >
                 <div className="grid grid-cols-[1.55fr_0.85fr] overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
                   {/* left: headline + two service columns */}
                   <div className="p-6">
@@ -253,8 +270,7 @@ export function Navbar() {
                     </Link>
                   </div>
                 </div>
-              </div>
-            )}
+            </div>
           </div>
 
           <Link
