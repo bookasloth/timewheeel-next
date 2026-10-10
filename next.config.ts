@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
       { source: "/performance-marketing-company-in-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
       // Free-website offer consolidated onto the 30-days challenge page.
       { source: "/free-website-nagpur", destination: "/30-days-30-websites", permanent: true },
+      // Retired pages, sent to their closest live equivalent (2026-10-10).
+      // /ai-automation-agency-in-nagpur has none, so it 404s instead.
+      { source: "/digital-marketing-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
+      { source: "/ai-marketing-automation-company-in-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
+      { source: "/creators", destination: "/coffee-and-toffee", permanent: true },
     ];
   },
   images: {

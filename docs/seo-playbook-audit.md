@@ -84,6 +84,11 @@ for this reason); the `/ai-automation-agency-in-nagpur` results are labelled
 | `/digital-marketing-nagpur` | Digital Marketing Company in Nagpur | (sitemap only) |
 | `/digital-marketing` | 2nd Best Digital Marketing Company in Nagpur | footer |
 
+**Update 2026-10-10:** `/digital-marketing-nagpur` and `/ai-marketing-automation-company-in-nagpur`
+were retired and now 301 to `/digital-marketing-company-in-nagpur`; `/creators` 301s to
+`/coffee-and-toffee`; `/ai-automation-agency-in-nagpur` was removed (404). Two pages still
+overlap: `/digital-marketing` and `/digital-marketing-company-in-nagpur`.
+
 They split ranking signals for one query. Recommendation: keep the navbar page,
 301 the other two to it (after checking in Search Console which one has
 impressions), and drop them from the sitemap. If one should stay, give it a

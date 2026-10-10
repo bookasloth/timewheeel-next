@@ -7,7 +7,6 @@ Contact: hello@timewheel.co.in
 Sitemap: https://timewheel.co.in/sitemap.xml
 
 ## Services
-- [Digital Marketing Company in Nagpur](https://timewheel.co.in/digital-marketing-nagpur): SEO, social media, Google Ads, content and websites for Nagpur businesses.
 - [Digital Marketing Company in Nagpur (paid ads focus)](https://timewheel.co.in/digital-marketing-company-in-nagpur): ROI-focused paid ads, SEO, social and content.
 - [Digital Marketing](https://timewheel.co.in/digital-marketing): Full-service digital marketing.
 - [SEO Company in Nagpur](https://timewheel.co.in/seo-company-in-nagpur): Local SEO, technical SEO, content and AI-search (AEO) visibility, with a free instant audit.
@@ -16,8 +15,6 @@ Sitemap: https://timewheel.co.in/sitemap.xml
 - [Web App Development Company in Nagpur](https://timewheel.co.in/web-app-development-company-in-nagpur): Custom web applications.
 - [Shopify Development Company in Nagpur](https://timewheel.co.in/shopify-development-company-in-nagpur): Shopify store design, build and optimisation.
 - [Social Media Marketing Company in Nagpur](https://timewheel.co.in/social-media-marketing-company-in-nagpur): Social media strategy, content and management.
-- [AI Marketing Automation Company in Nagpur](https://timewheel.co.in/ai-marketing-automation-company-in-nagpur): AI-driven marketing automation.
-- [AI Automation Agency in Nagpur](https://timewheel.co.in/ai-automation-agency-in-nagpur): AI workflow and business-process automation.
 - [Restaurant Marketing](https://timewheel.co.in/restaurant-marketing): Marketing for restaurants and cafes.
 - [30 Days, 30 Websites](https://timewheel.co.in/30-days-30-websites): A challenge to build 30 websites in 30 days on a pay-what-you-want basis, including ₹0.
 
@@ -26,7 +23,6 @@ Sitemap: https://timewheel.co.in/sitemap.xml
 - [Alluminaty](https://timewheel.co.in/products/alluminaty): A social network for alumni that an institution owns under its own brand: a verified alumni directory, mentorship, jobs and referrals, chapters, events and reunions, and scholarship fundraising.
 - [Ticket Dino](https://timewheel.co.in/products/ticket-dino): An event ticketing and management platform for organizers, covering ticket sales, attendee management and analytics. Launching soon.
 - [Coffee & Toffee](https://timewheel.co.in/coffee-and-toffee): A creator monetization platform: accept coffees, toffees, memberships and shop sales from one page, with instant payouts and full ownership of the supporter list.
-- [Coffee & Toffee for Creators](https://timewheel.co.in/creators): A self-hostable, creator-first support platform with profiles, updates, supporter walls and instant payouts.
 
 ## Case Studies
 - [All case studies](https://timewheel.co.in/case-studies): How Timewheel designs, builds and ships websites, products and marketing, with the challenges and decisions behind each one.

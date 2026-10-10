@@ -27,15 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const services = [
     "/digital-marketing",
     "/digital-marketing-company-in-nagpur",
-    "/digital-marketing-nagpur",
     "/seo-company-in-nagpur",
     "/web-development-company-in-nagpur",
     "/website-design-company-in-nagpur",
     "/web-app-development-company-in-nagpur",
     "/shopify-development-company-in-nagpur",
     "/social-media-marketing-company-in-nagpur",
-    "/ai-marketing-automation-company-in-nagpur",
-    "/ai-automation-agency-in-nagpur",
     "/restaurant-marketing",
   ];
 
@@ -59,7 +56,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/products/alluminaty", PRODUCTS_UPDATED, 0.7, "monthly"),
     entry("/products/ticket-dino", PRODUCTS_UPDATED, 0.5, "monthly"),
     entry("/coffee-and-toffee", PRODUCTS_UPDATED, 0.7, "monthly"),
-    entry("/creators", PRODUCTS_UPDATED, 0.6, "monthly"),
     ...["/legal/privacy", "/legal/terms", "/legal/cookies", "/legal/refund"].map((p) =>
       entry(p, LEGAL_UPDATED, 0.2, "yearly"),
     ),
