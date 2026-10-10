@@ -2,7 +2,7 @@
 // (no I/O), so they can be previewed or tested standalone. Senders live in
 // lib/resend-email.ts (lead-facing, Resend) and app/api/lead (team, SMTP).
 import { site } from "@/lib/site";
-import { COMPANY, renderEmail, type Block, type Rendered, type Row } from "@/lib/email/layout";
+import { COMPANY, renderEmail, renderNote, type Block, type Rendered, type Row } from "@/lib/email/layout";
 
 const WA = `https://wa.me/${site.contact.whatsappDigits}`;
 const first = (name: string) => (name || "").trim().split(/\s+/)[0] || "there";
@@ -173,35 +173,27 @@ export function newsletterWelcome(): Rendered {
   });
 }
 
-// Academy interest registration (/api/academy/interest). Nothing is open for
-// payment yet, so the email promises only what's true: details come first.
+// Academy interest registration (/api/academy/interest). Written as a plain
+// personal note (renderNote) so it lands in Primary, not Promotions: students
+// need to see it. Nothing is open for payment yet, so it promises only what's
+// true: details come first.
 export function academyInterest(o: { name: string; program: string; programUrl: string; enrolling: boolean }): Rendered {
-  return renderEmail({
-    subject: `You're on the list: ${o.program}`,
-    preheader: "Thanks for registering your interest in Timewheel Digital Marketing Academy.",
-    hero: { tone: "brand", icon: "check", title: "You're on the list", subtitle: o.program },
-    title: `Hi ${first(o.name)},`,
-    blocks: [
-      {
-        type: "p",
-        text: o.enrolling
-          ? `Thanks for applying to ${o.program} at Timewheel Digital Marketing Academy. We'll be in touch by email about next steps.`
-          : `Thanks for registering your interest in ${o.program} at Timewheel Digital Marketing Academy. The program isn't open for enrollment yet.`,
-      },
-      {
-        type: "steps",
-        title: "What happens next",
-        items: [
-          "We email you when cohort details are ready: dates, format and fees.",
-          "You decide then whether to join. Registering commits you to nothing.",
-          "Until then, the program page has the full curriculum and sample projects.",
-        ],
-      },
-      { type: "p", text: "Every program includes a Timewheel certificate, help completing Google, Meta, HubSpot and LinkedIn certifications, and internships at Timewheel and our sister companies." },
-      { type: "button", href: o.programUrl, label: "View the program" },
-      { type: "p", text: "We only use your email for Academy updates. Reply \"remove me\" any time and we'll delete your details.", muted: true },
+  return renderNote({
+    subject: `Your interest in ${o.program}`,
+    greeting: `Hi ${first(o.name)},`,
+    lines: [
+      o.enrolling
+        ? `Thanks for applying to ${o.program} at Timewheel Digital Marketing Academy. We've got your details and will email you about next steps.`
+        : `Thanks for registering your interest in ${o.program} at Timewheel Digital Marketing Academy. We've got your details.`,
+      ...(o.enrolling
+        ? []
+        : ["The program isn't open for enrollment yet. When the first cohort is ready, we'll email you the dates, format and fees, and you can decide then. Registering doesn't commit you to anything."]),
+      "Every program includes a Timewheel certificate, help completing Google, Meta, HubSpot and LinkedIn certifications, and internships at Timewheel and our sister companies.",
+      `The full curriculum and sample projects are here: [${o.programUrl.replace(/^https?:\/\//, "")}](${o.programUrl})`,
+      "If you have a question, just reply to this email. A person reads every reply.",
     ],
-    footnote: "You're receiving this because you registered interest at timewheel.co.in/academy.",
+    signature: ["Thanks,", "Timewheel Digital Marketing Academy", "Timewheel Internet Private Limited, Nagpur"],
+    footnote: "You're getting this because you registered on timewheel.co.in/academy. We only use your email for Academy updates; reply \"remove me\" and we'll delete your details.",
   });
 }
 

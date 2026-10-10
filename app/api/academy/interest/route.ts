@@ -3,12 +3,12 @@ import { getProgram, programPath, STAGES, type Stage } from "@/lib/academy";
 import { saveAcademyInterest } from "@/lib/academy-store";
 import type { Attribution } from "@/lib/attribution";
 import { resolveAttribution, summarizeCampaign } from "@/lib/attribution-server";
-import { teamAcademyInterest } from "@/lib/email/templates";
+import { academyInterest, teamAcademyInterest } from "@/lib/email/templates";
 import { checkHoneypot } from "@/lib/honeypot";
 import { clientIp, isRateLimited } from "@/lib/rate-limit";
-import { sendAcademyInterest } from "@/lib/resend-email";
+import { sendEmail } from "@/lib/resend-email";
 import { site } from "@/lib/site";
-import { sendTeamMail } from "@/lib/smtp";
+import { sendSmtp, sendTeamMail } from "@/lib/smtp";
 
 // Academy interest registration. Deliberately separate from /api/lead: students
 // aren't business leads, so they get their own table (one row per email per
@@ -108,14 +108,18 @@ export async function POST(request: Request) {
       }),
       `${name} <${email}>`,
     );
-  const student = () =>
-    sendAcademyInterest({
-      to: email,
+  // The confirmation is a personal note, sent from the team mailbox so Gmail
+  // files it under Primary (via Resend it landed in Promotions). Resend is
+  // the fallback when SMTP is down.
+  const student = async () => {
+    const mail = academyInterest({
       name,
       program: program.title,
       programUrl: `${site.url}${programPath(program)}`,
       enrolling: program.status === "enrolling",
     });
+    return (await sendSmtp(email, mail, { fromName: "Timewheel Academy" })) || sendEmail(email, mail);
+  };
 
   if (result === "saved") {
     after(() => Promise.allSettled([team(), student()]));

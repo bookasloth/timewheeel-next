@@ -232,3 +232,32 @@ export function renderEmail(e: Email): Rendered {
 
   return { subject: e.subject, html, text };
 }
+
+// ── Personal note ────────────────────────────────────────────────────────────
+// A plain email that reads like one person writing to another: no header
+// graphic, banner, button or colour stripe, just paragraphs and plain links.
+// Gmail tends to file heavily designed mail under Promotions; a note like
+// this is far more likely to land in Primary. Use it for one-to-one replies
+// (confirmations someone asked for), not newsletters.
+
+// One paragraph: plain text, with optional [label](url) links.
+export type NoteLine = string;
+
+const linkify = (s: string) =>
+  esc(s).replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_, label, href) => `<a href="${href}" style="color:#1a56b8">${label}</a>`);
+const unlink = (s: string) => s.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, "$1: $2");
+
+export function renderNote(n: { subject: string; greeting: string; lines: NoteLine[]; signature: string[]; footnote?: string }): Rendered {
+  const p = (s: string, extra = "") => `<p style="margin:0 0 16px${extra}">${s}</p>`;
+  const html = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(n.subject)}</title></head>
+<body style="margin:0;padding:16px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#222222">
+<div style="max-width:560px">
+${p(esc(n.greeting))}
+${n.lines.map((l) => p(linkify(l))).join("\n")}
+${p(n.signature.map(esc).join("<br>"))}
+${n.footnote ? p(esc(n.footnote), ";font-size:12px;color:#777777") : ""}
+</div>
+</body></html>`;
+  const text = [n.greeting, ...n.lines.map(unlink), n.signature.join("\n"), ...(n.footnote ? [n.footnote] : [])].join("\n\n");
+  return { subject: n.subject, html, text };
+}
