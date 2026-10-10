@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { ValueProps } from "@/components/home/value-props";
 import { EcosystemBento } from "@/components/home/ecosystem-bento";
@@ -9,6 +10,9 @@ import { FinalCta } from "@/components/home/final-cta";
 import { JsonLd } from "@/components/json-ld";
 import { homeLd, faqLd } from "@/lib/jsonld";
 import { homeFaq } from "@/lib/home-faq";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = { alternates: { canonical: site.url } };
 
 export default function Home() {
   return (

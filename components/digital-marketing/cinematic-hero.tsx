@@ -122,15 +122,15 @@ export function DmCinematicHero() {
               on this cream ground the primary is 1.33:1. 4.33:1 clears the
               3:1 large-text rule at 77px. No chip, no background on the type. */}
           <h1 className="dm-hero-h1 mt-6 max-w-[15ch] font-extrabold tracking-[-0.03em] text-[#111111]">
-            <span className="text-brand-text">Digital Marketing</span>
+            <span className="text-brand-text">Digital Marketing</span>{" "}
             <span className="block">
               Company in Nagpur
             </span>
           </h1>
 
           <p className="mt-5 max-w-[560px] text-[17px] leading-relaxed text-[#111111]/70 md:text-[18px]">
-            One connected growth system: SEO, paid ads, social and content working togethet to 
-            bring your business more enquires and more sales, all managed under one roof in 
+            One connected growth system: SEO, paid ads, social and content working together to 
+            bring your business more enquiries and more sales, all managed under one roof in 
             Nagpur.
           </p>
 

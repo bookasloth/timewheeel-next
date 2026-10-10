@@ -26,7 +26,10 @@ export async function generateMetadata({
   searchParams,
 }: Props): Promise<Metadata> {
   const { page } = await searchParams;
-  const n = Number(page);
+  // Clamp like the page does, so ?page=99 (which shows the last page) points
+  // at the real last page instead of minting a duplicate URL.
+  const totalPages = Math.max(1, Math.ceil(caseStudies.length / PER_PAGE));
+  const n = Math.min(Number(page), totalPages);
   if (Number.isInteger(n) && n > 1) {
     return {
       ...baseMetadata,

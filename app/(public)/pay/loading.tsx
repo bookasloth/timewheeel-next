@@ -2,7 +2,8 @@ import { Skeleton, SkeletonGroup } from "@/components/ui/skeleton";
 
 // /pay reads ?amount= and ?for=, so it renders per request. The heading is
 // static and shows straight away; only the form slot is a placeholder, laid
-// out like PayForm (amount, purpose, name + email, phone, button).
+// out like PayForm (amount, purpose, name + email, phone, button). The heading
+// is a div because this fallback also sits in the page's own server HTML.
 export default function Loading() {
   const field = (span = false) => (
     <div className={span ? "sm:col-span-2" : undefined}>
@@ -13,7 +14,7 @@ export default function Loading() {
   return (
     <section className="mx-auto max-w-xl px-6 py-16 md:py-24">
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">Payments</p>
-      <h1 className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">Make a payment</h1>
+      <div className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">Make a payment</div>
       <div className="skeleton-delay">
         <Skeleton className="mt-3 h-4 w-full" />
         <Skeleton className="mt-2 h-4 w-4/5" />
