@@ -13,7 +13,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const [m, sp] = await Promise.all([requireMember("/members/search"), searchParams]);
   const q = (sp.q ?? "").trim().slice(0, 60);
   const [results, bookmarkIds] = await Promise.all([searchAll(q), listBookmarkIds()]);
-  const count = results.posts.length + results.downloads.length + results.people.length;
+  const count = results.posts.length + results.downloads.length;
 
   return (
     <div className="mx-auto max-w-5xl space-y-8">
@@ -25,7 +25,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             name="q"
             defaultValue={q}
             autoFocus
-            placeholder="Search resources, posts and people"
+            placeholder="Search resources and posts"
             className="h-12 w-full rounded-lg border border-border bg-surface pl-12 pr-4 text-[15px] outline-none transition-colors hover:border-brand/40 focus:border-brand focus:ring-4 focus:ring-brand/15"
           />
         </form>
@@ -68,24 +68,6 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         </section>
       )}
 
-      {results.people.length > 0 && (
-        <section>
-          <p className="mb-3 font-heading text-lg font-bold">People</p>
-          <ul className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-3">
-            {results.people.map((p) => (
-              <li key={p.id}>
-                <Link href={`/members/people/${p.id}`} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-3 transition-colors hover:border-brand/50">
-                  <Avatar name={p.full_name} src={p.avatar_url} size={38} />
-                  <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold">{p.full_name || "Member"}</span>
-                    <span className="block truncate text-xs text-muted-foreground">{p.headline || p.business_name || p.city || "Member"}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
     </div>
   );
 }

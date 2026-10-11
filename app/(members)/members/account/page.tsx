@@ -29,15 +29,12 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-brand-text">Your account</p>
         <h1 className="mt-2 font-heading font-extrabold tracking-tight">Profile &amp; account</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Member since {formatDate(m.joinedAt)} ·{" "}
-          <Link href={`/members/people/${m.id}`} className="font-semibold text-brand-text hover:underline">
-            View your profile
-          </Link>
+          Member since {formatDate(m.joinedAt)}
         </p>
       </header>
       {sp.updated === "password" && <Alert tone="good">Your password was updated.</Alert>}
 
-      <Panel id="profile" title="Your profile" intro="Shown to other signed-in members on your profile and next to your posts.">
+      <Panel id="profile" title="Your profile" intro="Shown to other signed-in members next to your posts.">
         <ProfileForm values={{ name: m.name, ...m.profile }} />
       </Panel>
 

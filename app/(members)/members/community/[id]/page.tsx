@@ -54,10 +54,10 @@ export default async function PostPage({ params }: Props) {
         <div className="mt-4 flex items-center gap-3">
           <Avatar name={post.author?.full_name} src={post.author?.avatar_url} size={34} />
           <p className="text-sm">
-            <Link href={`/members/people/${post.author_id}`} className="inline-flex items-center gap-1 font-semibold hover:underline">
+            <span className="inline-flex items-center gap-1 font-semibold">
               {post.author?.full_name || "Member"}
               <CrownMark badge={badges[post.author_id]} />
-            </Link>
+            </span>
             <span className="text-muted-foreground">
               {" "}
               · {timeAgo(post.created_at)}
@@ -113,10 +113,10 @@ export default async function PostPage({ params }: Props) {
                 <div className="flex items-center gap-3">
                   <Avatar name={r.author?.full_name} src={r.author?.avatar_url} size={30} />
                   <p className="min-w-0 flex-1 text-sm">
-                    <Link href={`/members/people/${r.author_id}`} className="inline-flex items-center gap-1 font-semibold hover:underline">
+                    <span className="inline-flex items-center gap-1 font-semibold">
                       {r.author?.full_name || "Member"}
                       <CrownMark badge={badges[r.author_id]} />
-                    </Link>
+                    </span>
                     {r.author_id === post.author_id && <span className="ml-2 text-xs font-semibold text-brand-text">Author</span>}
                     <span className="text-muted-foreground"> · {timeAgo(r.created_at)}</span>
                   </p>

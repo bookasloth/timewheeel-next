@@ -189,7 +189,7 @@ export function MemberAppShell({
               <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 name="q"
-                placeholder="Search resources, posts, people..."
+                placeholder="Search resources and posts..."
                 className="h-10 w-full rounded-lg border border-border bg-background/70 pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/80 hover:border-brand/40 focus:border-brand focus:ring-4 focus:ring-brand/15"
               />
             </label>
