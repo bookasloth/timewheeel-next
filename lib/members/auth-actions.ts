@@ -1,5 +1,6 @@
 "use server";
 
+import { randomBytes } from "node:crypto";
 import { after } from "next/server";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
@@ -9,6 +10,7 @@ import { MEMBER_HINT_COOKIE, safeNext } from "@/lib/members/config";
 import { isRateLimited } from "@/lib/rate-limit";
 import { checkHoneypot } from "@/lib/honeypot";
 import { syncNewsletterContact } from "@/lib/resend-contacts";
+import { GOOGLE_STATE_COOKIE, GOOGLE_STATE_PATH, googleAuthUrl, googleConfigured } from "@/lib/members/google";
 
 // Sign-up, login, Google, password reset. Each one runs on the server with the
 // member's cookies, so session tokens never touch page JavaScript.
@@ -128,6 +130,22 @@ export async function signInWithGoogle(fd: FormData) {
   const next = safeNext(fd.get("next"));
   if (!membersConfigured()) redirect(`/login?error=unavailable`);
   const origin = await requestOrigin();
+
+  // Preferred: Google returns to our own domain (lib/members/google.ts), so the
+  // account picker says timewheel.co.in instead of the Supabase project URL.
+  if (googleConfigured()) {
+    const state = randomBytes(24).toString("base64url");
+    (await cookies()).set(GOOGLE_STATE_COOKIE, JSON.stringify({ state, next }), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: GOOGLE_STATE_PATH,
+      maxAge: 600,
+    });
+    redirect(googleAuthUrl(origin, state));
+  }
+
+  // Fallback: Supabase's hosted Google flow.
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",

@@ -44,6 +44,16 @@ Google Cloud console, project `timewheel-511216`:
 
 Supabase > Authentication > Sign In / Providers > **Google**: enable, paste both, save.
 
+**Show "timewheel.co.in", not the Supabase URL, on Google's screen.** Add
+`https://timewheel.co.in/auth/google/callback` and
+`http://localhost:3000/auth/google/callback` to the client's Authorized redirect URIs
+(keep the Supabase one too), and set `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` on
+Vercel. The button then sends Google back to our own domain and the site signs the
+member in to Supabase with Google's ID token (`lib/members/google.ts`). Without those
+two variables it falls back to Supabase's hosted flow. To show the **Timewheel** name
+and logo instead of the domain, submit **Branding > Verify branding** in Google
+(needs `timewheel.co.in` verified in Google Search Console).
+
 ### 3. Supabase Auth settings
 
 Authentication > **URL Configuration**:
