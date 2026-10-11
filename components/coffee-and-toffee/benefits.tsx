@@ -1,8 +1,8 @@
-import { Banknote, Download, Headset, HeartHandshake } from "lucide-react";
+import { Coffee, Landmark, Repeat, Wallet } from "lucide-react";
 import { type CfData } from "@/lib/coffee-and-toffee";
 import { Reveal } from "@/components/reveal";
 
-const icons = [HeartHandshake, Download, Headset, Banknote];
+const icons = [Coffee, Repeat, Landmark, Wallet];
 
 export function CfBenefits({ data }: { data: CfData }) {
   return (

@@ -23,7 +23,7 @@ const CHIPS: Chip[] = [
   {
     initials: "AK",
     text: <>Aisha bought 3 coffees ☕</>,
-    pos: { top: "18%", ["--chiplr" as string]: "6%" },
+    pos: { top: "5%", ["--chiplr" as string]: "6%" },
     float: "7.5s",
     tilt: "-4deg",
     delay: 0.5,
@@ -31,7 +31,7 @@ const CHIPS: Chip[] = [
   },
   {
     initials: "RM",
-    text: <>New member · ₹499/mo 🎉</>,
+    text: <>New member · ₹199/mo 🎉</>,
     pos: { top: "30%", ["--chippr" as string]: "5%" },
     float: "8.5s",
     tilt: "5deg",
@@ -40,7 +40,7 @@ const CHIPS: Chip[] = [
   },
   {
     initials: "SP",
-    text: <>“Love your work!” — ₹500 tip</>,
+    text: <>“Love your work!” · ₹100 tip</>,
     pos: { bottom: "20%", ["--chiplr" as string]: "9%" },
     float: "9s",
     tilt: "3deg",
@@ -49,7 +49,7 @@ const CHIPS: Chip[] = [
   },
   {
     initials: "JD",
-    text: <>Paid out instantly ⚡</>,
+    text: <>0% platform fee on tips ⚡</>,
     pos: { bottom: "26%", ["--chippr" as string]: "8%" },
     float: "7s",
     tilt: "-5deg",
@@ -105,7 +105,7 @@ export function CfHero({ data }: { data: CfData }) {
       {CHIPS.map((c, i) => (
         <motion.div
           key={i}
-          className="cf-chip hidden md:inline-flex"
+          className="cf-chip hidden min-[1400px]:inline-flex"
           style={{
             ...c.pos,
             ["--cf-float" as string]: c.float,
@@ -125,16 +125,16 @@ export function CfHero({ data }: { data: CfData }) {
       {/* Placeholder illustrations + doodles — swap the files in
           /public/coffee/*.svg with better art (same names = no code change). */}
       <img src="/coffee/illus-cup.svg" alt="" aria-hidden className="cf-deco cf-deco-cup hidden md:block" />
-      <img src="/coffee/illus-toffee.svg" alt="" aria-hidden className="cf-deco cf-deco-toffee hidden md:block" />
+      <img src="/coffee/illus-toffee.svg" alt="" aria-hidden className="cf-deco cf-deco-toffee hidden min-[1400px]:block" />
       <img src="/coffee/doodle-sparkle.svg" alt="" aria-hidden className="cf-deco cf-deco-sparkle" />
-      <img src="/coffee/doodle-arrow.svg" alt="" aria-hidden className="cf-deco cf-deco-arrow hidden md:block" />
+      <img src="/coffee/doodle-arrow.svg" alt="" aria-hidden className="cf-deco cf-deco-arrow hidden min-[1400px]:block" />
 
       <div className="cf-container cf-hero-centered">
         <div className="cf-hero-copy">
   
 
           <h1 className="cf-hero-title">
-            <Words text={data.hero.titleLine1} />
+            <Words text={data.hero.titleLine1} />{" "}
             <br />
             <Words text={data.hero.titleAccent} className="cf-hero-accent" start={0.24} />
           </h1>

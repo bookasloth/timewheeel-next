@@ -936,83 +936,6 @@
   color: var(--cf-ink);
 }
 
-/* ── testimonials ── */
-
-.cf-testimonials {
-  background: var(--cf-berry-soft);
-  border-block: var(--cf-stroke) solid var(--cf-sticker);
-}
-
-.cf-testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.cf-testimonial {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--cf-radius-card);
-  padding: 32px;
-}
-
-.cf-testimonial-quote {
-  color: var(--cf-caramel-deep);
-}
-
-.cf-testimonial-text {
-  flex: 1;
-  margin-top: 14px;
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--cf-ink);
-}
-
-.cf-testimonial-person {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.cf-testimonial-av {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  flex: none;
-  border: var(--cf-stroke) solid var(--cf-sticker);
-  border-radius: var(--cf-pill);
-  background: var(--cf-toffee-yellow);
-  color: var(--cf-ink);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.cf-testimonials-grid > :nth-child(4n + 2) .cf-testimonial-av {
-  background: var(--cf-matcha);
-}
-
-.cf-testimonials-grid > :nth-child(4n + 3) .cf-testimonial-av {
-  background: var(--cf-sky);
-  color: var(--cf-cream);
-}
-
-.cf-testimonial-person strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--cf-ink);
-}
-
-.cf-testimonial-person em {
-  display: block;
-  font-size: 13px;
-  font-style: normal;
-  color: var(--cf-muted);
-}
-
 /* ── faq ── */
 
 .cf-faq-list {
@@ -1519,6 +1442,141 @@
   transform: rotate(-8deg);
 }
 
+/* ── comparison table (vs Buy Me a Coffee / Ko-fi) ── */
+
+.cf-compare-wrap {
+  padding: 0;
+  overflow-x: auto;
+}
+
+.cf-compare-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.cf-compare-table th,
+.cf-compare-table td {
+  padding: 16px 20px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--cf-oat-deep);
+}
+
+.cf-compare-table thead th {
+  font-family: var(--cf-font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--cf-oat);
+  border-bottom: var(--cf-stroke) solid var(--cf-sticker);
+}
+
+/* Our column gets the toffee highlighter so the eye lands on it first. */
+.cf-compare-table thead th:nth-child(2),
+.cf-compare-table td:nth-child(2) {
+  background: var(--cf-wash);
+  font-weight: 600;
+}
+
+.cf-compare-table tbody th {
+  font-weight: 600;
+  color: var(--cf-ink);
+}
+
+.cf-compare-table td {
+  color: var(--cf-muted);
+}
+
+.cf-compare-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.cf-compare-note {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--cf-faint);
+  max-width: 760px;
+}
+
+/* ── licence upsell ── */
+
+.cf-licence {
+  background: var(--cf-oat);
+  border-block: var(--cf-stroke) solid var(--cf-sticker);
+}
+
+.cf-licence-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.cf-licence-card,
+.cf-licence-price {
+  padding: 32px;
+  border-radius: var(--cf-radius-card);
+}
+
+.cf-licence-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.cf-licence-list li {
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--cf-ink);
+}
+
+.cf-licence-list svg {
+  flex: none;
+  margin-top: 4px;
+  color: var(--cf-caramel-deep);
+}
+
+.cf-licence-price {
+  background: var(--cf-toffee-yellow);
+}
+
+.cf-licence-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding-inline: 14px;
+  border: var(--cf-stroke) solid var(--cf-sticker);
+  border-radius: var(--cf-pill);
+  background: var(--cf-surface);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cf-licence-amount {
+  margin-top: 16px;
+  font-family: var(--cf-font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cf-licence-price .cf-card-desc {
+  color: var(--cf-ink);
+  margin-bottom: 22px;
+}
+
+.cf-licence-fit {
+  margin-top: 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--cf-ink);
+}
+
 /* ── responsive ── */
 
 @media (max-width: 1024px) {
@@ -1540,11 +1598,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .cf-testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cf-final-inner {
+  .cf-final-inner,
+  .cf-licence-grid {
     grid-template-columns: 1fr;
   }
 

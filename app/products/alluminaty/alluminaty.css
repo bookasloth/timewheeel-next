@@ -2873,3 +2873,11 @@ button.az-faq-q {
 .az-cta::before {
   display: none;
 }
+/* Inline text link on light sections (hero, live-deployment block). */
+.az-text-link {
+  align-self: center;
+  font-weight: 600;
+  color: var(--az-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

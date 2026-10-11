@@ -10,7 +10,7 @@ import { programPath, programs } from "@/lib/academy";
 // Bump the matching constant when a group of pages is meaningfully edited.
 const SITE_UPDATED = "2026-10-07"; // home, services, company pages
 const CASE_STUDIES_UPDATED = "2026-10-07";
-const PRODUCTS_UPDATED = "2026-10-07";
+const PRODUCTS_UPDATED = "2026-10-11";
 const CAREERS_UPDATED = "2026-10-09";
 const ACADEMY_UPDATED = "2026-10-10";
 const LEGAL_UPDATED = "2026-06-01";
@@ -60,6 +60,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/products/book-a-sloth", PRODUCTS_UPDATED, 0.8, "monthly"),
     entry("/products/alluminaty", PRODUCTS_UPDATED, 0.7, "monthly"),
     entry("/products/ticket-dino", PRODUCTS_UPDATED, 0.5, "monthly"),
+    entry("/products/the-parliament", PRODUCTS_UPDATED, 0.7, "monthly"),
+    entry("/products/ezshop", PRODUCTS_UPDATED, 0.7, "monthly"),
     entry("/coffee-and-toffee", PRODUCTS_UPDATED, 0.7, "monthly"),
     ...["/legal/privacy", "/legal/terms", "/legal/cookies", "/legal/refund"].map((p) =>
       entry(p, LEGAL_UPDATED, 0.2, "yearly"),

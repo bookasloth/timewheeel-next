@@ -27,7 +27,7 @@ const items: OrbitItem[] = [
   { kind: "status", ring: "outer", angle: 132, label: "Reunion planned" },
   { kind: "card", ring: "outer", angle: 112.6, emoji: "🎓", badge: 12 },
   { kind: "pill", ring: "outer", angle: 90, icon: <ThreadAvatar />, label: "8 new posts" },
-  { kind: "pill", ring: "outer", angle: 67.6, icon: "🌍", label: "18" },
+  { kind: "pill", ring: "outer", angle: 67.6, icon: "🌍", label: "Abroad" },
   { kind: "avatar", ring: "outer", angle: 50.9, src: memoji(9), alt: "Alumnus", color: "#c4bceb" },
   { kind: "pill", ring: "outer", angle: 35.2, icon: <MessageSquareText size={13} strokeWidth={2} />, label: "36" },
   { kind: "avatar", ring: "inner", angle: 137.2, src: memoji(19), alt: "Alumnus", color: "#ffdcb6" },
@@ -37,17 +37,18 @@ const items: OrbitItem[] = [
   { kind: "check", ring: "inner", angle: 41.8 },
 ];
 
+// Product facts, mirrored from az.stats (no unverifiable usage numbers).
 const stats: OrbitStat[] = [
-  { value: "500+", label: "Verified alumni" },
-  { value: "18", label: "Countries connected" },
-  { value: "10", label: "Houses & batches" },
+  { value: "9", label: "Directory filters" },
+  { value: "4", label: "Membership tiers" },
+  { value: "1", label: "Network you own" },
 ];
 
 const tags: OrbitTag[] = [
   { icon: <Users strokeWidth={2} />, label: "Verified directory" },
   { icon: <CalendarHeart strokeWidth={2} />, label: "Reunions & events" },
-  { icon: <GraduationCap strokeWidth={2} />, label: "Mentorship" },
-  { icon: <Briefcase strokeWidth={2} />, label: "Alumni job board" },
+  { icon: <GraduationCap strokeWidth={2} />, label: "Batch groups" },
+  { icon: <Briefcase strokeWidth={2} />, label: "Job referrals" },
 ];
 
 export function AzCommunity() {
@@ -58,7 +59,7 @@ export function AzCommunity() {
         stats={stats}
         headline={
           <>
-            One school. One network.
+            Every batch. One network.
             <br className="hidden sm:block" /> Connected for life.
           </>
         }

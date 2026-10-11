@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { social } from "@/lib/metadata";
 import { az } from "@/lib/alluminaty";
+import { site } from "@/lib/site";
+import { breadcrumbLd, faqLd, orgRef } from "@/lib/jsonld";
+import { JsonLd } from "@/components/json-ld";
 import { AzHero } from "@/components/alluminaty/hero";
 import { AzStats } from "@/components/alluminaty/stats";
 import { AzProblem } from "@/components/alluminaty/problem";
@@ -13,32 +16,42 @@ import { AzCommunity } from "@/components/alluminaty/community";
 import { AzFaq } from "@/components/alluminaty/faq";
 import { AzFinalCta } from "@/components/alluminaty/final-cta";
 
+const PATH = "/products/alluminaty";
+const PAGE_URL = `${site.url}${PATH}`;
+
 export const metadata: Metadata = {
   title: { absolute: az.meta.title },
   description: az.meta.description,
-  ...social({ path: "/products/alluminaty", title: az.meta.title, description: az.meta.description }),
-  alternates: { canonical: "/products/alluminaty" },
+  ...social({ path: PATH, title: az.meta.title, description: az.meta.description }),
+  alternates: { canonical: PATH },
 };
 
-const jsonLd = {
+// No `offers`: institution pricing is quote-based (the old price "0" claimed it was free).
+const softwareLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
+  "@id": `${PAGE_URL}#software`,
   name: "Alluminaty",
-  applicationCategory: "CommunityApplication",
+  applicationCategory: "BusinessApplication",
+  applicationSubCategory: "Alumni management software",
   operatingSystem: "Web",
-  description: az.meta.description,
-  url: "https://timewheel.co.in/products/alluminaty",
-  author: { "@type": "Organization", "@id": "https://timewheel.co.in/#organization", name: "Timewheel" },
-  publisher: { "@id": "https://timewheel.co.in/#organization" },
-  offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+  description: az.hero.body,
+  url: PAGE_URL,
+  audience: { "@type": "EducationalAudience", audienceType: "Schools, colleges and universities" },
+  author: orgRef(),
+  publisher: orgRef(),
 };
 
 export default function AlluminatyPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <JsonLd data={softwareLd} />
+      <JsonLd data={faqLd(az.faq.items)} />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Alluminaty", path: PATH },
+        ])}
       />
       <AzHero />
       <AzStats />

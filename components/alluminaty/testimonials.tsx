@@ -13,6 +13,11 @@ export function AzTestimonials() {
           </p>
           <h2 className="az-h">{az.testimonials.title}</h2>
           <p className="az-lede">{az.testimonials.body}</p>
+          <p className="az-lede">
+            <a href={az.testimonials.linkHref} className="az-text-link" target="_blank" rel="noopener noreferrer">
+            {az.testimonials.linkLabel}
+          </a>
+          </p>
         </Reveal>
 
         <div className="az-quotes-grid">
