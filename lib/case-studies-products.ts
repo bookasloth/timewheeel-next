@@ -376,7 +376,7 @@ export const productCaseStudies: CaseStudy[] = [
         secondaryCta: { label: "More case studies", href: "/case-studies" },
       },
       stats: [
-        { value: "₹29", label: "per month" },
+        { value: "Razorpay", label: "payments" },
         { value: "Unlimited", label: "members" },
         { value: "Recurring", label: "billing" },
         { value: "Role-based", label: "access control" },
@@ -405,8 +405,8 @@ export const productCaseStudies: CaseStudy[] = [
         },
         {
           eyebrow: "What's Shipped",
-          title: "Unlimited members, flat monthly price.",
-          body: "The published plan is ₹29 per month and includes unlimited members, recurring billing and access and role control. Charging per member would put a growth ceiling on communities, which is the opposite of what a membership tool should do.",
+          title: "Unlimited members, no per-member ceiling.",
+          body: "There is no member cap: recurring billing, paid tiers and access and role control work the same for fifty members or fifty thousand. Charging per member would put a growth ceiling on communities, which is the opposite of what a membership tool should do.",
         },
       ],
       closing: {
@@ -423,11 +423,11 @@ export const productCaseStudies: CaseStudy[] = [
       },
       {
         q: "How much does it cost?",
-        a: "₹29 per month, with unlimited members, recurring billing and access and role control included.",
+        a: "Pricing depends on the size of the community and the setup it needs, and is quoted after a short call. Book a demo to get a number.",
       },
       {
         q: "Does it limit how many members I can have?",
-        a: "No. The plan includes unlimited members.",
+        a: "No. There is no member cap.",
       },
     ],
   },

@@ -2,6 +2,7 @@
 // RabbitShop codebase (D:\My Development\RabbitShop); see the PR notes for
 // the file behind each one. No store counts, ratings or testimonials: none
 // exist yet. ponytail: no pricing block, no plans are defined in the product.
+// Live: owner confirmed real-account payments/notifications tested (2026-10-11).
 
 export const ez = {
   path: "/products/ezshop",
@@ -11,7 +12,7 @@ export const ez = {
       "EZShop is an online store builder for Indian D2C brands and local shops: UPI, cards and COD via Razorpay, GST invoices, WhatsApp updates, zero order commission.",
   },
   hero: {
-    kicker: "EZShop by Timewheel",
+    kicker: "Live now · EZShop by Timewheel",
     title: "Online store builder for D2C brands and local shops in India",
     // Answer-first definition, the block AI answers quote. Keep it under 60 words.
     definition:
@@ -251,6 +252,10 @@ export const ez = {
       {
         q: "Is EZShop a Shopify alternative for Indian brands?",
         a: "Yes, for brands that sell only in India and want GST invoices, COD rules and WhatsApp updates built in, with no commission from EZShop on orders. Shopify is the better choice if you need its large theme and app store or sell internationally.",
+      },
+      {
+        q: "Is EZShop live?",
+        a: "Yes. EZShop is live: Razorpay payments, email and WhatsApp order updates are tested end to end on live accounts. Book a demo and Timewheel will set up your store.",
       },
       {
         q: "Does EZShop support UPI, cards and Cash on Delivery?",
