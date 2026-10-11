@@ -109,7 +109,7 @@ Authentication > Emails > Templates:
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase > Settings > API keys > publishable key. **Required**: without it the login pages say accounts aren't switched on yet. |
 | `SUPABASE_SECRET_KEY` | already set (admin pages, downloads, account deletion) |
 | `MEMBERS_ADMIN_EMAILS` | optional, comma-separated. Defaults to `team@timewheel.co.in` |
-| `PREMIUM_PRICE_INR` | optional. Unset = no online checkout; the Premium page shows "Ask us about Premium" |
+| `PREMIUM_PRICE_INR` | optional, default `999` (rupees per period). `off` = no online checkout; the Premium page shows "Ask us about Premium" |
 | `PREMIUM_DAYS` | optional, default `365` |
 
 Premium checkout also needs the existing Zoho Payments variables (it reuses `/pay`'s flow).
