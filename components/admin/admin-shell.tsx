@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ArrowSquareOut, CaretDown, CaretRight, List, MagnifyingGlass, SignOut, UserCircle, X } from "@phosphor-icons/react";
 import { ICONS } from "@/components/admin/icon-map";
 import { Toaster } from "sonner";
+import { consoleLogout } from "@/lib/admin/console-login-actions";
 import { NAV as ALL_NAV, activeItem, activeSection, sectionBadgeCount, type Badges, type NavSection } from "@/components/admin/nav-config";
 
 // Two-level console shell modelled on The Parliament admin: full-width top
@@ -229,7 +230,7 @@ function ProfileMenu({ admin }: { admin: AdminIdentity }) {
               <ArrowSquareOut size={16} /> View live site
             </Link>
             <div className="my-1 border-t border-gray-200" />
-            <form action="/auth/signout" method="post">
+            <form action={consoleLogout}>
               <button type="submit" className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-rose-600 hover:bg-rose-500/10">
                 <SignOut size={16} /> Sign out
               </button>

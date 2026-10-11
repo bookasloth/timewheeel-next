@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import { createAdminClient, createClient, membersConfigured } from "@/lib/supabase/server";
 import { site } from "@/lib/site";
+import { getConsoleSession } from "@/lib/admin/console-auth";
 
 // Data access layer for member pages. Every page, server action and route that
 // shows or changes member data calls one of these; the proxy's redirects are
@@ -109,23 +110,56 @@ export async function requireMember(next = "/members"): Promise<Member> {
   return member;
 }
 
+/** A signed-in /admin/login session, shaped as an admin Member. It has no
+ * Supabase user, so `id` is empty (writes store null for created_by). */
+const getConsoleAdmin = cache(async (): Promise<Member | null> => {
+  const email = await getConsoleSession();
+  if (!email) return null;
+  return {
+    id: "",
+    email,
+    name: "Timewheel Admin",
+    firstName: "Admin",
+    avatarUrl: null,
+    providers: ["console"],
+    joinedAt: new Date(0).toISOString(),
+    role: "admin",
+    isAdmin: true,
+    canWriteBlog: true,
+    premiumUntil: null,
+    isPremium: true,
+    hasPaidPremium: false,
+    profile: { headline: "", business_name: "", website: "", city: "", bio: "" },
+    emailPrefs: { replies: false, announcements: false },
+  };
+});
+
+/** Console pages: the /admin/login session first, else the member session. */
+async function requireConsoleMember(next: string): Promise<Member> {
+  const consoleAdmin = await getConsoleAdmin();
+  if (consoleAdmin) return consoleAdmin;
+  const member = await getMember();
+  if (!member) redirect(`/admin/login?next=${encodeURIComponent(next)}`);
+  return member;
+}
+
 /** Admin pages 404 for everyone else rather than revealing they exist. */
 export async function requireAdmin(): Promise<Member> {
-  const member = await requireMember("/admin");
+  const member = await requireConsoleMember("/admin");
   if (!member.isAdmin) notFound();
   return member;
 }
 
 /** The admin console shell: admins, plus writers (who only see the blog). */
 export async function requireStaff(): Promise<Member> {
-  const member = await requireMember("/admin");
+  const member = await requireConsoleMember("/admin");
   if (!member.canWriteBlog) notFound();
   return member;
 }
 
 /** Blog editor pages and actions. */
 export async function requireBlogEditor(): Promise<Member> {
-  const member = await requireMember("/admin/blog");
+  const member = await requireConsoleMember("/admin/blog");
   if (!member.canWriteBlog) notFound();
   return member;
 }

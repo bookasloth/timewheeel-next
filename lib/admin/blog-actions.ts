@@ -57,7 +57,7 @@ function revalidateBlog(...slugs: (string | null | undefined)[]) {
   revalidatePath("/admin/blog", "layout");
 }
 
-async function snapshot(db: ReturnType<typeof createAdminClient>, row: Record<string, unknown>, by: string, note?: string) {
+async function snapshot(db: ReturnType<typeof createAdminClient>, row: Record<string, unknown>, by: string | null, note?: string) {
   await db.from("blog_post_revisions").insert({ post_id: row.id, snapshot: row, note: note ?? null, created_by: by });
   // Keep the newest MAX_REVISIONS per post.
   const { data: old } = await db
@@ -125,7 +125,7 @@ export async function savePost(_prev: SavePostState, fd: FormData): Promise<Save
     robots: ROBOTS.has(robots) ? robots : "index,follow",
     focus_keyword: str(fd, "focus_keyword", 120),
     secondary_keywords: list(fd.get("secondary_keywords"), 12, 120),
-    updated_by: member.id,
+    updated_by: member.id || null,
   };
 
   // Optional publish time (UTC ISO from the browser). Published + future = scheduled.
@@ -147,7 +147,7 @@ export async function savePost(_prev: SavePostState, fd: FormData): Promise<Save
     if (!existing) return { error: "This post no longer exists." };
     oldSlug = existing.slug;
     // Snapshot the version being replaced whenever a published post is involved.
-    if (existing.status === "published" || status === "published") await snapshot(db, existing, member.id);
+    if (existing.status === "published" || status === "published") await snapshot(db, existing, member.id || null);
     if (status === "published" && !row.published_at) row.published_at = existing.published_at ?? new Date().toISOString();
     const { data, error } = await db.from("blog_posts").update(row).eq("id", id).select("id, slug, published_at").maybeSingle();
     if (error) return { error: error.code === "23505" ? "Another post already uses that slug." : error.message };
@@ -160,7 +160,7 @@ export async function savePost(_prev: SavePostState, fd: FormData): Promise<Save
     if (status === "published" && !row.published_at) row.published_at = new Date().toISOString();
     const { data, error } = await db
       .from("blog_posts")
-      .insert({ ...row, created_by: member.id })
+      .insert({ ...row, created_by: member.id || null })
       .select("id, slug, published_at")
       .maybeSingle();
     if (error) return { error: error.code === "23505" ? "Another post already uses that slug." : error.message };
@@ -180,8 +180,8 @@ export async function setPostStatus(id: string, status: "draft" | "published"): 
     if (!UUID.test(id)) return { error: "Unknown post." };
     const { data: existing } = await db.from("blog_posts").select("*").eq("id", id).maybeSingle();
     if (!existing) return { error: "This post no longer exists." };
-    await snapshot(db, existing, member.id, status === "published" ? "before publish" : "before unpublish");
-    const patch: Record<string, unknown> = { status, updated_by: member.id };
+    await snapshot(db, existing, member.id || null, status === "published" ? "before publish" : "before unpublish");
+    const patch: Record<string, unknown> = { status, updated_by: member.id || null };
     if (status === "published" && !existing.published_at) patch.published_at = new Date().toISOString();
     const { error } = await db.from("blog_posts").update(patch).eq("id", id);
     if (error) return { error: error.message };
@@ -226,7 +226,7 @@ export async function duplicatePost(id: string): Promise<{ error?: string; id?: 
     }
     const { data, error } = await db
       .from("blog_posts")
-      .insert({ ...rest, slug: next, title: `${title} (copy)`.slice(0, 200), status: "draft", published_at: null, created_by: member.id, updated_by: member.id })
+      .insert({ ...rest, slug: next, title: `${title} (copy)`.slice(0, 200), status: "draft", published_at: null, created_by: member.id || null, updated_by: member.id || null })
       .select("id")
       .maybeSingle();
     if (error || !data) return { error: error?.message ?? "Couldn't duplicate." };
@@ -246,14 +246,14 @@ export async function restoreRevision(revisionId: string): Promise<{ error?: str
     if (!rev) return { error: "That version no longer exists." };
     const { data: current } = await db.from("blog_posts").select("*").eq("id", rev.post_id).maybeSingle();
     if (!current) return { error: "This post no longer exists." };
-    await snapshot(db, current, member.id, "before restore");
+    await snapshot(db, current, member.id || null, "before restore");
 
     const s = rev.snapshot as Record<string, unknown>;
     const fields = [
       "title", "excerpt", "category", "tags", "author_id", "cover", "cover_alt", "content_html", "tldr", "takeaways", "faq", "comments",
       "meta_title", "meta_description", "og_title", "og_description", "og_image", "og_image_alt", "canonical", "robots", "focus_keyword", "secondary_keywords",
     ];
-    const patch: Record<string, unknown> = { updated_by: member.id };
+    const patch: Record<string, unknown> = { updated_by: member.id || null };
     for (const f of fields) if (f in s) patch[f] = s[f];
     const { error } = await db.from("blog_posts").update(patch).eq("id", rev.post_id);
     if (error) return { error: error.message };
