@@ -61,22 +61,9 @@ export type NotificationRow = {
   read_at: string | null;
 };
 
-export type PersonRow = {
-  id: string;
-  created_at: string;
-  full_name: string | null;
-  avatar_url: string | null;
-  headline: string | null;
-  business_name: string | null;
-  website: string | null;
-  city: string | null;
-  bio: string | null;
-};
-
 const DOWNLOAD_COLS = "id, created_at, title, description, category, tier, file_name, file_size, content_type, cover_path";
 const POST_COLS =
   "id, created_at, edited_at, author_id, category, title, body, pinned, locked, reply_count, last_activity_at, author:profiles(full_name, avatar_url)";
-const PERSON_COLS = "id, created_at, full_name, avatar_url, headline, business_name, website, city, bio";
 
 export const POSTS_PER_PAGE = 20;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -206,44 +193,20 @@ export async function listNotifications(limit = 100): Promise<NotificationRow[]>
   return (data as NotificationRow[] | null) ?? [];
 }
 
-// ------------------------------------------------------------------- people
-
-export async function listPeople(q = "", limit = 60): Promise<PersonRow[]> {
-  const supabase = await createClient();
-  let query = supabase.from("profiles").select(PERSON_COLS).order("created_at", { ascending: false }).limit(limit);
-  const needle = q.replace(/[%,()*]/g, " ").trim().slice(0, 60);
-  if (needle) {
-    const like = `%${needle}%`;
-    query = query.or(`full_name.ilike.${like},business_name.ilike.${like},city.ilike.${like},headline.ilike.${like}`);
-  }
-  const { data, error } = await query;
-  if (error) console.error("listPeople:", error.message);
-  return (data as PersonRow[] | null) ?? [];
-}
-
-export async function getPerson(id: string): Promise<PersonRow | null> {
-  if (!UUID.test(id)) return null;
-  const supabase = await createClient();
-  const { data } = await supabase.from("profiles").select(PERSON_COLS).eq("id", id).maybeSingle();
-  return (data as PersonRow | null) ?? null;
-}
-
 // ------------------------------------------------------------------- search
 
 export async function searchAll(q: string) {
   const needle = q.replace(/[%,()*]/g, " ").trim().slice(0, 60);
-  if (needle.length < 2) return { posts: [], downloads: [], people: [] };
+  if (needle.length < 2) return { posts: [], downloads: [] };
   const supabase = await createClient();
   const like = `%${needle}%`;
-  const [posts, downloads, people] = await Promise.all([
+  const [posts, downloads] = await Promise.all([
     supabase.from("community_posts").select(POST_COLS).or(`title.ilike.${like},body.ilike.${like}`).order("last_activity_at", { ascending: false }).limit(10),
     supabase.from("downloads").select(DOWNLOAD_COLS).or(`title.ilike.${like},description.ilike.${like},category.ilike.${like}`).limit(10),
-    listPeople(needle, 10),
   ]);
   return {
     posts: (posts.data as unknown as PostRow[] | null) ?? [],
     downloads: await withCovers((downloads.data as DownloadRow[] | null) ?? []),
-    people,
   };
 }
 

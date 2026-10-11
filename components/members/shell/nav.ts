@@ -11,7 +11,6 @@ import {
   Library,
   MessagesSquare,
   UserRound,
-  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -37,7 +36,6 @@ export const memberNav: NavGroup[] = [
     items: [
       { href: "/members", label: "Overview", icon: House, exact: true },
       { href: "/members/community", label: "Community", icon: MessagesSquare },
-      { href: "/members/people", label: "People", icon: Users },
     ],
   },
   {

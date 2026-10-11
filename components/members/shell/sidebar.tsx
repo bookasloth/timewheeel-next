@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, LogOut, Menu, Shield } from "lucide-react";
+import { ArrowUpRight, LogOut, Menu } from "lucide-react";
 import { Avatar } from "@/components/members/avatar";
 import { isActive, memberNav, tabBar } from "@/components/members/shell/nav";
 import { cn } from "@/lib/utils";
@@ -36,13 +36,13 @@ function Count({ n }: { n: number }) {
 export function MemberSidebar({ member, unread, onNavigate }: { member: ShellMember; unread: number; onNavigate?: () => void }) {
   const pathname = usePathname();
   return (
-    <div className="flex h-full flex-col gap-5 p-4">
+    <div className="flex h-full flex-col gap-3 p-3">
       <Link
         href="/members/account"
         onClick={onNavigate}
-        className="flex items-center gap-3 rounded-lg border border-border bg-surface p-3 transition-colors hover:border-brand/40"
+        className="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2.5 transition-colors hover:border-brand/40 [@media(max-height:767px)]:hidden"
       >
-        <Avatar name={member.name} src={member.avatarUrl} size={42} />
+        <Avatar name={member.name} src={member.avatarUrl} size={36} />
         <span className="min-w-0">
           <span className="block truncate text-sm font-semibold">{member.name}</span>
           <span className="block truncate text-xs text-muted-foreground">{member.email}</span>
@@ -57,10 +57,13 @@ export function MemberSidebar({ member, unread, onNavigate }: { member: ShellMem
         </span>
       </Link>
 
-      <nav aria-label="Member area" className="flex-1 space-y-5 overflow-y-auto">
+      {/* Sized to fit the screen: no inner scrolling. The admin console link
+          lives in the avatar menu (top right), and the profile card hides on short
+          screens, which also have it there. */}
+      <nav aria-label="Member area" className="flex-1 space-y-3">
         {memberNav.map((group) => (
           <div key={group.label}>
-            <p className="px-3 pb-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{group.label}</p>
+            <p className="px-3 pb-1 text-[10.5px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{group.label}</p>
             <ul className="space-y-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -77,7 +80,7 @@ export function MemberSidebar({ member, unread, onNavigate }: { member: ShellMem
                   </>
                 );
                 const cls = cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                  "flex items-center gap-3 rounded-lg px-3 py-[7px] text-sm font-medium transition-colors [@media(max-height:640px)]:py-[5px]",
                   active ? "bg-ink text-white" : "text-foreground/85 hover:bg-secondary hover:text-foreground",
                   item.soon && "pointer-events-none opacity-60",
                 );
@@ -98,25 +101,12 @@ export function MemberSidebar({ member, unread, onNavigate }: { member: ShellMem
             </ul>
           </div>
         ))}
-        {member.canWriteBlog && (
-          <div>
-            <p className="px-3 pb-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Team</p>
-            <Link
-              href={member.isAdmin ? "/admin" : "/admin/blog"}
-              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/85 transition-colors hover:bg-secondary hover:text-foreground"
-            >
-              <Shield className="size-[18px] text-foreground/70" strokeWidth={1.8} />
-              {member.isAdmin ? "Admin console" : "Blog editor"}
-              <ArrowUpRight className="ml-auto size-3.5 text-muted-foreground" />
-            </Link>
-          </div>
-        )}
       </nav>
 
-      <form action="/auth/signout" method="post" className="border-t border-border pt-3">
+      <form action="/auth/signout" method="post" className="border-t border-border pt-2">
         <button
           type="submit"
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-[7px] text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
         >
           <LogOut className="size-[18px]" strokeWidth={1.8} />
           Sign out

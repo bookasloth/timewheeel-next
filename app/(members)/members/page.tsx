@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check, Crown, Download, MessagesSquare, Users } from "lucide-react";
+import { ArrowRight, Check, Crown, Download, MessagesSquare, UserRound } from "lucide-react";
 import { Avatar } from "@/components/members/avatar";
 import { CrownMark } from "@/components/members/crown-mark";
 import { ResourceCard } from "@/components/members/library/resource-card";
@@ -45,7 +45,7 @@ export default async function MembersDashboard({ searchParams }: { searchParams:
   const tiles = [
     { href: "/members/library", icon: Download, label: "Resource library", stat: `${counts.free + counts.premium} resources` },
     { href: "/members/community", icon: MessagesSquare, label: "Community", stat: `${total} ${total === 1 ? "conversation" : "conversations"}` },
-    { href: "/members/people", icon: Users, label: "People", stat: "Meet other members" },
+    { href: "/members/account", icon: UserRound, label: "Your profile", stat: "Profile & email settings" },
     { href: "/members/premium", icon: Crown, label: m.hasPaidPremium ? "Your Premium" : "Premium", stat: m.hasPaidPremium ? "Membership & billing" : `${counts.premium} Premium resources` },
   ];
 
