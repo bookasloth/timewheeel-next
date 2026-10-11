@@ -2,6 +2,13 @@
 
 import {
   ArrowSquareOut,
+  Article,
+  EnvelopeSimple,
+  IdentificationCard,
+  Notepad,
+  PencilSimpleLine,
+  Tray,
+  UsersFour,
   Books,
   CreditCard,
   FileArrowDown,
@@ -18,6 +25,13 @@ import {
 // Phosphor names used in nav-config.ts, resolved client-side.
 export const ICONS: Record<string, Icon> = {
   ArrowSquareOut,
+  Article,
+  EnvelopeSimple,
+  IdentificationCard,
+  Notepad,
+  PencilSimpleLine,
+  Tray,
+  UsersFour,
   Books,
   CreditCard,
   FileArrowDown,

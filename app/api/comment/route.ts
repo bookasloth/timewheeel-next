@@ -3,9 +3,8 @@ import nodemailer from "nodemailer";
 import { checkHoneypot } from "@/lib/honeypot";
 
 // Blog comment -> email for moderation (no public DB). Same SMTP env as leads.
-// Comments are emailed to LEAD_TO; approve and add them to the post's
-// frontmatter `comments:` array to publish. Persisting live user comments would
-// need a datastore, this keeps it spam-safe and human-moderated for now.
+// Comments are emailed to LEAD_TO; approve one by pasting it into the post's
+// "Approved comments" panel in the blog editor (/admin/blog).
 
 export const runtime = "nodejs";
 

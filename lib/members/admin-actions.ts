@@ -129,9 +129,10 @@ export async function setPremium(fd: FormData) {
 export async function setRole(fd: FormData) {
   const { db, member } = await admin();
   const userId = String(fd.get("user_id") ?? "");
-  const role = fd.get("role") === "admin" ? "admin" : "member";
+  const want = String(fd.get("role") ?? "");
+  const role = want === "admin" || want === "writer" ? want : "member";
   // Never let an admin lock themselves out by accident.
-  if (!UUID.test(userId) || (userId === member.id && role === "member")) return;
+  if (!UUID.test(userId) || (userId === member.id && role !== "admin")) return;
   await db.from("memberships").upsert({ user_id: userId, role, updated_at: new Date().toISOString() });
   revalidatePath("/admin", "layout");
 }

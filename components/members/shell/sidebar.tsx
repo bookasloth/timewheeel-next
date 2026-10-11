@@ -14,6 +14,8 @@ export type ShellMember = {
   isPremium: boolean;
   hasPaidPremium: boolean;
   isAdmin: boolean;
+  /** Admins and blog writers. */
+  canWriteBlog?: boolean;
 };
 
 export function statusLabel(m: ShellMember) {
@@ -96,15 +98,15 @@ export function MemberSidebar({ member, unread, onNavigate }: { member: ShellMem
             </ul>
           </div>
         ))}
-        {member.isAdmin && (
+        {member.canWriteBlog && (
           <div>
             <p className="px-3 pb-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Team</p>
             <Link
-              href="/admin"
+              href={member.isAdmin ? "/admin" : "/admin/blog"}
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/85 transition-colors hover:bg-secondary hover:text-foreground"
             >
               <Shield className="size-[18px] text-foreground/70" strokeWidth={1.8} />
-              Admin console
+              {member.isAdmin ? "Admin console" : "Blog editor"}
               <ArrowUpRight className="ml-auto size-3.5 text-muted-foreground" />
             </Link>
           </div>

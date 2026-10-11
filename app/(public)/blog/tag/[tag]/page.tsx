@@ -7,13 +7,15 @@ import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
 import { getAllTags, getPostsByTag, slugify, formatDate } from "@/lib/blog";
 
-export function generateStaticParams() {
-  return getAllTags().map((tag) => ({ tag: slugify(tag) }));
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return (await getAllTags()).map((tag) => ({ tag: slugify(tag) }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
   const { tag } = await params;
-  const label = getAllTags().find((t) => slugify(t) === tag) ?? tag;
+  const label = (await getAllTags()).find((t) => slugify(t) === tag) ?? tag;
   const title = `${label} Articles and Guides, Timewheel Blog`;
   const description = `Timewheel articles and guides on ${label}: practical, no-fluff advice for growing businesses on marketing, search, AI visibility and websites.`;
   return {
@@ -26,9 +28,9 @@ export async function generateMetadata({ params }: { params: Promise<{ tag: stri
 
 export default async function TagPage({ params }: { params: Promise<{ tag: string }> }) {
   const { tag } = await params;
-  const label = getAllTags().find((t) => slugify(t) === tag);
+  const label = (await getAllTags()).find((t) => slugify(t) === tag);
   if (!label) notFound();
-  const posts = getPostsByTag(tag);
+  const posts = await getPostsByTag(tag);
 
   return (
     <>

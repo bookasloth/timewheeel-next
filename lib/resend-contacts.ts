@@ -58,3 +58,55 @@ async function syncContact(audienceId: string | undefined, opts: { email: string
     return false;
   }
 }
+
+export type NewsletterContact = { id: string; email: string; first_name?: string | null; last_name?: string | null; created_at: string; unsubscribed: boolean };
+
+/** Everyone in the newsletter audience (admin Subscribers page). null = Resend not configured or unreachable. */
+export async function listNewsletterContacts(): Promise<NewsletterContact[] | null> {
+  const key = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_NEWSLETTER_AUDIENCE_ID;
+  if (!key || !audienceId) return null;
+  const out: NewsletterContact[] = [];
+  let after = "";
+  try {
+    // Paged (100 at a time); stop at 5,000 as a safety cap.
+    for (let page = 0; page < 50; page++) {
+      const qs = new URLSearchParams({ limit: "100", ...(after ? { after } : {}) });
+      const res = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts?${qs}`, {
+        headers: { Authorization: `Bearer ${key}` },
+        cache: "no-store",
+      });
+      if (!res.ok) {
+        console.error("Resend list contacts failed:", res.status, await res.text().catch(() => ""));
+        return out.length ? out : null;
+      }
+      const body = (await res.json()) as { data?: NewsletterContact[]; has_more?: boolean };
+      const batch = body.data ?? [];
+      out.push(...batch);
+      if (!body.has_more || !batch.length) break;
+      after = batch[batch.length - 1].id;
+    }
+    return out.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+  } catch (err) {
+    console.error("Resend list contacts error:", err);
+    return out.length ? out : null;
+  }
+}
+
+/** Remove one contact from the newsletter audience. */
+export async function removeNewsletterContact(contactId: string): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_NEWSLETTER_AUDIENCE_ID;
+  if (!key || !audienceId) return false;
+  try {
+    const res = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts/${encodeURIComponent(contactId)}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${key}` },
+    });
+    if (!res.ok) console.error("Resend remove contact failed:", res.status, await res.text().catch(() => ""));
+    return res.ok;
+  } catch (err) {
+    console.error("Resend remove contact error:", err);
+    return false;
+  }
+}

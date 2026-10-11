@@ -122,9 +122,9 @@ function AccountMenu({ member }: { member: ShellMember }) {
           <Link href="/members/premium" onClick={() => setOpen(false)} className={item}>
             <CreditCard className="size-4" /> Membership & billing
           </Link>
-          {member.isAdmin && (
-            <Link href="/admin" onClick={() => setOpen(false)} className={item}>
-              <Shield className="size-4" /> Admin console
+          {member.canWriteBlog && (
+            <Link href={member.isAdmin ? "/admin" : "/admin/blog"} onClick={() => setOpen(false)} className={item}>
+              <Shield className="size-4" /> {member.isAdmin ? "Admin console" : "Blog editor"}
             </Link>
           )}
           <Link href="/" className={item}>

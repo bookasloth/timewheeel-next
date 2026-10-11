@@ -19,8 +19,10 @@ export type Member = {
   /** "email", "google", ... */
   providers: string[];
   joinedAt: string;
-  role: "member" | "admin";
+  role: "member" | "writer" | "admin";
   isAdmin: boolean;
+  /** Admins and writers can use the blog editor in the admin console. */
+  canWriteBlog: boolean;
   premiumUntil: string | null;
   /** Admins always count as premium so they can check premium pages. */
   isPremium: boolean;
@@ -62,7 +64,7 @@ export const getMember = cache(async (): Promise<Member | null> => {
   // sign-ups after they click the confirmation link).
   const envAdmin = Boolean(user.email_confirmed_at) && adminEmails().includes(email);
   const isAdmin = membership?.role === "admin" || envAdmin;
-  const role = isAdmin ? "admin" : "member";
+  const role = isAdmin ? "admin" : membership?.role === "writer" ? "writer" : "member";
   // Record team accounts as admins in the database too, so the community can
   // label them and admin lists stay accurate. One write, the first time only.
   if (envAdmin && membership?.role !== "admin") {
@@ -83,6 +85,7 @@ export const getMember = cache(async (): Promise<Member | null> => {
     joinedAt: user.created_at,
     role,
     isAdmin,
+    canWriteBlog: isAdmin || role === "writer",
     premiumUntil,
     isPremium: isAdmin || paid,
     hasPaidPremium: paid,
@@ -110,6 +113,20 @@ export async function requireMember(next = "/members"): Promise<Member> {
 export async function requireAdmin(): Promise<Member> {
   const member = await requireMember("/admin");
   if (!member.isAdmin) notFound();
+  return member;
+}
+
+/** The admin console shell: admins, plus writers (who only see the blog). */
+export async function requireStaff(): Promise<Member> {
+  const member = await requireMember("/admin");
+  if (!member.canWriteBlog) notFound();
+  return member;
+}
+
+/** Blog editor pages and actions. */
+export async function requireBlogEditor(): Promise<Member> {
+  const member = await requireMember("/admin/blog");
+  if (!member.canWriteBlog) notFound();
   return member;
 }
 

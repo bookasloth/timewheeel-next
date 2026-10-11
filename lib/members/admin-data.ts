@@ -36,7 +36,7 @@ export type AdminMember = {
   last_sign_in_at: string | null;
   confirmed: boolean;
   providers: string[];
-  role: "member" | "admin";
+  role: "member" | "writer" | "admin";
   premium_until: string | null;
 };
 
@@ -66,7 +66,7 @@ export async function listMembers(q = ""): Promise<{ members: AdminMember[]; tot
       last_sign_in_at: u.last_sign_in_at ?? null,
       confirmed: Boolean(u.email_confirmed_at),
       providers: (u.app_metadata?.providers as string[] | undefined) ?? [],
-      role: (ms.get(u.id)?.role === "admin" ? "admin" : "member") as AdminMember["role"],
+      role: (["admin", "writer"].includes(ms.get(u.id)?.role) ? ms.get(u.id)?.role : "member") as AdminMember["role"],
       premium_until: (ms.get(u.id)?.premium_until as string | null) ?? null,
     }))
     .sort((a, b) => b.created_at.localeCompare(a.created_at));

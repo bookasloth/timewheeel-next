@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowSquareOut, CaretDown, CaretRight, List, MagnifyingGlass, SignOut, UserCircle, X } from "@phosphor-icons/react";
 import { ICONS } from "@/components/admin/icon-map";
-import { NAV, activeItem, activeSection, itemActive, sectionBadgeCount, type Badges, type NavSection } from "@/components/admin/nav-config";
+import { Toaster } from "sonner";
+import { NAV as ALL_NAV, activeItem, activeSection, sectionBadgeCount, type Badges, type NavSection } from "@/components/admin/nav-config";
 
 // Two-level console shell modelled on The Parliament admin: full-width top
 // bar, then the icon-only primary rail + the secondary sidebar for the active
@@ -14,6 +15,11 @@ import { NAV, activeItem, activeSection, itemActive, sectionBadgeCount, type Bad
 // actions and active accents; section icons keep their own colours.
 
 export type AdminIdentity = { name: string; email: string; avatarUrl: string | null };
+/** Admins see every section; writers only the blog. */
+export type ConsoleScope = "admin" | "writer";
+
+const NavContext = createContext<NavSection[]>(ALL_NAV);
+const useNav = () => useContext(NavContext);
 
 const initials = (name: string) =>
   name
@@ -23,6 +29,7 @@ const initials = (name: string) =>
     .join("") || "A";
 
 function PrimaryRail({ badges }: { badges: Badges }) {
+  const NAV = useNav();
   const pathname = usePathname();
   const active = activeSection(NAV, pathname);
   return (
@@ -55,8 +62,11 @@ function PrimaryRail({ badges }: { badges: Badges }) {
 }
 
 function SecondarySidebar({ badges, onNavigate }: { badges: Badges; onNavigate?: () => void }) {
+  const NAV = useNav();
   const pathname = usePathname();
   const section = activeSection(NAV, pathname);
+  // Only the best match is active (so /admin/blog/new doesn't also light up Posts).
+  const current = activeItem(NAV, pathname);
   return (
     <div className="flex h-full w-[220px] flex-col border-r border-gray-200 bg-gray-50">
       <div className="flex h-12 shrink-0 items-center px-4">
@@ -65,7 +75,7 @@ function SecondarySidebar({ badges, onNavigate }: { badges: Badges; onNavigate?:
       <ul className="flex-1 space-y-0.5 overflow-y-auto px-3 pb-4">
         {section.items.map((item) => {
           const Icon = ICONS[item.icon];
-          const active = !item.external && itemActive(item.href, pathname);
+          const active = !item.external && current?.href === item.href;
           const count = item.badge ? (badges[item.badge] ?? 0) : 0;
           return (
             <li key={item.href}>
@@ -106,6 +116,7 @@ function SecondarySidebar({ badges, onNavigate }: { badges: Badges; onNavigate?:
 }
 
 function Breadcrumb() {
+  const NAV = useNav();
   const pathname = usePathname();
   const section = activeSection(NAV, pathname);
   const item = activeItem(NAV, pathname);
@@ -123,6 +134,7 @@ function Breadcrumb() {
 }
 
 function CommandPalette({ onClose }: { onClose: () => void }) {
+  const NAV = useNav();
   const router = useRouter();
   const [q, setQ] = useState("");
   const [i, setI] = useState(0);
@@ -131,7 +143,7 @@ function CommandPalette({ onClose }: { onClose: () => void }) {
     const all = NAV.flatMap((s) => s.items.map((it) => ({ ...it, section: s })));
     const n = q.trim().toLowerCase();
     return n ? all.filter((it) => `${it.label} ${it.section.label}`.toLowerCase().includes(n)) : all;
-  }, [q]);
+  }, [q, NAV]);
   useEffect(() => input.current?.focus(), []);
   const go = (href: string) => {
     onClose();
@@ -229,7 +241,20 @@ function ProfileMenu({ admin }: { admin: AdminIdentity }) {
   );
 }
 
-export function AdminShell({ admin, badges, env, children }: { admin: AdminIdentity; badges: Badges; env: string; children: ReactNode }) {
+export function AdminShell({
+  admin,
+  badges,
+  env,
+  scope = "admin",
+  children,
+}: {
+  admin: AdminIdentity;
+  badges: Badges;
+  env: string;
+  scope?: ConsoleScope;
+  children: ReactNode;
+}) {
+  const nav = useMemo(() => (scope === "writer" ? ALL_NAV.filter((s) => s.writer) : ALL_NAV), [scope]);
   const [drawer, setDrawer] = useState(false);
   const [palette, setPalette] = useState(false);
 
@@ -245,16 +270,17 @@ export function AdminShell({ admin, badges, env, children }: { admin: AdminIdent
   }, []);
 
   return (
+    <NavContext.Provider value={nav}>
     <div className="admin-console flex h-[100dvh] flex-col bg-gray-50 text-gray-900">
       <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-3 border-b border-gray-200 bg-gray-50 px-4 sm:px-6">
         <button type="button" onClick={() => setDrawer(true)} className="rounded-[3px] p-2 text-gray-600 hover:bg-gray-100 lg:hidden" aria-label="Open menu">
           <List size={20} />
         </button>
-        <Link href="/admin" className="flex items-center gap-2.5">
+        <Link href={scope === "writer" ? "/admin/blog" : "/admin"} className="flex items-center gap-2.5">
           <Image src="/brand/svg/timewheel-icon.svg" alt="" width={32} height={32} />
           <span className="hidden sm:block">
             <span className="block text-sm font-bold leading-tight text-gray-900">Timewheel</span>
-            <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#C2410C]">Admin console</span>
+            <span className="block text-[10px] font-semibold uppercase tracking-wider text-[#C2410C]">{scope === "writer" ? "Blog editor" : "Admin console"}</span>
           </span>
         </Link>
         <div className="ml-2 hidden md:block">
@@ -305,7 +331,9 @@ export function AdminShell({ admin, badges, env, children }: { admin: AdminIdent
       </div>
 
       {palette && <CommandPalette onClose={() => setPalette(false)} />}
+      <Toaster position="bottom-right" toastOptions={{ className: "!rounded-[4px] !text-[13px]" }} />
     </div>
+    </NavContext.Provider>
   );
 }
 
