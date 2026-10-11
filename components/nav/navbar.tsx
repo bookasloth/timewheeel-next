@@ -20,6 +20,7 @@ import type { Icon } from "@phosphor-icons/react";
 import { featuredProducts } from "@/lib/products";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { AccountLink } from "@/components/nav/account-link";
 
 // Products come from the shared featured list so the navbar and homepage
 // ecosystem never drift. Order + names live in lib/products.ts.
@@ -294,6 +295,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <AccountLink className={cn("hidden rounded-md px-3 py-2 text-sm font-medium transition-colors md:inline-flex", linkTone)} />
           <Link
             href={site.demoUrl}
             className="btn btn-primary hidden rounded-lg px-4 py-2 text-sm font-semibold text-brand-foreground md:inline-block"
@@ -393,6 +395,11 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
+
+          <AccountLink
+            className="w-full border-b border-border/60 py-4 text-base font-semibold active:text-brand"
+            onClick={() => setMobileOpen(false)}
+          />
 
           <Link
             href={site.demoUrl}

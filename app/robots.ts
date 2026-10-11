@@ -25,8 +25,9 @@ const aiCrawlers = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
-      { userAgent: aiCrawlers, allow: "/" },
+      // Member area and auth plumbing: private, nothing to index.
+      { userAgent: "*", allow: "/", disallow: ["/members", "/auth/", "/api/members/"] },
+      { userAgent: aiCrawlers, allow: "/", disallow: ["/members", "/auth/", "/api/members/"] },
     ],
     sitemap: `${site.url}/sitemap.xml`,
     host: site.url,

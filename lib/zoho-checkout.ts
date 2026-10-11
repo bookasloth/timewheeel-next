@@ -61,9 +61,10 @@ export type PayRequest = {
   source?: string;
 };
 
-// Full flow: order -> Zoho session -> widget -> server verify.
-export async function payWithZoho(req: PayRequest): Promise<Outcome> {
-  const [{ orderId }] = await Promise.all([post("/api/pay/order", req), loadWidget()]);
+// Full flow: order -> Zoho session -> widget -> server verify. `orderUrl` lets a
+// flow create its order elsewhere (Premium prices itself server-side).
+export async function payWithZoho(req: PayRequest, orderUrl = "/api/pay/order"): Promise<Outcome> {
+  const [{ orderId }] = await Promise.all([post(orderUrl, req), loadWidget()]);
   const zp = new window.ZPayments({
     account_id: process.env.NEXT_PUBLIC_ZOHO_PAY_ACCOUNT_ID,
     domain: "IN",

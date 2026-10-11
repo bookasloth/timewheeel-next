@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const updated = "September 17, 2026";
+  const updated = "October 11, 2026";
 
   return (
     <div>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
         </h2>
         <p>
           Timewheel (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates
-          the timewheel.com website and related products and services (the
+          the timewheel.co.in website and related products and services (the
           &quot;Service&quot;). This Privacy Policy explains how we collect,
           use, disclose, and safeguard your information when you visit our
           website or use our Service.
@@ -78,6 +78,40 @@ export default function PrivacyPage() {
             for details.
           </li>
         </ul>
+        <h3 className="pt-2 font-semibold text-foreground">Member accounts and Sign in with Google</h3>
+        <p>
+          If you create a Timewheel account we store your name, email address and
+          sign-in details (a securely hashed password if you choose one; we never
+          see or store it in readable form), your membership status, the files you
+          download, and anything you post in the member community, which other
+          signed-in members can read.
+        </p>
+        <p>
+          If you sign in with Google, we receive only your name, email address and
+          profile picture from Google (the &quot;openid&quot;, &quot;email&quot; and
+          &quot;profile&quot; permissions). We use them solely to create and sign you
+          in to your account and to show your name and picture in the community. We
+          do not access your Gmail, contacts, calendar, Drive or any other Google
+          data, we never post anything on your behalf, and we do not sell or share
+          Google user data with anyone, or use it for advertising. Our use of
+          information received from Google APIs adheres to the{" "}
+          <a
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+            className="text-brand hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google API Services User Data Policy
+          </a>
+          , including the Limited Use requirements.
+        </p>
+        <p>
+          Account data is stored with our database provider (Supabase). You can
+          delete your account at any time from the Account page in the member area,
+          which permanently removes your profile, membership and community posts.
+          Payment records we must keep for tax purposes are retained without the
+          link to your account.
+        </p>
       </section>
 
       <section className="space-y-4">
@@ -172,7 +206,7 @@ export default function PrivacyPage() {
         <ul className="ml-5 list-disc space-y-2">
           <li>Access the personal information we hold about you.</li>
           <li>Request correction of inaccurate data.</li>
-          <li>Request deletion of your personal information.</li>
+          <li>Request deletion of your personal information (account holders can also delete their account themselves from the Account page).</li>
           <li>Object to or restrict processing of your data.</li>
           <li>Data portability, receive your data in a structured format.</li>
           <li>Withdraw consent at any time where processing is based on consent.</li>
@@ -180,10 +214,10 @@ export default function PrivacyPage() {
         <p>
           To exercise any of these rights, contact us at{" "}
           <a
-            href="mailto:privacy@timewheel.com"
+            href="mailto:team@timewheel.co.in"
             className="text-brand hover:underline"
           >
-            privacy@timewheel.com
+            team@timewheel.co.in
           </a>
           .
         </p>
@@ -234,13 +268,13 @@ export default function PrivacyPage() {
         <p>
           Email:{" "}
           <a
-            href="mailto:privacy@timewheel.com"
+            href="mailto:team@timewheel.co.in"
             className="text-brand hover:underline"
           >
-            privacy@timewheel.com
+            team@timewheel.co.in
           </a>
         </p>
-        <p>Timewheel · timewheel.com</p>
+        <p>Timewheel Internet Pvt. Ltd. · timewheel.co.in</p>
       </section>
       </article>
     </div>
