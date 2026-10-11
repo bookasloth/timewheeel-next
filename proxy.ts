@@ -35,9 +35,13 @@ export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   let out = response;
-  const gated = pathname === MEMBERS_HOME || pathname.startsWith(`${MEMBERS_HOME}/`) || pathname === "/admin" || pathname.startsWith("/admin/");
+  const isAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
+  // The separate console login (/admin/login) sets its own signed cookie; pages
+  // verify it, this only skips the member-login redirect.
+  const consoleSession = isAdmin && request.cookies.has("tw_admin");
+  const gated = (pathname === MEMBERS_HOME || pathname.startsWith(`${MEMBERS_HOME}/`) || isAdmin) && pathname !== "/admin/login" && !consoleSession;
   if (!signedIn && gated) {
-    const to = new URL("/login", request.url);
+    const to = new URL(isAdmin ? "/admin/login" : "/login", request.url);
     to.searchParams.set("next", `${pathname}${search}`);
     out = redirectKeepingCookies(to, response);
   } else if (signedIn && AUTH_PAGES.has(pathname)) {

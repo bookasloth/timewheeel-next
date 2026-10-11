@@ -77,7 +77,11 @@ export const NAV: NavSection[] = [
     label: "Revenue",
     icon: "CreditCard",
     color: "#8b5cf6",
-    items: [{ label: "Payments", href: "/admin/payments", icon: "Receipt" }],
+    items: [
+      { label: "Invoices", href: "/admin/invoices", icon: "FileText" },
+      { label: "New invoice", href: "/admin/invoices/new", icon: "FilePlus" },
+      { label: "Payments", href: "/admin/payments", icon: "Receipt" },
+    ],
   },
   {
     key: "system",
