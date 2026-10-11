@@ -125,4 +125,15 @@ export const clientSites: ClientSite[] = [
       "Nagpur education consultancy offering career counselling, college planning and study-abroad guidance for MBBS students.",
     image: "/portfolio/edulocusss.png",
   },
+  {
+    name: "Linestory Studio",
+    href: "https://linestorystudio.in/",
+    caseStudySlug: "linestory-studio",
+    accent: "#e8a33d",
+    iconKey: "buildings",
+    category: "Architecture",
+    description:
+      "Nagpur architecture and interior design studio showing completed and ongoing work across offices, homes and hospitality.",
+    image: "/portfolio/linestory-studio.png",
+  },
 ];

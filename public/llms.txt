@@ -42,6 +42,7 @@ Sitemap: https://timewheel.co.in/sitemap.xml
 - [Ashlar Studio](https://timewheel.co.in/case-studies/ashlar-studio): An architecture site that gives the work room on the page.
 - [Alpha Adventures](https://timewheel.co.in/case-studies/alpha-adventures): Selling a trek in a scrolling feed.
 - [Edulocus](https://timewheel.co.in/case-studies/edulocus): Guiding a student through a decision that lasts years.
+- [Linestory Studio](https://timewheel.co.in/case-studies/linestory-studio): A portfolio that reads like a drawing set.
 - [Alluminaty build](https://timewheel.co.in/case-studies/alluminaty): The social network for your alumni.
 - [Book A Sloth build](https://timewheel.co.in/case-studies/book-a-sloth): Booking, payments and reminders in one system.
 - [Coffee and Toffee build](https://timewheel.co.in/case-studies/coffee-for-me): Direct audience-to-creator support.

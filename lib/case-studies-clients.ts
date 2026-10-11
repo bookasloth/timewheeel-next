@@ -692,4 +692,70 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: "linestory-studio",
+    name: "Linestory Studio",
+    tagline: "A portfolio that reads like a drawing set",
+    category: "Architecture",
+    summary:
+      "Nagpur architecture and interior design studio showing completed and ongoing work across offices, homes and hospitality.",
+    accent: "#e8a33d",
+    image: {
+      src: "/portfolio/linestory-studio.png",
+      width: 1200,
+      height: 675,
+    },
+    tags: ["Architecture", "Interior Design", "Web Design"],
+    href: "/case-studies/linestory-studio",
+    liveUrl: "https://linestorystudio.in/",
+    meta: { readTime: "2 min", services: ["Web Design", "Development"] },
+    content: {
+      hero: {
+        title: "Let the projects",
+        titleAccent: "do the talking.",
+        summary:
+          "Linestory Studio is an architecture and interior design practice in Nagpur, with work spanning coworking offices, private homes and restaurants. The site had one job: put that work in front of a prospective client within seconds.",
+        primaryCta: { label: "Book a call", href: "/book-a-demo" },
+        secondaryCta: { label: "More case studies", href: "/case-studies" },
+      },
+      sections: [
+        {
+          eyebrow: "The Brief",
+          title: "Many project types, one clear impression.",
+          body: "A visitor might be a business fitting out an office, a family building a house, or a restaurant owner planning a new space. Each wants to see work like theirs, quickly, and to know whether a project is finished or still underway.",
+          bullets: [
+            "Offices, homes and hospitality work under one practice",
+            "Completed and ongoing projects need to be told apart",
+            "Trust signals and contact details reachable from every view",
+          ],
+        },
+        {
+          eyebrow: "The Build",
+          title: "An image-first grid with a quiet frame.",
+          body: "We built the home page as the portfolio itself: a project grid beside a fixed side panel holding the identity, navigation and a works filter. Visitors can narrow to completed, ongoing or interior work in one click, and the studio's Google rating, email and phone sit in the same panel.",
+          bullets: [
+            "Home page is the project grid, no hero to scroll past",
+            "Works filter for All, Completed, Ongoing and Interior Design",
+            "Google rating and direct contact kept in the side panel",
+          ],
+        },
+      ],
+      closing: {
+        title: "Running a design practice?",
+        body: "Tell us what kind of client you want more of, and we'll show you how the site can put the right work in front of them.",
+        ctaLabel: "Book a call",
+        ctaHref: "/book-a-demo",
+      },
+    },
+    faq: [
+      {
+        q: "What does Linestory Studio do?",
+        a: "It's an architecture and interior design studio in Nagpur, working on offices, homes and hospitality spaces.",
+      },
+      {
+        q: "What did we build?",
+        a: "Their website: an image-first project grid with a works filter for completed, ongoing and interior projects, and contact details always in view.",
+      },
+    ],
+  },
 ];
