@@ -230,7 +230,8 @@ export async function getAdjacentPosts(slug: string): Promise<{ prev: PostMeta |
 
 export async function getAllTags(): Promise<string[]> {
   const set = new Set<string>();
-  for (const p of await getAllPosts()) p.tags.forEach((t) => set.add(t));
+  // Only tags that make a URL (a tag typed in Hindi slugifies to nothing).
+  for (const p of await getAllPosts()) p.tags.forEach((t) => slugify(t) && set.add(t));
   return [...set].sort();
 }
 

@@ -39,7 +39,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return {};
   const { meta, seo } = post;
   const url = `${site.url}/blog/${slug}`;
-  const image = seo.ogImage ? { url: seo.ogImage, alt: seo.ogImageAlt || meta.title } : { url: `${url}/opengraph-image`, alt: meta.title };
+  // Share image: the custom social image, else the featured image, else the
+  // generated branded card (matches what the editor's Social tab previews).
+  const image = seo.ogImage
+    ? { url: new URL(seo.ogImage, site.url).toString(), alt: seo.ogImageAlt || meta.title }
+    : meta.cover
+      ? { url: new URL(meta.cover, site.url).toString(), alt: meta.coverAlt || meta.title }
+      : { url: `${url}/opengraph-image`, alt: meta.title };
   const [index, follow] = seo.robots.split(",");
   return {
     title: seo.metaTitle ? { absolute: seo.metaTitle } : meta.title,
@@ -78,6 +84,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
   const { meta, html, comments, faq, tldr, author, seo } = post;
   const url = `${site.url}/blog/${slug}`;
+  // Tags with no Latin letters (e.g. typed in Hindi) have no tag page URL.
+  const linkedTags = meta.tags.filter((t) => slugify(t));
   const heroDate = (() => {
     const d = new Date(meta.date);
     return Number.isNaN(+d)
@@ -270,9 +278,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             )}
 
             {/* tags */}
-            {meta.tags.length > 0 && (
+            {linkedTags.length > 0 && (
               <div className="mt-10 flex flex-wrap gap-2 border-t border-border pt-6">
-                {meta.tags.map((t) => (
+                {linkedTags.map((t) => (
                   <Link
                     key={t}
                     href={`/blog/tag/${slugify(t)}`}
