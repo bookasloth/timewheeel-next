@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { Spinner } from "@/components/admin/feedback";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { MagnifyingGlass, Trash } from "@phosphor-icons/react";
@@ -88,7 +89,8 @@ export function LeadStatusControl({ id, status, deliveredUrl }: { id: string; st
       )}
       {emails && <p className="rounded-[3px] border border-amber-200 bg-amber-50 px-2.5 py-2 text-xs text-amber-800">Saving this sends the customer an automatic email.</p>}
       <button type="button" disabled={pending || (next === status && (next !== "delivered" || url === (deliveredUrl ?? "")))} onClick={save} className={btn.primary + " w-full justify-center"}>
-        {pending ? "Saving..." : "Update status"}
+        {pending && <Spinner className="size-3.5" />}
+        {pending ? "Updating status..." : "Update status"}
       </button>
     </div>
   );

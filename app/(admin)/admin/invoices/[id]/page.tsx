@@ -7,6 +7,7 @@ import { InvoiceEditor } from "@/components/admin/invoices/invoice-editor";
 import { getInvoice, sellerExtras } from "@/lib/admin/invoice-data";
 import { deleteInvoice, duplicateInvoice } from "@/lib/admin/invoice-actions";
 import { requireAdmin } from "@/lib/members/session";
+import { SubmitButton } from "@/components/admin/feedback-client";
 
 export const metadata: Metadata = { title: "Invoice" };
 
@@ -26,16 +27,16 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
             </Link>
             <form action={duplicateInvoice}>
               <input type="hidden" name="id" value={inv.id} />
-              <button type="submit" className={btn.ghost}>
+              <SubmitButton variant="ghost" pendingLabel="Duplicating...">
                 <Copy size={16} /> Duplicate
-              </button>
+              </SubmitButton>
             </form>
             {inv.status === "draft" && (
               <form action={deleteInvoice}>
                 <input type="hidden" name="id" value={inv.id} />
-                <button type="submit" className={btn.ghost} aria-label="Delete draft">
+                <SubmitButton variant="ghost" pendingLabel="Deleting..." aria-label="Delete draft">
                   <Trash size={16} />
-                </button>
+                </SubmitButton>
               </form>
             )}
           </>

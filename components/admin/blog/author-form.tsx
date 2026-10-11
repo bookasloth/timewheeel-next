@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState, useTransition } from "react";
+import { Spinner } from "@/components/admin/feedback";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ImageSquare, Trash } from "@phosphor-icons/react";
@@ -100,7 +101,7 @@ export function AuthorForm({ author, onDone }: { author: BlogAuthor | null; onDo
         </div>
       </div>
       <div className="flex items-center justify-between gap-3">
-        <button type="submit" disabled={pending} className={btn.primary}>{pending ? "Saving..." : author ? "Save author" : "Add author"}</button>
+        <button type="submit" disabled={pending} aria-busy={pending} className={`${btn.primary} disabled:cursor-not-allowed disabled:opacity-70`}>{pending && <Spinner className="size-3.5" />}{pending ? "Saving author..." : author ? "Save author" : "Add author"}</button>
         {author && (
           <button type="button" disabled={deleting} onClick={remove} className={btn.smDanger}>
             <Trash size={14} /> Delete
