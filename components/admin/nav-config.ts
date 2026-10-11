@@ -6,7 +6,7 @@
 // `icon` is a Phosphor component name resolved by icon-map.ts.
 // `color` is the section colour for the rail glyph and active accents.
 
-export type BadgeKey = "newMembers";
+export type BadgeKey = "newMembers" | "newMessages";
 export type Badges = Partial<Record<BadgeKey, number>>;
 
 export interface NavItem {
@@ -23,6 +23,8 @@ export interface NavSection {
   icon: string;
   color: string;
   items: NavItem[];
+  /** Also shown to writers (who only get the blog editor). */
+  writer?: boolean;
 }
 
 export const NAV: NavSection[] = [
@@ -32,6 +34,29 @@ export const NAV: NavSection[] = [
     icon: "Gauge",
     color: "#3b82f6",
     items: [{ label: "Dashboard", href: "/admin", icon: "House" }],
+  },
+  {
+    key: "blog",
+    label: "Blog",
+    icon: "Article",
+    color: "#10b981",
+    writer: true,
+    items: [
+      { label: "Posts", href: "/admin/blog", icon: "Notepad" },
+      { label: "New post", href: "/admin/blog/new", icon: "PencilSimpleLine" },
+      { label: "Authors", href: "/admin/blog/authors", icon: "IdentificationCard" },
+      { label: "View blog", href: "/blog", icon: "ArrowSquareOut", external: true },
+    ],
+  },
+  {
+    key: "inbox",
+    label: "Inbox",
+    icon: "Tray",
+    color: "#f59e0b",
+    items: [
+      { label: "Messages", href: "/admin/inbox", icon: "EnvelopeSimple", badge: "newMessages" },
+      { label: "Subscribers", href: "/admin/subscribers", icon: "UsersFour" },
+    ],
   },
   {
     key: "library",

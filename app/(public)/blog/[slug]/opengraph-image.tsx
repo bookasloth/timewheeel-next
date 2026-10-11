@@ -7,7 +7,7 @@ export const alt = "Timewheel blog";
 
 export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   const title = post?.meta.title ?? "Timewheel Blog";
   const category = post?.meta.category ?? "Blog";
 

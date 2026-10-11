@@ -16,8 +16,12 @@ export const metadata: Metadata = {
   ...social({ path: "/blog", title: TITLE, description: DESC }),
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+// Saving in the admin blog editor revalidates this page; the timer makes
+// scheduled posts appear on time.
+export const revalidate = 300;
+
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
   return (
     <>

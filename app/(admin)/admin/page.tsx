@@ -4,7 +4,8 @@ import { ChatsCircle, Crown, CurrencyInr, DownloadSimple, UserPlus, Users } from
 import { EmptyState, PageHeader, Panel, StatCard, StatusBadge, Table, Td, Th, btn } from "@/components/admin/ui";
 import { getAdminStats, listAllDownloads, listPayments } from "@/lib/members/admin-data";
 import { formatDate } from "@/lib/members/config";
-import { requireAdmin } from "@/lib/members/session";
+import { redirect } from "next/navigation";
+import { requireStaff } from "@/lib/members/session";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
@@ -12,7 +13,8 @@ const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const premiumActive = (until: string | null) => Boolean(until && new Date(until) > new Date());
 
 export default async function AdminDashboard() {
-  await requireAdmin();
+  // Writers only have the blog editor.
+  if (!(await requireStaff()).isAdmin) redirect("/admin/blog");
   const [{ stats, newest }, downloads, payments] = await Promise.all([getAdminStats(), listAllDownloads(), listPayments(5)]);
   const top = [...downloads].sort((a, b) => b.downloads - a.downloads).slice(0, 5);
 

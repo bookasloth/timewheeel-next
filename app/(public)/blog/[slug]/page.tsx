@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Calendar, Check, ChevronRight, Clock, User } from "lucide-react";
 import { site } from "@/lib/site";
 import { organizationLd, websiteLd, breadcrumbLd } from "@/lib/jsonld";
 import {
   getAllSlugs,
   getPost,
-  getAuthor,
+  getRenamedSlug,
   getRelatedPosts,
   getAdjacentPosts,
-  extractFaq,
   extractHeadings,
   formatDate,
   slugify,
 } from "@/lib/blog";
-import { Markdown } from "@/components/blog/markdown";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { ShareRail } from "@/components/blog/share-rail";
 import { AuthorCard } from "@/components/blog/author-card";
@@ -25,47 +23,61 @@ import { Comments } from "@/components/blog/comments";
 import { ReadingProgress } from "@/components/blog/reading-progress";
 import { PostCta } from "@/components/blog/post-cta";
 
-export function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+// Posts come from the admin blog editor. Saving revalidates the page at once;
+// this timer is the backstop that makes scheduled posts appear on time.
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return (await getAllSlugs()).map((slug) => ({ slug }));
 }
+
+const FAQ_ID = "frequently-asked-questions";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) return {};
-  const { meta } = post;
+  const { meta, seo } = post;
   const url = `${site.url}/blog/${slug}`;
+  const image = seo.ogImage ? { url: seo.ogImage, alt: seo.ogImageAlt || meta.title } : { url: `${url}/opengraph-image`, alt: meta.title };
+  const [index, follow] = seo.robots.split(",");
   return {
-    title: meta.title,
+    title: seo.metaTitle ? { absolute: seo.metaTitle } : meta.title,
     description: meta.description,
-    alternates: { canonical: url },
+    keywords: seo.keywords.length ? seo.keywords : undefined,
+    alternates: { canonical: seo.canonical || url },
+    robots: { index: index !== "noindex", follow: follow !== "nofollow" },
     openGraph: {
       type: "article",
       url,
       siteName: site.name,
-      title: meta.ogTitle ?? meta.title,
+      title: meta.ogTitle ?? seo.metaTitle ?? meta.title,
       description: meta.ogDescription ?? meta.description,
       publishedTime: meta.date,
-      modifiedTime: meta.date,
+      modifiedTime: meta.updated,
       authors: [meta.author],
-      images: [`${url}/opengraph-image`],
+      tags: meta.tags,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
-      title: meta.ogTitle ?? meta.title,
+      title: meta.ogTitle ?? seo.metaTitle ?? meta.title,
       description: meta.ogDescription ?? meta.description,
-      images: [`${url}/opengraph-image`],
+      images: [image.url],
     },
   };
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPost(slug);
-  if (!post) notFound();
-  const { meta, content, comments } = post;
+  const post = await getPost(slug);
+  if (!post) {
+    const renamed = await getRenamedSlug(slug);
+    if (renamed) permanentRedirect(`/blog/${renamed}`);
+    notFound();
+  }
+  const { meta, html, comments, faq, tldr, author, seo } = post;
   const url = `${site.url}/blog/${slug}`;
-  const author = getAuthor(meta.author);
   const heroDate = (() => {
     const d = new Date(meta.date);
     return Number.isNaN(+d)
@@ -82,10 +94,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E\")";
   const tornEdge =
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='700' preserveAspectRatio='none'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.016 0.03' numOctaves='2' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='22'/%3E%3C/filter%3E%3Crect x='11' y='11' width='1178' height='678' rx='30' fill='%23fff' filter='url(%23r)'/%3E%3C/svg%3E\")";
-  const headings = extractHeadings(content);
-  const faq = extractFaq(content);
-  const related = getRelatedPosts(slug, meta.category);
-  const { prev, next } = getAdjacentPosts(slug);
+  const headings = [...extractHeadings(html), ...(faq.length ? [{ text: "Frequently asked questions", id: FAQ_ID }] : [])];
+  const [related, { prev, next }] = await Promise.all([getRelatedPosts(slug, meta.category), getAdjacentPosts(slug)]);
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -93,12 +103,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     headline: meta.title,
     description: meta.description,
     datePublished: meta.date,
-    dateModified: meta.date,
+    dateModified: meta.updated,
     articleSection: meta.category,
-    keywords: meta.tags.join(", "),
+    keywords: [...new Set([...seo.keywords, ...meta.tags])].join(", "),
     inLanguage: "en",
-    wordCount: content.trim().split(/\s+/).length,
-    image: `${url}/opengraph-image`,
+    wordCount: post.wordCount,
+    image: seo.ogImage || meta.cover ? new URL(seo.ogImage || meta.cover!, site.url).toString() : `${url}/opengraph-image`,
     mainEntityOfPage: url,
     isPartOf: { "@id": `${site.url}/#website` },
     author: {
@@ -106,6 +116,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       name: author.name,
       jobTitle: author.role,
       description: author.bio,
+      ...(author.url ? { url: author.url } : {}),
+      ...(author.photo ? { image: author.photo } : {}),
+      ...(author.sameAs ? { sameAs: author.sameAs } : {}),
       worksFor: { "@id": `${site.url}/#organization` },
     },
     publisher: { "@id": `${site.url}/#organization` },
@@ -199,7 +212,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={meta.cover}
-              alt={meta.title}
+              alt={meta.coverAlt || meta.title}
               className="h-full min-h-[240px] w-full rounded-3xl border border-border object-cover shadow-sm"
             />
           ) : (
@@ -221,6 +234,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* mobile share row */}
             <div className="mb-6 lg:hidden"><ShareRail url={url} title={meta.title} /></div>
 
+            {tldr && (
+              <aside className="mb-6 rounded-2xl border border-border bg-secondary/40 p-6">
+                <p className="text-xs font-bold uppercase tracking-wide text-brand-text">TL;DR</p>
+                <p className="mt-2 leading-relaxed text-foreground/85">{tldr}</p>
+              </aside>
+            )}
+
             {meta.takeaways && meta.takeaways.length > 0 && (
               <aside className="mb-8 rounded-2xl border border-brand/20 bg-brand/5 p-6">
                 <p className="text-xs font-bold uppercase tracking-wide text-brand">Key takeaways</p>
@@ -235,7 +255,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </aside>
             )}
 
-            <Markdown content={content} />
+            <div className="blog-body" dangerouslySetInnerHTML={{ __html: html }} />
+
+            {faq.length > 0 && (
+              <section className="blog-body" aria-labelledby={FAQ_ID}>
+                <h2 id={FAQ_ID}>Frequently asked questions</h2>
+                {faq.map((f) => (
+                  <div key={f.q}>
+                    <h3>{f.q}</h3>
+                    <p>{f.a}</p>
+                  </div>
+                ))}
+              </section>
+            )}
 
             {/* tags */}
             {meta.tags.length > 0 && (

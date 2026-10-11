@@ -71,6 +71,7 @@ export default async function AdminMembersPage({ searchParams }: { searchParams:
                     <Td>
                       <div className="flex flex-wrap gap-1">
                         {u.role === "admin" && <StatusBadge status="admin" />}
+                        {u.role === "writer" && <StatusBadge status="writer">Blog writer</StatusBadge>}
                         <StatusBadge status={active ? (isLifetime(u.premium_until) ? "lifetime" : "premium") : "free"}>
                           {active ? (isLifetime(u.premium_until) ? "Lifetime" : `Premium to ${formatDate(u.premium_until)}`) : "Free"}
                         </StatusBadge>
@@ -99,6 +100,18 @@ export default async function AdminMembersPage({ searchParams }: { searchParams:
                             <input type="hidden" name="op" value="revoke" />
                             <ConfirmSubmit message={`Remove Premium from ${u.email}?`} className="h-7 px-2 text-rose-600">
                               Remove Premium
+                            </ConfirmSubmit>
+                          </form>
+                        )}
+                        {u.id !== me.id && u.role !== "admin" && (
+                          <form action={setRole}>
+                            <input type="hidden" name="user_id" value={u.id} />
+                            <input type="hidden" name="role" value={u.role === "writer" ? "member" : "writer"} />
+                            <ConfirmSubmit
+                              message={u.role === "writer" ? `Remove blog access from ${u.email}?` : `Make ${u.email} a blog writer? Writers can create, edit, publish and delete blog posts, and see nothing else in admin.`}
+                              className="h-7 px-2"
+                            >
+                              {u.role === "writer" ? "Remove writer" : "Make writer"}
                             </ConfirmSubmit>
                           </form>
                         )}

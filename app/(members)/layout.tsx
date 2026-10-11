@@ -13,7 +13,7 @@ export default async function MembersAppLayout({ children }: { children: ReactNo
   const { unread, latest } = await getNotificationSummary();
   return (
     <MemberAppShell
-      member={{ name: m.name, email: m.email, avatarUrl: m.avatarUrl, isPremium: m.isPremium, hasPaidPremium: m.hasPaidPremium, isAdmin: m.isAdmin }}
+      member={{ name: m.name, email: m.email, avatarUrl: m.avatarUrl, isPremium: m.isPremium, hasPaidPremium: m.hasPaidPremium, isAdmin: m.isAdmin, canWriteBlog: m.canWriteBlog }}
       unread={unread}
       latest={latest}
     >

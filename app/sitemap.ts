@@ -22,8 +22,11 @@ function entry(path: string, lastModified: string, priority: number, changeFrequ
   return { url: `${site.url}${path}`, lastModified, changeFrequency, priority };
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts = getAllPosts();
+// Blog entries come from the database, so rebuild the sitemap regularly.
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [posts, tags] = await Promise.all([getAllPosts(), getAllTags()]);
   const latestPost = posts[0]?.date || SITE_UPDATED;
 
   const services = [
@@ -55,8 +58,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/case-studies", CASE_STUDIES_UPDATED, 0.8, "weekly"),
     ...caseStudies.map((cs) => entry(cs.href, CASE_STUDIES_UPDATED, 0.7, "monthly")),
     entry("/blog", latestPost, 0.8, "weekly"),
-    ...posts.map((p) => entry(`/blog/${p.slug}`, p.date || latestPost, 0.7, "monthly")),
-    ...getAllTags().map((tag) => entry(`/blog/tag/${slugify(tag)}`, latestPost, 0.3, "weekly")),
+    ...posts.map((p) => entry(`/blog/${p.slug}`, p.updated || p.date || latestPost, 0.7, "monthly")),
+    ...tags.map((tag) => entry(`/blog/tag/${slugify(tag)}`, latestPost, 0.3, "weekly")),
     entry("/products/book-a-sloth", PRODUCTS_UPDATED, 0.8, "monthly"),
     entry("/products/alluminaty", PRODUCTS_UPDATED, 0.7, "monthly"),
     entry("/products/ticket-dino", PRODUCTS_UPDATED, 0.5, "monthly"),

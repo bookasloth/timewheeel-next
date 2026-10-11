@@ -12,6 +12,15 @@ export const btn = {
   smDanger: "inline-flex h-7 items-center gap-1 rounded-[3px] px-2.5 text-xs font-medium text-rose-600 transition-colors hover:bg-rose-50 disabled:opacity-60",
 };
 
+/** Console form controls. */
+export const field = {
+  input: "h-9 w-full rounded-[3px] border border-gray-300 bg-white px-3 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#F45B0A] focus:ring-2 focus:ring-orange-500/15 disabled:opacity-60",
+  textarea: "w-full resize-y rounded-[3px] border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-[#F45B0A] focus:ring-2 focus:ring-orange-500/15",
+  select: "h-9 w-full rounded-[3px] border border-gray-300 bg-white px-2.5 text-sm text-gray-900 outline-none focus:border-[#F45B0A] focus:ring-2 focus:ring-orange-500/15",
+  label: "mb-1 block text-[11px] font-medium uppercase tracking-wider text-gray-500",
+  hint: "mt-1 text-xs text-gray-500",
+};
+
 export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: ReactNode }) {
   return (
     <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -85,6 +94,15 @@ const STATUS: Record<string, string> = {
   published: "border-emerald-200 bg-emerald-50 text-emerald-700",
   hidden: "border-gray-200 bg-gray-100 text-gray-600",
   unconfirmed: "border-amber-200 bg-amber-50 text-amber-700",
+  draft: "border-gray-200 bg-gray-50 text-gray-600",
+  scheduled: "border-sky-200 bg-sky-50 text-sky-700",
+  writer: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  new: "border-orange-200 bg-orange-50 text-[#C2410C]",
+  contacted: "border-sky-200 bg-sky-50 text-sky-700",
+  delivered: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  upsell: "border-violet-200 bg-violet-50 text-violet-700",
+  won: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  lost: "border-gray-200 bg-gray-100 text-gray-500",
 };
 
 export function StatusBadge({ status, children }: { status: string; children?: ReactNode }) {

@@ -127,9 +127,35 @@ Premium checkout also needs the existing Zoho Payments variables (it reuses `/pa
 
 Sign up on the live site with `team@timewheel.co.in` (Google is quickest). Any address
 in `MEMBERS_ADMIN_EMAILS` is an admin once its email is verified. To make someone else an
-admin, use **Make admin** on `/members/admin/members`.
+admin, use **Make admin** on `/admin/members`.
+
+### 7. Blog editor (migration 0008)
+
+Run `supabase/migrations/0008_blog.sql` in the SQL Editor before the blog editor PR is
+merged. It creates the blog tables, the public `blog-images` bucket and the Writer role,
+and moves the existing markdown post into the database (same URL). Then:
+
+- Write at **/admin/blog** (Admin console, Blog). Drafts are private; Published with a
+  future date is scheduled and goes live on its own (pages re-check every 5 minutes).
+- Give someone blog access only: **Make writer** on `/admin/members`. Writers see the
+  Blog section and nothing else.
+- Approve blog comments (they still arrive by email) by pasting them into the post's
+  **Approved comments** panel.
 
 ## How things work
+
+- **Blog.** Posts live in `blog_posts` and are read with the publishable key, so RLS only
+  ever returns published posts whose publish time has passed. Every save that touches a
+  published post snapshots the old version into `blog_post_revisions` (newest 30 kept;
+  Restore is in the editor sidebar). Renaming a live post's slug stores the old one in
+  `blog_redirects`, which 308-redirects to the new URL. Body HTML is sanitized on save and
+  again on render. Images upload straight to the `blog-images` bucket via one-time signed
+  URLs (raster only, 5 MB). Saving revalidates `/blog`, the post, tag pages, the sitemap
+  and `/blog/feed.xml`.
+- **Inbox.** `/admin/inbox` lists the `leads` table (every website form). Setting a lead
+  to Delivered or Upsell sends the customer the lifecycle email (migration 0002 trigger),
+  so the console asks first. `/admin/subscribers` reads the Resend newsletter audience
+  directly and can remove contacts or export CSV.
 
 - **Premium.** A member has Premium while `memberships.premium_until` is in the future.
   It's granted three ways: (1) a Zoho payment from `/members/premium-downloads`. When the
@@ -154,7 +180,7 @@ admin, use **Make admin** on `/members/admin/members`.
 
 `npm run dev` with `.env.local` uses the real project. To test without touching
 production, run a local Supabase (`npx supabase start`), apply migrations 0001, 0003,
-0004, 0005 and 0006, and point `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_URL`,
+0004, 0005, 0006, 0007 and 0008, and point `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_URL`,
 `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` and `SUPABASE_SECRET_KEY` at it. Sign-up emails
 land in Mailpit (`supabase status` shows the URL). On recent Supabase CLI versions,
 run `grant all on public.rate_limits, public.payments to service_role;` locally,
