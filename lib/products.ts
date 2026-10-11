@@ -6,6 +6,7 @@ import {
   GraduationCap,
   LinkSimple,
   MagnifyingGlass,
+  Storefront,
   Student,
   Ticket,
   UsersThree,
@@ -29,23 +30,23 @@ export type Product = {
   bullets?: string[];
 };
 
-// The first four are `featured`, they drive both the navbar "What We Built"
-// dropdown and the homepage ecosystem section, in this order.
+// Entries marked `featured` drive the navbar "What We Built" dropdown and the
+// footer product links, in this order.
 export const products: Product[] = [
   {
     slug: "alluminaty",
     name: "Alluminaty",
-    tagline: "Where Your Alumni Network Lives",
+    tagline: "Alumni Management Software",
     icon: GraduationCap,
     accent: "#269cef",
     href: "/products/alluminaty",
     featured: true,
     blurb:
-      "The modern social network for alumni, a verified community your institution owns. Keep graduates reachable, give students mentors and jobs, and fund scholarships, all under your brand.",
+      "Alumni management software for schools and colleges: a verified alumni directory your institution owns, batch groups, events, membership fees and fundraising in one branded portal.",
     bullets: [
-      "Verified alumni directory your institution owns",
-      "Mentors, referrals and jobs for your students",
-      "Chapters, events and giving in one branded home",
+      "Verified alumni directory and database",
+      "Events, batch groups and paid memberships",
+      "Fundraising with receipts and a sponsor wall",
     ],
   },
   {
@@ -99,10 +100,34 @@ export const products: Product[] = [
   {
     slug: "the-parliament",
     name: "The Parliament",
-    tagline: "Run Communities & Memberships",
+    tagline: "Online Community Platform",
     icon: UsersThree,
     accent: "#ff4d93",
-    href: "#",
+    href: "/products/the-parliament",
+    featured: true,
+    blurb:
+      "An online community platform for groups that outgrew WhatsApp: feed, groups, paid events and memberships via Razorpay, DMs, video calls and moderation in one app.",
+    bullets: [
+      "Feed, groups and events in one place",
+      "Paid memberships and event tickets via Razorpay",
+      "Moderation, roles and WhatsApp broadcasts",
+    ],
+  },
+  {
+    slug: "ezshop",
+    name: "EZShop",
+    tagline: "Online Store Builder",
+    icon: Storefront,
+    accent: "#10b981",
+    href: "/products/ezshop",
+    featured: true,
+    blurb:
+      "An online store builder for Indian D2C brands and local shops: UPI, cards and COD via Razorpay, GST invoices, shipping and WhatsApp order updates, with no commission on orders.",
+    bullets: [
+      "Storefront, catalogue, variants and stock",
+      "Razorpay UPI, cards and Cash on Delivery",
+      "GST invoices, Shiprocket and WhatsApp updates",
+    ],
   },
   {
     slug: "link-lantern",

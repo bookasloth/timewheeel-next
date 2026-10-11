@@ -35,7 +35,6 @@ function RevealWords({
         <motion.span
           key={`${i}-${w}`}
           className="az-hero-word"
-          aria-hidden
           initial={reduce ? false : { opacity: 0, y: 28, filter: "blur(10px)" }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "0px 0px -12% 0px" }}
@@ -65,10 +64,11 @@ export function AzHero() {
     <section className="az-hero">
       <div className="az-hero-center">
         <h1 className="az-hero-title">
-          <RevealWords text={az.hero.titleLine1} />
+          <RevealWords text={az.hero.titleLine1} />{" "}
           <br />
           <RevealWords text={az.hero.titleAccent} className="az-hero-accent" start={0.32} />
         </h1>
+        <p className="az-hero-body">{az.hero.body}</p>
       </div>
 
       <div className="az-hero-cta-wrap">
@@ -82,6 +82,9 @@ export function AzHero() {
             {az.hero.primaryLabel}
             <ArrowRight size={16} strokeWidth={2.2} aria-hidden="true" />
           </AzButton>
+          <a href={az.hero.secondaryHref} className="az-text-link" target="_blank" rel="noopener noreferrer">
+            {az.hero.secondaryLabel}
+          </a>
         </motion.div>
       </div>
 

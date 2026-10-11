@@ -1,11 +1,11 @@
 import {
   Bell,
+  ChartNoAxesColumn,
   Download,
   EyeOff,
-  Gift,
-  Mail,
+  ReceiptText,
   Repeat,
-  ShoppingBag,
+  Upload,
   Wallet,
   Zap,
 } from "lucide-react";
@@ -15,11 +15,11 @@ import { Reveal } from "@/components/reveal";
 const iconMap = {
   wallet: Wallet,
   repeat: Repeat,
-  bag: ShoppingBag,
-  mail: Mail,
+  receipt: ReceiptText,
+  upload: Upload,
+  chart: ChartNoAxesColumn,
   download: Download,
   zap: Zap,
-  gift: Gift,
   eye: EyeOff,
   bell: Bell,
 } as const;

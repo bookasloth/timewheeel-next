@@ -204,12 +204,12 @@ export const productCaseStudies: CaseStudy[] = [
         title: "Creators paid directly,",
         titleAccent: "by the people who value them.",
         summary:
-          "Coffee and Toffee lets an audience support a creator with a simple contribution, with instant payouts and no monthly fee, so the relationship and the revenue stay in the creator's hands.",
+          "Coffee and Toffee lets an audience support a creator with a simple contribution, with 0% platform fee on tips and payouts straight to the creator's bank, so the relationship and the revenue stay in the creator's hands.",
         primaryCta: { label: "Book a call", href: "/book-a-demo" },
         secondaryCta: { label: "More case studies", href: "/case-studies" },
       },
       stats: [
-        { value: "3%", label: "per contribution" },
+        { value: "0%", label: "platform fee on tips" },
         { value: "Instant", label: "payouts" },
         { value: "Zero", label: "monthly fee" },
         { value: "Direct", label: "supporter messages" },
@@ -233,13 +233,13 @@ export const productCaseStudies: CaseStudy[] = [
             "Simple tipping and creator support tools",
             "Direct audience-to-creator monetization",
             "Supporter messages, so support is two-way",
-            "Instant payouts rather than a monthly settlement window",
+            "Payouts to the creator's bank via Razorpay Route, not a monthly settlement window",
           ],
         },
         {
           eyebrow: "What's Shipped",
           title: "No monthly fee, one transparent rate.",
-          body: "The published model is 3% per contribution with instant payouts and no monthly fee. For a creator who would otherwise pay a subscription to receive support, the cost only exists when the support does.",
+          body: "Tips carry a 0% platform fee and there is no monthly fee; the creator pays only the payment gateway's charge. For a creator who would otherwise pay a subscription to receive support, the cost only exists when the support does.",
         },
       ],
       closing: {
@@ -252,11 +252,11 @@ export const productCaseStudies: CaseStudy[] = [
     faq: [
       {
         q: "What is Coffee and Toffee?",
-        a: "A creator monetization platform. Audiences support creators through simple contributions, with instant payouts, supporter messages and no monthly fee.",
+        a: "A creator monetization platform. Audiences support creators through simple contributions, with 0% platform fee on tips, supporter messages and no monthly fee.",
       },
       {
         q: "How much does it cost?",
-        a: "3% per contribution, with no monthly fee.",
+        a: "0% platform fee on tips and no monthly fee; only the payment gateway charge applies.",
       },
       {
         q: "Who is it for?",

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { az } from "@/lib/alluminaty";
@@ -20,6 +21,12 @@ export function AzFinalCta() {
               {az.final.secondaryLabel}
             </AzButton>
           </div>
+          <p className="az-cta-body">
+            {az.final.relatedText}{" "}
+            <Link href={az.final.relatedHref} className="underline underline-offset-4">
+              {az.final.relatedLabel}
+            </Link>
+          </p>
         </Reveal>
       </div>
     </section>

@@ -19,9 +19,11 @@ Sitemap: https://timewheel.co.in/sitemap.xml
 
 ## Products
 - [Book A Sloth](https://timewheel.co.in/products/book-a-sloth): An India-first appointment booking and scheduling platform Timewheel designed and built. 24/7 booking pages, UPI and Razorpay payments, two-way Google Calendar sync, WhatsApp and email reminders, GST invoicing, and a business dashboard. Live at https://bookasloth.com.
-- [Alluminaty](https://timewheel.co.in/products/alluminaty): A social network for alumni that an institution owns under its own brand: a verified alumni directory, mentorship, jobs and referrals, chapters, events and reunions, and scholarship fundraising.
+- [Alluminaty](https://timewheel.co.in/products/alluminaty): Alumni management software for schools, colleges and universities: a verified alumni database and directory the institution owns, batch and house groups, events with paid registration, Razorpay membership fees, fundraising with receipts, and an admin console.
+- [The Parliament](https://timewheel.co.in/products/the-parliament): An online community platform for communities that outgrew WhatsApp groups: feed, groups, events with paid registration, paid memberships via Razorpay, DMs, video calls, moderation and WhatsApp broadcasts.
+- [EZShop](https://timewheel.co.in/products/ezshop): An online store builder for Indian D2C brands and local shops: Razorpay UPI, cards and Cash on Delivery, GST invoices, Shiprocket shipping, and WhatsApp order updates, with no commission on orders.
 - [Ticket Dino](https://timewheel.co.in/products/ticket-dino): An event ticketing and management platform for organizers, covering ticket sales, attendee management and analytics. Launching soon.
-- [Coffee & Toffee](https://timewheel.co.in/coffee-and-toffee): A creator monetization platform: accept coffees, toffees, memberships and shop sales from one page, with instant payouts and full ownership of the supporter list.
+- [Coffee & Toffee](https://timewheel.co.in/coffee-and-toffee): A Buy Me a Coffee alternative for India: creators accept tips and memberships by UPI, cards and net banking with 0% platform fee on tips, payouts to their bank via Razorpay Route, plus an own-site licence for a single creator.
 
 ## Case Studies
 - [All case studies](https://timewheel.co.in/case-studies): How Timewheel designs, builds and ships websites, products and marketing, with the challenges and decisions behind each one.

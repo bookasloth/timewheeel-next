@@ -4,21 +4,22 @@ import { useState } from "react";
 import {
   Candy,
   Coffee,
-  Mail,
+  Download,
   Minus,
+  Newspaper,
   Plus,
+  QrCode,
   Repeat,
-  ShoppingBag,
-  Users,
-  Zap,
+  Trophy,
 } from "lucide-react";
 import { type CfData } from "@/lib/coffee-and-toffee";
 import { Reveal } from "@/components/reveal";
 
-const icons = [Coffee, Repeat, ShoppingBag, Mail, Users, Zap];
+const icons = [Coffee, Repeat, Trophy, Newspaper, Download, QrCode];
 
 type MiniQty = { coffee: number; toffee: number };
-const PRICES = { coffee: 5, toffee: 10 };
+// Demo prices = the platform's defaults (Coffee ₹20, Toffee ₹5); creators set their own.
+const PRICES = { coffee: 20, toffee: 5 };
 
 function MiniWidget() {
   const [qty, setQty] = useState<MiniQty>({ coffee: 1, toffee: 0 });
@@ -35,7 +36,7 @@ function MiniWidget() {
       <div className="cf-mini-row">
         <span className="cf-mini-label">
           <Coffee size={13} strokeWidth={2.2} aria-hidden="true" />
-          Coffee ₹5
+          Coffee ₹{PRICES.coffee}
         </span>
         <span className="cf-mini-stepper">
           <button type="button" aria-label="Fewer coffees" onClick={() => step("coffee", -1)}>
@@ -50,7 +51,7 @@ function MiniWidget() {
       <div className="cf-mini-row">
         <span className="cf-mini-label">
           <Candy size={13} strokeWidth={2.2} aria-hidden="true" />
-          Toffee ₹10
+          Toffee ₹{PRICES.toffee}
         </span>
         <span className="cf-mini-stepper">
           <button type="button" aria-label="Fewer toffees" onClick={() => step("toffee", -1)}>

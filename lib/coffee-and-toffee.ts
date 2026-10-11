@@ -1,27 +1,49 @@
+// Content model for /coffee-and-toffee.
+// Target query: "buy me a coffee alternative india" (commercial, "X alternative").
+// Every product fact below is checked against the product code (hosted platform
+// `platform` branch, licence store, single-creator repo). Competitor facts are
+// from their public pricing pages, October 2026. No invented stats or quotes.
+
+// Hosted platform (beta). The bare *.vercel.app host is the live beta until the
+// platform gets its own domain; swap this one constant when it does.
+const APP_URL = "https://coffee-and-toffee-khaki.vercel.app";
+const SIGNUP_URL = `${APP_URL}/login`;
+
 export const cf = {
   meta: {
-    title: "Coffee & Toffee, Fund Your Creative Work",
+    title: "Buy Me a Coffee Alternative for India | Coffee & Toffee",
     description:
-      "Coffee & Toffee is a creator monetization platform. Accept coffees, memberships and shop sales from one page, with instant payouts and your own supporter list.",
+      "Coffee & Toffee is a Buy Me a Coffee alternative for India: 0% platform fee on tips, UPI, cards and net banking, and payouts by Razorpay to your bank.",
+    keywords: [
+      "buy me a coffee alternative india",
+      "ko-fi alternative india",
+      "accept tips from fans india upi",
+      "upi tip jar for creators",
+      "zero fee donation page for creators",
+      "creator membership upi autopay",
+      "creator support website india",
+    ],
   },
+  appUrl: APP_URL,
   hero: {
-    badge: "Loved by creators on Timewheel",
-    titleLine1: "Turn casual fans",
-    titleAccent: "into warm supporters.",
+    badge: "Now in beta",
+    titleLine1: "Buy Me a Coffee alternative for India,",
+    titleAccent: "with 0% fee on tips.",
     body:
-      "One friendly page for coffees, toffees, memberships, and shop sales. Supporters tap, leave a note, and you get paid instantly, no platform rents your audience.",
-    primaryLabel: "Start my page",
-    primaryHref: "#start",
-    secondaryLabel: "How it works",
-    secondaryHref: "#how",
-    proof: "Free to start · no fees, ever",
+      "Coffee & Toffee is a creator support page built for India. Fans tip you or become monthly members by UPI, card or net banking, in rupees, and Razorpay transfers the money to your own bank account. Tips carry no platform fee, there is no monthly fee, and your only cost is Razorpay's processing fee.",
+    primaryLabel: "Create my free page",
+    primaryHref: SIGNUP_URL,
+    secondaryLabel: "Compare with BMC & Ko-fi",
+    secondaryHref: "#compare",
+    proof: "Free to start · 0% platform fee on tips · now in beta",
   },
+  // Live demo widget copy (components/coffee-and-toffee/support-widget.tsx).
   widget: {
     name: "Coffee & Toffee",
     sub: "Buy me a coffee or a toffee.",
     items: [
-      { id: "coffee", name: "Coffee", price: 5, unit: "cup" },
-      { id: "toffee", name: "Toffee", price: 10, unit: "piece" },
+      { id: "coffee", name: "Coffee", price: 20, unit: "cup" },
+      { id: "toffee", name: "Toffee", price: 5, unit: "piece" },
     ],
     anonymousLabel: "Show me as anonymous.",
     namePlaceholder: "Name (optional)",
@@ -31,235 +53,275 @@ export const cf = {
     defaults: { coffee: 1, toffee: 0 },
     cta: "Support with ₹{total}",
     sent: "Thanks, that's the moment supporters feel!",
-    demoNote:
-      "This is a live demo, the checkout connects to Razorpay in the real product.",
+    demoNote: "This is a demo. On a real page, checkout runs on Razorpay.",
   },
+  // Facts, not vanity numbers. All static (no count-up).
   stats: [
-    { value: 20000, suffix: "+", label: "Creators earning" },
-    { value: 12, prefix: "₹", suffix: "L+", label: "Raised for creators" },
-    { value: 80000, suffix: "+", label: "Supporters giving" },
-    { value: 0, static: "Instant", label: "Payout, no 30-day holds" },
+    { value: "0%", label: "Platform fee on tips" },
+    { value: "₹0", label: "Monthly fee" },
+    { value: "UPI", label: "Plus cards and net banking" },
+    { value: "2 days", label: "To your bank (7 in month one)" },
   ],
   problem: {
     number: "01",
-    label: "THE CHALLENGE",
-    title: "Scattered links, rented audiences, slow money",
+    label: "WHY SWITCH",
+    title: "Why Indian creators look for a Buy Me a Coffee alternative",
     body:
-      "Creators don't have a monetization problem, they have a collection of disconnected payment links, payroll-dollars platforms, and zero ownership.",
+      "Global tip jars were built for card-paying supporters and dollar pricing. Indian fans pay by UPI, tips are often ₹20 to ₹100, and every percentage point taken off a small tip is felt.",
     items: [
       {
-        name: "One-off links, zero relationship",
-        desc: "A tip link buried in your bio turns giving into a transaction. Fans forget it exists, and you never hear from them again.",
+        name: "Your fans pay by UPI",
+        desc: "A support page that leads with a card form loses the supporter who only wants to scan and pay. Coffee & Toffee checkout runs on Razorpay, so UPI is right there.",
       },
       {
-        name: "Platforms rent your audience",
-        desc: "You build the following, the platform keeps the list, the data, and the connection. Leave, and every relationship stays behind.",
+        name: "Small tips, big cuts",
+        desc: "A 5% platform fee on top of processing fees takes a real share of a ₹50 coffee. On Coffee & Toffee, tips carry no platform fee at all.",
       },
       {
-        name: "Slow, withheld payouts",
-        desc: "Thirty-day holds and payout floors mean your work funds someone else's float before you ever see a rupee.",
+        name: "Rupees in, rupees out",
+        desc: "Supporters see prices in rupees and pay in rupees. Razorpay transfers each payment to your Indian bank account, with no currency conversion in between.",
       },
       {
-        name: "Built for businesses, not creators",
-        desc: "Dashboards tuned for ecommerce treat supporters like customers. No notes, no warmth, no community, just transactions.",
+        name: "Supporters, not transactions",
+        desc: "Every tip can carry a note, shows up on your supporter wall and triggers an automatic thank-you post, so giving feels like a conversation.",
       },
     ],
   },
   solution: {
     number: "02",
-    label: "THE SOLUTION",
-    title: "Support that feels human",
+    label: "WHAT IT IS",
+    title: "What is Coffee & Toffee?",
     body:
-      "Coffee & Toffee brings giving, membership, and sales onto one page your fans actually enjoy using, while you keep every relationship.",
+      "Coffee & Toffee is a creator support page for India where fans tip or become monthly members by UPI, and Razorpay transfers the money to the creator's own bank account, with no platform fee on tips.",
     items: [
-      "Coffee & Toffee, one friendly tap to say thanks",
-      "Memberships, a recurring income from your biggest fans",
-      "Shop, ebooks, calls, and commissions, made for creators",
-      "Posts, audio & email, publish free or members-only",
-      "Instant payouts, straight to your bank account",
-      "100% ownership, export your supporter list any time",
+      "A tip menu with two items you name and price",
+      "Monthly memberships by UPI AutoPay or card",
+      "Members-only posts, updates and comments",
+      "A supporter wall with lifetime tiers",
+      "Payouts to your bank through Razorpay Route",
+      "Your supporter list, exportable to CSV",
     ],
   },
   features: {
     number: "03",
     label: "WHAT'S INSIDE",
-    title: "Everything a creator needs to earn",
+    title: "What you get on a free Coffee & Toffee page",
     body:
-      "One page, one payment rail, one supporter list. The six pieces that turn a following into income, without a single SaaS subscription.",
+      "Everything below is live on the hosted platform today, at no monthly cost. Your page sits at its own link, picked from your name.",
     items: [
       {
-        name: "Support widget",
-        desc: "Giving that feels like a gift, not a checkout.",
-        bullets: ["Coffee ₹5 & Toffee ₹10", "Notes up to 250 characters", "Anonymous support"],
+        name: "Tip menu",
+        desc: "Two items, your names and your prices, from ₹1 to ₹10,000 each.",
+        bullets: ["Notes from supporters", "Anonymous support", "Optional 'cover the fee'"],
       },
       {
         name: "Memberships",
         desc: "Recurring income from your most loyal fans.",
-        bullets: ["Monthly or yearly", "Members-only posts", "Email alerts on new content"],
-      },
-      {
-        name: "Creator shop",
-        desc: "Sell what creators sell, ebooks, calls, art.",
-        bullets: ["One-tap checkout", "Digital and physical", "Ratings on your products"],
-      },
-      {
-        name: "Posts, audio & email",
-        desc: "Publish free or exclusive, reach everyone.",
-        bullets: ["Audio and text posts", "Members-only gating", "No marketing tool needed"],
+        bullets: ["₹10 to ₹5,000 a month", "UPI AutoPay or card", "Members cancel any time"],
       },
       {
         name: "Supporter wall",
-        desc: "Social proof that keeps contributions coming.",
-        bullets: ["Names and notes in real time", "Coffee & toffee icons", "Replies to supporters"],
+        desc: "Public thanks that encourages the next supporter.",
+        bullets: ["Pillars ₹2,500+", "Guardians ₹1,000+", "Torchbearers for everyone else"],
       },
-  
+      {
+        name: "Updates & comments",
+        desc: "Post for everyone or for members only.",
+        bullets: ["Text, images, YouTube, Vimeo", "Auto thank-you post per payment", "Email-verified comments"],
+      },
+      {
+        name: "Your supporter list",
+        desc: "The people who back you stay yours.",
+        bullets: ["CSV export any time", "Monthly earnings statement", "One email a day to opted-in fans"],
+      },
+      {
+        name: "Share kit",
+        desc: "Put your page everywhere your audience is.",
+        bullets: ["Page link", "Printable QR code", "'Buy me a coffee' button for your site"],
+      },
     ],
   },
-  benefits: {
+  compare: {
     number: "04",
-    label: "WHY CREATORS STAY",
-    title: "Designed for creators, not for businesses",
+    label: "COMPARE",
+    title: "Coffee & Toffee vs Buy Me a Coffee vs Ko-fi",
     body:
-      "We don't call them customers or transactions. They are your supporters, and the product is built around that.",
+      "Buy Me a Coffee and Ko-fi are good global products. Coffee & Toffee is narrower on purpose: Indian creators, Indian supporters, rupees and Razorpay.",
+    caption: "Fees and payments: Coffee & Toffee compared with Buy Me a Coffee and Ko-fi",
+    columns: ["Coffee & Toffee", "Buy Me a Coffee", "Ko-fi"],
+    rows: [
+      { label: "Platform fee on one-off tips", values: ["0%", "5%", "0%"] },
+      {
+        label: "Platform fee on memberships",
+        values: ["0% in beta; never more than 1%, capped at ₹25", "5%", "5% on the free plan, 0% on paid Ko-fi Gold"],
+      },
+      { label: "Monthly fee to use it", values: ["₹0", "None", "None on the free plan"] },
+      {
+        label: "Payment processor",
+        values: ["Razorpay: UPI, cards, net banking", "Stripe", "PayPal or Stripe"],
+      },
+      {
+        label: "Processing fee",
+        values: ["Razorpay's fee (about 2% + GST); supporters can choose to cover it", "Processor fees on top", "Processor fees on top"],
+      },
+      { label: "Built for", values: ["Indian creators, paid in rupees", "Creators worldwide", "Creators worldwide"] },
+    ],
+    note:
+      "Buy Me a Coffee and Ko-fi details come from their public pricing information, checked in October 2026. Fees change, so confirm on buymeacoffee.com and ko-fi.com before you decide.",
+  },
+  benefits: {
+    number: "05",
+    label: "PRICING",
+    title: "How much does it cost to accept tips in India?",
+    body:
+      "Here is the full cost of a Coffee & Toffee page. Nothing is added at payout time.",
     items: [
       {
-        name: "Supporters, not customers",
-        desc: "Every contribution carries a note and a name. The warmest conversion rate on the internet is a thank-you.",
+        name: "Tips: 0% platform fee",
+        desc: "No platform fee on tips, ever. The full tip, minus Razorpay's processing fee, is transferred to your bank.",
       },
       {
-        name: "You own your list",
-        desc: "We never email your supporters. Export the list to CSV any time, the relationship is yours, full stop.",
+        name: "Memberships: 0% in beta",
+        desc: "No platform fee on memberships during the beta. If one is switched on, it is at most 1% of a payment, capped at ₹25, plus GST.",
       },
       {
-        name: "A human answers",
-        desc: "Get help from a person who cheers for you, not a ticket bot. Advice included on hitting the ground running.",
+        name: "Razorpay's fee",
+        desc: "About 2% + GST per payment, paid by the creator. Supporters can tick 'cover the fee' at checkout to pay it for you.",
       },
       {
-        name: "Paid instantly",
-        desc: "Contributions land straight in your bank. No 30-day delay, no payout floor, no float.",
+        name: "₹0 a month",
+        desc: "No subscription, no setup fee, no card needed to start. You pay only when a supporter pays you.",
       },
     ],
   },
   process: {
-    number: "05",
+    number: "06",
     label: "HOW IT WORKS",
-    title: "From coffee money to steady income",
-    body:
-      "Four steps between a creator and an audience that pays them back for the work they already do.",
+    title: "How to accept support from fans in India",
+    body: "Four steps from sign-up to your first tip.",
     steps: [
       {
-        name: "Create your page",
+        name: "Sign up with your email",
         stop: "01",
-        desc: "Pick your coffee and toffee prices, add your story, it's free and takes under a minute.",
+        desc: "Log in with a one-time code sent to your inbox. No password, no card.",
       },
       {
-        name: "Share your link",
+        name: "Create your page",
         stop: "02",
-        desc: "Drop it in your bio, video descriptions, and newsletter. It looks like a page fans want to open.",
+        desc: "Pick your page link, add a photo and bio, and name and price your two tip items.",
       },
       {
-        name: "Support flows in",
+        name: "Set up payouts",
         stop: "03",
-        desc: "Fans tap coffee or toffee, leave a note, or join a membership. You see it in real time.",
+        desc: "Add your PAN, bank account and address. Razorpay verifies the account, usually within minutes.",
       },
       {
-        name: "Get paid & stay close",
+        name: "Share and get paid",
         stop: "04",
-        desc: "Money hits your bank instantly while you publish updates back to the people who back you.",
+        desc: "Share your link, QR code or button. Each payment reaches your bank 2 days later (7 days in your first month).",
       },
     ],
   },
   capabilities: {
-    number: "06",
-    label: "BUILT BY TIMEWHEEL",
-    title: "The full stack, already done",
+    number: "07",
+    label: "BUILT FOR INDIA",
+    title: "Built around Indian payments",
     body:
-      "Payments, memberships, content, and payouts, engineered once by Timewheel so you never stitch five tools together.",
+      "Coffee & Toffee is made by Timewheel, a product studio in Nagpur. These are the pieces that matter when your supporters are in India.",
     items: [
-      { icon: "wallet", label: "Razorpay, UPI, cards, net-banking" },
-      { icon: "repeat", label: "Memberships & recurring billing" },
-      { icon: "bag", label: "Creator shop with one-tap checkout" },
-      { icon: "mail", label: "Posts, audio & free emails" },
-      { icon: "download", label: "Supporter list with CSV export" },
-      { icon: "zap", label: "Instant payouts to your bank" },
-      { icon: "gift", label: "Totally free, we take no cut" },
-      { icon: "eye", label: "Anonymous support & privacy" },
-      { icon: "bell", label: "Email alerts for every sale" },
+      { icon: "wallet", label: "Razorpay checkout: UPI, cards, net banking" },
+      { icon: "repeat", label: "Memberships by UPI AutoPay or card" },
+      { icon: "zap", label: "Payouts to your bank via Razorpay Route" },
+      { icon: "receipt", label: "GST invoices for GST-registered creators" },
+      { icon: "download", label: "CSV export of supporters and statements" },
+      { icon: "upload", label: "Import supporters from BMC or Ko-fi" },
+      { icon: "chart", label: "Page analytics without cookies" },
+      { icon: "bell", label: "Optional WhatsApp receipts" },
+      { icon: "eye", label: "Anonymous support for shy fans" },
     ],
   },
-  testimonials: {
-    number: "07",
-    label: "FROM THE COMMUNITY",
-    title: "Creators who stopped depending on luck",
+  licence: {
+    number: "08",
+    label: "YOUR OWN SITE",
+    title: "Want your own support website instead?",
     body:
-      "Writers, artists, educators, and indie builders, posting less, earning more, and staying close to the people who matter.",
-    items: [
-      {
-        quote:
-          "I replaced three platforms with one page. Followers who never clicked a Patreon link now buy me coffees every week.",
-        name: "Ananya R.",
-        role: "Newsletter writer",
-        initials: "AR",
-      },
-      {
-        quote:
-          "The tip link paid my server bill on day one. Then a supporter joined a membership, and it's been quiet, steady income since.",
-        name: "Dev K.",
-        role: "Indie developer",
-        initials: "DK",
-      },
-      {
-        quote:
-          "Supporting creators finally feels like buying them a coffee. The notes make it human, I actually get a reply.",
-        name: "Meera S.",
-        role: "Supporter & superfan",
-        initials: "MS",
-      },
+      "Some creators want a support site on their own domain, with supporters paying straight into their own Razorpay account. For them, Timewheel sells a single-creator Coffee & Toffee site licence.",
+    includesTitle: "What the site licence gives you",
+    includes: [
+      "Your own support site on your own domain, for one creator",
+      "Tips, monthly memberships, updates, comments and a supporter wall",
+      "Payments go to your own Razorpay account; no platform in the middle and no platform fee",
+      "Owner dashboard with payments, members, CSV exports and a share kit",
+      "Premium: 12 months of updates and email support, then ₹999 a year",
+      "Optional 'Install for me' set-up on your domain for ₹1,999",
     ],
+    priceLabel: "Premium licence",
+    price: "₹3,650",
+    priceNote:
+      "First year, including GST. Founding-creator price ₹2,499 for the first 100 seats, with renewals at ₹999 a year for life. A free edition (no updates, 'Made with Coffee and Toffee' footer) is also available.",
+    ctaLabel: "Ask about a site licence",
+    ctaHref: "/contact",
+    fit: "Sales open soon. You need your own Razorpay account (KYC done) and a domain.",
   },
   faq: {
-    number: "08",
+    number: "09",
     label: "FAQ",
-    title: "Questions creators ask",
+    title: "Questions Indian creators ask",
     items: [
       {
-        q: "Is it really free?",
-        a: "Yes, 100%. Create your page free and start receiving support immediately. There's no setup fee, no monthly cost, and no cut of your contributions. Every rupee a supporter sends lands in your pocket.",
+        q: "Is there a Buy Me a Coffee alternative made for India?",
+        a: "Yes. Coffee & Toffee is a creator support page built for India by Timewheel. Supporters pay in rupees by UPI, card or net banking through Razorpay, the money is transferred to the creator's Indian bank account, and tips carry no platform fee.",
       },
       {
-        q: "How do creators get paid?",
-        a: "Payouts go straight to your linked bank account through Razorpay. Supporters can pay with UPI, cards, or net-banking, and creators get paid instantly, no 30-day holds or payout minimums.",
+        q: "How do I accept tips from fans in India by UPI?",
+        a: "Create a free Coffee & Toffee page, set up payouts with your PAN and bank account, and share your page link or QR code. Fans tap a coffee or toffee, pay by UPI, card or net banking on Razorpay checkout, and can leave a note.",
       },
       {
-        q: "What's the difference between a Coffee and a Toffee?",
-        a: "A Coffee is the classic ₹5 contribution, a quick way to say thanks. A Toffee is a ₹10 contribution, usually for a stronger thank-you or a shout-out. Both take one tap, let fans leave a note, and land on your supporter wall.",
+        q: "Is Coffee & Toffee really free?",
+        a: "Tips carry a 0% platform fee and there is no monthly fee. Memberships also carry no platform fee during the beta; if one is switched on, it is capped at 1% of a payment and ₹25, plus GST. Razorpay's processing fee (about 2% + GST) is the creator's only cost, and supporters can choose to cover it.",
       },
       {
-        q: "Can I run memberships and a shop too?",
-        a: "Absolutely. The same page powers one-off coffees and toffees, monthly memberships, and a shop for ebooks, calls, commissions, or physical goods, all under one supporter list you own.",
+        q: "When does the money reach my bank account?",
+        a: "Each payment is transferred to your linked bank account through Razorpay Route and released 2 days after the payment. During your first 30 days on the platform the hold is 7 days.",
       },
       {
-        q: "Do I own my supporter list?",
-        a: "Yes. Names, notes, and emails export to CSV any time. Timewheel never emails your supporters and never sells your data, the relationship is yours, even if you leave.",
+        q: "What do I need to set up payouts?",
+        a: "An individual PAN, an Indian bank account with IFSC, a 10-digit Indian mobile number, an email address and your full address. Razorpay verifies the bank account, usually within a few minutes.",
       },
       {
-        q: "What payment methods do supporters use?",
-        a: "UPI, credit and debit cards, and net-banking, processed by Razorpay in the supporter's own currency, so contributing feels effortless whether they're across the street or across the world.",
+        q: "Can I run monthly memberships?",
+        a: "Yes. Set a monthly price between ₹10 and ₹5,000. Members pay by UPI AutoPay or card, unlock your members-only posts with their verified email, and can cancel any time.",
+      },
+      {
+        q: "Can supporters outside India pay me?",
+        a: "Not at the moment. Coffee & Toffee charges in Indian rupees only and does not accept international cards, because it is built for Indian creators and Indian supporters.",
+      },
+      {
+        q: "How is Coffee & Toffee different from Ko-fi?",
+        a: "Both charge no platform fee on one-off tips. Ko-fi charges 5% on memberships and shop sales on its free plan and runs on PayPal or Stripe. Coffee & Toffee runs on Razorpay with UPI, works in rupees, and charges no platform fee on memberships during the beta.",
+      },
+      {
+        q: "Can I move my supporters from Buy Me a Coffee or Ko-fi?",
+        a: "Yes. Upload the supporters CSV you export from Buy Me a Coffee or Ko-fi. Imported supporters only receive emails from you if you confirm they agreed to it, and an unsubscribe always wins.",
+      },
+      {
+        q: "Can I have my own support website instead of a hosted page?",
+        a: "Yes. Timewheel sells a single-creator Coffee & Toffee site licence for your own domain, with payments going to your own Razorpay account. Premium is ₹3,650 for the first year including GST (₹2,499 for the first 100 founding creators), then ₹999 a year. Sales open soon.",
       },
     ],
   },
   final: {
-    number: "09",
+    number: "10",
     label: "YOUR MOVE",
     title: "Start your page.",
     titleAccent: "It's free.",
     body:
-      "Sixty seconds to set up, zero monthly cost, and a payment rail your fans actually want to use. Your audience is ready to support, make it easy for them.",
-    primaryLabel: "Start my page",
-    primaryHref: "#start",
+      "Sign up with your email, name your coffee and toffee, and connect your bank account through Razorpay. Coffee & Toffee is in beta, so tell us if anything feels off and a person will reply.",
+    primaryLabel: "Create my free page",
+    primaryHref: SIGNUP_URL,
     secondaryLabel: "Talk to a human",
-    secondaryHref: "#contact",
-    builtIn: "Payments, memberships, shop, posts · instant payouts · no fees, ever",
+    secondaryHref: "/contact",
+    builtIn: "0% platform fee on tips · UPI, cards, net banking · paid to your bank",
   },
 } as const;
 
