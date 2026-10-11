@@ -6,7 +6,7 @@ import "server-only";
 //                      "0" or "off" turns online checkout off ("Ask us about Premium").
 //   PREMIUM_DAYS       length of one period in days (default 365).
 // Checkout also needs the Zoho Payments env (NEXT_PUBLIC_ZOHO_PAY_ACCOUNT_ID etc.).
-// Admins can also grant Premium by hand from /members/admin/members.
+// Admins can also grant Premium by hand from /admin/members.
 
 export const PREMIUM_SOURCE = "premium-membership";
 const DEFAULT_PRICE_INR = 999;

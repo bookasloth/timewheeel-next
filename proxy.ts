@@ -35,7 +35,8 @@ export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   let out = response;
-  if (!signedIn && (pathname === MEMBERS_HOME || pathname.startsWith(`${MEMBERS_HOME}/`))) {
+  const gated = pathname === MEMBERS_HOME || pathname.startsWith(`${MEMBERS_HOME}/`) || pathname === "/admin" || pathname.startsWith("/admin/");
+  if (!signedIn && gated) {
     const to = new URL("/login", request.url);
     to.searchParams.set("next", `${pathname}${search}`);
     out = redirectKeepingCookies(to, response);
@@ -58,5 +59,5 @@ function redirectKeepingCookies(to: URL, from: NextResponse) {
 }
 
 export const config = {
-  matcher: ["/members", "/members/:path*", "/login", "/register", "/forgot-password", "/reset-password", "/api/members/:path*"],
+  matcher: ["/members", "/members/:path*", "/admin", "/admin/:path*", "/login", "/register", "/forgot-password", "/reset-password", "/api/members/:path*"],
 };

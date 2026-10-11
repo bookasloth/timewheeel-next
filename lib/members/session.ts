@@ -3,7 +3,7 @@ import { cache } from "react";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
-import { createClient, membersConfigured } from "@/lib/supabase/server";
+import { createAdminClient, createClient, membersConfigured } from "@/lib/supabase/server";
 import { site } from "@/lib/site";
 
 // Data access layer for member pages. Every page, server action and route that
@@ -24,6 +24,10 @@ export type Member = {
   premiumUntil: string | null;
   /** Admins always count as premium so they can check premium pages. */
   isPremium: boolean;
+  /** Paid or granted Premium that hasn't expired (admins excluded). */
+  hasPaidPremium: boolean;
+  profile: { headline: string; business_name: string; website: string; city: string; bio: string };
+  emailPrefs: { replies: boolean; announcements: boolean };
 };
 
 export const getUser = cache(async (): Promise<User | null> => {
@@ -47,18 +51,27 @@ export const getMember = cache(async (): Promise<Member | null> => {
 
   const supabase = await createClient();
   const [{ data: profile }, { data: membership }] = await Promise.all([
-    supabase.from("profiles").select("full_name, avatar_url").eq("id", user.id).maybeSingle(),
-    supabase.from("memberships").select("role, premium_until").eq("user_id", user.id).maybeSingle(),
+    supabase.from("profiles").select("full_name, avatar_url, headline, business_name, website, city, bio").eq("id", user.id).maybeSingle(),
+    supabase.from("memberships").select("role, premium_until, email_prefs").eq("user_id", user.id).maybeSingle(),
   ]);
 
   const meta = (user.user_metadata ?? {}) as Record<string, string | undefined>;
   const email = (user.email ?? "").toLowerCase();
   const name = (profile?.full_name || meta.full_name || meta.name || email.split("@")[0] || "Member").trim();
-  const role = membership?.role === "admin" ? "admin" : "member";
   // An address only counts once it's verified (Google always is; email
   // sign-ups after they click the confirmation link).
-  const isAdmin = role === "admin" || (Boolean(user.email_confirmed_at) && adminEmails().includes(email));
+  const envAdmin = Boolean(user.email_confirmed_at) && adminEmails().includes(email);
+  const isAdmin = membership?.role === "admin" || envAdmin;
+  const role = isAdmin ? "admin" : "member";
+  // Record team accounts as admins in the database too, so the community can
+  // label them and admin lists stay accurate. One write, the first time only.
+  if (envAdmin && membership?.role !== "admin") {
+    try {
+      await createAdminClient().from("memberships").upsert({ user_id: user.id, role: "admin", updated_at: new Date().toISOString() });
+    } catch {}
+  }
   const premiumUntil: string | null = membership?.premium_until ?? null;
+  const paid = Boolean(premiumUntil && new Date(premiumUntil) > new Date());
 
   return {
     id: user.id,
@@ -71,7 +84,19 @@ export const getMember = cache(async (): Promise<Member | null> => {
     role,
     isAdmin,
     premiumUntil,
-    isPremium: isAdmin || Boolean(premiumUntil && new Date(premiumUntil) > new Date()),
+    isPremium: isAdmin || paid,
+    hasPaidPremium: paid,
+    profile: {
+      headline: profile?.headline ?? "",
+      business_name: profile?.business_name ?? "",
+      website: profile?.website ?? "",
+      city: profile?.city ?? "",
+      bio: profile?.bio ?? "",
+    },
+    emailPrefs: {
+      replies: (membership?.email_prefs as { replies?: boolean } | null)?.replies !== false,
+      announcements: (membership?.email_prefs as { announcements?: boolean } | null)?.announcements === true,
+    },
   };
 });
 
@@ -83,7 +108,7 @@ export async function requireMember(next = "/members"): Promise<Member> {
 
 /** Admin pages 404 for everyone else rather than revealing they exist. */
 export async function requireAdmin(): Promise<Member> {
-  const member = await requireMember("/members/admin");
+  const member = await requireMember("/admin");
   if (!member.isAdmin) notFound();
   return member;
 }

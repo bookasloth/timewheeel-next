@@ -26,8 +26,8 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       // Member area and auth plumbing: private, nothing to index.
-      { userAgent: "*", allow: "/", disallow: ["/members", "/auth/", "/api/members/"] },
-      { userAgent: aiCrawlers, allow: "/", disallow: ["/members", "/auth/", "/api/members/"] },
+      { userAgent: "*", allow: "/", disallow: ["/members", "/admin", "/auth/", "/api/members/"] },
+      { userAgent: aiCrawlers, allow: "/", disallow: ["/members", "/admin", "/auth/", "/api/members/"] },
     ],
     sitemap: `${site.url}/sitemap.xml`,
     host: site.url,

@@ -330,7 +330,7 @@ export function RegisterForm({
             className="mt-0.5 size-4 accent-[var(--brand)]"
           />
           <span>
-            Send me the occasional Timewheel newsletter. Unsubscribe any time.
+            Email me the occasional newsletter and member announcements. Unsubscribe any time.
           </span>
         </label>
         <SubmitButton className="w-full" pendingText="Creating your account...">

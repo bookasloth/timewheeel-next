@@ -10,7 +10,12 @@ Visitors can create a Timewheel account (Google or email + password) and use:
 | `/members/free-downloads` | Files every member can download |
 | `/members/premium-downloads` | Premium files + the upgrade panel |
 | `/members/account` | Name, sign-in method, password, membership, delete account |
-| `/members/admin` | Admins only: upload downloads, manage members and Premium |
+| `/members/library` | All resources with search, category filters and Saved (bookmarks) |
+| `/members/people`, `/members/people/[id]` | Member directory and profiles (members only) |
+| `/members/premium` | Membership & billing: Premium status, checkout, receipts |
+| `/members/notifications` | Replies to your posts and threads (bell in the top bar) |
+| `/members/search`, `/members/help` | Search across resources, posts and people; help and support |
+| `/admin` | Admin console (own Parliament-style shell): dashboard, downloads, members, payments. `/members/admin` redirects here |
 
 Everything is Supabase (project `nefmwittrybufjqhpxip`): Supabase Auth for accounts,
 Postgres + RLS for data (`supabase/migrations/0006_members.sql`), and a private Storage
@@ -24,6 +29,10 @@ session cookies are httpOnly.
 Supabase dashboard > SQL Editor > paste `supabase/migrations/0006_members.sql` > Run.
 It is idempotent. It creates the tables, policies, the storage bucket and the
 Premium payment trigger, and adds `user_id` + `premium_days` to `payments`.
+
+Then run `supabase/migrations/0007_member_app.sql` the same way: profile fields,
+download covers and ordering, notifications (with the reply trigger), email
+preferences and bookmarks. Run it **before** merging the member-app PR.
 
 ### 2. Google sign-in
 

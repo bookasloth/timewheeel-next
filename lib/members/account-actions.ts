@@ -10,20 +10,53 @@ import { cookies } from "next/headers";
 export type ProfileState = { error?: string; saved?: number };
 export type DeleteState = { error?: string };
 
+const clip = (fd: FormData, k: string, max: number) => String(fd.get(k) ?? "").trim().replace(/\s+/g, " ").slice(0, max);
+
 export async function updateProfile(prev: ProfileState, fd: FormData): Promise<ProfileState> {
   const member = await getMember();
   if (!member) redirect("/login?next=/members/account");
-  const name = String(fd.get("name") ?? "").trim().replace(/\s+/g, " ").slice(0, 120);
+  const name = clip(fd, "name", 120);
   if (!name) return { error: "Enter your name." };
+  let website = clip(fd, "website", 200);
+  if (website && !/^https?:\/\//i.test(website)) website = `https://${website}`;
+  if (website && !/^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(website)) return { error: "That website address doesn't look right." };
 
   const supabase = await createClient();
-  const { error } = await supabase.from("profiles").update({ full_name: name }).eq("id", member.id);
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      full_name: name,
+      headline: clip(fd, "headline", 120) || null,
+      business_name: clip(fd, "business_name", 120) || null,
+      website: website || null,
+      city: clip(fd, "city", 80) || null,
+      bio: String(fd.get("bio") ?? "").trim().slice(0, 1000) || null,
+    })
+    .eq("id", member.id);
   if (error) {
     console.error("updateProfile:", error.message);
     return { error: "We couldn't save that. Please try again." };
   }
   await supabase.auth.updateUser({ data: { full_name: name } });
   revalidatePath("/members", "layout");
+  return { saved: (prev.saved ?? 0) + 1 };
+}
+
+export type PrefsState = { error?: string; saved?: number };
+
+export async function updateEmailPrefs(prev: PrefsState, fd: FormData): Promise<PrefsState> {
+  const member = await getMember();
+  if (!member) redirect("/login?next=/members/account");
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("memberships")
+    .update({ email_prefs: { replies: fd.get("replies") === "on", announcements: fd.get("announcements") === "on" } })
+    .eq("user_id", member.id);
+  if (error) {
+    console.error("updateEmailPrefs:", error.message);
+    return { error: "We couldn't save your preferences. Please try again." };
+  }
+  revalidatePath("/members/account");
   return { saved: (prev.saved ?? 0) + 1 };
 }
 

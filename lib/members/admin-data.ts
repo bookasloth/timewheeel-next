@@ -79,3 +79,61 @@ export async function listMembers(q = ""): Promise<{ members: AdminMember[]; tot
     premium: all.filter((m) => m.premium_until && new Date(m.premium_until).getTime() > now).length,
   };
 }
+
+export type AdminStats = {
+  members: number;
+  new7: number;
+  new30: number;
+  premium: number;
+  premiumRevenue: number;
+  downloads7: number;
+  posts: number;
+};
+
+export async function getAdminStats(): Promise<{ stats: AdminStats; newest: AdminMember[] }> {
+  const db = createAdminClient();
+  const since7 = new Date(Date.now() - 7 * 864e5).toISOString();
+  const [{ members, total, premium }, revenue, dl7, posts] = await Promise.all([
+    listMembers(""),
+    db.from("payments").select("amount").eq("status", "paid").eq("source", "premium-membership"),
+    db.from("download_events").select("id", { count: "exact", head: true }).gte("created_at", since7),
+    db.from("community_posts").select("id", { count: "exact", head: true }),
+  ]);
+  const now = Date.now();
+  const age = (iso: string) => (now - new Date(iso).getTime()) / 864e5;
+  return {
+    stats: {
+      members: total,
+      new7: members.filter((m) => age(m.created_at) <= 7).length,
+      new30: members.filter((m) => age(m.created_at) <= 30).length,
+      premium,
+      premiumRevenue: (revenue.data ?? []).reduce((n, r) => n + Number(r.amount), 0),
+      downloads7: dl7.count ?? 0,
+      posts: posts.count ?? 0,
+    },
+    newest: members.slice(0, 6),
+  };
+}
+
+export type AdminPayment = {
+  id: string;
+  created_at: string;
+  paid_at: string | null;
+  purpose: string;
+  amount: number;
+  name: string;
+  email: string;
+  status: string;
+  source: string;
+  provider_payment_id: string | null;
+};
+
+export async function listPayments(limit = 200): Promise<AdminPayment[]> {
+  const { data, error } = await createAdminClient()
+    .from("payments")
+    .select("id, created_at, paid_at, purpose, amount, name, email, status, source, provider_payment_id")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) console.error("listPayments:", error.message);
+  return (data ?? []).map((r) => ({ ...r, amount: Number(r.amount) })) as AdminPayment[];
+}
