@@ -1,5 +1,6 @@
 import { createPayment } from "@/lib/payments";
 import { PAY_MAX, PAY_MIN } from "@/lib/zoho-checkout";
+import { PREMIUM_SOURCE } from "@/lib/members/premium";
 
 // Creates a pending payment row. Its id becomes the Zoho reference_number, and its
 // amount is the ONLY amount Zoho will be asked to charge (see /api/zoho/session).
@@ -33,7 +34,8 @@ export async function POST(req: Request) {
       name,
       email,
       phone,
-      source: typeof b.source === "string" ? b.source.slice(0, 60) : "pay-page",
+      // "premium-membership" orders only come from /api/members/premium/order.
+      source: typeof b.source === "string" && b.source !== PREMIUM_SOURCE ? b.source.slice(0, 60) : "pay-page",
       ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
       user_agent: req.headers.get("user-agent")?.slice(0, 300) ?? undefined,
     });

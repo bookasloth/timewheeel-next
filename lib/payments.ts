@@ -20,7 +20,8 @@ export type PaymentRow = {
   email: string;
   phone: string | null;
   status: "pending" | "paid";
-  source?: string | null; // "pay-page", "30-days-challenge", ...
+  source?: string | null; // "pay-page", "30-days-challenge", "premium-membership", ...
+  user_id?: string | null; // set for member purchases (Premium)
   provider_payment_id: string | null;
   paid_at: string | null;
 };
@@ -44,6 +45,8 @@ export async function createPayment(p: {
   email: string;
   phone?: string;
   source?: string;
+  user_id?: string;
+  premium_days?: number; // Premium checkouts: the payments trigger grants this many days once paid
   ip?: string;
   user_agent?: string;
 }): Promise<PaymentRow> {

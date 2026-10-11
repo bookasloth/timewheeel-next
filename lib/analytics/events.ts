@@ -22,6 +22,9 @@ export const EVENTS = {
   // Academy interest registration (/academy). A student, not a business lead,
   // so it never fires lead_captured / Meta 'Lead' / GA4 generate_lead.
   ACADEMY_INTEREST: "academy_interest",
+  // Member accounts (/register, /members). GA4 recommended names. Not a lead.
+  SIGN_UP: "sign_up",
+  PREMIUM_PURCHASED: "premium_purchased",
   // review-generator funnel (/review): turn real customer feedback into a
   // copy-paste Google review. One event per meaningful step.
   REVIEW_PAGE_VIEWED: "review_page_viewed",

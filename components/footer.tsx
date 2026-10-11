@@ -26,6 +26,7 @@ const company = [
 const resources = [
   { label: "Free SEO Audit", href: "/seo-company-in-nagpur" },
   { label: "Book a Call", href: "/contact" },
+  { label: "Member Login", href: "/login" },
   { label: "Privacy Policy", href: "/legal/privacy" },
   { label: "Terms & Conditions", href: "/legal/terms" },
   { label: "Refund & SLA", href: "/legal/refund" },
