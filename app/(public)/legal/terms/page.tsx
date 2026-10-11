@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
-  const updated = "September 17, 2026";
+  const updated = "October 11, 2026";
 
   return (
     <div>
@@ -239,10 +239,10 @@ export default function TermsPage() {
         <p>
           If you have questions about these Terms, please contact us at{" "}
           <a
-            href="mailto:legal@timewheel.com"
+            href="mailto:team@timewheel.co.in"
             className="text-brand hover:underline"
           >
-            legal@timewheel.com
+            team@timewheel.co.in
           </a>
           .
         </p>

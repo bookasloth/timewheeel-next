@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function RefundPage() {
-  const updated = "September 17, 2026";
+  const updated = "October 11, 2026";
 
   return (
     <div>
@@ -92,10 +92,10 @@ export default function RefundPage() {
           <li>
             Email{" "}
             <a
-              href="mailto:billing@timewheel.com"
+              href="mailto:team@timewheel.co.in"
               className="text-brand hover:underline"
             >
-              billing@timewheel.com
+              team@timewheel.co.in
             </a>{" "}
             with your account email and reason for the refund request.
           </li>
@@ -282,10 +282,10 @@ export default function RefundPage() {
         <p>
           For refund requests or SLA inquiries, please contact us at{" "}
           <a
-            href="mailto:billing@timewheel.com"
+            href="mailto:team@timewheel.co.in"
             className="text-brand hover:underline"
           >
-            billing@timewheel.com
+            team@timewheel.co.in
           </a>
           .
         </p>
