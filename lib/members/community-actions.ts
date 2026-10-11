@@ -1,11 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { after } from "next/server";
 import { redirect } from "next/navigation";
 import { createAdminClient, createClient } from "@/lib/supabase/server";
 import { getMember } from "@/lib/members/session";
 import { communityCategories } from "@/lib/members/config";
 import { isRateLimited } from "@/lib/rate-limit";
+import { emailReplyRecipients } from "@/lib/members/reply-email";
 
 // Community writes. Members write as themselves (RLS checks authorship and
 // locked threads); moderation by admins uses the service key after an explicit
@@ -67,6 +69,7 @@ export async function createReply(prev: ReplyState, fd: FormData): Promise<Reply
     // RLS refuses replies to locked threads.
     return { body, error: error.code === "42501" ? "This thread is locked, so it can't take new replies." : "We couldn't post your reply. Please try again." };
   }
+  after(() => emailReplyRecipients(postId, member.id, member.name));
   revalidatePath(`/members/community/${postId}`);
   return { ok: (prev.ok ?? 0) + 1 };
 }

@@ -551,6 +551,16 @@ h2 {
   font-size: 25px !important;
   line-height: 1.2 !important;
 }
+/* Admin console (Parliament-style, dense): headings follow their own
+   utility classes instead of the site-wide marketing sizes above. */
+.admin-console h1 {
+  font-size: 20px !important;
+  line-height: 1.3 !important;
+}
+.admin-console h2 {
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
 /* Hero exception: a larger focal h1 on the web-dev hero (34px → 52px).
    Class specificity beats the global h1 rule. */
 .wd-hero-h1 {

@@ -4,7 +4,7 @@ import { randomBytes } from "node:crypto";
 import { after } from "next/server";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { createClient, membersConfigured } from "@/lib/supabase/server";
+import { createAdminClient, createClient, membersConfigured } from "@/lib/supabase/server";
 import { requestIp, requestOrigin } from "@/lib/members/session";
 import { MEMBER_HINT_COOKIE, safeNext } from "@/lib/members/config";
 import { isRateLimited } from "@/lib/rate-limit";
@@ -104,7 +104,19 @@ export async function signUp(_: AuthState, fd: FormData): Promise<AuthState> {
     return fail("We couldn't create your account just now. Please try again.");
   }
 
-  if (newsletter) after(() => syncNewsletterContact(email).then(() => undefined));
+  if (newsletter) {
+    after(async () => {
+      await syncNewsletterContact(email);
+      // The same tick opts them in to member announcements by email.
+      if (data.user?.id) {
+        await createAdminClient()
+          .from("memberships")
+          .update({ email_prefs: { replies: true, announcements: true } })
+          .eq("user_id", data.user.id)
+          .then(({ error: e }) => e && console.error("signup prefs:", e.message));
+      }
+    });
+  }
 
   // Confirmations off (or already confirmed): straight in.
   if (data.session) {

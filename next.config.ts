@@ -32,6 +32,9 @@ const nextConfig: NextConfig = {
       { source: "/ai-marketing-automation-company-in-nagpur", destination: "/digital-marketing-company-in-nagpur", permanent: true },
       { source: "/creators", destination: "/coffee-and-toffee", permanent: true },
       { source: "/digital-marketing", destination: "/digital-marketing-company-in-nagpur", permanent: true },
+      // Admin moved out of the member area into its own console (2026-10-11).
+      { source: "/members/admin", destination: "/admin", permanent: true },
+      { source: "/members/admin/:path*", destination: "/admin/:path*", permanent: true },
     ];
   },
   images: {

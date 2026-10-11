@@ -82,6 +82,7 @@ export async function saveDownload(prev: DownloadFormState, fd: FormData): Promi
     return { error: "Couldn't save the download. Please try again." };
   }
   revalidatePath("/members", "layout");
+  revalidatePath("/admin", "layout");
   return { saved: (prev.saved ?? 0) + 1 };
 }
 
@@ -101,6 +102,7 @@ export async function updateDownload(fd: FormData) {
     if (patch) await db.from("downloads").update(patch).eq("id", id);
   }
   revalidatePath("/members", "layout");
+  revalidatePath("/admin", "layout");
 }
 
 export async function setPremium(fd: FormData) {
@@ -121,7 +123,7 @@ export async function setPremium(fd: FormData) {
     const { error } = await db.rpc("grant_premium", { p_user: userId, p_days: days, p_source: "admin" });
     if (error) console.error("grant_premium:", error.message);
   }
-  revalidatePath("/members/admin/members");
+  revalidatePath("/admin", "layout");
 }
 
 export async function setRole(fd: FormData) {
@@ -131,5 +133,5 @@ export async function setRole(fd: FormData) {
   // Never let an admin lock themselves out by accident.
   if (!UUID.test(userId) || (userId === member.id && role === "member")) return;
   await db.from("memberships").upsert({ user_id: userId, role, updated_at: new Date().toISOString() });
-  revalidatePath("/members/admin/members");
+  revalidatePath("/admin", "layout");
 }
