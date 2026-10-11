@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
+import { Spinner } from "@/components/admin/feedback";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -136,7 +137,7 @@ export function PostForm({
   };
 
   const tagChips = tags.split(",").map((t) => t.trim()).filter(Boolean);
-  const primaryLabel = pending ? "Saving..." : status === "draft" ? "Save draft" : scheduled ? "Schedule" : savedLive ? "Update" : "Publish";
+  const primaryLabel = pending ? "Saving post..." : status === "draft" ? "Save draft" : scheduled ? "Schedule" : savedLive ? "Update" : "Publish";
 
   return (
     <form ref={formRef} onSubmit={submit} className="pb-16">
@@ -160,7 +161,8 @@ export function PostForm({
               <ArrowSquareOut size={16} /> View live
             </a>
           )}
-          <button type="submit" disabled={pending} className={btn.primary} title="Ctrl + S">
+          <button type="submit" disabled={pending} aria-busy={pending} className={`${btn.primary} min-w-[110px] justify-center disabled:cursor-not-allowed disabled:opacity-70`} title="Ctrl + S">
+            {pending && <Spinner className="size-3.5" />}
             {primaryLabel}
           </button>
         </div>

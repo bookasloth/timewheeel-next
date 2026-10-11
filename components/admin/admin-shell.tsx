@@ -7,7 +7,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { ArrowSquareOut, CaretDown, CaretRight, List, MagnifyingGlass, SignOut, UserCircle, X } from "@phosphor-icons/react";
 import { ICONS } from "@/components/admin/icon-map";
 import { Toaster } from "sonner";
+import NextTopLoader from "nextjs-toploader";
 import { consoleLogout } from "@/lib/admin/console-login-actions";
+import { useFormStatus } from "react-dom";
+import { Spinner } from "@/components/admin/feedback";
 import { NAV as ALL_NAV, activeItem, activeSection, sectionBadgeCount, type Badges, type NavSection } from "@/components/admin/nav-config";
 
 // Two-level console shell modelled on The Parliament admin: full-width top
@@ -231,14 +234,21 @@ function ProfileMenu({ admin }: { admin: AdminIdentity }) {
             </Link>
             <div className="my-1 border-t border-gray-200" />
             <form action={consoleLogout}>
-              <button type="submit" className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-rose-600 hover:bg-rose-500/10">
-                <SignOut size={16} /> Sign out
-              </button>
+              <SignOutButton />
             </form>
           </div>
         </>
       )}
     </div>
+  );
+}
+
+function SignOutButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending} className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-rose-600 hover:bg-rose-500/10 disabled:opacity-70">
+      {pending ? <Spinner className="size-4" /> : <SignOut size={16} />} {pending ? "Signing out..." : "Sign out"}
+    </button>
   );
 }
 
@@ -273,6 +283,7 @@ export function AdminShell({
   return (
     <NavContext.Provider value={nav}>
     <div className="admin-console flex h-[100dvh] flex-col bg-gray-50 text-gray-900">
+      <NextTopLoader color="#F45B0A" height={2} showSpinner={false} shadow={false} />
       <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-3 border-b border-gray-200 bg-gray-50 px-4 sm:px-6">
         <button type="button" onClick={() => setDrawer(true)} className="rounded-[3px] p-2 text-gray-600 hover:bg-gray-100 lg:hidden" aria-label="Open menu">
           <List size={20} />

@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Plus, Trash, FloppyDisk } from "@phosphor-icons/react";
 import { btn, field } from "@/components/admin/ui";
+import { Spinner } from "@/components/admin/feedback";
+import { useSlowNotice } from "@/components/admin/feedback-client";
 import { InvoiceDocument, type InvoiceDocData, type SellerExtras } from "@/components/admin/invoices/invoice-document";
 import { saveInvoice } from "@/lib/admin/invoice-actions";
 import { INDIAN_STATES, SERVICE_PRESETS, computeTotals, inr, type TaxMode } from "@/lib/admin/invoice-calc";
@@ -19,6 +21,7 @@ export function InvoiceEditor({ id, initial, extras }: { id: string | null; init
   const router = useRouter();
   const [inv, setInv] = useState<InvoiceDocData>(initial.terms || id ? initial : { ...initial, terms: DEFAULT_TERMS });
   const [pending, start] = useTransition();
+  const slow = useSlowNotice(pending);
   const set = <K extends keyof InvoiceDocData>(k: K, v: InvoiceDocData[K]) => setInv((p) => ({ ...p, [k]: v }));
   const setItem = (i: number, patch: Partial<InvoiceDocData["items"][number]>) => setInv((p) => ({ ...p, items: p.items.map((it, j) => (j === i ? { ...it, ...patch } : it)) }));
   const t = computeTotals(inv.items, inv.discount, inv.gst_rate, inv.tax_mode);
@@ -28,7 +31,7 @@ export function InvoiceEditor({ id, initial, extras }: { id: string | null; init
 
   const save = () =>
     start(async () => {
-      const res = await saveInvoice(id, { ...inv, due_date: inv.due_date ?? "" });
+      const res = await saveInvoice(id, { ...inv, due_date: inv.due_date ?? "" }).catch(() => ({ error: "Couldn't reach the server. Check your connection and try again.", id: undefined }));
       if (res.error) return void toast.error(res.error);
       toast.success(id ? "Invoice saved" : "Invoice created");
       if (!id && res.id) router.push(`/admin/invoices/${res.id}`);
@@ -148,12 +151,15 @@ export function InvoiceEditor({ id, initial, extras }: { id: string | null; init
         </Box>
 
         <div className="sticky bottom-0 -mx-1 flex items-center justify-between gap-3 border-t border-gray-200 bg-gray-50 px-1 py-3">
-          <p className="text-sm">
-            <span className="text-gray-500">Total </span>
-            <span className="font-bold tabular-nums">{inr(t.total)}</span>
-          </p>
-          <button type="button" onClick={save} disabled={pending} className={btn.primary}>
-            <FloppyDisk size={16} /> {pending ? "Saving..." : id ? "Save invoice" : "Create invoice"}
+          <div aria-live="polite">
+            <p className="text-sm">
+              <span className="text-gray-500">Total </span>
+              <span className="font-bold tabular-nums">{inr(t.total)}</span>
+            </p>
+            {slow && <p className="text-xs text-gray-500">Taking a bit longer than usual, still saving...</p>}
+          </div>
+          <button type="button" onClick={save} disabled={pending} aria-busy={pending} className={`${btn.primary} min-w-[150px] justify-center disabled:cursor-not-allowed disabled:opacity-70`}>
+            {pending ? <Spinner className="size-3.5" /> : <FloppyDisk size={16} />} {pending ? (id ? "Saving invoice..." : "Creating invoice...") : id ? "Save invoice" : "Create invoice"}
           </button>
         </div>
       </div>
