@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { social } from "@/lib/metadata";
 import { site } from "@/lib/site";
+import { SELLER } from "@/lib/admin/invoice-calc";
 
 const TITLE = "GST and Company Details | Timewheel";
 const DESC =
-  "Registered company details for Timewheel Internet Pvt. Ltd., Nagpur: legal name, GSTIN, PAN, CIN, registered address and billing contact for invoices and vendor forms.";
+  "Company details for Timewheel Internet Pvt. Ltd.: legal name, CIN, GSTIN, PAN, registered state and billing contact for invoices and vendor forms.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -13,20 +14,19 @@ export const metadata: Metadata = {
   ...social({ path: "/legal/company", title: TITLE, description: DESC }),
 };
 
-// Registration numbers come from env (the same ones the invoice generator uses),
-// so they are set once. Blank ones read "Available on request".
-const ON_REQUEST = "Available on request";
-
+// Registration numbers are public (MCA and GST records). The registered office
+// is a home address, so only its locality is shown here.
 export default function CompanyPage() {
   const c = site.contact;
   const rows: [string, string][] = [
-    ["Legal name", "Timewheel Internet Pvt. Ltd."],
+    ["Legal name", "Timewheel Internet Private Limited"],
     ["Brand name", "Timewheel"],
-    ["GSTIN", process.env.INVOICE_GSTIN || ON_REQUEST],
-    ["PAN", process.env.INVOICE_PAN || ON_REQUEST],
-    ["CIN", process.env.COMPANY_CIN || ON_REQUEST],
-    ["State", `${c.addressRegion} (state code 27)`],
-    ["Registered office", `${c.streetAddress}, ${c.city}, ${c.addressRegion} ${c.postalCode}, India`],
+    ["CIN", process.env.COMPANY_CIN || SELLER.cin],
+    ["GSTIN", process.env.INVOICE_GSTIN || SELLER.gstin],
+    ["PAN", process.env.INVOICE_PAN || SELLER.pan],
+    ["Incorporated", "18 February 2026, Registrar of Companies, Cuttack"],
+    ["Registered in", `${SELLER.registeredOffice}, India (GST state code ${SELLER.stateCode})`],
+    ["Office", `${c.streetAddress}, ${c.city}, ${c.addressRegion} ${c.postalCode}`],
     ["Billing email", c.email],
     ["Phone", c.phone],
   ];
@@ -64,10 +64,10 @@ export default function CompanyPage() {
         <section className="space-y-4">
           <h2 className="text-lg font-semibold text-foreground">Invoices and GST</h2>
           <ul className="ml-5 list-disc space-y-2">
-            <li>All invoices are GST invoices issued from Maharashtra.</li>
+            <li>Invoices are GST invoices under our Odisha registration.</li>
             <li>
-              Clients in Maharashtra are charged CGST and SGST. Clients in other states are
-              charged IGST.
+              Clients in Odisha are charged CGST and SGST. Clients in every other state,
+              including Maharashtra, are charged IGST.
             </li>
             <li>
               To get input tax credit, share your GSTIN and billing address before the invoice

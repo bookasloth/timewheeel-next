@@ -133,7 +133,9 @@ export function InvoiceDocument({ inv, extras }: { inv: InvoiceDocData; extras: 
           <Label color={C.blue}>From</Label>
           <p className="mt-1.5 font-heading text-[14px] font-semibold">{SELLER.name}</p>
           {extras.gstin && <p className="text-[11px] font-semibold">GSTIN {extras.gstin}</p>}
-          {extras.pan && <p className="text-[11px]" style={{ color: C.muted }}>PAN {extras.pan}</p>}
+          {extras.pan && <p className="text-[11px]" style={{ color: C.muted }}>PAN {extras.pan} · CIN {SELLER.cin}</p>}
+          <p className="text-[11px]" style={{ color: C.muted }}>Regd. office: {SELLER.registeredOffice}</p>
+          <p className="text-[11px]" style={{ color: C.muted }}>State: {SELLER.state} ({SELLER.stateCode})</p>
         </div>
       </section>
 
