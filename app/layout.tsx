@@ -6,6 +6,7 @@ import { AnalyticsBridge } from "@/components/analytics-bridge";
 import { EngagementTracker } from "@/components/engagement-tracker";
 import { WebVitals } from "@/components/web-vitals";
 import { ConsentBanner } from "@/components/consent-banner";
+import { SITE_CARD } from "@/lib/metadata";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -46,12 +47,14 @@ export const metadata: Metadata = {
     title: "Timewheel, Build on systems you control forever",
     description:
       "One connected ecosystem for bookings, payments, events, and communities, built for ownership, not dependency.",
+    images: [SITE_CARD],
   },
   twitter: {
     card: "summary_large_image",
     title: "Timewheel, Build on systems you control forever",
     description:
       "One connected ecosystem for bookings, payments, events, and communities, built for ownership.",
+    images: [SITE_CARD],
   },
   // No site-wide canonical: a page that inherited one would tell Google it's a
   // duplicate of the homepage. Every indexable page sets its own.
