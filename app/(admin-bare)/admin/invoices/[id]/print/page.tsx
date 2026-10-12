@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { InvoiceDocument } from "@/components/admin/invoices/invoice-document";
 import { getInvoice, sellerExtras } from "@/lib/admin/invoice-data";
 import { requireAdmin } from "@/lib/members/session";
-import { PrintBar } from "./print-bar";
+import { PrintBar } from "@/components/admin/invoices/print-bar";
 
 // Bare A4 page for printing or "Save as PDF", outside the console shell.
 export const metadata: Metadata = { title: "Invoice", robots: { index: false, follow: false } };

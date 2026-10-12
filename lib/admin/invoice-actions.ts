@@ -5,6 +5,9 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/members/session";
 import { computeTotals, financialYear, type InvoiceItem, type InvoiceStatus, type TaxMode } from "@/lib/admin/invoice-calc";
+import { invoiceToken, invoiceUrl } from "@/lib/admin/invoice-link";
+import { invoiceEmail } from "@/lib/email/invoice";
+import { sendEmail } from "@/lib/resend-email";
 
 export type InvoiceInput = {
   issue_date: string;
@@ -135,4 +138,41 @@ export async function deleteInvoice(fd: FormData) {
   await createAdminClient().from("invoices").delete().eq("id", id).eq("status", "draft");
   revalidatePath("/admin/invoices");
   redirect("/admin/invoices");
+}
+
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * Email an invoice to the client: a summary plus a private "View invoice" link
+ * they can print or save as PDF. Drafts become "sent". Extra addresses can be
+ * comma separated (to: client, cc: whoever else they list).
+ */
+export async function sendInvoice(id: string, toRaw: string, message: string): Promise<{ error?: string; sentTo?: string }> {
+  await requireAdmin();
+  const to = toRaw.split(/[,\s]+/).map((e) => e.trim()).filter(Boolean).slice(0, 5);
+  if (!to.length) return { error: "Add the client's email address." };
+  const bad = to.find((e) => !EMAIL.test(e));
+  if (bad) return { error: `"${bad}" isn't a valid email address.` };
+  if (!process.env.RESEND_API_KEY) return { error: "Email isn't set up yet. Add RESEND_API_KEY in Vercel." };
+
+  const db = createAdminClient();
+  const { data: inv } = await db.from("invoices").select("*").eq("id", id).maybeSingle();
+  if (!inv) return { error: "That invoice no longer exists." };
+  if (inv.status === "cancelled") return { error: "This invoice is cancelled. Duplicate it to send a new one." };
+  if (!(inv.items as InvoiceItem[])?.length) return { error: "Add at least one line item before sending." };
+  if (!invoiceToken(id)) return { error: "Set INVOICE_LINK_SECRET (or ADMIN_CONSOLE_SECRET) in Vercel so the invoice link can be signed." };
+
+  const ok = await sendEmail(to, invoiceEmail(inv, invoiceUrl(id), s(message, 1000)));
+  if (!ok) return { error: "The email didn't go through. Check the Resend setup and try again." };
+
+  const sent = { sent_at: new Date().toISOString(), sent_to: to.join(", ").slice(0, 400) };
+  const { error } = await db
+    .from("invoices")
+    .update(inv.status === "draft" ? { ...sent, status: "sent" } : sent)
+    .eq("id", id);
+  // Before migration 0011 the sent_* columns don't exist; still mark it sent.
+  if (error && inv.status === "draft") await db.from("invoices").update({ status: "sent" }).eq("id", id);
+  revalidatePath("/admin/invoices");
+  revalidatePath(`/admin/invoices/${id}`);
+  return { sentTo: sent.sent_to };
 }
