@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: `${site.url}/digital-marketing-company-in-nagpur` },
-  ...social({ path: "/digital-marketing-company-in-nagpur", title: TITLE, description: DESC, image: false }),
+  ...social({ path: "/digital-marketing-company-in-nagpur", title: TITLE, description: DESC }),
 };
 
 const jsonLd = {
