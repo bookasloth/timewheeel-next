@@ -224,7 +224,7 @@ export function Navbar() {
                     </div>
                   </div>
 
-                  {/* right: tinted rail — SaaS + Resources */}
+                  {/* right: tinted rail with the SaaS products */}
                   <div className="border-l border-border bg-secondary/60 p-6">
                     <p className="text-sm font-bold text-foreground">Software as a Service</p>
                     <div className="mt-3 space-y-1">
@@ -235,19 +235,6 @@ export function Navbar() {
                           className="block rounded-lg px-2 py-1.5 text-sm font-medium text-foreground/80 hover:bg-background hover:text-foreground"
                         >
                           {p.name}
-                        </Link>
-                      ))}
-                    </div>
-                    <p className="mt-5 text-sm font-bold text-foreground">Resources</p>
-                    <div className="mt-3 space-y-1">
-                      {/* Case Studies lives in the top-level Portfolio link, so it is filtered out here */}
-                      {resourceItems.filter((r) => r.href !== "/case-studies").map((r) => (
-                        <Link
-                          key={r.name}
-                          href={r.href}
-                          className="block rounded-lg px-2 py-1.5 text-sm font-medium text-foreground/80 hover:bg-background hover:text-foreground"
-                        >
-                          {r.name}
                         </Link>
                       ))}
                     </div>
