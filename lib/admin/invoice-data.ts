@@ -1,6 +1,6 @@
 import "server-only";
 import { createAdminClient } from "@/lib/supabase/server";
-import type { Invoice } from "@/lib/admin/invoice-calc";
+import { SELLER, type Invoice } from "@/lib/admin/invoice-calc";
 
 // Reads for /admin/invoices. Callers check requireAdmin() first.
 
@@ -37,8 +37,8 @@ export async function getInvoice(id: string): Promise<Invoice | null> {
 /** Seller registration and bank details, from env (blank ones are hidden). */
 export function sellerExtras() {
   return {
-    gstin: process.env.INVOICE_GSTIN ?? "",
-    pan: process.env.INVOICE_PAN ?? "",
+    gstin: process.env.INVOICE_GSTIN || SELLER.gstin,
+    pan: process.env.INVOICE_PAN || SELLER.pan,
     bank: (process.env.INVOICE_BANK_DETAILS ?? "").split("|").map((s) => s.trim()).filter(Boolean),
     upi: process.env.INVOICE_UPI_ID ?? "",
   };

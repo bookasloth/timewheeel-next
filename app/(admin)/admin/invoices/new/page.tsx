@@ -33,7 +33,7 @@ export default async function NewInvoicePage() {
           items: [],
           discount: 0,
           gst_rate: 18,
-          tax_mode: "intra",
+          tax_mode: "inter",
           notes: "Thank you for choosing Timewheel.",
           terms: "",
         }}

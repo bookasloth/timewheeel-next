@@ -9,10 +9,10 @@ import { Spinner } from "@/components/admin/feedback";
 import { useSlowNotice } from "@/components/admin/feedback-client";
 import { InvoiceDocument, type InvoiceDocData, type SellerExtras } from "@/components/admin/invoices/invoice-document";
 import { saveInvoice } from "@/lib/admin/invoice-actions";
-import { INDIAN_STATES, SERVICE_PRESETS, computeTotals, inr, type TaxMode } from "@/lib/admin/invoice-calc";
+import { INDIAN_STATES, SERVICE_PRESETS, computeTotals, inr, taxModeFor, type TaxMode } from "@/lib/admin/invoice-calc";
 
 // Form on the left, the real invoice updating live on the right. Tax mode
-// follows the client's state (Maharashtra: CGST+SGST, elsewhere: IGST) unless
+// follows the client's state (Odisha: CGST+SGST, elsewhere: IGST) unless
 // changed by hand.
 
 const DEFAULT_TERMS = "Payment due within 7 days of the invoice date.\n50% advance, balance on delivery, unless agreed otherwise in writing.";
@@ -27,7 +27,7 @@ export function InvoiceEditor({ id, initial, extras }: { id: string | null; init
   const t = computeTotals(inv.items, inv.discount, inv.gst_rate, inv.tax_mode);
 
   const onState = (state: string) =>
-    setInv((p) => ({ ...p, client_state: state, tax_mode: p.tax_mode === "none" ? "none" : state === "Maharashtra" ? "intra" : state === "Outside India" ? "none" : "inter" }));
+    setInv((p) => ({ ...p, client_state: state, tax_mode: p.tax_mode === "none" ? "none" : taxModeFor(state) }));
 
   const save = () =>
     start(async () => {

@@ -34,13 +34,21 @@ export type Invoice = {
   sent_to?: string;
 };
 
-/** Seller block on every invoice. GSTIN/PAN/bank come from env so they can be
- * filled in on Vercel without a code change; blank ones are simply hidden. */
+/** Seller block on every invoice. The company and its GSTIN are registered in
+ * Odisha, so Odisha is the home state for GST: Odisha clients get CGST + SGST,
+ * everyone else in India gets IGST. The registered office is a home address,
+ * so only its locality is ever shown; the Nagpur office is the place of
+ * business. Bank/UPI come from env; GSTIN/PAN/CIN fall back to the public
+ * registration numbers. */
 export const SELLER = {
   name: "Timewheel Internet Pvt. Ltd.",
-  address: "2nd & 4th floor, 11, Friends Colony, Mate Square, Pratap Nagar Road, Kotwal Nagar, Nagpur, Maharashtra 440022",
-  state: "Maharashtra",
-  stateCode: "27",
+  registeredOffice: "Jajpur Road, Jajpur, Odisha 755019",
+  address: "Eureka Coworking, Mate Square, Pratap Nagar, Nagpur, Maharashtra 440022",
+  state: "Odisha",
+  stateCode: "21",
+  gstin: "21AAMCT8270C1ZF",
+  pan: "AAMCT8270C",
+  cin: "U62012OD2026PTC052654",
   email: "team@timewheel.co.in",
   phone: "+91 79041 09359",
   website: "timewheel.co.in",
@@ -58,6 +66,12 @@ export const SERVICE_PRESETS: { label: string; sac: string; rate: number }[] = [
   { label: "Hosting & maintenance (annual)", sac: "998315", rate: 6000 },
   { label: "Domain registration (1 year)", sac: "998319", rate: 1200 },
 ];
+
+/** CGST + SGST inside the seller's state, IGST elsewhere, none outside India. */
+export function taxModeFor(clientState: string): TaxMode {
+  if (clientState === "Outside India") return "none";
+  return clientState === SELLER.state ? "intra" : "inter";
+}
 
 export const INDIAN_STATES = [
   "Maharashtra", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana",
