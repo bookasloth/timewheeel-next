@@ -1,518 +1,232 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Copy,
-  Pencil,
-  RefreshCw,
-  Star,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Pencil, RefreshCw, Star } from "lucide-react";
 import { analytics, EVENTS } from "@/lib/analytics";
-import {
-  BRAND,
-  BUSINESS_TYPES,
-  EMPTY_ANSWERS,
-  FEATURE_CHIPS,
-  GOOGLE_REVIEW_URL,
-  QUESTIONS,
-  WELCOME,
-  generateReview,
-  hasEnoughToGenerate,
-  type ReviewAnswers,
-} from "@/lib/review";
+import { BRAND, GOOGLE_REVIEW_URL, REVIEW_SERVICES, type ReviewService } from "@/lib/review";
 
-const LAST_STEP = QUESTIONS.length; // 3
-const RESULT_STEP = LAST_STEP + 1; // 4
+// Two slides: pick the service, then copy a sample review. The main button
+// copies the text and opens Timewheel's Google review form in one tap.
 
-// Framer-motion step transition (respects the direction of travel).
-const stepVariants = {
+const slideVariants = {
   enter: (dir: number) => ({ opacity: 0, x: dir >= 0 ? 24 : -24 }),
   center: { opacity: 1, x: 0 },
   exit: (dir: number) => ({ opacity: 0, x: dir >= 0 ? -24 : 24 }),
 };
 
 export function ReviewFlow() {
-  const [step, setStep] = useState(0); // 0 welcome, 1..3 questions, 4 result
+  const [service, setService] = useState<ReviewService | null>(null);
   const [dir, setDir] = useState(1);
-  const [answers, setAnswers] = useState<ReviewAnswers>(EMPTY_ANSWERS);
-  const [review, setReview] = useState("");
   const [variant, setVariant] = useState(0);
+  const [review, setReview] = useState("");
   const [copied, setCopied] = useState(false);
-  const generatedRef = useRef(false);
-  const copiedTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     analytics.track(EVENTS.REVIEW_PAGE_VIEWED);
-    return () => window.clearTimeout(copiedTimer.current);
   }, []);
 
-  function set<K extends keyof ReviewAnswers>(key: K, value: ReviewAnswers[K]) {
-    setAnswers((a) => ({ ...a, [key]: value }));
-  }
-
-  function toggleFeature(label: string) {
-    setAnswers((a) => ({
-      ...a,
-      features: a.features.includes(label)
-        ? a.features.filter((f) => f !== label)
-        : [...a.features, label],
-    }));
-  }
-
-  const canAdvance = useMemo(() => {
-    switch (step) {
-      case 1:
-        return answers.businessType !== "" &&
-          (answers.businessType !== "other" || answers.businessTypeOther.trim().length > 1);
-      case 2:
-        return (answers.features.length > 0 || answers.featuresOther.trim().length > 1) &&
-          answers.before.trim().length > 1;
-      case 3:
-        return answers.changed.trim().length > 1; // recommendation is optional
-      default:
-        return true;
-    }
-  }, [step, answers]);
-
-  function goNext() {
-    if (step === LAST_STEP) {
-      // Finishing the questions: generate once we land on the result.
-      if (!hasEnoughToGenerate(answers)) return;
-      const text = generateReview(answers, 0);
-      setReview(text);
-      setVariant(0);
-      if (!generatedRef.current) {
-        analytics.track(EVENTS.REVIEW_QUESTIONS_COMPLETED, {
-          business_type: answers.businessType || "unset",
-          features_count: answers.features.length,
-        });
-        analytics.track(EVENTS.REVIEW_GENERATED, { length: text.length });
-        generatedRef.current = true;
-      }
-    }
-    setDir(1);
-    setStep((s) => Math.min(RESULT_STEP, s + 1));
-  }
-
-  function goBack() {
-    setDir(-1);
-    setStep((s) => Math.max(0, s - 1));
-  }
-
-  function rephrase() {
-    const next = variant + 1;
-    setVariant(next);
-    setReview(generateReview(answers, next));
-  }
-
-  function startOver() {
-    setAnswers(EMPTY_ANSWERS);
-    setReview("");
+  function pick(s: ReviewService) {
+    setService(s);
     setVariant(0);
+    setReview(s.samples[0]);
     setCopied(false);
-    generatedRef.current = false;
+    setDir(1);
+    analytics.track(EVENTS.REVIEW_GENERATED, { service: s.id });
+  }
+
+  function back() {
     setDir(-1);
-    setStep(0);
+    setService(null);
   }
 
-  async function copyReview() {
-    try {
-      await navigator.clipboard.writeText(review);
-    } catch {
-      // Older browsers / blocked clipboard: fall back to a hidden textarea select.
-      const ta = document.createElement("textarea");
-      ta.value = review;
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand("copy");
-      } catch {
-        /* give up quietly; the text is still editable on screen */
-      }
-      document.body.removeChild(ta);
-    }
+  function another() {
+    if (!service) return;
+    const next = (variant + 1) % service.samples.length;
+    setVariant(next);
+    setReview(service.samples[next]);
+  }
+
+  // Runs inside the link's click, so the clipboard write happens within the
+  // user gesture and the new tab is a normal link open (no popup blocking).
+  function copyAndGo() {
+    copyText(review);
     setCopied(true);
-    analytics.track(EVENTS.REVIEW_COPIED, { length: review.length });
-    // Restart rather than stack, so a second copy keeps "Copied" up its full 2.2s.
-    window.clearTimeout(copiedTimer.current);
-    copiedTimer.current = window.setTimeout(() => setCopied(false), 2200);
+    analytics.track(EVENTS.REVIEW_COPIED, { length: review.length, service: service?.id });
+    analytics.track(EVENTS.REVIEW_GOOGLE_CLICKED, { service: service?.id });
   }
 
-  function onGoogleClick() {
-    analytics.track(EVENTS.REVIEW_GOOGLE_CLICKED);
-  }
-
-  const progress =
-    step === 0 ? 0 : step > LAST_STEP ? 100 : Math.round((step / LAST_STEP) * 100);
+  const step = service ? 2 : 1;
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-10 pt-6 sm:pt-10">
-      {/* Masthead */}
       <header className="flex items-center justify-between">
-        <a href="/" className="text-sm font-semibold tracking-tight">
+        <Link href="/" className="text-sm font-semibold tracking-tight">
           {BRAND}
-        </a>
+        </Link>
+        <span className="text-xs text-muted-foreground">Step {step} of 2</span>
       </header>
 
-      {/* Progress */}
-      {step > 0 && step <= LAST_STEP && (
-        <div className="mt-6">
-          <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
-            <span>
-              Question {step} of {LAST_STEP}
-            </span>
-            <span>{progress}%</span>
-          </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-            <motion.div
-              className="h-full rounded-full bg-brand"
-              initial={false}
-              animate={{ width: `${progress}%` }}
-              transition={{ type: "spring", stiffness: 160, damping: 24 }}
-            />
-          </div>
-        </div>
-      )}
+      <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+        <motion.div
+          className="h-full rounded-full bg-brand"
+          initial={false}
+          animate={{ width: step === 1 ? "50%" : "100%" }}
+          transition={{ type: "spring", stiffness: 160, damping: 24 }}
+        />
+      </div>
 
-      {/* Steps */}
       <div className="relative flex-1 pt-10">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={step}
             custom={dir}
-            variants={stepVariants}
+            variants={slideVariants}
             initial="enter"
             animate="center"
             exit="exit"
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
-            {step === 0 && <Welcome onStart={goNext} />}
-
-            {step === 1 && (
-              <QuestionShell q={QUESTIONS[0]}>
-                <div className="flex flex-wrap gap-2">
-                  {BUSINESS_TYPES.map((b) => (
-                    <Chip
-                      key={b.id}
-                      active={answers.businessType === b.id}
-                      onClick={() => set("businessType", b.id)}
+            {!service ? (
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-text">
+                  Share your experience
+                </p>
+                <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+                  Which service did you get from us?
+                </h1>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  Pick one and we will give you a ready review to post on Google.
+                </p>
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {REVIEW_SERVICES.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => pick(s)}
+                      className="group flex items-center justify-between rounded-xl border border-border bg-card px-5 py-4 text-left text-base font-semibold transition-colors hover:border-brand"
                     >
-                      {b.label}
-                    </Chip>
+                      {s.label}
+                      <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-brand" />
+                    </button>
                   ))}
                 </div>
-                {answers.businessType === "other" && (
-                  <input
-                    autoFocus
-                    value={answers.businessTypeOther}
-                    onChange={(e) => set("businessTypeOther", e.target.value)}
-                    placeholder="What do you do? e.g. tattoo studio"
-                    className={inputCls}
+              </div>
+            ) : (
+              <div>
+                <div className="flex flex-col items-center text-center">
+                  <Stars />
+                  <h1 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
+                    Tap 5 stars, then paste
+                  </h1>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    We copy this review for you and open our Google page. Edit anything you like
+                    first.
+                  </p>
+                </div>
+
+                <div className="mt-6">
+                  <div className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Pencil className="size-3.5" />
+                    {service.label} review
+                  </div>
+                  <textarea
+                    value={review}
+                    onChange={(e) => {
+                      setReview(e.target.value);
+                      setCopied(false);
+                    }}
+                    rows={6}
+                    className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-base leading-relaxed outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/20"
                   />
+                  <button
+                    type="button"
+                    onClick={another}
+                    className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <RefreshCw className="size-3.5" />
+                    Try another
+                  </button>
+                </div>
+
+                <a
+                  href={GOOGLE_REVIEW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={copyAndGo}
+                  aria-disabled={!review.trim()}
+                  className="btn btn-primary group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-4 text-base font-semibold text-brand-foreground aria-disabled:pointer-events-none aria-disabled:opacity-40"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="size-4" strokeWidth={3} />
+                      Copied, opening Google
+                    </>
+                  ) : (
+                    <>
+                      Copy &amp; review on Google
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    </>
+                  )}
+                </a>
+                {copied && (
+                  <p role="status" className="mt-3 text-center text-sm text-muted-foreground">
+                    Google didn&apos;t open?{" "}
+                    <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">
+                      Open it here
+                    </a>
+                    . Your review is on the clipboard.
+                  </p>
                 )}
-                <input
-                  value={answers.city}
-                  onChange={(e) => set("city", e.target.value)}
-                  placeholder="Your city (optional)"
-                  className={`${inputCls} mt-3`}
-                />
-              </QuestionShell>
-            )}
 
-            {step === 2 && (
-              <QuestionShell q={QUESTIONS[1]}>
-                <div className="flex flex-wrap gap-2">
-                  {FEATURE_CHIPS.map((f) => (
-                    <Chip key={f} active={answers.features.includes(f)} onClick={() => toggleFeature(f)}>
-                      {f}
-                    </Chip>
-                  ))}
-                </div>
-                <input
-                  value={answers.featuresOther}
-                  onChange={(e) => set("featuresOther", e.target.value)}
-                  placeholder={HELP.featuresOther.placeholder}
-                  aria-label={HELP.featuresOther.label}
-                  className={`${inputCls} mt-3`}
-                />
-                <Field label={HELP.before.label}>
-                  <textarea
-                    value={answers.before}
-                    onChange={(e) => set("before", e.target.value)}
-                    placeholder={HELP.before.placeholder}
-                    rows={3}
-                    className={textareaCls}
-                  />
-                </Field>
-              </QuestionShell>
-            )}
-
-            {step === 3 && (
-              <QuestionShell q={QUESTIONS[2]}>
-                <Field label={RESULT.changed.label} first>
-                  <textarea
-                    autoFocus
-                    value={answers.changed}
-                    onChange={(e) => set("changed", e.target.value)}
-                    placeholder={RESULT.changed.placeholder}
-                    rows={3}
-                    className={textareaCls}
-                  />
-                </Field>
-                <Field label={RESULT.recommend.label}>
-                  <textarea
-                    value={answers.recommend}
-                    onChange={(e) => set("recommend", e.target.value)}
-                    placeholder={RESULT.recommend.placeholder}
-                    rows={3}
-                    className={textareaCls}
-                  />
-                </Field>
-              </QuestionShell>
-            )}
-
-            {step === RESULT_STEP && (
-              <Result
-                review={review}
-                onChange={setReview}
-                copied={copied}
-                onCopy={copyReview}
-                onGoogle={onGoogleClick}
-                onRephrase={rephrase}
-                onStartOver={startOver}
-              />
+                <button
+                  type="button"
+                  onClick={back}
+                  className="mx-auto mt-6 flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <ArrowLeft className="size-4" />
+                  Pick a different service
+                </button>
+              </div>
             )}
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* Footer controls for the question steps */}
-      {step >= 1 && step <= LAST_STEP && (
-        <div className="mt-8 flex items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={goBack}
-            className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-4" />
-            Back
-          </button>
-          <button
-            type="button"
-            onClick={goNext}
-            disabled={!canAdvance}
-            className="btn btn-primary group inline-flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-brand-foreground disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            {step === LAST_STEP ? "Create my review" : "Next"}
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </button>
-        </div>
-      )}
     </div>
   );
 }
 
-// ── pieces ──────────────────────────────────────────────────────────────────
-const inputCls =
-  "w-full rounded-lg border border-border bg-background px-4 py-3 text-base outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/20";
-const textareaCls = `${inputCls} resize-none leading-relaxed`;
-
-// Sub-fields of the two combined screens.
-const HELP = QUESTIONS[1].fields!;
-const RESULT = QUESTIONS[2].fields!;
-
-function Field({ label, first, children }: { label: string; first?: boolean; children: React.ReactNode }) {
-  return (
-    <label className={`block ${first ? "" : "mt-6"}`}>
-      <span className="mb-2 block text-sm font-semibold">{label}</span>
-      {children}
-    </label>
-  );
+function copyText(text: string) {
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).catch(() => legacyCopy(text));
+  } else {
+    legacyCopy(text);
+  }
 }
 
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={`rounded-lg border px-3.5 py-2 text-sm font-medium transition-colors ${
-        active
-          ? "border-brand bg-brand text-brand-foreground"
-          : "border-border bg-card text-foreground hover:border-brand/50"
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function QuestionShell({
-  q,
-  children,
-}: {
-  q: (typeof QUESTIONS)[number];
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold leading-snug tracking-tight sm:text-3xl">{q.title}</h1>
-      {q.help && <p className="mt-2 text-sm text-muted-foreground">{q.help}</p>}
-      <div className="mt-6">{children}</div>
-    </div>
-  );
-}
-
-function Welcome({ onStart }: { onStart: () => void }) {
-  return (
-    <div className="pt-6">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-text">
-        {WELCOME.kicker}
-      </p>
-      <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-        {WELCOME.title}
-      </h1>
-      <p className="mt-4 text-base leading-relaxed text-muted-foreground">{WELCOME.body}</p>
-      <ul className="mt-6 space-y-3">
-        {WELCOME.points.map((p) => (
-          <li key={p} className="flex items-start gap-3 text-sm">
-            <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-rating/15 text-rating">
-              <Check className="size-3.5" strokeWidth={3} />
-            </span>
-            <span>{p}</span>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        onClick={onStart}
-        className="btn btn-primary group mt-9 inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-base font-semibold text-brand-foreground sm:w-auto"
-      >
-        {WELCOME.cta}
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-      </button>
-    </div>
-  );
+// Older browsers / blocked clipboard: select a hidden textarea and copy.
+function legacyCopy(text: string) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+  } catch {
+    /* the text is still on screen to copy by hand */
+  }
+  document.body.removeChild(ta);
 }
 
 function Stars() {
   return (
-    <div className="flex gap-0.5" aria-label="Five stars">
+    <div className="flex gap-1" aria-label="Five stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="size-5 fill-[#fbbc04] text-[#fbbc04]" strokeWidth={0} />
+        <Star key={i} className="size-9 fill-[#fbbc04] text-[#fbbc04]" strokeWidth={0} />
       ))}
-    </div>
-  );
-}
-
-function Result({
-  review,
-  onChange,
-  copied,
-  onCopy,
-  onGoogle,
-  onRephrase,
-  onStartOver,
-}: {
-  review: string;
-  onChange: (v: string) => void;
-  copied: boolean;
-  onCopy: () => void;
-  onGoogle: () => void;
-  onRephrase: () => void;
-  onStartOver: () => void;
-}) {
-  return (
-    <div>
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Your review is ready</h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">
-            Written from your answers. Edit anything before you post.
-          </p>
-        </div>
-        <Stars />
-      </div>
-
-      <div className="mt-6">
-        <div className="mb-2 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Pencil className="size-3.5" />
-          Your review
-        </div>
-        <textarea
-          value={review}
-          onChange={(e) => onChange(e.target.value)}
-          rows={7}
-          className={`${textareaCls} text-base`}
-        />
-        <div className="mt-2 flex items-center justify-between">
-          <button
-            type="button"
-            onClick={onRephrase}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <RefreshCw className="size-3.5" />
-            Rephrase
-          </button>
-          <span className="text-xs text-muted-foreground">{review.trim().length} characters</span>
-        </div>
-      </div>
-
-      <div className="mt-6 space-y-3">
-        <button
-          type="button"
-          onClick={onCopy}
-          disabled={!review.trim()}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3.5 text-base font-semibold text-foreground transition-colors hover:border-brand/50 disabled:opacity-40"
-        >
-          {copied ? (
-            <>
-              <Check className="size-4 text-rating" strokeWidth={3} />
-              Copied
-            </>
-          ) : (
-            <>
-              <Copy className="size-4" />
-              Copy review
-            </>
-          )}
-        </button>
-        <a
-          href={GOOGLE_REVIEW_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onGoogle}
-          className="btn btn-primary group inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-base font-semibold text-brand-foreground"
-        >
-          Leave Google review
-          <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-        </a>
-        <p className="text-center text-xs text-muted-foreground">
-          Paste your review on the Google page that opens, then tap post.
-        </p>
-      </div>
-
-      <button
-        type="button"
-        onClick={onStartOver}
-        className="mt-6 block w-full text-center text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-      >
-        Start over
-      </button>
     </div>
   );
 }
