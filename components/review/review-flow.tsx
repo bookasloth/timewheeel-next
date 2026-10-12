@@ -8,7 +8,48 @@ import { analytics, EVENTS } from "@/lib/analytics";
 import { BRAND, GOOGLE_REVIEW_URL, REVIEW_SERVICES, type ReviewService } from "@/lib/review";
 
 // Two slides: pick the service, then copy a sample review. The main button
-// copies the text and opens Timewheel's Google review form in one tap.
+// copies the text and opens Timewheel's Google review form in one tap. A copied
+// sample is never offered again: the server tracks it for everyone, and this
+// browser also remembers it in case the server isn't configured.
+
+const LOCAL_KEY = "tw-review-used";
+
+function localUsed(): Record<string, number[]> {
+  try {
+    return JSON.parse(localStorage.getItem(LOCAL_KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function rememberLocal(service: string, idx: number) {
+  try {
+    const all = localUsed();
+    all[service] = [...new Set([...(all[service] ?? []), idx])];
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(all));
+  } catch {
+    /* storage blocked: the server copy still counts */
+  }
+}
+
+// Unused indexes for a service, shuffled so two people on the page at the
+// same moment are unlikely to land on the same sample.
+async function availableFor(s: ReviewService): Promise<number[]> {
+  let used: number[] = [];
+  try {
+    const res = await fetch(`/api/review/samples?service=${encodeURIComponent(s.id)}`, { cache: "no-store" });
+    if (res.ok) used = (await res.json()).used ?? [];
+  } catch {
+    /* offline or server down: fall back to this browser's list */
+  }
+  const skip = new Set([...used, ...(localUsed()[s.id] ?? [])]);
+  const free = s.samples.map((_, i) => i).filter((i) => !skip.has(i));
+  for (let i = free.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [free[i], free[j]] = [free[j], free[i]];
+  }
+  return free;
+}
 
 const slideVariants = {
   enter: (dir: number) => ({ opacity: 0, x: dir >= 0 ? 24 : -24 }),
@@ -19,7 +60,9 @@ const slideVariants = {
 export function ReviewFlow() {
   const [service, setService] = useState<ReviewService | null>(null);
   const [dir, setDir] = useState(1);
-  const [variant, setVariant] = useState(0);
+  const [pool, setPool] = useState<number[]>([]);
+  const [pos, setPos] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [review, setReview] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -27,13 +70,18 @@ export function ReviewFlow() {
     analytics.track(EVENTS.REVIEW_PAGE_VIEWED);
   }, []);
 
-  function pick(s: ReviewService) {
+  async function pick(s: ReviewService) {
     setService(s);
-    setVariant(0);
-    setReview(s.samples[0]);
     setCopied(false);
     setDir(1);
-    analytics.track(EVENTS.REVIEW_GENERATED, { service: s.id });
+    setLoading(true);
+    setReview("");
+    const free = await availableFor(s);
+    setPool(free);
+    setPos(0);
+    setReview(free.length ? s.samples[free[0]] : "");
+    setLoading(false);
+    analytics.track(EVENTS.REVIEW_GENERATED, { service: s.id, available: free.length });
   }
 
   function back() {
@@ -42,10 +90,11 @@ export function ReviewFlow() {
   }
 
   function another() {
-    if (!service) return;
-    const next = (variant + 1) % service.samples.length;
-    setVariant(next);
-    setReview(service.samples[next]);
+    if (!service || pool.length < 2) return;
+    const next = (pos + 1) % pool.length;
+    setPos(next);
+    setReview(service.samples[pool[next]]);
+    setCopied(false);
   }
 
   // Runs inside the link's click, so the clipboard write happens within the
@@ -53,6 +102,16 @@ export function ReviewFlow() {
   function copyAndGo() {
     copyText(review);
     setCopied(true);
+    const idx = pool[pos];
+    if (service && idx !== undefined) {
+      rememberLocal(service.id, idx);
+      fetch("/api/review/samples", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ service: service.id, idx }),
+        keepalive: true,
+      }).catch(() => {});
+    }
     analytics.track(EVENTS.REVIEW_COPIED, { length: review.length, service: service?.id });
     analytics.track(EVENTS.REVIEW_GOOGLE_CLICKED, { service: service?.id });
   }
@@ -138,16 +197,17 @@ export function ReviewFlow() {
                       setCopied(false);
                     }}
                     rows={6}
+                    placeholder={loading ? "Loading your review..." : "Write a few lines about your experience with Timewheel."}
                     className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-base leading-relaxed outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/20"
                   />
-                  <button
+                  {pool.length > 1 && <button
                     type="button"
                     onClick={another}
                     className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     <RefreshCw className="size-3.5" />
                     Try another
-                  </button>
+                  </button>}
                 </div>
 
                 <a
