@@ -14,7 +14,7 @@ export default async function PrintInvoicePage({ params }: { params: Promise<{ i
   if (!inv) notFound();
   return (
     <main className="min-h-[100dvh] bg-gray-200 py-6 print:bg-white print:py-0">
-      <style>{"@page { size: A4; margin: 0 } @media print { .invoice-doc { max-width: none } }"}</style>
+      <style>{"@page { size: A4; margin: 0 } @media print { .invoice-doc { max-width: none; -webkit-print-color-adjust: exact; print-color-adjust: exact } }"}</style>
       <PrintBar title={inv.number} />
       <div className="mx-auto max-w-[794px] shadow-lg print:shadow-none">
         <InvoiceDocument inv={inv} extras={sellerExtras()} />
