@@ -41,22 +41,26 @@ function Card({ post }: { post: PostMeta }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-left transition-colors hover:border-brand/50"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card text-left transition-colors hover:border-brand/50"
     >
       <Thumb post={post} className="aspect-[16/9]" />
       <div className="flex flex-1 flex-col p-5">
         <span className="text-[11px] font-bold uppercase tracking-wide text-brand-text">{post.category}</span>
         <h3 className="mt-2 text-lg font-bold leading-snug text-foreground">{post.title}</h3>
+      </div>
 
-        {/* hover reveal: excerpt + read, height animates 0fr -> 1fr */}
-        <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-300 group-hover:mt-3 group-hover:grid-rows-[1fr] group-hover:opacity-100">
-          <div className="overflow-hidden">
-            <p className="text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
-            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand">
-              Read <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-            </span>
-          </div>
-        </div>
+      {/* hover reveal: a panel slides up from the bottom and covers the card,
+          so the card never changes size */}
+      <div
+        aria-hidden
+        className="absolute inset-0 flex translate-y-full flex-col bg-card p-6 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0 group-focus-visible:translate-y-0 motion-reduce:transition-none"
+      >
+        <span className="text-[11px] font-bold uppercase tracking-wide text-brand-text">{post.category}</span>
+        <p className="mt-2 text-lg font-bold leading-snug text-foreground">{post.title}</p>
+        <p className="mt-3 line-clamp-6 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
+        <span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-brand">
+          Read <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+        </span>
       </div>
     </Link>
   );
