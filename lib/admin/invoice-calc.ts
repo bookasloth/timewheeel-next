@@ -29,6 +29,9 @@ export type Invoice = {
   terms: string;
   paid_at: string | null;
   created_at: string;
+  /** Set by migration 0011 when the invoice is emailed. */
+  sent_at?: string | null;
+  sent_to?: string;
 };
 
 /** Seller block on every invoice. GSTIN/PAN/bank come from env so they can be

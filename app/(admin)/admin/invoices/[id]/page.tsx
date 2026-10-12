@@ -8,6 +8,7 @@ import { getInvoice, sellerExtras } from "@/lib/admin/invoice-data";
 import { deleteInvoice, duplicateInvoice } from "@/lib/admin/invoice-actions";
 import { requireAdmin } from "@/lib/members/session";
 import { SubmitButton } from "@/components/admin/feedback-client";
+import { SendInvoice } from "@/components/admin/invoices/send-invoice";
 
 export const metadata: Metadata = { title: "Invoice" };
 
@@ -22,7 +23,8 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
         description={`${inv.client_company || inv.client_name} · ${inv.status}`}
         actions={
           <>
-            <Link href={`/admin/invoices/${inv.id}/print`} target="_blank" className={btn.primary}>
+            <SendInvoice id={inv.id} email={inv.client_email} status={inv.status} sentAt={inv.sent_at} sentTo={inv.sent_to} />
+            <Link href={`/admin/invoices/${inv.id}/print`} target="_blank" className={btn.ghost}>
               <Printer size={16} /> Print / PDF
             </Link>
             <form action={duplicateInvoice}>
