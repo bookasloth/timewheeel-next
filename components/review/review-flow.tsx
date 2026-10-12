@@ -25,8 +25,8 @@ import {
   type ReviewAnswers,
 } from "@/lib/review";
 
-const LAST_STEP = QUESTIONS.length; // 5
-const RESULT_STEP = LAST_STEP + 1; // 6
+const LAST_STEP = QUESTIONS.length; // 3
+const RESULT_STEP = LAST_STEP + 1; // 4
 
 // Framer-motion step transition (respects the direction of travel).
 const stepVariants = {
@@ -36,7 +36,7 @@ const stepVariants = {
 };
 
 export function ReviewFlow() {
-  const [step, setStep] = useState(0); // 0 welcome, 1..5 questions, 6 result
+  const [step, setStep] = useState(0); // 0 welcome, 1..3 questions, 4 result
   const [dir, setDir] = useState(1);
   const [answers, setAnswers] = useState<ReviewAnswers>(EMPTY_ANSWERS);
   const [review, setReview] = useState("");
@@ -69,13 +69,10 @@ export function ReviewFlow() {
         return answers.businessType !== "" &&
           (answers.businessType !== "other" || answers.businessTypeOther.trim().length > 1);
       case 2:
-        return answers.before.trim().length > 1;
+        return (answers.features.length > 0 || answers.featuresOther.trim().length > 1) &&
+          answers.before.trim().length > 1;
       case 3:
-        return answers.features.length > 0 || answers.featuresOther.trim().length > 1;
-      case 4:
-        return answers.changed.trim().length > 1;
-      case 5:
-        return true; // recommendation is optional
+        return answers.changed.trim().length > 1; // recommendation is optional
       default:
         return true;
     }
@@ -230,19 +227,6 @@ export function ReviewFlow() {
 
             {step === 2 && (
               <QuestionShell q={QUESTIONS[1]}>
-                <textarea
-                  autoFocus
-                  value={answers.before}
-                  onChange={(e) => set("before", e.target.value)}
-                  placeholder={QUESTIONS[1].placeholder}
-                  rows={4}
-                  className={textareaCls}
-                />
-              </QuestionShell>
-            )}
-
-            {step === 3 && (
-              <QuestionShell q={QUESTIONS[2]}>
                 <div className="flex flex-wrap gap-2">
                   {FEATURE_CHIPS.map((f) => (
                     <Chip key={f} active={answers.features.includes(f)} onClick={() => toggleFeature(f)}>
@@ -253,35 +237,43 @@ export function ReviewFlow() {
                 <input
                   value={answers.featuresOther}
                   onChange={(e) => set("featuresOther", e.target.value)}
-                  placeholder={QUESTIONS[2].placeholder}
+                  placeholder={HELP.featuresOther.placeholder}
+                  aria-label={HELP.featuresOther.label}
                   className={`${inputCls} mt-3`}
                 />
+                <Field label={HELP.before.label}>
+                  <textarea
+                    value={answers.before}
+                    onChange={(e) => set("before", e.target.value)}
+                    placeholder={HELP.before.placeholder}
+                    rows={3}
+                    className={textareaCls}
+                  />
+                </Field>
               </QuestionShell>
             )}
 
-            {step === 4 && (
-              <QuestionShell q={QUESTIONS[3]}>
-                <textarea
-                  autoFocus
-                  value={answers.changed}
-                  onChange={(e) => set("changed", e.target.value)}
-                  placeholder={QUESTIONS[3].placeholder}
-                  rows={4}
-                  className={textareaCls}
-                />
-              </QuestionShell>
-            )}
-
-            {step === 5 && (
-              <QuestionShell q={QUESTIONS[4]}>
-                <textarea
-                  autoFocus
-                  value={answers.recommend}
-                  onChange={(e) => set("recommend", e.target.value)}
-                  placeholder={QUESTIONS[4].placeholder}
-                  rows={4}
-                  className={textareaCls}
-                />
+            {step === 3 && (
+              <QuestionShell q={QUESTIONS[2]}>
+                <Field label={RESULT.changed.label} first>
+                  <textarea
+                    autoFocus
+                    value={answers.changed}
+                    onChange={(e) => set("changed", e.target.value)}
+                    placeholder={RESULT.changed.placeholder}
+                    rows={3}
+                    className={textareaCls}
+                  />
+                </Field>
+                <Field label={RESULT.recommend.label}>
+                  <textarea
+                    value={answers.recommend}
+                    onChange={(e) => set("recommend", e.target.value)}
+                    placeholder={RESULT.recommend.placeholder}
+                    rows={3}
+                    className={textareaCls}
+                  />
+                </Field>
               </QuestionShell>
             )}
 
@@ -330,6 +322,19 @@ export function ReviewFlow() {
 const inputCls =
   "w-full rounded-lg border border-border bg-background px-4 py-3 text-base outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/20";
 const textareaCls = `${inputCls} resize-none leading-relaxed`;
+
+// Sub-fields of the two combined screens.
+const HELP = QUESTIONS[1].fields!;
+const RESULT = QUESTIONS[2].fields!;
+
+function Field({ label, first, children }: { label: string; first?: boolean; children: React.ReactNode }) {
+  return (
+    <label className={`block ${first ? "" : "mt-6"}`}>
+      <span className="mb-2 block text-sm font-semibold">{label}</span>
+      {children}
+    </label>
+  );
+}
 
 function Chip({
   active,

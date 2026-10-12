@@ -14,6 +14,7 @@ const PRODUCTS_UPDATED = "2026-10-11";
 const CAREERS_UPDATED = "2026-10-09";
 const ACADEMY_UPDATED = "2026-10-10";
 const LEGAL_UPDATED = "2026-06-01";
+const PAGES_UPDATED = "2026-10-12"; // newsletter, partners, write-for-us, sitemap, disclaimer, company
 
 type Entry = MetadataRoute.Sitemap[number];
 type Freq = Entry["changeFrequency"];
@@ -49,6 +50,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry("/contact", SITE_UPDATED, 0.6, "yearly"),
     entry("/book-a-demo", SITE_UPDATED, 0.6, "monthly"),
     entry("/30-days-30-websites", SITE_UPDATED, 0.7, "weekly"),
+    entry("/newsletter", PAGES_UPDATED, 0.5, "monthly"),
+    entry("/partners", PAGES_UPDATED, 0.4, "monthly"),
+    entry("/write-for-us", PAGES_UPDATED, 0.4, "monthly"),
+    entry("/sitemap", PAGES_UPDATED, 0.3, "weekly"),
     entry("/careers", CAREERS_UPDATED, 0.5, "weekly"),
     ...jobs.map((j) => entry(`/careers/${j.slug}`, CAREERS_UPDATED, 0.5, "weekly")),
     entry("/academy", ACADEMY_UPDATED, 0.7, "monthly"),
@@ -69,5 +74,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...["/legal/privacy", "/legal/terms", "/legal/cookies", "/legal/refund"].map((p) =>
       entry(p, LEGAL_UPDATED, 0.2, "yearly"),
     ),
+    ...["/legal/disclaimer", "/legal/company"].map((p) => entry(p, PAGES_UPDATED, 0.2, "yearly")),
   ];
 }

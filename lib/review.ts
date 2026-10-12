@@ -43,7 +43,7 @@ export const FEATURE_CHIPS: string[] = [
 export const WELCOME = {
   kicker: "SHARE YOUR EXPERIENCE",
   title: "Help others find Timewheel",
-  body: "Answer five quick questions about your experience and we will turn your own words into a natural review you can post to Google in one tap. Nothing is made up, it is simply your feedback, written clearly.",
+  body: "Answer three quick questions about your experience and we will turn your own words into a natural review you can post to Google in one tap. Nothing is made up, it is simply your feedback, written clearly.",
   points: [
     "Takes about a minute",
     "Built only from what you tell us",
@@ -52,12 +52,18 @@ export const WELCOME = {
   cta: "Start",
 };
 
+// Three screens. Each screen asks one or more of the answer fields below.
+export type QuestionField = {
+  label: string;
+  placeholder?: string;
+};
+
 export type Question = {
-  id: "business" | "before" | "features" | "changed" | "recommend";
-  step: number; // 1..5
+  id: "business" | "help" | "result";
+  step: number; // 1..3
   title: string;
   help?: string;
-  placeholder?: string;
+  fields?: Record<string, QuestionField>;
 };
 
 export const QUESTIONS: Question[] = [
@@ -68,32 +74,33 @@ export const QUESTIONS: Question[] = [
     help: "This just helps the review sound like you. Your city is optional.",
   },
   {
-    id: "before",
+    id: "help",
     step: 2,
-    title: "Before Timewheel, what was hardest about your website or online presence?",
-    help: "A line or two in your own words.",
-    placeholder: "e.g. My old site looked dated and never showed up on Google.",
+    title: "What did Timewheel help you with?",
+    help: "Pick what fits, then tell us what was hard before.",
+    fields: {
+      featuresOther: { label: "Anything else", placeholder: "Anything else they handled for you?" },
+      before: {
+        label: "Before Timewheel, what was hardest?",
+        placeholder: "e.g. My old site looked dated and never showed up on Google.",
+      },
+    },
   },
   {
-    id: "features",
+    id: "result",
     step: 3,
-    title: "What did Timewheel help you with the most?",
-    help: "Pick what fits. Add your own if something is missing.",
-    placeholder: "Anything else they handled for you?",
-  },
-  {
-    id: "changed",
-    step: 4,
-    title: "What has changed since working with Timewheel?",
+    title: "What has changed since?",
     help: "Share the real difference. Only mention numbers if they are genuinely yours.",
-    placeholder: "e.g. The new site brings in enquiries and we finally rank for our services.",
-  },
-  {
-    id: "recommend",
-    step: 5,
-    title: "What would you tell someone who is considering them?",
-    help: "Optional, but it makes the review feel complete.",
-    placeholder: "e.g. If your website is holding you back, talk to them.",
+    fields: {
+      changed: {
+        label: "What changed",
+        placeholder: "e.g. The new site brings in enquiries and we finally rank for our services.",
+      },
+      recommend: {
+        label: "What would you tell someone considering them? (optional)",
+        placeholder: "e.g. If your website is holding you back, talk to them.",
+      },
+    },
   },
 ];
 
