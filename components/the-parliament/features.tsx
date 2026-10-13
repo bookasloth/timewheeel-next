@@ -1,7 +1,8 @@
-import { CalendarDays, Check, Crown, MessagesSquare, Newspaper, ShieldCheck, Users } from "lucide-react";
+import { CalendarDays, Crown, MessagesSquare, Newspaper, ShieldCheck, Users } from "lucide-react";
 import { tp } from "@/lib/the-parliament";
 import { Reveal } from "@/components/reveal";
 import { TpHead } from "./head";
+import { TpFlipCard } from "./flip-card";
 
 const iconMap = {
   feed: Newspaper,
@@ -22,20 +23,13 @@ export function TpFeatures() {
           {s.items.map((item) => {
             const Icon = iconMap[item.icon as keyof typeof iconMap];
             return (
-              <Reveal key={item.name} className="tp-card">
-                <span className="tp-ic">
-                  <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
-                </span>
-                <h3 className="tp-card-name">{item.name}</h3>
-                <p className="tp-card-desc">{item.desc}</p>
-                <ul className="tp-bullets">
-                  {item.bullets.map((b) => (
-                    <li key={b}>
-                      <Check size={13} strokeWidth={2.6} aria-hidden="true" />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
+              <Reveal key={item.name} className="tp-flip-cell">
+                <TpFlipCard
+                  icon={<Icon size={20} strokeWidth={1.8} aria-hidden="true" />}
+                  name={item.name}
+                  desc={item.desc}
+                  bullets={item.bullets}
+                />
               </Reveal>
             );
           })}

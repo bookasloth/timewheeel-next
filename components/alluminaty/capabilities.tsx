@@ -1,13 +1,8 @@
 import {
   Code2,
   Compass,
-  Database,
-  LayoutGrid,
-  MessagesSquare,
   PenTool,
-  Server,
   ShieldCheck,
-  Wallet,
 } from "lucide-react";
 import { az } from "@/lib/alluminaty";
 import { Reveal } from "@/components/reveal";
@@ -15,13 +10,8 @@ import { Reveal } from "@/components/reveal";
 const iconMap = {
   compass: Compass,
   pen: PenTool,
-  layout: LayoutGrid,
   code: Code2,
-  server: Server,
-  database: Database,
   shield: ShieldCheck,
-  wallet: Wallet,
-  message: MessagesSquare,
 } as const;
 
 export function AzCapabilities() {
@@ -39,13 +29,20 @@ export function AzCapabilities() {
 
         <div className="az-caps-grid">
           {az.capabilities.items.map((item) => {
-            const Icon = iconMap[item.icon as keyof typeof iconMap];
+            const Icon =
+              iconMap[item.icon as keyof typeof iconMap] ?? Compass;
             return (
-              <Reveal key={item.label} className="az-cap">
+              <Reveal key={item.name} className="az-cap">
                 <span className="az-cap-ic">
                   <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
                 </span>
-                <span className="az-cap-label">{item.label}</span>
+                <h3 className="az-cap-name">{item.name}</h3>
+                <p className="az-cap-desc">{item.desc}</p>
+                <ul className="az-cap-list">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
               </Reveal>
             );
           })}

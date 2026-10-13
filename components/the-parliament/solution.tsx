@@ -1,9 +1,14 @@
-import { CalendarDays, Crown, Newspaper, ShieldCheck, Users, Video } from "lucide-react";
+import { CalendarDays, Newspaper, ShieldCheck, Users } from "lucide-react";
 import { tp } from "@/lib/the-parliament";
 import { Reveal } from "@/components/reveal";
 import { TpHead } from "./head";
 
-const icons = [Newspaper, Users, CalendarDays, Crown, Video, ShieldCheck];
+const iconMap = {
+  feed: Newspaper,
+  groups: Users,
+  events: CalendarDays,
+  admin: ShieldCheck,
+} as const;
 
 export function TpSolution() {
   const s = tp.solution;
@@ -11,19 +16,24 @@ export function TpSolution() {
     <section className="tp-sec tp-dark">
       <div className="tp-container">
         <TpHead number={s.number} label={s.label} title={s.title} body={s.body} light />
-        <Reveal className="tp-strips" stagger>
-          {s.items.map((item, i) => {
-            const Icon = icons[i % icons.length];
+        <div className="tp-solution-grid">
+          {s.cards.map((card) => {
+            const Icon = iconMap[card.icon as keyof typeof iconMap];
             return (
-              <div className="tp-strip" key={item}>
+              <Reveal key={card.name} className="tp-sol-card">
                 <span className="tp-ic tp-ic--dark">
-                  <Icon size={17} strokeWidth={1.9} aria-hidden="true" />
+                  <Icon size={18} strokeWidth={1.9} aria-hidden="true" />
                 </span>
-                {item}
-              </div>
+                <h3 className="tp-sol-name">{card.name}</h3>
+                <ul className="tp-sol-list">
+                  {card.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </Reveal>
             );
           })}
-        </Reveal>
+        </div>
       </div>
     </section>
   );

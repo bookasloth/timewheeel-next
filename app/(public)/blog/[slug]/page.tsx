@@ -9,7 +9,6 @@ import {
   getPost,
   getRenamedSlug,
   getRelatedPosts,
-  getAdjacentPosts,
   extractHeadings,
   formatDate,
   slugify,
@@ -18,7 +17,6 @@ import { TableOfContents } from "@/components/blog/table-of-contents";
 import { ShareRail } from "@/components/blog/share-rail";
 import { AuthorCard } from "@/components/blog/author-card";
 import { RelatedPosts } from "@/components/blog/related-posts";
-import { PostNav } from "@/components/blog/post-nav";
 import { Comments } from "@/components/blog/comments";
 import { ReadingProgress } from "@/components/blog/reading-progress";
 import { PostCta } from "@/components/blog/post-cta";
@@ -103,7 +101,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const tornEdge =
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='700' preserveAspectRatio='none'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.016 0.03' numOctaves='2' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='22'/%3E%3C/filter%3E%3Crect x='11' y='11' width='1178' height='678' rx='30' fill='%23fff' filter='url(%23r)'/%3E%3C/svg%3E\")";
   const headings = [...extractHeadings(html), ...(faq.length ? [{ text: "Frequently asked questions", id: FAQ_ID }] : [])];
-  const [related, { prev, next }] = await Promise.all([getRelatedPosts(slug, meta.category), getAdjacentPosts(slug)]);
+  const related = await getRelatedPosts(slug, meta.category);
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -303,7 +301,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <PostCta />
         <RelatedPosts posts={related} />
-        <PostNav prev={prev} next={next} />
       </div>
     </div>
   );
