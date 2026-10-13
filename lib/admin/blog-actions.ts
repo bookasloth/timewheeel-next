@@ -3,7 +3,7 @@
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/server";
-import { getMember } from "@/lib/members/session";
+import { getConsoleMember } from "@/lib/members/session";
 import { cleanBlogHtml } from "@/lib/blog-html";
 
 // Blog editor writes (admin console, /admin/blog), ported from the adetc blog
@@ -19,7 +19,7 @@ const RESERVED = new Set(["tag", "feed", "page", "new", "admin", "rss"]);
 const ROBOTS = new Set(["index,follow", "noindex,follow", "index,nofollow", "noindex,nofollow"]);
 
 async function editor() {
-  const member = await getMember();
+  const member = await getConsoleMember();
   if (!member?.canWriteBlog) throw new Error("Not allowed");
   return { member, db: createAdminClient() };
 }
@@ -279,6 +279,7 @@ export async function startImageUpload(input: { name: string; size: number; type
     return { url: data.signedUrl, publicUrl: db.storage.from("blog-images").getPublicUrl(path).data.publicUrl };
   } catch (e) {
     console.error("startImageUpload:", e);
+    if (e instanceof Error && e.message === "Not allowed") return { error: "You don't have access to the blog editor. Sign in again at /admin/login." };
     return { error: "Couldn't start the upload. Check the blog-images bucket exists (migration 0008)." };
   }
 }

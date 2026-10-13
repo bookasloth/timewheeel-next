@@ -134,11 +134,15 @@ const getConsoleAdmin = cache(async (): Promise<Member | null> => {
   };
 });
 
+/** Console server actions: the /admin/login session first, else the member
+ * session. Null when neither is signed in (actions return an error, not a redirect). */
+export async function getConsoleMember(): Promise<Member | null> {
+  return (await getConsoleAdmin()) ?? (await getMember());
+}
+
 /** Console pages: the /admin/login session first, else the member session. */
 async function requireConsoleMember(next: string): Promise<Member> {
-  const consoleAdmin = await getConsoleAdmin();
-  if (consoleAdmin) return consoleAdmin;
-  const member = await getMember();
+  const member = await getConsoleMember();
   if (!member) redirect(`/admin/login?next=${encodeURIComponent(next)}`);
   return member;
 }
