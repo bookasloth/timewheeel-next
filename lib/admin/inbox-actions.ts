@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/server";
-import { getMember } from "@/lib/members/session";
+import { getConsoleMember } from "@/lib/members/session";
 import { removeNewsletterContact } from "@/lib/resend-contacts";
 
 // Admin inbox writes: enquiry status and deletion, newsletter removals.
@@ -12,7 +12,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const STATUSES = new Set(["new", "contacted", "delivered", "upsell", "won", "lost"]);
 
 async function admin() {
-  const member = await getMember();
+  const member = await getConsoleMember();
   if (!member?.isAdmin) throw new Error("Not allowed");
   return createAdminClient();
 }

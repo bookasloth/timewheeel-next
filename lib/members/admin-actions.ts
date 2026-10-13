@@ -3,7 +3,7 @@
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/server";
-import { getMember } from "@/lib/members/session";
+import { getConsoleMember } from "@/lib/members/session";
 import { LIFETIME_YEAR } from "@/lib/members/config";
 
 // Admin-only writes, using the service key. Every action re-checks the caller
@@ -14,7 +14,7 @@ const MAX_BYTES = 50 * 1024 * 1024;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 async function admin() {
-  const member = await getMember();
+  const member = await getConsoleMember();
   if (!member?.isAdmin) throw new Error("Not allowed");
   return { member, db: createAdminClient() };
 }
@@ -36,6 +36,7 @@ export async function startUpload(input: { name: string; size: number }): Promis
     return { path, url: data.signedUrl };
   } catch (e) {
     console.error("startUpload:", e);
+    if (e instanceof Error && e.message === "Not allowed") return { error: "Only admins can upload. Sign in again at /admin/login." };
     return { error: "Couldn't start the upload. Check the storage bucket exists (migration 0006)." };
   }
 }

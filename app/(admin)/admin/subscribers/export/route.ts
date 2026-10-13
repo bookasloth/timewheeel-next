@@ -1,4 +1,4 @@
-import { getMember } from "@/lib/members/session";
+import { getConsoleMember } from "@/lib/members/session";
 import { listNewsletterContacts } from "@/lib/resend-contacts";
 
 // Newsletter subscribers as CSV (admins only).
@@ -10,7 +10,7 @@ const cell = (v: unknown) => {
 };
 
 export async function GET() {
-  const member = await getMember();
+  const member = await getConsoleMember();
   if (!member?.isAdmin) return new Response("Not found", { status: 404 });
   const contacts = (await listNewsletterContacts()) ?? [];
   const rows = [["email", "first_name", "last_name", "status", "joined"], ...contacts.map((c) => [c.email, c.first_name, c.last_name, c.unsubscribed ? "unsubscribed" : "subscribed", c.created_at])];
