@@ -1,4 +1,4 @@
-import { Quote } from "lucide-react";
+import { ArrowUpRight, Quote } from "lucide-react";
 import { az } from "@/lib/alluminaty";
 import { Reveal } from "@/components/reveal";
 
@@ -6,24 +6,27 @@ export function AzTestimonials() {
   return (
     <section className="az-sec az-quotes">
       <div className="az-container">
-        <Reveal className="az-head" data-ghost={az.testimonials.number}>
+        <Reveal
+          className="az-head az-head--center"
+          data-ghost={az.testimonials.number}
+        >
           <p className="az-kicker">
             <span className="az-kicker-num">{az.testimonials.number}</span>
             {az.testimonials.label}
           </p>
           <h2 className="az-h">{az.testimonials.title}</h2>
           <p className="az-lede">{az.testimonials.body}</p>
-          <p className="az-lede">
-            <a href={az.testimonials.linkHref} className="az-text-link" target="_blank" rel="noopener noreferrer">
-            {az.testimonials.linkLabel}
-          </a>
-          </p>
         </Reveal>
 
         <div className="az-quotes-grid">
           {az.testimonials.items.map((item) => (
             <Reveal key={item.name} className="az-quote">
-              <Quote size={22} strokeWidth={1.6} className="az-quote-mark" aria-hidden="true" />
+              <Quote
+                size={26}
+                strokeWidth={1.5}
+                className="az-quote-mark"
+                aria-hidden="true"
+              />
               <p className="az-quote-text">{item.quote}</p>
               <div className="az-quote-person">
                 <span className="az-quote-av">{item.initials}</span>
@@ -35,6 +38,18 @@ export function AzTestimonials() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="az-quotes-cta">
+          <a
+            href={az.testimonials.linkHref}
+            className="az-text-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {az.testimonials.linkLabel}
+            <ArrowUpRight size={16} strokeWidth={2.2} aria-hidden="true" />
+          </a>
+        </Reveal>
       </div>
     </section>
   );

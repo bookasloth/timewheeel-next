@@ -31,43 +31,65 @@ export const tp = {
   problem: {
     number: "01",
     label: "THE PROBLEM",
-    title: "How to manage a large WhatsApp group, and when to stop trying",
-    body: "Three things help a big WhatsApp group: an admin-only announcement group, pinned rules, and a separate place for events and payments. When you are juggling all three plus a spreadsheet, the community has outgrown the chat. These are the usual signs.",
+    title: "When your WhatsApp group has outgrown itself",
+    body: "WhatsApp works brilliantly for small, close-knit groups. But as your community grows, the very things that made it easy start working against you. If you're juggling multiple groups, spreadsheets and payment screenshots just to keep things running, it's a sign your community has outgrown the chat.",
     items: [
       {
-        name: "Important posts get buried",
-        desc: "Announcements, decisions and useful links sink under replies within hours. There is no feed to come back to.",
+        name: "Critical updates get lost in the noise",
+        desc: "Announcements, decisions and important links disappear under a flood of replies. There's no central feed for members to catch up on later.",
       },
       {
-        name: "You don't know who your members are",
-        desc: "A list of phone numbers is not a directory. Nobody can find the designer, the doctor or the person from their city.",
+        name: "You don't have a real member directory",
+        desc: "A list of phone numbers isn't enough. Members can't easily find each other by profession, city, batch or area of interest.",
       },
       {
-        name: "Events and money live somewhere else",
-        desc: "RSVPs in a Google Form, payments as UPI screenshots, and an admin reconciling both by hand.",
+        name: "Payments, RSVPs and data are scattered",
+        desc: "Events run on Google Forms, money comes in as UPI screenshots, and admins spend hours reconciling everything manually.",
       },
       {
-        name: "Admins only have blunt tools",
-        desc: "Remove someone or don't. No report queue, no warnings, no moderators with limited powers.",
-      },
-      {
-        name: "Growth hits a ceiling",
-        desc: "WhatsApp caps how many people a group can hold, so big communities split into Group 2 and Group 3 and lose the thread.",
+        name: "Moderation isn't built for scale",
+        desc: "With only an all-or-nothing 'remove member' option, admins are left with blunt tools. There's no way to warn, report, or delegate safely.",
       },
     ],
   },
   solution: {
     number: "02",
     label: "THE SOLUTION",
-    title: "One app your community owns, instead of five tools held together by admins.",
-    body: "The Parliament puts the conversation, the members, the events and the money in one place, with the controls a growing community needs.",
-    items: [
-      "A feed where posts stay findable",
-      "Public and private groups",
-      "Events with RSVPs and paid tickets",
-      "Paid membership tiers",
-      "Direct messages and video calls",
-      "Moderators, roles and a report queue",
+    title: "Your community deserves a home of its own",
+    body: "Stop patching together WhatsApp, Google Forms, spreadsheets and UPI screenshots. The Parliament brings everything your community needs into one beautifully simple platform—so you can focus on building connections, not chasing payments or lost updates.",
+    cards: [
+      {
+        icon: "feed",
+        name: "Content and connections",
+        items: [
+          "A permanent, searchable feed where every update stays findable",
+          "A member directory that helps people connect meaningfully",
+        ],
+      },
+      {
+        icon: "groups",
+        name: "Conversations, organised",
+        items: [
+          "Public and private groups to keep conversations organised",
+          "Direct messages, video calls and live AMA rooms",
+        ],
+      },
+      {
+        icon: "events",
+        name: "Events and memberships",
+        items: [
+          "Events with RSVPs, paid tickets, check-ins and feedback",
+          "Paid membership tiers with automatic renewals and invoices",
+        ],
+      },
+      {
+        icon: "admin",
+        name: "Safety and reach",
+        items: [
+          "Smart moderation with roles, report queue and audit logs",
+          "WhatsApp, email and push notifications that actually reach people",
+        ],
+      },
     ],
   },
   compare: {
@@ -95,8 +117,8 @@ export const tp = {
   features: {
     number: "04",
     label: "WHAT'S INSIDE",
-    title: "Everything a community app needs, already built.",
-    body: "Six core areas, all built and shipped, plus the extras a community grows into.",
+    title: "All the tools you need. Built to work together.",
+    body: "Every piece is designed to solve real community headaches. Hover or tap any feature to see how it fits into your day-to-day.",
     items: [
       {
         icon: "feed",
@@ -153,29 +175,30 @@ export const tp = {
     number: "05",
     label: "HOW TO MOVE",
     title: "How to move a WhatsApp group to an app",
-    body: "You don't have to shut the WhatsApp group down on day one. Most communities move in five steps and keep WhatsApp for alerts.",
+    body: "You don't have to shut the WhatsApp group down on day one. Most communities move in four steps and keep WhatsApp for alerts.",
     steps: [
       {
+        icon: "setup",
         name: "Set it up",
         desc: "Book a demo. We walk through how your community runs today and set up The Parliament for it.",
       },
       {
+        icon: "invite",
         name: "Bring members in",
         desc: "Import your member list from a CSV and send everyone an invite to set a password, or let them sign in with Google.",
       },
       {
+        icon: "structure",
         name: "Rebuild the structure",
-        desc: "Create groups for each topic or city, post your rules and schedule the first event.",
+        desc: "Create a group for each topic or city, post your rules and schedule the first event.",
       },
       {
+        icon: "announce",
         name: "Announce it on WhatsApp",
-        desc: "Share the link in the old group. Members who opt in keep getting important updates on WhatsApp as template broadcasts.",
-      },
-      {
-        name: "Run it with less effort",
-        desc: "Moderators work the report queue, and memberships and tickets bring money in without screenshots.",
+        desc: "Share the link in the old group. Members who opt in keep getting updates on WhatsApp, and memberships and tickets bring money in without screenshots.",
       },
     ],
+    notes: ["No app-store download", "Members keep WhatsApp for alerts", "Set up by Timewheel"],
   },
   audiences: {
     number: "06",

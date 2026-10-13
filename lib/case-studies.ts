@@ -459,7 +459,11 @@ metaDescription:
     metaDescription:
       "Corart got clicks but not customers. We fixed every leaky post-click step of a high-consideration custom product and qualified intent before scaling spend.",
     accent: "#EC4899",
-    image: null,
+    image: {
+      src: "/portfolio/corart.png",
+      width: 1200,
+      height: 675,
+    },
     tags: ["Performance", "Landing Pages", "Creative"],
     href: "/case-studies/corart",
     liveUrl: "#",

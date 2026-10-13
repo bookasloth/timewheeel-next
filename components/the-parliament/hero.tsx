@@ -1,11 +1,12 @@
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { tp } from "@/lib/the-parliament";
 import { TpButton } from "./button";
+import { CrowdCanvas } from "@/components/ui/skiper-ui/skiper39";
 
 export function TpHero() {
   const h = tp.hero;
   return (
-    <section className="tp-hero">
+    <section className="tp-hero tp-hero--crowd">
       <span className="tp-glow" aria-hidden="true" />
       <div className="tp-container tp-hero-inner">
         <p className="tp-eyebrow">{h.eyebrow}</p>
@@ -22,14 +23,9 @@ export function TpHero() {
             {h.secondaryLabel}
           </TpButton>
         </div>
-        <ul className="tp-chips">
-          {h.chips.map((c) => (
-            <li key={c}>
-              <Check size={13} strokeWidth={2.6} aria-hidden="true" />
-              {c}
-            </li>
-          ))}
-        </ul>
+      </div>
+      <div className="tp-hero-crowd" aria-hidden="true">
+        <CrowdCanvas src="/images/peeps/all-peeps.png" rows={15} cols={7} safeTopRatio={0.36} />
       </div>
     </section>
   );

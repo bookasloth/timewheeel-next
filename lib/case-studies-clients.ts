@@ -701,7 +701,7 @@ export const clientSiteCaseStudies: CaseStudy[] = [
       "Nagpur architecture and interior design studio showing completed and ongoing work across offices, homes and hospitality.",
     accent: "#e8a33d",
     image: {
-      src: "/portfolio/linestory-studio.png",
+      src: "/portfolio/linestory.png",
       width: 1200,
       height: 675,
     },
