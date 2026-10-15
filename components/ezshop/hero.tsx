@@ -1,4 +1,5 @@
-import { ArrowRight, Check, MessageCircle, ShoppingBag } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ShoppingBag } from "lucide-react";
 import { ez } from "@/lib/ezshop";
 import { EzButton } from "./button";
 
@@ -7,9 +8,11 @@ import { EzButton } from "./button";
 export function EzHero() {
   return (
     <section className="ez-hero">
-      <span className="ez-glow" aria-hidden="true" />
+      <span className="ez-orb ez-orb--a" aria-hidden="true" />
+      <span className="ez-orb ez-orb--b" aria-hidden="true" />
+
       <div className="ez-container ez-hero-grid">
-        <div>
+        <div className="ez-hero-copy">
           <p className="ez-kicker ez-kicker--pill">
             <ShoppingBag size={14} strokeWidth={2} aria-hidden="true" />
             {ez.hero.kicker}
@@ -25,46 +28,45 @@ export function EzHero() {
               {ez.hero.secondaryLabel}
             </EzButton>
           </div>
-          <ul className="ez-chips">
-            {ez.hero.chips.map((c) => (
-              <li key={c}>
-                <Check size={13} strokeWidth={2.6} aria-hidden="true" />
-                {c}
-              </li>
-            ))}
-          </ul>
         </div>
 
-        {/* Illustrative storefront mock, not real store data. */}
-        <div className="ez-mock" aria-hidden="true">
-          <div className="ez-mock-bar">
-            <span />
-            <span />
-            <span />
-            <em>yourbrand.in</em>
-          </div>
-          <div className="ez-mock-body">
-            <div className="ez-mock-img" />
-            <div className="ez-mock-info">
-              <b>Handloom cotton kurta</b>
-              <div className="ez-mock-price">
-                ₹1,299 <s>₹1,599</s>
+        {/* EZShop visual, with an illustrative order ticket on top. */}
+        <div className="ez-stage" aria-hidden="true">
+          <div className="ez-stage-inner">
+            <Image
+              className="ez-shot"
+              src="/ezshop2.png"
+              alt=""
+              width={1024}
+              height={1536}
+              preload
+              sizes="(max-width: 960px) 90vw, 420px"
+            />
+
+            <div className="ez-receipt">
+              <span className="ez-notch ez-notch--l" />
+              <span className="ez-notch ez-notch--r" />
+              <p className="ez-receipt-head">Order #1042</p>
+              <ul>
+                <li>
+                  <span>Handloom kurta · M</span>
+                  <b>₹1,299</b>
+                </li>
+                <li>
+                  <span>Shipping</span>
+                  <b>Free</b>
+                </li>
+                <li>
+                  <span>GST invoice</span>
+                  <b>Auto</b>
+                </li>
+              </ul>
+              <div className="ez-receipt-total">
+                <span>Total</span>
+                <b>₹1,299</b>
               </div>
-              <div className="ez-mock-variants">
-                <i>S</i>
-                <i className="is-on">M</i>
-                <i>L</i>
-                <i>XL</i>
-              </div>
-              <div className="ez-mock-pay">UPI · Cards · Cash on Delivery</div>
-              <div className="ez-mock-cta">Add to cart</div>
+              <span className="ez-barcode" />
             </div>
-          </div>
-          <div className="ez-mock-toast">
-            <MessageCircle size={16} strokeWidth={2} />
-            <span>
-              <b>WhatsApp</b> Your order has been shipped
-            </span>
           </div>
         </div>
       </div>

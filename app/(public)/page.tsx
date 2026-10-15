@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { ValueProps } from "@/components/home/value-props";
 import { EcosystemBento } from "@/components/home/ecosystem-bento";
+import { TopProducts } from "@/components/home/top-products";
 import { PoweredBy } from "@/components/home/powered-by";
 import { SocialProof } from "@/components/home/social-proof";
 import { Testimonials } from "@/components/home/testimonials";
@@ -23,6 +24,7 @@ export default function Home() {
       <Hero />
       <ValueProps />
       <EcosystemBento />
+      <TopProducts />
       <PoweredBy />
       {/* <SocialProof /> */}
       <Testimonials />

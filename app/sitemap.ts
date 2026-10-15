@@ -70,6 +70,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     entry("/products/ticket-dino", PRODUCTS_UPDATED, 0.5, "monthly"),
     entry("/products/the-parliament", PRODUCTS_UPDATED, 0.7, "monthly"),
     entry("/products/ezshop", PRODUCTS_UPDATED, 0.7, "monthly"),
+    entry("/products/indian-sports-club", PRODUCTS_UPDATED, 0.6, "monthly"),
+    entry("/products/archflow", PRODUCTS_UPDATED, 0.6, "monthly"),
+    entry("/products/leader", PRODUCTS_UPDATED, 0.6, "monthly"),
+    entry("/products/marketing-bug", PRODUCTS_UPDATED, 0.7, "monthly"),
     entry("/coffee-and-toffee", PRODUCTS_UPDATED, 0.7, "monthly"),
     ...["/legal/privacy", "/legal/terms", "/legal/cookies", "/legal/refund"].map((p) =>
       entry(p, LEGAL_UPDATED, 0.2, "yearly"),
