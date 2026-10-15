@@ -275,7 +275,7 @@ export const productCaseStudies: CaseStudy[] = [
       "An event ticketing and management platform for organizers who need reliability at scale: ticket sales, attendee management, real-time analytics and operational workflows.",
     metaDescription:
       "Event ticketing and management platform for organizers who need reliability at scale: ticket sales, attendee management, live analytics and workflows.",
-    accent: "#269cef",
+    accent: "#00b67a",
     image: {
       src: "/portfolio/ticket-dino.png",
       width: 1200,

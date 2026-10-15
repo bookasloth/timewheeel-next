@@ -182,11 +182,11 @@ export const ez = {
       },
       {
         name: "WhatsApp order updates",
-        values: ["Built in (AiSensy)", "Via apps", "Marketplace sends its own", "Manual"],
+        values: ["Built in ", "Via apps", "Marketplace sends its own", "Manual"],
       },
       {
         name: "Themes and app store",
-        values: ["Fixed sections, no app store", "Large theme and app store", "None", "None"],
+        values: ["Customized sections, no app store", "Large theme and app store", "None", "None"],
       },
       {
         name: "Source code",

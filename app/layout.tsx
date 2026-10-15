@@ -68,7 +68,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
-        <Analytics />
+        {/* Vercel Web Analytics only works when served by Vercel; anywhere else
+            its /_vercel/insights/script.js 404s and logs console errors. */}
+        {process.env.VERCEL ? <Analytics /> : null}
         <AnalyticsBridge />
         <EngagementTracker />
         <WebVitals />

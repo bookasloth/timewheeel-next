@@ -81,9 +81,9 @@ export default function BookASlothPage() {
       <BasAutomation />
       <BasBeforeAfter />
       <BasPricing />
-      <BasFaq />
       <BasCapabilities />
       <BasTestimonials />
+      <BasFaq />
       <BasFinalCta />
     </>
   );

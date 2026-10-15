@@ -1,8 +1,8 @@
-import Link from "next/link";
+﻿import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Bell,
-  Building2,
   Check,
   Code2,
   Compass,
@@ -28,8 +28,6 @@ const iconMap = {
   message: MessagesSquare,
 } as const;
 
-const bars = [44, 68, 52, 86, 60, 74];
-
 export function TpCapabilities() {
   const s = tp.capabilities;
   const [lead] = s.title.split("Timewheel");
@@ -39,10 +37,6 @@ export function TpCapabilities() {
       <div className="tp-container tp-built-inner">
         <div className="tp-built-main">
           <Reveal className="tp-built-head">
-            <p className="tp-built-kicker">
-              <span className="tp-built-num">{s.number}</span>
-              {s.label}
-            </p>
             <h2 className="tp-built-title">
               {lead}
               <span className="tp-built-accent">Timewheel</span>.
@@ -76,77 +70,21 @@ export function TpCapabilities() {
           </Link>
         </div>
 
-        <Reveal className="tp-built-visual" aria-hidden="true">
-          <span className="tp-built-glow" />
+        <Reveal className="tp-built-visual">
+          <span className="tp-built-glow" aria-hidden="true" />
 
-          <div className="tp-browser">
-            <div className="tp-browser-bar">
-              <span className="tp-browser-dot" />
-              <span className="tp-browser-dot" />
-              <span className="tp-browser-dot" />
-              <span className="tp-browser-url">theparliament.in</span>
-            </div>
-            <div className="tp-browser-body">
-              <div className="tp-browser-side">
-                <span className="tp-side-logo">
-                  <Building2 size={14} strokeWidth={2} />
-                </span>
-                <span className="tp-side-item is-on" />
-                <span className="tp-side-item" />
-                <span className="tp-side-item" />
-                <span className="tp-side-item" />
-              </div>
-              <div className="tp-browser-main">
-                <div className="tp-browser-head">
-                  <span className="tp-browser-title">THE PARLIAMENT</span>
-                  <span className="tp-browser-pill">Live</span>
-                </div>
-                <div className="tp-browser-stats">
-                  <div className="tp-stat">
-                    <span className="tp-stat-k">Members</span>
-                    <span className="tp-stat-v">1,248</span>
-                  </div>
-                  <div className="tp-stat">
-                    <span className="tp-stat-k">Collected</span>
-                    <span className="tp-stat-v">₹4.2L</span>
-                  </div>
-                </div>
-                <div className="tp-browser-photo">
-                  <Building2 size={20} strokeWidth={1.5} />
-                </div>
-                <div className="tp-browser-chart">
-                  {bars.map((h, i) => (
-                    <span key={i} style={{ height: `${h}%` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="tp-built-shot">
+            <Image
+              src="/parliament1.png"
+              alt="The Parliament member portal running in production"
+              width={1711}
+              height={919}
+              sizes="(max-width: 980px) 100vw, 44vw"
+              className="tp-built-shot-img"
+            />
           </div>
 
-          <div className="tp-phone">
-            <span className="tp-phone-notch" />
-            <div className="tp-phone-head">
-              <span className="tp-phone-av" />
-              <span className="tp-phone-lines">
-                <span />
-                <span />
-              </span>
-            </div>
-            <div className="tp-phone-card" />
-            <div className="tp-phone-card tp-phone-card--sm" />
-            <div className="tp-phone-nav">
-              <span className="is-on" />
-              <span />
-              <span />
-            </div>
-          </div>
-
-          <span className="tp-live-badge">
-            <span className="tp-live-check">
-              <Check size={11} strokeWidth={3.4} />
-            </span>
-            Live in production
-          </span>
+            
         </Reveal>
       </div>
     </section>

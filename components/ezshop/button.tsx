@@ -20,13 +20,11 @@ export function EzButton({
 
 /** Numbered kicker + H2 + optional lede, shared by every section. */
 export function EzHead({
-  number,
-  label,
   title,
   body,
   center,
 }: {
-  number: string;
+  number?: string;
   label: string;
   title: string;
   body?: string;
@@ -34,11 +32,7 @@ export function EzHead({
 }) {
   return (
     <div className={cn("ez-head", center && "ez-head--center")}>
-      <p className="ez-kicker">
-        <span className="ez-kicker-num">{number}</span>
-        {label}
-      </p>
-      <h2 className="ez-h">{title}</h2>
+      <h2 className="ez-title">{title}</h2>
       {body && <p className="ez-lede">{body}</p>}
     </div>
   );

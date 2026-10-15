@@ -6,14 +6,18 @@ import { az } from "@/lib/alluminaty";
 import { AzButton } from "./button";
 
 const ALUMNI_PHOTOS = [
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80",
-  "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=500&q=80",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80",
-  "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=500&q=80",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80",
-  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80",
-  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&q=80",
-  "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=500&q=80",
+  // Indian graduates celebrating, and college students with signed shirts.
+  "https://images.pexels.com/photos/13019686/pexels-photo-13019686.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/31968811/pexels-photo-31968811.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/31968829/pexels-photo-31968829.jpeg?auto=compress&cs=tinysrgb&w=600",
+  // College students on campus at Santiniketan / Visva Bharati.
+  "https://images.pexels.com/photos/39006532/pexels-photo-39006532.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/39006534/pexels-photo-39006534.jpeg?auto=compress&cs=tinysrgb&w=600",
+  // Studying in a New Delhi university library, and friends chatting on campus.
+  "https://images.pexels.com/photos/16504588/pexels-photo-16504588.jpeg?auto=compress&cs=tinysrgb&w=600",
+  "https://images.pexels.com/photos/7972508/pexels-photo-7972508.jpeg?auto=compress&cs=tinysrgb&w=600",
+  // Indian school students in uniform.
+  "https://images.pexels.com/photos/30889597/pexels-photo-30889597.jpeg?auto=compress&cs=tinysrgb&w=600",
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -66,7 +70,7 @@ export function AzHero() {
         <h1 className="az-hero-title">
           <RevealWords text={az.hero.titleLine1} />{" "}
           <br />
-          <RevealWords text={az.hero.titleAccent} className="az-hero-accent" start={0.32} />
+          <span className="az-hero-accent">{az.hero.titleAccent}</span>
         </h1>
         <p className="az-hero-body">{az.hero.body}</p>
       </div>
