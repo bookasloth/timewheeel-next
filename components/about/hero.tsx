@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // About hero, full-bleed section on a clean white background. Copy on the
 // left, the team/about photo on the right in a softly framed card.
@@ -26,7 +27,6 @@ export function AboutHero() {
         {/* copy */}
         <div>
           <p className="flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.22em] text-brand">
-            <span className="size-1.5 rounded-full bg-brand" />
             About Timewheel
           </p>
 
@@ -50,19 +50,12 @@ export function AboutHero() {
               Start a Project
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
-            <Link
+            <InPageAnchor
               href="#work"
               className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold"
             >
               Explore Our Work
-            </Link>
-          </div>
-
-          <div className="mt-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-2 text-sm font-medium text-muted-foreground">
-              <span className="size-1.5 rounded-full bg-brand" />
-              Established in 2019
-            </span>
+            </InPageAnchor>
           </div>
         </div>
 

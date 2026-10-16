@@ -10,18 +10,14 @@ export function SmmFinalCta() {
     <section className="w-full">
       <Reveal className="relative overflow-hidden bg-black px-6 py-16 text-center text-white md:px-8 md:py-20">
         <div className="relative">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white/85">
-            <span className="size-1.5 rounded-full bg-accent-yellow" />
-            Start the conversation
-          </p>
-          <RevealHeading as="h2" className="mx-auto mt-5 max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
+          <RevealHeading as="h2" className="mx-auto max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
             {smm.finalCta.heading}
           </RevealHeading>
           <p className="mx-auto mt-5 max-w-xl text-white/75 md:text-lg">{smm.finalCta.body}</p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link
               href={smm.finalCta.primaryCta.href}
-              className="group inline-flex items-center gap-2 rounded-lg bg-white px-7 py-3.5 text-sm font-semibold text-[#1d4ed8] transition-colors hover:bg-white/90"
+              className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-brand-foreground"
             >
               <MessageCircle className="size-4" />
               {smm.finalCta.primaryCta.label}

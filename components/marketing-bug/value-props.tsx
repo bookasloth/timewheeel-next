@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Megaphone, MousePointerClick, ShieldCheck } from "lucide-react";
 import { mb } from "@/lib/marketing-bug";
 import { Reveal } from "@/components/reveal";
@@ -20,6 +21,15 @@ export function MbValueProps() {
             const Icon = iconMap[item.icon as keyof typeof iconMap];
             return (
               <Reveal key={item.name} className="mb-vp-card">
+                <span className="mb-vp-bug" aria-hidden="true">
+                  <Image
+                    src={item.bug.src}
+                    alt=""
+                    width={item.bug.width}
+                    height={item.bug.height}
+                    className="mb-vp-bug-img"
+                  />
+                </span>
                 <span className="mb-ic">
                   <Icon size={22} strokeWidth={1.9} aria-hidden="true" />
                 </span>

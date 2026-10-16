@@ -10,6 +10,7 @@ import {
   Users,
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 import { site } from "@/lib/site";
 import type { Job } from "@/lib/jobs";
@@ -73,13 +74,13 @@ export function JobDetail({ job }: { job: Job }) {
               {job.intro}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a
+              <InPageAnchor
                 href="#apply"
                 className="btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold text-brand-foreground"
               >
                 Apply for this role
                 <ArrowUpRight className="size-4" />
-              </a>
+              </InPageAnchor>
               <a
                 href={`mailto:${site.contact.email}?subject=${encodeURIComponent(
                   `Application: ${job.title}`,

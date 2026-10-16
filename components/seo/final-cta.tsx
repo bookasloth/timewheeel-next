@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function SeoFinalCta() {
   return (
@@ -15,19 +15,19 @@ export function SeoFinalCta() {
           holding your Nagpur rankings back. No sign-up, no obligation.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Link
+          <InPageAnchor
             href="#top"
             className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-brand-foreground"
           >
             Run my free audit
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-          <Link
+          </InPageAnchor>
+          <InPageAnchor
             href="#contact"
             className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
           >
             Talk to us
-          </Link>
+          </InPageAnchor>
         </div>
       </Reveal>
     </section>

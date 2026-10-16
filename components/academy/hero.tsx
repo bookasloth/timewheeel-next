@@ -3,6 +3,7 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 import { LEARNING_LOOP } from "@/lib/academy";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // The right-hand panel is an example of the thing students leave with: a
 // portfolio case study. It is labelled as an example layout with a fictional
@@ -37,13 +38,13 @@ export function AcademyHero() {
               Explore Programs
               <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <a
+            <InPageAnchor
               href="#how-it-works"
               className="group btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
             >
               How It Works
               <ArrowDown aria-hidden className="size-4 transition-transform group-hover:translate-y-0.5" />
-            </a>
+            </InPageAnchor>
           </div>
           <p className="mt-8 max-w-xl text-sm text-muted-foreground">
             For college students, fresh graduates and beginners. Includes a Timewheel certificate, help with

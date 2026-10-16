@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function SeoPricing() {
   return (
@@ -42,15 +42,15 @@ export function SeoPricing() {
                 </li>
               ))}
             </ul>
-            <Link
-              href="#contact"
+            <InPageAnchor
+              href={t.href ?? "#contact"}
               className={cn(
                 "mt-7 inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold",
                 t.highlight ? "btn btn-primary text-brand-foreground" : "btn btn-outline",
               )}
             >
               {t.cta}
-            </Link>
+            </InPageAnchor>
           </div>
         ))}
       </Reveal>

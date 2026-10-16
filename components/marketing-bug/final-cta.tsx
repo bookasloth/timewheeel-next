@@ -7,7 +7,6 @@ export function MbFinalCta() {
   const s = mb.final;
   return (
     <section className="mb-cta">
-      <span className="mb-glow" aria-hidden="true" />
       <div className="mb-container">
         <Reveal className="mb-cta-inner">
           <h2 className="mb-cta-title">{s.title}</h2>

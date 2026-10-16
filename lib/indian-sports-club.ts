@@ -1,24 +1,25 @@
-// Indian Sports Club product page content. Target: an online + offline sports
-// community app for clubs in India (India-first community software, in the same
-// family as The Parliament). Every claim describes the product surface; no
-// customer counts, ratings or testimonials until real ones exist.
+// Indian Sports Club product page content. Target: a fanclub app for sports in
+// India — a club, its members and its fans in one place, online and offline
+// (India-first community software, in the same family as The Parliament). Every
+// claim describes the product surface; no customer counts, ratings or
+// testimonials until real ones exist.
 // Palette note: the Indian tricolour (saffron, white, green) over deep navy is
 // the page accent scheme, used in equal proportion.
 
 export const isc = {
   path: "/products/indian-sports-club",
   meta: {
-    title: "Indian Sports Club: Online & Offline Sports Community App | Timewheel",
+    title: "Indian Sports Club: The Fanclub App for Sports in India | Timewheel",
     description:
-      "Indian Sports Club is a community app for sports clubs in India: fixtures and results, teams and rosters, tournaments with paid registration via Razorpay, ground and slot bookings, a member directory, club memberships and moderation.",
+      "Indian Sports Club is a fanclub app for sports in India: fixtures and results, teams and rosters, tournaments with paid entry, ground and slot bookings, a member directory, club memberships and moderation. Payments on Razorpay, plus WhatsApp to reach everyone.",
   },
   hero: {
     eyebrow: "Indian Sports Club, by Timewheel",
-    title: "The app for clubs that live",
-    titleAccent: "online and on the ground.",
+    title: "Every club deserves a fanclub",
+    titleAccent: "that lives online and on the ground.",
     // Answer-first block (the passage AI answers lift). Keep it under 60 words.
     answer:
-      "Indian Sports Club gives a sports club an app of its own: fixtures and results, teams and rosters, tournaments with paid registration, ground and slot bookings, a member directory, club memberships and moderation. Payments run on Razorpay, and the club can still reach everyone on WhatsApp.",
+      "Indian Sports Club gives a sports club a fanclub of its own: fixtures and results, teams and rosters, tournaments with paid entry, ground and slot bookings, a member directory, club memberships and moderation. Payments run on Razorpay, and the club still reaches everyone on WhatsApp.",
     primaryLabel: "Book a demo",
     primaryHref: "/book-a-demo",
     secondaryLabel: "Talk to us",
@@ -58,32 +59,32 @@ export const isc = {
   problem: {
     number: "01",
     label: "THE PROBLEM",
-    title: "When a sports club runs on five WhatsApp groups",
-    body: "A group chat is fine for a Sunday match. It falls apart the moment the club has fixtures to schedule, fees to collect, teams to pick and a ground to book. If your season lives across screenshots, spreadsheets and a dozen groups, the club has outgrown the chat.",
+    title: "When the fanclub lives in five WhatsApp groups",
+    body: "A group chat is perfect for a Sunday match. It falls apart the moment the club has a season to run: fixtures to schedule, fees to collect, squads to pick and a ground to book. If your club lives across screenshots, spreadsheets and a dozen groups, it has outgrown the chat.",
     items: [
       {
         name: "Fixtures and results are scattered",
-        desc: "The schedule is a photo in one group, the score is a message in another, and nobody can find the last result when they need it.",
+        desc: "The schedule is a photo in one group, the score is a message in another, and nobody can find last week's result when they need it.",
       },
       {
         name: "Fees are tracked in screenshots",
-        desc: "Subscriptions, tournament entries and ground charges come in as UPI screenshots, and someone reconciles them by hand every month.",
+        desc: "Subscriptions, tournament entries and ground charges arrive as UPI screenshots, and someone reconciles them by hand every month.",
       },
       {
         name: "There is no real roster",
-        desc: "A list of phone numbers is not a squad. Members cannot see who plays where, who is available, or who is due to renew.",
+        desc: "A list of phone numbers is not a squad. Members cannot see who plays where, who is free, or whose membership is due to renew.",
       },
       {
         name: "Picking teams and booking grounds is ad hoc",
-        desc: "Team selection and slot booking run on memory and first-come replies, so the fairest and fastest are never the ones who get in.",
+        desc: "Selection and slot booking run on memory and first-come replies, so the fairest and the fastest are rarely the ones who get in.",
       },
     ],
   },
   solution: {
     number: "02",
     label: "THE SOLUTION",
-    title: "One club, one app, online and on the ground",
-    body: "Stop patching together WhatsApp, Google Forms, spreadsheets and UPI screenshots. Indian Sports Club brings the whole club into one place, so the season runs itself and members show up to play.",
+    title: "One club, one fanclub, online and on the ground",
+    body: "Stop stitching together WhatsApp, Google Forms, spreadsheets and UPI screenshots. Indian Sports Club brings the whole club, players, members and fans, into one place, so the season runs itself and everyone turns up ready to play.",
     lead: {
       icon: "play",
       name: "Play and compete",
@@ -132,8 +133,8 @@ export const isc = {
   compare: {
     number: "03",
     label: "HONEST COMPARISON",
-    title: "WhatsApp group vs a club app",
-    body: "WhatsApp is the right tool for a small group that mostly chats. A club app is the right tool once you have a season to run. Here is where each one wins.",
+    title: "WhatsApp group vs the fanclub app",
+    body: "WhatsApp is the right tool for a small group that mostly chats. A fanclub app is the right tool once there is a season to run. Here is where each one wins.",
     columns: ["", "WhatsApp group", "Indian Sports Club"],
     score: { us: "9", them: "2", note: "criteria where a club app wins" },
     rows: [
@@ -153,24 +154,24 @@ export const isc = {
     number: "04",
     label: "WHAT'S INSIDE",
     title: "Everything a club needs. Built to work together.",
-    body: "Each piece solves a real club headache, from the first fixture of the season to the last invoice of the year. Choose a part to see how it fits into your week.",
+    body: "Each piece solves a real club headache, from the first fixture of the season to the last invoice of the year. Pick one to see how it fits into your week.",
     items: [
       {
         icon: "fixtures",
         name: "Fixtures and results",
-        desc: "Publish the season schedule, record results and let a points table update itself for every league and cup.",
+        desc: "Publish the season, record results as they happen, and let the points table update itself for every league and cup.",
         bullets: ["Home and away fixtures", "Result entry and standings", "Shareable match pages"],
       },
       {
         icon: "teams",
         name: "Teams and rosters",
-        desc: "Build squads for every sport, age group and season, then track availability and selection in one place.",
+        desc: "Build squads for every sport, age group and season, then keep availability and selection in one place everyone can see.",
         bullets: ["Squad and roster builder", "Availability and selection", "Captains and coaches per team"],
       },
       {
         icon: "tournaments",
         name: "Tournaments and leagues",
-        desc: "Run a knockout or a league: publish brackets, take paid entries and keep everyone on the same schedule.",
+        desc: "Run a knockout or a full league: publish brackets, take paid entries and keep every team on the same schedule.",
         bullets: ["Brackets and group stages", "Paid entry via Razorpay", "Live standings and results"],
       },
       {
@@ -182,13 +183,13 @@ export const isc = {
       {
         icon: "bookings",
         name: "Ground and slot booking",
-        desc: "List grounds and courts with their slots, let members claim and pay for them, and keep a clean booking record.",
+        desc: "List grounds, courts and nets with their slots, let members claim and pay for them, and keep a clean booking record.",
         bullets: ["Ground and court schedules", "Slot claim and payment", "Coaching and net sessions"],
       },
       {
         icon: "admin",
         name: "Admin and moderation",
-        desc: "An admin console where captains, coaches and treasurers get the powers they need, and reports get handled.",
+        desc: "An admin console where captains, coaches and treasurers get exactly the powers they need, and reports actually get handled.",
         bullets: ["Role-based admin permissions", "Report queue and audit log", "WhatsApp and email broadcasts"],
       },
     ],
@@ -209,8 +210,8 @@ export const isc = {
   process: {
     number: "05",
     label: "HOW TO MOVE",
-    title: "How to move a sports club onto an app",
-    body: "You don't have to shut the WhatsApp groups down on day one. Most clubs move in four steps and keep WhatsApp for alerts.",
+    title: "How to move a sports club onto its own app",
+    body: "You don't have to shut the WhatsApp groups down on day one. Most clubs move in four steps and keep the groups for alerts.",
     steps: [
       {
         name: "Set it up",
@@ -239,7 +240,7 @@ export const isc = {
       {
         tag: "Memberships",
         name: "Sports clubs and associations",
-        desc: "Registered clubs with memberships, committees, a season and multiple sports that need a members-only space.",
+        desc: "Registered clubs with memberships, committees, a season and multiple sports that need a members-only fanclub.",
       },
       {
         tag: "Batches & fees",
@@ -265,7 +266,7 @@ export const isc = {
     items: [
       {
         q: "What is Indian Sports Club?",
-        a: "Indian Sports Club is a community app for sports clubs in India, built by Timewheel. It gives a club its own platform for fixtures and results, teams and rosters, tournaments with paid registration, ground and slot bookings, a member directory, club memberships and an admin console for moderation. Payments run on Razorpay.",
+        a: "Indian Sports Club is a fanclub app for sports in India, built by Timewheel. It gives a club its own platform for fixtures and results, teams and rosters, tournaments with paid registration, ground and slot bookings, a member directory, club memberships and an admin console for moderation. Payments run on Razorpay.",
       },
       {
         q: "Is Indian Sports Club good for clubs that meet offline?",
@@ -285,7 +286,7 @@ export const isc = {
       },
       {
         q: "Do members need to install an app?",
-        a: "No app store download is needed. Indian Sports Club is a web app that works in any phone or desktop browser and can be added to the home screen like an app. Members get push notifications on supported browsers and email notifications for the rest.",
+        a: "No app-store download is needed. Indian Sports Club is a web app that works in any phone or desktop browser and can be added to the home screen like an app. Members get push notifications on supported browsers and email notifications for the rest.",
       },
       {
         q: "How do admins keep the club safe and organised?",
@@ -302,7 +303,7 @@ export const isc = {
     ],
   },
   final: {
-    title: "Give your club a home beyond the group chat.",
+    title: "Give your club a fanclub beyond the group chat.",
     body: "Tell us how your club runs today, across groups, forms and spreadsheets, and we'll show you the same club on Indian Sports Club.",
     primaryLabel: "Book a demo",
     primaryHref: "/book-a-demo",

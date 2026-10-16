@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function RmHero() {
   return (
@@ -31,19 +31,19 @@ export function RmHero() {
 
         <Reveal delay={0.2}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link
+            <InPageAnchor
               href="#contact"
               className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
             >
               Work With Us
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
+            </InPageAnchor>
+            <InPageAnchor
               href="#services"
               className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
             >
               Restaurant Marketing Services
-            </Link>
+            </InPageAnchor>
           </div>
         </Reveal>
       </div>

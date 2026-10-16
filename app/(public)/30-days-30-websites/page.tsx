@@ -9,6 +9,7 @@ import { breadcrumbLd, ORG_ID } from "@/lib/jsonld";
 import { countLeadsBySource } from "@/lib/supabase-leads";
 import { projects } from "@/components/about/work";
 import { Sparkles, PencilRuler, Rocket, Check } from "lucide-react";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // Near-live counter: regenerate the page at most once a minute.
 export const revalidate = 60;
@@ -136,12 +137,12 @@ export default async function ChallengePage() {
                 />
               </div>
             </div>
-            <a
+            <InPageAnchor
               href="#join"
               className="btn btn-primary mt-8 inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-brand-foreground"
             >
               Claim your spot
-            </a>
+            </InPageAnchor>
           </Reveal>
         </div>
       </section>

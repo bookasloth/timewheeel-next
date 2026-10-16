@@ -17,6 +17,7 @@ import { LeadForm } from "@/components/shared/lead-form";
 import { JsonLd } from "@/components/json-ld";
 import { organizationLd, breadcrumbLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 const TITLE = "Book a Demo of Our Products and Services | Timewheel";
 const DESC =
@@ -91,12 +92,12 @@ export default function BookADemoPage() {
                 Book a demo on Book A Sloth
                 <ArrowUpRight className="size-4" />
               </a>
-              <a
+              <InPageAnchor
                 href="#contact"
                 className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
               >
                 Prefer a callback?
-              </a>
+              </InPageAnchor>
             </div>
           </Reveal>
 
@@ -124,7 +125,6 @@ export default function BookADemoPage() {
 
       {/* Request form (reuses the lead pipeline) */}
       <LeadForm
-        eyebrow="Prefer a callback?"
         heading="Or ask us to reach out"
         blurb="Rather we contact you than self-book? Pick the demo, share your goals, and we'll email you a time within one business day."
         infoRows={[

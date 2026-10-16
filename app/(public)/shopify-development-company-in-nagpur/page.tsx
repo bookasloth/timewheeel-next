@@ -18,6 +18,7 @@ import { SdFinalCta } from "@/components/shopify-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { LeadForm } from "@/components/shared/lead-form";
 import { RelatedServices } from "@/components/shared/related-services";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const PATH = "/shopify-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -71,13 +72,17 @@ export default function ShopifyDevelopmentPage() {
       <SdIndustries />
       <SdTech />
       <SdFaq />
-      <RelatedServices current="/shopify-development-company-in-nagpur" showResults={false} />
+      <RelatedServices current="/shopify-development-company-in-nagpur" />
       <SdFinalCta />
+      <StickyCta
+        message="Ready to build your Shopify store?"
+        label="Start Your Project"
+        href="#contact"
+      />
       <div id="lead">
         <LeadForm
           idPrefix="sd"
           source="Shopify Development"
-          eyebrow="Start the conversation"
           heading="Get Your Free Shopify Development Plan"
           blurb="Tell us about your store and goals. We'll come back with a clear, honest Shopify plan, no obligation, no jargon."
           infoRows={[

@@ -3,6 +3,7 @@ import { Plus, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { projects } from "@/components/about/work";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // "Real websites, really shipped" as a grid of `total` spots (the challenge is
 // 30 websites). Cell 1 is the "add your website here" CTA that jumps to the form;
@@ -33,7 +34,7 @@ export function WebsitesShowcase({ filled = 0, total = 30 }: { filled?: number; 
 
         <Reveal className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-5">
           {/* 1 x 1: add your website here -> form */}
-          <Link
+          <InPageAnchor
             href="#join"
             className="group flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-brand/40 bg-brand/5 p-3 text-center transition-colors hover:border-brand hover:bg-brand/10"
           >
@@ -41,7 +42,7 @@ export function WebsitesShowcase({ filled = 0, total = 30 }: { filled?: number; 
               <Plus className="size-5" strokeWidth={2.5} />
             </span>
             <span className="text-xs font-bold leading-tight text-brand-text">Add your website here</span>
-          </Link>
+          </InPageAnchor>
 
           {/* shipped sites */}
           {projects.slice(0, built).map((p) => (

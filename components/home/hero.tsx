@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { ArrowRight, Database, BadgePercent, LayoutDashboard, TrendingUp } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { BlackHoleHeroSection } from "@/components/ui/blackhole-hero-section";
 import { skipEntrance, useIsClientMount } from "@/components/anim/entrance";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // Dark, centered hero (Lexend-style): headline with a typewriter word, big CTA,
 // and a 4-card feature row.
@@ -119,13 +119,13 @@ export function Hero() {
           One team to design, build and grow your business online — websites and apps,
           then the SEO, ads and social to fill them. Built on systems you own, not rent.
         </p>
-        <Link
+        <InPageAnchor
           href="#ecosystem"
           className="hero-up group btn btn-primary mt-9 inline-flex items-center gap-2 rounded-lg px-8 py-4 text-base font-semibold text-brand-foreground"
         >
           Explore the Ecosystem
           <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" />
-        </Link>
+        </InPageAnchor>
 
         {/* feature cards */}
         <div className="hero-up mt-16 grid w-full grid-cols-2 gap-[21px] lg:grid-cols-4">

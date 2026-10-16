@@ -25,11 +25,7 @@ export function SmmPlatforms() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="grid items-end gap-10 lg:grid-cols-2">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-text">
-              <span className="size-1.5 rounded-full bg-brand" />
-              {smm.platforms.label}
-            </p>
-            <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+            <RevealHeading as="h2" className="text-3xl font-extrabold tracking-tight md:text-4xl">
               {smm.platforms.heading}
             </RevealHeading>
           </Reveal>

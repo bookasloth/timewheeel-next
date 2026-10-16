@@ -49,6 +49,8 @@ export type Product = {
   name: string;
   tagline: string;
   icon: Icon;
+  /** optional product logo (public path); falls back to the icon when absent */
+  logo?: string;
   /** brand accent (hex), placeholder until real product palettes land */
   accent: string;
   /** external app URL, placeholder "#" until live URLs provided */
@@ -68,6 +70,7 @@ export const products: Product[] = [
     name: "Alluminaty",
     tagline: "Alumni Management Software",
     icon: GraduationCap,
+    logo: "https://picsum.photos/seed/alluminaty/96/96",
     accent: "#269cef",
     href: "/products/alluminaty",
     featured: true,
@@ -87,6 +90,7 @@ export const products: Product[] = [
     name: "Book A Sloth",
     tagline: "Manage Bookings & Clients",
     icon: CalendarCheck,
+    logo: "/products/book-a-sloth-logo.png",
     accent: "#fe5100",
     href: "/products/book-a-sloth",
     featured: true,
@@ -106,6 +110,7 @@ export const products: Product[] = [
     name: "Coffee and Toffee",
     tagline: "Collect Tips & Donations",
     icon: Coffee,
+    logo: "https://picsum.photos/seed/coffee-for-me/96/96",
     accent: "#ffcc1c",
     href: "/coffee-and-toffee",
     featured: true,
@@ -125,6 +130,7 @@ export const products: Product[] = [
     name: "Ticket Dino",
     tagline: "Sell Events & Tickets",
     icon: Ticket,
+    logo: "https://picsum.photos/seed/ticket-dino/96/96",
     accent: "#00b67a",
     href: "/products/ticket-dino",
     featured: true,
@@ -144,6 +150,7 @@ export const products: Product[] = [
     name: "The Parliament",
     tagline: "Online Community Platform",
     icon: UsersThree,
+    logo: "https://picsum.photos/seed/the-parliament/96/96",
     accent: "#ff4d93",
     href: "/products/the-parliament",
     featured: true,
@@ -163,6 +170,7 @@ export const products: Product[] = [
     name: "Indian Sports Club",
     tagline: "Online & Offline Sports Community",
     icon: Trophy,
+    logo: "https://picsum.photos/seed/indian-sports-club/96/96",
     accent: "#008c45",
     href: "/products/indian-sports-club",
     featured: true,
@@ -182,6 +190,7 @@ export const products: Product[] = [
     name: "Archflow",
     tagline: "Project Workspace for Architects",
     icon: Blueprint,
+    logo: "https://picsum.photos/seed/archflow/96/96",
     accent: "#0d9488",
     href: "/products/archflow",
   },
@@ -190,6 +199,7 @@ export const products: Product[] = [
     name: "Leader",
     tagline: "Build Lead Lists From Maps",
     icon: Target,
+    logo: "https://picsum.photos/seed/leader/96/96",
     accent: "#5b8f6f",
     href: "/products/leader",
   },
@@ -198,6 +208,7 @@ export const products: Product[] = [
     name: "EZShop",
     tagline: "Online Store Builder",
     icon: Storefront,
+    logo: "https://picsum.photos/seed/ezshop/96/96",
     accent: "#10b981",
     href: "/products/ezshop",
     featured: true,
@@ -225,7 +236,8 @@ export const products: Product[] = [
     name: "Marketing Bug",
     tagline: "SEO & Growth Marketing",
     icon: Bug,
-    accent: "#fe5100",
+    logo: "/products/marketing-bug-logo.png",
+    accent: "#F0442E",
     href: "/products/marketing-bug",
   },
   {

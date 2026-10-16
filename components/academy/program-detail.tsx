@@ -8,6 +8,7 @@ import { Breadcrumbs, type Crumb } from "@/components/academy/page-header";
 import { ProgramCard } from "@/components/academy/program-card";
 import { ProgramIcon, ProgramStatusLine } from "@/components/academy/program-icon";
 import { CAREER_SUPPORT, CERTIFICATE_LINE, relatedPrograms, STATUS_META, type Program } from "@/lib/academy";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 function Block({ id, eyebrow, title, children }: { id?: string; eyebrow: string; title: string; children: ReactNode }) {
   return (
@@ -62,20 +63,20 @@ export function ProgramDetail({ program, trail }: { program: Program; trail: Cru
             </RevealHeading>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{program.summary}</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a
+              <InPageAnchor
                 href="#register"
                 className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
               >
                 {meta.cta}
                 <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <a
+              </InPageAnchor>
+              <InPageAnchor
                 href="#curriculum"
                 className="group btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold"
               >
                 See the curriculum
                 <ArrowDown aria-hidden className="size-4 transition-transform group-hover:translate-y-0.5" />
-              </a>
+              </InPageAnchor>
             </div>
             {program.status !== "enrolling" && (
               <p className="mt-7 flex max-w-2xl gap-3 rounded-lg border border-border bg-card px-4 py-3.5 text-sm leading-relaxed">
@@ -225,12 +226,12 @@ export function ProgramDetail({ program, trail }: { program: Program; trail: Cru
                 </div>
               ))}
             </dl>
-            <a
+            <InPageAnchor
               href="#register"
               className="btn btn-primary mt-6 flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold"
             >
               {meta.cta}
-            </a>
+            </InPageAnchor>
           </div>
         </aside>
       </div>

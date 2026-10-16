@@ -16,6 +16,7 @@ import { WaBenefits } from "@/components/web-app-development/benefits";
 import { WaFinalCta } from "@/components/web-app-development/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { RelatedServices } from "@/components/shared/related-services";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const PATH = "/web-app-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -67,11 +68,15 @@ export default function WebAppDevelopmentPage() {
       <WaBenefits />
       <RelatedServices current="/web-app-development-company-in-nagpur" />
       <WaFinalCta />
+      <StickyCta
+        message="Have a web app idea?"
+        label="Start a Project"
+        href="#contact"
+      />
       <div id="lead">
         <LeadForm
           idPrefix="wa"
           source="Web App Development"
-          eyebrow="Start the conversation"
           heading="Get Your Free Web App Plan"
           blurb="Tell us what you're building. We'll come back with a clear scope, timeline and price, no obligation, no jargon."
           infoRows={[

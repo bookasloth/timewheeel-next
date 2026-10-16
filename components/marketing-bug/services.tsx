@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Cpu,
@@ -24,7 +25,16 @@ const iconMap = {
 export function MbServices() {
   const s = mb.services;
   return (
-    <section className="mb-sec mb-dark">
+    <section className="mb-sec mb-dark mb-svc-sec">
+      <span className="mb-svc-bg" aria-hidden="true">
+        <Image
+          src="/marketing-bug/bug1.png"
+          alt=""
+          width={1092}
+          height={1440}
+          className="mb-svc-bg-img"
+        />
+      </span>
       <div className="mb-container">
         <MbHead label={s.label} title={s.title} light />
         <div className="mb-svc-grid">
