@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function RmFinalCta() {
   return (
@@ -20,20 +20,20 @@ export function RmFinalCta() {
             Let&apos;s help you get the best results, reach out today!
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link
+            <InPageAnchor
               href="#contact"
               className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
             >
               Reach Out Today
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
+            </InPageAnchor>
+            <InPageAnchor
               href="#services"
               className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
               style={{ color: "#fff", borderColor: "rgba(255,255,255,0.35)" }}
             >
               Explore Our Services
-            </Link>
+            </InPageAnchor>
           </div>
         </div>
       </Reveal>

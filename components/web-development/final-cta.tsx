@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // ponytail: no WhatsApp deep link yet, needs a real number. Add a wa.me
 // secondary CTA here once one exists (blueprint MUST-HAVE); until then both
@@ -18,19 +18,19 @@ export function WdFinalCta() {
           one business day, and keep full ownership of everything we build.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Link
+          <InPageAnchor
             href="#contact"
             className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold text-brand-foreground"
           >
             Get a Fixed Quote in 24 Hours
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-          <Link
+          </InPageAnchor>
+          <InPageAnchor
             href="#work"
             className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
           >
             See our work
-          </Link>
+          </InPageAnchor>
         </div>
       </Reveal>
     </section>

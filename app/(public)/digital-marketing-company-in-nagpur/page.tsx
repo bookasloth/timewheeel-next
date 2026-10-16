@@ -18,6 +18,7 @@ import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal
 import { dmServiceOptions } from "@/lib/digital-marketing2";
 import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
 import { RelatedServices } from "@/components/shared/related-services";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const TITLE = "Digital Marketing Agency in Nagpur: SEO & Ads";
 const DESC =
@@ -102,11 +103,16 @@ export default function DigitalMarketing2Page() {
       <PmFaq />
       <RelatedServices current="/digital-marketing-company-in-nagpur" />
       <PmFinalCta />
+      <StickyCta
+        message="Ready to grow your business online?"
+        label="Book a Meeting"
+        href="#contact"
+        ctaClassName="bg-brand text-black"
+      />
       <div id="lead">
         <LeadForm
           idPrefix="dm2"
           source="Digital Marketing Agency in Nagpur"
-          eyebrow="Start the conversation"
           heading="Get Your Free Digital Marketing Plan"
           blurb="Tell us your business and goals. We'll come back with a clear, honest plan across SEO, ads, social and site, with no obligation and no jargon."
           infoRows={[

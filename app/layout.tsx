@@ -6,6 +6,7 @@ import { AnalyticsBridge } from "@/components/analytics-bridge";
 import { EngagementTracker } from "@/components/engagement-tracker";
 import { WebVitals } from "@/components/web-vitals";
 import { ConsentBanner } from "@/components/consent-banner";
+import { SmoothAnchor } from "@/components/smooth-anchor";
 import { SITE_CARD } from "@/lib/metadata";
 import "./globals.css";
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
+        <SmoothAnchor />
         {/* Vercel Web Analytics only works when served by Vercel; anywhere else
             its /_vercel/insights/script.js 404s and logs console errors. */}
         {process.env.VERCEL ? <Analytics /> : null}

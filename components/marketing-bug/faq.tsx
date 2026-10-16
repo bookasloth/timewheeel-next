@@ -4,6 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { MbHead } from "./head";
 
 // ponytail: native <details>, no client JS; answers stay in the HTML for crawlers.
+// The shared `name` makes the group exclusive — opening one closes the others.
 export function MbFaq() {
   const s = mb.faq;
   return (
@@ -12,7 +13,7 @@ export function MbFaq() {
         <MbHead label={s.label} title={s.title} center />
         <Reveal className="mb-faq" stagger>
           {s.items.map((item, i) => (
-            <details key={item.q} className="mb-faq-item" open={i === 0}>
+            <details key={item.q} className="mb-faq-item" name="mb-faq" open={i === 0}>
               <summary>
                 <span className="mb-faq-num" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}

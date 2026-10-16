@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { wd } from "@/lib/web-development";
 import { cn } from "@/lib/utils";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function WdPricing() {
   return (
@@ -48,7 +48,7 @@ export function WdPricing() {
                 </li>
               ))}
             </ul>
-            <Link
+            <InPageAnchor
               href="#contact"
               className={cn(
                 "mt-7 inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold",
@@ -58,7 +58,7 @@ export function WdPricing() {
               )}
             >
               {t.cta}
-            </Link>
+            </InPageAnchor>
           </div>
         ))}
       </Reveal>

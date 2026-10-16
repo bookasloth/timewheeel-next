@@ -5,6 +5,7 @@ import { TiltCard } from "@/components/digital-marketing/tilt-card";
 import { rmServices, type RmService } from "@/lib/restaurant-marketing";
 import { cn } from "@/lib/utils";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // ---- Shared "restaurant system" shells used by every service mock ----
 
@@ -412,14 +413,14 @@ export function RmServices() {
                     {service.title}
                   </h3>
                   <p className="mt-3 max-w-md text-muted-foreground">{service.body}</p>
-                  <a
+                  <InPageAnchor
                     href="#contact"
                     className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
                     style={{ color: service.accent }}
                   >
                     Discuss this service
                     <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
+                  </InPageAnchor>
                 </div>
                 <div className={cn(flip && "md:order-1")}>
                   <ServiceVisual service={service} />

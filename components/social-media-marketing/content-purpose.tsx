@@ -9,11 +9,7 @@ export function SmmContentPurpose() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
       <Reveal className="max-w-2xl">
-        <p className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-text">
-          <span className="size-1.5 rounded-full bg-brand" />
-          {smm.contentPurpose.label}
-        </p>
-        <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+        <RevealHeading as="h2" className="text-3xl font-extrabold tracking-tight md:text-4xl">
           {smm.contentPurpose.heading}
         </RevealHeading>
         <p className="mt-4 text-muted-foreground md:text-lg">{smm.contentPurpose.body}</p>

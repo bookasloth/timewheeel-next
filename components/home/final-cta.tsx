@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function FinalCta() {
   return (
@@ -26,13 +26,13 @@ export function FinalCta() {
           together so your business runs with more control, clarity, and
           ownership.
         </p>
-        <Link
+        <InPageAnchor
           href="#ecosystem"
           className="group btn btn-primary mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-brand-foreground"
         >
           Explore the Ecosystem
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
+        </InPageAnchor>
       </Reveal>
     </section>
   );

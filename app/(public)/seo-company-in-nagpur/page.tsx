@@ -20,6 +20,7 @@ import { SeoFaq } from "@/components/seo/faq";
 import { SeoFinalCta } from "@/components/seo/final-cta";
 import { SmmCollaborators } from "@/components/social-media-marketing/collaborators";
 import { RelatedServices } from "@/components/shared/related-services";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const PATH = "/seo-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -90,10 +91,14 @@ export default function SeoCompanyNagpurPage() {
       <SeoFaq />
       <RelatedServices current="/seo-company-in-nagpur" />
       <SeoFinalCta />
+      <StickyCta
+        message="Ready to rank higher on Google?"
+        label="Get My Free SEO Plan"
+        href="#contact"
+      />
       <LeadForm
         idPrefix="seo"
         source="SEO Company in Nagpur"
-        eyebrow="Start the conversation"
         heading="Get Your Free SEO Plan"
         blurb="Run the audit above, then tell us your goals. We'll come back with a clear, honest plan, no obligation, no jargon."
         infoRows={[

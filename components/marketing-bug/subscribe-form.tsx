@@ -54,7 +54,7 @@ export function MbSubscribeForm() {
         </button>
       </form>
       {state === "error" && (
-        <p role="alert" className="mb-subscribe-note" style={{ color: "#c23c05" }}>
+        <p role="alert" className="mb-subscribe-note" style={{ color: "#c92f21" }}>
           Couldn&apos;t subscribe you just now. Check the address and try again.
         </p>
       )}

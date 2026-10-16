@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 
 // Products come from the shared featured list so the navbar and homepage
 // ecosystem never drift. Order + names live in lib/products.ts.
-const navProducts = featuredProducts;
+const navProducts = featuredProducts.filter((p) => p.slug !== "indian-sports-club");
 
 type NavService = { name: string; icon: Icon; accent: string; href: string; desc: string };
 

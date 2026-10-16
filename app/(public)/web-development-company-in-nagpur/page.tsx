@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { social } from "@/lib/metadata";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { wd } from "@/lib/web-development";
@@ -22,6 +21,8 @@ import { LeadForm } from "@/components/shared/lead-form";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { Reveal } from "@/components/reveal";
 import { RelatedServices } from "@/components/shared/related-services";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const PATH = "/web-development-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -116,13 +117,13 @@ export default function WebDevelopmentPage() {
                 Every project above started with a conversation about a goal.
               </p>
             </div>
-            <Link
+            <InPageAnchor
               href="#contact"
               className="group btn btn-primary inline-flex shrink-0 items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
             >
               Start a Project
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </InPageAnchor>
           </div>
         </Reveal>
       </section>
@@ -134,12 +135,16 @@ export default function WebDevelopmentPage() {
       <WdOwnership />
       <WdIndustries />
       <WdFaq />
-      <RelatedServices current="/web-development-company-in-nagpur" showResults={false} />
+      <RelatedServices current="/web-development-company-in-nagpur" />
       <WdFinalCta />
+      <StickyCta
+        message="Need a site that loads fast and ranks?"
+        label="Get a Fixed Quote in 24 Hours"
+        href="#contact"
+      />
       <LeadForm
         idPrefix="wd"
         source="Web Development Company in Nagpur"
-        eyebrow="Start your project"
         heading="Get a Fixed Quote in 24 Hours"
         blurb="Tell us what you need built. You'll get a clear scope, a fixed price and a written timeline, no obligation, no jargon."
         infoRows={[

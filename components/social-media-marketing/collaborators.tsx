@@ -50,7 +50,7 @@ function crossings(cols: number, rows: number, mobile: boolean) {
 // Oversized marks that need to render smaller than the standard h-14.
 const SMALL_LOGOS = new Set(["banarasee.png"]);
 // Undersized marks that need to render a little bigger than h-14.
-const BIG_LOGOS = new Set(["upsilon.png"]);
+const BIG_LOGOS = new Set(["upsilon.png", "khiladi-adda.png", "sharechat.png"]);
 
 export function SmmCollaborators() {
   const logos = getClientLogos();
@@ -89,12 +89,19 @@ export function SmmCollaborators() {
             {logos.map((logo) => {
               const small = SMALL_LOGOS.has(logo.file.toLowerCase());
               const big = BIG_LOGOS.has(logo.file.toLowerCase());
-              const imgH = small ? "h-8" : big ? "h-20" : "h-14";
-              const boxCls = small ? "h-8 w-24" : big ? "h-20 w-56" : "h-14 w-40";
+              const imgH = small ? "h-8" : big ? "h-32" : "h-14";
+              const boxCls = small ? "h-8 w-24" : big ? "h-32 w-80" : "h-14 w-40";
+              // Keeps each cell the same height as the old py-8/md:py-10 boxes,
+              // without adding padding around the artwork itself.
+              const heightCls = small
+                ? "min-h-24 md:min-h-28"
+                : big || logo.photo
+                  ? "min-h-36 md:min-h-40"
+                  : "min-h-[7.5rem] md:min-h-[8.5rem]";
               return (
               <li
                 key={logo.file}
-                className="group flex items-center justify-center gap-2.5 bg-navy py-8 transition-colors duration-300 hover:bg-white/[0.04] md:py-10"
+                className={`group flex items-center justify-center gap-2.5 bg-navy transition-colors duration-300 hover:bg-white/[0.04] ${heightCls}`}
               >
                 {/* Static, in colour, no hover. Artwork that is itself near-black cannot read
                     on the ink wall in its own colours, so only those are forced

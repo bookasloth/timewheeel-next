@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowRight,
   Megaphone,
@@ -8,6 +7,7 @@ import {
   Search,
   Users,
 } from "lucide-react";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // Cinematic editorial hero for /digital-marketing-company-in-nagpur.
 //
@@ -135,19 +135,19 @@ export function DmCinematicHero() {
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3 lg:mt-8">
-            <Link
+            <InPageAnchor
               href="#contact"
               className="group btn btn-primary inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold"
             >
               Work With Us
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
+            </InPageAnchor>
+            <InPageAnchor
               href="#services"
               className="inline-flex items-center gap-2 rounded-lg border border-[#111111]/25 bg-[#F7F2E8]/50 px-7 py-3.5 text-sm font-semibold text-[#111111] transition-colors hover:border-[#111111]/45 hover:bg-[#F7F2E8]/80"
             >
               Our Services
-            </Link>
+            </InPageAnchor>
           </div>
 
           {/* ── handwritten annotation ───────────────────────────── */}

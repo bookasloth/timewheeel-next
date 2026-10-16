@@ -12,7 +12,6 @@ import { Honeypot, useHoneypot } from "@/components/shared/honeypot";
 type FieldName = "name" | "business" | "email" | "phone" | "website" | "service" | "message";
 
 type Props = {
-  eyebrow: string;
   heading: string;
   blurb: string;
   infoRows: { k: string; v: string }[];
@@ -135,8 +134,7 @@ export function LeadForm(p: Props) {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="grid gap-12 lg:grid-cols-2">
           <Reveal>
-            <p className="inline-flex items-center gap-2.5 rounded-full border border-brand/20 bg-brand/5 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.22em] text-brand">{p.eyebrow}</p>
-            <RevealHeading as="h2" className="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">{p.heading}</RevealHeading>
+            <RevealHeading as="h2" className="text-3xl font-extrabold tracking-tight md:text-4xl">{p.heading}</RevealHeading>
             <p className="mt-4 max-w-md text-muted-foreground md:text-lg">{p.blurb}</p>
             <div className="mt-8 space-y-3">
               {p.infoRows.map((row) => {

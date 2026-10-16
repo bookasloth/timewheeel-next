@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { social } from "@/lib/metadata";
-import { PageShell } from "@/components/page-shell";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbLd } from "@/lib/jsonld";
+import { SolHero } from "@/components/solutions/hero";
+import { BuildSection } from "@/components/solutions/build-section";
+import { SolOwnership } from "@/components/solutions/ownership";
+import { SolFinalCta } from "@/components/solutions/final-cta";
 
-const TITLE = "Solutions for Bookings, Events and Communities";
+const TITLE = "Solutions for Creators, Schools, Shops & Events";
 const DESC =
-  "Explore Timewheel solutions: booking, ticketing, membership and creator platforms, plus custom websites and apps, all on systems your business owns.";
+  "Timewheel products for creators, schools and colleges, small businesses, event organizers, communities, sports clubs and D2C brands — booking, ticketing, memberships and stores on systems you own.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -24,11 +27,10 @@ export default function SolutionsPage() {
           { name: "Solutions", path: "/solutions" },
         ])}
       />
-      <PageShell
-        eyebrow="Solutions"
-        title="Solutions for every workflow"
-        intro="Use-case pages coming soon. Bookings, payments, events, and communities, built for ownership."
-      />
+      <SolHero />
+      <BuildSection />
+      <SolOwnership />
+      <SolFinalCta />
     </>
   );
 }

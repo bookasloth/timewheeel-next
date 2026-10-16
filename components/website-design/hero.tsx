@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { cn } from "@/lib/utils";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 const rotateTexts = [
   "for Salons",
@@ -116,9 +117,9 @@ function LandingHero() {
               initial={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.2, ease: "easeOut", delay: 0.7 }}
             >
-              <Link href="#work" className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold">
+              <InPageAnchor href="#work" className="btn btn-outline inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold">
                 Explore Our Work
-              </Link>
+              </InPageAnchor>
             </motion.div>
           </div>
         </div>

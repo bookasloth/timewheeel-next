@@ -14,6 +14,7 @@ import { RmFinalCta } from "@/components/restaurant-marketing/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { RmContact } from "@/components/restaurant-marketing/contact";
 import { RelatedServices } from "@/components/shared/related-services";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const TITLE = "Digital Marketing Agency for Restaurants";
 const DESC =
@@ -110,6 +111,11 @@ export default function RestaurantMarketingPage() {
       <RmFaq />
       <RelatedServices current="/restaurant-marketing" />
       <RmFinalCta />
+      <StickyCta
+        message="Ready to fill more tables?"
+        label="Reach Out Today"
+        href="#contact"
+      />
       <RmContact />
       <GrowthBlueprintModal service="Restaurant Marketing" />
     </div>

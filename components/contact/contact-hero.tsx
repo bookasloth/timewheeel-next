@@ -3,6 +3,7 @@ import { ArrowRight, CalendarClock, MapPin, Timer } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { RevealHeading } from "@/components/anim/reveal-heading";
 import { site } from "@/lib/site";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 export function ContactHero() {
   return (
@@ -33,13 +34,13 @@ export function ContactHero() {
           </div>
 
           <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-            <Link
+            <InPageAnchor
               href="#contact"
               className="group btn btn-primary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-brand-foreground"
             >
               Start a conversation
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </InPageAnchor>
             <a
               href={site.calendlyUrl}
               target="_blank"

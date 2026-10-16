@@ -21,6 +21,7 @@ import { WdFaq } from "@/components/website-design/faq";
 import { WdFinalCta } from "@/components/website-design/final-cta";
 import { GrowthBlueprintModal } from "@/components/shared/growth-blueprint-modal";
 import { RelatedServices } from "@/components/shared/related-services";
+import { StickyCta } from "@/components/shared/sticky-cta";
 
 const PATH = "/website-design-company-in-nagpur";
 const url = `${site.url}${PATH}`;
@@ -86,13 +87,17 @@ export default function WebsiteDesignPage() {
       <WdWhy />
       <WdTestimonials />
       <WdFaq />
-      <RelatedServices current="/website-design-company-in-nagpur" showResults={false} />
+      <RelatedServices current="/website-design-company-in-nagpur" />
       <WdFinalCta />
+      <StickyCta
+        message="Ready for a website worth remembering?"
+        label="Start a Project"
+        href="#contact"
+      />
       <div id="lead">
         <LeadForm
           idPrefix="wd"
           source="Website Design"
-          eyebrow="Start the conversation"
           heading="Get Your Free Website Design Plan"
           blurb="Tell us about your project. We'll come back with a clear, honest design proposal, no obligation, no jargon."
           infoRows={[

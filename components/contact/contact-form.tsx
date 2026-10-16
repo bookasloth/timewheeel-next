@@ -4,7 +4,6 @@ import { LeadForm } from "@/components/shared/lead-form";
 export function ContactForm() {
   return (
     <LeadForm
-      eyebrow="Send us a message"
       heading="Tell us what you're building."
       blurb="Share a few details and we'll come back with a clear, scoped next step, no pushy follow-up after the first reply."
       infoRows={[

@@ -107,6 +107,7 @@ export const seo = {
         blurb: "For a single-location business that needs to win locally.",
         features: ["Google Business Profile optimisation", "Local + technical SEO fixes", "On-page + schema", "Monthly report"],
         cta: "Start with a free audit",
+        href: "/seo-report",
       },
       {
         name: "Growth",
@@ -114,6 +115,7 @@ export const seo = {
         blurb: "For businesses competing across Nagpur and beyond.",
         features: ["Everything in Local Starter", "Ongoing content programme", "AEO / AI-search optimisation", "Link & authority building", "Priority support"],
         cta: "Start with a free audit",
+        href: "/seo-report",
         highlight: true,
       },
       {
@@ -122,6 +124,7 @@ export const seo = {
         blurb: "For stores and multi-location or high-competition SEO.",
         features: ["Category & product SEO at scale", "Technical SEO for large sites", "Custom content velocity", "Scoped after audit"],
         cta: "Book a strategy call",
+        href: "#contact",
       },
     ],
   },

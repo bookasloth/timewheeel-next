@@ -10,11 +10,7 @@ export function SmmMetrics() {
     <section className="border-y border-border/60 bg-secondary/60">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal>
-          <p className="inline-flex items-center gap-2 rounded-full bg-brand/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-text">
-            <span className="size-1.5 rounded-full bg-brand" />
-            {smm.metrics.eyebrow}
-          </p>
-          <RevealHeading as="h2" className="mt-4 max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+          <RevealHeading as="h2" className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
             {smm.metrics.heading}
           </RevealHeading>
           <p className="mt-4 max-w-2xl text-muted-foreground md:text-lg">{smm.metrics.body}</p>

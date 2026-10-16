@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Counter } from "@/components/digital-marketing/counter";
+import { InPageAnchor } from "@/components/shared/in-page-anchor";
 
 // Dark-violet bento hero: a deep gradient panel + glossy bloom + live result
 // tiles so the page reads as a full-service digital marketing agency from the
@@ -33,27 +33,27 @@ export function PmHeroCentered() {
               </p>
             </div>
             <div className="relative mt-8 flex flex-wrap items-center gap-3">
-              <Link
+              <InPageAnchor
                 href="#contact"
                 className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#171717] transition-transform hover:scale-[1.02]"
               >
                 Work With Us
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
+              </InPageAnchor>
+              <InPageAnchor
                 href="#services"
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
                 Our Services
-              </Link>
+              </InPageAnchor>
             </div>
-            <Link
+            <InPageAnchor
               href="#services"
               aria-label="Explore digital marketing services"
               className="absolute bottom-7 right-7 hidden size-14 place-items-center rounded-2xl pm-arrow transition-transform hover:scale-105 md:grid"
             >
               <ArrowUpRight className="size-6" />
-            </Link>
+            </InPageAnchor>
           </div>
 
           {/* B — headline stat tile */}
@@ -95,13 +95,13 @@ export function PmHeroCentered() {
 
           {/* D — trust / proven tile */}
           <div className="relative flex flex-col justify-between overflow-hidden rounded-3xl p-7 md:col-span-3 md:row-span-1 pm-tile-soft">
-            <Link
+            <InPageAnchor
               href="#contact"
               aria-label="Get your free digital marketing plan"
               className="absolute right-5 top-5 grid size-10 place-items-center rounded-xl pm-arrow transition-transform hover:scale-105"
             >
               <ArrowUpRight className="size-4" />
-            </Link>
+            </InPageAnchor>
             <div className="flex -space-x-2">
               {["#ffcc1c", "#f59e0b", "#f4b400"].map((c) => (
                 <span

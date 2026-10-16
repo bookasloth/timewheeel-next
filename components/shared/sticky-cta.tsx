@@ -3,10 +3,22 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, X } from "@phosphor-icons/react/dist/ssr";
-import { smm } from "@/lib/social-media-marketing";
 
 // Floating book-a-call bar — slides up once past the hero, dismissible.
-export function SmmStickyCta() {
+// Colours come from the page's brand scope, so each service page gets its own
+// primary colour with no extra wiring.
+export function StickyCta({
+  message,
+  label,
+  href,
+  ctaClassName = "bg-brand text-brand-foreground",
+}: {
+  message: string;
+  label: string;
+  href: string;
+  /** Button colour. Defaults to the page primary; override for low-contrast brands. */
+  ctaClassName?: string;
+}) {
   const [show, setShow] = useState(false);
   const [closed, setClosed] = useState(false);
 
@@ -26,14 +38,12 @@ export function SmmStickyCta() {
       }`}
     >
       <div className="flex w-full max-w-xl items-center gap-3 rounded-full border border-border bg-card/95 p-2 pl-5 shadow-[0_20px_50px_-20px_rgba(26,29,36,0.5)] backdrop-blur">
-        <p className="min-w-0 flex-1 truncate text-sm font-semibold">
-          Ready to grow your social presence?
-        </p>
+        <p className="min-w-0 flex-1 truncate text-sm font-semibold">{message}</p>
         <Link
-          href={smm.hero.primaryCta.href}
-          className="group inline-flex shrink-0 items-center gap-1.5 rounded-full bg-brand px-4 py-2.5 text-sm font-semibold text-brand-foreground"
+          href={href}
+          className={`group inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold ${ctaClassName}`}
         >
-          {smm.hero.primaryCta.label}
+          {label}
           <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
         </Link>
         <button

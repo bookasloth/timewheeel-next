@@ -13,28 +13,29 @@ export const mb = {
   },
   hero: {
     eyebrow: "Marketing Bug, by Timewheel",
+    logo: {
+      src: "/products/marketing-bug-logo.png",
+      alt: "Marketing Bug mascot",
+      width: 1536,
+      height: 1024,
+    },
     title: "Grow the search traffic that",
     titleAccent: "actually converts.",
     // Answer-first block (the passage AI answers lift). Keep it under 60 words.
     answer:
       "Marketing Bug is Timewheel's SEO and growth marketing platform. It finds the queries your buyers already type, fixes what holds your pages back, and tracks every ranking, so the organic demand you earn turns into pipeline instead of just visits.",
-    primaryLabel: "Sign up free",
-    primaryHref: "/book-a-demo",
-    secondaryLabel: "Talk to our team",
-    secondaryHref: "/contact",
     formLabel: "Work email",
     formCta: "Subscribe",
-    trust: [
-      "No lock-in contracts",
-      "Keyword-to-revenue reporting",
-      "Set up with our team",
-    ],
     image: {
-      src: "/hero/seo.png",
-      alt: "Marketing Bug search performance dashboard",
+      src: "/marketing-bug/bug7.png",
+      alt: "The Marketing Bug mascot, a red bug ready to grow your search traffic",
       width: 1536,
       height: 1024,
     },
+    poses: [
+      { src: "/marketing-bug/bug1.png", width: 1092, height: 1440 },
+      { src: "/marketing-bug/bug6.png", width: 1254, height: 1254 },
+    ],
   },
   valueProps: {
     label: "WHY IT WORKS",
@@ -43,16 +44,19 @@ export const mb = {
       {
         icon: "awareness",
         name: "Grows your share of voice",
+        bug: { src: "/marketing-bug/bug1.png", width: 1092, height: 1440 },
         desc: "Own the searches your buyers make before they ever hear your name, and show up as the obvious answer in your category.",
       },
       {
         icon: "ppc",
         name: "Makes paid search go further",
+        bug: { src: "/marketing-bug/bug3.png", width: 1254, height: 1254 },
         desc: "Organic and paid feed each other. The keyword data behind your SEO plan sharpens every ad you run and lowers cost per lead.",
       },
       {
         icon: "trust",
         name: "Earns trust before the first call",
+        bug: { src: "/marketing-bug/bug4.png", width: 1254, height: 1254 },
         desc: "Pages that answer real questions and rank for real terms are proof you know the problem, and that shortens the sales cycle.",
       },
     ],
@@ -71,10 +75,10 @@ export const mb = {
       "One report for rankings, traffic and conversions",
     ],
     image: {
-      src: "/digital-marketing-hero1.png",
-      alt: "Search performance dashboard showing organic growth",
-      width: 1671,
-      height: 941,
+      src: "/marketing-bug/bug2.png",
+      alt: "The Marketing Bug mascot, keeping your SEO plan in one place",
+      width: 1254,
+      height: 1254,
     },
   },
   services: {
@@ -118,6 +122,7 @@ export const mb = {
   momentum: {
     label: "COMPOUNDING GROWTH",
     title: "SEO gets stronger the longer you keep at it",
+    titleAccent: "stronger",
     body: [
       "Most channels stop the moment you stop paying. Search keeps working. Pages that rank stay ranked, and each improvement builds on the last, so the curve bends upwards over time.",
       "Marketing Bug makes that long game visible: which pages are climbing, which keywords are close, and where your next win is.",
@@ -125,10 +130,10 @@ export const mb = {
     ctaLabel: "See how it works",
     ctaHref: "/contact",
     image: {
-      src: "/digital-marketing-hero.png",
-      alt: "Compounding organic traffic growth over time",
-      width: 1672,
-      height: 941,
+      src: "/marketing-bug/bug6.png",
+      alt: "The Marketing Bug mascot, with SEO growth that compounds over time",
+      width: 1254,
+      height: 1254,
     },
   },
   process: {
@@ -139,18 +144,21 @@ export const mb = {
         icon: "audit",
         tag: "Week 1",
         name: "Audit and keyword map",
+        bug: { src: "/marketing-bug/bug5.png", width: 1159, height: 1357 },
         desc: "We crawl your site, find what is blocking search, and map the queries worth winning, ranked by intent and opportunity.",
       },
       {
         icon: "fix",
         tag: "Weeks 2-4",
         name: "Fix and publish",
+        bug: { src: "/marketing-bug/bug7.png", width: 1254, height: 1254 },
         desc: "Technical issues get fixed, and pages get written and optimised around the terms that matter, on a schedule you can follow.",
       },
       {
         icon: "track",
         tag: "Every month",
         name: "Track and compound",
+        bug: { src: "/marketing-bug/bug8.png", width: 1254, height: 1254 },
         desc: "Rankings, traffic and conversions land in one dashboard, so each month builds on the last instead of starting over.",
       },
     ],

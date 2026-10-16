@@ -1,4 +1,4 @@
-﻿import { CalendarOff, MessageSquareOff, ShieldCheck, Split, Users } from "lucide-react";
+import { CalendarOff, MessageSquareOff, ShieldCheck, Split, Users } from "lucide-react";
 import { tp } from "@/lib/the-parliament";
 import { Reveal } from "@/components/reveal";
 import { TpHead } from "./head";
@@ -10,7 +10,7 @@ export function TpProblem() {
   return (
     <section className="tp-sec">
       <div className="tp-container">
-        <TpHead number={s.number} label={s.label} title={s.title} body={s.body} />
+        <div title={s.title} />
         <div className="tp-grid tp-grid--4">
           {s.items.map((item, i) => {
             const Icon = icons[i % icons.length];

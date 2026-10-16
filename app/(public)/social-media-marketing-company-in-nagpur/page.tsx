@@ -9,8 +9,7 @@ import { SmmMetrics } from "@/components/social-media-marketing/metrics";
 import { SmmFeed } from "@/components/social-media-marketing/feed";
 import { SmmPackages } from "@/components/social-media-marketing/packages";
 import { SmmSocialProof } from "@/components/social-media-marketing/social-proof";
-import { SmmStickyCta } from "@/components/social-media-marketing/sticky-cta";
-import { SmmIntro } from "@/components/social-media-marketing/intro";
+import { StickyCta } from "@/components/shared/sticky-cta";import { SmmIntro } from "@/components/social-media-marketing/intro";
 import { SmmServices } from "@/components/social-media-marketing/services";
 import { SmmPlatforms } from "@/components/social-media-marketing/platforms";
 import { SmmApproach } from "@/components/social-media-marketing/approach";
@@ -99,11 +98,14 @@ export default function SocialMediaMarketingPage() {
       <SmmFaq />
       <RelatedServices current="/social-media-marketing-company-in-nagpur" />
       <SmmFinalCta />
-      <SmmStickyCta />
+      <StickyCta
+        message="Ready to grow your social presence?"
+        label={smm.hero.primaryCta.label}
+        href={smm.hero.primaryCta.href}
+      />
       <LeadForm
         idPrefix="smm"
         source="Social Media Marketing Company in Nagpur"
-        eyebrow="Start the conversation"
         heading="Get a Social Media Plan Built for Your Brand"
         blurb="Tell us about your business and what you want social media to do for it. We'll come back with an honest, personalised plan, strategy, channels and next steps, no obligation, no jargon."
         infoRows={[
