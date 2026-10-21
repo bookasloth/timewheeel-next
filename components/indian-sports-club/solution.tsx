@@ -11,7 +11,8 @@ const iconMap = {
 } as const;
 
 export function IscSolution() {
-  const s = isc.solution;
+  const s = (isc as any).solution;
+  if (!s || !s.lead) return null;
   const Lead = iconMap[s.lead.icon as keyof typeof iconMap] ?? Trophy;
 
   return (

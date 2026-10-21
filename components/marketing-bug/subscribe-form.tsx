@@ -27,7 +27,7 @@ export function MbSubscribeForm() {
   if (state === "ok") {
     return (
       <p role="status" className="mb-subscribe-note">
-        Thanks, you&apos;re on the list. We&apos;ll send your SEO checklist shortly.
+        Thanks, you&apos;re on the list. Tomorrow&apos;s issue lands in your inbox.
       </p>
     );
   }
@@ -35,7 +35,7 @@ export function MbSubscribeForm() {
   const busy = state === "loading";
 
   return (
-    <div>
+    <div id="mb-subscribe">
       <form onSubmit={submit} aria-busy={busy} className="mb-subscribe">
         <input
           type="email"

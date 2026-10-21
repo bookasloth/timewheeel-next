@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Check, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { mb } from "@/lib/marketing-bug";
 import { Reveal } from "@/components/reveal";
 
@@ -14,7 +14,7 @@ export function MbAbout() {
           <Reveal className="mb-about-copy">
             <p className="mb-kicker">{s.label}</p>
             <h2 className="mb-h">
-              {before}
+              {before.trimEnd()}{" "}
               <span className="mb-accent">{s.titleAccent}</span>
               <span className="mb-h-dim">{after}</span>
             </h2>
@@ -33,16 +33,6 @@ export function MbAbout() {
                 sizes="(max-width: 900px) 92vw, 48vw"
                 className="mb-about-img"
               />
-            </div>
-
-            <div className="mb-about-badge">
-              <span className="mb-about-badge-ic" aria-hidden="true">
-                <TrendingUp size={20} strokeWidth={2.2} />
-              </span>
-              <div>
-                <p className="mb-about-badge-value">Page one</p>
-                <p className="mb-about-badge-label">terms that keep ranking</p>
-              </div>
             </div>
 
             <div className="mb-about-chart" aria-hidden="true">

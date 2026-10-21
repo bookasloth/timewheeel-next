@@ -551,6 +551,10 @@
   color: var(--mb-red-ink);
 }
 
+.mb-ic--ghost {
+  background: transparent;
+}
+
 .mb-ic--dark {
   background: rgba(255, 201, 40, 0.16);
   color: var(--mb-yellow);
@@ -673,63 +677,21 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 5 / 4;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
   border-radius: var(--mb-radius-sm);
 }
 
-.mb-about-badge,
 .mb-about-chart {
   position: absolute;
   z-index: 2;
-  border-radius: var(--mb-radius-sm);
-  background: var(--mb-surface);
-  border: 1px solid var(--mb-line);
-  box-shadow: var(--mb-shadow);
-}
-
-.mb-about-badge {
-  top: 30px;
-  left: -30px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
-}
-
-.mb-about-badge-ic {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--mb-radius-sm);
-  background: var(--mb-yellow-soft);
-  color: var(--mb-red-ink);
-}
-
-.mb-about-badge-value {
-  margin: 0;
-  font-family: var(--mb-font-display), ui-sans-serif, system-ui, sans-serif;
-  font-size: 21px;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--mb-red-ink);
-}
-
-.mb-about-badge-label {
-  margin: 4px 0 0;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--mb-muted);
-}
-
-.mb-about-chart {
   right: -86px;
   bottom: -34px;
   width: min(244px, 64%);
   padding: 16px 18px 12px;
+  border-radius: var(--mb-radius-sm);
+  background: var(--mb-surface);
+  border: 1px solid var(--mb-line);
+  box-shadow: var(--mb-shadow);
 }
 
 .mb-about-chart-head {
@@ -837,10 +799,6 @@
 }
 
 @media (max-width: 560px) {
-  .mb-about-badge {
-    left: 10px;
-  }
-
   .mb-about-chart {
     right: 8px;
     width: min(200px, 68%);

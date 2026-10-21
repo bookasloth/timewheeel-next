@@ -56,7 +56,7 @@ export function AboutHero() {
             >
               Explore Our Work
             </InPageAnchor>
-          </div>
+           </div>
         </div>
 
         {/* team photo */}

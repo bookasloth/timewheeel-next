@@ -212,11 +212,11 @@ export const ez = {
     steps: [
       {
         name: "Book a demo",
-        desc: "Tell us what you sell, where you ship and how you take payment today.",
+        desc: "Tell us what you sell, where you ship and how you take payment today. We'll plan your store setup to go live.",
       },
       {
         name: "Connect your accounts",
-        desc: "Razorpay (KYC done), your domain, and optionally Shiprocket, AiSensy and Brevo, all in your name.",
+        desc: "We help connect Razorpay (KYC done), your domain, and optionally Shiprocket, AiSensy and Brevo, all under your accounts.",
       },
       {
         name: "Add products and settings",

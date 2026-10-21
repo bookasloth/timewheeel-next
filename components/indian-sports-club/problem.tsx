@@ -2,9 +2,9 @@ import { isc } from "@/lib/indian-sports-club";
 import { Reveal } from "@/components/reveal";
 
 export function IscProblem() {
-  const s = isc.problem;
+  const s = (isc as any).benefits || (isc as any).problem;
   return (
-    <section className="isc-sec isc-problem">
+    <section id="benefits" className="isc-sec isc-problem">
       <div className="isc-container isc-problem-grid">
         <aside className="isc-problem-aside">
           <Reveal>
@@ -14,7 +14,7 @@ export function IscProblem() {
         </aside>
 
         <div className="isc-problem-list">
-          {s.items.map((item, i) => (
+          {s.items.map((item: any, i: number) => (
             <Reveal key={item.name} className="isc-problem-row" delay={i * 0.04}>
               <span className="isc-problem-num" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
