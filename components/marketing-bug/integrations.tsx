@@ -1,4 +1,4 @@
-import { BarChart3, FileText, Gauge, Layers, Search, ShoppingBag, Table2, Zap } from "lucide-react";
+import { BarChart3, FileText, Gauge, Layers, MessageCircle, Search, ShoppingBag, Table2, Zap } from "lucide-react";
 import { mb } from "@/lib/marketing-bug";
 import { Reveal } from "@/components/reveal";
 import { MbHead } from "./head";
@@ -12,6 +12,7 @@ const iconMap = {
   headless: Layers,
   speed: Gauge,
   api: Zap,
+  "message-circle": MessageCircle,
 } as const;
 
 export function MbIntegrations() {
@@ -22,7 +23,7 @@ export function MbIntegrations() {
         <MbHead label={s.label} title={s.title} body={s.body} center />
         <Reveal className="mb-integrations" stagger>
           {s.items.map((item) => {
-            const Icon = iconMap[item.icon as keyof typeof iconMap];
+            const Icon = iconMap[item.icon as keyof typeof iconMap] ?? Search;
             return (
               <div key={item.name} className="mb-int">
                 <span className="mb-ic" aria-hidden="true">

@@ -30,8 +30,8 @@ const softwareLd = {
   "@id": `${url}#software`,
   name: "Marketing Bug",
   url,
-  applicationCategory: "BusinessApplication",
-  applicationSubCategory: "SEO and growth marketing software",
+  applicationCategory: "NewsApplication",
+  applicationSubCategory: "Daily AI marketing newsletter",
   operatingSystem: "Web",
   description: mb.meta.description,
   featureList: [

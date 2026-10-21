@@ -234,7 +234,7 @@ export const products: Product[] = [
   {
     slug: "marketing-bug",
     name: "Marketing Bug",
-    tagline: "SEO & Growth Marketing",
+    tagline: "Daily AI Marketing Newsletter",
     icon: Bug,
     logo: "/products/marketing-bug-logo.png",
     accent: "#F0442E",

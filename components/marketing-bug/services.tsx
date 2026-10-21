@@ -50,10 +50,6 @@ export function MbServices() {
                 </div>
                 <h3 className="mb-svc-name">{item.name}</h3>
                 <p className="mb-svc-desc">{item.desc}</p>
-                <Link href={s.ctaHref} className="mb-svc-link">
-                  {s.ctaLabel}
-                  <ArrowRight size={14} strokeWidth={2.2} aria-hidden="true" />
-                </Link>
               </Reveal>
             );
           })}

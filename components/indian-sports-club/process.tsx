@@ -3,13 +3,14 @@ import { Reveal } from "@/components/reveal";
 import { IscHead } from "./head";
 
 export function IscProcess() {
-  const s = isc.process;
+  const s = (isc as any).howToJoin || (isc as any).process;
+  if (!s) return null;
   return (
     <section className="isc-sec isc-tint isc-process">
       <div className="isc-container">
         <IscHead title={s.title} body={s.body} />
         <Reveal className="isc-timeline" stagger>
-          {s.steps.map((step, i) => (
+          {s.steps.map((step: any, i: number) => (
             <div key={step.name} className="isc-tl-step">
               <span className="isc-tl-node" aria-hidden="true">
                 <span className="isc-tl-num">{String(i + 1).padStart(2, "0")}</span>
@@ -22,11 +23,13 @@ export function IscProcess() {
             </div>
           ))}
         </Reveal>
-        <ul className="isc-notes">
-          {s.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-        </ul>
+        {(s.notes || []).length > 0 && (
+          <ul className="isc-notes">
+            {s.notes.map((note: string) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

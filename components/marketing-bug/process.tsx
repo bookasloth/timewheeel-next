@@ -11,7 +11,6 @@ export function MbProcess() {
         <MbHead label={s.label} title={s.title} center />
         <Reveal className="mb-timeline" stagger>
           {s.steps.map((step, i) => {
-            const index = String(i + 1).padStart(2, "0");
             return (
               <div key={step.name} className="mb-tl-item">
                 <span className="mb-tl-node" aria-hidden="true">
@@ -24,9 +23,6 @@ export function MbProcess() {
                   />
                 </span>
                 <div className="mb-tl-card">
-                  <span className="mb-tl-ghost" aria-hidden="true">
-                    {index}
-                  </span>
                   <p className="mb-tl-tag">{step.tag}</p>
                   <h3 className="mb-card-name">
                     <span className="sr-only">Step {i + 1}: </span>

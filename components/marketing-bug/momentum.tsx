@@ -37,7 +37,7 @@ export function MbMomentum() {
         <Reveal className="mb-momentum-copy" delay={0.1}>
           <p className="mb-kicker">{s.label}</p>
           <h2 className="mb-h">
-            {before}
+            {before.trimEnd()}{" "}
             <span className="mb-accent">{s.titleAccent}</span>
             <span className="mb-h-dim">{after}</span>
           </h2>
