@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { social } from "@/lib/metadata";
 import Link from "next/link";
-import { ArrowUpRight, BriefcaseBusiness, Mail, MapPin, Users } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, Mail, MapPin, Sparkles, Users } from "lucide-react";
 import { JsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { CareersHero } from "@/components/careers/hero";
@@ -10,9 +10,10 @@ import { breadcrumbLd, organizationLd } from "@/lib/jsonld";
 import { jobs } from "@/lib/jobs";
 import { site } from "@/lib/site";
 
-const TITLE = "Careers, Sales Executive in Nagpur | Timewheel";
-const DESC =
-  "Open roles at Timewheel Internet (P) Ltd. Hire a Sales Executive in the Greater Nagpur Area. ₹10,000/month plus bonus and uncapped commission. Freshers welcome.";
+const TITLE = "Careers at Timewheel | Open Roles in Nagpur";
+const DESC = `Open roles at Timewheel Internet (P) Ltd. in Nagpur: ${jobs
+  .map((j) => j.title)
+  .join(", ")}. Freshers welcome, internships available. Apply online.`;
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -90,6 +91,10 @@ export default function CareersPage() {
             <li className="inline-flex items-center gap-2">
               <Users className="size-4 text-brand" strokeWidth={1.9} />
               Freshers welcome
+            </li>
+            <li className="inline-flex items-center gap-2">
+              <Sparkles className="size-4 text-brand" strokeWidth={1.9} />
+              Internships available
             </li>
           </ul>
         </div>

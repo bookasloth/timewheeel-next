@@ -269,6 +269,7 @@ export type LeadEmail = {
   campaign?: string; // one-line first-touch attribution summary
   findings?: LeadFinding[]; // admin-only SEO audit findings + fixes
   flag?: string; // set when the bot trap was filled slowly (likely autofill)
+  cv?: string; // uploaded CV, attached to this email
 };
 
 export function teamLead(l: LeadEmail): Rendered {
@@ -285,6 +286,7 @@ export function teamLead(l: LeadEmail): Rendered {
   if (l.budget) rows.push(["Their price", l.budget]);
   if (typeof l.consent === "boolean") rows.push(["Marketing consent", l.consent ? "Yes" : "No"]);
   if (l.campaign) rows.push(["Campaign", l.campaign]);
+  if (l.cv) rows.push(["CV", `${l.cv} (attached to this email)`]);
 
   const blocks: Block[] = [
     ...(l.flag ? ([{ type: "callout", label: "Check", value: l.flag, tone: "danger" }] as Block[]) : []),

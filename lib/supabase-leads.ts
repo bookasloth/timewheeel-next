@@ -24,6 +24,10 @@ export type LeadRow = {
   marketing_consent?: boolean;
   source: string;
   event_id?: string;
+  // Uploaded CV (job applications). Path in the private `job-applications`
+  // bucket, plus the name the candidate gave it. Needs migration 0012.
+  cv_path?: string;
+  cv_name?: string;
   // attribution
   utm_source?: string;
   utm_medium?: string;
@@ -54,7 +58,7 @@ export async function saveLead(
 
   const row: LeadRow = { ...lead, ...attr };
 
-  try {
+  const insert = async (payload: LeadRow) => {
     const res = await fetch(`${url.replace(/\/$/, "")}/rest/v1/leads`, {
       method: "POST",
       headers: {
@@ -63,13 +67,33 @@ export async function saveLead(
         "Content-Type": "application/json",
         Prefer: "return=minimal",
       },
-      body: JSON.stringify(row),
+      body: JSON.stringify(payload),
     });
-    if (!res.ok) {
-      console.error("Supabase lead insert failed:", res.status, await res.text().catch(() => ""));
+    return { ok: res.ok, status: res.status, detail: await res.text().catch(() => "") };
+  };
+
+  try {
+    const res = await insert(row);
+    if (res.ok) return true;
+
+    // cv_path/cv_name need migration 0012. Retry without them so a database
+    // that hasn't been migrated yet still stores the lead (the CV still goes
+    // out by email, so nothing is lost but the inbox link).
+    if (row.cv_path || row.cv_name) {
+      const rest: LeadRow = { ...row };
+      delete rest.cv_path;
+      delete rest.cv_name;
+      const retry = await insert(rest);
+      if (retry.ok) {
+        console.warn("Supabase lead insert: saved without cv_path (migration 0012 not applied).");
+        return true;
+      }
+      console.error("Supabase lead insert failed:", retry.status, retry.detail);
       return false;
     }
-    return true;
+
+    console.error("Supabase lead insert failed:", res.status, res.detail);
+    return false;
   } catch (err) {
     console.error("Supabase lead insert error:", err);
     return false;

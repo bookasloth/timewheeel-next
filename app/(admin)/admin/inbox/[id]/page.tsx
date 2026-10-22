@@ -67,6 +67,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
               <Row label="Email">{l.email}</Row>
               <Row label="Phone">{l.phone}</Row>
               <Row label="Website">{l.website && <a href={/^https?:/.test(l.website) ? l.website : `https://${l.website}`} target="_blank" rel="noreferrer" className="text-[#C2410C] hover:underline">{l.website}</a>}</Row>
+              <Row label="CV">{l.cv_path && <a href={`/api/admin/lead-cv/${l.id}`} target="_blank" rel="noreferrer" className="text-[#C2410C] hover:underline">{l.cv_name || "Download CV"}</a>}</Row>
               <Row label="Budget">{l.budget}</Row>
               <Row label="Category">{l.category}</Row>
               <Row label="Location">{l.location}</Row>

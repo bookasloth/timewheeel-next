@@ -8,6 +8,8 @@ import { syncLeadContact } from "@/lib/resend-contacts";
 import { sendChallengeWelcome, sendEnquiryReceived, sendSeoReport } from "@/lib/resend-email";
 import { checkHoneypot } from "@/lib/honeypot";
 import { clientIp, isRateLimited } from "@/lib/rate-limit";
+import { readCvUpload, uploadCv, type CvUpload } from "@/lib/job-applications";
+import { formatBytes } from "@/lib/cv-upload";
 import type { Attribution } from "@/lib/attribution";
 import { resolveAttribution, summarizeCampaign } from "@/lib/attribution-server";
 
@@ -52,6 +54,13 @@ const LEAD_LIMIT = { windowSeconds: 10 * 60, max: 5 };
 
 function clean(s: unknown): string {
   return typeof s === "string" ? s.trim().slice(0, 2000) : "";
+}
+
+/** A multipart file entry, or null when the field wasn't a file. */
+function asFile(v: FormDataEntryValue | null): File | null {
+  if (!v || typeof v === "string") return null;
+  const f = v as File;
+  return typeof f.arrayBuffer === "function" && typeof f.name === "string" ? f : null;
 }
 
 // ── Meta Conversions API (server-side 'Lead') ────────────────────────────────
@@ -139,11 +148,40 @@ function validate(l: Lead): string | null {
 }
 
 export async function POST(request: Request) {
+  // Job applications upload a CV, so they post multipart/form-data. Every other
+  // form on the site still posts JSON: both shapes are accepted here.
+  const multipart = (request.headers.get("content-type") || "").includes("multipart/form-data");
+
   let body: Lead;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  let cvFile: File | null = null;
+
+  if (multipart) {
+    let form: FormData;
+    try {
+      form = await request.formData();
+    } catch {
+      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    }
+    const fields: Record<string, string> = {};
+    for (const [k, v] of form.entries()) if (typeof v === "string") fields[k] = v;
+    body = fields as unknown as Lead;
+    // Nested objects arrive as JSON strings in multipart.
+    if (fields.attribution) {
+      try {
+        body.attribution = JSON.parse(fields.attribution);
+      } catch {
+        /* malformed attribution is not worth failing the lead over */
+      }
+    }
+    if (fields.marketing_consent === "true") body.marketing_consent = true;
+    else if (fields.marketing_consent === "false") body.marketing_consent = false;
+    cvFile = asFile(form.get("cv"));
+  } else {
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    }
   }
 
   // Bot trap (lib/honeypot). Filled fast: a bot, so pretend success and send
@@ -169,6 +207,25 @@ export async function POST(request: Request) {
   const problem = validate(body);
   if (problem) return NextResponse.json({ error: problem }, { status: 400 });
 
+  // The uploaded CV (job applications only). Read and checked before anything
+  // else, so a rejected file never leaves a half-saved lead behind.
+  let cv: (CvUpload & { path: string | null }) | null = null;
+  if (cvFile) {
+    const check = await readCvUpload(cvFile);
+    if (!check.ok) return NextResponse.json({ error: check.error }, { status: 400 });
+    // Storing it is best-effort: without Supabase (or without the storage
+    // bucket from migration 0012) the CV still goes out as an email attachment.
+    cv = { ...check.cv, path: await uploadCv(check.cv) };
+  }
+
+  // The CV line goes in the message so the file is named in the admin inbox
+  // even on a database that hasn't been migrated to store cv_path yet.
+  const message = clean(
+    cv
+      ? `${clean(body.message)}\n\nCV attached: ${cv.name} (${formatBytes(cv.size)})`
+      : body.message,
+  );
+
   const l = {
     name: clean(body.name),
     business: clean(body.business),
@@ -176,7 +233,7 @@ export async function POST(request: Request) {
     phone: clean(body.phone),
     website: clean(body.website),
     service: clean(body.service),
-    message: clean(body.message),
+    message,
     budget: clean(body.budget) || undefined,
     category: clean(body.category) || undefined,
     location: clean(body.location) || undefined,
@@ -211,7 +268,13 @@ export async function POST(request: Request) {
       ? `Hidden bot-trap field was filled (${hp.ms}ms after the form showed). Probably autofill; sanity-check before replying.`
       : undefined;
   if (flag) console.warn("[honeypot] kept /api/lead", JSON.stringify({ ms: hp.ms, eventId }));
-  const teamEmail = { ...l, campaign: campaign || undefined, findings, flag };
+  const teamEmail = {
+    ...l,
+    campaign: campaign || undefined,
+    findings,
+    flag,
+    cv: cv ? `${cv.name} (${formatBytes(cv.size)})` : undefined,
+  };
   const reportDomain = clean(body.domain);
   const reportSite = reportDomain ? reportDomain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : "";
 
@@ -233,6 +296,8 @@ export async function POST(request: Request) {
       marketing_consent: l.consent,
       source: l.source,
       event_id: eventId,
+      cv_path: cv?.path ?? undefined,
+      cv_name: cv?.name,
       ip: ip !== "unknown" ? ip : undefined,
       user_agent: request.headers.get("user-agent") || undefined,
     },
@@ -299,6 +364,9 @@ export async function POST(request: Request) {
         subject: mail.subject,
         text: mail.text,
         html: mail.html,
+        // The CV rides along with the notification, so the hiring team has it
+        // in their inbox even if storage or the database is unavailable.
+        attachments: cv ? [{ filename: cv.name, content: cv.bytes }] : undefined,
       });
       return true;
     } catch (err) {

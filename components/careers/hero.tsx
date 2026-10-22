@@ -9,6 +9,7 @@ const DOT_GRID = "radial-gradient(circle, rgba(15,17,17,0.06) 1px, transparent 1
 // rather than selling the company first.
 export function CareersHero() {
   const open = jobs.length;
+  const departments = Array.from(new Set(jobs.map((j) => j.department)));
 
   return (
     <section className="relative overflow-hidden border-b border-border/60 bg-secondary/40">
@@ -35,16 +36,16 @@ export function CareersHero() {
         </RevealHeading>
 
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          We&apos;re a Nagpur digital studio selling websites, SEO, marketing and
-          AI automation to businesses across the region. We hire for people who
-          talk to business owners, not for people who fill spreadsheets.
+          We&apos;re a Nagpur studio that builds and runs web products and sells
+          websites, SEO, marketing and AI automation across the region. We hire
+          for people who talk to business owners, and for people who ship code.
         </p>
 
         <dl className="mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
           {[
             { k: "Open roles", v: String(open), icon: Briefcase },
             { k: "Based in", v: "Nagpur, Maharashtra", icon: MapPin },
-            { k: "Hiring for", v: "Sales & delivery", icon: Sparkles },
+            { k: "Hiring for", v: departments.join(" & "), icon: Sparkles },
           ].map((s) => (
             <div
               key={s.k}

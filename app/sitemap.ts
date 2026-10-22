@@ -11,7 +11,7 @@ import { programPath, programs } from "@/lib/academy";
 const SITE_UPDATED = "2026-10-07"; // home, services, company pages
 const CASE_STUDIES_UPDATED = "2026-10-07";
 const PRODUCTS_UPDATED = "2026-10-11";
-const CAREERS_UPDATED = "2026-10-09";
+const CAREERS_UPDATED = "2026-10-22";
 const ACADEMY_UPDATED = "2026-10-10";
 const LEGAL_UPDATED = "2026-06-01";
 const PAGES_UPDATED = "2026-10-12"; // newsletter, partners, write-for-us, sitemap, disclaimer, company
