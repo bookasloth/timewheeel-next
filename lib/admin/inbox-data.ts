@@ -24,6 +24,9 @@ export type Lead = {
   source: string;
   status: LeadStatus;
   delivered_url: string | null;
+  // Uploaded CV (job applications). Path in the private storage bucket.
+  cv_path: string | null;
+  cv_name: string | null;
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;

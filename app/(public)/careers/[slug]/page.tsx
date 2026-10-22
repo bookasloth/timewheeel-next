@@ -24,13 +24,13 @@ export async function generateMetadata({
   if (!job) return { title: "Role not found, Timewheel" };
 
   const title = `${job.title} in ${job.location}, Timewheel Careers`;
-  const description = `${job.summary} ${job.compensation[0]}. Apply online, no experience required.`;
+  const description = `${job.summary} ${job.compensation[0]}. ${job.experience}. Apply online.`;
 
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: `/careers/${job.slug}` },
-  ...social({ path: `/careers/${job.slug}`, title, description, type: "article" }),
+    ...social({ path: `/careers/${job.slug}`, title, description, type: "article" }),
   };
 }
 
@@ -43,13 +43,13 @@ function jobPostingLd(job: (typeof jobs)[number]) {
     title: job.title,
     description: `${job.summary}\n\n${job.intro}`,
     datePosted: job.postedAt,
-    employmentType: "FULL_TIME",
+    employmentType: job.employmentTypeSchema,
     hiringOrganization: {
       "@type": "Organization",
       name: "Timewheel Internet Pvt. Ltd.",
       sameAs: site.url,
     },
-    jobLocationType: "onsite",
+    jobLocationType: job.locationType,
     applicantLocationRequirements: {
       "@type": "Country",
       name: "IN",
@@ -64,7 +64,7 @@ function jobPostingLd(job: (typeof jobs)[number]) {
       },
     },
     industry: "Internet Marketing",
-    occupationalCategory: "Sales",
+    occupationalCategory: job.occupationalCategory,
     experienceRequirements: job.experience,
     totalJobOpenings: 1,
     directApply: true,
@@ -110,9 +110,9 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
             </h2>
             <p className="mt-4 text-muted-foreground">
               Two minutes, no account needed. We read every application and reply
-              to everyone. Add a link to your CV or LinkedIn if you have one,
-              otherwise just tell us what you&apos;d do to win a business owner
-              over.
+              to everyone. Add a link to your CV, portfolio or LinkedIn if you
+              have one, otherwise just tell us why you&apos;re a good fit for this
+              role.
             </p>
             <p className="mt-4 text-sm text-muted-foreground">
               Prefer email?{" "}

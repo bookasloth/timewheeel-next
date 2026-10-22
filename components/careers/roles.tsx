@@ -18,8 +18,9 @@ export function CareersRoles() {
             : `${jobs.length} roles open right now.`}
         </RevealHeading>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Freshers welcome on every role listed here. If nothing fits today, send
-          a note anyway, we hire ahead when the timing works.
+          Freshers welcome on every role listed here, and we take on interns.
+          If nothing fits today, send a note anyway, we hire ahead when the
+          timing works.
         </p>
       </Reveal>
 

@@ -2,7 +2,10 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   BriefcaseBusiness,
+  Building2,
   Car,
+  ClipboardCheck,
+  Clock,
   IndianRupee,
   ListChecks,
   MapPin,
@@ -19,9 +22,12 @@ import type { Job } from "@/lib/jobs";
 // unrecognised falls back to a neutral dot.
 const FACT_ICON: Record<string, typeof MapPin> = {
   Location: MapPin,
+  Office: Building2,
   "Work type": Car,
   Experience: Users,
   Employment: BriefcaseBusiness,
+  Hours: Clock,
+  Probation: ClipboardCheck,
   Compensation: IndianRupee,
 };
 
@@ -110,6 +116,14 @@ export function JobDetail({ job }: { job: Job }) {
               </RevealHeading>
             </div>
             {bullets(job.requirements)}
+            {job.requirementsExtra?.map((group) => (
+              <div key={group.title} className="mt-8">
+                <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  {group.title}
+                </h3>
+                {bullets(group.items)}
+              </div>
+            ))}
           </Reveal>
 
           <Reveal className="mt-14">
@@ -121,11 +135,10 @@ export function JobDetail({ job }: { job: Job }) {
             </div>
             <div className="mt-5 rounded-2xl border border-border bg-card p-6">
               <p className="text-xl font-extrabold tracking-tight text-brand-text">
-                ₹10,000/month + Sales Bonus + Commission
+                {job.compensationHeadline}
               </p>
               <p className="mt-1.5 text-sm text-muted-foreground">
-                Your earnings increase with performance. There is no fixed
-                ceiling on incentives.
+                {job.compensationNote}
               </p>
               <ul className="mt-5 space-y-2.5">
                 {job.compensation.map((c) => (
@@ -140,6 +153,17 @@ export function JobDetail({ job }: { job: Job }) {
               </ul>
             </div>
           </Reveal>
+
+          {/* Role-specific blocks that don't fit the fixed three: eligibility,
+              what you'll learn, evaluation, terms. */}
+          {job.sections?.map((section) => (
+            <Reveal key={section.title} className="mt-14">
+              <RevealHeading as="h2" className="font-extrabold tracking-tight">
+                {section.title}
+              </RevealHeading>
+              {bullets(section.items)}
+            </Reveal>
+          ))}
         </div>
 
         {/* At-a-glance rail */}
