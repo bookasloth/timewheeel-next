@@ -276,35 +276,35 @@ export const jobs: Job[] = [
     ],
   },
   {
-    slug: "social-media-intern",
-    title: "Social Media Intern",
+    slug: "digital-marketing-intern",
+    title: "Digital Marketing Intern",
     department: "Marketing",
     location: "Nagpur, Maharashtra",
     workType: "Hybrid",
-    experience: "Students, recent graduates, or self-taught creators",
+    experience: "Students, recent graduates, or self-taught marketers",
     employmentType: "Internship",
     postedAt: "2026-10-24",
     summary:
-      "Run our social channels end to end: plan content, shoot and edit short-form video, write captions, and grow our audience across Instagram, LinkedIn, and more.",
+      "Run digital marketing end to end: social media, paid ads, SEO, email, and content. Plan campaigns, track what works, and grow our reach across every channel.",
     intro:
-      "You'll join the Marketing Team as a Social Media Intern and own the day-to-day of our social presence. You'll plan the calendar, create posts and reels, write the words that go with them, and watch what actually works, all under the direct guidance of the reporting manager.",
+      "You'll join the Marketing Team as a Digital Marketing Intern and work across the full funnel: social media, paid ads, SEO, email, and content. You'll plan campaigns, create posts and creatives, measure what actually moves the numbers, and improve from there, all under the direct guidance of the reporting manager.",
     responsibilities: [
       "Plan and maintain a content calendar across Instagram, LinkedIn, Facebook, and YouTube.",
-      "Shoot, edit, and publish short-form video (reels, shorts) and static posts.",
-      "Write captions, hooks, and hashtags that match our brand voice.",
-      "Design simple graphics using Canva or similar tools.",
-      "Engage with the community: reply to comments and DMs, and follow relevant conversations.",
-      "Track reach, engagement, and follower growth, and report what's working each week.",
-      "Research trends, audio, and formats, and turn them into post ideas.",
-      "Work with the product and sales teams to turn launches and offers into content.",
+      "Create posts, short-form video (reels, shorts), and simple graphics in Canva or similar tools.",
+      "Help set up and manage paid ad campaigns on Meta and Google.",
+      "Support SEO: keyword research, on-page basics, and content optimization.",
+      "Write and send email and WhatsApp campaigns to our lists.",
+      "Track reach, engagement, traffic, and leads, and report what's working each week.",
+      "Research trends, competitors, and formats, and turn them into campaign ideas.",
+      "Work with the product and sales teams to turn launches and offers into campaigns.",
       "Join daily updates with the reporting manager and complete tasks within deadlines.",
     ],
     requirements: [
-      "A genuine feel for social media and what makes people stop scrolling.",
-      "Basic video editing (CapCut, InShot, or similar) and a good eye for visuals.",
+      "A genuine interest in digital marketing and how brands grow online.",
+      "Basic understanding of social media, ads, and SEO (from study, projects, or your own pages).",
       "Clear, correct writing in English and Hindi.",
-      "Comfortable being on camera or directing others who are.",
-      "Organised enough to keep a posting schedule and hit it.",
+      "Comfortable with numbers: able to read a dashboard and spot what changed.",
+      "Organised enough to keep a campaign schedule and hit it.",
       "Willing to learn, take feedback, and try again.",
     ],
     requirementsExtra: [
@@ -312,10 +312,11 @@ export const jobs: Job[] = [
         title: "Good to have",
         items: [
           "Canva, Figma, or basic Photoshop.",
-          "Experience growing a page, your own or someone else's.",
-          "Basic understanding of analytics (Instagram Insights, Meta Business Suite).",
-          "Photography or a sense of composition.",
-          "Familiarity with scheduling tools like Buffer or Later.",
+          "Hands-on with Meta Ads Manager or Google Ads.",
+          "Basic understanding of analytics (Google Analytics, Meta Business Suite, Search Console).",
+          "Experience growing a page or running a campaign, your own or someone else's.",
+          "Basic video editing (CapCut, InShot, or similar).",
+          "Familiarity with email tools or scheduling tools like Buffer or Later.",
         ],
       },
     ],
@@ -331,7 +332,7 @@ export const jobs: Job[] = [
       { k: "Location", v: "Nagpur, Maharashtra" },
       { k: "Office", v: "Eureka Coworking, Mate Square, Nagpur 440022" },
       { k: "Work type", v: "Hybrid (onsite + remote)" },
-      { k: "Experience", v: "Students, recent graduates, or self-taught creators" },
+      { k: "Experience", v: "Students, recent graduates, or self-taught marketers" },
       { k: "Employment", v: "Internship" },
       { k: "Hours", v: "Monday to Saturday, 10:00 AM – 6:00 PM" },
       { k: "Probation", v: "1 month, extendable" },
@@ -340,15 +341,15 @@ export const jobs: Job[] = [
     faqs: [
       {
         q: "Who can apply for this internship?",
-        a: "Students, recent graduates, and self-taught creators. If you already run a page, make reels for fun, or just understand social media better than most people around you, you qualify. A formal marketing degree is not required.",
+        a: "Students, recent graduates, and self-taught marketers. If you've run ads, grown a page, studied digital marketing, or just understand how brands win attention online, you qualify. A formal marketing degree is not required.",
       },
       {
         q: "Is this a paid internship?",
         a: "Yes. The stipend runs from ₹5,000 to ₹10,000 a month depending on your performance and the scope of work you take on, and it's credited on the 1st of every month.",
       },
       {
-        q: "Do I need my own camera or editing software?",
-        a: "No. A smartphone and free apps like CapCut or Canva are enough to start. What matters is your eye and your willingness to post consistently.",
+        q: "Do I need prior experience with paid ads?",
+        a: "No. It helps, but it isn't required. You'll be supported on campaign setup and optimization. What matters is that you're curious, comfortable with numbers, and willing to test and learn.",
       },
       {
         q: "What does the probation period involve?",
@@ -360,7 +361,7 @@ export const jobs: Job[] = [
       },
       {
         q: "Does the internship guarantee a job?",
-        a: "No. It doesn't. The internship is designed to give you real brand-building experience and a portfolio of published work, and it can extend based on business needs and management approval, but permanent employment is never guaranteed.",
+        a: "No. It doesn't. The internship is designed to give you real, measurable marketing experience across channels, and it can extend based on business needs and management approval, but permanent employment is never guaranteed.",
       },
     ],
     employmentTypeSchema: "INTERN",
@@ -371,11 +372,11 @@ export const jobs: Job[] = [
       experienceOptions: [
         "Student",
         "Recent graduate",
-        "Self-taught creator",
-        "Managed a page before",
+        "Self-taught marketer",
+        "Ran campaigns or ads before",
       ],
       messagePlaceholder:
-        "Tell us about a page you run or posts you've made, what you'd like to work on, and share any links to your work.",
+        "Tell us about campaigns, pages, or ads you've worked on, what you'd like to learn, and share any links to your work.",
     },
     sections: [
       {
@@ -388,7 +389,7 @@ export const jobs: Job[] = [
       {
         title: "Eligibility",
         items: [
-          "Student, recent graduate, or self-taught creator.",
+          "Student, recent graduate, or self-taught marketer.",
           "Able to work from Nagpur for onsite days.",
           "Available Monday to Saturday, 10:00 AM to 6:00 PM.",
         ],
@@ -396,8 +397,8 @@ export const jobs: Job[] = [
       {
         title: "What you'll learn",
         items: [
-          "Running real brand channels across multiple platforms.",
-          "Short-form video from idea to publish.",
+          "Running real campaigns across social, paid ads, SEO, and email.",
+          "Setting up and optimizing Meta and Google ad campaigns.",
           "Writing copy that converts, not just copy that reads well.",
           "Reading analytics and turning them into decisions.",
           "Ownership, speed, and working in a lean product team.",
