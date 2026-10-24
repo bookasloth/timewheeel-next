@@ -275,6 +275,154 @@ export const jobs: Job[] = [
       },
     ],
   },
+  {
+    slug: "social-media-intern",
+    title: "Social Media Intern",
+    department: "Marketing",
+    location: "Nagpur, Maharashtra",
+    workType: "Hybrid",
+    experience: "Students, recent graduates, or self-taught creators",
+    employmentType: "Internship",
+    postedAt: "2026-10-24",
+    summary:
+      "Run our social channels end to end: plan content, shoot and edit short-form video, write captions, and grow our audience across Instagram, LinkedIn, and more.",
+    intro:
+      "You'll join the Marketing Team as a Social Media Intern and own the day-to-day of our social presence. You'll plan the calendar, create posts and reels, write the words that go with them, and watch what actually works, all under the direct guidance of the reporting manager.",
+    responsibilities: [
+      "Plan and maintain a content calendar across Instagram, LinkedIn, Facebook, and YouTube.",
+      "Shoot, edit, and publish short-form video (reels, shorts) and static posts.",
+      "Write captions, hooks, and hashtags that match our brand voice.",
+      "Design simple graphics using Canva or similar tools.",
+      "Engage with the community: reply to comments and DMs, and follow relevant conversations.",
+      "Track reach, engagement, and follower growth, and report what's working each week.",
+      "Research trends, audio, and formats, and turn them into post ideas.",
+      "Work with the product and sales teams to turn launches and offers into content.",
+      "Join daily updates with the reporting manager and complete tasks within deadlines.",
+    ],
+    requirements: [
+      "A genuine feel for social media and what makes people stop scrolling.",
+      "Basic video editing (CapCut, InShot, or similar) and a good eye for visuals.",
+      "Clear, correct writing in English and Hindi.",
+      "Comfortable being on camera or directing others who are.",
+      "Organised enough to keep a posting schedule and hit it.",
+      "Willing to learn, take feedback, and try again.",
+    ],
+    requirementsExtra: [
+      {
+        title: "Good to have",
+        items: [
+          "Canva, Figma, or basic Photoshop.",
+          "Experience growing a page, your own or someone else's.",
+          "Basic understanding of analytics (Instagram Insights, Meta Business Suite).",
+          "Photography or a sense of composition.",
+          "Familiarity with scheduling tools like Buffer or Later.",
+        ],
+      },
+    ],
+    compensation: [
+      "₹5,000 to ₹10,000 per month stipend, based on performance and scope of work.",
+      "Credited on the 1st of every month.",
+      "One-month probation period, then extendable based on business needs and management approval.",
+    ],
+    compensationHeadline: "₹5,000 – ₹10,000 / month stipend",
+    compensationNote:
+      "Credited on the 1st of every month. One-month probation, then extendable based on business needs and management approval.",
+    facts: [
+      { k: "Location", v: "Nagpur, Maharashtra" },
+      { k: "Office", v: "Eureka Coworking, Mate Square, Nagpur 440022" },
+      { k: "Work type", v: "Hybrid (onsite + remote)" },
+      { k: "Experience", v: "Students, recent graduates, or self-taught creators" },
+      { k: "Employment", v: "Internship" },
+      { k: "Hours", v: "Monday to Saturday, 10:00 AM – 6:00 PM" },
+      { k: "Probation", v: "1 month, extendable" },
+      { k: "Compensation", v: "₹5,000 – ₹10,000 / month stipend" },
+    ],
+    faqs: [
+      {
+        q: "Who can apply for this internship?",
+        a: "Students, recent graduates, and self-taught creators. If you already run a page, make reels for fun, or just understand social media better than most people around you, you qualify. A formal marketing degree is not required.",
+      },
+      {
+        q: "Is this a paid internship?",
+        a: "Yes. The stipend runs from ₹5,000 to ₹10,000 a month depending on your performance and the scope of work you take on, and it's credited on the 1st of every month.",
+      },
+      {
+        q: "Do I need my own camera or editing software?",
+        a: "No. A smartphone and free apps like CapCut or Canva are enough to start. What matters is your eye and your willingness to post consistently.",
+      },
+      {
+        q: "What does the probation period involve?",
+        a: "The first month is a probation period. You're assessed on the quality of what you deliver, attendance and punctuality, how you communicate, and how quickly you pick things up. If it works for both sides, the internship extends.",
+      },
+      {
+        q: "What are the working hours and the setup?",
+        a: "Monday to Saturday, 10:00 AM to 6:00 PM. The role is hybrid, so you'll be at our Eureka Coworking office in Mate Square on onsite days and remote on the rest. You need to be based in Nagpur.",
+      },
+      {
+        q: "Does the internship guarantee a job?",
+        a: "No. It doesn't. The internship is designed to give you real brand-building experience and a portfolio of published work, and it can extend based on business needs and management approval, but permanent employment is never guaranteed.",
+      },
+    ],
+    employmentTypeSchema: "INTERN",
+    locationType: "hybrid",
+    occupationalCategory: "Marketing",
+    apply: {
+      experienceLabel: "Relevant experience",
+      experienceOptions: [
+        "Student",
+        "Recent graduate",
+        "Self-taught creator",
+        "Managed a page before",
+      ],
+      messagePlaceholder:
+        "Tell us about a page you run or posts you've made, what you'd like to work on, and share any links to your work.",
+    },
+    sections: [
+      {
+        title: "About Timewheel",
+        items: [
+          "We build and run multiple web products: appointment booking and payments, creator monetization, community management, and event ticketing.",
+          "We ship fast, work lean, and give interns real production work.",
+        ],
+      },
+      {
+        title: "Eligibility",
+        items: [
+          "Student, recent graduate, or self-taught creator.",
+          "Able to work from Nagpur for onsite days.",
+          "Available Monday to Saturday, 10:00 AM to 6:00 PM.",
+        ],
+      },
+      {
+        title: "What you'll learn",
+        items: [
+          "Running real brand channels across multiple platforms.",
+          "Short-form video from idea to publish.",
+          "Writing copy that converts, not just copy that reads well.",
+          "Reading analytics and turning them into decisions.",
+          "Ownership, speed, and working in a lean product team.",
+        ],
+      },
+      {
+        title: "Evaluation (1-month probation)",
+        items: [
+          "Performance and quality of delivered work.",
+          "Attendance and punctuality.",
+          "Professionalism and communication.",
+          "Learning ability and initiative.",
+          "Overall suitability for the role.",
+        ],
+      },
+      {
+        title: "Terms",
+        items: [
+          "Confidentiality of client data, business processes, and account access during and after the internship.",
+          "Return of all company property, credentials, and files on completion or termination.",
+          "The internship does not guarantee permanent employment.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getJob(slug: string): Job | undefined {
